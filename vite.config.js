@@ -12,7 +12,6 @@ export default defineConfig({
         tailwindcss(),
         vue(), // dodaj plugin Vue
     ],
-
 });
 
 

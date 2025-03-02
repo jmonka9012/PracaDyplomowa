@@ -12,5 +12,5 @@ export default {
     mounted() {
         console.log('Props:', this.$props);
     }
-};z
+};
 </script>
