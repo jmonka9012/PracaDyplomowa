@@ -19,6 +19,6 @@
         "@vitejs/plugin-vue": "^5.2.1",
         "npm-watch": "^0.13.0",
         "vue": "^3.5.13",
-        "watch": "^1.0.2"
+        "ziggy-js": "^2.5.2"
     }
 }

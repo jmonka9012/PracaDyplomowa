@@ -5,6 +5,6 @@ use Inertia\Inertia;
 
 Route::get('/register', function () {
     return Inertia::render('Register', [
-    'message' => 'Rejestracja'
+        'message' => 'Rejestracja'
     ]);
-});
+})->name('register');

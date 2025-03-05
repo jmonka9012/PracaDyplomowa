@@ -10,13 +10,13 @@ export default defineConfig({
             refresh: true,
         }),
         tailwindcss(),
-        vue(), // dodaj plugin Vue
-    ],
+        vue(),
+    ]/*,
     server: {
         hmr: {
             host: 'localhost',
         }
-    }
+    }*/
 });
 
 

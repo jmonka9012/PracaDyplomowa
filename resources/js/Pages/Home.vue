@@ -1,17 +1,18 @@
+<script setup>
+//import { route } from '../../../vendor/tightenco/ziggy';
+import { Link } from '@inertiajs/vue3';
+
+// Pobieranie props w <script setup>
+defineProps({
+    message: String
+});
+
+
+</script>
+
 <template>
     <div>
         <h1>{{ message }}</h1>
-        <a href="/register">Rejestracja</a>
+        <Link :href="route('register')">Rejestracja</Link>
     </div>
 </template>
-
-<script>
-export default {
-    props: {
-        message: String,
-    },
-    mounted() {
-        console.log('Props:', this.$props);
-    }
-};
-</script>
