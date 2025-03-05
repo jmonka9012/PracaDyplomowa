@@ -12,6 +12,11 @@ export default defineConfig({
         tailwindcss(),
         vue(), // dodaj plugin Vue
     ],
+    server: {
+        hmr: {
+            host: 'localhost',
+        }
+    }
 });
 
 

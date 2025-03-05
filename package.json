@@ -3,7 +3,8 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "watch": "vite build --watch"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
@@ -16,6 +17,8 @@
     "dependencies": {
         "@inertiajs/vue3": "^2.0.3",
         "@vitejs/plugin-vue": "^5.2.1",
-        "vue": "^3.5.13"
+        "npm-watch": "^0.13.0",
+        "vue": "^3.5.13",
+        "watch": "^1.0.2"
     }
 }
