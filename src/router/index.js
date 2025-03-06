@@ -5,6 +5,7 @@ import New from '@/views/New.vue'
 import Blog from '@/views/Blog.vue'
 import Single from '@/views/Single.vue'
 import Contact from '@/views/Contact.vue'
+import Forms from '@/views/Forms.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -46,6 +47,11 @@ const router = createRouter({
       path: '/kontakt',
       name: 'kontakt',
       component: Contact,
+    },
+    {
+      path: '/forms',
+      name: 'forms',
+      component: Forms,
     },
   ],
 })

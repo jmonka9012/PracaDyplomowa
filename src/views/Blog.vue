@@ -36,7 +36,7 @@ const latest = [
 	{
 		id: 3,
 		src: "/src/assets/images/hellspit.jpg",
-		link: [{ href: "/icp", title: "GIVE ME HEAD BIIITCH" }],
+		link: [{ href: "/icp", title: "Event" }],
 		date: "January 22, 2025",
 		category: [
 			{
