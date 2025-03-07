@@ -1,12 +1,12 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\RegisterUserController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Home', [
-        'message' => 'Witaj w aplikacji z Inertia!'
-    ]);
-});
+// Rejestracja
+Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
+Route::post('/register', [RegisterUserController::class, 'store']);
 
-require __DIR__.'/auth.php';
+// Strona domowa
+Route::get('/', [HomeController::class, 'index'])->name('home');

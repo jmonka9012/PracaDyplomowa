@@ -8,6 +8,7 @@ import HeroSmall from "../Components/sections-new/Hero-small.vue";
 		<div class="container flex-column">
 			<h1 class="title-1 mb-20px">Logowanie</h1>
 			<form class="form" method="post">
+				<input type="hidden" name="_token" :value="csrf_token" />
 				<div class="input-wrap d-flex flex-column col-12">
 					<label for="username">Nazwa użytkownika *</label>
 					<input
@@ -48,12 +49,14 @@ import HeroSmall from "../Components/sections-new/Hero-small.vue";
 				</div>
 			</form>
 			<h1 class="title-1 mb-20px">Rejestracja</h1>
-			<form class="form" method="post">
+			<form class="form" method="post" action="/register">
+				<input type="hidden" name="_token" :value="csrf_token" />
 				<div class="input-wrap d-flex flex-column col-12">
 					<label for="register-username">Nazwa użytkownika *</label>
 					<input
 						type="text"
 						id="register-username"
+						name="name"
 						autocomplete="register-username"
 						spellcheck="false"
 						value=""
@@ -66,6 +69,7 @@ import HeroSmall from "../Components/sections-new/Hero-small.vue";
 					<input
 						type="text"
 						id="register-email"
+						name="email"
 						autocomplete="registeremail"
 						spellcheck="false"
 						value=""
@@ -77,8 +81,19 @@ import HeroSmall from "../Components/sections-new/Hero-small.vue";
 					<label for="register-password">Hasło *</label>
 					<input
 						type="password"
-						name="register-password"
+						name="password"
 						id="register-password"
+						autocomplete="register"
+						required=""
+						aria-required="true"
+					/>
+				</div>
+				<div class="input-wrap d-flex flex-column col-12">
+					<label for="register-password-confirm">Potwierdź Hasło *</label>
+					<input
+						type="password"
+						name="password_confirmation"
+						id="register-password-confirm"
 						autocomplete="register"
 						required=""
 						aria-required="true"
@@ -93,9 +108,17 @@ import HeroSmall from "../Components/sections-new/Hero-small.vue";
 					</p>
 				</div>
 				<div class="input-wrap col-12">
-					<input type="submit" placeholder="Zaloguj się" />
+					<input type="submit" placeholder="Zarejestruj się" />
 				</div>
 			</form>
 		</div>
 	</section>
 </template>
+
+<script>
+export default {
+    props: {
+        csrf_token: String,
+    },
+};
+</script>
