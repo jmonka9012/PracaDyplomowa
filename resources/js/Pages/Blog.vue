@@ -3,69 +3,75 @@ import HeroSmall from "../Components/sections-new/Hero-small.vue";
 import LatestEvents from "../Components/sections-new/LatestEvents.vue";
 import TitleNSub from "../Components/sections-new/TitleNSub.vue";
 
+import bangpow from "@/assets/images/bangpow.jpg";
+import greatmilenko from "@/assets/images/greatmilenko.jpg";
+import hellspit from "@/assets/images/hellspit.jpg";
+import jeckelbros from "@/assets/images/Jeckelbros.jpg";
+import blogBg from "@/assets/images/blog-bg.jpg";
+
 const latest = [
-	{
-		id: 1,
-		src: "/src/assets/images/bangpow.jpg",
-		link: [
-			{
-				href: "/icp",
-				title: "zmień wielkość kontenera później",
-			},
-		],
-		category: [
-			{
-				href: "/bpb",
-				title: "BangPow",
-			},
-		],
-		date: "January 22, 2025",
-	},
-	{
-		id: 2,
-		src: "/src/assets/images/greatmilenko.jpg",
-		link: [{ href: "/icp", title: "Great MILENKO GREAT MILENKO" }],
-		date: "January 22, 2025",
-		category: [
-			{
-				href: "/bpb",
-				title: "greatmilenko",
-			},
-		],
-	},
-	{
-		id: 3,
-		src: "/src/assets/images/hellspit.jpg",
-		link: [{ href: "/icp", title: "Event" }],
-		date: "January 22, 2025",
-		category: [
-			{
-				href: "/bpb",
-				title: "Hellspit",
-			},
-		],
-	},
-	{
-		id: 4,
-		src: "/src/assets/images/Jeckelbros.jpg",
-		link: [{ href: "/icp", title: "Jeckelbross" }],
-		date: "January 22, 2025",
-		category: [
-			{
-				href: "/bpb",
-				title: "Jeckelbros",
-			},
-		],
-	},
+    {
+        id: 1,
+        src: bangpow,
+        link: [
+            {
+                href: "/icp",
+                title: "zmień wielkość kontenera później",
+            },
+        ],
+        category: [
+            {
+                href: "/bpb",
+                title: "BangPow",
+            },
+        ],
+        date: "January 22, 2025",
+    },
+    {
+        id: 2,
+        src: greatmilenko,
+        link: [{ href: "/icp", title: "Great MILENKO GREAT MILENKO" }],
+        date: "January 22, 2025",
+        category: [
+            {
+                href: "/bpb",
+                title: "greatmilenko",
+            },
+        ],
+    },
+    {
+        id: 3,
+        src: hellspit,
+        link: [{ href: "/icp", title: "Event" }],
+        date: "January 22, 2025",
+        category: [
+            {
+                href: "/bpb",
+                title: "Hellspit",
+            },
+        ],
+    },
+    {
+        id: 4,
+        src: jeckelbros,
+        link: [{ href: "/icp", title: "Jeckelbross" }],
+        date: "January 22, 2025",
+        category: [
+            {
+                href: "/bpb",
+                title: "Jeckelbros",
+            },
+        ],
+    },
 ];
 </script>
 
 <template>
-	<HeroSmall source="/src/assets/images/blog-bg.jpg" title="Blog"></HeroSmall>
-	<div class="section pb-120px">
-		<div class="container container-small">
-			<LatestEvents evContClass="ev-cont-lg-three" :latest="latest">
-			</LatestEvents>
-		</div>
-	</div>
+    <HeroSmall :source="blogBg" title="Blog"></HeroSmall>
+    <div class="section pb-120px">
+        <div class="container container-small">
+            <LatestEvents evContClass="ev-cont-lg-three" :latest="latest">
+            </LatestEvents>
+        </div>
+    </div>
 </template>
