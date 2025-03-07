@@ -18,7 +18,9 @@
     "dependencies": {
         "@inertiajs/vue3": "^2.0.3",
         "@vitejs/plugin-vue": "^5.2.1",
+        "font-awesome": "^4.7.0",
         "npm-watch": "^0.13.0",
+        "sass-loader": "^16.0.5",
         "vue": "^3.5.13",
         "ziggy-js": "^2.5.2"
     }
