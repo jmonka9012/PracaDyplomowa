@@ -1,21 +1,15 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Auth\RegisterUserController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
-// Rejestracja
-Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
-Route::post('/register', [RegisterUserController::class, 'store']);
-
 // Strona domowa
-Route::get('/', [HomeController::class, 'index'])->name('home');
+require __DIR__.'/home.php';
 
 // Strona bloga
-Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+require __DIR__.'/blog.php';
 
 // Strona kontaktu
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+require __DIR__.'/contact.php';
 
+//strona rejestracji i logowania
+require __DIR__.'/auth.php';
