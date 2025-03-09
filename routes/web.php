@@ -13,3 +13,6 @@ require __DIR__.'/contact.php';
 
 //strona rejestracji i logowania
 require __DIR__.'/auth.php';
+
+//strone testowa matiego
+require __DIR__.'/new.php';
