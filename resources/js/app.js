@@ -2,7 +2,7 @@ import "./bootstrap";
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 import { ZiggyVue } from "ziggy-js";
-import MainLayout from "@/../resources/js/Layouts/MainLayout.vue";
+import MainLayout from "@/Layouts/MainLayout.vue";
 
 createInertiaApp({
     resolve: (name) => {

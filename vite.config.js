@@ -20,13 +20,16 @@ export default defineConfig({
     // },
     resolve: {
         alias: {
-            "@": path.resolve(__dirname, "./src"),
+            "@": path.resolve(__dirname, "./resources/js"),
+            "~css": path.resolve(__dirname, "./resources/css"),
+            "~images": path.resolve(__dirname, "./public/images"),
+            "~icons": path.resolve(__dirname, "./public/icons"),
         },
     },
     css: {
         preprocessorOptions: {
             scss: {
-                additionalData: `@import "@/assets/mixin.scss";`,
+                additionalData: `@import "~css/mixin.scss";`,
             },
         },
     },

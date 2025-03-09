@@ -4,27 +4,27 @@
             <div class="cat-item">
                 <a href="/" class="link-stretched z-1"></a>
                 <img class="cat-img" src="/src/assets/images/cat-img-bg-1.jpg" alt="">
-                <h3 class="cat-name">Dupa</h3>
+                <h3 class="cat-name">lorem</h3>
             </div>
             <div class="cat-item">
                 <a href="/" class="link-stretched z-1"></a>
                 <img class="cat-img" src="/src/assets/images/cat-img-bg-1.jpg" alt="">
-                <h3 class="cat-name">Dupa</h3>
+                <h3 class="cat-name">lorem</h3>
             </div>
             <div class="cat-item">
                 <a href="/" class="link-stretched z-1"></a>
                 <img class="cat-img" src="/src/assets/images/cat-img-bg-1.jpg" alt="">
-                <h3 class="cat-name">Dupa</h3>
+                <h3 class="cat-name">lorem</h3>
             </div>
             <div class="cat-item">
                 <a href="/" class="link-stretched z-1"></a>
                 <img class="cat-img" src="/src/assets/images/cat-img-bg-1.jpg" alt="">
-                <h3 class="cat-name">Dupa</h3>
+                <h3 class="cat-name">lorem</h3>
             </div>
             <div class="cat-item">
                 <a href="/" class="link-stretched z-1"></a>
                 <img class="cat-img" src="/src/assets/images/cat-img-bg-1.jpg" alt="">
-                <h3 class="cat-name">Dupa</h3>
+                <h3 class="cat-name">lorem</h3>
             </div>
 
         </div>

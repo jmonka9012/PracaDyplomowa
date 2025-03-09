@@ -15,25 +15,37 @@ const wordTotal = computed(() => splitText.value.length);
 const charTotal = computed(() => props.text.length);
 </script>
 
-
 <template>
-    <h3 class="poptext" :style="`--word-total: ${wordTotal}; --char-total: ${charTotal};`">
-        <span v-for="(word, wordIndex) in splitText" :key="wordIndex" class="word" :data-word="word"
-            :style="`--word-index: ${wordIndex};`">
-            <span v-for="(char, charIndex) in word.split('')" :key="charIndex" class="char" :data-char="char" :style="{
-                '--char-index': charIndex,
-                '--char-total': charTotal, 
-            }">
+    <h3
+        class="poptext"
+        :style="`--word-total: ${wordTotal}; --char-total: ${charTotal};`"
+    >
+        <span
+            v-for="(word, wordIndex) in splitText"
+            :key="wordIndex"
+            class="word"
+            :data-word="word"
+            :style="`--word-index: ${wordIndex};`"
+        >
+            <span
+                v-for="(char, charIndex) in word.split('')"
+                :key="charIndex"
+                class="char"
+                :data-char="char"
+                :style="{
+                    '--char-index': charIndex,
+                    '--char-total': charTotal,
+                }"
+            >
                 {{ char }}
             </span>
         </span>
     </h3>
 </template>
 
-
 <style lang="scss">
 .poptext {
-    font-family: 'Krona one';
+    font-family: "Krona one";
     font-size: 8vw;
     line-height: 1.05em;
     text-transform: uppercase;
@@ -54,13 +66,15 @@ const charTotal = computed(() => props.text.length);
         line-height: inherit;
         line-height: inherit;
         letter-spacing: inherit;
-        --color-text: var(--primary)
+        --color-text: var(--primary);
     }
 
     .char {
         --char-percent: calc(var(--char-index) / var(--char-total));
         --char-offset: calc(var(--char-index) - var(--char-center));
-        --distance: calc((var(--char-offset) * var(--char-offset)) / var(--char-center));
+        --distance: calc(
+            (var(--char-offset) * var(--char-offset)) / var(--char-center)
+        );
         --distance-sine: calc(var(--char-offset) / var(--char-center));
         --distance-percent: calc((var(--distance) / var(--char-center)));
         display: inline-block;
@@ -71,7 +85,6 @@ const charTotal = computed(() => props.text.length);
         animation-delay: calc(var(--animation-delay) * var(--char-index));
         animation-name: color-cycle;
         color: var(--primary);
-
 
         &::before,
         &::after {
@@ -87,7 +100,6 @@ const charTotal = computed(() => props.text.length);
             z-index: 1;
             animation: inherit;
             animation-name: inherit;
-
         }
 
         &::before {
@@ -102,6 +114,5 @@ const charTotal = computed(() => props.text.length);
             transition: color 0.4s;
         }
     }
-
 }
 </style>

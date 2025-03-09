@@ -1,6 +1,6 @@
 <script setup>
-import HeroSmall from "../Components/sections-new/Hero-small.vue";
-import blogBg from "@/assets/images/blog-bg.jpg";
+import HeroSmall from "@/Components/sections-new/Hero-small.vue";
+import blogBg from "~images/blog-bg.jpg";
 </script>
 
 <template>

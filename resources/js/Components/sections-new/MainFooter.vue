@@ -1,70 +1,73 @@
 <script setup>
-
+import fbWhite from "~icons/facebook-circle-white.svg";
+import twWhite from "~icons/twitter-circle-white.svg";
+import insWhite from "~icons/instagram-circle-white.svg";
+import logoW from "~images/logo-white.png";
 </script>
 
 <template>
     <section class="footer">
         <div class="container">
             <div
-                class="col-12 col-lg-3 d-flex flex-column text-align-center text-align-lg-start align-items-center align-items-lg-start ">
-                <p class="footer__heading ">
-                    London
-                </p>
+                class="col-12 col-lg-3 d-flex flex-column text-align-center text-align-lg-start align-items-center align-items-lg-start"
+            >
+                <p class="footer__heading">London</p>
                 <a class="text-primary mb-15px" href="/">
                     london@lunfest.com
                 </a>
-                <a class="text-primary mb-15px" href="/">
-                    +44 020 7490 8954
-                </a>
-                <p>
-                    3 Dufferin Street. <br>London EC1Y 8NA
-                </p>
+                <a class="text-primary mb-15px" href="/"> +44 020 7490 8954 </a>
+                <p>3 Dufferin Street. <br />London EC1Y 8NA</p>
             </div>
             <div class="col-12 col-lg-6 d-flex flex-column align-items-center">
-                <img class="footer__logo mb-25px" src="/src/assets/images/logo-white.png" alt="">
-                <p class="text-align-center mb-25px">We help organisations transform their impact by providing a
-                    comprehensive new great experience </p>
-                <div class="d-flex flex-row justify-content-center mb-35px"><a class="text-white hover-primary"
-                        href="/">Privacy Policy</a><span class="text-white divider "></span><a
-                        class="text-white hover-primary" href="/">Terms of use</a></div>
-                <div class="d-flex flex-row w-fit justify-content-between">
-                    <a class="morph-btn footer__icon" href=""><img
-                            src="/src/assets/icons/facebook-circle-white.svg"></img></a>
-                    <a class="morph-btn footer__icon" href=""><img
-                            src="/src/assets/icons/twitter-circle-white.svg"></img></a>
-                    <a class="morph-btn footer__icon" href=""><img
-                            src="/src/assets/icons/instagram-circle-white.svg"></img></a>
+                <img class="footer__logo mb-25px" :src="logoW" alt="" />
+                <p class="text-align-center mb-25px">
+                    We help organisations transform their impact by providing a
+                    comprehensive new great experience
+                </p>
+                <div class="d-flex flex-row justify-content-center mb-35px">
+                    <a class="text-white hover-primary" href="/"
+                        >Privacy Policy</a
+                    ><span class="text-white divider"></span
+                    ><a class="text-white hover-primary" href="/"
+                        >Terms of use</a
+                    >
                 </div>
-
+                <div class="d-flex flex-row w-fit justify-content-between">
+                    <a class="morph-btn footer__icon" href="">
+                        <img :src="fbWhite" alt="Facebook"
+                    /></a>
+                    <a class="morph-btn footer__icon" href="">
+                        <img :src="twWhite" alt="Twitter"
+                    /></a>
+                    <a class="morph-btn footer__icon" href=""
+                        ><img :src="insWhite" alt="Instagram"
+                    /></a>
+                </div>
             </div>
             <div
-                class="col-12 col-lg-3 d-flex flex-column text-align-center text-align-lg-end align-items-center align-items-lg-end mt-40px mt-lg-0">
-                <p class="footer__heading">
-                    New-York
-                </p>
+                class="col-12 col-lg-3 d-flex flex-column text-align-center text-align-lg-end align-items-center align-items-lg-end mt-40px mt-lg-0"
+            >
+                <p class="footer__heading">New-York</p>
                 <a class="text-primary mb-15px" href="">
                     newyork@lunfest.com
                 </a>
-                <a class="text-primary mb-15px" href="">
-                    +61 0481 224 883
-                </a>
+                <a class="text-primary mb-15px" href=""> +61 0481 224 883 </a>
                 <p>
-                    12 Houston Street, New-York, <br>
+                    12 Houston Street, New-York, <br />
                     CA 9020, USA
                 </p>
             </div>
         </div>
     </section>
     <section class="footer__under">
-        <p>Copyright © 2024 LUNFEST by WebGeniusLab. All Rights Reserved </p>
+        <p>Copyright © 2024 LUNFEST by WebGeniusLab. All Rights Reserved</p>
     </section>
-
 </template>
 
 <style lang="scss">
 .footer {
     background-color: var(--footer);
-    color: #BABAC0;
+    color: #babac0;
     padding: 60px 0px 60px 0px;
 
     @include media-breakpoint-up(md) {
@@ -83,7 +86,7 @@
 
     &__icon {
         padding: 25px 14px 25px 14px;
-        background-color: #FFF0;
+        background-color: #fff0;
         display: flex;
 
         img {
@@ -104,15 +107,14 @@
 
     &__under {
         padding: 19px 0px 19px 0px;
-        transition: background .3s, border .3s, border-radius .3s, box-shadow .3s, transform .4s;
+        transition: background 0.3s, border 0.3s, border-radius 0.3s,
+            box-shadow 0.3s, transform 0.4s;
         border-color: white;
         border-top: 1px solid;
         border-bottom: 1px solid;
         width: 100%;
         background-color: var(--footer);
-        color: #BABAC0;
+        color: #babac0;
     }
-
-
 }
 </style>

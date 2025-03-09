@@ -1,11 +1,10 @@
 <script setup>
 import HeroSmall from "../Components/sections-new/Hero-small.vue";
-
-import blogBg from "@/assets/images/blog-bg.jpg";
-import contactsMap from "@/assets/images/contacts_map.jpg";
-import facebookIcon from "@/assets/icons/facebook-circle-black.svg";
-import twitterIcon from "@/assets/icons/twitter-black.svg";
-import instagramIcon from "@/assets/icons/instagram-black.svg";
+import blogBg from "~images/blog-bg.jpg";
+import contactsMap from "~images/contacts_map.jpg";
+import facebookIcon from "~icons/facebook-circle-black.svg";
+import twitterIcon from "~icons/twitter-black.svg";
+import instagramIcon from "~icons/instagram-black.svg";
 </script>
 
 <template>
@@ -14,7 +13,7 @@ import instagramIcon from "@/assets/icons/instagram-black.svg";
     <section class="mt-75px mt-lg-120px mb-75px mb-lg-120px">
         <div class="container container-small flexc-reverse-mob flex-lg-row">
             <div class="col-12 col-lg-6 mt-50px mt-lg-0 contact-map">
-                <img src="/src/assets/images/contacts_map.jpg" alt="" />
+                <img src="/public/images/contacts_map.jpg" alt="" />
             </div>
             <div class="col-12 col-lg-6 d-flex flex-column">
                 <a href="" class="sub-title sub-title-lprpl mb-17px"

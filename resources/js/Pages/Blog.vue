@@ -3,11 +3,11 @@ import HeroSmall from "../Components/sections-new/Hero-small.vue";
 import LatestEvents from "../Components/sections-new/LatestEvents.vue";
 import TitleNSub from "../Components/sections-new/TitleNSub.vue";
 
-import bangpow from "@/assets/images/bangpow.jpg";
-import greatmilenko from "@/assets/images/greatmilenko.jpg";
-import hellspit from "@/assets/images/hellspit.jpg";
-import jeckelbros from "@/assets/images/Jeckelbros.jpg";
-import blogBg from "@/assets/images/blog-bg.jpg";
+import bangpow from "~images/bangpow.jpg";
+import greatmilenko from "~images/greatmilenko.jpg";
+import hellspit from "~images/hellspit.jpg";
+import jeckelbros from "~images/Jeckelbros.jpg";
+import blogBg from "~images/blog-bg.jpg";
 
 const latest = [
     {
