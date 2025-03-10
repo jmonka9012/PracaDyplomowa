@@ -6,12 +6,13 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class AuthRegisterTest extends TestCase
 {
     use DatabaseTransactions;
 
-    /** @test */
+    #[Test]
     public function it_validates_and_creates_a_user_successfully()//sprawdza rejestracje
     {
         $data = [
@@ -34,7 +35,7 @@ class AuthRegisterTest extends TestCase
         $response->assertRedirect(route('home'));
     }
 
-    /** @test */
+    #[Test]
     public function it_fails_validation_with_invalid_data() // sprawdza działanie walidacji
     {
         $data = [
