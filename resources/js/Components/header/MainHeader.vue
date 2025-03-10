@@ -2,6 +2,7 @@
 import DropDown from "./DropDown.vue";
 
 import icpLogo from "~images/ICP-Logo.jpg";
+import placeHolder from "~icons/placeholder.svg";
 
 import { ref } from "vue";
 const isOpen = ref(false);
@@ -12,15 +13,22 @@ const toggleMenu = () => {
 </script>
 
 <template>
-    <header class="section header">
-        <div class="header-desk container container-big">
+    <header class="section header" :class="{ open: isOpen }">
+        <div class="container container-big">
             <div
                 class="d-flex flex-row justify-content-between align-items-center col-12"
             >
+                <a class="mobile-toggle" href="#" @click.prevent="toggleMenu">
+                    <div class="mobile-toggle-inner">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
                 <a href="/" class="header-logo"
-                    ><img :src="icpLogo" alt=""
+                    ><img :src="placeHolder" alt=""
                 /></a>
-                <nav class="header-nav">
+                <nav class="header-nav d-none d-lg-flex">
                     <ul>
                         <li>
                             <a href="/new"><span>Home</span></a>
@@ -36,7 +44,7 @@ const toggleMenu = () => {
                         </li>
                     </ul>
                 </nav>
-                <div class="d-flex align-items-center">
+                <div class="d-none d-lg-flex align-items-center">
                     <div class="d-flex align-items-center mr-30px"></div>
 
                     <a href="/login" class="hover-primary">
@@ -54,37 +62,42 @@ const toggleMenu = () => {
                         >+ Create event</a
                     >
                 </div>
-            </div>
-        </div>
-
-        <div
-            class="col-12 d-flex justify-content-between align-items-center header-mobile"
-        >
-            <a href="/" class="header-logo"><img :src="icpLogo" alt="" /> </a>
-            <a class="mobile-toggle" href="#" @click.prevent="toggleMenu">
-                <i class="text-white fa fa-reorder"></i>
-            </a>
-
-            <div class="mobile-nav" :class="{ open: isOpen }">
+                <div class="header-search">
+                    <i class="fa fa-search" />
+                </div>
                 <div class="mobile-nav__overlay"></div>
-                <div class="mobile-nav__content">
-                    <div class="container flex-column">
-                        <a class="header-logo mb-30px" href="/">
-                            <img :src="icpLogo" alt="" />
-                        </a>
-                        <nav class="header-nav">
-                            <ul>
-                                <li><a href="">Zmienić tutaj overlay</a></li>
-                                <li>
-                                    <a href=""
-                                        >Refactorować kod tak żeby były tylko
-                                        dwa loga</a
-                                    >
-                                </li>
-                                <li><a href="">transformujący hamburger</a></li>
-                                <li><a href="">text</a></li>
-                            </ul>
-                        </nav>
+                <div class="mobile-nav">
+                    <a
+                        class="mobile-toggle mobile-toggle-innav"
+                        href="#"
+                        @click.prevent="toggleMenu"
+                        ><div class="mobile-toggle-inner">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </a>
+
+                    <div class="mobile-nav__content">
+                        <div class="container flex-column">
+                            <a class="header-logo mb-30px" href="/">
+                                <img :src="placeHolder" alt="" />
+                            </a>
+                            <nav class="header-nav">
+                                <ul>
+                                    <li>
+                                        <a href="">overlay jest</a>
+                                    </li>
+                                    <li>
+                                        <a href="">dwa loga są</a>
+                                    </li>
+                                    <li>
+                                        <a href="">transformujący hamburger</a>
+                                    </li>
+                                    <li><a href="">text</a></li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -95,13 +108,11 @@ const toggleMenu = () => {
 <style lang="scss" scoped>
 .header {
     z-index: 10;
-    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 20px;
+    padding: 10px 20px;
     background-color: var(--text);
-
     @include media-breakpoint-up(lg) {
         background-color: white;
         padding: 0 30px;
@@ -112,20 +123,25 @@ const toggleMenu = () => {
             display: none;
         }
     }
-    &-desk {
-        display: none;
-        @include media-breakpoint-up(lg) {
-            display: flex;
-        }
-    }
     .container {
         padding: 0;
     }
+    &.open {
+        .mobile-nav {
+            transform: translate(0) !important;
+            overflow-x: visible;
+        }
+        .mobile-nav__overlay {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
 }
 .header-logo {
-    width: 110px;
+    width: 150px;
     height: 30px;
     @include media-breakpoint-up(lg) {
+        width: auto;
         height: 40px;
     }
     img {
@@ -181,21 +197,75 @@ const toggleMenu = () => {
         }
     }
 }
+.header-search {
+    color: white;
+    i {
+        font-size: 20px;
+    }
+}
 
 .mobile-toggle {
-    padding: 20px;
-    margin-right: -20px;
+    padding: 12px 10px;
+    margin-left: -20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    @include media-breakpoint-up(lg) {
+        display: none;
+    }
     .fa {
         font-size: 20px;
+    }
+    &-innav {
+        position: absolute;
+        top: 10px;
+        right: -45px;
+        background-color: var(--text);
+        margin-left: 0;
+    }
+    .mobile-toggle-inner {
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+
+        span {
+            display: inline-block;
+            position: relative;
+            width: 20px;
+            height: 2px;
+            vertical-align: top;
+            background: white;
+            &:first-of-type {
+                animation: ease 0.7s 0.4s bar-top-2 backwards;
+            }
+            &:nth-of-type(2) {
+                animation: ease 0.7s 0.4s bar-scaled-2 backwards;
+            }
+            &:nth-of-type(3) {
+                animation: ease 0.7s 0.4s bar-bottom-2 backwards;
+            }
+        }
+    }
+}
+.header.open {
+    .mobile-toggle-inner {
+        span {
+            &:first-of-type {
+                animation: ease 0.7s 0.4s bar-top forwards;
+            }
+            &:nth-of-type(2) {
+                animation: ease 0.7s 0.4s bar-scaled forwards;
+            }
+            &:nth-of-type(3) {
+                animation: ease 0.7s 0.4s bar-bottom forwards;
+            }
+        }
     }
 }
 .mobile-nav {
     display: flex;
-    overflow-x: hidden;
     position: fixed;
+    overflow-x: hidden;
     transition: transform 0.45s ease-in-out;
     z-index: 999;
     left: 0;
@@ -206,6 +276,9 @@ const toggleMenu = () => {
     height: 100vh;
     background-color: var(--text);
     width: calc(100% - 48px);
+    @include media-breakpoint-up(lg) {
+        display: none;
+    }
     &__overlay {
         position: fixed;
         top: 0;
@@ -224,13 +297,6 @@ const toggleMenu = () => {
         display: flex;
         flex-direction: column;
         padding: 30px;
-    }
-    &.open {
-        transform: translate(0) !important;
-        .mobile-nav__overlay {
-            // opacity: 1;
-            // visibility: visible;
-        }
     }
 }
 </style>

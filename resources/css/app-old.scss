@@ -360,7 +360,20 @@ img {
 }
 
 .d-flex {
-    display: flex;
+    display: flex !important;
+}
+.d-none{
+    display: none !important;
+}
+.d-lg-flex{
+    @include media-breakpoint-up(lg){
+        display: flex !important;
+    }
+}
+.d-lg-none{
+    @include media-breakpoint-up(lg){
+        display: none !important;
+    }
 }
 
 .flex-row {
