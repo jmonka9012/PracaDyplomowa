@@ -156,13 +156,14 @@ const text = ref("Freedom Festival");
 </script>
 
 <template>
-    <h1 class="pb-100px">lorem ipsum</h1>
     <Hero>
         <template #title>
-            <Poptext :text="text" />
+            <Poptext
+                class="d-flex flex-column justify-content-center align-items-center poptext-white"
+                :text="text"
+            />
         </template>
     </Hero>
-    <h3>todo jak wróce</h3>
     <Cta />
     <section class="pt-110px pb-100px">
         <div

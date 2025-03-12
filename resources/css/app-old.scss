@@ -330,6 +330,9 @@ img {
 .bt-1 {
     border-top: 1px solid;
 }
+.br-1 {
+    border-right: 1px solid;
+}
 
 .bb-1 {
     border-bottom: 1px solid;
@@ -341,6 +344,12 @@ img {
 
 .b-secondary {
     border-color: $secondary;
+}
+.b-text {
+    border-color: $text;
+}
+.b-text-50 {
+    border-color: #ddd;
 }
 
 .w-fit {
@@ -362,16 +371,16 @@ img {
 .d-flex {
     display: flex !important;
 }
-.d-none{
+.d-none {
     display: none !important;
 }
-.d-lg-flex{
-    @include media-breakpoint-up(lg){
+.d-lg-flex {
+    @include media-breakpoint-up(lg) {
         display: flex !important;
     }
 }
-.d-lg-none{
-    @include media-breakpoint-up(lg){
+.d-lg-none {
+    @include media-breakpoint-up(lg) {
         display: none !important;
     }
 }

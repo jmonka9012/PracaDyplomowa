@@ -3,82 +3,75 @@ import hellspit from "~images/hellspit.jpg";
 import bangpow from "~images/bangpow.jpg";
 import jeckelbros from "~images/Jeckelbros.jpg";
 import icpLogo from "~images/ICP-Logo.jpg";
+import heroBg from "~images/bg_home1.jpg";
 </script>
 
 <template>
     <section class="hero">
-        <div class="container container-big">
-            <div class="d-flex flex-column col-12 col-lg-6">
-                <p class="sub-title sub-title-lprpl mb-40px">Modern art</p>
+        <div class="hero-bg">
+            <img :src="heroBg" alt="" />
+        </div>
+        <div class="container">
+            <div
+                class="d-flex flex-column align-items-center justify-content-center col-12 mb-150px"
+            >
                 <slot name="title">
                     <h1 class="title-1">
                         {{ title }}
                     </h1>
                 </slot>
-                <p class="mb-40px hero__text">
-                    Nibh nisl condimentum venenatis a condimentum vitae sapien
-                    dignissim sodales. Consequat ac felis ridiculus mus mauris
-                    vitae ultricies leo integer malesuada.
-                </p>
-                <a href="" class="btn btn-md">Styl jest</a>
             </div>
-            <div class="hero__images col-12 col-lg-6">
-                <div class="hero__images__item">
-                    <img :src="hellspit" alt="" />
+            <form class="hero-form" action="submit">
+                <div class="input-wrap hero-input-wrap br-1 b-text-50">
+                    <i class="fa fa-search"></i>
+                    <input
+                        class="hero-input"
+                        type="text"
+                        placeholder="Enter name ..."
+                    />
                 </div>
-                <div class="hero__images__item">
-                    <img :src="bangpow" alt="" />
+                <div class="input-wrap hero-select-wrap br-1 b-text-50">
+                    <i class="fa fa-th-list"></i>
+                    <select class="hero-select">
+                        <option disabled selected value="">
+                            Please select one
+                        </option>
+                        <option>Buisness</option>
+                        <option>Concert</option>
+                        <option>Music</option>
+                        <option>Conference</option>
+                        <option>Education</option>
+                        <option>Fashion</option>
+                        <option>Festival</option>
+                        <option>Food & drink</option>
+                        <option>Other</option>
+                        <option>Sport</option>
+                    </select>
                 </div>
-                <div class="hero__images__item">
-                    <img :src="jeckelbros" alt="" />
+                <div class="input-wrap hero-select-wrap">
+                    <i class="fa fa-map-marker"></i>
+                    <select class="hero-select">
+                        <option disabled selected value="">All time</option>
+                        <option>Today</option>
+                        <option>Tommorow</option>
+                        <option>This week</option>
+                        <option>This weekend</option>
+                        <option>Next week</option>
+                        <option>Next month</option>
+                    </select>
                 </div>
-            </div>
+                <button class="hero-search">Search</button>
+            </form>
         </div>
-
-        <img class="hero__under" :src="icpLogo" alt="" />
     </section>
 </template>
 
 <style lang="scss" scoped>
 .hero {
     position: relative;
-    padding-bottom: 70px;
-    &__images {
-        position: relative;
-        &__item {
-            position: absolute;
-            transition: all 800ms;
-            img {
-                width: 210px;
-                height: 270px;
-            }
+    padding-top: 240px;
+    padding-bottom: 210px;
 
-            &:nth-of-type(1) {
-                transition-delay: 600ms;
-                left: 100px;
-            }
-
-            &:nth-of-type(2) {
-                transition-delay: 1200ms;
-                left: 100px;
-            }
-
-            &:nth-of-type(3) {
-                transition-delay: 1800ms;
-                left: 260px;
-            }
-
-            &:nth-of-type(4) {
-                transition-delay: 2400ms;
-                left: 260px;
-            }
-
-            &:nth-of-type(5) {
-                transition-delay: 3000ms;
-                left: 270px;
-            }
-        }
-    }
     &__text {
         width: 73%;
     }
@@ -92,5 +85,162 @@ import icpLogo from "~images/ICP-Logo.jpg";
             object-fit: contain;
         }
     }
+    &-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    &-overlay {
+        background-color: rgba(0, 0, 0, 0.42);
+        opacity: 0.73;
+        z-index: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+.hero-form {
+    margin: 40px 0px 45px 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    z-index: 1;
+}
+
+@media screen and (min-width: 992px) {
+    .hero-form {
+        flex-direction: row;
+        margin: 58px 0px 20px 0px;
+    }
+}
+
+.input-wrap {
+    position: relative;
+}
+
+.input-wrap .fa {
+    position: absolute;
+    color: var(--primary);
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    font-size: 20px;
+    display: block;
+}
+
+.hero-input,
+.hero-select {
+    box-shadow: none;
+    min-height: 60px;
+    font-size: 15px;
+    display: block;
+    padding: 0.375rem 0.75rem;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    appearance: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    width: 100%;
+    padding-left: 55px;
+    border: 0;
+    font-family: "Krona one";
+    &::placeholder {
+        color: var(--text);
+    }
+}
+
+.hero-input:focus,
+.hero-select:focus {
+    outline: none;
+}
+
+.hero-input-wrap {
+    width: 100%;
+}
+
+.hero-select-wrap {
+    width: 100%;
+    position: relative;
+    &::after {
+        position: absolute;
+        display: block;
+        content: "";
+        right: 15px;
+        border-color: #888 transparent transparent transparent;
+        border-style: solid;
+        border-width: 5px 4px 0 4px;
+        height: 0;
+        margin-left: -4px;
+        margin-top: -2px;
+        position: absolute;
+        top: calc(50% + 5px);
+        transform: translateY(-50%);
+        width: 0;
+    }
+}
+
+.hero-search {
+    width: 100%;
+    background-color: var(--primary);
+    border-radius: 0 4px 4px 0;
+    width: 100%;
+    display: inline-block;
+    height: 60px;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 35px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary);
+    &:hover {
+        background-color: var(--text);
+        border-color: var(--text);
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .hero-input-wrap {
+        width: 30%;
+    }
+
+    .hero-select-wrap {
+        width: 25%;
+    }
+
+    .hero-search {
+        width: 20%;
+    }
+}
+
+.hero-select option {
+    padding: 6px 20px !important;
+    appearance: none;
+    font-family: "Krona one";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 23px;
+    letter-spacing: 0px;
+}
+
+.hero-select option:hover {
+    background-color: var(--orange);
+    color: white;
 }
 </style>

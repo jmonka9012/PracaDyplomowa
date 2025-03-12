@@ -19,6 +19,7 @@ const charTotal = computed(() => props.text.length);
     <h3
         class="poptext"
         :style="`--word-total: ${wordTotal}; --char-total: ${charTotal};`"
+        v-bind="$attrs"
     >
         <span
             v-for="(word, wordIndex) in splitText"
@@ -112,6 +113,19 @@ const charTotal = computed(() => props.text.length);
             color: var(--text);
             z-index: 2;
             transition: color 0.4s;
+        }
+    }
+    &-white {
+        .word {
+            --color-text: var(--yellow);
+        }
+        .char {
+            &::before {
+                --color-text: var(--primary);
+            }
+            &::after {
+                color: #f4f4f4;
+            }
         }
     }
 }

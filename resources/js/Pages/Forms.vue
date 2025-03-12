@@ -55,7 +55,7 @@ import blogBg from "~images/blog-bg.jpg";
                     />
                 </div>
                 <div class="input-wrap d-flex flex-column col-12">
-                    <label for="register-email">Email*</label>
+                    <label for="register-email">Email *</label>
                     <input
                         type="text"
                         id="register-email"
