@@ -8,14 +8,15 @@ import blogBg from "~images/blog-bg.jpg";
     <section>
         <div class="container flex-column">
             <h1 class="title-1 mb-20px">Logowanie</h1>
-            <form class="form" method="post">
+            <form class="form" method="post" action="/login">
                 <input type="hidden" name="_token" :value="csrf_token" />
                 <div class="input-wrap d-flex flex-column col-12">
                     <label for="username">Dane użytkownika *</label>
                     <input
                         type="text"
-                        id="username"
-                        autocomplete="username"
+                        id="email"
+                        autocomplete="email"
+                        name="email"
                         spellcheck="false"
                         value=""
                         required=""
