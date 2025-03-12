@@ -58,7 +58,7 @@ import blogBg from "~images/blog-bg.jpg";
                     <input
                         type="text"
                         id="register-email"
-                        name="name"
+                        name="email"
                         autocomplete="register-email"
                         spellcheck="false"
                         value=""
