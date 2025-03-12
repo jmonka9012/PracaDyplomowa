@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import Poptext from "@/Components/sections-new/Poptext.vue";
 import ctaCloud from "~images/cta-cloud.png";
-import catCalendar from "~images/cat-calendar.png";
+import ctaCalendar from "~images/cat-calendar.png";
 
 const text = ref("Future Events");
 </script>
@@ -66,14 +66,14 @@ const text = ref("Future Events");
                 <a class="btn btn-md morph-outline" href=""> Learn more </a>
             </div>
             <div class="cta-right">
-                <Poptext :text="text" />
+                <Poptext class="poptext-cta" :text="text" />
             </div>
         </div>
         <div class="cta-cloud">
             <img :src="ctaCloud" alt="" />
         </div>
         <div class="cta-calendar">
-            <img :src="ctaCloud" alt="" />
+            <img :src="ctaCalendar" alt="" />
         </div>
     </section>
 </template>
@@ -82,11 +82,16 @@ const text = ref("Future Events");
 .cta {
     column-gap: 30px;
     background-color: var(--primary);
-    background-image: url("src/assets/images/cta-bg.jpg");
+    background-image: url("/public/images/cta-bg.jpg");
     background-position: center right;
     background-repeat: no-repeat;
     overflow: hidden;
     position: relative;
+    .container {
+        @include media-breakpoint-up(lg) {
+            padding: 0 35px;
+        }
+    }
 
     &-left {
         display: flex;
@@ -95,10 +100,11 @@ const text = ref("Future Events");
         width: 100%;
         order: 1;
 
-        @include media-breakpoint-up(lg) {
+        @include media-breakpoint-up(xl) {
             padding-top: 130px;
             width: 44%;
             order: 0;
+            padding-right: 15px;
         }
     }
 
@@ -109,7 +115,7 @@ const text = ref("Future Events");
         width: 100%;
         order: 0;
 
-        @include media-breakpoint-up(lg) {
+        @include media-breakpoint-up(xl) {
             width: 56%;
             padding-top: 100px;
             order: 1;
@@ -167,13 +173,13 @@ const text = ref("Future Events");
 
         @include media-breakpoint-up(lg) {
             display: block;
-            top: 45%;
+            top: 55%;
             left: 25%;
+            width: 100%;
         }
     }
 
     &-calendar {
-        display: none;
         position: absolute;
         z-index: 0;
         width: 100%;
@@ -183,10 +189,13 @@ const text = ref("Future Events");
         will-change: transform;
         opacity: 1;
         visibility: visible;
+        display: block;
 
         @include media-breakpoint-up(lg) {
             top: 25%;
             left: 78%;
+            max-height: 544px;
+            max-width: 390px;
         }
 
         z-index: 0;

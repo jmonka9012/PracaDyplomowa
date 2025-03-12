@@ -115,6 +115,12 @@ const charTotal = computed(() => props.text.length);
             transition: color 0.4s;
         }
     }
+    &-cta {
+        z-index: 1;
+        @include media-breakpoint-up(xl) {
+            padding-left: 65px;
+        }
+    }
     &-white {
         .word {
             --color-text: var(--yellow);

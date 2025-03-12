@@ -30,7 +30,14 @@
     font-weight: normal;
     font-style: normal;
 }
-
-body {
+@font-face {
+    font-family: "Font Awesome 6 Free";
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url("/public/fonts/fa-regular-400.woff2") format("woff2"),
+        url("/public/fonts/fa-regular-400.ttf") format("truetype");
+}
+node_modules\@fortawesome\fontawesome-free\webfonts\fa-regular-400.woff2 body {
     font-family: "Prompt", sans-serif;
 }
