@@ -4,6 +4,7 @@ import bangpow from "~images/bangpow.jpg";
 import jeckelbros from "~images/Jeckelbros.jpg";
 import icpLogo from "~images/ICP-Logo.jpg";
 import heroBg from "~images/bg_home1.jpg";
+
 </script>
 
 <template>

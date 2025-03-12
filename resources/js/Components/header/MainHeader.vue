@@ -1,5 +1,6 @@
 <script setup>
 import placeHolder from "~icons/placeholder.svg";
+import placeHolderDark from "~icons/logo-dark.svg";
 
 import { ref, onMounted, onBeforeUnmount } from "vue";
 const isOpen = ref(false);
@@ -61,7 +62,11 @@ onBeforeUnmount(() => {
                     </div>
                 </a>
                 <a href="/" class="header-logo"
-                    ><img :src="placeHolder" alt=""
+                    ><img
+                        class="d-none d-lg-flex"
+                        :src="placeHolderDark"
+                        alt="" />
+                    <img class="d-lg-none" :src="placeHolder" alt=""
                 /></a>
                 <nav class="header-nav d-none d-lg-flex">
                     <ul>
@@ -93,18 +98,18 @@ onBeforeUnmount(() => {
                 <div class="d-none d-lg-flex align-items-center">
                     <div class="d-flex align-items-center mr-30px"></div>
 
-                    <a href="/login" class="hover-primary">
+                    <a href="/login" class="hover-primary header-login">
                         <i class="fa fa-user text-primary mr-8px"></i>Login</a
                     >
                     <span class="divider divider-dark"></span>
 
-                    <a href="/register" class="hover-primary">
+                    <a href="/register" class="hover-primary header-login">
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
                         Register
                     </a>
                     <a
                         href="/makeanevent"
-                        class="ml-30px btn btn-md btn-hovprim"
+                        class="ml-30px btn btn-header btn-hovprim"
                         >+ Create event</a
                     >
                 </div>
@@ -262,6 +267,12 @@ onBeforeUnmount(() => {
         width: auto;
         height: 40px;
     }
+    @media screen and (min-width: 1000px) and (max-width: 1200px) {
+        width: 150px;
+        img {
+            object-fit: contain;
+        }
+    }
     img {
         height: 100%;
     }
@@ -289,6 +300,9 @@ onBeforeUnmount(() => {
             height: 100%;
             a {
                 font-size: 14px;
+                @media screen and (min-width: 1000px) and (max-width: 1200px) {
+                    font-size: 12px;
+                }
                 letter-spacing: 0.14px;
                 transition: all 0.4s;
                 font-weight: 400;
@@ -429,6 +443,9 @@ onBeforeUnmount(() => {
 .header-nav {
     ul.header-ddown {
         color: white;
+        @media screen and (min-width: 1000px) and (max-width: 1200px) {
+            font-size: 12px;
+        }
         font-size: 14px;
         transition: all 0.4s;
         padding: 4px 0;
@@ -488,11 +505,34 @@ onBeforeUnmount(() => {
         }
     }
 }
+.header-login {
+    font-family: "Krona one";
+    white-space: nowrap;
+    @media screen and (min-width: 1000px) and (max-width: 1200px) {
+        font-size: 12px;
+    }
+    font-size: 14px;
+}
+.btn-header {
+    background-color: var(--primary);
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    border-radius: 5px 5px 5px 5px;
+    padding: 10px 25px 10px 30px;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: var(--primary);
+    white-space: nowrap;
+}
 .desk-dropdown {
     position: relative;
     display: flex;
     align-items: center;
     .desk-dropdown-toggle {
+        @media screen and (min-width: 1000px) and (max-width: 1200px) {
+            font-size: 12px;
+        }
         font-size: 14px;
         letter-spacing: 0.14px;
         transition: all 0.4s;
