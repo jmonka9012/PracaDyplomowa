@@ -34,7 +34,7 @@ class LoginUserController extends Controller
     }
 
         return back()->withErrors([
-            'email' => 'Podane dane są niepoprawne.',
+            'login' => 'Podane dane są niepoprawne.',
         ]);
     }
 
