@@ -51,7 +51,7 @@ const text = ref("Future Events");
             <i class="fa fa-arrow-down"></i>
         </div>
     </div>
-    <section class="pb-50px pb-lg-105px cta">
+    <section class="pb-70px pb-lg-105px cta">
         <div class="container container-big">
             <div class="cta-left">
                 <p class="sub-title mb-17px">Lorem ipsum</p>
@@ -99,6 +99,7 @@ const text = ref("Future Events");
         padding-top: 30px;
         width: 100%;
         order: 1;
+        z-index: 2;
 
         @include media-breakpoint-up(xl) {
             padding-top: 130px;
@@ -168,14 +169,14 @@ const text = ref("Future Events");
         transform: translateY(-32px);
         transition: transform linear;
         will-change: transform;
-        z-index: 1;
+        z-index: 0;
         display: none;
-
+        top: 55%;
+        left: 25%;
+        width: 100%;
+        z-index: 1;
         @include media-breakpoint-up(lg) {
             display: block;
-            top: 55%;
-            left: 25%;
-            width: 100%;
         }
     }
 
@@ -189,13 +190,13 @@ const text = ref("Future Events");
         will-change: transform;
         opacity: 1;
         visibility: visible;
-        display: block;
-
+        display: none;
+        top: 15%;
+        left: 80%;
+        max-height: 544px;
+        max-width: 390px;
         @include media-breakpoint-up(lg) {
-            top: 25%;
-            left: 78%;
-            max-height: 544px;
-            max-width: 390px;
+            display: block;
         }
 
         z-index: 0;

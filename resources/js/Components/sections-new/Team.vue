@@ -1,4 +1,6 @@
 <script setup>
+import IconRotate from "@/Components/icons/IconRotate.vue";
+
 defineProps({
     team: {
         type: Array,
@@ -9,33 +11,17 @@ defineProps({
 import fbWhite from "~icons/facebook-circle-white.svg";
 import twWhite from "~icons/twitter-circle-white.svg";
 import insWhite from "~icons/instagram-circle-white.svg";
+import spiral from "~images/spiral.png";
 </script>
 
 <template>
     <section class="team">
-        <div class="container d-flex flex-column relative">
-            <div class="team__svg-holder">
-                <svg
-                    class="team__svg"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="250.5"
-                    height="250.5"
-                    viewBox="0 0 250.5 250.5"
-                >
-                    <path
-                        d="M.25,125.25a125,125,0,1,1,125,125,125,125,0,0,1-125-125"
-                        id="e-path-78c8962"
-                    ></path>
-                    <text>
-                        <textPath
-                            id="e-text-path-78c8962"
-                            href="#e-path-78c8962"
-                            startOffset="0%"
-                        >
-                            TODO&nbsp;&nbsp;&nbsp;—&nbsp;&nbsp;&nbsp;TODO&nbsp;&nbsp;&nbsp;—
-                        </textPath>
-                    </text>
-                </svg>
+        <div class="container d-flex flex-column">
+            <div class="team__iconrotate">
+                <IconRotate
+                    :background="`url(${spiral})`"
+                    rotateText="- Custom Rotating Text - Custom Rotating Text 2 "
+                />
             </div>
 
             <p class="sub-title mb-15px">
@@ -99,10 +85,11 @@ import insWhite from "~icons/instagram-circle-white.svg";
 
 <style scoped lang="scss">
 .team {
-    background-image: url("/src/assets/images/bg-team.jpg");
+    background-image: url("~images/bg-team.jpg");
     background-position: center center;
     background-size: cover;
     padding: 80px 0;
+    position: relative;
 
     @include media-breakpoint-up(lg) {
         padding: 121px 15px;
@@ -112,40 +99,13 @@ import insWhite from "~icons/instagram-circle-white.svg";
         max-width: 1800px;
     }
 
-    &__svg {
-        width: 190px;
-        max-width: 100%;
-        height: auto;
-        overflow: visible;
-        transform: rotate(0) scaleX(1) scaleY(1);
-        animation: rotate-right linear 60s infinite;
-
-        path {
-            vector-effect: non-scaling-stroke;
-            fill: transparent;
-            stroke: transparent;
-            stroke-width: 1px;
-            transition: stroke, fill;
-        }
-
-        text {
-            fill: rgb(0, 0, 0);
-            direction: var(--direction, ltr);
-            transition: 0.3s stroke, 0.3s stroke-width, 0.3s fill;
-        }
-    }
-
-    &__svg-holder {
-        background-image: url("/src/assets/images/team-svg-bg.png");
-        background-position: center center;
-        background-repeat: no-repeat;
-        position: absolute;
-        top: 0px;
-        right: 40px;
+    &__iconrotate {
         display: none;
-
         @include media-breakpoint-up(lg) {
-            display: flex;
+            display: block;
+            position: absolute;
+            right: 60px;
+            top: 120px;
         }
     }
 
@@ -169,6 +129,14 @@ import insWhite from "~icons/instagram-circle-white.svg";
     &__item {
         position: relative;
         display: flex;
+        max-height: 400px;
+        height: 100%;
+        @include media-breakpoint-up(lg) {
+            max-height: 600px;
+        }
+        @include media-breakpoint-up(xl) {
+            max-height: 375px;
+        }
 
         &::before {
             content: "";

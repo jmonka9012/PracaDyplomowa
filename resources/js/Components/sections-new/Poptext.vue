@@ -54,7 +54,7 @@ const charTotal = computed(() => props.text.length);
     --char-center: calc((var(--char-total) - 1) / 2);
     --line-center: calc((var(--line-total) - 1) / 2);
     --color-bg-text: #fff;
-    z-index: 0;
+    z-index: 1;
     font-weight: 500;
     --animation-speed: 200ms;
     --animation-delay: 100ms;
@@ -116,7 +116,7 @@ const charTotal = computed(() => props.text.length);
         }
     }
     &-cta {
-        z-index: 1;
+        z-index: 3;
         @include media-breakpoint-up(xl) {
             padding-left: 65px;
         }
