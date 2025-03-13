@@ -21,6 +21,7 @@
         "@vitejs/plugin-vue": "^5.2.1",
         "npm-watch": "^0.13.0",
         "sass-loader": "^16.0.5",
+        "swiper": "^11.2.5",
         "vue": "^3.5.13",
         "ziggy-js": "^2.5.2"
     }

@@ -2,7 +2,7 @@
 defineProps({
     id: Number,
     src: String,
-    mainLink: Array, // Keep as Array if your data structure is an array
+    mainLink: Array,
     date: String,
 });
 </script>

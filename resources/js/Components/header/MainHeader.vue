@@ -35,7 +35,7 @@ const handleClickOutside = (event) => {
     }
 };
 
-// Event listener setup remains the same
+
 onMounted(() => window.addEventListener("click", handleClickOutside));
 onBeforeUnmount(() => window.removeEventListener("click", handleClickOutside));
 

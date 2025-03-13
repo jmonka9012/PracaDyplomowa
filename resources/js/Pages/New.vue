@@ -17,6 +17,7 @@ import jeckelBros from "~images/Jeckelbros.jpg";
 import teamOne from "~images/team-1.jpg";
 import eventsBg from "~images/events-bg-1.jpg";
 import { ref } from "vue";
+import SliderGallery from "../Components/sections-new/SliderGallery.vue";
 const team = [
     {
         id: 1,
@@ -187,4 +188,9 @@ const text = ref("Freedom Festival");
         <template #subtitle>Meet Our Team</template>
         <template #title>Our Professionals</template>
     </Team>
+    <section class="pt-100px pb-100px">
+        <div class="container">
+            <SliderGallery :events="events" />
+        </div>
+    </section>
 </template>
