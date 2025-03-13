@@ -22,14 +22,16 @@ class LoginUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'email' => 'required|string|email',
+            'login' => 'required|string',
             'password' => 'required|string',
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->route('contact'); //na razie ta strona, tak jak w RegisterUserController.php nie ma innej
-        }
+        $fieldType = filter_var($credentials['login'], FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+ 
+    if (Auth::attempt([$fieldType => $credentials['login'], 'password' => $credentials['password']])) {
+        $request->session()->regenerate();
+        return redirect()->route('contact');
+    }
 
         return back()->withErrors([
             'email' => 'Podane dane są niepoprawne.',

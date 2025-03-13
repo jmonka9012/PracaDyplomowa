@@ -14,9 +14,9 @@ import blogBg from "~images/blog-bg.jpg";
                     <label for="username">Dane użytkownika *</label>
                     <input
                         type="text"
-                        id="email"
+                        id="login"
                         autocomplete="email"
-                        name="email"
+                        name="login"
                         spellcheck="false"
                         value=""
                         required=""
