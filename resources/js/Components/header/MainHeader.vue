@@ -75,13 +75,16 @@ onBeforeUnmount(() => {
                             <Link :href="route('home')"><span>Home</span></Link>
                         </li>
                         <li>
-                            <a href="/blog"><span>Blog</span></a>
+                            <Link :href="route('blog')"><span>Blog</span></Link>
                         </li>
                         <li>
-                            <a href="/single"><span>Single</span></a>
+                            <Link :href="route('blog')"><span>Single</span></Link>
                         </li>
                         <li>
-                            <a href="/kontakt"><span>Kontakt</span></a>
+                            <Link :href="route('contact')"><span>Kontakt</span></Link>
+                        </li>
+                        <li>
+                            <Link :href="route('ce')"><span>CE</span></Link>
                         </li>
                         <li class="desk-dropdown">
                             <span class="desk-dropdown-toggle"
@@ -139,15 +142,20 @@ onBeforeUnmount(() => {
                             <nav class="header-nav">
                                 <ul class="header-list">
                                     <li>
-                                        <a href="#">Home</a>
+                                        <Link :href="route('home')">Home</Link>
                                     </li>
                                     <li>
-                                        <a href="#">Blog</a>
+                                        <Link :href="route('blog')">Blog</Link>
                                     </li>
                                     <li>
-                                        <a href="#">Single</a>
+                                        <Link :href="route('blog')">Single</Link>
                                     </li>
-                                    <li><a href="#">Kontakt</a></li>
+                                    <li>
+                                        <Link :href="route('contact')">Kontakt</Link>
+                                    </li>
+                                    <li>
+                                        <Link :href="route('ce')">CE</Link>
+                                    </li>
                                     <ul class="header-ddown">
                                         <li
                                             class="header-ddown-toggle"
