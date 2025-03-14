@@ -1,8 +1,9 @@
 <script setup>
 import placeHolder from "~icons/placeholder.svg";
 import placeHolderDark from "~icons/logo-dark.svg";
+import {Link} from '@inertiajs/vue3';
+import {ref, onMounted, onBeforeUnmount} from "vue";
 
-import { ref, onMounted, onBeforeUnmount } from "vue";
 const isOpen = ref(false);
 
 const toggleMenu = () => {
@@ -12,7 +13,7 @@ const toggleMenu = () => {
 const dropdownStates = ref({});
 
 const toggleDropdown = (id) => {
-    const newStates = { ...dropdownStates.value };
+    const newStates = {...dropdownStates.value};
 
     Object.keys(newStates).forEach((key) => {
         newStates[key] = false;
@@ -61,17 +62,17 @@ onBeforeUnmount(() => {
                         <span></span>
                     </div>
                 </a>
-                <a href="/" class="header-logo"
-                    ><img
-                        class="d-none d-lg-flex"
-                        :src="placeHolderDark"
-                        alt="" />
+                <Link :href="route('home')" class="header-logo"
+                ><img
+                    class="d-none d-lg-flex"
+                    :src="placeHolderDark"
+                    alt=""/>
                     <img class="d-lg-none" :src="placeHolder" alt=""
-                /></a>
+                    /></Link>
                 <nav class="header-nav d-none d-lg-flex">
                     <ul>
                         <li>
-                            <a href="/new"><span>Home</span></a>
+                            <Link :href="route('home')"><span>Home</span></Link>
                         </li>
                         <li>
                             <a href="/blog"><span>Blog</span></a>
@@ -84,7 +85,7 @@ onBeforeUnmount(() => {
                         </li>
                         <li class="desk-dropdown">
                             <span class="desk-dropdown-toggle"
-                                ><span>Toggle</span>
+                            ><span>Toggle</span>
                                 <i class="fa fa-chevron-right"></i>
                             </span>
                             <ul class="dropdown-content">
@@ -98,23 +99,23 @@ onBeforeUnmount(() => {
                 <div class="d-none d-lg-flex align-items-center">
                     <div class="d-flex align-items-center mr-30px"></div>
 
-                    <a href="/login" class="hover-primary header-login">
-                        <i class="fa fa-user text-primary mr-8px"></i>Login</a
-                    >
+                    <Link :href="route('login')" class="hover-primary header-login">
+                        <i class="fa fa-user text-primary mr-8px"></i>Login
+                    </Link>
                     <span class="divider divider-dark"></span>
 
-                    <a href="/register" class="hover-primary header-login">
+                    <Link :href="route('register')" class="hover-primary header-login">
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
                         Register
-                    </a>
+                    </Link>
                     <a
                         href="/makeanevent"
                         class="ml-30px btn btn-header btn-hovprim"
-                        >+ Create event</a
+                    >+ Create event</a
                     >
                 </div>
                 <div class="header-search">
-                    <i class="fa fa-search" />
+                    <i class="fa fa-search"/>
                 </div>
                 <div class="mobile-nav__overlay"></div>
                 <div class="mobile-nav">
@@ -122,7 +123,8 @@ onBeforeUnmount(() => {
                         class="mobile-toggle mobile-toggle-innav"
                         href="#"
                         @click.prevent="toggleMenu"
-                        ><div class="mobile-toggle-inner">
+                    >
+                        <div class="mobile-toggle-inner">
                             <span></span>
                             <span></span>
                             <span></span>
@@ -132,7 +134,7 @@ onBeforeUnmount(() => {
                     <div class="mobile-nav__content">
                         <div class="container flex-column">
                             <a class="header-logo mb-30px" href="/">
-                                <img :src="placeHolder" alt="" />
+                                <img :src="placeHolder" alt=""/>
                             </a>
                             <nav class="header-nav">
                                 <ul class="header-list">
@@ -241,25 +243,30 @@ onBeforeUnmount(() => {
         background-color: white;
         padding: 0 30px;
     }
+
     &-mobile {
         @include media-breakpoint-up(lg) {
             display: none;
         }
     }
+
     .container {
         padding: 0;
     }
+
     &.open {
         .mobile-nav {
             transform: translate(0) !important;
             overflow-x: visible;
         }
+
         .mobile-nav__overlay {
             opacity: 1;
             visibility: visible;
         }
     }
 }
+
 .header-logo {
     width: 150px;
     height: 30px;
@@ -273,10 +280,12 @@ onBeforeUnmount(() => {
             object-fit: contain;
         }
     }
+
     img {
         height: 100%;
     }
 }
+
 .header-nav {
     display: flex;
     flex-direction: column;
@@ -286,6 +295,7 @@ onBeforeUnmount(() => {
         align-items: center;
         height: 90px;
     }
+
     ul {
         display: flex;
         flex-direction: column;
@@ -296,8 +306,10 @@ onBeforeUnmount(() => {
         align-items: stretch;
         height: 100%;
         width: 100%;
+
         li {
             height: 100%;
+
             a {
                 font-size: 14px;
                 @media screen and (min-width: 1000px) and (max-width: 1200px) {
@@ -321,11 +333,13 @@ onBeforeUnmount(() => {
                 height: 100%;
                 display: flex;
                 align-items: center;
+
                 &:hover {
                     color: var(--primary);
                 }
             }
         }
+
         li:not(:last-of-type) {
             margin-bottom: 10px;
             @include media-breakpoint-up(lg) {
@@ -334,11 +348,13 @@ onBeforeUnmount(() => {
         }
     }
 }
+
 .header-search {
     color: white;
     @include media-breakpoint-up(lg) {
         display: none;
     }
+
     i {
         font-size: 20px;
     }
@@ -353,9 +369,11 @@ onBeforeUnmount(() => {
     @include media-breakpoint-up(lg) {
         display: none;
     }
+
     .fa {
         font-size: 20px;
     }
+
     &-innav {
         position: absolute;
         top: 10px;
@@ -363,6 +381,7 @@ onBeforeUnmount(() => {
         background-color: var(--text);
         margin-left: 0;
     }
+
     .mobile-toggle-inner {
         display: flex;
         flex-direction: column;
@@ -375,33 +394,40 @@ onBeforeUnmount(() => {
             height: 2px;
             vertical-align: top;
             background: white;
+
             &:first-of-type {
                 animation: ease 0.7s 0.4s bar-top-2 backwards;
             }
+
             &:nth-of-type(2) {
                 animation: ease 0.7s 0.4s bar-scaled-2 backwards;
             }
+
             &:nth-of-type(3) {
                 animation: ease 0.7s 0.4s bar-bottom-2 backwards;
             }
         }
     }
 }
+
 .header.open {
     .mobile-toggle-inner {
         span {
             &:first-of-type {
                 animation: ease 0.7s 0.4s bar-top forwards;
             }
+
             &:nth-of-type(2) {
                 animation: ease 0.7s 0.4s bar-scaled forwards;
             }
+
             &:nth-of-type(3) {
                 animation: ease 0.7s 0.4s bar-bottom forwards;
             }
         }
     }
 }
+
 .mobile-nav {
     display: flex;
     position: fixed;
@@ -419,6 +445,7 @@ onBeforeUnmount(() => {
     @include media-breakpoint-up(lg) {
         display: none;
     }
+
     &__overlay {
         position: fixed;
         top: 0;
@@ -432,6 +459,7 @@ onBeforeUnmount(() => {
         transition: 0.45s ease-in-out;
         background-color: #161a1dcc;
     }
+
     &__content {
         width: 100%;
         display: flex;
@@ -457,10 +485,12 @@ onBeforeUnmount(() => {
             padding: 0 13px;
             color: var(--text);
         }
+
         li.header-ddown-toggle {
             height: auto !important;
             margin-bottom: 0;
             position: relative;
+
             .fa {
                 position: absolute;
                 top: 50%;
@@ -472,12 +502,14 @@ onBeforeUnmount(() => {
                 transform: translateY(-50%);
                 transition: all 0.3s ease;
             }
+
             &.show {
                 .fa {
                     transform: translateY(-50%) rotate(90deg);
                 }
             }
         }
+
         .ddown-content {
             display: flex;
             padding: 0 0 0 20px;
@@ -491,6 +523,7 @@ onBeforeUnmount(() => {
             font-size: inherit;
             max-height: 0;
             transition: max-height 0.5s ease;
+
             &.show {
                 max-height: 1000px;
             }
@@ -499,12 +532,14 @@ onBeforeUnmount(() => {
         li {
             height: auto;
             margin-bottom: 0;
+
             a {
                 line-height: 30px;
             }
         }
     }
 }
+
 .header-login {
     font-family: "Krona one";
     white-space: nowrap;
@@ -513,6 +548,7 @@ onBeforeUnmount(() => {
     }
     font-size: 14px;
 }
+
 .btn-header {
     background-color: var(--primary);
     font-size: 14px;
@@ -525,10 +561,12 @@ onBeforeUnmount(() => {
     border-color: var(--primary);
     white-space: nowrap;
 }
+
 .desk-dropdown {
     position: relative;
     display: flex;
     align-items: center;
+
     .desk-dropdown-toggle {
         @media screen and (min-width: 1000px) and (max-width: 1200px) {
             font-size: 12px;
@@ -546,19 +584,24 @@ onBeforeUnmount(() => {
         cursor: pointer;
         display: flex;
         align-items: center;
+
         &:hover {
             color: var(--primary);
+
             .fa {
                 color: var(--primary);
             }
         }
+
         @include media-breakpoint-up(lg) {
             padding: 0 13px;
             color: var(--text);
         }
+
         span {
             margin-right: 7px;
         }
+
         .fa {
             position: relative;
             z-index: 1;
@@ -570,6 +613,7 @@ onBeforeUnmount(() => {
             transition: all 0.3s ease;
         }
     }
+
     .dropdown-content {
         display: flex;
         flex-direction: column;
@@ -587,9 +631,11 @@ onBeforeUnmount(() => {
         visibility: hidden;
         opacity: 0;
         top: calc(100% + 10px);
+
         li {
             margin-bottom: 8px !important;
         }
+
         a {
             line-height: 30px;
             color: white;
@@ -598,14 +644,16 @@ onBeforeUnmount(() => {
             justify-content: space-between;
             font-weight: 500;
             transition: all 0s, transform 0.3s, text-decoration 0.3s ease-in-out,
-                -webkit-text-decoration 0.3s ease-in-out;
+            -webkit-text-decoration 0.3s ease-in-out;
             padding: 1px 30px;
+
             &:hover {
                 transform: translateX(6px);
                 color: var(--primary);
             }
         }
     }
+
     &:hover {
         .dropdown-content {
             top: 100%;
