@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
 
         // John Doe jest używany w unit testach
         $excludedName = "John Doe";
-        $excludedEmail = "john@example.com";
+        $excludedEmail = ["john@example.com", "john2@example.com", "john3@example.com"];
 
         $usersCreated = 0;
 
