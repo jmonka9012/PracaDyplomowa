@@ -19,12 +19,12 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->integer('permission_level')->default(6); //owo
+            $table->integer('permission_level')->default(6); 
         });
 
         $admins = Config::get('users.admins');
         foreach ($admins as &$admin) {
-            $admin['password'] = Hash::make($admin['password']); // Securely hash passwords
+            $admin['password'] = Hash::make($admin['password']);
             $admin['created_at'] = now();
             $admin['updated_at'] = now();
         }
