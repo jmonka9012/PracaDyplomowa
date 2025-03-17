@@ -5,6 +5,8 @@ import HeroSmall from "@/Components/sections-new/Hero-small.vue";
 import HellSpit from "~images/hellspit.jpg";
 import BangPow from "~images/bangpow.jpg";
 import SingleMap from "~images/single-map.jpg";
+import blogBg from "~images/single-map.jpg";
+
 
 const latest = [
     {
@@ -47,7 +49,7 @@ const latest = [
 </script>
 
 <template>
-    <HeroSmall source="/src/assets/images/blog-bg.jpg" title="Single" />
+    <HeroSmall :source=blogBg title="Single" />
     <section class="single">
         <div class="container container-small">
             <div class="single__content">

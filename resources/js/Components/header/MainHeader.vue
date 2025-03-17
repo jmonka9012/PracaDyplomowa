@@ -78,7 +78,7 @@ onBeforeUnmount(() => {
                             <Link :href="route('blog')"><span>Blog</span></Link>
                         </li>
                         <li>
-                            <Link :href="route('blog')"><span>Single</span></Link>
+                            <Link :href="route('post')"><span>Single</span></Link>
                         </li>
                         <li>
                             <Link :href="route('contact')"><span>Kontakt</span></Link>
@@ -148,7 +148,7 @@ onBeforeUnmount(() => {
                                         <Link :href="route('blog')">Blog</Link>
                                     </li>
                                     <li>
-                                        <Link :href="route('blog')">Single</Link>
+                                        <Link :href="route('post')">Single</Link>
                                     </li>
                                     <li>
                                         <Link :href="route('contact')">Kontakt</Link>
