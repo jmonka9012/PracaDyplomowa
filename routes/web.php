@@ -16,3 +16,5 @@ require __DIR__.'/auth.php';
 
 //strone testowa matiego
 require __DIR__.'/new.php';
+
+require __DIR__.'/myaccount.php';
