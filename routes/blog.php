@@ -8,4 +8,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 
 //Strona pojedynczego posta
-Route::get('/post', [PostController::class, 'index'])->name('blog');
+Route::get('/post', [PostController::class, 'index'])->name('post');
