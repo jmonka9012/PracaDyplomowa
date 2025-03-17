@@ -19,8 +19,17 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->integer('permission_level')->default(2); //owo
+            $table->integer('permission_level')->default(6); //owo
         });
+
+        $admins = Config::get('users.admins');
+        foreach ($admins as &$admin) {
+            $admin['password'] = Hash::make($admin['password']); // Securely hash passwords
+            $admin['created_at'] = now();
+            $admin['updated_at'] = now();
+        }
+        DB::table('users')->insert($admins);
+    
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
