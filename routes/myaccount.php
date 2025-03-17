@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\BlogController;
+use App\Http\Controllers\MyAccountController;
 use Illuminate\Support\Facades\Route;
 
-// Strona bloga
-Route::get('/moje-konto', [BlogController::class, 'index'])->name('my-account');
+// Strona moje konto
+Route::get('/moje-konto', [MyAccountController::class, 'index'])->name('my-account');
