@@ -39,7 +39,7 @@ import blogBg from "~images/blog-bg.jpg";
                 </div>
             </form>
             <h1 class="title-1 mb-20px">Rejestracja</h1>
-            <form class="form" method="post" action="/register">
+            <form class="form pb-120px" method="post" action="/register">
                 <input type="hidden" name="_token" :value="csrf_token" />
                 <div class="input-wrap d-flex flex-column col-12">
                     <label for="register-username">Nazwa użytkownika *</label>
