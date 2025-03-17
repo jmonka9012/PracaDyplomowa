@@ -86,6 +86,9 @@ onBeforeUnmount(() => {
                         <li>
                             <Link :href="route('ce')"><span>CE</span></Link>
                         </li>
+                        <li>
+                            <Link :href="route('jacek')"><span>Jacek CE</span></Link>
+                        </li>
                         <li class="desk-dropdown">
                             <span class="desk-dropdown-toggle"
                             ><span>Toggle</span>

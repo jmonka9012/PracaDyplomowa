@@ -15,7 +15,7 @@ require __DIR__.'/contact.php';
 require __DIR__.'/auth.php';
 
 //strone testowa matiego
-require __DIR__.'/new.php';
+require __DIR__ . '/CE.php';
 
 //strona moje konto
 require __DIR__.'/myaccount.php';
