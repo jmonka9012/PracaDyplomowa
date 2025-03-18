@@ -94,12 +94,23 @@ import blogBg from "~images/blog-bg.jpg";
                 <div class="input-wrap col-12 mb-20px">
                     <p>
                         Na adres e-mail zostanie wysłany odnośnik do ustawienia
-                        nowego<br /><br />
-                        hasła. Twoje dane osobowe zostaną użyte do obsługi
-                        twojej wizyty na naszej stronie, zarządzania dostępem do
+                        nowego hasła.
+                    </p>
+                </div>
+                <div class="input-wrap col-12 mb-20px">
+                    <input
+                        type="checkbox"
+                        required
+                        name="confirmation"
+                        id="confirmation"
+                        aria-required="true"
+                    />
+                    <label for="checkbox">
+                        Twoje dane osobowe zostaną użyte do obsługi twojej
+                        wizyty na naszej stronie, zarządzania dostępem do
                         twojego konta i dla innych celów o których mówi nasza
                         polityka prywatności.
-                    </p>
+                    </label>
                 </div>
                 <div class="input-wrap col-12">
                     <input type="submit" placeholder="Zarejestruj się" />
