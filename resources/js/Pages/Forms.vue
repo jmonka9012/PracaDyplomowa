@@ -34,6 +34,18 @@ import blogBg from "~images/blog-bg.jpg";
                         aria-required="true"
                     />
                 </div>
+                <div class="input-wrap col-12 mb-20px">
+                    <input
+                        type="checkbox"
+                        required
+                        name="remember"
+                        id="remember"
+                        aria-required="true"
+                    />
+                    <label for="remember">
+                   Zapamiętaj mnie
+                    </label>
+                </div>
                 <div class="input-wrap col-12">
                     <input type="submit" value="Zaloguj się" />
                 </div>
