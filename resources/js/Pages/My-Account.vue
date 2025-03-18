@@ -2,9 +2,9 @@
 
 <template>
     <section class="ma-hero"></section>
-    <section>
-        <div class="container">
-            <div class="col-12 col-lg-3 d-flex flex-column">
+    <section class="bg-grey">
+        <div class="container flex-lg-row column-mob-reverse">
+            <div class="col-12 col-lg-3 d-flex ma-lcol flex-column">
                 <div class="ma-lcol-intro">
                     <p>Witaj ponownie</p>
                     <p class="fw-bold">[[User]]</p>
@@ -13,14 +13,18 @@
                     <nav class="ma-lcol-nav">
                         <ul>
                             <li>
-                                <button>Moje bilety</button>
+                                <button>
+                                    <i class="fa fa-ticket"></i>Moje bilety
+                                </button>
                             </li>
                             <li><a href="#">Nadchodzące wydarzenia</a></li>
                             <li><a href="#">Poprzednie wydarzenia</a></li>
                         </ul>
                         <ul>
                             <li>
-                                <button>Mój profil</button>
+                                <button>
+                                    <i class="fa fa-user"></i>Mój profil
+                                </button>
                             </li>
                             <li><a href="#">Szczegóły profilu</a></li>
                             <li><a href="#">Szczególy sprzedawcy</a></li>
@@ -28,7 +32,9 @@
                         </ul>
                         <ul>
                             <li>
-                                <button>Moje ustawienia</button>
+                                <button>
+                                    <i class="fa fa-gear"></i>Moje ustawienia
+                                </button>
                             </li>
                             <li><a href="#">Zarządzaj powiadomieniami</a></li>
                         </ul>
@@ -40,8 +46,8 @@
                     </nav>
                 </div>
             </div>
-            <div class="col-12 col-lg-9 d-flex flex-column pl-60px">
-                <div class="bcrumb bcrumb-ma text-white">
+            <div class="col-12 col-lg-9 d-flex flex-column ma-rcol pl-lg-60px">
+                <div class="bcrumb text-white mb-32px">
                     <a href="">Prev</a>
                     <span class="divider divider-star"></span>
                     <a class="bcrumb__cur" href="">Current</a>
@@ -164,7 +170,6 @@
 .ma-hero {
     background-color: var(--primary);
     min-height: 380px;
-    margin-bottom: -200px;
 }
 .ma-ftitle {
     font-size: 32px;
@@ -180,6 +185,7 @@
     letter-spacing: 0.56px;
     text-align: left;
     margin-bottom: 30px;
+    color: white;
 }
 .ma-divider {
     margin: 32px 0px 0px;
@@ -195,8 +201,12 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-end;
     background-color: rgba(255, 255, 255, 0.1);
-    height: 200px;
+
+    @include media-breakpoint-up(lg) {
+        min-height: 200px;
+    }
 }
 .ma-lcol-content {
     padding: 16px 0 88px;
@@ -204,6 +214,7 @@
     box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 10px 3px;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 .ma-lcol-nav {
     color: rgb(18, 18, 18);
@@ -223,6 +234,7 @@
             bottom: 0;
         }
         li {
+            position: relative;
             button {
                 padding: 16px 64px;
                 background-color: transparent;
@@ -232,6 +244,18 @@
                 font-family: "Prompt";
                 width: 100%;
                 text-align: start;
+                &:hover {
+                    background-color: #f6f6f6;
+                    text-decoration: underline;
+                }
+                i {
+                    position: absolute;
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    left: 24px;
+                    color: rgb(100, 100, 100);
+                }
             }
             a {
                 padding: 12px 24px 12px 64px;
@@ -253,22 +277,37 @@
         }
     }
 }
+.ma-rcol {
+    margin-top: -240px;
+    margin-bottom: 35px;
+    @include media-breakpoint-up(lg) {
+        margin-bottom: 70px;
+    }
+}
+.ma-lcol {
+    @include media-breakpoint-up(lg) {
+        margin-top: -200px;
+    }
+}
 //tabs temporairly here
 .tabs {
-    padding-bottom: 32px;
-    ul {
-        li {
-            a {
-                display: block;
-                margin-bottom: -1px;
-                padding: 12px;
-                border-bottom: 2px solid rgb(255, 255, 255);
-                color: rgb(255, 255, 255);
-                white-space: nowrap;
-                text-decoration: none;
+    nav {
+        padding-bottom: 32px;
+        ul {
+            li {
+                a {
+                    display: block;
+                    margin-bottom: -1px;
+                    padding: 12px;
+                    border-bottom: 2px solid rgb(255, 255, 255);
+                    color: rgb(255, 255, 255);
+                    white-space: nowrap;
+                    text-decoration: none;
+                }
             }
         }
     }
+
     &__content {
         padding: 62px 24px 32px;
         position: relative;

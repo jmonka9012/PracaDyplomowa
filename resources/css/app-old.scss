@@ -396,6 +396,11 @@ img {
 .flex-column {
     flex-direction: column;
 }
+.column-mob-reverse {
+    @include media-breakpoint-down(xl) {
+        flex-direction: column-reverse !important;
+    }
+}
 
 .flex-lg-row {
     flex-direction: column;
@@ -609,6 +614,10 @@ img {
 
 .text-gray {
     color: $text2 !important;
+}
+
+.fw-bold {
+    font-weight: 600;
 }
 
 .orange-underline {
@@ -1198,6 +1207,11 @@ img {
         border-left: 0;
         border-right: 0;
         border-top: 0;
+        &:last-of-type {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-width: 0;
+        }
     }
 }
 .social-link {
