@@ -92,7 +92,7 @@ import spiral from "~images/spiral.png";
     position: relative;
 
     @include media-breakpoint-up(lg) {
-        padding: 121px 15px;
+        padding: 121px 20px;
     }
 
     .container {

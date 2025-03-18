@@ -110,6 +110,9 @@ section {
 
     &-big {
         max-width: 1800px;
+        @include media-breakpoint-up(lg) {
+            padding: 0 30px;
+        }
     }
 
     &-small {
@@ -1114,7 +1117,7 @@ img {
     .input-wrap {
         padding: 0 15px;
         margin: 0 0 26px 0;
-        display: flex;
+        display: f;
     }
 
     input:not(input[type="checkbox"]):not(input[type="submit"]) {

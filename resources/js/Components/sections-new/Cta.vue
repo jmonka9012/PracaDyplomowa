@@ -89,7 +89,7 @@ const text = ref("Future Events");
     position: relative;
     .container {
         @include media-breakpoint-up(lg) {
-            padding: 0 35px;
+            padding: 0 30px;
         }
     }
 

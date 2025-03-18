@@ -7,7 +7,6 @@ import BangPow from "~images/bangpow.jpg";
 import SingleMap from "~images/single-map.jpg";
 import blogBg from "~images/single-map.jpg";
 
-
 const latest = [
     {
         id: 1,
@@ -49,7 +48,7 @@ const latest = [
 </script>
 
 <template>
-    <HeroSmall :source=blogBg title="Single" />
+    <HeroSmall :source="blogBg" title="Single" />
     <section class="single">
         <div class="container container-small">
             <div class="single__content">
@@ -164,7 +163,7 @@ const latest = [
                             </label>
                         </div>
 
-                        <input type="submit" placeholder="Post comment" />
+                        <input type="submit" value="post comment" />
                     </div>
                 </form>
             </div>
@@ -180,8 +179,10 @@ const latest = [
         color: #505558;
         display: flex;
         flex-direction: column;
+        margin-bottom: 55px;
         @include media-breakpoint-up(md) {
             padding: 0 30px;
+            margin-bottom: 110px;
         }
     }
     &__intro {
