@@ -79,7 +79,7 @@ import instagramIcon from "~icons/instagram-black.svg";
                                 placeholder="Your message"
                             ></textarea>
                         </div>
-                        <input type="submit" />
+                        <input type="submit" value="wyślij" />
                     </form>
                 </div>
             </div>

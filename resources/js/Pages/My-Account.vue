@@ -32,7 +32,7 @@
                         </ul>
                         <ul>
                             <li>
-                                <button>
+                                <button value="">
                                     <i class="fa fa-gear"></i>Moje ustawienia
                                 </button>
                             </li>
@@ -80,7 +80,7 @@
                             <div class="input-wrap col-12">
                                 <input
                                     type="submit"
-                                    placeholder="Zarejestruj się"
+                                    value="zaktualizuj szczegóły"
                                 />
                             </div>
                         </form>
@@ -101,7 +101,7 @@
                             <div class="input-wrap col-12">
                                 <input
                                     type="submit"
-                                    placeholder="Zarejestruj się"
+                                    value="zaktualizuj szczegóły"
                                 />
                             </div>
                         </form>
@@ -124,7 +124,7 @@
                             <div class="input-wrap col-12">
                                 <input
                                     type="submit"
-                                    placeholder="Zarejestruj się"
+                                    value="Zaktualizuj E-mail"
                                 />
                             </div>
                         </form>
@@ -146,17 +146,14 @@
                             <div class="input-wrap col-12">
                                 <input
                                     type="submit"
-                                    placeholder="Zarejestruj się"
+                                    value="Zaktualizuj Hasło"
                                 />
                             </div>
                         </form>
                         <h3 class="ma-ftitle">Potwierdź Email</h3>
                         <form class="form form-ma">
                             <div class="input-wrap d-flex flex-column col-12">
-                                <input
-                                    type="submit"
-                                    placeholder="Zarejestruj się"
-                                />
+                                <input type="submit" value="Potwierdź" />
                             </div>
                         </form>
                     </div>

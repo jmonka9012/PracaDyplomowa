@@ -35,7 +35,7 @@ import blogBg from "~images/blog-bg.jpg";
                     />
                 </div>
                 <div class="input-wrap col-12">
-                    <input type="submit" placeholder="Zaloguj się" />
+                    <input type="submit" value="Zaloguj się" />
                 </div>
             </form>
             <h1 class="title-1 mb-20px">Rejestracja</h1>
@@ -113,7 +113,7 @@ import blogBg from "~images/blog-bg.jpg";
                     </label>
                 </div>
                 <div class="input-wrap col-12">
-                    <input type="submit" placeholder="Zarejestruj się" />
+                    <input type="submit" value="zarejestruj się" />
                 </div>
             </form>
         </div>
