@@ -38,14 +38,4 @@ class LoginUserController extends Controller
             'login' => 'Podane dane są niepoprawne.',
         ]);
     }
-
-    // Logout, nie mamy jeszcze przycisku do wylogowania
-    // public function destroy(Request $request): RedirectResponse
-    // {
-    //     Auth::logout();
-    //     $request->session()->invalidate();
-    //     $request->session()->regenerateToken();
-
-    //     return redirect()->route('home');
-    // }
 }
