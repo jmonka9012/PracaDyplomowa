@@ -133,12 +133,22 @@ onBeforeUnmount(() => {
                     </div>
                 </div>
                 <div v-else>
-                    <Link
-                        class="hover-primary header-login"
-                    >
-                        <i class="fa fa-arrow-right text-primary mr-8px"></i>
-                        Wyloguj
-                    </Link>
+                    <div class="d-none d-lg-flex align-items-center">
+                        <div class="d-flex align-items-center mr-30px"></div>
+                        <Link
+                            class="hover-primary header-login"
+                        >
+                            <i class="fa fa-arrow-right text-primary mr-8px"></i>
+                            Wyloguj
+                        </Link>
+                        <span class="divider divider-dark"></span>
+                        <Link
+                            :href="route('my-account')"
+                            class="hover-primary header-login"
+                        >
+                            <i class="fa fa-user text-primary mr-8px"></i>Moje konto
+                        </Link>
+                    </div>
                 </div>
                 <div class="header-search">
                     <i class="fa fa-search" />
