@@ -1,8 +1,8 @@
 <script setup>
-import placeHolder from "~icons/placeholder.svg";
-import placeHolderDark from "~icons/logo-dark.svg";
-import {Link} from '@inertiajs/vue3';
-import {ref, onMounted, onBeforeUnmount} from "vue";
+import placeHolder from "~icons/logoipsum-364.svg";
+import placeHolderDark from "~icons/logoipsum-362.svg";
+import { Link } from "@inertiajs/vue3";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const isOpen = ref(false);
 
@@ -13,7 +13,7 @@ const toggleMenu = () => {
 const dropdownStates = ref({});
 
 const toggleDropdown = (id) => {
-    const newStates = {...dropdownStates.value};
+    const newStates = { ...dropdownStates.value };
 
     Object.keys(newStates).forEach((key) => {
         newStates[key] = false;
@@ -35,7 +35,6 @@ const handleClickOutside = (event) => {
         );
     }
 };
-
 
 onMounted(() => window.addEventListener("click", handleClickOutside));
 onBeforeUnmount(() => window.removeEventListener("click", handleClickOutside));
@@ -63,12 +62,12 @@ onBeforeUnmount(() => {
                     </div>
                 </a>
                 <Link :href="route('home')" class="header-logo"
-                ><img
-                    class="d-none d-lg-flex"
-                    :src="placeHolderDark"
-                    alt=""/>
+                    ><img
+                        class="d-none d-lg-flex"
+                        :src="placeHolderDark"
+                        alt="" />
                     <img class="d-lg-none" :src="placeHolder" alt=""
-                    /></Link>
+                /></Link>
                 <nav class="header-nav d-none d-lg-flex">
                     <ul>
                         <li>
@@ -78,20 +77,26 @@ onBeforeUnmount(() => {
                             <Link :href="route('blog')"><span>Blog</span></Link>
                         </li>
                         <li>
-                            <Link :href="route('post')"><span>Single</span></Link>
+                            <Link :href="route('post')"
+                                ><span>Single</span></Link
+                            >
                         </li>
                         <li>
-                            <Link :href="route('contact')"><span>Kontakt</span></Link>
+                            <Link :href="route('contact')"
+                                ><span>Kontakt</span></Link
+                            >
                         </li>
                         <li>
                             <Link :href="route('ce')"><span>CE</span></Link>
                         </li>
                         <li>
-                            <Link :href="route('jacek')"><span>Jacek CE</span></Link>
+                            <Link :href="route('jacek')"
+                                ><span>Jacek CE</span></Link
+                            >
                         </li>
                         <li class="desk-dropdown">
                             <span class="desk-dropdown-toggle"
-                            ><span>Toggle</span>
+                                ><span>Toggle</span>
                                 <i class="fa fa-chevron-right"></i>
                             </span>
                             <ul class="dropdown-content">
@@ -105,23 +110,29 @@ onBeforeUnmount(() => {
                 <div class="d-none d-lg-flex align-items-center">
                     <div class="d-flex align-items-center mr-30px"></div>
 
-                    <Link :href="route('login')" class="hover-primary header-login">
+                    <Link
+                        :href="route('login')"
+                        class="hover-primary header-login"
+                    >
                         <i class="fa fa-user text-primary mr-8px"></i>Login
                     </Link>
                     <span class="divider divider-dark"></span>
 
-                    <Link :href="route('register')" class="hover-primary header-login">
+                    <Link
+                        :href="route('register')"
+                        class="hover-primary header-login"
+                    >
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
                         Register
                     </Link>
                     <a
                         href="/makeanevent"
                         class="ml-30px btn btn-header btn-hovprim"
-                    >+ Create event</a
+                        >+ Create event</a
                     >
                 </div>
                 <div class="header-search">
-                    <i class="fa fa-search"/>
+                    <i class="fa fa-search" />
                 </div>
                 <div class="mobile-nav__overlay"></div>
                 <div class="mobile-nav">
@@ -140,7 +151,7 @@ onBeforeUnmount(() => {
                     <div class="mobile-nav__content">
                         <div class="container flex-column">
                             <a class="header-logo mb-30px" href="/">
-                                <img :src="placeHolder" alt=""/>
+                                <img :src="placeHolder" alt="" />
                             </a>
                             <nav class="header-nav">
                                 <ul class="header-list">
@@ -151,10 +162,14 @@ onBeforeUnmount(() => {
                                         <Link :href="route('blog')">Blog</Link>
                                     </li>
                                     <li>
-                                        <Link :href="route('post')">Single</Link>
+                                        <Link :href="route('post')"
+                                            >Single</Link
+                                        >
                                     </li>
                                     <li>
-                                        <Link :href="route('contact')">Kontakt</Link>
+                                        <Link :href="route('contact')"
+                                            >Kontakt</Link
+                                        >
                                     </li>
                                     <li>
                                         <Link :href="route('ce')">CE</Link>
@@ -655,7 +670,7 @@ onBeforeUnmount(() => {
             justify-content: space-between;
             font-weight: 500;
             transition: all 0s, transform 0.3s, text-decoration 0.3s ease-in-out,
-            -webkit-text-decoration 0.3s ease-in-out;
+                -webkit-text-decoration 0.3s ease-in-out;
             padding: 1px 30px;
 
             &:hover {

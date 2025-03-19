@@ -4,320 +4,322 @@ $sides: (top, bottom, left, right); // Full names for sides
 $abbrv: (t, b, l, r); // Abbreviations for sides
 
 $spacers: (
-	"0": 0,
-	"4px": 4px,
-	"5px": 5px,
-	"8px": 8px,
-	"10px": 10px,
-	"13px": 13px,
-	"15px": 15px,
-	"16px": 16px,
-	"17px": 17px,
-	"18px": 18px,
-	"20px": 20px,
-	"25px": 25px,
-	"30px": 30px,
-	"32px": 32px,
-	"35px": 35px,
-	"40px": 40px,
-	"45px": 45px,
-	"48px": 48px,
-	"50px": 50px,
-	"55px": 55px,
-	"60px": 60px,
-	"64px": 64px,
-	"65px": 65px,
-	"70px": 70px,
-	"75px": 75px,
-	"80px": 80px,
-	"85px": 85px,
-	"90px": 90px,
-	"95px": 95px,
-	"100px": 100px,
-	"105px": 105px,
-	"110px": 110px,
-	"115px": 115px,
-	"120px": 120px,
-	"130px": 130px,
-	auto: auto,
+    "0": 0,
+    "4px": 4px,
+    "5px": 5px,
+    "8px": 8px,
+    "10px": 10px,
+    "13px": 13px,
+    "15px": 15px,
+    "16px": 16px,
+    "17px": 17px,
+    "18px": 18px,
+    "20px": 20px,
+    "25px": 25px,
+    "30px": 30px,
+    "32px": 32px,
+    "35px": 35px,
+    "40px": 40px,
+    "45px": 45px,
+    "48px": 48px,
+    "50px": 50px,
+    "55px": 55px,
+    "60px": 60px,
+    "64px": 64px,
+    "65px": 65px,
+    "70px": 70px,
+    "75px": 75px,
+    "80px": 80px,
+    "85px": 85px,
+    "90px": 90px,
+    "95px": 95px,
+    "100px": 100px,
+    "105px": 105px,
+    "110px": 110px,
+    "115px": 115px,
+    "120px": 120px,
+    "130px": 130px,
+    auto: auto,
 ) !default;
 
 $grid-breakpoints: (
-	xs: 0,
-	sm: 478px,
-	md: 768px,
-	lg: 992px,
-	xl: 1200px,
-	xxl: 1400px,
-	xxxl: 1600px,
-	fullhd: 1900px,
+    xs: 0,
+    sm: 478px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+    xxxl: 1600px,
+    fullhd: 1900px,
 ) !default;
 
-@each $key, $value in $spacers {
-	@each $side, $abbr in zip($sides, $abbrv) {
-		.m#{$abbr}-#{$key} {
-			margin-#{$side}: #{$value} !important;
-		}
+@use "sass:map";
+@use "sass:list";
 
-		@if $key != auto {
-			.p#{$abbr}-#{$key} {
-				padding-#{$side}: #{$value} !important;
-			}
-		}
-	}
+@each $key, $value in $spacers {
+    @each $side, $abbr in zip($sides, $abbrv) {
+        .m#{$abbr}-#{$key} {
+            margin-#{$side}: #{$value} !important;
+        }
+
+        @if $key != auto {
+            .p#{$abbr}-#{$key} {
+                padding-#{$side}: #{$value} !important;
+            }
+        }
+    }
 }
 
 @each $breakpoint, $breakpoint-value in $grid-breakpoints {
-	@each $key, $value in $spacers {
-		@each $side, $abbr in zip($sides, $abbrv) {
-			@media (min-width: $breakpoint-value) {
-				.m#{$abbr}-#{$breakpoint}-#{$key} {
-					margin-#{$side}: #{$value} !important;
-				}
-				@if $key != auto {
-					.p#{$abbr}-#{$breakpoint}-#{$key} {
-						padding-#{$side}: #{$value} !important;
-					}
-				}
-			}
-		}
-	}
+    @each $key, $value in $spacers {
+        @each $side, $abbr in zip($sides, $abbrv) {
+            @media (min-width: $breakpoint-value) {
+                .m#{$abbr}-#{$breakpoint}-#{$key} {
+                    margin-#{$side}: #{$value} !important;
+                }
+                @if $key != auto {
+                    .p#{$abbr}-#{$breakpoint}-#{$key} {
+                        padding-#{$side}: #{$value} !important;
+                    }
+                }
+            }
+        }
+    }
 }
 
 @mixin media-breakpoint-up($breakpoint) {
-	$min-width: map-get($grid-breakpoints, $breakpoint);
+    $min-width: map.get($grid-breakpoints, $breakpoint);
 
-	@if $min-width {
-		@media (min-width: $min-width) {
-			@content;
-		}
-	}
+    @if $min-width {
+        @media (min-width: $min-width) {
+            @content;
+        }
+    }
 }
 
 @mixin media-breakpoint-down($breakpoint) {
-	$max-width: map-get($grid-breakpoints, $breakpoint);
-	$keys: map-keys($grid-breakpoints);
-	$index: index($keys, $breakpoint);
+    $max-width: map.get($grid-breakpoints, $breakpoint);
+    $keys: map.keys($grid-breakpoints);
+    $index: list.index($keys, $breakpoint);
 
-	@if $index > 1 {
-		$prev-key: nth($keys, $index - 1);
-		$max-width: map-get($grid-breakpoints, $prev-key);
-	}
+    @if $index > 1 {
+        $prev-key: list.nth($keys, $index - 1);
+        $max-width: map.get($grid-breakpoints, $prev-key);
+    }
 
-	@media (max-width: $max-width) {
-		@content;
-	}
+    @media (max-width: $max-width) {
+        @content;
+    }
 }
 
 @mixin media-breakpoint-only($breakpoint) {
-	$min-width: map-get($grid-breakpoints, $breakpoint);
-	$keys: map-keys($grid-breakpoints);
-	$index: index($keys, $breakpoint);
+    $min-width: map.get($grid-breakpoints, $breakpoint);
+    $keys: map.keys($grid-breakpoints);
+    $index: list.index($keys, $breakpoint);
 
-	$max-width: null;
+    $max-width: null;
 
-	@if $index < length($keys) {
-		$next-key: nth($keys, $index + 1);
-		$max-width: map-get($grid-breakpoints, $next-key);
-	}
+    @if $index < list.length($keys) {
+        $next-key: list.nth($keys, $index + 1);
+        $max-width: map.get($grid-breakpoints, $next-key);
+    }
 
-	@if $min-width {
-		@if $max-width {
-			@media (min-width: $min-width) and (max-width: $max-width) {
-				@content;
-			}
-		} @else {
-			@media (min-width: $min-width) {
-				@content;
-			}
-		}
-	}
+    @if $min-width {
+        @if $max-width {
+            @media (min-width: $min-width) and (max-width: $max-width) {
+                @content;
+            }
+        } @else {
+            @media (min-width: $min-width) {
+                @content;
+            }
+        }
+    }
 }
-
 .col-12 {
-	width: 100%;
+    width: 100%;
 }
 
 /* Column width percentages */
 .col-sm-1 {
-	@include media-breakpoint-up(sm) {
-		width: 8.33%;
-	}
+    @include media-breakpoint-up(sm) {
+        width: 8.33%;
+    }
 }
 .col-sm-2 {
-	@include media-breakpoint-up(sm) {
-		width: 16.66%;
-	}
+    @include media-breakpoint-up(sm) {
+        width: 16.66%;
+    }
 }
 .col-sm-3 {
-	@include media-breakpoint-up(sm) {
-		width: 25%;
-	}
+    @include media-breakpoint-up(sm) {
+        width: 25%;
+    }
 }
 .col-sm-4 {
-	@include media-breakpoint-up(sm) {
-		width: 33.33%;
-	}
+    @include media-breakpoint-up(sm) {
+        width: 33.33%;
+    }
 }
 .col-sm-5 {
-	@include media-breakpoint-up(sm) {
-		width: 41.66%;
-	}
+    @include media-breakpoint-up(sm) {
+        width: 41.66%;
+    }
 }
 .col-sm-6 {
-	@include media-breakpoint-up(sm) {
-		width: 50%;
-	}
+    @include media-breakpoint-up(sm) {
+        width: 50%;
+    }
 }
 .col-sm-7 {
-	@include media-breakpoint-up(sm) {
-		width: 58.33%;
-	}
+    @include media-breakpoint-up(sm) {
+        width: 58.33%;
+    }
 }
 .col-sm-8 {
-	@include media-breakpoint-up(sm) {
-		width: 66.66%;
-	}
+    @include media-breakpoint-up(sm) {
+        width: 66.66%;
+    }
 }
 .col-sm-9 {
-	@include media-breakpoint-up(sm) {
-		width: 75%;
-	}
+    @include media-breakpoint-up(sm) {
+        width: 75%;
+    }
 }
 .col-sm-10 {
-	@include media-breakpoint-up(sm) {
-		width: 83.33%;
-	}
+    @include media-breakpoint-up(sm) {
+        width: 83.33%;
+    }
 }
 .col-sm-11 {
-	@include media-breakpoint-up(sm) {
-		width: 91.66%;
-	}
+    @include media-breakpoint-up(sm) {
+        width: 91.66%;
+    }
 }
 .col-sm-12 {
-	@include media-breakpoint-up(sm) {
-		width: 100%;
-	}
+    @include media-breakpoint-up(sm) {
+        width: 100%;
+    }
 }
 
 .col-md-1 {
-	@include media-breakpoint-up(md) {
-		width: 8.33%;
-	}
+    @include media-breakpoint-up(md) {
+        width: 8.33%;
+    }
 }
 .col-md-2 {
-	@include media-breakpoint-up(md) {
-		width: 16.66%;
-	}
+    @include media-breakpoint-up(md) {
+        width: 16.66%;
+    }
 }
 .col-md-3 {
-	@include media-breakpoint-up(md) {
-		width: 25%;
-	}
+    @include media-breakpoint-up(md) {
+        width: 25%;
+    }
 }
 .col-md-4 {
-	@include media-breakpoint-up(md) {
-		width: 33.33%;
-	}
+    @include media-breakpoint-up(md) {
+        width: 33.33%;
+    }
 }
 .col-md-5 {
-	@include media-breakpoint-up(md) {
-		width: 41.66%;
-	}
+    @include media-breakpoint-up(md) {
+        width: 41.66%;
+    }
 }
 .col-md-6 {
-	@include media-breakpoint-up(md) {
-		width: 50%;
-	}
+    @include media-breakpoint-up(md) {
+        width: 50%;
+    }
 }
 .col-md-7 {
-	@include media-breakpoint-up(md) {
-		width: 58.33%;
-	}
+    @include media-breakpoint-up(md) {
+        width: 58.33%;
+    }
 }
 .col-md-8 {
-	@include media-breakpoint-up(md) {
-		width: 66.66%;
-	}
+    @include media-breakpoint-up(md) {
+        width: 66.66%;
+    }
 }
 .col-md-9 {
-	@include media-breakpoint-up(md) {
-		width: 75%;
-	}
+    @include media-breakpoint-up(md) {
+        width: 75%;
+    }
 }
 .col-md-10 {
-	@include media-breakpoint-up(md) {
-		width: 83.33%;
-	}
+    @include media-breakpoint-up(md) {
+        width: 83.33%;
+    }
 }
 .col-md-11 {
-	@include media-breakpoint-up(md) {
-		width: 91.66%;
-	}
+    @include media-breakpoint-up(md) {
+        width: 91.66%;
+    }
 }
 .col-md-12 {
-	@include media-breakpoint-up(md) {
-		width: 100%;
-	}
+    @include media-breakpoint-up(md) {
+        width: 100%;
+    }
 }
 
 .col-lg-1 {
-	@include media-breakpoint-up(lg) {
-		width: 8.33%;
-	}
+    @include media-breakpoint-up(lg) {
+        width: 8.33%;
+    }
 }
 .col-lg-2 {
-	@include media-breakpoint-up(lg) {
-		width: 16.66%;
-	}
+    @include media-breakpoint-up(lg) {
+        width: 16.66%;
+    }
 }
 .col-lg-3 {
-	@include media-breakpoint-up(lg) {
-		width: 25%;
-	}
+    @include media-breakpoint-up(lg) {
+        width: 25%;
+    }
 }
 .col-lg-4 {
-	@include media-breakpoint-up(lg) {
-		width: 33.33%;
-	}
+    @include media-breakpoint-up(lg) {
+        width: 33.33%;
+    }
 }
 .col-lg-5 {
-	@include media-breakpoint-up(lg) {
-		width: 41.66%;
-	}
+    @include media-breakpoint-up(lg) {
+        width: 41.66%;
+    }
 }
 .col-lg-6 {
-	@include media-breakpoint-up(lg) {
-		width: 50%;
-	}
+    @include media-breakpoint-up(lg) {
+        width: 50%;
+    }
 }
 .col-lg-7 {
-	@include media-breakpoint-up(lg) {
-		width: 58.33%;
-	}
+    @include media-breakpoint-up(lg) {
+        width: 58.33%;
+    }
 }
 .col-lg-8 {
-	@include media-breakpoint-up(lg) {
-		width: 66.66%;
-	}
+    @include media-breakpoint-up(lg) {
+        width: 66.66%;
+    }
 }
 .col-lg-9 {
-	@include media-breakpoint-up(lg) {
-		width: 75%;
-	}
+    @include media-breakpoint-up(lg) {
+        width: 75%;
+    }
 }
 .col-lg-10 {
-	@include media-breakpoint-up(lg) {
-		width: 83.33%;
-	}
+    @include media-breakpoint-up(lg) {
+        width: 83.33%;
+    }
 }
 .col-lg-11 {
-	@include media-breakpoint-up(lg) {
-		width: 91.66%;
-	}
+    @include media-breakpoint-up(lg) {
+        width: 91.66%;
+    }
 }
 .col-lg-12 {
-	@include media-breakpoint-up(lg) {
-		width: 100%;
-	}
+    @include media-breakpoint-up(lg) {
+        width: 100%;
+    }
 }

@@ -2,7 +2,7 @@
 import fbWhite from "~icons/facebook-circle-white.svg";
 import twWhite from "~icons/twitter-circle-white.svg";
 import insWhite from "~icons/instagram-circle-white.svg";
-import logoW from "~images/logo-white.png";
+import logoW from "~icons/logoipsum-364.svg";
 </script>
 
 <template>
@@ -13,16 +13,16 @@ import logoW from "~images/logo-white.png";
             >
                 <p class="footer__heading">London</p>
                 <a class="text-primary mb-15px" href="/">
-                    london@lunfest.com
+                    london@loremipsum.com
                 </a>
-                <a class="text-primary mb-15px" href="/"> +44 020 7490 8954 </a>
-                <p>3 Dufferin Street. <br />London EC1Y 8NA</p>
+                <a class="text-primary mb-15px" href="/"> +48 123 456 789 </a>
+                <p>3 Lorem Ipsum. <br />London a123 4BCD</p>
             </div>
             <div class="col-12 col-lg-6 d-flex flex-column align-items-center">
                 <img class="footer__logo mb-25px" :src="logoW" alt="" />
                 <p class="text-align-center mb-25px">
-                    We help organisations transform their impact by providing a
-                    comprehensive new great experience
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Accusantium, eveniet.
                 </p>
                 <div class="d-flex flex-row justify-content-center mb-35px">
                     <a class="text-white hover-primary" href="/"
@@ -49,18 +49,18 @@ import logoW from "~images/logo-white.png";
             >
                 <p class="footer__heading">New-York</p>
                 <a class="text-primary mb-15px" href="">
-                    newyork@lunfest.com
+                    newyork@loremipsum.com
                 </a>
-                <a class="text-primary mb-15px" href=""> +61 0481 224 883 </a>
+                <a class="text-primary mb-15px" href=""> +48 123 456 789 </a>
                 <p>
-                    12 Houston Street, New-York, <br />
-                    CA 9020, USA
+                    12 Lorem Street, New York <br />
+                    TX 98 765, USA
                 </p>
             </div>
         </div>
     </section>
     <section class="footer__under">
-        <p>Copyright © 2024 LUNFEST by WebGeniusLab. All Rights Reserved</p>
+        <p>Copyright © 2024 PracaDyplomowa by My. All Rights Reserved</p>
     </section>
 </template>
 
