@@ -1,5 +1,12 @@
 <script setup>
 import useAuth from '@/Composables/useAuth'
+import { router } from '@inertiajs/vue3';
+import { Link } from "@inertiajs/vue3";
+
+
+const Logout = () => {
+    router.post(route('logout'), {});
+};
 
 const { user, isLoggedIn } = useAuth()
 </script>
@@ -44,7 +51,7 @@ const { user, isLoggedIn } = useAuth()
                         </ul>
                         <ul>
                             <li>
-                                <a href="#" class="text-primary">Wyloguj się</a>
+                                <Link @click="Logout" class="text-primary">Wyloguj się</Link>
                             </li>
                         </ul>
                     </nav>
