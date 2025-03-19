@@ -4,6 +4,7 @@ import placeHolderDark from "~icons/logoipsum-362.svg";
 import { Link } from "@inertiajs/vue3";
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import useAuth from '@/Composables/useAuth'
+import { router } from '@inertiajs/vue3';
 
 const { user, isLoggedIn } = useAuth()
 const isOpen = ref(false);
@@ -13,6 +14,10 @@ const toggleMenu = () => {
 };
 
 const dropdownStates = ref({});
+
+const Logout = () => {
+    router.post(route('logout'), {});
+};
 
 const toggleDropdown = (id) => {
     const newStates = { ...dropdownStates.value };
@@ -136,6 +141,7 @@ onBeforeUnmount(() => {
                     <div class="d-none d-lg-flex align-items-center">
                         <div class="d-flex align-items-center mr-30px"></div>
                         <Link
+                            @click="Logout"
                             class="hover-primary header-login"
                         >
                             <i class="fa fa-arrow-right text-primary mr-8px"></i>
