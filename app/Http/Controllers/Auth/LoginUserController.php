@@ -27,10 +27,11 @@ class LoginUserController extends Controller
         ]);
 
         $fieldType = filter_var($credentials['login'], FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
- 
-    if (Auth::attempt([$fieldType => $credentials['login'], 'password' => $credentials['password']])) {
+        $remember = $request->has('remember');
+
+    if (Auth::attempt([$fieldType => $credentials['login'], 'password' => $credentials['password']], $remember)) {
         $request->session()->regenerate();
-        return redirect()->route('contact');
+        return redirect()->route('my-account');
     }
 
         return back()->withErrors([

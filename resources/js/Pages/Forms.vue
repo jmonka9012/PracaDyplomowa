@@ -37,7 +37,6 @@ import blogBg from "~images/blog-bg.jpg";
                 <div class="input-wrap col-12 mb-20px">
                     <input
                         type="checkbox"
-                        required
                         name="remember"
                         id="remember"
                         aria-required="true"
