@@ -20,6 +20,8 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->integer('permission_level')->default(6); 
+            $table->string('first_name');
+            $table->string('last_name');
         });
 
         $admins = Config::get('users.admins');

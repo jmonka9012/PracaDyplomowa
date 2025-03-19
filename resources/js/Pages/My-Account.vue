@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+import useAuth from '@/Composables/useAuth'
+
+const { user, isLoggedIn } = useAuth()
+</script>
 
 <template>
     <section class="ma-hero"></section>
@@ -7,7 +11,7 @@
             <div class="col-12 col-lg-3 d-flex ma-lcol flex-column">
                 <div class="ma-lcol-intro">
                     <p>Witaj ponownie</p>
-                    <p class="fw-bold">[[User]]</p>
+                    <p class="fw-bold">{{user.name}}</p>
                 </div>
                 <div class="ma-lcol-content">
                     <nav class="ma-lcol-nav">
