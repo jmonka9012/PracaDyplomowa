@@ -134,5 +134,19 @@ const charTotal = computed(() => props.text.length);
             }
         }
     }
+    &-404 {
+        font-size: 100px;
+        @include media-breakpoint-up(sm) {
+            font-size: 120px;
+        }
+        @include media-breakpoint-up(md) {
+            font-size: 150px;
+        }
+        @include media-breakpoint-up(lg) {
+            font-size: 250px;
+        }
+
+        --animation-speed: 700ms;
+    }
 }
 </style>

@@ -53,9 +53,6 @@ $grid-breakpoints: (
     fullhd: 1900px,
 ) !default;
 
-@use "sass:map";
-@use "sass:list";
-
 @each $key, $value in $spacers {
     @each $side, $abbr in zip($sides, $abbrv) {
         .m#{$abbr}-#{$key} {
@@ -88,7 +85,7 @@ $grid-breakpoints: (
 }
 
 @mixin media-breakpoint-up($breakpoint) {
-    $min-width: map.get($grid-breakpoints, $breakpoint);
+    $min-width: map-get($grid-breakpoints, $breakpoint);
 
     @if $min-width {
         @media (min-width: $min-width) {
@@ -98,13 +95,13 @@ $grid-breakpoints: (
 }
 
 @mixin media-breakpoint-down($breakpoint) {
-    $max-width: map.get($grid-breakpoints, $breakpoint);
-    $keys: map.keys($grid-breakpoints);
-    $index: list.index($keys, $breakpoint);
+    $max-width: map-get($grid-breakpoints, $breakpoint);
+    $keys: map-keys($grid-breakpoints);
+    $index: index($keys, $breakpoint);
 
     @if $index > 1 {
-        $prev-key: list.nth($keys, $index - 1);
-        $max-width: map.get($grid-breakpoints, $prev-key);
+        $prev-key: nth($keys, $index - 1);
+        $max-width: map-get($grid-breakpoints, $prev-key);
     }
 
     @media (max-width: $max-width) {
@@ -113,15 +110,15 @@ $grid-breakpoints: (
 }
 
 @mixin media-breakpoint-only($breakpoint) {
-    $min-width: map.get($grid-breakpoints, $breakpoint);
-    $keys: map.keys($grid-breakpoints);
-    $index: list.index($keys, $breakpoint);
+    $min-width: map-get($grid-breakpoints, $breakpoint);
+    $keys: map-keys($grid-breakpoints);
+    $index: index($keys, $breakpoint);
 
     $max-width: null;
 
-    @if $index < list.length($keys) {
-        $next-key: list.nth($keys, $index + 1);
-        $max-width: map.get($grid-breakpoints, $next-key);
+    @if $index < length($keys) {
+        $next-key: nth($keys, $index + 1);
+        $max-width: map-get($grid-breakpoints, $next-key);
     }
 
     @if $min-width {
@@ -136,6 +133,7 @@ $grid-breakpoints: (
         }
     }
 }
+
 .col-12 {
     width: 100%;
 }

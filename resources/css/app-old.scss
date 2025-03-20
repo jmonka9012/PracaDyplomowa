@@ -1118,8 +1118,21 @@ img {
         padding: 0 15px;
         margin: 0 0 26px 0;
         display: flex;
+        &-search {
+            position: relative;
+            i,
+            svg {
+                position: absolute;
+                top: 50%;
+                right: 0;
+                transform: translateY(-50%);
+                z-index: -1;
+            }
+        }
     }
-
+    input:focus {
+        outline: none;
+    }
     input:not(input[type="checkbox"]):not(input[type="submit"]) {
         width: 100%;
         appearance: none;
@@ -1134,6 +1147,7 @@ img {
         display: block;
         height: 40px;
         min-height: 33px;
+        background-color: transparent;
 
         &::placeholder {
             color: $secondary;
