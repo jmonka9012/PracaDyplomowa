@@ -36,6 +36,7 @@ class LoginUserController extends Controller
 
         return back()->withErrors([
             'login' => 'Podane dane są niepoprawne.',
+            'password' => "Podane hasło jest niepoprawne." // Obsługa tego co jest nie tak @Yen
         ]);
     }
 }

@@ -1,6 +1,35 @@
 <script setup>
 import HeroSmall from "@/Components/sections-new/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
+import { reactive } from 'vue'
+import { router } from '@inertiajs/vue3'
+const errors = reactive({});
+
+
+const loginForm = reactive({
+    login: null,
+    password: null,
+    remember: false,
+})
+
+function submitLoginRequest() {
+    router.post('/login', loginForm, {
+        onError: (err) => {
+            Object.assign(errors, err);
+        }
+    });
+}
+
+const RegisterForm = reactive({
+    first_name: null,
+    last_name: null,
+    email: null,
+})
+
+function submitRegisterRequest() {
+    router.post('/users', form)
+}
+
 </script>
 
 <template>
@@ -8,8 +37,7 @@ import blogBg from "~images/blog-bg.jpg";
     <section>
         <div class="container flex-column">
             <h1 class="title-1 mb-20px">Logowanie</h1>
-            <form class="form" method="post" action="/login">
-                <input type="hidden" name="_token" :value="csrf_token" />
+            <form class="form" @submit.prevent="submitLoginRequest">
                 <div class="input-wrap d-flex flex-column col-12">
                     <label for="username">Dane użytkownika *</label>
                     <input
@@ -18,10 +46,11 @@ import blogBg from "~images/blog-bg.jpg";
                         autocomplete="email"
                         name="login"
                         spellcheck="false"
-                        value=""
                         required=""
                         aria-required="true"
+                        v-model="loginForm.login"
                     />
+                    <div v-if="errors.login">{{ errors.login }}</div>
                 </div>
                 <div class="input-wrap d-flex flex-column col-12">
                     <label for="password">Hasło *</label>
@@ -30,9 +59,11 @@ import blogBg from "~images/blog-bg.jpg";
                         name="password"
                         id="password"
                         autocomplete="password"
+                        v-model="loginForm.password"
                         required=""
                         aria-required="true"
                     />
+                    <div v-if="errors.password">{{ errors.password }}</div>
                 </div>
                 <div class="input-wrap col-12 mb-20px">
                     <input
@@ -40,6 +71,9 @@ import blogBg from "~images/blog-bg.jpg";
                         name="remember"
                         id="remember"
                         aria-required="true"
+                        true-value="true"
+                        false-value="false"
+                        v-model="loginForm.remember"
                     />
                     <label for="remember">
                    Zapamiętaj mnie
