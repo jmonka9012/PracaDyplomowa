@@ -19,3 +19,9 @@ require __DIR__ . '/CE.php';
 
 //strona moje konto
 require __DIR__.'/myaccount.php';
+
+//strona 404
+require __DIR__.'/error404.php';
+
+//testowy email
+require __DIR__.'/email.php';
