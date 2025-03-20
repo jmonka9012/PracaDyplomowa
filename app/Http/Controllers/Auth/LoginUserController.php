@@ -27,24 +27,16 @@ class LoginUserController extends Controller
         ]);
 
         $fieldType = filter_var($credentials['login'], FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
- 
-    if (Auth::attempt([$fieldType => $credentials['login'], 'password' => $credentials['password']])) {
+        $remember = $request->has('remember');
+
+    if (Auth::attempt([$fieldType => $credentials['login'], 'password' => $credentials['password']], $remember)) {
         $request->session()->regenerate();
-        return redirect()->route('contact');
+        return redirect()->route('my-account');
     }
 
         return back()->withErrors([
             'login' => 'Podane dane są niepoprawne.',
+            'password' => "Podane hasło jest niepoprawne." // Obsługa tego co jest nie tak @Yen
         ]);
     }
-
-    // Logout, nie mamy jeszcze przycisku do wylogowania
-    // public function destroy(Request $request): RedirectResponse
-    // {
-    //     Auth::logout();
-    //     $request->session()->invalidate();
-    //     $request->session()->regenerateToken();
-
-    //     return redirect()->route('home');
-    // }
 }

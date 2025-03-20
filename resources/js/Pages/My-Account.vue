@@ -2,6 +2,20 @@
 import Popup from "@/Components/sections-new/Popup.vue";
 import { ref } from "vue";
 const showModal = ref(false);
+import useAuth from '@/Composables/useAuth'
+import { router } from '@inertiajs/vue3';
+import { Link } from "@inertiajs/vue3";
+
+
+const Logout = () => {
+    router.post(route('logout'), {});
+};
+
+const TestEmail = () => {
+    router.post(route('test-email'), {});
+};
+
+const { user, isLoggedIn } = useAuth()
 </script>
 
 <template>
@@ -11,7 +25,7 @@ const showModal = ref(false);
             <div class="col-12 col-lg-3 d-flex ma-lcol flex-column">
                 <div class="ma-lcol-intro">
                     <p>Witaj ponownie</p>
-                    <p class="fw-bold">[[User]]</p>
+                    <p class="fw-bold">{{user.name}}</p>
                 </div>
                 <div class="ma-lcol-content">
                     <nav class="ma-lcol-nav">
@@ -44,7 +58,8 @@ const showModal = ref(false);
                         </ul>
                         <ul>
                             <li>
-                                <a href="#" class="text-primary">Wyloguj się</a>
+                                <Link @click="Logout" class="text-primary">Wyloguj się</Link>
+                                <Link @click="TestEmail" class="text-primary">Test Email</Link>
                             </li>
                         </ul>
                     </nav>

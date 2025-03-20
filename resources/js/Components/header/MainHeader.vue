@@ -3,7 +3,10 @@ import placeHolder from "~icons/logoipsum-364.svg";
 import placeHolderDark from "~icons/logoipsum-362.svg";
 import { Link } from "@inertiajs/vue3";
 import { ref, onMounted, onBeforeUnmount } from "vue";
+import useAuth from '@/Composables/useAuth'
+import { router } from '@inertiajs/vue3';
 
+const { user, isLoggedIn } = useAuth()
 const isOpen = ref(false);
 
 const toggleMenu = () => {
@@ -11,6 +14,10 @@ const toggleMenu = () => {
 };
 
 const dropdownStates = ref({});
+
+const Logout = () => {
+    router.post(route('logout'), {});
+};
 
 const toggleDropdown = (id) => {
     const newStates = { ...dropdownStates.value };
@@ -107,34 +114,52 @@ onBeforeUnmount(() => {
                         </li>
                     </ul>
                 </nav>
-                <div class="d-none d-lg-flex align-items-center">
-                    <div class="d-flex align-items-center mr-30px"></div>
-
-                    <Link
-                        :href="route('login')"
-                        class="hover-primary header-login"
-                    >
-                        <i class="fa fa-user text-primary mr-8px"></i>Login
-                    </Link>
-                    <span class="divider divider-dark"></span>
-
-                    <Link
-                        :href="route('register')"
-                        class="hover-primary header-login"
-                    >
-                        <i class="fa fa-arrow-right text-primary mr-8px"></i>
-                        Register
-                    </Link>
-                    <a
-                        href="/makeanevent"
-                        class="ml-30px btn btn-header btn-hovprim"
-                        >+ Create event</a
-                    >
+                <div v-if="!user">
+                    <div class="d-none d-lg-flex align-items-center">
+                        <div class="d-flex align-items-center mr-30px"></div>
+                        <Link
+                            :href="route('login')"
+                            class="hover-primary header-login"
+                        >
+                            <i class="fa fa-user text-primary mr-8px"></i>Login
+                        </Link>
+                        <span class="divider divider-dark"></span>
+                        <Link
+                            :href="route('register')"
+                            class="hover-primary header-login"
+                        >
+                            <i class="fa fa-arrow-right text-primary mr-8px"></i>
+                            Register
+                        </Link>
+                        <a
+                            href="/makeanevent"
+                            class="ml-30px btn btn-header btn-hovprim"
+                        >+ Create event</a>
+                    </div>
+                </div>
+                <div v-else>
+                    <div class="d-none d-lg-flex align-items-center">
+                        <div class="d-flex align-items-center mr-30px"></div>
+                        <Link
+                            @click="Logout"
+                            class="hover-primary header-login"
+                        >
+                            <i class="fa fa-arrow-right text-primary mr-8px"></i>
+                            Wyloguj
+                        </Link>
+                        <span class="divider divider-dark"></span>
+                        <Link
+                            :href="route('my-account')"
+                            class="hover-primary header-login"
+                        >
+                            <i class="fa fa-user text-primary mr-8px"></i>Moje konto
+                        </Link>
+                    </div>
                 </div>
                 <div class="header-search">
                     <i class="fa fa-search" />
+                    <div class="mobile-nav__overlay"></div>
                 </div>
-                <div class="mobile-nav__overlay"></div>
                 <div class="mobile-nav">
                     <a
                         class="mobile-toggle mobile-toggle-innav"
