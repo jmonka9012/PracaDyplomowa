@@ -8,6 +8,10 @@ const Logout = () => {
     router.post(route('logout'), {});
 };
 
+const TestEmail = () => {
+    router.post(route('test-email'), {});
+};
+
 const { user, isLoggedIn } = useAuth()
 </script>
 
@@ -52,6 +56,7 @@ const { user, isLoggedIn } = useAuth()
                         <ul>
                             <li>
                                 <Link @click="Logout" class="text-primary">Wyloguj się</Link>
+                                <Link @click="TestEmail" class="text-primary">Test Email</Link>
                             </li>
                         </ul>
                     </nav>
