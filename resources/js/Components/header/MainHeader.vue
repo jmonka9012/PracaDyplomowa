@@ -3,10 +3,10 @@ import placeHolder from "~icons/logoipsum-364.svg";
 import placeHolderDark from "~icons/logoipsum-362.svg";
 import { Link } from "@inertiajs/vue3";
 import { ref, onMounted, onBeforeUnmount } from "vue";
-import useAuth from '@/Composables/useAuth'
-import { router } from '@inertiajs/vue3';
+import useAuth from "@/Composables/useAuth";
+import { router } from "@inertiajs/vue3";
 
-const { user, isLoggedIn } = useAuth()
+const { user, isLoggedIn } = useAuth();
 const isOpen = ref(false);
 
 const toggleMenu = () => {
@@ -16,7 +16,7 @@ const toggleMenu = () => {
 const dropdownStates = ref({});
 
 const Logout = () => {
-    router.post(route('logout'), {});
+    router.post(route("logout"), {});
 };
 
 const toggleDropdown = (id) => {
@@ -114,52 +114,44 @@ onBeforeUnmount(() => {
                         </li>
                     </ul>
                 </nav>
-                <div v-if="!user">
-                    <div class="d-none d-lg-flex align-items-center">
-                        <div class="d-flex align-items-center mr-30px"></div>
-                        <Link
-                            :href="route('login')"
-                            class="hover-primary header-login"
-                        >
-                            <i class="fa fa-user text-primary mr-8px"></i>Login
-                        </Link>
-                        <span class="divider divider-dark"></span>
-                        <Link
-                            :href="route('register')"
-                            class="hover-primary header-login"
-                        >
-                            <i class="fa fa-arrow-right text-primary mr-8px"></i>
-                            Register
-                        </Link>
-                        <a
-                            href="/makeanevent"
-                            class="ml-30px btn btn-header btn-hovprim"
-                        >+ Create event</a>
-                    </div>
+                <div class="d-none d-lg-flex align-items-center" v-if="!user">
+                    <Link
+                        :href="route('login')"
+                        class="hover-primary header-login"
+                    >
+                        <i class="fa fa-user text-primary mr-8px"></i>Login
+                    </Link>
+                    <span class="divider divider-dark"></span>
+                    <Link
+                        :href="route('register')"
+                        class="hover-primary header-login"
+                    >
+                        <i class="fa fa-arrow-right text-primary mr-8px"></i>
+                        Register
+                    </Link>
+                    <a
+                        href="/makeanevent"
+                        class="ml-30px btn btn-header btn-hovprim"
+                        >+ Create event</a
+                    >
                 </div>
-                <div v-else>
-                    <div class="d-none d-lg-flex align-items-center">
-                        <div class="d-flex align-items-center mr-30px"></div>
-                        <Link
-                            @click="Logout"
-                            class="hover-primary header-login"
-                        >
-                            <i class="fa fa-arrow-right text-primary mr-8px"></i>
-                            Wyloguj
-                        </Link>
-                        <span class="divider divider-dark"></span>
-                        <Link
-                            :href="route('my-account')"
-                            class="hover-primary header-login"
-                        >
-                            <i class="fa fa-user text-primary mr-8px"></i>Moje konto
-                        </Link>
-                    </div>
+                <div class="d-none d-lg-flex align-items-center" v-else>
+                    <Link @click="Logout" class="hover-primary header-login">
+                        <i class="fa fa-arrow-right text-primary mr-8px"></i>
+                        Wyloguj
+                    </Link>
+                    <span class="divider divider-dark"></span>
+                    <Link
+                        :href="route('my-account')"
+                        class="hover-primary header-login"
+                    >
+                        <i class="fa fa-user text-primary mr-8px"></i>Moje konto
+                    </Link>
                 </div>
-                <div class="header-search">
+                <!-- <div class="header-search">
                     <i class="fa fa-search" />
                     <div class="mobile-nav__overlay"></div>
-                </div>
+                </div> -->
                 <div class="mobile-nav">
                     <a
                         class="mobile-toggle mobile-toggle-innav"
@@ -269,6 +261,65 @@ onBeforeUnmount(() => {
                                             </ul>
                                         </li>
                                     </ul>
+                                    <li>
+                                        <ul v-if="!user">
+                                            <li>
+                                                <Link
+                                                    :href="route('login')"
+                                                    class="hover-primary header-login"
+                                                >
+                                                    <i
+                                                        class="fa fa-user text-primary mr-8px"
+                                                    ></i
+                                                    >Login
+                                                </Link>
+                                            </li>
+
+                                            <li>
+                                                <Link
+                                                    :href="route('register')"
+                                                    class="hover-primary header-login"
+                                                >
+                                                    <i
+                                                        class="fa fa-arrow-right text-primary mr-8px"
+                                                    ></i>
+                                                    Register
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <a
+                                                    href="/makeanevent"
+                                                    class="ml-30px btn btn-header btn-hovprim"
+                                                    >+ Create event</a
+                                                >
+                                            </li>
+                                        </ul>
+
+                                        <ul v-else>
+                                            <li>
+                                                <Link
+                                                    @click="Logout"
+                                                    class="hover-primary header-login"
+                                                >
+                                                    <i
+                                                        class="fa fa-arrow-right text-primary mr-8px"
+                                                    ></i>
+                                                    Wyloguj
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link
+                                                    :href="route('my-account')"
+                                                    class="hover-primary header-login"
+                                                >
+                                                    <i
+                                                        class="fa fa-user text-primary mr-8px"
+                                                    ></i
+                                                    >Moje konto
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
@@ -321,7 +372,10 @@ onBeforeUnmount(() => {
 .header-logo {
     width: 150px;
     height: 30px;
+    margin-left: auto;
+    margin-right: auto;
     @include media-breakpoint-up(lg) {
+        margin: 0 0;
         width: auto;
         height: 40px;
     }
@@ -496,6 +550,9 @@ onBeforeUnmount(() => {
     @include media-breakpoint-up(lg) {
         display: none;
     }
+    .container {
+        width: 100%;
+    }
 
     &__overlay {
         position: fixed;
@@ -594,6 +651,10 @@ onBeforeUnmount(() => {
 .header-login {
     font-family: "Krona one";
     white-space: nowrap;
+    color: white;
+    @include media-breakpoint-up(lg) {
+        color: var(--text);
+    }
     @media screen and (min-width: 1000px) and (max-width: 1200px) {
         font-size: 12px;
     }
