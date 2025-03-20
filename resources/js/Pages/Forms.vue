@@ -150,7 +150,7 @@ function submitRegisterRequest() {
                         id="confirmation"
                         aria-required="true"
                     />
-                    <label for="checkbox">
+                    <label for="confirmation">
                         Twoje dane osobowe zostaną użyte do obsługi twojej
                         wizyty na naszej stronie, zarządzania dostępem do
                         twojego konta i dla innych celów o których mówi nasza
