@@ -37,7 +37,7 @@ class AuthLoginTest extends TestCase
         ]);
 
         $this->assertAuthenticatedAs($user);
-        $response->assertRedirect(route('contact'));
+        $response->assertRedirect(route('my-account'));
     }
 
     #[Test]
