@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+import Popup from "@/Components/sections-new/Popup.vue";
+import { ref } from "vue";
+const showModal = ref(false);
+</script>
 
 <template>
     <section class="ma-hero"></section>
@@ -81,6 +85,7 @@
                                 <input
                                     type="submit"
                                     value="zaktualizuj szczegóły"
+                                    @click.prevent="showModal = true"
                                 />
                             </div>
                         </form>
@@ -161,6 +166,7 @@
             </div>
         </div>
     </section>
+    <Popup :show="showModal" @close="showModal = false"></Popup>
 </template>
 
 <style lang="scss">

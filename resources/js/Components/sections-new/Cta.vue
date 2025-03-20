@@ -8,49 +8,6 @@ const text = ref("Future Events");
 </script>
 
 <template>
-    <div class="cta-scroller">
-        <div class="d-flex flex-row align-items-center">
-            <span>Future Events</span>
-            <i class="fa fa-arrow-down"></i>
-        </div>
-        <div class="d-flex flex-row align-items-center">
-            <span>Future Events</span>
-            <i class="fa fa-arrow-down"></i>
-        </div>
-        <div class="d-flex flex-row align-items-center">
-            <span>Future Events</span>
-            <i class="fa fa-arrow-down"></i>
-        </div>
-        <div class="d-flex flex-row align-items-center">
-            <span>Future Events</span>
-            <i class="fa fa-arrow-down"></i>
-        </div>
-        <div class="d-flex flex-row align-items-center">
-            <span>Future Events</span>
-            <i class="fa fa-arrow-down"></i>
-        </div>
-        <div class="d-flex flex-row align-items-center">
-            <span>Future Events</span>
-            <i class="fa fa-arrow-down"></i>
-        </div>
-        <div class="d-flex flex-row align-items-center">
-            <span>Future Events</span>
-            <i class="fa fa-arrow-down"></i>
-        </div>
-        <div class="d-flex flex-row align-items-center">
-            <span>Future Events</span>
-            <i class="fa fa-arrow-down"></i>
-        </div>
-        <div class="d-flex flex-row align-items-center">
-            <span>Future Events</span>
-            <i class="fa fa-arrow-down"></i>
-        </div>
-
-        <div class="d-flex flex-row align-items-center">
-            <span>Future Events</span>
-            <i class="fa fa-arrow-down"></i>
-        </div>
-    </div>
     <section class="pb-70px pb-lg-105px cta">
         <div class="container container-big">
             <div class="cta-left">
@@ -82,11 +39,12 @@ const text = ref("Future Events");
 .cta {
     column-gap: 30px;
     background-color: var(--primary);
-    background-image: url("/public/images/cta-bg.jpg");
+    background-image: url("~images/cta-bg.jpg");
     background-position: center right;
     background-repeat: no-repeat;
     overflow: hidden;
     position: relative;
+    border-top: 1px solid var(--primary);
     .container {
         @include media-breakpoint-up(lg) {
             padding: 0 30px;
