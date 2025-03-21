@@ -25,3 +25,6 @@ require __DIR__.'/error404.php';
 
 //testowy email
 require __DIR__.'/email.php';
+
+//formularz dodawania eventu
+require __DIR__.'/createevent.php';

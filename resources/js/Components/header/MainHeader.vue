@@ -129,10 +129,10 @@ onBeforeUnmount(() => {
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
                         Register
                     </Link>
-                    <a
-                        href="/makeanevent"
+                    <Link
+                        :href="route('event-quote')"
                         class="ml-30px btn btn-header btn-hovprim"
-                        >+ Create event</a
+                        >+ Create event</Link
                     >
                 </div>
                 <div class="d-none d-lg-flex align-items-center" v-else>
@@ -147,6 +147,11 @@ onBeforeUnmount(() => {
                     >
                         <i class="fa fa-user text-primary mr-8px"></i>Moje konto
                     </Link>
+                    <Link
+                        :href="route('event-quote')"
+                        class="ml-30px btn btn-header btn-hovprim"
+                    >+ Create event</Link
+                    >
                 </div>
                 <!-- <div class="header-search">
                     <i class="fa fa-search" />
