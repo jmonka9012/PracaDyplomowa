@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeEmail;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterUserController extends Controller{
 
@@ -35,11 +37,11 @@ class RegisterUserController extends Controller{
             'password' => Hash::make($validatedData['password']),
         ]);
 
-        //event(new Registered($user)); nie ma jeszcze eventu, trzeba napisac event ktory wysle email z weryfikacja kiedy to zrobimy
+        Mail::to($user->email)->send(new WelcomeEmail($user->name));
 
-        //Auth::login($user);
+        Auth::login($user);
 
-        return redirect()->route('home'); // nie ma strony na ktora moze to przekierowywac
+        return redirect()->route('my-account');
     }
 
 }

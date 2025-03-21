@@ -84,7 +84,7 @@ function submitRegisterRequest() {
                 </div>
             </form>
             <h1 class="title-1 mb-20px">Rejestracja</h1>
-            <form class="form pb-120px" method="post" action="/register">
+            <form class="form pb-120px" method="post" action="/rejestracja"> //TYMCZASOWE, trzeba ogarnac jak dzialaja formy z inertia zeby uzyc action="register.post" zamiast pisac po routcie userow
                 <input type="hidden" name="_token" :value="csrf_token" />
                 <div class="input-wrap d-flex flex-column col-12">
                     <label for="register-username">Nazwa użytkownika *</label>

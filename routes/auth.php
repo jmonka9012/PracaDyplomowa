@@ -7,7 +7,7 @@ use App\Http\Controllers\Auth\LogoutController;
 
 // Rejestracja
 Route::get('/rejestracja', [RegisterUserController::class, 'create'])->name('register');
-Route::post('/rejestracja', [RegisterUserController::class, 'store']);
+Route::post('/rejestracja', [RegisterUserController::class, 'store'])->name('register.post');
 
 //Logowanie
 Route::get('/login', [LoginUserController::class,'create'])->name('login');
