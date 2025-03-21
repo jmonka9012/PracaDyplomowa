@@ -32,7 +32,7 @@ class AuthRegisterTest extends TestCase
         $user = User::where('email', 'john@example.com')->first();
         $this->assertTrue(Hash::check('Password123', $user->password));
 
-        $response->assertRedirect(route('home'));
+        $response->assertRedirect(route('my-account'));
     }
 
     #[Test]
