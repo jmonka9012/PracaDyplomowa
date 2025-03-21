@@ -41,7 +41,9 @@ class HandleInertiaRequests extends Middleware
                     'id',
                     'name',
                     'email',
-                    'permission_level'
+                    'permission_level',
+                    'first_name',
+                    'last_name',
                 ]),
             ],
         ]);

@@ -31,7 +31,7 @@ class RegisterUserController extends Controller{
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], [
             'name.unique' => 'Istnieje już konto z tą nazwom',
-            'password.confirmed'=> 'Hasła nie są takie same', //placeholder bo nie mam lepszego tłumaczenia
+            'password.confirmed'=> 'Hasła nie są takie same',
             'email.unique'=> 'Istnieje już konto z tym emailem',
             'password.min'=> 'Hasło jest zbyt krótkie',
         ]);

@@ -89,7 +89,7 @@ function submitRegisterRequest() {
                 </div>
             </form>
             <h1 class="title-1 mb-20px">Rejestracja</h1>
-            <form class="form pb-120px" @submit.prevent="submitRegisterRequest"> //TYMCZASOWE, trzeba ogarnac jak dzialaja formy z inertia zeby uzyc action="register.post" zamiast pisac po routcie userow
+            <form class="form pb-120px" @submit.prevent="submitRegisterRequest">
                 <div class="input-wrap d-flex flex-column col-12">
                     <label for="register-username">Nazwa użytkownika *</label>
                     <input

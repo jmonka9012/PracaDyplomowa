@@ -94,6 +94,7 @@ const { user, isLoggedIn } = useAuth()
                                     value=""
                                     required=""
                                     aria-required="true"
+                                    :placeholder="user.first_name"
                                 />
                             </div>
                             <div class="input-wrap col-12">
@@ -116,6 +117,7 @@ const { user, isLoggedIn } = useAuth()
                                     value=""
                                     required=""
                                     aria-required="true"
+                                    :placeholder="user.last_name"
                                 />
                             </div>
                             <div class="input-wrap col-12">
@@ -139,6 +141,7 @@ const { user, isLoggedIn } = useAuth()
                                     value=""
                                     required=""
                                     aria-required="true"
+                                    :placeholder="user.email"
                                 />
                             </div>
                             <div class="input-wrap col-12">
