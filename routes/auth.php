@@ -11,7 +11,7 @@ Route::post('/rejestracja', [RegisterUserController::class, 'store'])->name('reg
 
 //Logowanie
 Route::get('/login', [LoginUserController::class,'create'])->name('login');
-Route::post('/login', [LoginUserController::class, 'store'])->name('login-post');
+Route::post('/login', [LoginUserController::class, 'store'])->name('login.post');
 
 //Wylogowanie
 Route::middleware(['auth'])->group(function () {
