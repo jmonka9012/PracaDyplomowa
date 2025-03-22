@@ -20,3 +20,5 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+/selenium-tests/screenshots
+/selenium-tests/logs
