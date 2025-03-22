@@ -46,6 +46,9 @@ class HandleInertiaRequests extends Middleware
                     'last_name',
                 ]),
             ],
+            'site_data' => [
+                'title' => 'Organizzare Eventare',
+            ]
         ]);
     }
 }

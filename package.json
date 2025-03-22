@@ -5,7 +5,7 @@
         "build": "vite build",
         "dev": "vite",
         "watch": "vite build --watch",
-        "test": "mocha selenium-tests/test.js"
+        "test": "mocha selenium-tests/${npm_config_file}/${npm_config_file}.js"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
@@ -20,6 +20,7 @@
         "@fortawesome/fontawesome-free": "^6.7.2",
         "@inertiajs/vue3": "^2.0.3",
         "@vitejs/plugin-vue": "^5.2.1",
+        "chai": "^5.2.0",
         "chromedriver": "^134.0.5",
         "mocha": "^11.1.0",
         "npm-watch": "^0.13.0",
