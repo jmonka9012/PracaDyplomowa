@@ -154,7 +154,7 @@ const events = [
         date: "22.02.2025",
     },
 ];
-const text = ref("Freedom Festival");
+const text = ref("Lorem Ipsum");
 </script>
 
 <template>
