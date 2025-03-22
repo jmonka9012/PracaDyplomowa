@@ -149,20 +149,19 @@ const latest = [
                     <div class="input-wrap col-12">
                         <textarea placeholder="Your Comment..."></textarea>
                     </div>
-                    <div class="d-flex flex-column pl-15px pr-15px">
-                        <div class="form-checkwrap">
-                            <input
-                                type="checkbox"
-                                v-model="toggle"
-                                true-value="yes"
-                                false-value="no"
-                            />
-                            <label for="checkbox"
-                                >Save my name, email, and website in this
-                                browser for the next time I comment.
-                            </label>
-                        </div>
-
+                    <div class="input-wrap input-wrap-check col-12">
+                        <input
+                            type="checkbox"
+                            v-model="toggle"
+                            true-value="yes"
+                            false-value="no"
+                        />
+                        <label for="checkbox"
+                            >Save my name, email, and website in this browser
+                            for the next time I comment.
+                        </label>
+                    </div>
+                    <div class="input-wrap col-12">
                         <input type="submit" value="post comment" />
                     </div>
                 </form>

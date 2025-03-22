@@ -1,6 +1,8 @@
 <script setup>
 import Tab from "@/Components/sections-new/Tab.vue";
 import Tabs from "@/Components/sections-new/Tabs.vue";
+import HeroSmall from "@/Components/sections-new/Hero-small.vue";
+import blogBg from "~images/blog-bg.jpg";
 </script>
 
 <template>
@@ -9,35 +11,35 @@ import Tabs from "@/Components/sections-new/Tabs.vue";
             class="container flex-column align-items-center justify-content-center"
         >
             <form action="" class="form">
-                <div class="input-wrap col-12 mb-20px">
+                <div class="input-wrap input-wrap-check col-12 mb-20px">
                     <input type="checkbox" name="notif1" id="notif1" />
                     <label for="notif1">
                         Lorem ipsum dolor, sit amet consectetur adipisicing
                         elit. Powiadomienie 1
                     </label>
                 </div>
-                <div class="input-wrap col-12 mb-20px">
+                <div class="input-wrap input-wrap-check col-12 mb-20px">
                     <input type="checkbox" name="notif2" id="notif2" />
                     <label for="notif2">
                         Lorem ipsum dolor, sit amet consectetur adipisicing
                         elit. Powiadomienie 2
                     </label>
                 </div>
-                <div class="input-wrap col-12 mb-20px">
+                <div class="input-wrap input-wrap-check col-12 mb-20px">
                     <input type="checkbox" name="notif3" id="notif3" />
                     <label for="notif3">
                         Lorem ipsum dolor, sit amet consectetur adipisicing
                         elit. Powiadomienie 3
                     </label>
                 </div>
-                <div class="input-wrap col-12 mb-20px">
+                <div class="input-wrap input-wrap-check col-12 mb-20px">
                     <input type="checkbox" name="notif4" id="notif4" />
                     <label for="notif4">
                         Lorem ipsum dolor, sit amet consectetur adipisicing
                         elit. Powiadomienie 4
                     </label>
                 </div>
-                <div class="input-wrap col-12">
+                <div class="input-wrap input-wrap-check col-12">
                     <input type="submit" value="Zapisz zmiany" />
                 </div>
             </form>
@@ -60,7 +62,7 @@ import Tabs from "@/Components/sections-new/Tabs.vue";
                         aria-required="true"
                     />
                 </div>
-                <div class="input-wrap col-12 mb-35px">
+                <div class="input-wrap input-wrap-check col-12 mb-35px">
                     <input type="checkbox" name="notif4" id="notif4" />
                     <label for="notif4">
                         Czy na pewno pewno jesteś pewny
@@ -72,6 +74,7 @@ import Tabs from "@/Components/sections-new/Tabs.vue";
             </form>
         </div>
     </section>
+    
 </template>
 
 <style lang="scss"></style>

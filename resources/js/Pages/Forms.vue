@@ -1,22 +1,21 @@
 <script setup>
 import HeroSmall from "@/Components/sections-new/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
-import { reactive } from 'vue'
-import { router } from '@inertiajs/vue3'
+import { reactive } from "vue";
+import { router } from "@inertiajs/vue3";
 const errors = reactive({});
-
 
 const loginForm = reactive({
     login: null,
     password: null,
     remember: false,
-})
+});
 
 function submitLoginRequest() {
-    router.post(route('login.post'), loginForm, {
+    router.post(route("login.post"), loginForm, {
         onError: (err) => {
             Object.assign(errors, err);
-        }
+        },
     });
 }
 
@@ -25,16 +24,15 @@ const registerForm = reactive({
     email: null,
     password: null,
     password_confirmation: null,
-})
+});
 
 function submitRegisterRequest() {
-    router.post(route('register.post'), registerForm, {
+    router.post(route("register.post"), registerForm, {
         onError: (err) => {
             Object.assign(errors, err);
-        }
+        },
     });
 }
-
 </script>
 
 <template>
@@ -43,7 +41,7 @@ function submitRegisterRequest() {
         <div class="container flex-column">
             <h1 class="title-1 mb-20px">Logowanie</h1>
             <form class="form" @submit.prevent="submitLoginRequest">
-                <div class="input-wrap d-flex flex-column col-12">
+                <div class="input-wrap col-12">
                     <label for="username">Dane użytkownika *</label>
                     <input
                         type="text"
@@ -57,7 +55,7 @@ function submitRegisterRequest() {
                     />
                     <div v-if="errors.login">{{ errors.login }}</div>
                 </div>
-                <div class="input-wrap d-flex flex-column col-12">
+                <div class="input-wrap col-12">
                     <label for="password">Hasło *</label>
                     <input
                         type="password"
@@ -70,7 +68,7 @@ function submitRegisterRequest() {
                     />
                     <div v-if="errors.password">{{ errors.password }}</div>
                 </div>
-                <div class="input-wrap col-12 mb-20px">
+                <div class="input-wrap input-wrap-check col-12 mb-20px">
                     <input
                         type="checkbox"
                         name="remember"
@@ -80,9 +78,7 @@ function submitRegisterRequest() {
                         false-value="false"
                         v-model="loginForm.remember"
                     />
-                    <label for="remember">
-                   Zapamiętaj mnie
-                    </label>
+                    <label for="remember"> Zapamiętaj mnie </label>
                 </div>
                 <div class="input-wrap col-12">
                     <input type="submit" value="Zaloguj się" />
@@ -90,7 +86,7 @@ function submitRegisterRequest() {
             </form>
             <h1 class="title-1 mb-20px">Rejestracja</h1>
             <form class="form pb-120px" @submit.prevent="submitRegisterRequest">
-                <div class="input-wrap d-flex flex-column col-12">
+                <div class="input-wrap col-12">
                     <label for="register-username">Nazwa użytkownika *</label>
                     <input
                         type="text"
@@ -105,7 +101,7 @@ function submitRegisterRequest() {
                     />
                     <div v-if="errors.name">{{ errors.name }}</div>
                 </div>
-                <div class="input-wrap d-flex flex-column col-12">
+                <div class="input-wrap col-12">
                     <label for="register-email">Email *</label>
                     <input
                         type="text"
@@ -120,7 +116,7 @@ function submitRegisterRequest() {
                     />
                     <div v-if="errors.email">{{ errors.email }}</div>
                 </div>
-                <div class="input-wrap d-flex flex-column col-12">
+                <div class="input-wrap col-12">
                     <label for="register-password">Hasło *</label>
                     <input
                         type="password"
@@ -133,7 +129,7 @@ function submitRegisterRequest() {
                     />
                     <div v-if="errors.password">{{ errors.password }}</div>
                 </div>
-                <div class="input-wrap d-flex flex-column col-12">
+                <div class="input-wrap col-12">
                     <label for="register-password-confirm"
                         >Potwierdź Hasło *</label
                     >
@@ -146,7 +142,9 @@ function submitRegisterRequest() {
                         aria-required="true"
                         v-model="registerForm.password_confirmation"
                     />
-                    <div v-if="errors.password_confirmation">{{ errors.password_confirmation }}</div>
+                    <div v-if="errors.password_confirmation">
+                        {{ errors.password_confirmation }}
+                    </div>
                 </div>
                 <div class="input-wrap col-12 mb-20px">
                     <p>
@@ -154,7 +152,7 @@ function submitRegisterRequest() {
                         nowego hasła.
                     </p>
                 </div>
-                <div class="input-wrap col-12 mb-20px">
+                <div class="input-wrap input-wrap-check col-12 mb-20px">
                     <input
                         type="checkbox"
                         required
