@@ -4,7 +4,8 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "watch": "vite build --watch"
+        "watch": "vite build --watch",
+        "test": "mocha selenium-tests/test.js"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
@@ -20,9 +21,11 @@
         "@inertiajs/vue3": "^2.0.3",
         "@vitejs/plugin-vue": "^5.2.1",
         "chromedriver": "^134.0.5",
+        "mocha": "^11.1.0",
         "npm-watch": "^0.13.0",
         "sass-loader": "^16.0.5",
         "selenium": "^2.20.0",
+        "selenium-webdriver": "^4.30.0",
         "swiper": "^11.2.5",
         "vue": "^3.5.13",
         "ziggy-js": "^2.5.2"
