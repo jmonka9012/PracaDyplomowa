@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Mail\WelcomeEmail;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
+use App\Mail\VerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +42,7 @@ class RegisterUserController extends Controller{
             'password' => Hash::make($validatedData['password']),
         ]);
 
-        Mail::to($user->email)->send(new WelcomeEmail($user->name));
+        Mail::to($user->email)->send(new VerifyEmail($user));
 
         Auth::login($user);
 

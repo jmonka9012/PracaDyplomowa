@@ -29,6 +29,7 @@ return new class extends Migration
             $admin['password'] = Hash::make($admin['password']);
             $admin['created_at'] = now();
             $admin['updated_at'] = now();
+            $admin['email_verified_at'] = now();
         }
         DB::table('users')->insert($admins);
 

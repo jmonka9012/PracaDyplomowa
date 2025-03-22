@@ -31,6 +31,7 @@ class UserSeeder extends Seeder
                 'name' => $name,
                 'email' => $email,
                 'password' => Hash::make('12341234'),
+                'email_verified_at'=> now(),
             ]);
 
             $usersCreated++;
