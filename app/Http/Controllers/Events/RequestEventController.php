@@ -21,12 +21,12 @@ class RequestEventController extends Controller
             $folder = 'event-images/'.now()->format('Y/m/d');
 
             $imagePath = $request->file('event-image')->store($folder,'public');
-        } 
+        }
         else {
             $imagePath = null;
         }
 
-        $request->merge(['image-path' => $imagePath]);
+        $request->merge(['event_image' => $imagePath]);
 
         $validatedData = $request->validate([
             'event_name' => 'required|string|max:255|unique:events,event_name',
@@ -37,18 +37,18 @@ class RequestEventController extends Controller
             'contact_email' => 'string|max:255',
             'contact_email_additional' => 'string|max:255',
             'event_description' => 'max:65535',
-            'event_description-additional' => 'max:65535',
+            'event_description_additional' => 'max:65535',
             'event_location' => 'string|max:255',
             'image_path' => 'string|max:255|nullable',
         ], [
             'events_name.unique' => 'Istnieję już wydarzenia z tą nazwą',
             'events_name.max' => 'Nazwa wydarzenia jest zbyt długa',
-            'event_slug.unique' => 'Istnieje już wydarzenia z tym URLem',
+            'event_url.unique' => 'Istnieje już wydarzenia z tym URLem',
             'event_description.max' => 'Opis jest zbyt długi',
             'event_description_additional.max'=> 'Dodtakowe informacje są zbyt długie',
 
         ]);
-        
+
         $event = Events::create([
             'event_name'=> $validatedData['event_name'],
             'event_url'=> $validatedData['event_url'],

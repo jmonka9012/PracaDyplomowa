@@ -2,6 +2,61 @@
 import useAuth from "@/Composables/useAuth";
 import HeroSmall from "@/Components/sections-new/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
+import { reactive, ref } from "vue";
+const errors = reactive({});
+
+
+// Przechowywanie danych formularza
+const requestEventForm = reactive({
+    event_name: null,
+    event_url: null,
+    event_date: null,
+    event_start: null,
+    event_end: null,
+    contact_email: null,
+    contact_email_additional: null,
+    event_description: null,
+    event_description_additional: null,
+    event_location: null,
+});
+
+// Plik przechowujemy osobno
+const eventImage = ref(null);
+
+// Obsługa zmiany pliku
+const handleFileUpload = (event) => {
+    const file = event.target.files[0]; // Pobranie pierwszego pliku
+    if (file) {
+        eventImage.value = file;
+    }
+};
+
+// Obsługa przesyłania formularza
+function submitEventRequest() {
+    const formData = new FormData();
+
+    // Dodajemy dane formularza do FormData
+    Object.entries(requestEventForm).forEach(([key, value]) => {
+        if (value) {
+            formData.append(key, value);
+        }
+    });
+
+    // Dodajemy plik, jeśli został wybrany
+    if (eventImage.value) {
+        formData.append("event_image", eventImage.value);
+    }
+
+    // Wysyłanie żądania POST do serwera
+    router.post(route("event-create.post"), formData, {
+        onError: (err) => {
+            Object.assign(errors, err);
+        },
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
+}
 
 const { user, isLoggedIn } = useAuth();
 </script>
@@ -10,7 +65,7 @@ const { user, isLoggedIn } = useAuth();
     <HeroSmall title="Zorganizuj wydarzenie" :source="blogBg"></HeroSmall>
     <section class="pt-50px pb-50px">
         <div class="container">
-            <form action="" class="form" enctype="multipart/form-data">
+            <form class="form" enctype="multipart/form-data" @submit.prevent="submitEventRequest">
                 <div class="input-wrap col-12">
                     <label for="event-title">Nazwa Wydarzenia*</label>
                     <input
@@ -23,7 +78,9 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="true"
+                        v-model="submitEventRequest.event_name"
                     />
+                    <div v-if="errors.event_name">{{ errors.event_name }}</div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-slug">Url wydarzenia</label>
@@ -40,6 +97,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="false"
+                        v-model="submitEventRequest.event_url"
                     />
                 </div>
                 <div class="input-wrap col-12">
@@ -54,6 +112,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="true"
+                        @change="handleFileUpload"
                     />
                     <p class="mt-10px fs-14">
                         Zalecane ratio 3:2, zalecana rozdzielczość 1024x1024
@@ -70,6 +129,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="true"
+                        v-model="submitEventRequest.event_date"
                     />
                 </div>
 
@@ -84,6 +144,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="true"
+                        v-model="submitEventRequest.event_start"
                     />
                 </div>
                 <div class="input-wrap col-12 col-lg-6">
@@ -97,6 +158,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="true"
+                        v-model="submitEventRequest.event_end"
                     />
                 </div>
                 <div class="input-wrap col-12">
@@ -112,6 +174,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="true"
+                        v-model="submitEventRequest.event_location"
                     />
                 </div>
                 <div class="input-wrap col-12">
@@ -125,6 +188,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="true"
+                        v-model="submitEventRequest.contact_email"
                     />
                 </div>
                 <div class="input-wrap col-12">
@@ -137,6 +201,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="false"
+                        v-model="submitEventRequest.contact_email_additional"
                     />
                 </div>
                 <div class="input-wrap col-12">
@@ -149,6 +214,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="true"
+                        v-model="submitEventRequest.event_description"
                     ></textarea>
                 </div>
                 <div class="input-wrap col-12">
@@ -160,6 +226,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="false"
+                        v-model="submitEventRequest.event_description_additional"
                     ></textarea>
                 </div>
                 <div class="input-wrap col-12">
