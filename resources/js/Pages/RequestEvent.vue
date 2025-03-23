@@ -3,6 +3,7 @@ import useAuth from "@/Composables/useAuth";
 import HeroSmall from "@/Components/sections-new/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
 import { reactive, ref } from "vue";
+import { router } from "@inertiajs/vue3";
 const errors = reactive({});
 
 
@@ -78,7 +79,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="true"
-                        v-model="submitEventRequest.event_name"
+                        v-model="requestEventForm.event_name"
                     />
                     <div v-if="errors.event_name">{{ errors.event_name }}</div>
                 </div>
@@ -97,7 +98,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="false"
-                        v-model="submitEventRequest.event_url"
+                        v-model="requestEventForm.event_url"
                     />
                 </div>
                 <div class="input-wrap col-12">
@@ -129,7 +130,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="true"
-                        v-model="submitEventRequest.event_date"
+                        v-model="requestEventForm.event_date"
                     />
                 </div>
 
@@ -144,7 +145,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="true"
-                        v-model="submitEventRequest.event_start"
+                        v-model="requestEventForm.event_start"
                     />
                 </div>
                 <div class="input-wrap col-12 col-lg-6">
@@ -158,7 +159,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="true"
-                        v-model="submitEventRequest.event_end"
+                        v-model="requestEventForm.event_end"
                     />
                 </div>
                 <div class="input-wrap col-12">
@@ -174,7 +175,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="true"
-                        v-model="submitEventRequest.event_location"
+                        v-model="requestEventForm.event_location"
                     />
                 </div>
                 <div class="input-wrap col-12">
@@ -188,7 +189,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="true"
-                        v-model="submitEventRequest.contact_email"
+                        v-model="requestEventForm.contact_email"
                     />
                 </div>
                 <div class="input-wrap col-12">
@@ -201,7 +202,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="false"
-                        v-model="submitEventRequest.contact_email_additional"
+                        v-model="requestEventForm.contact_email_additional"
                     />
                 </div>
                 <div class="input-wrap col-12">
@@ -214,7 +215,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="true"
-                        v-model="submitEventRequest.event_description"
+                        v-model="requestEventForm.event_description"
                     ></textarea>
                 </div>
                 <div class="input-wrap col-12">
@@ -226,7 +227,7 @@ const { user, isLoggedIn } = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="false"
-                        v-model="submitEventRequest.event_description_additional"
+                        v-model="requestEventForm.event_description_additional"
                     ></textarea>
                 </div>
                 <div class="input-wrap col-12">
@@ -236,3 +237,10 @@ const { user, isLoggedIn } = useAuth();
         </div>
     </section>
 </template>
+<script>
+export default {
+    props: {
+        csrf_token: String,
+    },
+};
+</script>

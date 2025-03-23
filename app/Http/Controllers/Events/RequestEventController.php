@@ -17,23 +17,23 @@ class RequestEventController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        if ($request->hasFile('event-image')) {
-            $folder = 'event-images/'.now()->format('Y/m/d');
+        if ($request->hasFile('event_image')) {
+            $folder = 'event_images/'.now()->format('Y/m/d');
 
-            $imagePath = $request->file('event-image')->store($folder,'public');
+            $imagePath = $request->file('event_image')->store($folder,'public');
         }
         else {
             $imagePath = null;
         }
 
-        $request->merge(['event_image' => $imagePath]);
+        $request->merge(['image_path' => $imagePath]);
 
         $validatedData = $request->validate([
             'event_name' => 'required|string|max:255|unique:events,event_name',
             'event_url' => 'string|max:255|unique:events,event_url',
             'event_date' => 'date|required',
-            'event_start' => 'time|required',
-            'event_end' => 'time|required',
+            'event_start' => 'required',
+            'event_end' => 'required',
             'contact_email' => 'string|max:255',
             'contact_email_additional' => 'string|max:255',
             'event_description' => 'max:65535',
@@ -41,8 +41,8 @@ class RequestEventController extends Controller
             'event_location' => 'string|max:255',
             'image_path' => 'string|max:255|nullable',
         ], [
-            'events_name.unique' => 'Istnieję już wydarzenia z tą nazwą',
-            'events_name.max' => 'Nazwa wydarzenia jest zbyt długa',
+            'event_name.unique' => 'Istnieję już wydarzenia z tą nazwą',
+            'event_name.max' => 'Nazwa wydarzenia jest zbyt długa',
             'event_url.unique' => 'Istnieje już wydarzenia z tym URLem',
             'event_description.max' => 'Opis jest zbyt długi',
             'event_description_additional.max'=> 'Dodtakowe informacje są zbyt długie',
