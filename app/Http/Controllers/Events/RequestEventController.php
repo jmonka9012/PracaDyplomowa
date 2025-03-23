@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class SendEventQuote extends Controller
+class RequestEventController extends Controller
 {
     public function index()
     {
