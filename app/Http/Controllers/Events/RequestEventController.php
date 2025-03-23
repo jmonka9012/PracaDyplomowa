@@ -41,7 +41,12 @@ class RequestEventController extends Controller
             'event-location' => 'string|max:255',
             'image-path' => 'string|max:255|nullable',
         ], [
-            //errory
+            'events-name.unique' => 'Istnieję już wydarzenia z tą nazwą',
+            'events-name.max' => 'Nazwa wydarzenia jest zbyt długa',
+            'event-slug.unique' => 'Istnieje już wydarzenia z tym URLem',
+            'event-description.max' => 'Opis jest zbyt długi',
+            'event-description-additional.max'=> 'Dodtakowe informacje są zbyt długie',
+
         ]);
         
         $event = Events::create([
