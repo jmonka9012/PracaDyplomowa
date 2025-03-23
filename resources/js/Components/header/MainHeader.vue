@@ -69,12 +69,12 @@ onBeforeUnmount(() => {
                     </div>
                 </a>
                 <Link :href="route('home')" class="header-logo"
-                    ><img
-                        class="d-none d-lg-flex"
-                        :src="placeHolderDark"
-                        alt="" />
+                ><img
+                    class="d-none d-lg-flex"
+                    :src="placeHolderDark"
+                    alt="" />
                     <img class="d-lg-none" :src="placeHolder" alt=""
-                /></Link>
+                    /></Link>
                 <nav class="header-nav d-none d-lg-flex">
                     <ul>
                         <li>
@@ -85,12 +85,12 @@ onBeforeUnmount(() => {
                         </li>
                         <li>
                             <Link :href="route('post')"
-                                ><span>Single</span></Link
+                            ><span>Single</span></Link
                             >
                         </li>
                         <li>
                             <Link :href="route('contact')"
-                                ><span>Kontakt</span></Link
+                            ><span>Kontakt</span></Link
                             >
                         </li>
                         <li>
@@ -98,12 +98,12 @@ onBeforeUnmount(() => {
                         </li>
                         <li>
                             <Link :href="route('jacek')"
-                                ><span>Jacek CE</span></Link
+                            ><span>Jacek CE</span></Link
                             >
                         </li>
                         <li class="desk-dropdown">
                             <span class="desk-dropdown-toggle"
-                                ><span>Toggle</span>
+                            ><span>Toggle</span>
                                 <i class="fa fa-chevron-right"></i>
                             </span>
                             <ul class="dropdown-content">
@@ -130,9 +130,9 @@ onBeforeUnmount(() => {
                         Register
                     </Link>
                     <Link
-                        :href="route('event-quote')"
+                        :href="route('event-create')"
                         class="ml-30px btn btn-header btn-hovprim"
-                        >+ Create event</Link
+                    >+ Create event</Link
                     >
                 </div>
                 <div class="d-none d-lg-flex align-items-center" v-else>
@@ -148,7 +148,7 @@ onBeforeUnmount(() => {
                         <i class="fa fa-user text-primary mr-8px"></i>Moje konto
                     </Link>
                     <Link
-                        :href="route('event-quote')"
+                        :href="route('event-create')"
                         class="ml-30px btn btn-header btn-hovprim"
                     >+ Create event</Link
                     >
@@ -185,12 +185,12 @@ onBeforeUnmount(() => {
                                     </li>
                                     <li>
                                         <Link :href="route('post')"
-                                            >Single</Link
+                                        >Single</Link
                                         >
                                     </li>
                                     <li>
                                         <Link :href="route('contact')"
-                                            >Kontakt</Link
+                                        >Kontakt</Link
                                         >
                                     </li>
                                     <li>
@@ -295,7 +295,7 @@ onBeforeUnmount(() => {
                                                 <a
                                                     href="/makeanevent"
                                                     class="ml-30px btn btn-header btn-hovprim"
-                                                    >+ Create event</a
+                                                >+ Create event</a
                                                 >
                                             </li>
                                         </ul>
