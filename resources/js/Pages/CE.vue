@@ -6,6 +6,29 @@ import blogBg from "~images/blog-bg.jpg";
 </script>
 
 <template>
+    <section>
+        <div class="container justify-content-center">
+            <div class="col-lg-4">
+                <Tabs>
+                    <Tab title="Pierwszy Tab">
+                        <h2>Lorem, ipsum dolor.</h2>
+                        <p>Treść pierwszego tabu</p>
+                    </Tab>
+
+                    <Tab title="Drugi Tab">
+                        <h2>Lorem, ipsum dolor.</h2>
+                        <p>Treść drugiego tabu</p>
+                    </Tab>
+
+                    <Tab title="Trzeci Tab">
+                        <h2>Lorem, ipsum dolor.</h2>
+                        <p>Treść trzeciego tabu</p>
+                    </Tab>
+                </Tabs>
+            </div>
+        </div>
+    </section>
+
     <section class="pt-100px pb-100px">
         <div
             class="container flex-column align-items-center justify-content-center"
@@ -74,7 +97,6 @@ import blogBg from "~images/blog-bg.jpg";
             </form>
         </div>
     </section>
-    
 </template>
 
 <style lang="scss"></style>

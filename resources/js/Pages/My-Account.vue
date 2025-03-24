@@ -1,21 +1,22 @@
 <script setup>
 import Popup from "@/Components/sections-new/Popup.vue";
+import Tab from "@/Components/sections-new/Tab.vue";
+import Tabs from "@/Components/sections-new/Tabs.vue";
 import { ref } from "vue";
 const showModal = ref(false);
-import useAuth from '@/Composables/useAuth'
-import { router } from '@inertiajs/vue3';
+import useAuth from "@/Composables/useAuth";
+import { router } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
 
-
 const Logout = () => {
-    router.post(route('logout'), {});
+    router.post(route("logout"), {});
 };
 
 const TestEmail = () => {
-    router.post(route('test-email'), {});
+    router.post(route("test-email"), {});
 };
 
-const { user, isLoggedIn } = useAuth()
+const { user, isLoggedIn } = useAuth();
 </script>
 
 <template>
@@ -25,7 +26,7 @@ const { user, isLoggedIn } = useAuth()
             <div class="col-12 col-lg-3 d-flex ma-lcol flex-column">
                 <div class="ma-lcol-intro">
                     <p>Witaj ponownie</p>
-                    <p class="fw-bold">{{user.name}}</p>
+                    <p class="fw-bold">{{ user.name }}</p>
                 </div>
                 <div class="ma-lcol-content">
                     <nav class="ma-lcol-nav">
@@ -58,8 +59,12 @@ const { user, isLoggedIn } = useAuth()
                         </ul>
                         <ul>
                             <li>
-                                <Link @click="Logout" class="text-primary">Wyloguj się</Link>
-                                <Link @click="TestEmail" class="text-primary">Test Email</Link>
+                                <Link @click="Logout" class="text-primary"
+                                    >Wyloguj się</Link
+                                >
+                                <Link @click="TestEmail" class="text-primary"
+                                    >Test Email</Link
+                                >
                             </li>
                         </ul>
                     </nav>
@@ -72,15 +77,9 @@ const { user, isLoggedIn } = useAuth()
                     <a class="bcrumb__cur" href="">Current</a>
                 </div>
                 <h1 class="ma-title">Mój profil</h1>
-                <div class="tabs">
-                    <nav>
-                        <ul>
-                            <li>
-                                <a href="#"> Szczegóły profilu </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div class="tabs__content">
+
+                <Tabs class="tabs-white">
+                    <Tab title="Moje informacje">
                         <h3 class="ma-ftitle">Moje informacje</h3>
                         <form class="form form-ma">
                             <div class="input-wrap d-flex flex-column col-12">
@@ -179,8 +178,8 @@ const { user, isLoggedIn } = useAuth()
                                 <input type="submit" value="Potwierdź" />
                             </div>
                         </form>
-                    </div>
-                </div>
+                    </Tab>
+                </Tabs>
             </div>
         </div>
     </section>
@@ -308,32 +307,6 @@ const { user, isLoggedIn } = useAuth()
 .ma-lcol {
     @include media-breakpoint-up(lg) {
         margin-top: -200px;
-    }
-}
-//tabs temporairly here
-.tabs {
-    nav {
-        padding-bottom: 32px;
-        ul {
-            li {
-                a {
-                    display: block;
-                    margin-bottom: -1px;
-                    padding: 12px;
-                    border-bottom: 2px solid rgb(255, 255, 255);
-                    color: rgb(255, 255, 255);
-                    white-space: nowrap;
-                    text-decoration: none;
-                }
-            }
-        }
-    }
-
-    &__content {
-        padding: 62px 24px 32px;
-        position: relative;
-        box-shadow: rgba(18, 18, 18, 0.15) 0px 1px 4px 0px;
-        background-color: white;
     }
 }
 </style>
