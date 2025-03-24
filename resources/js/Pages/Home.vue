@@ -16,8 +16,9 @@ import hellsPit from "~images/hellspit.jpg";
 import jeckelBros from "~images/Jeckelbros.jpg";
 import teamOne from "~images/team-1.jpg";
 import eventsBg from "~images/events-bg-1.jpg";
-import {ref} from "vue";
+import { ref } from "vue";
 import SliderGallery from "../Components/sections-new/SliderGallery.vue";
+import { SwiperSlide } from "swiper/vue";
 
 const team = [
     {
@@ -93,7 +94,7 @@ const latest = [
     {
         id: 2,
         src: greatMilenko,
-        link: [{href: "/icp", title: "Great MILENKO GREAT MILENKO"}],
+        link: [{ href: "/icp", title: "Great MILENKO GREAT MILENKO" }],
         date: "January 22, 2025",
         category: [
             {
@@ -105,7 +106,7 @@ const latest = [
     {
         id: 3,
         src: hellsPit,
-        link: [{href: "/icp", title: "hellspit"}],
+        link: [{ href: "/icp", title: "hellspit" }],
         date: "January 22, 2025",
         category: [
             {
@@ -117,7 +118,7 @@ const latest = [
     {
         id: 4,
         src: jeckelBros,
-        link: [{href: "/icp", title: "Jeckelbross"}],
+        link: [{ href: "/icp", title: "Jeckelbross" }],
         date: "January 22, 2025",
         category: [
             {
@@ -153,6 +154,18 @@ const events = [
         ],
         date: "22.02.2025",
     },
+    {
+        id: 3,
+        src: eventsBg,
+        mainLink: [
+            {
+                href: "/icp",
+                title: "Proponent for sentience",
+                location: "Alleagon",
+            },
+        ],
+        date: "22.02.2025",
+    },
 ];
 const text = ref("Organizzare Eventare");
 </script>
@@ -166,32 +179,42 @@ const text = ref("Organizzare Eventare");
             />
         </template>
     </Hero>
-    <Cta/>
+    <Cta />
     <section class="pt-110px pb-100px">
         <div
             class="container container-big flex-lg-row align-items-start align-items-lg-center justify-content-between"
         >
-            <TitleNSub title="Title" subtitle="subtitle" class="mb-35px"/>
+            <TitleNSub title="Title" subtitle="subtitle" class="mb-35px" />
             <a href="/" class="btn btn-md">View all</a>
             <LatestEvents :latest="latest"></LatestEvents>
         </div>
     </section>
-    <CategoriesImg class="pt-70px pt-lg-120px pb-60px pb-lg-90px"/>
+    <CategoriesImg class="pt-70px pt-lg-120px pb-60px pb-lg-90px" />
     <section class="pb-75px">
         <div class="container flex-column align-items-center">
             <p class="sub-title sub-title-lprpl mb-20px">FUTURE EVENTS</p>
             <h3 class="title-1 mb-20px">Festivals This December</h3>
-            <Events v-for="event in events" v-bind="event" :key="event.id"/>
+            <Events v-for="event in events" v-bind="event" :key="event.id" />
         </div>
     </section>
-    <Services/>
+    <Services />
     <Team :team="team">
         <template #subtitle>Meet Our Team</template>
         <template #title>Our Professionals</template>
     </Team>
     <section class="pt-100px pb-100px">
         <div class="container">
-            <SliderGallery :events="events"/>
+            <SliderGallery
+                :slides-per-view="1"
+                :space-between="50"
+                :breakpoints="{ 992: { slidesPerView: 2 } }"
+            >
+                <template #content>
+                    <swiper-slide v-for="event in events" :key="event.id">
+                        <Events v-bind="event" />
+                    </swiper-slide>
+                </template>
+            </SliderGallery>
         </div>
     </section>
 </template>
