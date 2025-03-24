@@ -20,8 +20,8 @@ return new class extends Migration
             $table->time('event_end');
             $table->string('contact_email');
             $table->string('contact_email_additional');
-            $table->text('event_description')->default('test');
-            $table->text('event_description_additional')->default('test');
+            $table->text('event_description');
+            $table->text('event_description_additional')->nullable();
             $table->string('event_location');
             $table->string('image_path')->nullable();
             $table->timestamps();

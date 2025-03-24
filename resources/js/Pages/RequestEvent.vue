@@ -209,7 +209,7 @@ const { user, isLoggedIn } = useAuth();
                     <label for="event-description">Opis*</label>
                     <textarea
                         id="event-description"
-                        name="eevent-description"
+                        name="event-description"
                         required
                         placeholder="Opis wydarzenia"
                         spellcheck="false"
@@ -222,7 +222,7 @@ const { user, isLoggedIn } = useAuth();
                     <label for="event-description">Więcej informacji</label>
                     <textarea
                         id="event-description-additional"
-                        name="eevent-description-additional"
+                        name="event-description-additional"
                         placeholder="Więcej informacji"
                         spellcheck="false"
                         value=""

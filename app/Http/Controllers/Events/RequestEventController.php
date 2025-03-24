@@ -36,8 +36,8 @@ class RequestEventController extends Controller
             'event_end' => 'required',
             'contact_email' => 'string|max:255',
             'contact_email_additional' => 'string|max:255',
-            'event_description' => 'max:65535',
-            'event_description_additional' => 'max:65535',
+            'event_description' => 'required|max:65535',
+            'event_description_additional' => 'required|max:65535',
             'event_location' => 'string|max:255',
             'image_path' => 'string|max:255|nullable',
         ], [
@@ -46,7 +46,7 @@ class RequestEventController extends Controller
             'event_url.unique' => 'Istnieje już wydarzenia z tym URLem',
             'event_description.max' => 'Opis jest zbyt długi',
             'event_description_additional.max'=> 'Dodtakowe informacje są zbyt długie',
-
+            'event_description.required'=> 'Brak opisu',
         ]);
 
         $event = Events::create([
@@ -58,6 +58,8 @@ class RequestEventController extends Controller
             'contact_email'=> $validatedData['contact_email'],
             'contact_email_additional'=> $validatedData['contact_email_additional'],
             'event_location'=> $validatedData['event_location'],
+            'event_description'=> $validatedData['event_description'],
+            'event_description_additional'=> $validatedData['event_description_additional'],
             'image_path'=> $validatedData['image_path'],
         ]);
 
