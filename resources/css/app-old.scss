@@ -1138,7 +1138,7 @@ img {
     input:focus {
         outline: none;
     }
-    input:not([type="checkbox"]):not(.form-submit) {
+    input:not([type="checkbox"]):not(.form-submit):not([type="submit"]) {
         width: 100%;
         appearance: none;
         border: 1px solid #afb0b7;
