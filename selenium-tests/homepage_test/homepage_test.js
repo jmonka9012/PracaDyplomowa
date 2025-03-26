@@ -15,7 +15,7 @@ import chrome from 'selenium-webdriver/chrome.js';
       .build();
 
     console.log('Przeglądarka uruchomiona. Wczytywanie aplikacji...');
-    await driver.get('http://127.0.0.1:32768/');
+    await driver.get('https://lvi.ddev.site');
     console.log('Strona załadowana.');
 
     const title = await driver.getTitle();
