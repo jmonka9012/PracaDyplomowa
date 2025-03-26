@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\WelcomeEmail;
 use App\Models\User;
 use App\Mail\VerifyEmail;
 use Illuminate\Http\RedirectResponse;
@@ -14,6 +13,7 @@ use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\RegisterUserRequest;
 
 class RegisterUserController extends Controller{
 
@@ -24,7 +24,7 @@ class RegisterUserController extends Controller{
         ]);
     }
 
-    public function store(Request $request): RedirectResponse{
+    public function store(RegisterUserRequest $request): RedirectResponse{
         $validatedData = $request->validate([
             'name' => 'required|string|max:255|unique:'.User::class,
             'email' => 'required|string|email|max:255|unique:'.User::class,

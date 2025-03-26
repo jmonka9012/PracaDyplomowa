@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
+use App\Http\Requests\RequestEventRequest;
 
 class RequestEventController extends Controller
 {
@@ -16,30 +17,11 @@ class RequestEventController extends Controller
         return Inertia::render('RequestEvent');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(RequestEventRequest $request): RedirectResponse
     {
 
-        $validatedData = $request->validate([
-            'event_name' => 'required|string|max:255|unique:events,event_name',
-            'event_url' => 'string|max:255|unique:events,event_url',
-            'event_date' => 'date|required',
-            'event_start' => 'required',
-            'event_end' => 'required',
-            'contact_email' => 'string|max:255',
-            'contact_email_additional' => 'string|max:255',
-            'event_description' => 'required|max:65535',
-            'event_description_additional' => 'required|max:65535',
-            'event_location' => 'string|max:255',
-            'image_path' => 'string|max:255|nullable',
-        ], [
-            'event_name.unique' => 'Istnieję już wydarzenia z tą nazwą',
-            'event_name.max' => 'Nazwa wydarzenia jest zbyt długa',
-            'event_url.unique' => 'Istnieje już wydarzenia z tym URLem',
-            'event_description.max' => 'Opis jest zbyt długi',
-            'event_description_additional.max'=> 'Dodtakowe informacje są zbyt długie',
-            'event_description.required'=> 'Brak opisu',
-        ]);
-
+        $validatedData = $request->validated(); 
+        
         if ($request->hasFile('event_image')) {
             $eventName = Str::slug($request->input('event_name'));
             $folder = 'event_images/' . now()->format('Y/m') . '/' . $eventName;
