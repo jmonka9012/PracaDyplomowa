@@ -2,11 +2,44 @@
 import Popup from "@/Components/sections-new/Popup.vue";
 import Tab from "@/Components/sections-new/Tab.vue";
 import Tabs from "@/Components/sections-new/Tabs.vue";
-import { ref } from "vue";
 const showModal = ref(false);
 import useAuth from "@/Composables/useAuth";
 import { router } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
+import { ref, reactive, toRaw } from "vue";
+
+const { user, isLoggedIn } = useAuth();
+const nameErrors = reactive({});
+
+let currentRequest;
+
+function handleSubmitClick(type, form) {
+    showModal.value = true;
+    currentRequest = form;
+/*
+    const rawData = toRaw(form)
+    console.log(type, rawData);*/
+}
+
+//$event.target.value
+const handleValidationEmit = (state) => {
+    if (state === true) {
+        router.post(route("my-account.change"), currentRequest, {
+            onError: (err) => {
+                Object.assign(nameErrors, err); //errory do poprawienia
+            },
+            onSuccess: (page) => {
+                currentRequest = null;
+            },
+        });
+    }
+}
+
+function validateForm(field) {
+    if (field === 'first_name') {
+        // Do napisania walidacja
+    }
+}
 
 const Logout = () => {
     router.post(route("logout"), {});
@@ -16,7 +49,11 @@ const TestEmail = () => {
     router.post(route("test-email"), {});
 };
 
-const { user, isLoggedIn } = useAuth();
+const nameForm = reactive({
+    first_name: null,
+});
+
+
 </script>
 
 <template>
@@ -81,12 +118,13 @@ const { user, isLoggedIn } = useAuth();
                 <Tabs class="tabs-white">
                     <Tab title="Moje informacje">
                         <h3 class="ma-ftitle">Moje informacje</h3>
-                        <form class="form form-ma">
+                        <form class="form form-ma" @submit.prevent="handleSubmitClick('first_name', nameForm)"
+                        >
                             <div class="input-wrap d-flex flex-column col-12">
                                 <label for="first-name-input">Imię</label>
                                 <input
                                     type="text"
-                                    id="first-name-input"
+                                    id="change-first-name"
                                     autocomplete="first-name-input"
                                     name="first-name-input"
                                     spellcheck="false"
@@ -94,13 +132,16 @@ const { user, isLoggedIn } = useAuth();
                                     required=""
                                     aria-required="true"
                                     :placeholder="user.first_name"
+                                    @input="validateForm('name')"
+                                    v-model="nameForm.first_name"
                                 />
                             </div>
+                            <div v-if="nameErrors.first_name">{{ nameErrors.first_name }}</div>
                             <div class="input-wrap col-12">
                                 <input
-                                    type="submit"
                                     value="zaktualizuj szczegóły"
-                                    @click.prevent="showModal = true"
+                                    type="submit"
+                                    class="form-submit"
                                 />
                             </div>
                         </form>
@@ -109,7 +150,7 @@ const { user, isLoggedIn } = useAuth();
                                 <label for="last-name-input">Nazwisko</label>
                                 <input
                                     type="text"
-                                    id="last-name-input"
+                                    id="change-last-name"
                                     autocomplete="last-name-input"
                                     name="last-name-input"
                                     spellcheck="false"
@@ -183,7 +224,7 @@ const { user, isLoggedIn } = useAuth();
             </div>
         </div>
     </section>
-    <Popup :show="showModal" @close="showModal = false"></Popup>
+    <Popup :show="showModal" @close="showModal = false" @password-validation-success="handleValidationEmit"></Popup>
 </template>
 
 <style lang="scss">
