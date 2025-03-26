@@ -1,30 +1,63 @@
 <script setup>
+import {reactive} from "vue";
+
 const props = defineProps({
     show: Boolean,
 });
+
+// const emit = defineEmits(['emit-password']);
+const emit = defineEmits(['password-validation-success']);
+
+
+/*function HandleInput(value) {
+    emit('emit-password', value);
+}*/
+
+//                         @input="HandleInput($event.target.value)"
+
+const validationErrors = reactive({});
+function submitPasswordValidation() {
+
+    router.post(route("my-account.validate"), passwordForm, {
+        onError: (err) => {
+            Object.assign(validationErrors, err);
+        },
+        onSuccess: (page) => {
+            emit('password-validation-success', true);
+            validationErrors.password = null
+        },
+
+    });
+}
+
+const passwordForm = reactive({
+    password: null
+});
+
 </script>
 
 <template>
     <div v-if="show" @click.self="$emit('close')" class="popup-holder">
         <div class="popup">
-            <form class="form">
+            <form class="form" @submit.prevent="submitPasswordValidation">
                 <div class="input-wrap d-flex flex-column col-12">
                     <label for="my-account-confirm"
                         >Podaj Hasło, aby potwierdzić zmiane</label
                     >
                     <input
-                        type="text"
+                        type="password"
                         id="my-account-confirm"
                         autocomplete="my-account-confirm"
                         name="my-account-confirm"
                         spellcheck="false"
-                        value=""
                         required=""
                         aria-required="true"
+                        v-model="passwordForm.password"
                     />
+                    <div v-if="validationErrors.password">{{ validationErrors.password }}</div>
                 </div>
                 <div class="input-wrap d-flex flex-column col-12">
-                    <input type="submit" value="Zaktualizuj" />
+                    <input class="form-submit" @click="" value="Zaktualizuj" />
                 </div>
             </form>
             <button class="popup__close" @click="$emit('close')">
