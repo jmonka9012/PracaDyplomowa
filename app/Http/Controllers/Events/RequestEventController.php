@@ -7,6 +7,7 @@ use App\Models\Events;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 class RequestEventController extends Controller
 {
@@ -17,16 +18,6 @@ class RequestEventController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        if ($request->hasFile('event_image')) {
-            $folder = 'event_images/'.now()->format('Y/m/d');
-
-            $imagePath = $request->file('event_image')->store($folder,'public');
-        }
-        else {
-            $imagePath = null;
-        }
-
-        $request->merge(['image_path' => $imagePath]);
 
         $validatedData = $request->validate([
             'event_name' => 'required|string|max:255|unique:events,event_name',
@@ -49,6 +40,18 @@ class RequestEventController extends Controller
             'event_description.required'=> 'Brak opisu',
         ]);
 
+        if ($request->hasFile('event_image')) {
+            $eventName = Str::slug($request->input('event_name'));
+            $folder = 'event_images/' . now()->format('Y/m') . '/' . $eventName;
+        
+            $imagePath = $request->file('event_image')->store($folder, 'public');
+        } else {
+            $imagePath = null;
+        }
+        
+
+        $request->merge(['image_path' => $imagePath]);
+
         $event = Events::create([
             'event_name'=> $validatedData['event_name'],
             'event_url'=> $validatedData['event_url'],
@@ -60,7 +63,7 @@ class RequestEventController extends Controller
             'event_location'=> $validatedData['event_location'],
             'event_description'=> $validatedData['event_description'],
             'event_description_additional'=> $validatedData['event_description_additional'],
-            'image_path'=> $validatedData['image_path'],
+            'image_path'=> $imagePath,
         ]);
 
         return redirect()->route('home');
