@@ -28,7 +28,7 @@ class MyAccountDataChangeRequest extends FormRequest
             'first_name' => 'string|max:255|nullable',
             'last_name'=> 'string|max:255|nullable',
             'email' => 'nullable|string|email|max:255|unique:'.User::class,
-            'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
+            'password' => ['nullable', Rules\Password::defaults()],
         ];
     }
     public function messages(): array
