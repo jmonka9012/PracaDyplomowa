@@ -29,14 +29,19 @@ class LoginUserController extends Controller
         $fieldType = filter_var($credentials['login'], FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
         $remember = $request->has('remember');
 
-    if (Auth::attempt([$fieldType => $credentials['login'], 'password' => $credentials['password']], $remember)) {
-        $request->session()->regenerate();
-        return redirect()->route('my-account');
-    }
+        $userExist = \App\Models\User::where($fieldType, $credentials['login'])->exists();
+        if ($userExist) {
+            if (Auth::attempt([$fieldType => $credentials['login'], 'password' => $credentials['password']], $remember)) {
+                $request->session()->regenerate();
+                return redirect()->route('my-account');
+            }
 
+                return back()->withErrors([
+                    'password' => "Podane hasło jest niepoprawne.",
+                ]);
+        }
         return back()->withErrors([
-            'login' => 'Podane dane są niepoprawne.',
-            'password' => "Podane hasło jest niepoprawne." // Obsługa tego co jest nie tak @Yen
-        ]);
+            'login' => 'Podany użytkownik nie istnieje'
+            ]);
     }
 }
