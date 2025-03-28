@@ -20,6 +20,7 @@ class PasswordConfirmationController extends Controller
       if(Hash::check($request->password, $user->password)) {
             
             $request->session()->put('auth.password_confirmed_at', time());
+            $request->session()->save();
             
             return back()->with([
                   'confirmed' => true,
