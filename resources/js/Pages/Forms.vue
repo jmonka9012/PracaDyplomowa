@@ -24,6 +24,8 @@ const registerForm = reactive({
     email: null,
     password: null,
     password_confirmation: null,
+    first_name: null,
+    last_name: null,
 });
 
 function submitRegisterRequest() {
@@ -115,6 +117,36 @@ function submitRegisterRequest() {
                         v-model="registerForm.email"
                     />
                     <div v-if="errors.email">{{ errors.email }}</div>
+                </div>
+                <div class="input-wrap col-12">
+                    <label for="register-username">Imię *</label>
+                    <input
+                        type="text"
+                        id="register-username"
+                        name="name"
+                        autocomplete="register-first_name"
+                        spellcheck="false"
+                        value=""
+                        required=""
+                        aria-required="true"
+                        v-model="registerForm.first_name"
+                    />
+                    <div v-if="errors.first_name">{{ errors.first_name }}</div>
+                </div>
+                <div class="input-wrap col-12">
+                    <label for="register-username">Nazwisko *</label>
+                    <input
+                        type="text"
+                        id="register-username"
+                        name="name"
+                        autocomplete="register-last_name"
+                        spellcheck="false"
+                        value=""
+                        required=""
+                        aria-required="true"
+                        v-model="registerForm.last_name"
+                    />
+                    <div v-if="errors.last_name">{{ errors.last_name }}</div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="register-password">Hasło *</label>

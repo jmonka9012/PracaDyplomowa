@@ -29,7 +29,7 @@ class RegisterUserController extends Controller{
             'email' => 'required|string|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], [
-            'name.unique' => 'Istnieje już konto z tą nazwom',
+            'name.unique' => 'Istnieje już konto z tą nazwą',
             'password.confirmed'=> 'Hasła nie są takie same',
             'email.unique'=> 'Istnieje już konto z tym emailem',
             'password.min'=> 'Hasło jest zbyt krótkie',

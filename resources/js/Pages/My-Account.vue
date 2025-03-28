@@ -12,12 +12,9 @@ const { user, isLoggedIn } = useAuth();
 
 let currentRequest;
 
-function handleSubmitClick(type, form) {
+function handleSubmitClick(form) {
     showModal.value = true;
     currentRequest = form;
-/*
-    const rawData = toRaw(form)
-    console.log(type, rawData);*/
 }
 
 //$event.target.value
@@ -25,10 +22,11 @@ const handleValidationEmit = (state) => {
     if (state === true) {
         router.post(route("my-account.change"), currentRequest, {
             onError: (err) => {
-                Object.assign(nameErrors, err); //errory do poprawienia
+                Object.assign(errors, err); //errory do poprawienia
             },
             onSuccess: (page) => {
                 currentRequest = null;
+                showModal.value = false;
             },
         });
     }
@@ -48,11 +46,23 @@ const TestEmail = () => {
     router.post(route("test-email"), {});
 };
 
-const nameForm = reactive({
+const fNameForm = reactive({
     first_name: null,
 });
 
-const nameErrors = reactive({});
+const lNameForm = reactive({
+    last_name: null,
+});
+
+const emailForm = reactive({
+    email: null,
+});
+
+const passwordForm = reactive({
+    password: null,
+});
+
+const errors = reactive({});
 
 </script>
 
@@ -118,7 +128,7 @@ const nameErrors = reactive({});
                 <Tabs class="tabs-white">
                     <Tab title="Moje informacje">
                         <h3 class="ma-ftitle">Moje informacje</h3>
-                        <form class="form form-ma" @submit.prevent="handleSubmitClick('first_name', nameForm)"
+                        <form class="form form-ma" @submit.prevent="handleSubmitClick( fNameForm)"
                         >
                             <div class="input-wrap d-flex flex-column col-12">
                                 <label for="first-name-input">Imię</label>
@@ -132,11 +142,10 @@ const nameErrors = reactive({});
                                     required=""
                                     aria-required="true"
                                     :placeholder="user.first_name"
-                                    @input="validateForm('name')"
-                                    v-model="nameForm.first_name"
+                                    v-model="fNameForm.first_name"
                                 />
                             </div>
-                            <div v-if="nameErrors.first_name">{{ nameErrors.first_name }}</div>
+                            <div v-if="errors.first_name">{{ errors.first_name }}</div>
                             <div class="input-wrap col-12">
                                 <input
                                     value="zaktualizuj szczegóły"
@@ -145,7 +154,7 @@ const nameErrors = reactive({});
                                 />
                             </div>
                         </form>
-                        <form class="form form-ma">
+                        <form class="form form-ma" @submit.prevent="handleSubmitClick(lNameForm)">
                             <div class="input-wrap d-flex flex-column col-12">
                                 <label for="last-name-input">Nazwisko</label>
                                 <input
@@ -158,6 +167,7 @@ const nameErrors = reactive({});
                                     required=""
                                     aria-required="true"
                                     :placeholder="user.last_name"
+                                    v-model="lNameForm.last_name"
                                 />
                             </div>
                             <div class="input-wrap col-12">
@@ -169,7 +179,7 @@ const nameErrors = reactive({});
                         </form>
 
                         <h3 class="ma-ftitle">Adres Email</h3>
-                        <form class="form form-ma">
+                        <form class="form form-ma" @submit.prevent="handleSubmitClick(emailForm)">
                             <div class="input-wrap d-flex flex-column col-12">
                                 <label for="change-email">Email</label>
                                 <input
@@ -182,6 +192,7 @@ const nameErrors = reactive({});
                                     required=""
                                     aria-required="true"
                                     :placeholder="user.email"
+                                    v-model="emailForm.email"
                                 />
                             </div>
                             <div class="input-wrap col-12">
@@ -192,11 +203,11 @@ const nameErrors = reactive({});
                             </div>
                         </form>
                         <h3 class="ma-ftitle">Zmień hasło</h3>
-                        <form class="form form-ma">
+                        <form class="form form-ma" @submit.prevent="handleSubmitClick(passwordForm)">
                             <div class="input-wrap d-flex flex-column col-12">
                                 <label for="change-password">Hasło</label>
                                 <input
-                                    type="text"
+                                    type="password"
                                     id="change-password"
                                     autocomplete="change-password"
                                     name="change-password"
@@ -204,6 +215,7 @@ const nameErrors = reactive({});
                                     value=""
                                     required=""
                                     aria-required="true"
+                                    v-model="passwordForm.password"
                                 />
                             </div>
                             <div class="input-wrap col-12">
