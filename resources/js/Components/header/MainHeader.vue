@@ -252,7 +252,7 @@ onBeforeUnmount(() => {
                                                     <a href="#">About us</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">About us</a>
+                                                    <a hrKef="#">About us</a>
                                                 </li>
                                                 <li>
                                                     <a href="#">About us</a>
@@ -292,10 +292,10 @@ onBeforeUnmount(() => {
                                                 </Link>
                                             </li>
                                             <li>
-                                                <a
-                                                    href="/makeanevent"
-                                                    class="ml-30px btn btn-header btn-hovprim"
-                                                >+ Create event</a
+                                                <Link
+                                                    :href="route('event-create')"
+                                                    class="btn btn-header btn-hovprim"
+                                                >+ Create event</Link
                                                 >
                                             </li>
                                         </ul>
@@ -322,6 +322,13 @@ onBeforeUnmount(() => {
                                                     ></i
                                                     >Moje konto
                                                 </Link>
+                                            </li>
+                                            <li>
+                                                <Link
+                                                    :href="route('event-create')"
+                                                    class="btn btn-header btn-hovprim"
+                                                >+ Create event</Link
+                                                >
                                             </li>
                                         </ul>
                                     </li>
