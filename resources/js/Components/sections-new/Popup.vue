@@ -19,7 +19,7 @@ const emit = defineEmits(['password-validation-success']);
 const validationErrors = reactive({});
 function submitPasswordValidation() {
 
-    router.post(route("my-account.validate"), passwordForm, {
+    router.post(route("password.confirm"), passwordForm, {
         onError: (err) => {
             Object.assign(validationErrors, err);
         },
@@ -58,7 +58,7 @@ const passwordForm = reactive({
                     <div v-if="validationErrors.password">{{ validationErrors.password }}</div>
                 </div>
                 <div class="input-wrap d-flex flex-column col-12">
-                    <input class="form-submit" @click="" value="Zaktualizuj" />
+                    <input type="submit" class="form-submit" @click="" value="Zaktualizuj" />
                 </div>
             </form>
             <button class="popup__close" @click="$emit('close')">

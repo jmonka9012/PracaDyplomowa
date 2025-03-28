@@ -9,7 +9,6 @@ import { Link } from "@inertiajs/vue3";
 import { ref, reactive, toRaw } from "vue";
 
 const { user, isLoggedIn } = useAuth();
-const nameErrors = reactive({});
 
 let currentRequest;
 
@@ -53,6 +52,7 @@ const nameForm = reactive({
     first_name: null,
 });
 
+const nameErrors = reactive({});
 
 </script>
 
