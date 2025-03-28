@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterUserController;
 use App\Http\Controllers\Auth\LoginUserController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\EmailVerificationController;
+use App\Http\Controllers\Auth\PasswordConfirmationController;
 
 // Rejestracja
 Route::get('/rejestracja', [RegisterUserController::class, 'create'])->name('register');
@@ -32,3 +33,7 @@ Route::get('/email/verify/{id}', [EmailVerificationController::class, 'verify'])
 Route::post('/email/resend', [EmailVerificationController::class, 'resend'])
     ->middleware(['auth', 'throttle:5,10'])
     ->name('verification.resend');
+
+// Potwierdzenie hasła
+Route::post('/confirm-password', [PasswordConfirmationController::class, 'confirmPassword'])
+    ->middleware(['auth'])->name('password.confirm'); 
