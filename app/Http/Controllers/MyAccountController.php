@@ -6,6 +6,8 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Http\Requests\MyAccountDataChangeRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerifyEmail;
 
 
 class MyAccountController extends Controller
@@ -30,6 +32,11 @@ class MyAccountController extends Controller
     
         if (isset($updateData['password'])) {
             $updateData['password'] = Hash::make($updateData['password']);
+        }
+
+        if (isset($updateData['email'])) {
+            $updateData['email_verified_at'] = null;
+            Mail::to($user->email)->send(new VerifyEmail($user));
         }
 
         if (!empty($updateData)) {
