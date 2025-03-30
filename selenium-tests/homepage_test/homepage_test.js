@@ -16,15 +16,12 @@ import chrome from 'selenium-webdriver/chrome.js';
       .setChromeOptions(options)
       .build();
 
-<<<<<<< HEAD
     console.log('Przeglądarka uruchomiona. Wczytywanie aplikacji...');
     await driver.get('https://lvi.ddev.site');
-=======
     console.log('Przeglądarka uruchomiona.');
 
-    // Przejście do strony home, sprawdzenie czy w ogóle strona działa 
+    // Przejście do strony home, sprawdzenie czy w ogóle strona działa
     await driver.get('http://lvi.ddev.site/');
->>>>>>> 1d7b77b (testy)
     console.log('Strona załadowana.');
 
     // Pobranie tytułu strony do terminalu
@@ -39,10 +36,10 @@ import chrome from 'selenium-webdriver/chrome.js';
     await driver.sleep(5000);
     await driver.quit();
     console.log('Przeglądarka zamknięta.');
-    
-    
+
+
   //gdy strona nie zadziała, wypisz błąd
-  
+
   } catch (error) {
     console.error('Błąd:', error);
     if (driver) await driver.quit();
