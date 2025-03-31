@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
+use App\Models\User;
 
 class LoginUserController extends Controller
 {
@@ -29,7 +30,7 @@ class LoginUserController extends Controller
         $fieldType = filter_var($credentials['login'], FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
         $remember = $request->has('remember');
 
-        $userExist = \App\Models\User::where($fieldType, $credentials['login'])->exists();
+        $userExist = User::where($fieldType, $credentials['login'])->exists();
         if ($userExist) {
             if (Auth::attempt([$fieldType => $credentials['login'], 'password' => $credentials['password']], $remember)) {
                 $request->session()->regenerate();

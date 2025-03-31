@@ -31,3 +31,6 @@ require __DIR__.'/createevent.php';
 
 //errory
 require __DIR__.'/404.php';
+
+//weryfikacja live
+require __DIR__.'/liveverification.php';
