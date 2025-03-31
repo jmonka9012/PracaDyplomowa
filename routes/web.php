@@ -34,3 +34,6 @@ require __DIR__.'/404.php';
 
 //weryfikacja live
 require __DIR__.'/liveverification.php';
+
+//panel admina
+require __DIR__.'/admin.php';
