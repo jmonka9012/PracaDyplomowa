@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('halls', function (Blueprint $table) {
             $table->id();
             $table->string('hall_name');
-            $table->integer('seat_capacity');
-            $table->integer('stand_capacity');
+            $table->integer('seat_capacity')->nullable();
+            $table->integer('stand_capacity')->nullable();
             $table->integer('hall_price');
         });
     }

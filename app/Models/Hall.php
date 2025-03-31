@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Halls extends Model
+class Hall extends Model
 {
     use HasFactory;
 
@@ -17,10 +17,6 @@ class Halls extends Model
         'stand_capacity',
         'hall_price',
     ];
-
-    public function halls(): HasMany{
-        return $this->hasMany(HallSection::class);
-    }
 
     public function getTotalCapacity(): int{
         return $this->seat_capacity + $this->stand_capacity;
@@ -37,4 +33,16 @@ class Halls extends Model
     public function sections(): HasMany{
         return $this->hasMany(HallSection::class, 'hall_id');
     }
+
+    public function updateHallCapacity(): void{
+        $this->seat_capacity = $this->sections()
+        ->where('section_type', 'seat')
+        ->sum('capacity');
+
+        $this->stand_capacity = $this->sections()
+        ->where('section_type', 'stand')
+        ->sum('capacity');
+        $this->save();
+    }
+
 }

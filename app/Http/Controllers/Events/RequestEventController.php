@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Events;
 
 use App\Http\Controllers\Controller;
 use App\Models\Events;
+use App\Models\Hall;
+use App\Models\EventSeat;
+use App\Models\EventStandingTicket;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 use App\Http\Requests\RequestEventRequest;
+
 
 class RequestEventController extends Controller
 {
@@ -48,6 +51,32 @@ class RequestEventController extends Controller
             'image_path'=> $imagePath,
         ]);
 
+        $hall = Hall::with('sections')->find($validatedData['event_location']);
+
+        foreach ($hall->sections as $section) {
+            if($section->section_type == 'seat') {
+                for($row = 1; $row <= $section->row; $row++){
+                    for($col =1; $col <= $section->col; $col++){
+                        EventSeat::create([
+                            'hall_section_id'=> $section->id,
+                            'event_id'=> $event->id,
+                            'seat_row'=> $row,
+                            'seat_number'=> $col,
+                            'price'=> 10.50,
+                            'status'=> 'available'
+                        ]);
+                    }
+                }
+            } else {
+                EventStandingTicket::create([
+                    'hall_section_id'=> $section->id,
+                    'event_id'=> $event->id,
+                    'capacity'=> $section->capacity,
+                    'price' => 5.50,
+                ]);
+            } //ceny są narazie stałe @JacekMonka trzeba będzie zrobić jakiś wybór ceny sekcji
+
+        }
         return redirect()->route('home');
     }
 }
