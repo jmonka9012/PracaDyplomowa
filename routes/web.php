@@ -28,3 +28,6 @@ require __DIR__.'/email.php';
 
 //formularz dodawania eventu
 require __DIR__.'/createevent.php';
+
+//errory
+require __DIR__.'/404.php';
