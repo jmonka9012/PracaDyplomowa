@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\UsersPanelController;
+use App\Http\Controllers\Admin\UsersPanelController;
 use Illuminate\Support\Facades\Route;
 
-
-Route::get('/panel-administracji-użytkownicy', [UsersPanelController::class, 'index'])->name('admin.users');
+Route::get('/panel-administracji-uzytkownicy', [UsersPanelController::class, 'index'])->name('admin.users');
