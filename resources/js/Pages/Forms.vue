@@ -55,7 +55,7 @@ function submitRegisterRequest() {
                         aria-required="true"
                         v-model="loginForm.login"
                     />
-                    <div v-if="errors.login">{{ errors.login }}</div>
+                    <div class="error-msg" v-if="errors.login">{{ errors.login }}</div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="password">Hasło *</label>
@@ -68,7 +68,7 @@ function submitRegisterRequest() {
                         required=""
                         aria-required="true"
                     />
-                    <div v-if="errors.password">{{ errors.password }}</div>
+                    <div class="error-msg" v-if="errors.password">{{ errors.password }}</div>
                 </div>
                 <div class="input-wrap input-wrap-check col-12 mb-20px">
                     <input
@@ -116,7 +116,7 @@ function submitRegisterRequest() {
                         aria-required="true"
                         v-model="registerForm.email"
                     />
-                    <div v-if="errors.email">{{ errors.email }}</div>
+                    <div class="error-msg" v-if="errors.email">{{ errors.email }}</div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="register-username">Imię *</label>
@@ -131,7 +131,7 @@ function submitRegisterRequest() {
                         aria-required="true"
                         v-model="registerForm.first_name"
                     />
-                    <div v-if="errors.first_name">{{ errors.first_name }}</div>
+                    <div class="error-msg" v-if="errors.first_name">{{ errors.first_name }}</div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="register-username">Nazwisko *</label>
@@ -146,7 +146,7 @@ function submitRegisterRequest() {
                         aria-required="true"
                         v-model="registerForm.last_name"
                     />
-                    <div v-if="errors.last_name">{{ errors.last_name }}</div>
+                    <div class="error-msg" v-if="errors.last_name">{{ errors.last_name }}</div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="register-password">Hasło *</label>
@@ -159,7 +159,7 @@ function submitRegisterRequest() {
                         aria-required="true"
                         v-model="registerForm.password"
                     />
-                    <div v-if="errors.password">{{ errors.password }}</div>
+                    <div class="error-msg" v-if="errors.password">{{ errors.password }}</div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="register-password-confirm"
@@ -174,7 +174,7 @@ function submitRegisterRequest() {
                         aria-required="true"
                         v-model="registerForm.password_confirmation"
                     />
-                    <div v-if="errors.password_confirmation">
+                    <div class="error-msg" v-if="errors.password_confirmation">
                         {{ errors.password_confirmation }}
                     </div>
                 </div>

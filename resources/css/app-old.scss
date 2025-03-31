@@ -1480,3 +1480,14 @@ table {
         width: 75px;
     }
 }
+
+.error-msg {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #c3b9ef33;
+    border-radius: 50px;
+    width: fit-content;
+    border: 3px solid var(--primary);
+    font-size: 13px;
+    line-height: 1.3;
+}
