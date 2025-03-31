@@ -17,7 +17,11 @@ class RequestEventController extends Controller
 {
     public function index()
     {
-        return Inertia::render('RequestEvent');
+        $halls = Hall::with('sections')->get();
+
+        return Inertia::render('RequestEvent', [
+            'halls' => $halls,
+        ]);
     }
 
     public function store(RequestEventRequest $request): RedirectResponse
