@@ -1,5 +1,5 @@
 <template>
-    <div v-show="isActive">
+    <div class="tabs__inner" v-show="isActive">
         <slot />
     </div>
 </template>
