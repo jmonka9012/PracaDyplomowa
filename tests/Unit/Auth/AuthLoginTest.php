@@ -54,6 +54,6 @@ class AuthLoginTest extends TestCase
         ]);
 
         $this->assertGuest();
-        $response->assertSessionHasErrors('login');
+        $response->assertSessionHasErrors('password');
     }
 }
