@@ -4,6 +4,8 @@ import Tabs from "@/Components/sections-new/Tabs.vue";
 import HeroSmall from "@/Components/sections-new/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
 import hellsPit from "~images/hellspit.jpg";
+import bangPow from "~images/bangpow.jpg";
+import greatMilenko from "~images/greatmilenko.jpg";
 </script>
 
 <template>
@@ -12,18 +14,24 @@ import hellsPit from "~images/hellspit.jpg";
             <div class="col-lg-4">
                 <Tabs>
                     <Tab title="Pierwszy Tab">
-                        <h2>Lorem, ipsum dolor.</h2>
-                        <p>Treść pierwszego tabu</p>
+                        <div class="d-flex flex-column">
+                            <h2>Lorem, ipsum dolor.</h2>
+                            <p>Treść pierwszego tabu</p>
+                        </div>
                     </Tab>
 
                     <Tab title="Drugi Tab">
-                        <h2>Lorem, ipsum dolor.</h2>
-                        <p>Treść drugiego tabu</p>
+                        <div class="d-flex flex-column">
+                            <h2>Lorem, ipsum dolor.</h2>
+                            <p>Treść drugiego tabu</p>
+                        </div>
                     </Tab>
 
                     <Tab title="Trzeci Tab">
-                        <h2>Lorem, ipsum dolor.</h2>
-                        <p>Treść trzeciego tabu</p>
+                        <div class="d-flex flex-column">
+                            <h2>Lorem, ipsum dolor.</h2>
+                            <p>Treść trzeciego tabu</p>
+                        </div>
                     </Tab>
                 </Tabs>
             </div>
@@ -107,7 +115,7 @@ import hellsPit from "~images/hellspit.jpg";
                 <a href="#" class="ml-20px btn btn-md">Dodaj nowego</a>
             </div>
             <div class="col-12 mt-30px mb-30px overflow-x-scroll">
-                <table class="table-fixed">
+                <table>
                     <thead>
                         <tr>
                             <th>
@@ -214,7 +222,7 @@ import hellsPit from "~images/hellspit.jpg";
                 <a href="#" class="ml-20px btn btn-md">Dodaj nowe</a>
             </div>
             <div class="col-12 mt-30px mb-30px overflow-x-scroll">
-                <table class="table-nowrap">
+                <table class="table-nowrap table-fixed">
                     <thead>
                         <tr>
                             <th class="t-details-events__input">
@@ -331,6 +339,112 @@ import hellsPit from "~images/hellspit.jpg";
                     </tfoot>
                 </table>
             </div>
+        </div>
+    </section>
+
+    <!-- Koniec tables -->
+
+    <!-- Hale -->
+    <HeroSmall :source="blogBg" title="Task 3"></HeroSmall>
+    <section>
+        <div class="container justify-content-center">
+            <div class="col-lg-12">
+                <Tabs>
+                    <Tab title="Pierwszy Tab">
+                        <div
+                            class="d-flex justify-content-center align-items-center"
+                        >
+                            <img
+                                :src="hellsPit"
+                                alt=""
+                                style="max-height: 600px"
+                            />
+                        </div>
+                    </Tab>
+
+                    <Tab title="Drugi Tab">
+                        <div
+                            class="d-flex justify-content-center align-items-center"
+                        >
+                            <img
+                                :src="greatMilenko"
+                                alt=""
+                                style="max-height: 600px"
+                            />
+                        </div>
+                    </Tab>
+
+                    <Tab title="Trzeci Tab">
+                        <div
+                            class="d-flex justify-content-center align-items-center"
+                        >
+                            <img
+                                :src="bangPow"
+                                alt=""
+                                style="max-height: 600px"
+                            />
+                        </div>
+                    </Tab>
+                </Tabs>
+            </div>
+        </div>
+    </section>
+
+    <!-- koniec hal -->
+
+    <HeroSmall :source="blogBg" title="Blog formular"></HeroSmall>
+    <section class="pt-50px pb-50px">
+        <div class="container">
+            <form class="form" enctype="multipart/form-data">
+                <div class="input-wrap col-12">
+                    <label for="post-title">Nazwa wpisu*</label>
+                    <input
+                        type="text"
+                        placeholder="Nazwa wpisu"
+                        required
+                        id="post-title"
+                        autocomplete="post-title"
+                        name="post-title"
+                        spellcheck="false"
+                        value=""
+                        aria-required="true"
+                    />
+                </div>
+                <div class="input-wrap col-12">
+                    <label for="post-image">Obrazek główny wpisu*</label>
+                    <input
+                        type="file"
+                        id="post-image"
+                        name="post-image"
+                        accept="image/*"
+                        required
+                        placeholder="Obrazek główny*"
+                        spellcheck="false"
+                        value=""
+                        aria-required="true"
+                        @change="handleFileUpload"
+                    />
+                    <p class="mt-10px fs-14">
+                        Zalecane ratio 3:2, zalecana rozdzielczość 1024x1024
+                    </p>
+                </div>
+
+                <div class="input-wrap col-12">
+                    <label for="post-description">Opis wpisu*</label>
+                    <textarea
+                        id="post-description"
+                        name="post-description"
+                        required
+                        placeholder="Opis wpisu"
+                        spellcheck="false"
+                        value=""
+                        aria-required="true"
+                    ></textarea>
+                </div>
+                <div class="input-wrap col-12">
+                    <input type="submit" value="Stwórz wpis" />
+                </div>
+            </form>
         </div>
     </section>
 </template>

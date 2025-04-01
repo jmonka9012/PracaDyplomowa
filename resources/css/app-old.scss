@@ -1176,8 +1176,8 @@ img {
 
     textarea {
         @extend input;
-        height: 60px;
-        min-height: 60px;
+        height: 100px;
+        min-height: 100px !important;
     }
 
     input[type="submit"],
@@ -1330,6 +1330,9 @@ table {
                 white-space: nowrap;
             }
         }
+    }
+    &.table-fixed {
+        table-layout: fixed;
     }
     td,
     th {
