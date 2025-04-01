@@ -1321,7 +1321,15 @@ img {
 table {
     border-collapse: collapse;
     width: 100%;
-    &.table-fixed {
+    &.table-nowrap {
+        th {
+            white-space: nowrap;
+        }
+        tbody {
+            td {
+                white-space: nowrap;
+            }
+        }
     }
     td,
     th {
@@ -1441,7 +1449,7 @@ table {
     }
 }
 
-.user {
+.t-details {
     &__pic {
         width: 32px;
         height: 32px;
@@ -1461,23 +1469,61 @@ table {
         }
     }
     &:hover {
-        .user__options {
+        .t-details__options {
             position: static;
         }
-    }
-    &__nick {
-        @include media-breakpoint-down(xl) {
-        }
-    }
-    &__name {
-    }
-    &__mail {
     }
     &__role {
         width: 15%;
     }
     &__posts {
         width: 75px;
+    }
+    &-events {
+        &__input {
+            width: 40px;
+            padding: 8px 0;
+            text-align: center;
+            input {
+                vertical-align: middle;
+            }
+        }
+        &__main-img {
+            width: 120px;
+        }
+        &__name {
+            width: 200px;
+        }
+        &__url {
+            width: 120px;
+        }
+        &__date {
+            width: 60px;
+        }
+        &__start {
+            width: 95px;
+        }
+        &__end {
+            width: 80px;
+        }
+        &__loc {
+            width: 85px;
+        }
+        &__e-main {
+            width: 120px;
+        }
+        &__e-add {
+            width: 125px;
+        }
+        &__desc {
+            width: 400px;
+        }
+        &__td-desc {
+            white-space: normal !important;
+        }
+        &__mr-info {
+            width: 400px;
+        }
     }
 }
 
