@@ -145,7 +145,7 @@ const errors = reactive({});
                                     v-model="fNameForm.first_name"
                                 />
                             </div>
-                            <div v-if="errors.first_name">{{ errors.first_name }}</div>
+                            <div class="error-msg" v-if="errors.first_name">{{ errors.first_name }}</div>
                             <div class="input-wrap col-12">
                                 <input
                                     value="zaktualizuj szczegóły"

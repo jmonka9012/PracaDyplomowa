@@ -21,7 +21,7 @@ class RequestEventTest extends TestCase
             'event_end'=>'12:12:00',
             'contact_email'=>'Test456@test.com',
             'contact_email_additional'=>'Test456@test.com',
-            'event_location'=>'Test456',
+            'event_location'=>'1',
             'event_description'=>'Test456',
             'event_description_additional'=> 'Test456',
         ];
@@ -37,7 +37,7 @@ class RequestEventTest extends TestCase
             'event_end'=>'12:12:00',
             'contact_email'=>'Test456@test.com',
             'contact_email_additional'=>'Test456@test.com',
-            'event_location'=>'Test456',
+            'event_location'=>'1',
             'event_description'=>'Test456',
             'event_description_additional'=> 'Test456',
         ]);

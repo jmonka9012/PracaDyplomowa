@@ -6,7 +6,6 @@ import { reactive, ref } from "vue";
 import { router } from "@inertiajs/vue3";
 const errors = reactive({});
 
-
 // Przechowywanie danych formularza
 const requestEventForm = reactive({
     event_name: null,
@@ -66,7 +65,11 @@ const { user, isLoggedIn } = useAuth();
     <HeroSmall title="Zorganizuj wydarzenie" :source="blogBg"></HeroSmall>
     <section class="pt-50px pb-50px">
         <div class="container">
-            <form class="form" enctype="multipart/form-data" @submit.prevent="submitEventRequest">
+            <form
+                class="form"
+                enctype="multipart/form-data"
+                @submit.prevent="submitEventRequest"
+            >
                 <div class="input-wrap col-12">
                     <label for="event-title">Nazwa Wydarzenia*</label>
                     <input
@@ -81,7 +84,9 @@ const { user, isLoggedIn } = useAuth();
                         aria-required="true"
                         v-model="requestEventForm.event_name"
                     />
-                    <div v-if="errors.event_name">{{ errors.event_name }}</div>
+                    <div class="error-msg" v-if="errors.event_name">
+                        {{ errors.event_name }}
+                    </div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-slug">Url wydarzenia</label>
