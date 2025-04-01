@@ -13,15 +13,13 @@ class CEController extends Controller
 
         $halls = Hall::with('sections')->get();
 
-        return Inertia::render('Jacek', [
-            'halls' => $halls,
-        ]);
-
         $routeName = $request->route()->getName();
         if ($routeName === 'jacek') {
             return Inertia::render('Jacek');
         } else if ($routeName === 'ce') {
-            return Inertia::render('CE');
+            return Inertia::render('Jacek', [
+                'halls' => $halls,
+            ]);
         }
     }
 }
