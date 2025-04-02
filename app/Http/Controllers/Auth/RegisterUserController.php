@@ -24,21 +24,15 @@ class RegisterUserController extends Controller{
     }
 
     public function store(RegisterUserRequest $request): RedirectResponse{
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255|unique:'.User::class,
-            'email' => 'required|string|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ], [
-            'name.unique' => 'Istnieje już konto z tą nazwą',
-            'password.confirmed'=> 'Hasła nie są takie same',
-            'email.unique'=> 'Istnieje już konto z tym emailem',
-            'password.min'=> 'Hasło jest zbyt krótkie',
-        ]);
+        
+        $validatedData = $request->validated(); 
 
         $user = User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
+            'first_name'=> $validatedData['first_name'],
+            'last_name'=> $validatedData['last_name'],
         ]);
 
         Mail::to($user->email)->send(new VerifyEmail($user));

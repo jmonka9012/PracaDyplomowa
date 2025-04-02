@@ -20,8 +20,13 @@ return new class extends Migration
             $table->boolean('insured')->default(false);
             $table->timestamps();
 
-            $table->foreign('event_id')->references('id')->on('events');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('event_id')
+                ->references('id')
+                ->on('events');
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
         });
     }
 

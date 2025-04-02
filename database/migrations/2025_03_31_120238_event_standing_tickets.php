@@ -20,8 +20,13 @@ return new class extends Migration
             $table->integer('sold')->default(0);
             $table->timestamps();
 
-            $table->foreign('event_id')->references('id')->on('events');
-            $table->foreign('hall_section_id')->references('id')->on('hall_sections');
+            $table->foreign('event_id')
+                ->references('id')
+                ->on('events');
+                
+            $table->foreign('hall_section_id')
+                ->references('id')
+                ->on('hall_sections');
         });
     }
 
