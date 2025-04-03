@@ -6,6 +6,7 @@ import blogBg from "~images/blog-bg.jpg";
 import hellsPit from "~images/hellspit.jpg";
 import bangPow from "~images/bangpow.jpg";
 import greatMilenko from "~images/greatmilenko.jpg";
+import Wysiwyg from "../Components/sections-new/Wysiwyg.vue";
 </script>
 
 <template>
@@ -447,6 +448,183 @@ import greatMilenko from "~images/greatmilenko.jpg";
             </form>
         </div>
     </section>
+    <section>
+        <div class="container">
+            <Wysiwyg
+                :init="{
+                    toolbar_mode: 'sliding',
+                    plugins: [
+                        // Core editing features
+                        'anchor',
+                        'autolink',
+                        'charmap',
+                        'codesample',
+                        'emoticons',
+                        'image',
+                        'link',
+                        'lists',
+                        'media',
+                        'searchreplace',
+                        'table',
+                        'visualblocks',
+                        'wordcount',
+                        // Your account includes a free trial of TinyMCE premium features
+                        // Try the most popular premium features until Apr 17, 2025:
+                        'checklist',
+                        'mediaembed',
+                        'casechange',
+                        'formatpainter',
+                        'pageembed',
+                        'a11ychecker',
+                        'tinymcespellchecker',
+                        'permanentpen',
+                        'powerpaste',
+                        'advtable',
+                        'advcode',
+                        'editimage',
+                        'advtemplate',
+                        'ai',
+                        'mentions',
+                        'tinycomments',
+                        'tableofcontents',
+                        'footnotes',
+                        'mergetags',
+                        'autocorrect',
+                        'typography',
+                        'inlinecss',
+                        'markdown',
+                        'importword',
+                        'exportword',
+                        'exportpdf',
+                    ],
+                    toolbar:
+                        'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                    tinycomments_mode: 'embedded',
+                    tinycomments_author: 'Author name',
+                    mergetags_list: [
+                        { value: 'First.Name', title: 'First Name' },
+                        { value: 'Email', title: 'Email' },
+                    ],
+                    ai_request: (request, respondWith) =>
+                        respondWith.string(() =>
+                            Promise.reject('See docs to implement AI Assistant')
+                        ),
+                }"
+            />
+        </div>
+    </section>
+
+    <HeroSmall :source="blogBg" title="Tytuł wpisu"></HeroSmall>
+    <section>
+        <div class="container">
+            <div class="col-12 col-lg-4">
+                <div
+                    class="d-flex flex-row flex-wrap-wrap justify-content-center align-items-center bg-primary pt-12px pb-12px pl-6px pr-6px column-gap-5px border-radius-12px text-white"
+                >
+                    <a href="/kategoria/Bez-kategorii">Bez kategorii</a>
+                    <a href="/kategoria/Bez-kategorii">Lorem Ipsum</a>
+                    <a href="/kategoria/Bez-kategorii">Lorem Ipsum Dolor</a>
+                </div>
+            </div>
+            <div
+                class="col-12 col-lg-4 d-flex justify-content-center align-items-center"
+            >
+                <i class="fa fa-calendar mr-5px"></i> <span>2025-01-01</span>
+            </div>
+            <div
+                class="col-12 col-lg-4 d-flex justify-content-center align-items-center"
+            >
+                <i class="fa fa-user mr-5px"></i>
+                The Ringmaster
+            </div>
+            <div
+                class="col-12 d-flex flex-column align-items-center justify-content-center mt-lg-100px mt-50px"
+            >
+                <h3 class="mb-30px">Lorem ipsum</h3>
+                <p class="mb-30px">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Sequi cumque incidunt earum architecto dolor sit accusamus,
+                    magnam optio eius repellat labore molestias recusandae vitae
+                    delectus itaque. Facilis, et quis labore sint eligendi fuga
+                    unde quam quaerat dolorem voluptatum, alias rerum itaque.
+                    Nihil accusantium placeat consectetur numquam pariatur?
+                    Maxime, laborum doloribus? Lorem ipsum dolor sit, amet
+                    consectetur adipisicing elit. Sequi cumque incidunt earum
+                    architecto dolor sit accusamus, magnam optio eius repellat
+                    labore molestias recusandae vitae delectus itaque. Facilis,
+                    et quis labore sint eligendi fuga unde quam quaerat dolorem
+                    voluptatum, alias rerum itaque. Nihil accusantium placeat
+                    consectetur numquam pariatur? Maxime, laborum doloribus?
+                </p>
+                <h3 class="mb-30px">Lorem Ipsum</h3>
+                <img
+                    class="blog-image blog-image-square mb-50px"
+                    :src="greatMilenko"
+                    alt=""
+                />
+                <p class="mb-30px">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Sequi cumque incidunt earum architecto dolor sit accusamus,
+                    magnam optio eius repellat labore molestias recusandae vitae
+                    delectus itaque. Facilis, et quis labore sint eligendi fuga
+                    unde quam quaerat dolorem voluptatum, alias rerum itaque.
+                    Nihil accusantium placeat consectetur numquam pariatur?
+                    Maxime, laborum doloribus? Lorem ipsum dolor sit, amet
+                    consectetur adipisicing elit. Sequi cumque incidunt earum
+                    architecto dolor sit accusamus, magnam optio eius repellat
+                    labore molestias recusandae vitae delectus itaque. Facilis,
+                    et quis labore sint eligendi fuga unde quam quaerat dolorem
+                    voluptatum, alias rerum itaque. Nihil accusantium placeat
+                    consectetur numquam pariatur? Maxime, laborum doloribus?
+                </p>
+            </div>
+            <div class="blog-single__bottom">
+                <div class="col-12 col-lg-3">
+                    <div
+                        class="d-flex flex-row flex-wrap-wrap justify-content-center align-items-center bg-primary pt-12px pb-12px pl-6px pr-6px column-gap-5px border-radius-12px text-white"
+                    >
+                        <a href="/kategoria/Bez-kategorii">Bez kategorii</a>
+                        <a href="/kategoria/Bez-kategorii">Lorem Ipsum</a>
+                        <a href="/kategoria/Bez-kategorii">Lorem Ipsum Dolor</a>
+                    </div>
+                </div>
+                <div
+                    class="col-12 col-lg-3 d-flex justify-content-center align-items-center"
+                >
+                    <i class="fa fa-calendar mr-5px"></i>
+                    <span>2025-01-01</span>
+                </div>
+                <div
+                    class="col-12 col-lg-3 d-flex justify-content-center align-items-center"
+                >
+                    <i class="fa fa-user mr-5px"></i>
+                    The Ringmaster
+                </div>
+            </div>
+        </div>
+    </section>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+///tutaj narazie style dla blog-single
+
+.blog-image {
+    max-height: 450px;
+    max-width: 450px;
+    @include media-breakpoint-up(lg) {
+        max-height: 600px;
+        max-width: 600px;
+    }
+    &-square {
+        max-width: 450px;
+        @include media-breakpoint-up(lg) {
+            max-width: 600px;
+        }
+    }
+}
+.blog-single__bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+</style>
