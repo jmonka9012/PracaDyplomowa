@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Events;
 
 use App\Http\Controllers\Controller;
-use App\Models\Events;
+use App\Models\Event;
 use App\Models\Hall;
 use App\Models\EventSeat;
 use App\Models\EventStandingTicket;
@@ -41,7 +41,7 @@ class RequestEventController extends Controller
 
         $request->merge(['image_path' => $imagePath]);
 
-        $event = Events::create([
+        $event = Event::create([
             'event_name'=> $validatedData['event_name'],
             'event_url'=> $validatedData['event_url'],
             'event_date'=> $validatedData['event_date'],
