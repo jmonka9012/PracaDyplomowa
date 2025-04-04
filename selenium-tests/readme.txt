@@ -9,7 +9,7 @@ Założenia:
     ma on służyć jedynie temu żebyś mógł porównać do niego w przyszłości swoje nie działające testy (bo na pewno jakiś nie zadziała - Informatyka)
 4.  Testy zakładają że masz odpalony "ddev start", oraz świeży "npm run build" (robisz builda raz na pulla), a w wypadku jak
     były zmiany w backendzie to do tego robisz "ddev php artisan cache:clear", a dodatkowo jak były zmiany w migracjach
-    (bazie danych) to robisz "ddev php artisan cache:clear"
+    (bazie danych) to robisz "ddev php artisan migrate:fresh"
 5.  Twój skrypt z testem musi być zapisany w selenium-tests, koniecznie w takim formacie:
     <nazwa_testu>/<nazwa_testu>.js
 6.  Żeby odpalić test piszesz w terminalu:
