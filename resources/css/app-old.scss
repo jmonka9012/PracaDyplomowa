@@ -212,6 +212,12 @@ h6 {
 }
 
 h1 {
+    font-size: 35px;
+    line-height: 35px;
+    @include media-breakpoint-up(lg) {
+        font-size: 70px;
+        line-height: 70px;
+    }
 }
 
 h2 {
@@ -541,8 +547,8 @@ img {
     }
 }
 
-.border-radius-12px{
-border-radius:12px
+.border-radius-12px {
+    border-radius: 12px;
 }
 
 .column-gap-5px {
@@ -718,6 +724,12 @@ border-radius:12px
 
         &:hover {
             color: white !important;
+        }
+    }
+    &-text {
+        @extend .hover;
+        &:hover {
+            color: $text;
         }
     }
 

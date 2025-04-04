@@ -68,10 +68,10 @@ const latest = [
 
 <template>
     <HeroSmall :source="blogBg" title="Blog"></HeroSmall>
-    <div class="section pb-120px">
+    <section class="section pb-120px">
         <div class="container container-small">
             <LatestEvents evContClass="ev-cont-lg-three" :latest="latest">
             </LatestEvents>
         </div>
-    </div>
+    </section>
 </template>

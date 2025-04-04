@@ -6,7 +6,64 @@ import blogBg from "~images/blog-bg.jpg";
 import hellsPit from "~images/hellspit.jpg";
 import bangPow from "~images/bangpow.jpg";
 import greatMilenko from "~images/greatmilenko.jpg";
+import jeckelbros from "~images/Jeckelbros.jpg";
 import Wysiwyg from "../Components/sections-new/Wysiwyg.vue";
+import LatestEvents from "../Components/sections-new/LatestEvents.vue";
+const latest = [
+    {
+        id: 1,
+        src: bangPow,
+        link: [
+            {
+                href: "/icp",
+                title: "zmień wielkość kontenera później",
+            },
+        ],
+        category: [
+            {
+                href: "/bpb",
+                title: "bangpow",
+            },
+        ],
+        date: "January 22, 2025",
+    },
+    {
+        id: 2,
+        src: greatMilenko,
+        link: [{ href: "/icp", title: "Great MILENKO GREAT MILENKO" }],
+        date: "January 22, 2025",
+        category: [
+            {
+                href: "/bpb",
+                title: "greatMilenko",
+            },
+        ],
+    },
+    {
+        id: 3,
+        src: hellsPit,
+        link: [{ href: "/icp", title: "Event" }],
+        date: "January 22, 2025",
+        category: [
+            {
+                href: "/bpb",
+                title: "hellsPit",
+            },
+        ],
+    },
+    {
+        id: 4,
+        src: jeckelbros,
+        link: [{ href: "/icp", title: "Jeckelbross" }],
+        date: "January 22, 2025",
+        category: [
+            {
+                href: "/bpb",
+                title: "Jeckelbros",
+            },
+        ],
+    },
+];
 </script>
 
 <template>
@@ -347,7 +404,7 @@ import Wysiwyg from "../Components/sections-new/Wysiwyg.vue";
 
     <!-- Hale -->
     <HeroSmall :source="blogBg" title="Task 3"></HeroSmall>
-    <section>
+    <section class="mb-100px">
         <div class="container justify-content-center">
             <div class="col-lg-12">
                 <Tabs>
@@ -448,7 +505,7 @@ import Wysiwyg from "../Components/sections-new/Wysiwyg.vue";
             </form>
         </div>
     </section>
-    <section>
+    <section class="mb-100px">
         <div class="container">
             <Wysiwyg
                 :init="{
@@ -517,30 +574,41 @@ import Wysiwyg from "../Components/sections-new/Wysiwyg.vue";
     <HeroSmall :source="blogBg" title="Tytuł wpisu"></HeroSmall>
     <section>
         <div class="container">
-            <div class="col-12 col-lg-4">
+            <div class="col-12 d-flex flex-lg-row row-gap-30px">
+                <div class="col-12 col-lg-4">
+                    <div
+                        class="d-flex flex-row flex-wrap-wrap justify-content-center align-items-center bg-primary pt-12px pb-12px pl-6px pr-6px column-gap-5px border-radius-12px text-white"
+                    >
+                        <!-- Tutaj potrzebny będzie loop żeby tworzyć kategorie -->
+                        <a class="hover-text" href="/kategoria/Bez-kategorii"
+                            >Bez kategorii,
+                        </a>
+                        <a class="hover-text" href="/kategoria/Bez-kategorii"
+                            >Lorem Ipsum,
+                        </a>
+                        <a class="hover-text" href="/kategoria/Bez-kategorii"
+                            >Lorem Ipsum Dolor</a
+                        >
+                    </div>
+                </div>
                 <div
-                    class="d-flex flex-row flex-wrap-wrap justify-content-center align-items-center bg-primary pt-12px pb-12px pl-6px pr-6px column-gap-5px border-radius-12px text-white"
+                    class="col-12 col-lg-4 d-flex justify-content-center align-items-center"
                 >
-                    <a href="/kategoria/Bez-kategorii">Bez kategorii</a>
-                    <a href="/kategoria/Bez-kategorii">Lorem Ipsum</a>
-                    <a href="/kategoria/Bez-kategorii">Lorem Ipsum Dolor</a>
+                    <i class="fa fa-calendar mr-5px"></i>
+                    <span>2025-01-01</span>
+                </div>
+                <div
+                    class="col-12 col-lg-4 d-flex justify-content-center align-items-center"
+                >
+                    <i class="fa fa-user mr-5px"></i>
+                    The Ringmaster
                 </div>
             </div>
+
             <div
-                class="col-12 col-lg-4 d-flex justify-content-center align-items-center"
+                class="col-12 d-flex flex-column align-items-center justify-content-center mt-lg-80px mt-50px"
             >
-                <i class="fa fa-calendar mr-5px"></i> <span>2025-01-01</span>
-            </div>
-            <div
-                class="col-12 col-lg-4 d-flex justify-content-center align-items-center"
-            >
-                <i class="fa fa-user mr-5px"></i>
-                The Ringmaster
-            </div>
-            <div
-                class="col-12 d-flex flex-column align-items-center justify-content-center mt-lg-100px mt-50px"
-            >
-                <h3 class="mb-30px">Lorem ipsum</h3>
+                <h1 class="mb-30px">Lorem ipsum</h1>
                 <p class="mb-30px">
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                     Sequi cumque incidunt earum architecto dolor sit accusamus,
@@ -558,7 +626,7 @@ import Wysiwyg from "../Components/sections-new/Wysiwyg.vue";
                 </p>
                 <h3 class="mb-30px">Lorem Ipsum</h3>
                 <img
-                    class="blog-image blog-image-square mb-50px"
+                    class="blog-image blog-image-square mb-30px mb-lg-50px"
                     :src="greatMilenko"
                     alt=""
                 />
@@ -583,9 +651,15 @@ import Wysiwyg from "../Components/sections-new/Wysiwyg.vue";
                     <div
                         class="d-flex flex-row flex-wrap-wrap justify-content-center align-items-center bg-primary pt-12px pb-12px pl-6px pr-6px column-gap-5px border-radius-12px text-white"
                     >
-                        <a href="/kategoria/Bez-kategorii">Bez kategorii</a>
-                        <a href="/kategoria/Bez-kategorii">Lorem Ipsum</a>
-                        <a href="/kategoria/Bez-kategorii">Lorem Ipsum Dolor</a>
+                        <a class="hover-text" href="/kategoria/Bez-kategorii"
+                            >Bez kategorii,
+                        </a>
+                        <a class="hover-text" href="/kategoria/Bez-kategorii"
+                            >Lorem Ipsum,
+                        </a>
+                        <a class="hover-text" href="/kategoria/Bez-kategorii"
+                            >Lorem Ipsum Dolor</a
+                        >
                     </div>
                 </div>
                 <div
@@ -600,8 +674,21 @@ import Wysiwyg from "../Components/sections-new/Wysiwyg.vue";
                     <i class="fa fa-user mr-5px"></i>
                     The Ringmaster
                 </div>
+                <div
+                    class="col-12 col-lg-3 d-flex justify-content-center align-items-center"
+                >
+                    <a href="#" class="hover-primary"
+                        ><i class="fa fa-arrow-left"></i> Widok Listy</a
+                    >
+                </div>
             </div>
         </div>
+        <section class="section pb-100px">
+            <div class="container container-small">
+                <LatestEvents evContClass="ev-cont-lg-three" :latest="latest">
+                </LatestEvents>
+            </div>
+        </section>
     </section>
 </template>
 
@@ -611,6 +698,7 @@ import Wysiwyg from "../Components/sections-new/Wysiwyg.vue";
 .blog-image {
     max-height: 450px;
     max-width: 450px;
+    width: 100%;
     @include media-breakpoint-up(lg) {
         max-height: 600px;
         max-width: 600px;
@@ -626,5 +714,15 @@ import Wysiwyg from "../Components/sections-new/Wysiwyg.vue";
     width: 100%;
     display: flex;
     justify-content: space-between;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-top: 1px solid #dddedf;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    @include media-breakpoint-up(lg) {
+        flex-direction: row;
+        padding-bottom: 100px;
+    }
 }
 </style>
