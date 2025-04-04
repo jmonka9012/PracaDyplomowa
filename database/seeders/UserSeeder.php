@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
         while ($usersCreated < 50) {
             $name = $faker->name;
             $email = $faker->unique()->safeEmail;
+            $last_name = $faker->lastName;
 
             if ($name === $excludedName && $email === $excludedEmail) {
                 continue;
@@ -30,6 +31,8 @@ class UserSeeder extends Seeder
             User::create([
                 'name' => $name,
                 'email' => $email,
+                'first_name'=> $name,
+                'last_name'=> $last_name,
                 'password' => Hash::make('12341234'),
                 'email_verified_at'=> now(),
             ]);
