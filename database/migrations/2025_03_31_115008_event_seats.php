@@ -21,8 +21,13 @@ return new class extends Migration
             $table->enum('status', ['available','reserved','sold'])->default('available');
             $table->timestamps();
 
-            $table->foreign('event_id')->references('id')->on('events');
-            $table->foreign('hall_section_id')->references('id')->on('hall_sections');
+            $table->foreign('event_id')
+                ->references('id')
+                ->on('events');
+                
+            $table->foreign('hall_section_id')
+                ->references('id')
+                ->on('hall_sections');
         });
     }
 

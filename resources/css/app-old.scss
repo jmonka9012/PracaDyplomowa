@@ -4,6 +4,8 @@
 @import "@fortawesome/fontawesome-free/css/all.css";
 @import "./mixin.scss";
 @import "swiper/swiper-bundle.css";
+// @import "froala-editor/css/froala_editor.pkgd.min.css";
+// @import "froala-editor/css/froala_style.min.css";
 
 :root {
     //new
@@ -539,6 +541,13 @@ img {
     }
 }
 
+.border-radius-12px{
+border-radius:12px
+}
+
+.column-gap-5px {
+    column-gap: 5px;
+}
 .column-gap-10px {
     column-gap: 10px;
 }
@@ -566,6 +575,9 @@ img {
     row-gap: 45px;
 }
 
+.bg-primary {
+    background-color: $primary;
+}
 .bg-lpurple {
     background: #f4f4fc;
 }

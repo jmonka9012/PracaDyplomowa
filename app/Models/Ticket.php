@@ -18,7 +18,7 @@ class Ticket extends Model
         'insured',
     ];
 
-    protected $with = ['events','user'];
+    protected $with = ['event','user'];
 
     public function user()
     {
@@ -27,6 +27,6 @@ class Ticket extends Model
 
     public function event()
     {
-        return $this->belongsTo(Events::class);
+        return $this->belongsTo(Event::class);
     }
 }

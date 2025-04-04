@@ -20,6 +20,7 @@ export default defineConfig({
     // },
     resolve: {
         alias: {
+            "-nd": path.resolve(__dirname, "./node_modules"),
             "@": path.resolve(__dirname, "./resources/js"),
             "~css": path.resolve(__dirname, "./resources/css"),
             "~images": path.resolve(__dirname, "./public/images"),
