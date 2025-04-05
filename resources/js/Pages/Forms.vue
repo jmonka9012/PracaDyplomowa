@@ -13,13 +13,27 @@ const liveErrors = reactive({
     nameError: ''
 })
 
+let registerNameCorrect = false;
+let registerEmailCorrect = false;
+
+let canRegister = false;
+
+function HandleSubmitClass(routeName, response) {
+
+}
+
 function HandleValidationResponse(routeName, response) {
     switch(routeName) {
         case 'verification.user':
             liveErrors.nameError = response.data.message;
+            registerNameCorrect = response.data.valid;
+            console.log(registerNameCorrect)
             break;
         case 'verification.email':
             liveErrors.emailError = response.data.message;
+            registerEmailCorrect = response.data.valid;
+            console.log(registerEmailCorrect)
+
             break;
         default:
             console.error('Nie rozpoznano route walidacyjnego')
@@ -30,6 +44,7 @@ const validationRequest = debounce((routeName) => {
     axios.post(route(routeName), registerForm)
         .then(response => {
             HandleValidationResponse(routeName, response);
+            HandleSubmitClass(routeName, response);
         })
         .catch(error => {
             console.error(error)

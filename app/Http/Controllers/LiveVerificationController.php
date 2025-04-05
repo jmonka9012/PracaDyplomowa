@@ -18,33 +18,44 @@ class LiveVerificationController extends Controller
 
         if ($userExist) {
             return response()->json([
-/*                'valid' => 'true',*/
+                'valid' => false,
                 'message' => 'użytkownik istnieje'
             ]);
         }
-/*
+
         return response()->json([
-            'valid' => 'false',
-        ]);*/
+            'valid' => true,
+        ]);
     }
 
     public function isEmail(Request $request)
     {
         $request->validate([
-            'email' => 'required|string',
+            'email' => 'string|nullable',
         ]);
 
         $email = trim($request->input('email'));
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return response()->json([
-                'valid' => 'false',
-                'message' => 'Nieprawdiłowy email,'
-            ], 422);
+                'valid' => false,
+                'message' => 'Nieprawidłowy adres e-mail.'
+            ], 200);
+        }
+
+        if (User::where('email', $email)->exists()) {
+            return response()->json([
+                'valid' => false,
+                'message' => 'Użytkownik z takim adresem e-mail już istnieje.'
+            ], 200);
         }
 
         return response()->json([
-            'valid' => 'true'
+            'valid' => true
+        ], 200);
+
+        return response()->json([
+            'valid' => true
         ]);
     }
 
