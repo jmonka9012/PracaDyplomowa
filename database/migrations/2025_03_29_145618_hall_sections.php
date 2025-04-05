@@ -52,6 +52,38 @@ return new class extends Migration
             ]
         ]);
 
+        $hall = Hall::create([
+            'hall_name' => 'Trvth Hall',
+            'hall_price'=> 5000,
+        ]);
+        $hall->sections()->createMany([
+            [
+                'section_name' => 'A',
+                'section_type' => 'seat',
+                'row' => 40,
+                'col' => 20,
+            ],
+            [
+                'section_name' => 'B',
+                'section_type' => 'seat',
+                'row' => 10,
+                'col' => 30,
+            ],
+            [
+                'section_name' => 'C',
+                'section_type' => 'stand',
+                'row' => null,
+                'col' => null,
+                'capacity' => 100
+            ],
+            [
+                'section_name' => 'D',
+                'section_type' => 'stand',
+                'row' => null,
+                'col' => null,
+                'capacity' => 300
+            ]
+        ]);
     }
     
     /**
