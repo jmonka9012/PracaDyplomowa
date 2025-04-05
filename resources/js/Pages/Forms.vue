@@ -74,6 +74,7 @@ function submitLoginRequest() {
         onError: (err) => {
             Object.assign(errors, err);
         },
+        preserveScroll: true
     });
 }
 
@@ -82,6 +83,7 @@ function submitRegisterRequest() {
         onError: (err) => {
             Object.assign(errors, err);
         },
+        preserveScroll: true
     });
 }
 </script>
