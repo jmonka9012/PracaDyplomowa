@@ -6,15 +6,7 @@ const props = defineProps({
     show: Boolean,
 });
 
-// const emit = defineEmits(['emit-password']);
 const emit = defineEmits(['password-validation-success']);
-
-
-/*function HandleInput(value) {
-    emit('emit-password', value);
-}*/
-
-//                         @input="HandleInput($event.target.value)"
 
 const validationErrors = reactive({});
 function submitPasswordValidation() {

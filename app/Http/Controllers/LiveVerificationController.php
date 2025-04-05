@@ -54,5 +54,4 @@ class LiveVerificationController extends Controller
             'valid' => true
         ], 200);
     }
-
 }

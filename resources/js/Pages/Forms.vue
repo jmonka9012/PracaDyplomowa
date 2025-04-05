@@ -146,13 +146,12 @@ function submitRegisterRequest() {
                         autocomplete="register-username"
                         spellcheck="false"
                         value=""
-                        required=""
                         aria-required="true"
                         v-model="registerForm.name"
                         @input="onInput('verification.user')"
                     />
-                    <div v-if="errors.name">{{ errors.name }}</div>
-                    <div v-if="liveErrors.nameError">{{ liveErrors.nameError }}</div>
+                    <div class="error-msg" v-if="errors.name">{{ errors.name }}</div>
+                    <div class="error-msg" v-if="liveErrors.nameError">{{ liveErrors.nameError }}</div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="register-email">Email *</label>
@@ -163,13 +162,12 @@ function submitRegisterRequest() {
                         autocomplete="register-email"
                         spellcheck="false"
                         value=""
-                        required=""
                         aria-required="true"
                         v-model="registerForm.email"
                         @input="onInput('verification.email')"
                     />
                     <div class="error-msg" v-if="errors.email">{{ errors.email }}</div>
-                    <div v-if="liveErrors.emailError">{{ liveErrors.emailError }}</div>
+                    <div class="error-msg" v-if="liveErrors.emailError">{{ liveErrors.emailError }}</div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="register-username">Imię *</label>
@@ -180,7 +178,6 @@ function submitRegisterRequest() {
                         autocomplete="register-first_name"
                         spellcheck="false"
                         value=""
-                        required=""
                         aria-required="true"
                         v-model="registerForm.first_name"
                     />
@@ -195,7 +192,6 @@ function submitRegisterRequest() {
                         autocomplete="register-last_name"
                         spellcheck="false"
                         value=""
-                        required=""
                         aria-required="true"
                         v-model="registerForm.last_name"
                     />
