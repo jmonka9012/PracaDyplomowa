@@ -85,6 +85,8 @@ function submitRegisterRequest() {
         },
         preserveScroll: true
     });
+    liveErrors.emailError = null;
+    liveErrors.nameError = null;
 }
 </script>
 
