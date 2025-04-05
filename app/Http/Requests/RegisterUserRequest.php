@@ -28,19 +28,26 @@ class RegisterUserRequest extends FormRequest
             'name' => 'required|string|max:255|unique:'.User::class,
             'email' => 'required|string|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'first_name' => 'required',
-            'last_name'=> 'required',
+            'first_name' => 'required|max:255',
+            'last_name'=> 'required|max:255',
         ];
     }
     public function messages(): array
     {
         return [
             'name.unique' => 'Istnieje już konto z tą nazwą',
-            'password.confirmed'=> 'Hasła nie są takie same',
+            'name.required'=> 'Nie podano nazwy użytkownika',
+            'name.max'=> 'Nazwa użytkownika jest zbyt długa',
             'email.unique'=> 'Istnieje już konto z tym emailem',
+            'email.required'=> 'Nie podano emailu',
+            'email.max'=> 'Podany email jest zbyt długi',
+            'email.email'=> 'Nieprawidłowy adres e-mail.',
+            'password.confirmed'=> 'Hasła nie są takie same',
             'password.min'=> 'Hasło jest zbyt krótkie',
             'first_name.required'=> 'Nie podano imienia',
+            'first_name.max'=> 'Imie jest zbyt długie (Max. 255 znaków)',
             'last_name.required'=> 'Nie podano nazwiska',
+            'last_name.max'=> 'Nazwisko jest zbyt długie (Max. 255 znaków)',
         ];
     }
 }
