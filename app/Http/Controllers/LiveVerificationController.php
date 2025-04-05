@@ -53,10 +53,6 @@ class LiveVerificationController extends Controller
         return response()->json([
             'valid' => true
         ], 200);
-
-        return response()->json([
-            'valid' => true
-        ]);
     }
 
 }
