@@ -16,10 +16,10 @@ const liveErrors = reactive({
 let registerNameCorrect = false;
 let registerEmailCorrect = false;
 
-let canRegister = false;
+let canRegister =  false;
 
 function HandleSubmitClass(routeName, response) {
-
+    canRegister = registerEmailCorrect && registerNameCorrect;
 }
 
 function HandleValidationResponse(routeName, response) {
@@ -27,17 +27,16 @@ function HandleValidationResponse(routeName, response) {
         case 'verification.user':
             liveErrors.nameError = response.data.message;
             registerNameCorrect = response.data.valid;
-            console.log(registerNameCorrect)
             break;
         case 'verification.email':
             liveErrors.emailError = response.data.message;
             registerEmailCorrect = response.data.valid;
-            console.log(registerEmailCorrect)
 
             break;
         default:
             console.error('Nie rozpoznano route walidacyjnego')
     }
+    console.log(`${routeName} valid:`, response.data.valid);
 }
 
 const validationRequest = debounce((routeName) => {
@@ -254,7 +253,7 @@ function submitRegisterRequest() {
                     </label>
                 </div>
                 <div class="input-wrap col-12">
-                    <input type="submit" value="zarejestruj się"/>
+                    <input type="submit" :class="{'disabled': !canRegister}" value="zarejestruj się"/>
                 </div>
             </form>
         </div>
