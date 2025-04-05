@@ -1,23 +1,50 @@
 <script setup>
 import HeroSmall from "@/Components/sections-new/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
-import { reactive } from "vue";
-import { router } from "@inertiajs/vue3";
+import {reactive} from "vue";
+import {router} from "@inertiajs/vue3";
+import {debounce} from "@/Utilities/debounce"
+import axios from 'axios'
+
 const errors = reactive({});
+
+const liveErrors = reactive({
+    emailError: '',
+    nameError: ''
+})
+
+function HandleValidationResponse(routeName, response) {
+    switch(routeName) {
+        case 'verification.user':
+            liveErrors.nameError = response.data.message;
+            break;
+        case 'verification.email':
+            liveErrors.emailError = response.data.message;
+            break;
+        default:
+            console.error('Nie rozpoznano route walidacyjnego')
+    }
+}
+
+const validationRequest = debounce((routeName) => {
+    axios.post(route(routeName), registerForm)
+        .then(response => {
+            HandleValidationResponse(routeName, response);
+        })
+        .catch(error => {
+            console.error(error)
+        })
+}, 1000)
+
+function onInput(routeName) {
+    validationRequest(routeName);
+}
 
 const loginForm = reactive({
     login: null,
     password: null,
     remember: false,
 });
-
-function submitLoginRequest() {
-    router.post(route("login.post"), loginForm, {
-        onError: (err) => {
-            Object.assign(errors, err);
-        },
-    });
-}
 
 const registerForm = reactive({
     name: null,
@@ -27,6 +54,14 @@ const registerForm = reactive({
     first_name: null,
     last_name: null,
 });
+
+function submitLoginRequest() {
+    router.post(route("login.post"), loginForm, {
+        onError: (err) => {
+            Object.assign(errors, err);
+        },
+    });
+}
 
 function submitRegisterRequest() {
     router.post(route("register.post"), registerForm, {
@@ -38,7 +73,7 @@ function submitRegisterRequest() {
 </script>
 
 <template>
-    <HeroSmall title="Forms showcase" :source="blogBg" />
+    <HeroSmall title="Forms showcase" :source="blogBg"/>
     <section>
         <div class="container flex-column">
             <h1 class="title-1 mb-20px">Logowanie</h1>
@@ -83,7 +118,7 @@ function submitRegisterRequest() {
                     <label for="remember"> Zapamiętaj mnie </label>
                 </div>
                 <div class="input-wrap col-12">
-                    <input type="submit" value="Zaloguj się" />
+                    <input type="submit" value="Zaloguj się"/>
                 </div>
             </form>
             <h1 class="title-1 mb-20px">Rejestracja</h1>
@@ -100,8 +135,10 @@ function submitRegisterRequest() {
                         required=""
                         aria-required="true"
                         v-model="registerForm.name"
+                        @input="onInput('verification.user')"
                     />
                     <div v-if="errors.name">{{ errors.name }}</div>
+                    <div v-if="liveErrors.nameError">{{ liveErrors.nameError }}</div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="register-email">Email *</label>
@@ -115,8 +152,10 @@ function submitRegisterRequest() {
                         required=""
                         aria-required="true"
                         v-model="registerForm.email"
+                        @input="onInput('verification.email')"
                     />
                     <div class="error-msg" v-if="errors.email">{{ errors.email }}</div>
+                    <div v-if="liveErrors.emailError">{{ liveErrors.emailError }}</div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="register-username">Imię *</label>
@@ -163,7 +202,7 @@ function submitRegisterRequest() {
                 </div>
                 <div class="input-wrap col-12">
                     <label for="register-password-confirm"
-                        >Potwierdź Hasło *</label
+                    >Potwierdź Hasło *</label
                     >
                     <input
                         type="password"
@@ -200,7 +239,7 @@ function submitRegisterRequest() {
                     </label>
                 </div>
                 <div class="input-wrap col-12">
-                    <input type="submit" value="zarejestruj się" />
+                    <input type="submit" value="zarejestruj się"/>
                 </div>
             </form>
         </div>

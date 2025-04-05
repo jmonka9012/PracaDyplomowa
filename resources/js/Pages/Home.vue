@@ -167,7 +167,7 @@ const events = [
         date: "22.02.2025",
     },
 ];
-const text = ref("Organizzare Eventare");
+const text = ref("Event machen");
 </script>
 
 <template>

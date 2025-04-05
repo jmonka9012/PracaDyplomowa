@@ -1,5 +1,5 @@
 <script setup>
-import useAuth from "@/Composables/useAuth";
+import useAuth from "@/Utilities/useAuth";
 import HeroSmall from "@/Components/sections-new/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
 import { reactive, ref } from "vue";

@@ -3,7 +3,7 @@ import Popup from "@/Components/sections-new/Popup.vue";
 import Tab from "@/Components/sections-new/Tab.vue";
 import Tabs from "@/Components/sections-new/Tabs.vue";
 const showModal = ref(false);
-import useAuth from "@/Composables/useAuth";
+import useAuth from "@/Utilities/useAuth";
 import { router } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
 import { ref, reactive, toRaw } from "vue";
@@ -108,9 +108,6 @@ const errors = reactive({});
                             <li>
                                 <Link @click="Logout" class="text-primary"
                                     >Wyloguj się</Link
-                                >
-                                <Link @click="TestEmail" class="text-primary"
-                                    >Test Email</Link
                                 >
                             </li>
                         </ul>

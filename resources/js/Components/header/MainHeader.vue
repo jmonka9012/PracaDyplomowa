@@ -3,7 +3,7 @@ import placeHolder from "~icons/logoipsum-364.svg";
 import placeHolderDark from "~icons/logoipsum-362.svg";
 import { Link } from "@inertiajs/vue3";
 import { ref, onMounted, onBeforeUnmount } from "vue";
-import useAuth from "@/Composables/useAuth";
+import useAuth from "@/Utilities/useAuth";
 import { router } from "@inertiajs/vue3";
 
 const { user, isLoggedIn } = useAuth();

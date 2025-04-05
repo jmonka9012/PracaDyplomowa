@@ -1,5 +1,5 @@
 <script setup>
-import useAuth from '@/Composables/useAuth'
+import useAuth from '@/Utilities/useAuth'
 
 const { user, isLoggedIn } = useAuth()
 

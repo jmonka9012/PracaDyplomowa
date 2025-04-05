@@ -8,24 +8,24 @@ use App\Models\User;
 class LiveVerificationController extends Controller
 {
 
-    public function userExists(Request $request) 
-    {   
+    public function userExists(Request $request)
+    {
         $credentials = $request->validate([
-            'login' => 'required|string',
+            'name' => 'string|nullable',
         ]);
-        $fieldType = filter_var($credentials['login'], FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
-        $userExist = User::where($fieldType, $credentials['login'])->exists();
+        $fieldType = filter_var($credentials['name'], FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+        $userExist = User::where($fieldType, $credentials['name'])->exists();
 
         if ($userExist) {
             return response()->json([
-                'valid' => 'true'
+/*                'valid' => 'true',*/
+                'message' => 'użytkownik istnieje'
             ]);
         }
-
+/*
         return response()->json([
             'valid' => 'false',
-            'message' => 'użytkownik nie istnieje'
-        ]);
+        ]);*/
     }
 
     public function isEmail(Request $request)
