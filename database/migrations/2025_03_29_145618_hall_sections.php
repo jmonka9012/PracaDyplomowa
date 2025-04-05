@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('col')->nullable();
             $table->integer('row')->nullable();
             $table->integer('capacity')->nullable();
+            $table->integer('section_height')->nullable();
+            $table->integer('section_width')->nullable();
 
             $table->foreign('hall_id')
                 ->references('id')->on('halls');
@@ -29,6 +31,8 @@ return new class extends Migration
         $hall = Hall::create([
             'hall_name' => 'Ziggy Zone',
             'hall_price'=> 500,
+            'hall_height'=> '3',
+            'hall_width'=> '3',
         ]);
         $hall->sections()->createMany([
             [
@@ -36,25 +40,33 @@ return new class extends Migration
                 'section_type' => 'seat',
                 'row' => 20,
                 'col' => 20,
+                'section_height' => '1',
+                'section_width' => '1'
             ],
             [
                 'section_name' => 'B',
                 'section_type' => 'seat',
                 'row' => 5,
                 'col' => 20,
+                'section_height' => '1',
+                'section_width' => '3'
             ],
             [
                 'section_name' => 'C',
                 'section_type' => 'stand',
                 'row' => null,
                 'col' => null,
-                'capacity' => 100
+                'capacity' => 100,
+                'section_height' => '3',
+                'section_width' => '2'
             ]
         ]);
 
         $hall = Hall::create([
             'hall_name' => 'Trvth Hall',
             'hall_price'=> 5000,
+            'hall_height'=> '4',
+            'hall_width'=> '4',
         ]);
         $hall->sections()->createMany([
             [
@@ -62,19 +74,25 @@ return new class extends Migration
                 'section_type' => 'seat',
                 'row' => 40,
                 'col' => 20,
+                'section_height' => '1',
+                'section_width' => '1'
             ],
             [
                 'section_name' => 'B',
                 'section_type' => 'seat',
                 'row' => 10,
                 'col' => 30,
+                'section_height' => '2',
+                'section_width' => '3'
             ],
             [
                 'section_name' => 'C',
                 'section_type' => 'stand',
                 'row' => null,
                 'col' => null,
-                'capacity' => 100
+                'capacity' => 100,
+                'section_height' => '4',
+                'section_width' => '1'
             ],
             [
                 'section_name' => 'D',
@@ -82,6 +100,8 @@ return new class extends Migration
                 'row' => null,
                 'col' => null,
                 'capacity' => 300,
+                'section_height' => '3',
+                'section_width' => '4'
             ]
         ]);
     }

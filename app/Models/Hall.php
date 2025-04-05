@@ -16,6 +16,8 @@ class Hall extends Model
         'seat_capacity',
         'stand_capacity',
         'hall_price',
+        'hall_width',
+        'hall_height',
     ];
 
     public function getTotalCapacity(): int{

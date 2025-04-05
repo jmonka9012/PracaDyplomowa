@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('seat_capacity')->nullable();
             $table->integer('stand_capacity')->nullable();
             $table->integer('hall_price');
+            $table->integer('hall_width')->nullable();
+            $table->integer('hall_height')->nullable();
         });
     }
 

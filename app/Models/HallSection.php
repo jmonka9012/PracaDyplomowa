@@ -17,7 +17,9 @@ class HallSection extends Model
         'section_type',
         'col',
         'row',
-        'capacity'
+        'capacity',
+        'section_height',
+        'section_width',
     ];
 
     public function hall(): BelongsTo
