@@ -81,7 +81,7 @@ return new class extends Migration
                 'section_type' => 'stand',
                 'row' => null,
                 'col' => null,
-                'capacity' => 300
+                'capacity' => 300,
             ]
         ]);
     }
