@@ -31,77 +31,103 @@ return new class extends Migration
         $hall = Hall::create([
             'hall_name' => 'Ziggy Zone',
             'hall_price'=> 500,
-            'hall_height'=> '3',
+            'hall_height'=> '2',
             'hall_width'=> '3',
         ]);
         $hall->sections()->createMany([
             [
-                'section_name' => 'A',
+                'section_name' => 'Hala 1',
                 'section_type' => 'seat',
-                'row' => 20,
-                'col' => 20,
+                'row' => 6,
+                'col' => 10,
                 'section_height' => '1',
                 'section_width' => '1'
             ],
             [
-                'section_name' => 'B',
+                'section_name' => 'Hala 2',
+                'section_type' => 'stand',
+                'row' => null,
+                'col' => null,
+                'section_height' => '1',
+                'section_width' => '2',
+                'capacity' => 100,
+            ],
+            [
+                'section_name' => 'Hala 3',
                 'section_type' => 'seat',
-                'row' => 5,
-                'col' => 20,
+                'row' => 6,
+                'col' => 10,
                 'section_height' => '1',
                 'section_width' => '3'
             ],
             [
-                'section_name' => 'C',
-                'section_type' => 'stand',
-                'row' => null,
-                'col' => null,
-                'capacity' => 100,
-                'section_height' => '3',
+                'section_name' => 'Hala 4',
+                'section_type' => 'seat',
+                'row' => 3,
+                'col' => 10,
+                'section_height' => '2',
+                'section_width' => '1'
+            ],
+            [
+                'section_name' => 'Hala 5',
+                'section_type' => 'seat',
+                'row' => 6,
+                'col' => 10,
+                'section_height' => '2',
                 'section_width' => '2'
-            ]
+            ],
+            [
+                'section_name' => 'Hala 6',
+                'section_type' => 'seat',
+                'row' => 3,
+                'col' => 10,
+                'section_height' => '2',
+                'section_width' => '3'
+            ],
         ]);
 
         $hall = Hall::create([
             'hall_name' => 'Trvth Hall',
             'hall_price'=> 5000,
-            'hall_height'=> '4',
-            'hall_width'=> '4',
+            'hall_height'=> '2',
+            'hall_width'=> '2',
         ]);
         $hall->sections()->createMany([
             [
-                'section_name' => 'A',
-                'section_type' => 'seat',
-                'row' => 40,
-                'col' => 20,
+                'section_name' => 'Halla 1',
+                'section_type' => 'stand',
+                'row' => null,
+                'col' => null,
+                'capacity' => '150',
                 'section_height' => '1',
                 'section_width' => '1'
             ],
             [
-                'section_name' => 'B',
-                'section_type' => 'seat',
-                'row' => 10,
-                'col' => 30,
-                'section_height' => '2',
-                'section_width' => '3'
-            ],
-            [
-                'section_name' => 'C',
+                'section_name' => 'Halla 2',
                 'section_type' => 'stand',
                 'row' => null,
                 'col' => null,
-                'capacity' => 100,
-                'section_height' => '4',
+                'capacity' => '150',
+                'section_height' => '1',
+                'section_width' => '2'
+            ],
+            [
+                'section_name' => 'Hala 3',
+                'section_type' => 'seat',
+                'row' => 10,
+                'col' => 5,
+                'capacity' => 150,
+                'section_height' => '2',
                 'section_width' => '1'
             ],
             [
-                'section_name' => 'D',
-                'section_type' => 'stand',
-                'row' => null,
-                'col' => null,
+                'section_name' => 'Hala 4',
+                'section_type' => 'seat',
+                'row' => 10,
+                'col' => 5,
                 'capacity' => 300,
-                'section_height' => '3',
-                'section_width' => '4'
+                'section_height' => '2',
+                'section_width' => '2'
             ]
         ]);
     }
