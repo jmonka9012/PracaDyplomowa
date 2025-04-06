@@ -2,14 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Strona domowa
-require __DIR__.'/home.php';
+//strony statyczne
+require __DIR__ .'/static.php';
 
 // Strona bloga
 require __DIR__.'/blog.php';
-
-// Strona kontaktu
-require __DIR__.'/contact.php';
 
 //strona rejestracji i logowania
 require __DIR__.'/auth.php';
@@ -25,9 +22,6 @@ require __DIR__.'/error404.php';
 
 //testowy email
 require __DIR__.'/email.php';
-
-//formularz dodawania eventu
-require __DIR__.'/createevent.php';
 
 //errory
 require __DIR__.'/404.php';
