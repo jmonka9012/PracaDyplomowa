@@ -24,16 +24,6 @@ return new class extends Migration
             $table->string('last_name')->nullable();
         });
 
-        $admins = Config::get('users.admins');
-        foreach ($admins as &$admin) {
-            $admin['password'] = Hash::make($admin['password']);
-            $admin['created_at'] = now();
-            $admin['updated_at'] = now();
-            $admin['email_verified_at'] = now();
-        }
-        DB::table('users')->insert($admins);
-
-
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
