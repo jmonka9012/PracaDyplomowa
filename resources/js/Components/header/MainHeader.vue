@@ -72,28 +72,13 @@ const text = ref("Event machen");
                         <span></span>
                     </div>
                 </a>
-<<<<<<< Updated upstream
                 <Link :href="route('home')" class="header-logo d-flex align-items-center"
                 >
                     <Poptext
                         class="d-flex flex-column justify-content-center align-items-center poptext-white poptext-logo"
                         :text="text"
                     />
-                    <!--<img
-                    class="d-none d-lg-flex"
-                    :src="placeHolderDark"
-                    alt="" />
-                    <img class="d-lg-none" :src="placeHolder" alt=""
-                    />--></Link>
-=======
-                <Link :href="route('home')" class="header-logo"
-                    ><img
-                        class="d-none d-lg-flex"
-                        :src="placeHolderDark"
-                        alt="" />
-                    <img class="d-lg-none" :src="placeHolder" alt=""
-                /></Link>
->>>>>>> Stashed changes
+                </Link>
                 <nav class="header-nav d-none d-lg-flex">
                     <ul>
                         <li>

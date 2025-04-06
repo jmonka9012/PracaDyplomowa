@@ -120,13 +120,8 @@ section {
     }
 
     &-big {
-<<<<<<< Updated upstream
-        max-width: 1400px;
-        @include media-breakpoint-up(lg) {
-=======
         max-width: 1800px;
         @include mixin.media-breakpoint-up(lg) {
->>>>>>> Stashed changes
             padding: 0 30px;
         }
     }

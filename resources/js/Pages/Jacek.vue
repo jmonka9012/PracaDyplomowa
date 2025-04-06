@@ -42,19 +42,6 @@ const filteredSections = computed(() =>
                 </div>
             </div>
         </div>
-<<<<<<< Updated upstream
-        <div class="container-big flex-column mb-130px hall" v-for="hall in halls" :key="hall.id">
-            <div class="hall__row" v-for="(row, hrowIndex) in hall.hall_height" :key="hrowIndex">
-                <div class="hall_col" v-for="(col, hcolIndex) in hall.hall_width" :key="hcolIndex">
-                    <div class="petla" v-for="section in hall.sections.filter(
-                    section => section.section_height === hrowIndex + 1 &&
-                    section.section_width === hcolIndex + 1)" :key="section.id">
-                        <div class="hall__section-seat" v-if="section.section_type === 'seat'">
-                            <div class="hall__section-row" v-for="(row, rowIndex) in section.row"
-                                 :key="rowIndex">
-                                <div class="hall__seat" v-for="(col, colIndex) in section.col" :key="colIndex">
-                                </div>
-=======
         <div
             class="flex-column mb-130px hall"
             v-for="hall in halls"
@@ -93,7 +80,6 @@ const filteredSections = computed(() =>
                                     v-for="(col, colIndex) in section.col"
                                     :key="colIndex"
                                 ></div>
->>>>>>> Stashed changes
                             </div>
                         </div>
                         <div v-else class="hall__section-stand"></div>
