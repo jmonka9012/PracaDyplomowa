@@ -155,5 +155,10 @@ const charTotal = computed(() => props.text.length);
 
         --animation-speed: 700ms;
     }
+
+    &-footer {
+        font-size: 55px;
+
+    }
 }
 </style>

@@ -26,7 +26,12 @@ const { siteData } = pageInfo();
                 <p>3 Lorem Ipsum. <br />London a123 4BCD</p>
             </div>
             <div class="col-12 col-lg-6 d-flex flex-column align-items-center">
-                <img class="footer__logo mb-25px" :src="logoW" alt="" />
+                <Link :href="route('home')">
+                    <Poptext
+                        class="flex-column justify-content-center align-items-center poptext-white poptext-footer"
+                        :text="siteData.title"
+                    />
+                </Link>
                 <p class="text-align-center mb-25px">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                     Accusantium, eveniet.
