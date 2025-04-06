@@ -56,7 +56,6 @@ onBeforeUnmount(() => {
 });
 
 const text = ref("Event machen");
-
 </script>
 
 <template>
@@ -72,10 +71,16 @@ const text = ref("Event machen");
                         <span></span>
                     </div>
                 </a>
-                <Link :href="route('home')" class="header-logo d-flex align-items-center"
+                <Link
+                    :href="route('home')"
+                    class="header-logo d-flex align-items-center"
                 >
                     <Poptext
-                        class="d-flex flex-column justify-content-center align-items-center poptext-white poptext-logo"
+                        class="d-none d-lg-flex flex-column justify-content-center align-items-center poptext-logo"
+                        :text="text"
+                    />
+                    <Poptext
+                        class="d-flex d-lg-none flex-column justify-content-center align-items-center poptext-white poptext-logo"
                         :text="text"
                     />
                 </Link>
@@ -105,7 +110,7 @@ const text = ref("Event machen");
                                 ><span>Jacek CE</span></Link
                             >
                         </li>
-<!--                        <li class="desk-dropdown">
+                        <!--                        <li class="desk-dropdown">
                             <span class="desk-dropdown-toggle"
                                 ><span>Toggle</span>
                                 <i class="fa fa-chevron-right"></i>
@@ -200,7 +205,7 @@ const text = ref("Event machen");
                                     <li>
                                         <Link :href="route('ce')">CE</Link>
                                     </li>
-<!--                                    <ul class="header-ddown">
+                                    <!--                                    <ul class="header-ddown">
                                         <li
                                             class="header-ddown-toggle"
                                             :class="{ show: dropdownStates.d1 }"
@@ -677,7 +682,6 @@ const text = ref("Event machen");
     @media screen and (min-width: 1000px) and (max-width: 1200px) {
         font-size: 12px;
     }
-    
 }
 
 .btn-header {

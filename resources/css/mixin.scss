@@ -58,15 +58,11 @@ $grid-breakpoints: (
     fullhd: 1900px,
 ) !default;
 
-
-
 @each $key, $value in $spacers {
     @each $side, $abbr in list.zip($sides, $abbrv) {
-
         .m#{$abbr}-#{$key} {
             margin-#{$side}: #{$value} !important;
         }
-
         @if $key != auto {
             .p#{$abbr}-#{$key} {
                 padding-#{$side}: #{$value} !important;
@@ -74,6 +70,7 @@ $grid-breakpoints: (
         }
     }
 }
+
 
 @each $breakpoint, $breakpoint-value in $grid-breakpoints {
     @each $key, $value in $spacers {
@@ -91,8 +88,6 @@ $grid-breakpoints: (
         }
     }
 }
-
-
 
 @mixin media-breakpoint-up($breakpoint) {
     $min-width: map.get($grid-breakpoints, $breakpoint);
@@ -146,7 +141,6 @@ $grid-breakpoints: (
 .col-12 {
     width: 100%;
 }
-
 
 .col-sm-1 {
     @include media-breakpoint-up(sm) {
