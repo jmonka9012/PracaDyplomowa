@@ -1,11 +1,12 @@
-@import "./fonts.scss";
-@import "./anims.scss";
-@import "./mixin.scss";
-@import "@fortawesome/fontawesome-free/css/all.css";
-@import "./mixin.scss";
-@import "swiper/swiper-bundle.css";
-// @import "froala-editor/css/froala_editor.pkgd.min.css";
-// @import "froala-editor/css/froala_style.min.css";
+@use "./fonts.scss";
+
+@use "./anims.scss";
+
+@use "./mixin.scss";
+
+@use "@fortawesome/fontawesome-free/css/all.css";
+
+@use "swiper/swiper-bundle.css";
 
 :root {
     //new
@@ -82,6 +83,12 @@ section {
 }
 
 .container {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    padding: 0 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
     @media screen and (max-width: 480px) {
         width: calc(90% + 30px);
         max-width: 100%;
@@ -108,20 +115,18 @@ section {
         max-width: 1200px;
     }
 
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    padding: 0 10px;
-    flex-direction: row;
-    flex-wrap: wrap;
-
     &-full {
         max-width: 100%;
     }
 
     &-big {
+<<<<<<< Updated upstream
         max-width: 1400px;
         @include media-breakpoint-up(lg) {
+=======
+        max-width: 1800px;
+        @include mixin.media-breakpoint-up(lg) {
+>>>>>>> Stashed changes
             padding: 0 30px;
         }
     }
@@ -214,7 +219,7 @@ h6 {
 h1 {
     font-size: 35px;
     line-height: 35px;
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         font-size: 70px;
         line-height: 70px;
     }
@@ -226,7 +231,7 @@ h2 {
 h3 {
     font-size: 28px;
 
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         font-size: 48px;
         line-height: 62px;
     }
@@ -334,7 +339,7 @@ img {
         @extend .text-gray;
         padding: 100px 0 38px 0;
 
-        @include media-breakpoint-up(lg) {
+        @include mixin.media-breakpoint-up(lg) {
             padding: 90px 0px 70px 0px;
         }
 
@@ -399,12 +404,12 @@ img {
     display: none !important;
 }
 .d-lg-flex {
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         display: flex !important;
     }
 }
 .d-lg-none {
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         display: none !important;
     }
 }
@@ -417,7 +422,7 @@ img {
     flex-direction: column;
 }
 .column-mob-reverse {
-    @include media-breakpoint-down(xl) {
+    @include mixin.media-breakpoint-down(xl) {
         flex-direction: column-reverse !important;
     }
 }
@@ -425,13 +430,13 @@ img {
 .flex-lg-row {
     flex-direction: column;
 
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         flex-direction: row;
     }
 }
 
 .flexc-reverse-mob {
-    @include media-breakpoint-down(xl) {
+    @include mixin.media-breakpoint-down(xl) {
         flex-direction: column-reverse;
     }
 }
@@ -467,13 +472,13 @@ img {
 }
 
 .justify-content-lg-start {
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         justify-content: flex-start;
     }
 }
 
 .justify-content-lg-between {
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         justify-content: space-between;
     }
 }
@@ -491,19 +496,19 @@ img {
 }
 
 .align-items-lg-center {
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         align-items: center;
     }
 }
 
 .align-items-lg-start {
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         align-items: start;
     }
 }
 
 .align-items-lg-end {
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         align-items: end;
     }
 }
@@ -525,11 +530,11 @@ img {
     display: grid;
     grid-template-columns: 1fr;
 
-    @include media-breakpoint-up(md) {
+    @include mixin.media-breakpoint-up(md) {
         grid-template-columns: repeat(2, auto);
     }
 
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         grid-template-columns: repeat(3, auto);
     }
 }
@@ -538,11 +543,11 @@ img {
     display: grid;
     grid-template-columns: 1fr;
 
-    @include media-breakpoint-up(md) {
+    @include mixin.media-breakpoint-up(md) {
         grid-template-columns: repeat(2, auto);
     }
 
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         grid-template-columns: repeat(5, auto);
     }
 }
@@ -609,19 +614,19 @@ img {
 }
 
 .text-align-lg-center {
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         text-align: center;
     }
 }
 
 .text-align-lg-start {
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         text-align: start;
     }
 }
 
 .text-align-lg-end {
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         text-align: end;
     }
 }
@@ -670,12 +675,10 @@ img {
     position: relative;
     font-size: 26px;
     font-weight: 500;
-
-    @include media-breakpoint-up(md) {
+    line-height: 1.34em;
+    @include mixin.media-breakpoint-up(md) {
         font-size: 48px;
     }
-
-    line-height: 1.34em;
 }
 
 .title2 {
@@ -808,16 +811,15 @@ img {
 }
 
 .cat-holder {
-    @include media-breakpoint-up(lg) {
-        flex-wrap: nowrap;
-        padding: 0;
-    }
-
     column-gap: 20px;
     row-gap: 20px;
     align-items: stretch;
     padding: 0 20px;
     justify-content: center;
+    @include mixin.media-breakpoint-up(lg) {
+        flex-wrap: nowrap;
+        padding: 0;
+    }
 }
 
 .ftr-list {
@@ -1090,7 +1092,6 @@ img {
     color: $dark;
     font-family: "Krona one";
     text-transform: uppercase;
-
     &::after {
         content: "";
         position: absolute;
@@ -1310,15 +1311,15 @@ img {
     justify-content: center;
     width: 100%;
 
-    @include media-breakpoint-up(md) {
+    @include mixin.media-breakpoint-up(md) {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         grid-template-columns: repeat(4, 1fr);
     }
     &-lg-three {
-        @include media-breakpoint-up(lg) {
+        @include mixin.media-breakpoint-up(lg) {
             grid-template-columns: repeat(3, 1fr);
         }
     }
@@ -1373,7 +1374,7 @@ table {
         font-weight: 400;
         text-align: left;
         white-space: nowrap;
-        @include media-breakpoint-up(lg) {
+        @include mixin.media-breakpoint-up(lg) {
             white-space: normal;
         }
         &:first-of-type {
@@ -1454,14 +1455,13 @@ table {
     td {
         padding: 8px 10px;
         white-space: nowrap;
-        @include media-breakpoint-up(lg) {
-            word-wrap: break-word;
-            white-space: normal;
-        }
-
         color: #161a1dcc;
         vertical-align: top;
         border-bottom: 1px solid #161a1d33;
+        @include mixin.media-breakpoint-up(lg) {
+            word-wrap: break-word;
+            white-space: normal;
+        }
     }
     tbody {
         tr {
@@ -1497,7 +1497,7 @@ table {
         display: flex;
         column-gap: 5px;
         flex-wrap: wrap;
-        @include media-breakpoint-down(xl) {
+        @include mixin.media-breakpoint-down(xl) {
             flex-wrap: nowrap;
             float: left;
         }

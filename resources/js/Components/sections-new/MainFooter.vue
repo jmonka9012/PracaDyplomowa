@@ -65,16 +65,17 @@ import logoW from "~icons/logoipsum-364.svg";
 </template>
 
 <style lang="scss">
+@use "~css/mixin.scss";
 .footer {
     background-color: var(--footer);
     color: #babac0;
     padding: 60px 0px 60px 0px;
 
-    @include media-breakpoint-up(md) {
+    @include mixin.media-breakpoint-up(md) {
         padding: 80px 0px 70px 0px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include mixin.media-breakpoint-up(xl) {
         padding: 80px 15px 70px 15px;
     }
 

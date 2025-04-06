@@ -171,6 +171,7 @@ const latest = [
 </template>
 
 <style scoped lang="scss">
+@use "~css/mixin.scss";
 .single {
     &__content {
         width: 100%;
@@ -179,7 +180,7 @@ const latest = [
         display: flex;
         flex-direction: column;
         margin-bottom: 55px;
-        @include media-breakpoint-up(md) {
+        @include mixin.media-breakpoint-up(md) {
             padding: 0 30px;
             margin-bottom: 110px;
         }
@@ -193,14 +194,14 @@ const latest = [
         line-height: 1.25;
         word-wrap: break-word;
         overflow-wrap: break-word;
-        @include media-breakpoint-up(md) {
+        @include mixin.media-breakpoint-up(md) {
             font-size: 42px;
         }
     }
     &__details {
         display: grid;
         grid-template-columns: 1fr;
-        @include media-breakpoint-up(md) {
+        @include mixin.media-breakpoint-up(md) {
             grid-template-columns: repeat(3, 1fr);
             grid-column-gap: 60px;
         }
@@ -232,7 +233,7 @@ const latest = [
     }
     h3 {
         font-size: 24px;
-        @include media-breakpoint-up(lg) {
+        @include mixin.media-breakpoint-up(lg) {
             font-size: 36px;
         }
     }

@@ -29,6 +29,7 @@
 </template>
 
 <style scoped lang="scss">
+@use "~css/mixin.scss";
 .serv-item {
     color: white;
     text-transform: uppercase;
@@ -45,7 +46,7 @@
     width: 100%;
     margin-bottom: 20px;
 
-    @include media-breakpoint-up(md) {
+    @include mixin.media-breakpoint-up(md) {
         width: 50% !important;
 
         &:nth-of-type(1),
@@ -58,7 +59,7 @@
         }
     }
 
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         width: 20% !important;
         border-width: 0 1px 0 0;
 

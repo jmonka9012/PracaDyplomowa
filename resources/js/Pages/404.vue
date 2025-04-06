@@ -31,13 +31,14 @@ const text = ref("404");
 </template>
 
 <style lang="scss">
+@use "~css/mixin.scss";
 .error-title {
     font-size: 28px;
     line-height: 1.3;
     margin-top: 35px;
     margin-bottom: 20px;
     text-align: center;
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         font-size: 46px;
         margin-top: 55px;
     }

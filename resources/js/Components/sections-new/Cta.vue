@@ -36,6 +36,7 @@ const text = ref("Future Events");
 </template>
 
 <style lang="scss" scoped>
+@use "~css/mixin.scss";
 .cta {
     column-gap: 30px;
     background-color: var(--primary);
@@ -46,7 +47,7 @@ const text = ref("Future Events");
     position: relative;
     border-top: 1px solid var(--primary);
     .container {
-        @include media-breakpoint-up(lg) {
+        @include mixin.media-breakpoint-up(lg) {
             padding: 0 30px;
         }
     }
@@ -58,8 +59,7 @@ const text = ref("Future Events");
         width: 100%;
         order: 1;
         z-index: 2;
-
-        @include media-breakpoint-up(xl) {
+        @include mixin.media-breakpoint-up(xl) {
             padding-top: 130px;
             width: 44%;
             order: 0;
@@ -73,8 +73,7 @@ const text = ref("Future Events");
         padding-top: 80px;
         width: 100%;
         order: 0;
-
-        @include media-breakpoint-up(xl) {
+        @include mixin.media-breakpoint-up(xl) {
             width: 56%;
             padding-top: 100px;
             order: 1;
@@ -91,7 +90,6 @@ const text = ref("Future Events");
         border-left: 0;
         border-right: 0;
         white-space: nowrap;
-
         span {
             text-transform: uppercase;
             font-family: "Krona one";
@@ -116,8 +114,7 @@ const text = ref("Future Events");
         font-size: 26px;
         line-height: 1.24em;
         font-weight: 500;
-
-        @include media-breakpoint-up(md) {
+        @include mixin.media-breakpoint-up(md) {
             font-size: 58px;
         }
     }
@@ -133,14 +130,13 @@ const text = ref("Future Events");
         left: 25%;
         width: 100%;
         z-index: 1;
-        @include media-breakpoint-up(lg) {
+        @include mixin.media-breakpoint-up(lg) {
             display: block;
         }
     }
 
     &-calendar {
         position: absolute;
-        z-index: 0;
         width: 100%;
         pointer-events: none;
         transform: translateX(-20px);
@@ -153,11 +149,10 @@ const text = ref("Future Events");
         left: 80%;
         max-height: 544px;
         max-width: 390px;
-        @include media-breakpoint-up(lg) {
+        z-index: 0;
+        @include mixin.media-breakpoint-up(lg) {
             display: block;
         }
-
-        z-index: 0;
     }
 }
 </style>

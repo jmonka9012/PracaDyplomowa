@@ -27,11 +27,11 @@ export default defineConfig({
             "~icons": path.resolve(__dirname, "./public/icons"),
         },
     },
-    css: {
-        preprocessorOptions: {
-            scss: {
-                additionalData: `@import "~css/mixin.scss";`,
-            },
-        },
-    },
+    // css: {
+    //     preprocessorOptions: {
+    //         scss: {
+    //             additionalData: `@use "~css/mixin-test.scss";`,
+    //         },
+    //     },
+    // },
 });

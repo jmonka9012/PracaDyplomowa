@@ -1,24 +1,24 @@
 <script setup>
-import useAuth from '@/Utilities/useAuth'
+import useAuth from "@/Utilities/useAuth";
 
-import {computed} from "vue";
+import { computed } from "vue";
 
-const {user, isLoggedIn} = useAuth()
+const { user, isLoggedIn } = useAuth();
 
 const props = defineProps({
     halls: {
         type: Array,
-        required: true
-    }
-})
+        required: true,
+    },
+});
 
 const filteredSections = computed(() =>
-    props.halls.sections.filter(section =>
-        section.section_height === props.hrowIndex + 1 &&
-        section.section_width === props.hcolIndex + 1
+    props.halls.sections.filter(
+        (section) =>
+            section.section_height === props.hrowIndex + 1 &&
+            section.section_width === props.hcolIndex + 1
     )
-)
-
+);
 </script>
 
 <template>
@@ -42,6 +42,7 @@ const filteredSections = computed(() =>
                 </div>
             </div>
         </div>
+<<<<<<< Updated upstream
         <div class="container-big flex-column mb-130px hall" v-for="hall in halls" :key="hall.id">
             <div class="hall__row" v-for="(row, hrowIndex) in hall.hall_height" :key="hrowIndex">
                 <div class="hall_col" v-for="(col, hcolIndex) in hall.hall_width" :key="hcolIndex">
@@ -53,77 +54,111 @@ const filteredSections = computed(() =>
                                  :key="rowIndex">
                                 <div class="hall__seat" v-for="(col, colIndex) in section.col" :key="colIndex">
                                 </div>
+=======
+        <div
+            class="flex-column mb-130px hall"
+            v-for="hall in halls"
+            :key="hall.id"
+        >
+            <div
+                class="hall__row"
+                v-for="(row, hrowIndex) in hall.hall_height"
+                :key="hrowIndex"
+            >
+                <div
+                    class="hall_col"
+                    v-for="(col, hcolIndex) in hall.hall_width"
+                    :key="hcolIndex"
+                >
+                    <div
+                        class="petla"
+                        v-for="section in hall.sections.filter(
+                            (section) =>
+                                section.section_height === hrowIndex + 1 &&
+                                section.section_width === hcolIndex + 1
+                        )"
+                        :key="section.id"
+                    >
+                        <div
+                            class="hall__section-seat"
+                            v-if="section.section_type === 'seat'"
+                        >
+                            <div
+                                class="hall__section-row"
+                                v-for="(row, rowIndex) in section.row"
+                                :key="rowIndex"
+                            >
+                                <div
+                                    class="hall__seat"
+                                    v-for="(col, colIndex) in section.col"
+                                    :key="colIndex"
+                                ></div>
+>>>>>>> Stashed changes
                             </div>
                         </div>
-                        <div v-else class="hall__section-stand">
-                        </div>
+                        <div v-else class="hall__section-stand"></div>
                     </div>
                 </div>
             </div>
         </div>
-
     </section>
 </template>
 
-<style>
-
+<style lang="scss">
 .hall {
     width: 100%;
     margin-bottom: 100px;
     background-color: yellowgreen;
+
+    &__row {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 30px;
+        justify-content: space-between;
+        min-height: 100px;
+    }
+
+    &_col {
+        width: 100%;
+        background-color: yellow;
+    }
+
+    &__section-row {
+        display: flex;
+        flex-direction: row;
+        gap: 4px;
+        justify-content: space-between;
+    }
+
+    &__seat {
+        width: 100%;
+        height: 10px;
+        min-width: 1px;
+        background-color: red;
+
+        &:hover {
+            background-color: green;
+            cursor: pointer;
+        }
+    }
+
+    &__section-seat {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 40px;
+        min-height: 100px;
+    }
+
+    &__section-stand {
+        width: 100%;
+        height: 200px;
+        background: red;
+
+        &:hover {
+            cursor: pointer;
+            background-color: green;
+        }
+    }
 }
-
-.hall__row {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 30px;
-    justify-content: space-between;
-    min-height: 100px;
-
-}
-
-.hall_col {
-    width: 100%;
-    background-color: yellow;
-
-}
-
-.hall__section-row {
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
-    justify-content: space-between;
-}
-
-.hall__seat {
-    width: 100%;
-    height: 10px;
-    min-width: 1px;
-    background-color: red;
-}
-
-.hall__seat:hover {
-    background-color: green;
-    cursor: pointer;
-}
-
-.hall__section-seat {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 40px;
-    min-height: 100px;
-}
-
-.hall__section-stand {
-    width: 100%;
-    height: 200px;
-    background: red;
-}
-
-.hall__section-stand:hover {
-    cursor: pointer;
-    background-color: green;
-}
-
 </style>

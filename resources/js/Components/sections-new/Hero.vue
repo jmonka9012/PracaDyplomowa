@@ -4,7 +4,6 @@ import bangpow from "~images/bangpow.jpg";
 import jeckelbros from "~images/Jeckelbros.jpg";
 import icpLogo from "~images/ICP-Logo.jpg";
 import heroBg from "~images/bg_home1.jpg";
-
 </script>
 
 <template>
@@ -68,6 +67,7 @@ import heroBg from "~images/bg_home1.jpg";
 </template>
 
 <style lang="scss" scoped>
+@use "~css/mixin.scss";
 .hero {
     position: relative;
     padding-top: 240px;
@@ -80,7 +80,7 @@ import heroBg from "~images/bg_home1.jpg";
         position: absolute;
         bottom: 70px;
         right: 0;
-        @include media-breakpoint-up(lg) {
+        @include mixin.media-breakpoint-up(lg) {
             width: 200px;
             height: 200px;
             object-fit: contain;

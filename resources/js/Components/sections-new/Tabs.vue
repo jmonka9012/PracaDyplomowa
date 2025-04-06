@@ -39,6 +39,7 @@ provide("tabsContext", {
 </script>
 
 <style lang="scss">
+@use "~css/mixin.scss";
 .tabs {
     display: flex;
     flex-direction: column;
@@ -56,19 +57,18 @@ provide("tabsContext", {
         color: var(--text);
         white-space: nowrap;
         text-decoration: none;
-
         &.active {
             border-bottom: 2px solid var(--text);
         }
     }
     &__content {
         padding: 31px 12px 16px;
-        @include media-breakpoint-up(lg) {
-            padding: 62px 24px 32px;
-        }
         position: relative;
         box-shadow: rgba(18, 18, 18, 0.15) 0px 1px 4px 0px;
         background-color: white;
+        @include mixin.media-breakpoint-up(lg) {
+            padding: 62px 24px 32px;
+        }
     }
     &-white {
         .tabs__btn {

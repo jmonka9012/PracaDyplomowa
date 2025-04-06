@@ -72,6 +72,7 @@ const text = ref("Event machen");
                         <span></span>
                     </div>
                 </a>
+<<<<<<< Updated upstream
                 <Link :href="route('home')" class="header-logo d-flex align-items-center"
                 >
                     <Poptext
@@ -84,6 +85,15 @@ const text = ref("Event machen");
                     alt="" />
                     <img class="d-lg-none" :src="placeHolder" alt=""
                     />--></Link>
+=======
+                <Link :href="route('home')" class="header-logo"
+                    ><img
+                        class="d-none d-lg-flex"
+                        :src="placeHolderDark"
+                        alt="" />
+                    <img class="d-lg-none" :src="placeHolder" alt=""
+                /></Link>
+>>>>>>> Stashed changes
                 <nav class="header-nav d-none d-lg-flex">
                     <ul>
                         <li>
@@ -94,12 +104,12 @@ const text = ref("Event machen");
                         </li>
                         <li>
                             <Link :href="route('post')"
-                            ><span>Single</span></Link
+                                ><span>Single</span></Link
                             >
                         </li>
                         <li>
                             <Link :href="route('contact')"
-                            ><span>Kontakt</span></Link
+                                ><span>Kontakt</span></Link
                             >
                         </li>
                         <li>
@@ -107,12 +117,12 @@ const text = ref("Event machen");
                         </li>
                         <li>
                             <Link :href="route('jacek')"
-                            ><span>Jacek CE</span></Link
+                                ><span>Jacek CE</span></Link
                             >
                         </li>
 <!--                        <li class="desk-dropdown">
                             <span class="desk-dropdown-toggle"
-                            ><span>Toggle</span>
+                                ><span>Toggle</span>
                                 <i class="fa fa-chevron-right"></i>
                             </span>
                             <ul class="dropdown-content">
@@ -141,7 +151,7 @@ const text = ref("Event machen");
                     <Link
                         :href="route('event-create')"
                         class="ml-30px btn btn-header btn-hovprim"
-                    >+ Create event</Link
+                        >+ Create event</Link
                     >
                 </div>
                 <div class="d-none d-lg-flex align-items-center" v-else>
@@ -159,7 +169,7 @@ const text = ref("Event machen");
                     <Link
                         :href="route('event-create')"
                         class="ml-30px btn btn-header btn-hovprim"
-                    >+ Create event</Link
+                        >+ Create event</Link
                     >
                 </div>
                 <!-- <div class="header-search">
@@ -194,12 +204,12 @@ const text = ref("Event machen");
                                     </li>
                                     <li>
                                         <Link :href="route('post')"
-                                        >Single</Link
+                                            >Single</Link
                                         >
                                     </li>
                                     <li>
                                         <Link :href="route('contact')"
-                                        >Kontakt</Link
+                                            >Kontakt</Link
                                         >
                                     </li>
                                     <li>
@@ -302,9 +312,11 @@ const text = ref("Event machen");
                                             </li>
                                             <li>
                                                 <Link
-                                                    :href="route('event-create')"
+                                                    :href="
+                                                        route('event-create')
+                                                    "
                                                     class="btn btn-header btn-hovprim"
-                                                >+ Create event</Link
+                                                    >+ Create event</Link
                                                 >
                                             </li>
                                         </ul>
@@ -334,9 +346,11 @@ const text = ref("Event machen");
                                             </li>
                                             <li>
                                                 <Link
-                                                    :href="route('event-create')"
+                                                    :href="
+                                                        route('event-create')
+                                                    "
                                                     class="btn btn-header btn-hovprim"
-                                                >+ Create event</Link
+                                                    >+ Create event</Link
                                                 >
                                             </li>
                                         </ul>
@@ -352,6 +366,7 @@ const text = ref("Event machen");
 </template>
 
 <style lang="scss" scoped>
+@use "~css/mixin.scss";
 .header {
     z-index: 10;
     display: flex;
@@ -362,13 +377,13 @@ const text = ref("Event machen");
     border-style: solid;
     border-width: 0px 0px 1px 0px;
     border-color: #161a1d;
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         background-color: white;
         padding: 0 30px;
     }
 
     &-mobile {
-        @include media-breakpoint-up(lg) {
+        @include mixin.media-breakpoint-up(lg) {
             display: none;
         }
     }
@@ -395,7 +410,10 @@ const text = ref("Event machen");
     height: 30px;
     margin-left: auto;
     margin-right: auto;
-    @include media-breakpoint-up(lg) {
+    img {
+        height: 100%;
+    }
+    @include mixin.media-breakpoint-up(lg) {
         margin: 0 0;
         width: auto;
         height: 40px;
@@ -406,41 +424,32 @@ const text = ref("Event machen");
             object-fit: contain;
         }
     }
-
-    img {
-        height: 100%;
-    }
 }
 
 .header-nav {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         flex-direction: row;
         align-items: center;
         height: 90px;
     }
-
     ul {
         display: flex;
         flex-direction: column;
-        @include media-breakpoint-up(lg) {
-            flex-direction: row;
-        }
-
         align-items: stretch;
         height: 100%;
         width: 100%;
+        @include mixin.media-breakpoint-up(lg) {
+            flex-direction: row;
+        }
 
         li {
             height: 100%;
 
             a {
                 font-size: 14px;
-                @media screen and (min-width: 1000px) and (max-width: 1200px) {
-                    font-size: 12px;
-                }
                 letter-spacing: 0.14px;
                 transition: all 0.4s;
                 font-weight: 400;
@@ -450,15 +459,17 @@ const text = ref("Event machen");
                 width: 100%;
                 font-family: "Krona One";
                 text-transform: capitalize;
-
-                @include media-breakpoint-up(lg) {
-                    padding: 0 13px;
-                    color: var(--text);
-                }
-
                 height: 100%;
                 display: flex;
                 align-items: center;
+                @media screen and (min-width: 1000px) and (max-width: 1200px) {
+                    font-size: 12px;
+                }
+
+                @include mixin.media-breakpoint-up(lg) {
+                    padding: 0 13px;
+                    color: var(--text);
+                }
 
                 &:hover {
                     color: var(--primary);
@@ -468,7 +479,7 @@ const text = ref("Event machen");
 
         li:not(:last-of-type) {
             margin-bottom: 10px;
-            @include media-breakpoint-up(lg) {
+            @include mixin.media-breakpoint-up(lg) {
                 margin-bottom: 0;
             }
         }
@@ -477,7 +488,7 @@ const text = ref("Event machen");
 
 .header-search {
     color: white;
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         display: none;
     }
 
@@ -492,7 +503,7 @@ const text = ref("Event machen");
     display: flex;
     justify-content: center;
     align-items: center;
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         display: none;
     }
 
@@ -568,7 +579,7 @@ const text = ref("Event machen");
     height: 100vh;
     background-color: var(--text);
     width: calc(100% - 48px);
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         display: none;
     }
     .container {
@@ -600,9 +611,7 @@ const text = ref("Event machen");
 .header-nav {
     ul.header-ddown {
         color: white;
-        @media screen and (min-width: 1000px) and (max-width: 1200px) {
-            font-size: 12px;
-        }
+
         font-size: 14px;
         transition: all 0.4s;
         padding: 4px 0;
@@ -610,7 +619,10 @@ const text = ref("Event machen");
         width: 100%;
         font-family: "Krona One";
         font-weight: 400;
-        @include media-breakpoint-up(lg) {
+        @media screen and (min-width: 1000px) and (max-width: 1200px) {
+            font-size: 12px;
+        }
+        @include mixin.media-breakpoint-up(lg) {
             padding: 0 13px;
             color: var(--text);
         }
@@ -673,13 +685,14 @@ const text = ref("Event machen");
     font-family: "Krona one";
     white-space: nowrap;
     color: white;
-    @include media-breakpoint-up(lg) {
+    font-size: 14px;
+    @include mixin.media-breakpoint-up(lg) {
         color: var(--text);
     }
     @media screen and (min-width: 1000px) and (max-width: 1200px) {
         font-size: 12px;
     }
-    font-size: 14px;
+    
 }
 
 .btn-header {
@@ -701,9 +714,6 @@ const text = ref("Event machen");
     align-items: center;
 
     .desk-dropdown-toggle {
-        @media screen and (min-width: 1000px) and (max-width: 1200px) {
-            font-size: 12px;
-        }
         font-size: 14px;
         letter-spacing: 0.14px;
         transition: all 0.4s;
@@ -717,7 +727,9 @@ const text = ref("Event machen");
         cursor: pointer;
         display: flex;
         align-items: center;
-
+        @media screen and (min-width: 1000px) and (max-width: 1200px) {
+            font-size: 12px;
+        }
         &:hover {
             color: var(--primary);
 
@@ -726,7 +738,7 @@ const text = ref("Event machen");
             }
         }
 
-        @include media-breakpoint-up(lg) {
+        @include mixin.media-breakpoint-up(lg) {
             padding: 0 13px;
             color: var(--text);
         }

@@ -35,6 +35,7 @@ import catImage from "~images/cat-img-bg-1.jpg";
 </template>
 
 <style lang="scss" scoped>
+@use "~css/mixin.scss";
 .cat-cont {
     display: grid;
     grid-template-columns: 1fr;
@@ -43,7 +44,7 @@ import catImage from "~images/cat-img-bg-1.jpg";
     align-items: center;
     row-gap: 30px;
 
-    @include media-breakpoint-up(md) {
+    @include mixin.media-breakpoint-up(md) {
         grid-template-columns: repeat(5, 1fr);
     }
 }

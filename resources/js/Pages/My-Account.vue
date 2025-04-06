@@ -110,6 +110,14 @@ const errors = reactive({});
                                     class="text-primary user-functions"
                                     >Wyloguj się</Link
                                 >
+<<<<<<< Updated upstream
+=======
+                                <Link
+                                    @click="TestEmail"
+                                    class="text-primary user-functions"
+                                    >Test Email</Link
+                                >
+>>>>>>> Stashed changes
                             </li>
                         </ul>
                     </nav>
@@ -255,6 +263,7 @@ const errors = reactive({});
 </template>
 
 <style lang="scss">
+@use "~css/mixin.scss";
 .ma-hero {
     background-color: var(--primary);
     min-height: 380px;
@@ -292,7 +301,7 @@ const errors = reactive({});
     justify-content: flex-end;
     background-color: rgba(255, 255, 255, 0.1);
 
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         min-height: 200px;
     }
 }
@@ -371,12 +380,12 @@ const errors = reactive({});
 .ma-rcol {
     margin-top: -240px;
     margin-bottom: 35px;
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         margin-bottom: 70px;
     }
 }
 .ma-lcol {
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         margin-top: -200px;
     }
 }

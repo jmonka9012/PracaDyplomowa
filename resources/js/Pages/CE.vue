@@ -693,19 +693,20 @@ const latest = [
 </template>
 
 <style lang="scss">
+@use "~css/mixin.scss";
 ///tutaj narazie style dla blog-single
 
 .blog-image {
     max-height: 450px;
     max-width: 450px;
     width: 100%;
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         max-height: 600px;
         max-width: 600px;
     }
     &-square {
         max-width: 450px;
-        @include media-breakpoint-up(lg) {
+        @include mixin.media-breakpoint-up(lg) {
             max-width: 600px;
         }
     }
@@ -720,7 +721,7 @@ const latest = [
     display: flex;
     flex-direction: column;
     row-gap: 30px;
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         flex-direction: row;
         padding-bottom: 100px;
     }

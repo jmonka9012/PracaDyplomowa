@@ -84,6 +84,7 @@ import spiral from "~images/spiral.png";
 </template>
 
 <style scoped lang="scss">
+@use "~css/mixin.scss";
 .team {
     background-image: url("~images/bg-team.jpg");
     background-position: center center;
@@ -91,7 +92,7 @@ import spiral from "~images/spiral.png";
     padding: 80px 0;
     position: relative;
 
-    @include media-breakpoint-up(lg) {
+    @include mixin.media-breakpoint-up(lg) {
         padding: 121px 20px;
     }
 
@@ -101,7 +102,7 @@ import spiral from "~images/spiral.png";
 
     &__iconrotate {
         display: none;
-        @include media-breakpoint-up(lg) {
+        @include mixin.media-breakpoint-up(lg) {
             display: block;
             position: absolute;
             right: 60px;
@@ -114,16 +115,15 @@ import spiral from "~images/spiral.png";
         grid-template-columns: 1fr;
         justify-content: center;
         row-gap: 50px;
+        grid-column-gap: 30px;
 
-        @include media-breakpoint-up(md) {
+        @include mixin.media-breakpoint-up(md) {
             grid-template-columns: repeat(2, auto);
         }
 
-        @include media-breakpoint-up(xl) {
+        @include mixin.media-breakpoint-up(xl) {
             grid-template-columns: repeat(5, auto);
         }
-
-        grid-column-gap: 30px;
     }
 
     &__item {
@@ -131,10 +131,10 @@ import spiral from "~images/spiral.png";
         display: flex;
         max-height: 400px;
         height: 100%;
-        @include media-breakpoint-up(lg) {
+        @include mixin.media-breakpoint-up(lg) {
             max-height: 600px;
         }
-        @include media-breakpoint-up(xl) {
+        @include mixin.media-breakpoint-up(xl) {
             max-height: 375px;
         }
 
@@ -186,7 +186,7 @@ import spiral from "~images/spiral.png";
             }
         }
 
-        @include media-breakpoint-down(md) {
+        @include mixin.media-breakpoint-down(md) {
         }
     }
 

@@ -180,18 +180,15 @@ function submitRegisterRequest() {
                         v-model="registerForm.email"
                         @input="onInput('verification.email')"
                     />
-                    <<<<<<< Updated upstream
                     <div class="error-msg" v-if="errors.email">
                         {{ errors.email }}
                     </div>
                     <div class="error-msg" v-if="liveErrors.emailError">
                         {{ liveErrors.emailError }}
                     </div>
-                    =======
                     <div class="error-msg" v-if="errors.email">
                         {{ errors.email }}
                     </div>
-                    >>>>>>> Stashed changes
                 </div>
                 <div class="input-wrap col-12">
                     <label for="register-username">Imię *</label>

@@ -30,6 +30,7 @@ defineProps({
 </template>
 
 <style lang="scss" scoped>
+@use "~css/mixin.scss";
 .event {
     display: flex;
     flex-direction: column;
@@ -37,7 +38,7 @@ defineProps({
     margin-bottom: 25px;
     position: relative;
 
-    @include media-breakpoint-up(md) {
+    @include mixin.media-breakpoint-up(md) {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
@@ -62,7 +63,7 @@ defineProps({
         position: relative;
         display: flex;
 
-        @include media-breakpoint-up(md) {
+        @include mixin.media-breakpoint-up(md) {
             margin-right: 30px;
             margin-bottom: 0;
         }
@@ -83,7 +84,7 @@ defineProps({
         }
 
 
-        @include media-breakpoint-up(lg) {
+        @include mixin.media-breakpoint-up(lg) {
             margin-bottom: 0;
         }
 
@@ -98,7 +99,7 @@ defineProps({
     &-date {
         margin-bottom: 10px;
 
-        @include media-breakpoint-up(md) {
+        @include mixin.media-breakpoint-up(md) {
             margin-bottom: 0;
         }
     }

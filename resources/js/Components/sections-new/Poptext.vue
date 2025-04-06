@@ -45,6 +45,7 @@ const charTotal = computed(() => props.text.length);
 </template>
 
 <style lang="scss">
+@use "~css/mixin.scss";
 .poptext {
     font-family: "Krona one";
     font-size: 8vw;
@@ -117,7 +118,7 @@ const charTotal = computed(() => props.text.length);
     }
     &-cta {
         z-index: 3;
-        @include media-breakpoint-up(xl) {
+        @include mixin.media-breakpoint-up(xl) {
             padding-left: 65px;
         }
     }
@@ -136,17 +137,17 @@ const charTotal = computed(() => props.text.length);
     }
     &-404 {
         font-size: 100px;
-        @include media-breakpoint-up(sm) {
+        --animation-speed: 700ms;
+        @include mixin.media-breakpoint-up(sm) {
             font-size: 120px;
         }
-        @include media-breakpoint-up(md) {
+        @include mixin.media-breakpoint-up(md) {
             font-size: 150px;
         }
-        @include media-breakpoint-up(lg) {
+        @include mixin.media-breakpoint-up(lg) {
             font-size: 250px;
         }
 
-        --animation-speed: 700ms;
     }
 
     &-logo {
