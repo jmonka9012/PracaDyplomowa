@@ -110,14 +110,6 @@ const errors = reactive({});
                                     class="text-primary user-functions"
                                     >Wyloguj się</Link
                                 >
-<<<<<<< Updated upstream
-=======
-                                <Link
-                                    @click="TestEmail"
-                                    class="text-primary user-functions"
-                                    >Test Email</Link
-                                >
->>>>>>> Stashed changes
                             </li>
                         </ul>
                     </nav>
