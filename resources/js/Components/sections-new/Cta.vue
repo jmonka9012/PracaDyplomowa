@@ -1,29 +1,27 @@
 <script setup>
-import { ref } from "vue";
 import Poptext from "@/Components/sections-new/Poptext.vue";
 import ctaCloud from "~images/cta-cloud.png";
 import ctaCalendar from "~images/cat-calendar.png";
+import { Link } from "@inertiajs/vue3";
 
-const text = ref("Future Events");
+
 </script>
 
 <template>
     <section class="pb-70px pb-lg-105px cta">
         <div class="container container-big">
             <div class="cta-left">
-                <p class="sub-title mb-17px">Lorem ipsum</p>
+                <p class="sub-title mb-17px">Wydarzenia</p>
                 <h3 class="cta-title mb-20px">
-                    The Essential Guide to Upcoming Festivals
+                    Zobacz na jakie wydarzenia możesz się udać w najbliższym czasie!
                 </h3>
                 <p class="mb-35px text-gray">
-                    Facilisi etiam dignissim diam quis sociis natoque penatibus.
-                    Aliquam ut porttitor leo a diam sollicitudin velit sed
-                    ullamcorper morbi porta non pulvinar neque.
+                    Kliknij w poniższy link aby przejść na stronę z najbliższymi eventami. Na pewno znajdziesz coś dla siebie!
                 </p>
-                <a class="btn btn-md morph-outline" href=""> Learn more </a>
+                <Link :href="route('blog')" class="btn btn-md morph-outline" href=""> Zobacz więcej </Link>
             </div>
             <div class="cta-right">
-                <Poptext class="poptext-cta" :text="text" />
+                <Poptext class="poptext-cta" text="Najbliższe wydarzenia" />
             </div>
         </div>
         <div class="cta-cloud">
