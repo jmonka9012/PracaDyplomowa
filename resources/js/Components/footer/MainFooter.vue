@@ -17,23 +17,23 @@
         <form class="col-12 col-lg-7 ftr-form" action="">
           <input class="ftr-field" placeholder="Enter your email" type="email">
    <input class="submit" type="submit" value="SUBSCRIBE">
-         
+
         </form>
       </div>
-    
+
     </div>
     <div class="footer__middle ">
-      <div class="container d-flex flex-lg-row flex-wrap-nowrap"> 
+      <div class="container d-flex flex-lg-row flex-wrap-nowrap">
       <div class=" d-flex flex-column col-12 col-lg-3 mb-50px mb-lg-0">
         <img class="ftr-logo mb-25px" src="\src\assets\icons\logo.svg" alt="">
         <p class="text-gray mb-30px">Lorem ipsum dolor sit amet, conse ctetuers adipiscing eli sed diam nonum nibhie…</p>
         <div class="d-grid grid-4-col grid-cgap-30px">
             <p>F</p>
             <p>P</p>
-            <p>I</p>  
+            <p>I</p>
             <p>X</p>
         </div>
-      </div> 
+      </div>
       <div class="d-flex flex-column col-12 col-lg-2 mb-50px mb-lg-0">
         <p class="ftr-big">About Us</p>
         <ul class="ftr-list">
@@ -66,7 +66,7 @@
       <div class="col-12 col-lg-6 d-flex flex-row justify-content-center justify-content-lg-end text-gray ">
         <a href="/">Regulamin</a><span class="divider ">|</span><a href="/">Prywatność</a>
       </div></div>
-      
+
     </div>
   </footer>
 </template>

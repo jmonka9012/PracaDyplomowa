@@ -4,10 +4,16 @@
 import Poptext from "@/Components/sections-new/Poptext.vue";
 import { Link } from "@inertiajs/vue3";
 import { ref, onMounted, onBeforeUnmount } from "vue";
-import useAuth from "@/Utilities/useAuth";
 import { router } from "@inertiajs/vue3";
+import {computed} from "vue";
 
+import useAuth from "@/Utilities/useAuth";
 const { user, isLoggedIn } = useAuth();
+
+import pageInfo from "@/Utilities/pageInfo";
+const { siteData } = pageInfo();
+
+
 const isOpen = ref(false);
 
 const toggleMenu = () => {
@@ -55,7 +61,7 @@ onBeforeUnmount(() => {
     window.removeEventListener("click", handleClickOutside);
 });
 
-const text = ref("Event machen");
+
 </script>
 
 <template>
@@ -77,24 +83,27 @@ const text = ref("Event machen");
                 >
                     <Poptext
                         class="d-none d-lg-flex flex-column justify-content-center align-items-center poptext-logo"
-                        :text="text"
+                        :text="siteData.title"
                     />
                     <Poptext
                         class="d-flex d-lg-none flex-column justify-content-center align-items-center poptext-white poptext-logo"
-                        :text="text"
+                        :text="siteData.title"
                     />
                 </Link>
                 <nav class="header-nav d-none d-lg-flex">
                     <ul>
                         <li>
-                            <Link :href="route('home')"><span>Home</span></Link>
+                            <Link :href="route('home')"><span>Strona główna</span></Link>
+                        </li>
+                        <li>
+                            <Link :href="route('about-us')"><span>O nas</span></Link>
                         </li>
                         <li>
                             <Link :href="route('blog')"><span>Blog</span></Link>
                         </li>
                         <li>
                             <Link :href="route('post')"
-                                ><span>Single</span></Link
+                                ><span>Single (CE)</span></Link
                             >
                         </li>
                         <li>
@@ -110,7 +119,7 @@ const text = ref("Event machen");
                                 ><span>Jacek CE</span></Link
                             >
                         </li>
-                        <!--                        <li class="desk-dropdown">
+<!--                        <li class="desk-dropdown">
                             <span class="desk-dropdown-toggle"
                                 ><span>Toggle</span>
                                 <i class="fa fa-chevron-right"></i>
@@ -128,7 +137,7 @@ const text = ref("Event machen");
                         :href="route('login')"
                         class="hover-primary header-login"
                     >
-                        <i class="fa fa-user text-primary mr-8px"></i>Login
+                        <i class="fa fa-user text-primary mr-8px"></i>Zaloguj
                     </Link>
                     <span class="divider divider-dark"></span>
                     <Link
@@ -136,12 +145,12 @@ const text = ref("Event machen");
                         class="hover-primary header-login"
                     >
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
-                        Register
+                        Zarejestruj
                     </Link>
                     <Link
                         :href="route('event-create')"
                         class="ml-30px btn btn-header btn-hovprim"
-                        >+ Create event</Link
+                        >+ Zorganizuj wydarzenie</Link
                     >
                 </div>
                 <div class="d-none d-lg-flex align-items-center" v-else>
@@ -159,7 +168,7 @@ const text = ref("Event machen");
                     <Link
                         :href="route('event-create')"
                         class="ml-30px btn btn-header btn-hovprim"
-                        >+ Create event</Link
+                        >+ Zorganizuj wydarzenie</Link
                     >
                 </div>
                 <!-- <div class="header-search">
@@ -187,14 +196,17 @@ const text = ref("Event machen");
                             <nav class="header-nav">
                                 <ul class="header-list">
                                     <li>
-                                        <Link :href="route('home')">Home</Link>
+                                        <Link :href="route('home')">Strona główna</Link>
+                                    </li>
+                                    <li>
+                                        <Link :href="route('about-us')">O nas</Link>
                                     </li>
                                     <li>
                                         <Link :href="route('blog')">Blog</Link>
                                     </li>
                                     <li>
                                         <Link :href="route('post')"
-                                            >Single</Link
+                                            >Single (CE)</Link
                                         >
                                     </li>
                                     <li>
@@ -205,7 +217,7 @@ const text = ref("Event machen");
                                     <li>
                                         <Link :href="route('ce')">CE</Link>
                                     </li>
-                                    <!--                                    <ul class="header-ddown">
+<!--                                    <ul class="header-ddown">
                                         <li
                                             class="header-ddown-toggle"
                                             :class="{ show: dropdownStates.d1 }"
@@ -285,7 +297,7 @@ const text = ref("Event machen");
                                                     <i
                                                         class="fa fa-user text-primary mr-8px"
                                                     ></i
-                                                    >Login
+                                                    >Zaloguj
                                                 </Link>
                                             </li>
 
@@ -297,7 +309,7 @@ const text = ref("Event machen");
                                                     <i
                                                         class="fa fa-arrow-right text-primary mr-8px"
                                                     ></i>
-                                                    Register
+                                                    Zarejestruj
                                                 </Link>
                                             </li>
                                             <li>
@@ -306,7 +318,7 @@ const text = ref("Event machen");
                                                         route('event-create')
                                                     "
                                                     class="btn btn-header btn-hovprim"
-                                                    >+ Create event</Link
+                                                    >+ Zorganizuj wydarzenie</Link
                                                 >
                                             </li>
                                         </ul>
@@ -340,7 +352,7 @@ const text = ref("Event machen");
                                                         route('event-create')
                                                     "
                                                     class="btn btn-header btn-hovprim"
-                                                    >+ Create event</Link
+                                                    >+ Zorganizuj wydarzenie</Link
                                                 >
                                             </li>
                                         </ul>
@@ -682,6 +694,7 @@ const text = ref("Event machen");
     @media screen and (min-width: 1000px) and (max-width: 1200px) {
         font-size: 12px;
     }
+
 }
 
 .btn-header {

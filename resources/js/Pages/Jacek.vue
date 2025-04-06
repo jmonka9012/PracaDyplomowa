@@ -12,13 +12,6 @@ const props = defineProps({
     },
 });
 
-const filteredSections = computed(() =>
-    props.halls.sections.filter(
-        (section) =>
-            section.section_height === props.hrowIndex + 1 &&
-            section.section_width === props.hcolIndex + 1
-    )
-);
 </script>
 
 <template>

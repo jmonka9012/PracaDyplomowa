@@ -20,6 +20,11 @@ import { ref } from "vue";
 import SliderGallery from "../Components/sections-new/SliderGallery.vue";
 import { SwiperSlide } from "swiper/vue";
 
+
+import pageInfo from "@/Utilities/pageInfo";
+const { siteData } = pageInfo();
+
+
 const team = [
     {
         id: 1,
@@ -167,7 +172,7 @@ const events = [
         date: "22.02.2025",
     },
 ];
-const text = ref("Event machen");
+
 </script>
 
 <template>
@@ -175,7 +180,7 @@ const text = ref("Event machen");
         <template #title>
             <Poptext
                 class="d-flex flex-column justify-content-center align-items-center poptext-white"
-                :text="text"
+                :text="siteData.title"
             />
         </template>
     </Hero>

@@ -3,6 +3,13 @@ import fbWhite from "~icons/facebook-circle-white.svg";
 import twWhite from "~icons/twitter-circle-white.svg";
 import insWhite from "~icons/instagram-circle-white.svg";
 import logoW from "~icons/logoipsum-364.svg";
+
+import Poptext from "@/Components/sections-new/Poptext.vue";
+import { Link } from "@inertiajs/vue3";
+
+import pageInfo from "@/Utilities/pageInfo";
+const { siteData } = pageInfo();
+
 </script>
 
 <template>
