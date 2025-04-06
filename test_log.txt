@@ -1,0 +1,30 @@
+Logi testu obciążeniowego
+
+Instancja 0: Start
+Instancja 1: Start
+Instancja 2: Start
+Instancja 3: Start
+Instancja 4: Start
+Instancja 4: Strona główna załadowana
+Instancja 1: Strona główna załadowana
+Instancja 2: Strona główna załadowana
+Instancja 3: Strona główna załadowana
+Instancja 0: Strona główna załadowana
+Instancja 1: Kliknięto Login
+Instancja 0: Kliknięto Kontakt
+Instancja 4: Kliknięto Login
+Instancja 2: Kliknięto Kontakt
+Instancja 4: Kliknięto Login
+Instancja 2: Kliknięto Kontakt
+Instancja 0: Kliknięto Login
+Instancja 4: Kliknięto Login
+Instancja 0: Kliknięto Kontakt
+Instancja 1: Kliknięto Kontakt
+Instancja 2: Kliknięto Login
+Instancja 0: Kliknięto Login
+Instancja 3: Zakończono
+Instancja 2: Zakończono
+Instancja 0: Zakończono
+Instancja 4: Kliknięto Login
+Instancja 1: Zakończono
+Instancja 4: Zakończono
