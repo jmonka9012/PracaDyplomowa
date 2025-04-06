@@ -1,6 +1,7 @@
 <script setup>
 import Poptext from "@/Components/sections-new/Poptext.vue";
 import { ref } from "vue";
+import { Link } from "@inertiajs/vue3";
 const text = ref("404");
 </script>
 
@@ -12,19 +13,19 @@ const text = ref("404");
                 :text="text"
             />
             <h1 class="error-title">
-                Przepraszamy, nie możemy znaleźć takiej strony !
+                Przepraszamy, nie możemy znaleźć takiej strony!
             </h1>
             <p class="mb-35px text-align-center">
                 Strona której szukasz została przeniesiona, usunięta, lub nigdy
                 nie istniała.
             </p>
-            <form action="" class="form">
+<!--            <form action="" class="form">
                 <div class="input-wrap input-wrap-search pl-0 pr-0 col-12">
                     <input type="search" placeholder="szukaj" />
                     <i class="fa fa-search"></i>
                 </div>
-            </form>
-            <button class="btn btn-md btn-hovprim">Powróć do strony</button>
+            </form>-->
+            <Link :href="route('home')" class="btn btn-md btn-hovprim">Powróć do strony</Link>
         </div>
     </section>
 </template>

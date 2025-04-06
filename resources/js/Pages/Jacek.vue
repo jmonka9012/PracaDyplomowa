@@ -42,7 +42,7 @@ const filteredSections = computed(() =>
                 </div>
             </div>
         </div>
-        <div class=" flex-column mb-130px hall" v-for="hall in halls" :key="hall.id">
+        <div class="container-big flex-column mb-130px hall" v-for="hall in halls" :key="hall.id">
             <div class="hall__row" v-for="(row, hrowIndex) in hall.hall_height" :key="hrowIndex">
                 <div class="hall_col" v-for="(col, hcolIndex) in hall.hall_width" :key="hcolIndex">
                     <div class="petla" v-for="section in hall.sections.filter(

@@ -1,6 +1,7 @@
 <script setup>
-import placeHolder from "~icons/logoipsum-364.svg";
-import placeHolderDark from "~icons/logoipsum-362.svg";
+//import placeHolder from "~icons/logoipsum-364.svg";
+//import placeHolderDark from "~icons/logoipsum-362.svg";
+import Poptext from "@/Components/sections-new/Poptext.vue";
 import { Link } from "@inertiajs/vue3";
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import useAuth from "@/Utilities/useAuth";
@@ -53,6 +54,9 @@ onMounted(() => {
 onBeforeUnmount(() => {
     window.removeEventListener("click", handleClickOutside);
 });
+
+const text = ref("Event machen");
+
 </script>
 
 <template>
@@ -68,13 +72,18 @@ onBeforeUnmount(() => {
                         <span></span>
                     </div>
                 </a>
-                <Link :href="route('home')" class="header-logo"
-                ><img
+                <Link :href="route('home')" class="header-logo d-flex align-items-center"
+                >
+                    <Poptext
+                        class="d-flex flex-column justify-content-center align-items-center poptext-white poptext-logo"
+                        :text="text"
+                    />
+                    <!--<img
                     class="d-none d-lg-flex"
                     :src="placeHolderDark"
                     alt="" />
                     <img class="d-lg-none" :src="placeHolder" alt=""
-                    /></Link>
+                    />--></Link>
                 <nav class="header-nav d-none d-lg-flex">
                     <ul>
                         <li>
@@ -101,7 +110,7 @@ onBeforeUnmount(() => {
                             ><span>Jacek CE</span></Link
                             >
                         </li>
-                        <li class="desk-dropdown">
+<!--                        <li class="desk-dropdown">
                             <span class="desk-dropdown-toggle"
                             ><span>Toggle</span>
                                 <i class="fa fa-chevron-right"></i>
@@ -111,7 +120,7 @@ onBeforeUnmount(() => {
                                 <li><a href="">subitem2</a></li>
                                 <li><a href="">subitem3</a></li>
                             </ul>
-                        </li>
+                        </li>-->
                     </ul>
                 </nav>
                 <div class="d-none d-lg-flex align-items-center" v-if="!user">
@@ -196,7 +205,7 @@ onBeforeUnmount(() => {
                                     <li>
                                         <Link :href="route('ce')">CE</Link>
                                     </li>
-                                    <ul class="header-ddown">
+<!--                                    <ul class="header-ddown">
                                         <li
                                             class="header-ddown-toggle"
                                             :class="{ show: dropdownStates.d1 }"
@@ -265,7 +274,7 @@ onBeforeUnmount(() => {
                                                 </li>
                                             </ul>
                                         </li>
-                                    </ul>
+                                    </ul>-->
                                     <li>
                                         <ul v-if="!user">
                                             <li>

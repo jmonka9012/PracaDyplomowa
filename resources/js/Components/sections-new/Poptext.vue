@@ -148,5 +148,11 @@ const charTotal = computed(() => props.text.length);
 
         --animation-speed: 700ms;
     }
+
+    &-logo {
+        font-size: 25px;
+
+        --animation-speed: 700ms;
+    }
 }
 </style>
