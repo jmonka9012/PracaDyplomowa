@@ -1190,6 +1190,13 @@ img {
             color: $secondary;
         }
     }
+    input {
+        &.disabled,
+        &:disabled {
+            pointer-events: none;
+            background-color: #5151511a !important;
+        }
+    }
     .form-checkwrap {
         padding-top: 10px;
         padding-bottom: 22px;

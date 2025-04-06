@@ -47,7 +47,7 @@ const passwordForm = reactive({
                         aria-required="true"
                         v-model="passwordForm.password"
                     />
-                    <div v-if="validationErrors.password">{{ validationErrors.password }}</div>
+                    <div class="error-msg" v-if="validationErrors.password">{{ validationErrors.password }}</div>
                 </div>
                 <div class="input-wrap d-flex flex-column col-12">
                     <input type="submit" class="form-submit" @click="" value="Zaktualizuj" />

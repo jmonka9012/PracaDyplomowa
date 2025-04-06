@@ -1,54 +1,55 @@
 <script setup>
 import HeroSmall from "@/Components/sections-new/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
-import {reactive} from "vue";
-import {router} from "@inertiajs/vue3";
-import {debounce} from "@/Utilities/debounce"
-import axios from 'axios'
+import { reactive } from "vue";
+import { router } from "@inertiajs/vue3";
+import { debounce } from "@/Utilities/debounce";
+import axios from "axios";
 
 const errors = reactive({});
 
 const liveErrors = reactive({
-    emailError: '',
-    nameError: ''
-})
+    emailError: "",
+    nameError: "",
+});
 
 let registerNameCorrect = false;
 let registerEmailCorrect = false;
 
-let canRegister =  false;
+let canRegister = false;
 
 function HandleSubmitClass(routeName, response) {
     canRegister = registerEmailCorrect && registerNameCorrect;
 }
 
 function HandleValidationResponse(routeName, response) {
-    switch(routeName) {
-        case 'verification.user':
+    switch (routeName) {
+        case "verification.user":
             liveErrors.nameError = response.data.message;
             registerNameCorrect = response.data.valid;
             break;
-        case 'verification.email':
+        case "verification.email":
             liveErrors.emailError = response.data.message;
             registerEmailCorrect = response.data.valid;
 
             break;
         default:
-            console.error('Nie rozpoznano route walidacyjnego')
+            console.error("Nie rozpoznano route walidacyjnego");
     }
     console.log(`${routeName} valid:`, response.data.valid);
 }
 
 const validationRequest = debounce((routeName) => {
-    axios.post(route(routeName), registerForm)
-        .then(response => {
+    axios
+        .post(route(routeName), registerForm)
+        .then((response) => {
             HandleValidationResponse(routeName, response);
             HandleSubmitClass(routeName, response);
         })
-        .catch(error => {
-            console.error(error)
-        })
-}, 1000)
+        .catch((error) => {
+            console.error(error);
+        });
+}, 1000);
 
 function onInput(routeName) {
     validationRequest(routeName);
@@ -74,7 +75,7 @@ function submitLoginRequest() {
         onError: (err) => {
             Object.assign(errors, err);
         },
-        preserveScroll: true
+        preserveScroll: true,
     });
 }
 
@@ -83,7 +84,7 @@ function submitRegisterRequest() {
         onError: (err) => {
             Object.assign(errors, err);
         },
-        preserveScroll: true
+        preserveScroll: true,
     });
     liveErrors.emailError = null;
     liveErrors.nameError = null;
@@ -91,7 +92,7 @@ function submitRegisterRequest() {
 </script>
 
 <template>
-    <HeroSmall title="Forms showcase" :source="blogBg"/>
+    <HeroSmall title="Forms showcase" :source="blogBg" />
     <section>
         <div class="container flex-column">
             <h1 class="title-1 mb-20px">Logowanie</h1>
@@ -108,7 +109,9 @@ function submitRegisterRequest() {
                         aria-required="true"
                         v-model="loginForm.login"
                     />
-                    <div class="error-msg" v-if="errors.login">{{ errors.login }}</div>
+                    <div class="error-msg" v-if="errors.login">
+                        {{ errors.login }}
+                    </div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="password">Hasło *</label>
@@ -121,7 +124,9 @@ function submitRegisterRequest() {
                         required=""
                         aria-required="true"
                     />
-                    <div class="error-msg" v-if="errors.password">{{ errors.password }}</div>
+                    <div class="error-msg" v-if="errors.password">
+                        {{ errors.password }}
+                    </div>
                 </div>
                 <div class="input-wrap input-wrap-check col-12 mb-20px">
                     <input
@@ -136,7 +141,7 @@ function submitRegisterRequest() {
                     <label for="remember"> Zapamiętaj mnie </label>
                 </div>
                 <div class="input-wrap col-12">
-                    <input type="submit" value="Zaloguj się"/>
+                    <input type="submit" value="Zaloguj się" />
                 </div>
             </form>
             <h1 class="title-1 mb-20px">Rejestracja</h1>
@@ -144,6 +149,7 @@ function submitRegisterRequest() {
                 <div class="input-wrap col-12">
                     <label for="register-username">Nazwa użytkownika *</label>
                     <input
+                        class="disabled"
                         type="text"
                         id="register-username"
                         name="name"
@@ -154,8 +160,12 @@ function submitRegisterRequest() {
                         v-model="registerForm.name"
                         @input="onInput('verification.user')"
                     />
-                    <div class="error-msg" v-if="errors.name">{{ errors.name }}</div>
-                    <div class="error-msg" v-if="liveErrors.nameError">{{ liveErrors.nameError }}</div>
+                    <div class="error-msg" v-if="errors.name">
+                        {{ errors.name }}
+                    </div>
+                    <div class="error-msg" v-if="liveErrors.nameError">
+                        {{ liveErrors.nameError }}
+                    </div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="register-email">Email *</label>
@@ -170,8 +180,18 @@ function submitRegisterRequest() {
                         v-model="registerForm.email"
                         @input="onInput('verification.email')"
                     />
-                    <div class="error-msg" v-if="errors.email">{{ errors.email }}</div>
-                    <div class="error-msg" v-if="liveErrors.emailError">{{ liveErrors.emailError }}</div>
+                    <<<<<<< Updated upstream
+                    <div class="error-msg" v-if="errors.email">
+                        {{ errors.email }}
+                    </div>
+                    <div class="error-msg" v-if="liveErrors.emailError">
+                        {{ liveErrors.emailError }}
+                    </div>
+                    =======
+                    <div class="error-msg" v-if="errors.email">
+                        {{ errors.email }}
+                    </div>
+                    >>>>>>> Stashed changes
                 </div>
                 <div class="input-wrap col-12">
                     <label for="register-username">Imię *</label>
@@ -185,7 +205,9 @@ function submitRegisterRequest() {
                         aria-required="true"
                         v-model="registerForm.first_name"
                     />
-                    <div class="error-msg" v-if="errors.first_name">{{ errors.first_name }}</div>
+                    <div class="error-msg" v-if="errors.first_name">
+                        {{ errors.first_name }}
+                    </div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="register-username">Nazwisko *</label>
@@ -199,7 +221,9 @@ function submitRegisterRequest() {
                         aria-required="true"
                         v-model="registerForm.last_name"
                     />
-                    <div class="error-msg" v-if="errors.last_name">{{ errors.last_name }}</div>
+                    <div class="error-msg" v-if="errors.last_name">
+                        {{ errors.last_name }}
+                    </div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="register-password">Hasło *</label>
@@ -212,11 +236,13 @@ function submitRegisterRequest() {
                         aria-required="true"
                         v-model="registerForm.password"
                     />
-                    <div class="error-msg" v-if="errors.password">{{ errors.password }}</div>
+                    <div class="error-msg" v-if="errors.password">
+                        {{ errors.password }}
+                    </div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="register-password-confirm"
-                    >Potwierdź Hasło *</label
+                        >Potwierdź Hasło *</label
                     >
                     <input
                         type="password"
@@ -253,7 +279,11 @@ function submitRegisterRequest() {
                     </label>
                 </div>
                 <div class="input-wrap col-12">
-                    <input type="submit" :class="{'disabled': !canRegister}" value="zarejestruj się"/>
+                    <input
+                        type="submit"
+                        :class="{ disabled: !canRegister }"
+                        value="zarejestruj się"
+                    />
                 </div>
             </form>
         </div>

@@ -30,10 +30,10 @@ const handleValidationEmit = (state) => {
             },
         });
     }
-}
+};
 
 function validateForm(field) {
-    if (field === 'first_name') {
+    if (field === "first_name") {
         // Do napisania walidacja
     }
 }
@@ -63,7 +63,6 @@ const passwordForm = reactive({
 });
 
 const errors = reactive({});
-
 </script>
 
 <template>
@@ -106,9 +105,19 @@ const errors = reactive({});
                         </ul>
                         <ul>
                             <li>
-                                <Link @click="Logout" class="text-primary"
+                                <Link
+                                    @click="Logout"
+                                    class="text-primary user-functions"
                                     >Wyloguj się</Link
                                 >
+<<<<<<< Updated upstream
+=======
+                                <Link
+                                    @click="TestEmail"
+                                    class="text-primary user-functions"
+                                    >Test Email</Link
+                                >
+>>>>>>> Stashed changes
                             </li>
                         </ul>
                     </nav>
@@ -125,7 +134,9 @@ const errors = reactive({});
                 <Tabs class="tabs-white">
                     <Tab title="Moje informacje">
                         <h3 class="ma-ftitle">Moje informacje</h3>
-                        <form class="form form-ma" @submit.prevent="handleSubmitClick( fNameForm)"
+                        <form
+                            class="form form-ma"
+                            @submit.prevent="handleSubmitClick(fNameForm)"
                         >
                             <div class="input-wrap d-flex flex-column col-12">
                                 <label for="first-name-input">Imię</label>
@@ -142,7 +153,9 @@ const errors = reactive({});
                                     v-model="fNameForm.first_name"
                                 />
                             </div>
-                            <div class="error-msg" v-if="errors.first_name">{{ errors.first_name }}</div>
+                            <div class="error-msg" v-if="errors.first_name">
+                                {{ errors.first_name }}
+                            </div>
                             <div class="input-wrap col-12">
                                 <input
                                     value="zaktualizuj szczegóły"
@@ -151,7 +164,10 @@ const errors = reactive({});
                                 />
                             </div>
                         </form>
-                        <form class="form form-ma" @submit.prevent="handleSubmitClick(lNameForm)">
+                        <form
+                            class="form form-ma"
+                            @submit.prevent="handleSubmitClick(lNameForm)"
+                        >
                             <div class="input-wrap d-flex flex-column col-12">
                                 <label for="last-name-input">Nazwisko</label>
                                 <input
@@ -176,7 +192,10 @@ const errors = reactive({});
                         </form>
 
                         <h3 class="ma-ftitle">Adres Email</h3>
-                        <form class="form form-ma" @submit.prevent="handleSubmitClick(emailForm)">
+                        <form
+                            class="form form-ma"
+                            @submit.prevent="handleSubmitClick(emailForm)"
+                        >
                             <div class="input-wrap d-flex flex-column col-12">
                                 <label for="change-email">Email</label>
                                 <input
@@ -200,7 +219,10 @@ const errors = reactive({});
                             </div>
                         </form>
                         <h3 class="ma-ftitle">Zmień hasło</h3>
-                        <form class="form form-ma" @submit.prevent="handleSubmitClick(passwordForm)">
+                        <form
+                            class="form form-ma"
+                            @submit.prevent="handleSubmitClick(passwordForm)"
+                        >
                             <div class="input-wrap d-flex flex-column col-12">
                                 <label for="change-password">Hasło</label>
                                 <input
@@ -233,7 +255,11 @@ const errors = reactive({});
             </div>
         </div>
     </section>
-    <Popup :show="showModal" @close="showModal = false" @password-validation-success="handleValidationEmit"></Popup>
+    <Popup
+        :show="showModal"
+        @close="showModal = false"
+        @password-validation-success="handleValidationEmit"
+    ></Popup>
 </template>
 
 <style lang="scss">
@@ -334,6 +360,9 @@ const errors = reactive({});
                 line-height: 1.5;
                 letter-spacing: 0.32px;
                 width: 100%;
+                &.user-functions {
+                    padding-left: 24px;
+                }
                 &:hover {
                     background-color: #f6f6f6;
                     text-decoration: underline;
