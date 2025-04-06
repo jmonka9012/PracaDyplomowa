@@ -46,7 +46,7 @@ const props = defineProps({
                 :key="hrowIndex"
             >
                 <div
-                    class="hall_col"
+                    class="hall__col"
                     v-for="(col, hcolIndex) in hall.hall_width"
                     :key="hcolIndex"
                 >
@@ -82,62 +82,6 @@ const props = defineProps({
         </div>
     </section>
 </template>
-
 <style lang="scss">
-.hall {
-    width: 100%;
-    margin-bottom: 100px;
-    background-color: yellowgreen;
-
-    &__row {
-        display: flex;
-        gap: 20px;
-        margin-bottom: 30px;
-        justify-content: space-between;
-        min-height: 100px;
-    }
-
-    &_col {
-        width: 100%;
-        background-color: yellow;
-    }
-
-    &__section-row {
-        display: flex;
-        flex-direction: row;
-        gap: 4px;
-        justify-content: space-between;
-    }
-
-    &__seat {
-        width: 100%;
-        height: 10px;
-        min-width: 1px;
-        background-color: red;
-
-        &:hover {
-            background-color: green;
-            cursor: pointer;
-        }
-    }
-
-    &__section-seat {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 40px;
-        min-height: 100px;
-    }
-
-    &__section-stand {
-        width: 100%;
-        height: 200px;
-        background: red;
-
-        &:hover {
-            cursor: pointer;
-            background-color: green;
-        }
-    }
-}
+@use "~css/hale.scss";
 </style>
