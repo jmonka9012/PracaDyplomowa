@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\EventSeats;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EventSeat extends Model
+abstract class EventSeatBase extends Model
 {
     protected $fillable = [
         'event_id',
@@ -14,4 +14,10 @@ class EventSeat extends Model
         'price',
         'status',
     ];
+
+    public function getIsArchivedAttribute()
+    {
+        return $this->getTable() == 'event_seats_archive';
+    }
 }
+

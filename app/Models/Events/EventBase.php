@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Events;
+
 
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+abstract class EventBase extends Model
 {
     protected $fillable = [
         'event_name',
@@ -20,8 +21,9 @@ class Event extends Model
         'image_path',
     ];
 
-    public function tickets()
+    public function getIsArchivedAttribute()
     {
-        return $this->hasMany(Ticket::class);
+        return $this->getTable() == 'events_archive';
     }
+
 }
