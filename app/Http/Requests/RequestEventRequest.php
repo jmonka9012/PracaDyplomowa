@@ -22,7 +22,7 @@ class RequestEventRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'event_name' => 'required|string|max:255|unique:events,event_name',
+            'event_name' => 'required|string|max:255|unique:events,event_name|unique:events_archive,event_name',
             'event_url' => 'string|max:255|unique:events,event_url',
             'event_date' => 'date|required',
             'event_start' => 'required',
