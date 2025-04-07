@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('event_standing_tickets_archived', function (Blueprint $table) {
+        Schema::create('event_standing_tickets_archive', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('event_id');
             $table->unsignedBigInteger('hall_section_id');
