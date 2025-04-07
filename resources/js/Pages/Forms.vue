@@ -71,23 +71,32 @@ const registerForm = reactive({
 });
 
 function submitLoginRequest() {
+    let hadError = false;
+
     router.post(route("login.post"), loginForm, {
+        preserveScroll: () => hadError,
         onError: (err) => {
+            hadError = true;
             Object.assign(errors, err);
         },
-        preserveScroll: true,
+        onSuccess: () => {
+            hadError = false;
+        },
     });
 }
 
 function submitRegisterRequest() {
+    let hadError = false;
+
     router.post(route("register.post"), registerForm, {
+        preserveScroll: () => hadError,
         onError: (err) => {
+            hadError = true;
             Object.assign(errors, err);
+            liveErrors.emailError = null;
+            liveErrors.nameError = null;
         },
-        preserveScroll: true,
     });
-    liveErrors.emailError = null;
-    liveErrors.nameError = null;
 }
 </script>
 
