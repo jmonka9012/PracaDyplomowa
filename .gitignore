@@ -22,3 +22,4 @@ yarn-error.log
 /.zed
 /selenium-tests/screenshots
 /selenium-tests/logs
+.env
