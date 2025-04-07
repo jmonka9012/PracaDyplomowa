@@ -24,7 +24,7 @@ class RequestEventRequest extends FormRequest
         return [
             'event_name' => 'required|string|max:255|unique:events,event_name|unique:events_archive,event_name',
             'event_url' => 'string|max:255|unique:events,event_url',
-            'event_date' => 'date|required',
+            'event_date' => 'date|required|after:+6 days',
             'event_start' => 'required',
             'event_end' => 'required',
             'contact_email' => 'email|max:255',
@@ -48,6 +48,7 @@ class RequestEventRequest extends FormRequest
             'event_description.max' => 'Opis jest zbyt długi',
             'event_description_additional.max'=> 'Dodtakowe informacje są zbyt długie',
             'event_description.required'=> 'Brak opisu',
+            'event_date.after'=> 'Potrzebujemy przynajmniej tygodnia na organizacje wydarzenia, wybierz datę przynajmniej tydzień w przód'
         ];
     }
 }
