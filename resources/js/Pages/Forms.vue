@@ -149,7 +149,6 @@ function submitRegisterRequest() {
                 <div class="input-wrap col-12">
                     <label for="register-username">Nazwa użytkownika *</label>
                     <input
-                        class="disabled"
                         type="text"
                         id="register-username"
                         name="name"
@@ -278,6 +277,7 @@ function submitRegisterRequest() {
                 <div class="input-wrap col-12">
                     <input
                         type="submit"
+                        :disabled="!canRegister"
                         :class="{ disabled: !canRegister }"
                         value="zarejestruj się"
                     />
