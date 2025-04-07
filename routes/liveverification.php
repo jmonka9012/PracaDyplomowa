@@ -3,6 +3,6 @@
 use App\Http\Controllers\LiveVerificationController;
 use Illuminate\Support\Facades\Route;
 
-Route::post("/walidacja", [LiveVerificationController::class,"userExists"])->name("verification.user");
+Route::post("/walidacja/uzytkownik-istnieje", [LiveVerificationController::class,"userExists"])->name("verification.user");
 
-Route::post("/walidacja2", [LiveVerificationController::class,"isEmail"])->name("verification.email");
+Route::post("/walidacja/email", [LiveVerificationController::class,"isEmail"])->name("verification.email");
