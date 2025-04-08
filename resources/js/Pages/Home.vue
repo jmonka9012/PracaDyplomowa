@@ -20,10 +20,8 @@ import { ref } from "vue";
 import SliderGallery from "../Components/sections-new/SliderGallery.vue";
 import { SwiperSlide } from "swiper/vue";
 
-
 import pageInfo from "@/Utilities/pageInfo";
 const { siteData } = pageInfo();
-
 
 const team = [
     {
@@ -172,7 +170,6 @@ const events = [
         date: "22.02.2025",
     },
 ];
-
 </script>
 
 <template>
@@ -189,7 +186,7 @@ const events = [
         <div
             class="container container-big flex-lg-row align-items-start align-items-lg-center justify-content-between"
         >
-            <TitleNSub title="Title" subtitle="subtitle" class="mb-35px" />
+            <TitleNSub title="Title test" subtitle="subtitle" class="mb-35px" />
             <a href="/" class="btn btn-md">View all</a>
             <LatestEvents :latest="latest"></LatestEvents>
         </div>
@@ -199,6 +196,50 @@ const events = [
         <div class="container flex-column align-items-center">
             <p class="sub-title sub-title-lprpl mb-20px">FUTURE EVENTS</p>
             <h3 class="title-1 mb-20px">Festivals This December</h3>
+            <div class="event-filters">
+                <div class="input-wrap event-select-wrap">
+                    <i class="fa fa-calendar"></i>
+                    <i class="fa fa-chevron-down"></i>
+                    <select class="event-select" v-model="selectedCategory">
+                        <option disabled value="">Please select one</option>
+                        <option>Buisness</option>
+                        <option>Concert</option>
+                        <option>Music</option>
+                        <option>Conference</option>
+                        <option>Education</option>
+                        <option>Fashion</option>
+                        <option>Festival</option>
+                        <option>Food & drink</option>
+                        <option>Other</option>
+                        <option>Sport</option>
+                    </select>
+                </div>
+                <div class="input-wrap event-select-wrap">
+                    <i class="fa fa-map-marker"></i>
+                    <select class="event-select" v-model="selectedTime">
+                        <option disabled value="">All time</option>
+                        <option>Today</option>
+                        <option>Tommorow</option>
+                        <option>This week</option>
+                        <option>This weekend</option>
+                        <option>Next week</option>
+                        <option>Next month</option>
+                    </select>
+                </div>
+            </div>
+            <select>
+                <option disabled value="">Please select one</option>
+                <option>Buisness</option>
+                <option>Concert</option>
+                <option>Music</option>
+                <option>Conference</option>
+                <option>Education</option>
+                <option>Fashion</option>
+                <option>Festival</option>
+                <option>Food & drink</option>
+                <option>Other</option>
+                <option>Sport</option>
+            </select>
             <Events v-for="event in events" v-bind="event" :key="event.id" />
         </div>
     </section>
