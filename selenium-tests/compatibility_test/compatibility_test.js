@@ -1,9 +1,17 @@
 import { Builder, By } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
 import edge from 'selenium-webdriver/edge.js';
+import dotenv from 'dotenv';
+
+// Wczytaj zmienne środowiskowe z .env
+dotenv.config();
+const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, ''); // usuwa ewentualne cudzysłowy z wartości zmiennej
 
 (async function compatibilityAndResponsiveTest() {
-  const browsers = ['chrome', 'MicrosoftEdge', 'chromium']; // Lista testowanych przeglądarek
+  // Lista przeglądarek do testu
+  const browsers = ['chrome', 'MicrosoftEdge', 'chromium'];
+
+  // Lista rozdzielczości ekranów i urządzeń do testowania responsywności
   const devices = [
     { width: 1920, height: 1080, label: 'Desktop (Full HD)' },
     { width: 2560, height: 1440, label: 'Desktop (27-inch QHD)' },
@@ -14,40 +22,62 @@ import edge from 'selenium-webdriver/edge.js';
     { width: 384, height: 854, label: 'Phone (Samsung Galaxy S25)' }
   ];
 
+  // Iteracja przez każdą przeglądarkę
   for (const browser of browsers) {
+    // Iteracja przez każde urządzenie / rozdzielczość
     for (const device of devices) {
       let driver;
       try {
         console.log(`\n${browser} | ${device.label} (${device.width}x${device.height})`);
 
-        // Konfiguracja przeglądarki na podstawie typu
+        // Konfiguracja opcji przeglądarek
         if (browser === 'chrome' || browser === 'chromium') {
           const options = new chrome.Options();
           options.addArguments(
-            '--headless', // Tryb bez interfejsu graficznego
-            '--disable-dev-shm-usage',
-            '--no-sandbox',
-            '--disable-gpu'
+            '--headless',                   // tryb w tle
+            '--disable-dev-shm-usage',     // unika błędów w kontenerach
+            '--no-sandbox',                // wymagane dla wielu środowisk
+            '--disable-gpu'                // wyłącza akcelerację GPU
           );
+
           if (browser === 'chromium') {
-            options.addArguments('--remote-debugging-port=9222');
+            options.addArguments('--remote-debugging-port=9222'); // debug port dla Chromium
           }
-          driver = await new Builder().forBrowser('chrome').setChromeOptions(options).build();
+
+          driver = await new Builder()
+            .forBrowser('chrome')
+            .setChromeOptions(options)
+            .build();
+
         } else if (browser === 'MicrosoftEdge') {
           const options = new edge.Options();
-          options.addArguments('--headless', '--disable-dev-shm-usage', '--no-sandbox', '--disable-gpu');
-          driver = await new Builder().forBrowser('MicrosoftEdge').setEdgeOptions(options).build();
+          options.addArguments(
+            '--headless',                   // tryb w tle 
+            '--disable-dev-shm-usage',      // unika błędów w kontenerach 
+            '--no-sandbox',                 // wymagane dla wielu środowisk
+            '--disable-gpu'                 //wyłącza akcelerację GPU
+          );
+
+          driver = await new Builder()
+            .forBrowser('MicrosoftEdge')
+            .setEdgeOptions(options)
+            .build();
         }
 
-        // Ustawienie wymiarów okna przeglądarki
-        await driver.manage().window().setRect({ width: device.width, height: device.height });
+        // Ustawienie wymiarów okna
+        await driver.manage().window().setRect({
+          width: device.width,
+          height: device.height
+        });
 
-        // Załadowanie strony głównej aplikacji
-        await driver.get('http://lvi.ddev.site/');
+        // Wejście na testowaną stronę
+        await driver.get(BASE_URL);
+
+        // Sprawdzenie tytułu strony
         const title = await driver.getTitle();
         console.log(`Tytuł strony: "${title}"`);
 
-        // Weryfikacja obecności nagłówka na stronie
+        // Sprawdzenie obecności nagłówka
         const header = await driver.findElements(By.css('header'));
         if (header.length > 0) {
           console.log('Nagłówek został odnaleziony.');
@@ -55,12 +85,12 @@ import edge from 'selenium-webdriver/edge.js';
           console.warn('Brak nagłówka na stronie.');
         }
 
-        // Zakończenie sesji testowej
+        // Zakończenie sesji przeglądarki
         await driver.quit();
         console.log('Test zakończony pomyślnie.\n');
 
       } catch (err) {
-        // Obsługa wyjątków i zamknięcie przeglądarki w przypadku błędu
+        // Wypisanie błędu i zamknięcie drivera, jeśli wystąpi wyjątek
         console.error(`Błąd w ${browser} - ${device.label}:`, err);
         if (driver) await driver.quit();
       }

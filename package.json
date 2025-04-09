@@ -23,6 +23,7 @@
         "@vitejs/plugin-vue": "^5.2.1",
         "chai": "^5.2.0",
         "chromedriver": "^134.0.5",
+        "dotenv": "^16.4.7",
         "mocha": "^11.1.0",
         "npm-watch": "^0.13.0",
         "sass-loader": "^16.0.5",

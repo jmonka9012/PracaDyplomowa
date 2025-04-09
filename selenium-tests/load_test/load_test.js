@@ -1,29 +1,36 @@
 import { Builder, By, until } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
+import dotenv from 'dotenv';
 
-// Konfiguracja liczby sesji równoległych i akcji w każdej sesji
+// Wczytanie zmiennych środowiskowych z pliku .env
+dotenv.config();
+const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, ''); // Usuwa cudzysłowy z wartości, jeśli są
+
+// Liczba instancji równoległych (userów)
 const INSTANCES = 18;
+
+// Liczba akcji wykonywanych przez jedną instancję (ilość czynności jaką wykona pojedynczy user)
 const ACTIONS_PER_INSTANCE = 10;
 
-// Lista możliwych akcji wykonywanych przez użytkownika
+// Dostępne typy akcji do losowania
 const ACTIONS = ['Login', 'Kontakt', 'Search', 'Scroll'];
 
-// Statystyki wykonywanych akcji
+// Statystyki wykonanych akcji
 const stats = {
   Login: 0,
   Kontakt: 0,
   Search: 0,
   Scroll: 0,
   Powrot: 0,
-  Nieudane: 0 // Liczba nieudanych prób wykonania akcji
+  Nieudane: 0
 };
 
-// Losowanie jednej z dostępnych akcji
+// Losowanie jednej akcji z dostępnych
 function losowaAkcja() {
   return ACTIONS[Math.floor(Math.random() * ACTIONS.length)];
 }
 
-// Obsługa kliknięcia w link (np. "Login", "Kontakt")
+// Kliknięcie w link tekstowy (np. Login, Kontakt)
 async function clickLink(driver, linkText, id) {
   try {
     const element = await driver.wait(until.elementLocated(By.linkText(linkText)), 7000);
@@ -36,7 +43,7 @@ async function clickLink(driver, linkText, id) {
   }
 }
 
-// Obsługa wyszukiwania
+// Wykonanie akcji wyszukiwania
 async function search(driver, id) {
   try {
     const pole = await driver.wait(until.elementLocated(By.css('input[type="search"], input[type="text"]')), 7000);
@@ -51,7 +58,7 @@ async function search(driver, id) {
   }
 }
 
-// Przewijanie strony
+// Scrollowanie do losowej wysokości
 async function scroll(driver, id) {
   const y = Math.floor(Math.random() * 1000);
   await driver.executeScript(`window.scrollTo(0, ${y})`);
@@ -59,10 +66,10 @@ async function scroll(driver, id) {
   stats.Scroll++;
 }
 
-// Powrót na stronę główną
+// Powrót do strony głównej
 async function powrot(driver, id) {
   try {
-    await driver.get('http://lvi.ddev.site/');
+    await driver.get(BASE_URL);
     console.log(`Instancja ${id}: Powrót na stronę główną`);
     stats.Powrot++;
   } catch (err) {
@@ -71,7 +78,7 @@ async function powrot(driver, id) {
   }
 }
 
-// Uruchomienie jednej instancji przeglądarki i wykonanie zaplanowanych akcji
+// Uruchomienie jednej instancji testu
 async function uruchomInstancje(id) {
   const options = new chrome.Options();
   options.addArguments(
@@ -80,14 +87,18 @@ async function uruchomInstancje(id) {
     '--headless=new'
   );
 
-  const driver = await new Builder().forBrowser('chrome').setChromeOptions(options).build();
+  const driver = await new Builder()
+    .forBrowser('chrome')
+    .setChromeOptions(options)
+    .build();
 
+  // Ustawienie okna przeglądarki
   await driver.manage().window().setRect({ width: 1400, height: 1000 });
 
   console.log(`Instancja ${id}: Start`);
 
   try {
-    await driver.get('http://lvi.ddev.site/');
+    await driver.get(BASE_URL);
     console.log(`Instancja ${id}: Załadowano stronę główną`);
 
     for (let i = 0; i < ACTIONS_PER_INSTANCE; i++) {
@@ -106,10 +117,10 @@ async function uruchomInstancje(id) {
           break;
       }
 
-      // Losowe opóźnienie między akcjami
+      // Opóźnienie między akcjami
       await new Promise(r => setTimeout(r, Math.random() * 2000));
 
-      // Powrót na stronę główną po każdej akcji
+      // Powrót po każdej akcji
       await powrot(driver, id);
     }
 
@@ -121,9 +132,9 @@ async function uruchomInstancje(id) {
   }
 }
 
-// Główna funkcja testowa
+// Uruchomienie testu głównego z wieloma instancjami
 describe('Test obciążeniowy aplikacji', function () {
-  this.timeout(300000); // Zwiększony limit czasu na zakończenie testu
+  this.timeout(300000); // Limit czasu na wykonanie całego testu
 
   it('Uruchamia wiele instancji równolegle', async function () {
     const wszystkie = [];
@@ -134,7 +145,6 @@ describe('Test obciążeniowy aplikacji', function () {
 
     await Promise.all(wszystkie);
 
-    // Podsumowanie wyników
     console.log('\n=== ANALIZA WYKONANYCH AKCJI ===');
     let suma = 0;
     for (const [akcja, liczba] of Object.entries(stats)) {

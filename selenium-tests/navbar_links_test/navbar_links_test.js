@@ -1,10 +1,16 @@
 import { Builder, By, until } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
+import dotenv from 'dotenv';
+
+// Wczytanie zmiennych środowiskowych z pliku .env
+dotenv.config();
+const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, ''); // Usunięcie cudzysłowów z adresu
 
 (async function runNavbarLinksTest() {
   let driver;
+
   try {
-    // Konfiguracja przeglądarki
+    // Konfiguracja opcji przeglądarki (głównie pod CI)
     const options = new chrome.Options();
     options.addArguments('--disable-dev-shm-usage');
     options.addArguments('--no-sandbox');
@@ -19,16 +25,16 @@ import chrome from 'selenium-webdriver/chrome.js';
 
     console.log('Przeglądarka uruchomiona.');
 
-    // Przejście do strony głównej
-    await driver.get('http://lvi.ddev.site/');
+    // Przejście na stronę główną
+    await driver.get(BASE_URL);
     console.log('Strona główna załadowana.');
 
-    await driver.sleep(2000);
+    await driver.sleep(2000); // Czekanie na załadowanie widoku
 
-    // Lista linków do sprawdzenia
+    // Lista linków do sprawdzenia w navbarze
     const links = ['Home', 'Blog', 'Single', 'Kontakt', 'CE', 'Jacek CE'];
 
-    // Sprawdzenie widoczności każdego linku i wypisanie w terminalu
+    // Przeglądanie i sprawdzanie widoczności linków
     for (const text of links) {
       try {
         const element = await driver.wait(until.elementLocated(By.linkText(text)), 5000);
@@ -38,13 +44,15 @@ import chrome from 'selenium-webdriver/chrome.js';
         console.log(`Link "${text}" nie został znaleziony.`);
       }
     }
-    // Koniec testu, zamyka przeglądarkę 
-    await driver.sleep(2000);
+
+    await driver.sleep(2000); // Krótkie opóźnienie przed zamknięciem
+
+    // Zamykanie przeglądarki
     await driver.quit();
     console.log('Przeglądarka zamknięta, test zakończony.');
 
-    // Gdy błąd, wypisz błąd
   } catch (error) {
+    // Obsługa błędów krytycznych
     console.error('Błąd:', error);
     if (driver) await driver.quit();
   }
