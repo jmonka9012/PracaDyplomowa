@@ -11,7 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('event_standing_tickets_archive', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('event_id');
+            $table->unsignedBigInteger('hall_section_id');
+            $table->decimal('price', 5,2)->comment('PLN');
+            $table->integer('capacity');
+            $table->integer('sold')->default(0);
+            $table->dateTime('archived_at')->useCurrent();
+            $table->timestamps();
+
+            $table->foreign('event_id')
+                ->references('id')
+                ->on('events_archive');
+                
+            $table->foreign('hall_section_id')
+                ->references('id')
+                ->on('hall_sections');
+        });
     }
 
     /**
@@ -19,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('event_standing_tickets');
     }
 };

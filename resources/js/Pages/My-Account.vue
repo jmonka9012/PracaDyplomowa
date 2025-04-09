@@ -32,12 +32,6 @@ const handleValidationEmit = (state) => {
     }
 };
 
-function validateForm(field) {
-    if (field === "first_name") {
-        // Do napisania walidacja
-    }
-}
-
 const Logout = () => {
     router.post(route("logout"), {});
 };
@@ -110,14 +104,6 @@ const errors = reactive({});
                                     class="text-primary user-functions"
                                     >Wyloguj się</Link
                                 >
-<<<<<<< Updated upstream
-=======
-                                <Link
-                                    @click="TestEmail"
-                                    class="text-primary user-functions"
-                                    >Test Email</Link
-                                >
->>>>>>> Stashed changes
                             </li>
                         </ul>
                     </nav>

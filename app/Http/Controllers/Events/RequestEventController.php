@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Events;
 
 use App\Http\Controllers\Controller;
-use App\Models\Event;
+use App\Models\Events\Event;
 use App\Models\Hall;
-use App\Models\EventSeat;
-use App\Models\EventStandingTicket;
+use App\Models\EventSeats\EventSeat;
+use App\Models\EventStandingTickets\EventStandingTicket;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Illuminate\Support\Str;

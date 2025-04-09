@@ -19,7 +19,9 @@ class AuthRegisterTest extends TestCase
             'name' => 'John Doe',
             'email' => 'john@example.com',
             'password' => 'Password123',
-            'password_confirmation' => 'Password123'
+            'password_confirmation' => 'Password123',
+            'first_name' => 'John',
+            'last_name'=> 'Doe',
         ];
 
         $response = $this->post(route('register'), $data);

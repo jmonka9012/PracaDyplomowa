@@ -31,9 +31,9 @@ const handleFileUpload = (event) => {
     }
 };
 
-// Obsługa przesyłania formularza
 function submitEventRequest() {
     const formData = new FormData();
+    let hadError = false;
 
     // Dodajemy dane formularza do FormData
     Object.entries(requestEventForm).forEach(([key, value]) => {
@@ -49,8 +49,10 @@ function submitEventRequest() {
 
     // Wysyłanie żądania POST do serwera
     router.post(route("event-create.post"), formData, {
+        preserveScroll: () => hadError,
         onError: (err) => {
             Object.assign(errors, err);
+            hadError = true;
         },
         headers: {
             "Content-Type": "multipart/form-data",

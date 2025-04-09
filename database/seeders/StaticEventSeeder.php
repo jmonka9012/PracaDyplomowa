@@ -4,11 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Event;
+use App\Models\Events\Event;
 use App\Models\Hall;
-use App\Models\EventSeat;
-use App\Models\EventStandingTicket;
-
+use App\Models\EventSeats\EventSeat;
+use App\Models\EventStandingTickets\EventStandingTicket;
 class StaticEventSeeder extends Seeder
 {
     /**
@@ -99,6 +98,19 @@ class StaticEventSeeder extends Seeder
                 'contact_email_additional' => 'serji2real@soad.com',
                 'event_description' => 'Nowy album anytime now, stay tuned.',
                 'event_description_additional' => 'tell me lies tell me sweet little lies',
+                'event_location' =>2,
+                'image_path' => 'event_images/placeholder.jpg',
+            ],
+            [
+                'event_name' => 'Archive Test Event',
+                'event_url' => 'https://open.spotify.com/artist/5eAWCfyUhZtHHtBdNk56l1',
+                'event_date' => now()->subYears(value: 2),
+                'event_start' => '10:00:00',
+                'event_end' => '15:00:00',
+                'contact_email' => 'archive@test.com',
+                'contact_email_additional' => 'archive@test.com',
+                'event_description' => 'archive@test.com',
+                'event_description_additional' => 'archive@test.com',
                 'event_location' =>2,
                 'image_path' => 'event_images/placeholder.jpg',
             ],

@@ -22,7 +22,8 @@ return new class extends Migration
 
             $table->foreign('event_id')
                 ->references('id')
-                ->on('events');
+                ->on('events')
+                ->onDelete('cascade');
                 
             $table->foreign('hall_section_id')
                 ->references('id')
