@@ -31,6 +31,7 @@
         "selenium": "^2.20.0",
         "selenium-webdriver": "^4.30.0",
         "swiper": "^11.2.5",
+        "tinymce-i18n": "^25.3.17",
         "vue": "^3.5.13",
         "ziggy-js": "^2.5.2"
     }

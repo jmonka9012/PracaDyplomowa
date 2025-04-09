@@ -106,7 +106,7 @@ function submitRegisterRequest() {
         <div class="container flex-column">
             <h1 class="title-1 mb-20px">Logowanie</h1>
             <form class="form" @submit.prevent="submitLoginRequest">
-                <div class="input-wrap col-12">
+                <div class="input-wrap col-12 col-lg-6">
                     <label for="username">Dane użytkownika *</label>
                     <input
                         type="text"
@@ -122,7 +122,7 @@ function submitRegisterRequest() {
                         {{ errors.login }}
                     </div>
                 </div>
-                <div class="input-wrap col-12">
+                <div class="input-wrap col-12 col-lg-6">
                     <label for="password">Hasło *</label>
                     <input
                         type="password"
@@ -155,7 +155,7 @@ function submitRegisterRequest() {
             </form>
             <h1 class="title-1 mb-20px">Rejestracja</h1>
             <form class="form pb-120px" @submit.prevent="submitRegisterRequest">
-                <div class="input-wrap col-12">
+                <div class="input-wrap col-12 col-lg-6">
                     <label for="register-username">Nazwa użytkownika *</label>
                     <input
                         type="text"
@@ -175,7 +175,7 @@ function submitRegisterRequest() {
                         {{ liveErrors.nameError }}
                     </div>
                 </div>
-                <div class="input-wrap col-12">
+                <div class="input-wrap col-12 col-lg-6">
                     <label for="register-email">Email *</label>
                     <input
                         type="text"
@@ -198,7 +198,7 @@ function submitRegisterRequest() {
                         {{ errors.email }}
                     </div>
                 </div>
-                <div class="input-wrap col-12">
+                <div class="input-wrap col-12 col-lg-6">
                     <label for="register-username">Imię *</label>
                     <input
                         type="text"
@@ -214,7 +214,7 @@ function submitRegisterRequest() {
                         {{ errors.first_name }}
                     </div>
                 </div>
-                <div class="input-wrap col-12">
+                <div class="input-wrap col-12 col-lg-6">
                     <label for="register-username">Nazwisko *</label>
                     <input
                         type="text"
@@ -230,7 +230,7 @@ function submitRegisterRequest() {
                         {{ errors.last_name }}
                     </div>
                 </div>
-                <div class="input-wrap col-12">
+                <div class="input-wrap col-12 col-lg-6">
                     <label for="register-password">Hasło *</label>
                     <input
                         type="password"
@@ -245,7 +245,7 @@ function submitRegisterRequest() {
                         {{ errors.password }}
                     </div>
                 </div>
-                <div class="input-wrap col-12">
+                <div class="input-wrap col-12 col-lg-6">
                     <label for="register-password-confirm"
                         >Potwierdź Hasło *</label
                     >
@@ -268,7 +268,9 @@ function submitRegisterRequest() {
                         nowego hasła.
                     </p>
                 </div>
-                <div class="input-wrap input-wrap-check col-12 mb-20px">
+                <div
+                    class="input-wrap input-wrap-check col-12 col-lg-6 mb-20px"
+                >
                     <input
                         type="checkbox"
                         required

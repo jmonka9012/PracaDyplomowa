@@ -1,7 +1,7 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
-import MainFooter from "../Components/sections-new/MainFooter.vue";
-import MainHeader from "../Components/header/MainHeader.vue";
+import MainFooter from "@/Components/sections-new/MainFooter.vue";
+import MainHeader from "@/Components/header/MainHeader.vue";
 
 const props = defineProps({
     auth: Object,
