@@ -1,21 +1,29 @@
 import { Builder, By } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
 import dotenv from 'dotenv';
+import { logTestResult } from '../logUtils.js';
 
-// Wczytaj zmienne środowiskowe z pliku .env
+// Ładowanie zmiennych środowiskowych z pliku .env
 dotenv.config();
-const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, ''); // Usuwa cudzysłowy z adresu URL, jeśli są
+
+// Uzyskanie adresu URL aplikacji z pliku konfiguracyjnego
+const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, '');
+
+// Nazwa testu, używana do logowania wyników
+const testName = 'stress_login_test';
 
 (async function stressLoginTest() {
   let driver;
-  try {
-    // Konfiguracja przeglądarki Chrome
-    const options = new chrome.Options();
-    options.addArguments('--disable-dev-shm-usage'); // Poprawka na środowiska z ograniczoną pamięcią
-    options.addArguments('--no-sandbox');             // Wymagane w wielu środowiskach CI/CD
-    options.addArguments('--remote-debugging-port=9222'); // Opcjonalnie do debugowania
+  let passed = true;  // Flaga określająca, czy test przeszedł pomyślnie
 
-    // Inicjalizacja WebDrivera
+  try {
+    // Konfiguracja opcji przeglądarki Chrome
+    const options = new chrome.Options();
+    options.addArguments('--disable-dev-shm-usage');  // Wyłączenie dev/shm dla dużych aplikacji
+    options.addArguments('--no-sandbox');  // Wyłączenie sandboxa w celu uniknięcia błędów na systemach Linux
+    options.addArguments('--remote-debugging-port=9222');  // Uruchomienie portu debugowania zdalnego
+
+    // Budowanie instancji WebDrivera z wybranym profilem przeglądarki Chrome
     driver = await new Builder()
       .forBrowser('chrome')
       .setChromeOptions(options)
@@ -24,43 +32,57 @@ const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, ''); // Usuwa cudzysło
     // Ustawienie rozmiaru okna przeglądarki
     await driver.manage().window().setRect({ width: 1400, height: 1000 });
 
+    // Otwieranie strony głównej aplikacji
     console.log('Otwieram stronę...');
     await driver.get(BASE_URL);
-    await driver.sleep(1000); // Krótkie czekanie na załadowanie
+    await driver.sleep(1000);  // Czekamy 1 sekundę, by strona zdążyła się załadować
 
+    // Szukanie przycisku logowania
     console.log('Szukanie przycisku "Login"...');
     const loginBtn = await driver.findElement(By.linkText('Login'));
 
-    // Przygotowanie do testu stresowego
+    // Zmienna do przechowywania liczby udanych i nieudanych prób kliknięcia
     let success = 0;
     let failed = 0;
+
+    // Ustalamy czas trwania testu na 3000 ms (3 sekundy)
     const startTime = Date.now();
-    const duration = 3000; // Czas trwania testu w milisekundach (3 sekundy)
+    const duration = 3000;
 
     console.log('Rozpoczynam szybkie klikanie...');
-
-    // Pętla szybkiego klikania w "Login"
     while (Date.now() - startTime < duration) {
       try {
-        await loginBtn.click(); // Próba kliknięcia
-        success++;
+        // Kliknięcie w przycisk logowania
+        await loginBtn.click();
+        success++;  // Inkrementacja liczby udanych kliknięć
       } catch (e) {
-        failed++;
+        failed++;  // Inkrementacja liczby nieudanych prób kliknięcia
       }
     }
 
+    // Po zakończeniu testu, wyświetlamy wyniki
     console.log('Klikanie zakończone.');
     console.log(`Udane kliknięcia: ${success}`);
     console.log(`Nieudane próby: ${failed}`);
 
-    await driver.sleep(2000); // Mała przerwa przed zamknięciem
+    // Jeśli nie udało się wykonać żadnego kliknięcia, test uznaje się za nieudany
+    if (success === 0) {
+      passed = false;
+      logTestResult(testName, false, 'Brak udanych kliknięć przycisku "Login"');
+    } else {
+      // Logowanie wyniku testu (sukces)
+      logTestResult(testName, true);
+    }
 
+    // Czekanie 2 sekundy przed zamknięciem przeglądarki
+    await driver.sleep(2000);
     console.log('Zamykam przeglądarkę...');
     await driver.quit();
 
   } catch (error) {
-    // Obsługa ewentualnych błędów
+    // Obsługa błędów, logowanie błędu i zamykanie przeglądarki w przypadku awarii
     console.error('Błąd:', error);
     if (driver) await driver.quit();
+    logTestResult(testName, false, error.message);
   }
 })();

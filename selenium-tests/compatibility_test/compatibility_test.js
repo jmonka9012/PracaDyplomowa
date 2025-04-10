@@ -2,16 +2,20 @@ import { Builder, By } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
 import edge from 'selenium-webdriver/edge.js';
 import dotenv from 'dotenv';
+import { logTestResult } from '../logUtils.js'; // Import funkcji logowania wyniku testu
 
-// Wczytaj zmienne środowiskowe z .env
+// Wczytanie zmiennych środowiskowych z pliku .env
 dotenv.config();
-const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, ''); // usuwa ewentualne cudzysłowy z wartości zmiennej
+const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, ''); // Usunięcie ewentualnych cudzysłowów z adresu URL
 
 (async function compatibilityAndResponsiveTest() {
-  // Lista przeglądarek do testu
+  const testName = 'compatibility_test';
+  let allPassed = true;
+
+  // Lista przeglądarek do testowania
   const browsers = ['chrome', 'MicrosoftEdge', 'chromium'];
 
-  // Lista rozdzielczości ekranów i urządzeń do testowania responsywności
+  // Zdefiniowane rozmiary ekranów reprezentujące różne urządzenia
   const devices = [
     { width: 1920, height: 1080, label: 'Desktop (Full HD)' },
     { width: 2560, height: 1440, label: 'Desktop (27-inch QHD)' },
@@ -22,40 +26,40 @@ const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, ''); // usuwa ewentualn
     { width: 384, height: 854, label: 'Phone (Samsung Galaxy S25)' }
   ];
 
-  // Iteracja przez każdą przeglądarkę
+  // Iteracja po wszystkich kombinacjach przeglądarek i rozdzielczości
   for (const browser of browsers) {
-    // Iteracja przez każde urządzenie / rozdzielczość
     for (const device of devices) {
       let driver;
       try {
         console.log(`\n${browser} | ${device.label} (${device.width}x${device.height})`);
 
-        // Konfiguracja opcji przeglądarek
+        // Konfiguracja przeglądarki Chrome i Chromium
         if (browser === 'chrome' || browser === 'chromium') {
           const options = new chrome.Options();
           options.addArguments(
-            '--headless',                   // tryb w tle
-            '--disable-dev-shm-usage',     // unika błędów w kontenerach
-            '--no-sandbox',                // wymagane dla wielu środowisk
-            '--disable-gpu'                // wyłącza akcelerację GPU
+            '--headless',
+            '--disable-dev-shm-usage',
+            '--no-sandbox',
+            '--disable-gpu'
           );
-
           if (browser === 'chromium') {
-            options.addArguments('--remote-debugging-port=9222'); // debug port dla Chromium
+            options.addArguments('--remote-debugging-port=9222');
           }
 
           driver = await new Builder()
             .forBrowser('chrome')
             .setChromeOptions(options)
             .build();
+        }
 
-        } else if (browser === 'MicrosoftEdge') {
+        // Konfiguracja przeglądarki Microsoft Edge
+        else if (browser === 'MicrosoftEdge') {
           const options = new edge.Options();
           options.addArguments(
-            '--headless',                   // tryb w tle 
-            '--disable-dev-shm-usage',      // unika błędów w kontenerach 
-            '--no-sandbox',                 // wymagane dla wielu środowisk
-            '--disable-gpu'                 //wyłącza akcelerację GPU
+            '--headless',
+            '--disable-dev-shm-usage',
+            '--no-sandbox',
+            '--disable-gpu'
           );
 
           driver = await new Builder()
@@ -64,20 +68,20 @@ const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, ''); // usuwa ewentualn
             .build();
         }
 
-        // Ustawienie wymiarów okna
+        // Ustawienie rozdzielczości okna
         await driver.manage().window().setRect({
           width: device.width,
           height: device.height
         });
 
-        // Wejście na testowaną stronę
+        // Przejście na testowaną stronę
         await driver.get(BASE_URL);
 
-        // Sprawdzenie tytułu strony
+        // Pobranie tytułu strony
         const title = await driver.getTitle();
         console.log(`Tytuł strony: "${title}"`);
 
-        // Sprawdzenie obecności nagłówka
+        // Weryfikacja obecności elementu 
         const header = await driver.findElements(By.css('header'));
         if (header.length > 0) {
           console.log('Nagłówek został odnaleziony.');
@@ -87,13 +91,19 @@ const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, ''); // usuwa ewentualn
 
         // Zakończenie sesji przeglądarki
         await driver.quit();
-        console.log('Test zakończony pomyślnie.\n');
-
+        console.log('Test zakończony pomyślnie.');
       } catch (err) {
-        // Wypisanie błędu i zamknięcie drivera, jeśli wystąpi wyjątek
-        console.error(`Błąd w ${browser} - ${device.label}:`, err);
+        // Obsługa błędów testu
+        console.error(`Błąd w ${browser} - ${device.label}:`, err.message);
+        logTestResult(testName, false, `Błąd w ${browser} - ${device.label}: ${err.message}`);
+        allPassed = false;
         if (driver) await driver.quit();
       }
     }
+  }
+
+  // Zapis ogólnego wyniku testu
+  if (allPassed) {
+    logTestResult(testName, true);
   }
 })();
