@@ -1124,6 +1124,15 @@ img {
             transition: all 0.6s ease-out;
         }
     }
+    &-stop {
+        &::after {
+            animation: none;
+            z-index: 0;
+            opacity: 1;
+            animation: none;
+            right: 0;
+        }
+    }
 }
 
 //breadcrumb
@@ -1586,30 +1595,29 @@ table {
     margin-bottom: 60px;
     flex-wrap: wrap;
     row-gap: 8px;
-    .select-wrap {
-        position: relative;
-        i {
-            position: absolute;
-            left: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 24px;
-            &.fa-chevron-down {
-                left: auto;
-                right: 30px;
-                font-size: 16px;
-            }
+}
+.select-wrap {
+    position: relative;
+    i {
+        position: absolute;
+        left: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 24px;
+        &.fa-chevron-down {
+            left: auto;
+            right: 30px;
+            font-size: 16px;
         }
     }
 }
 select option {
     padding: 6px 20px !important;
-
-    font-family: Poppins;
     font-weight: 400;
     font-size: 16px;
     line-height: 23px;
     letter-spacing: 0px;
+    font-family: "Krona One";
 }
 
 select option:hover {
@@ -1634,5 +1642,9 @@ select {
     appearance: none;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     min-width: 300px;
-    padding-left: 60px;
+    padding-left: 15px;
+    font-family: "Krona One";
+    &.select-icon {
+        padding-left: 60px;
+    }
 }

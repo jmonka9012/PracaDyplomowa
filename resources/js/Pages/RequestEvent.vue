@@ -181,12 +181,24 @@ const { user, isLoggedIn } = useAuth();
                     <label for="event-location"
                         >Lokalizacja / Wybrana sala*</label
                     >
-                    <select v-model="requestEventForm.event_location" >
-                        <option selected disabled value="ph">Wybierz halę</option>
-                        <option :value="hall.id" v-for="hall in halls">{{ hall.hall_name }}</option>
-                    </select>
+                    <div class="select-wrap">
+                        <i class="fa fa-chevron-down"></i>
+                        <select
+                            class="col-12"
+                            v-model="requestEventForm.event_location"
+                        >
+                            <option selected disabled value="ph">
+                                Wybierz halę
+                            </option>
+                            <option :value="hall.id" v-for="hall in halls">
+                                {{ hall.hall_name }}
+                            </option>
+                        </select>
+                    </div>
+
                     <div>
-                        Wizualizacje naszych hal znajdziesz <Link :href="`${route('about-us')}#halls`">Tutaj</Link>
+                        Wizualizacje naszych hal znajdziesz
+                        <Link :href="`${route('about-us')}#halls`">Tutaj</Link>
                     </div>
                 </div>
                 <div class="input-wrap col-12">
