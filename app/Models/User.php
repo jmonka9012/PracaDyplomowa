@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Blog\BlogAuthor;
+use App\Models\Tickets\Ticket;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -52,5 +54,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function author()
+    {
+        return $this->hasOne(BlogAuthor::class);
     }
 }
