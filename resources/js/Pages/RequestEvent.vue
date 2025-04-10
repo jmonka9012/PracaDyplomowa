@@ -6,6 +6,7 @@ import {reactive, ref} from "vue";
 import {router} from "@inertiajs/vue3";
 import {Link} from "@inertiajs/vue3";
 import Wysiwyg from "../Components/sections-new/Wysiwyg.vue";
+import Editor from "@tinymce/tinymce-vue";
 
 const errors = reactive({});
 
@@ -18,7 +19,7 @@ const requestEventForm = reactive({
     event_end: null,
     contact_email: null,
     contact_email_additional: null,
-    event_description: null,
+    event_description: '',
     event_description_additional: null,
     event_location: null,
 });
@@ -108,7 +109,7 @@ const {user, isLoggedIn} = useAuth();
                     </p>
                     <input
                         type="text"
-                        placeholder="Url wydarzenia*"
+                        placeholder="Url wydarzenia"
                         id="event-slug"
                         pattern="[a-z0-9-]+"
                         name="event-slug"
@@ -233,18 +234,20 @@ const {user, isLoggedIn} = useAuth();
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-description">Opis*</label>
-                    <Wysiwyg
+                    <Editor
+                        api-key="9xfliuzz7ewega4fyhr4ewcymh6ye1gut2xoz8gc9zd140t7"
                         name="event-description"
                         spellcheck="false"
                         id="event-description"
                         placeholder="Opis wydarzenia"
-                        required
                         v-model="requestEventForm.event_description"
                         :init="{
                     toolbar_mode: 'sliding',
+                            content_style: 'body { font-family: Arial; }',
                     images_upload_url: route('event-create.image'),
+                    images_upload_credentials: true, // Dodaj to!
+        forced_root_block: false,
                     plugins: [
-                        // Core editing features
                         'anchor',
                         'autolink',
                         'charmap',
@@ -258,8 +261,6 @@ const {user, isLoggedIn} = useAuth();
                         'table',
                         'visualblocks',
                         'wordcount',
-                        // Your account includes a free trial of TinyMCE premium features
-                        // Try the most popular premium features until Apr 17, 2025:
                         'checklist',
                         'mediaembed',
                         'casechange',
@@ -273,7 +274,6 @@ const {user, isLoggedIn} = useAuth();
                         'advcode',
                         'editimage',
                         'advtemplate',
-                        'ai',
                         'mentions',
                         'tinycomments',
                         'tableofcontents',
@@ -295,10 +295,6 @@ const {user, isLoggedIn} = useAuth();
                         { value: 'First.Name', title: 'First Name' },
                         { value: 'Email', title: 'Email' },
                     ],
-                    ai_request: (request, respondWith) =>
-                        respondWith.string(() =>
-                            Promise.reject('See docs to implement AI Assistant')
-                        ),
                 }"
                     />
                 </div>
@@ -309,6 +305,7 @@ const {user, isLoggedIn} = useAuth();
                         name="event-description-additional"
                         placeholder="Więcej informacji"
                         spellcheck="false"
+                        required
                         value=""
                         aria-required="false"
                         v-model="requestEventForm.event_description_additional"
