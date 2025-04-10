@@ -184,10 +184,11 @@ const { user, isLoggedIn } = useAuth();
                     <div class="select-wrap">
                         <i class="fa fa-chevron-down"></i>
                         <select
+                            id="event-location"
                             class="col-12"
                             v-model="requestEventForm.event_location"
                         >
-                            <option selected disabled value="ph">
+                            <option disabled :value="null">
                                 Wybierz halę
                             </option>
                             <option :value="hall.id" v-for="hall in halls">
