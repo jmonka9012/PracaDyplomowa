@@ -18,7 +18,7 @@ let registerEmailCorrect = false;
 
 let canRegister = false;
 
-function HandleSubmitClass(routeName, response) {
+function HandleSubmitClass() {
     canRegister = registerEmailCorrect && registerNameCorrect;
 }
 
@@ -44,7 +44,7 @@ const validationRequest = debounce((routeName) => {
         .post(route(routeName), registerForm)
         .then((response) => {
             HandleValidationResponse(routeName, response);
-            HandleSubmitClass(routeName, response);
+            HandleSubmitClass();
         })
         .catch((error) => {
             console.error(error);

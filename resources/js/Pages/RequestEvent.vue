@@ -4,6 +4,7 @@ import HeroSmall from "@/Components/sections-new/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
 import { reactive, ref } from "vue";
 import { router } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 const errors = reactive({});
 
 // Przechowywanie danych formularza
@@ -59,6 +60,13 @@ function submitEventRequest() {
         },
     });
 }
+
+const props = defineProps({
+    halls: {
+        type: Array,
+        required: true,
+    },
+});
 
 const { user, isLoggedIn } = useAuth();
 </script>
@@ -173,17 +181,13 @@ const { user, isLoggedIn } = useAuth();
                     <label for="event-location"
                         >Lokalizacja / Wybrana sala*</label
                     >
-                    <input
-                        type="text"
-                        id="event-location"
-                        name="event-location"
-                        required
-                        placeholder="Lokalizacja"
-                        spellcheck="false"
-                        value=""
-                        aria-required="true"
-                        v-model="requestEventForm.event_location"
-                    />
+                    <select v-model="requestEventForm.event_location" >
+                        <option selected disabled value="ph">Wybierz halę</option>
+                        <option :value="hall.id" v-for="hall in halls">{{ hall.hall_name }}</option>
+                    </select>
+                    <div>
+                        Wizualizacje naszych hal znajdziesz <Link :href="`${route('about-us')}#halls`">Tutaj</Link>
+                    </div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-email">Email kontaktowy*</label>
