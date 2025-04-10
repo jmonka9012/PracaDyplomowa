@@ -2,8 +2,12 @@
 import useAuth from "@/Utilities/useAuth";
 import HeroSmall from "@/Components/sections-new/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
-import { reactive, ref } from "vue";
-import { router } from "@inertiajs/vue3";
+import {reactive, ref} from "vue";
+import {router} from "@inertiajs/vue3";
+import {Link} from "@inertiajs/vue3";
+import Wysiwyg from "../Components/sections-new/Wysiwyg.vue";
+import Editor from "@tinymce/tinymce-vue";
+
 const errors = reactive({});
 
 // Przechowywanie danych formularza
@@ -15,7 +19,7 @@ const requestEventForm = reactive({
     event_end: null,
     contact_email: null,
     contact_email_additional: null,
-    event_description: null,
+    event_description: '',
     event_description_additional: null,
     event_location: null,
 });
@@ -60,7 +64,14 @@ function submitEventRequest() {
     });
 }
 
-const { user, isLoggedIn } = useAuth();
+const props = defineProps({
+    halls: {
+        type: Array,
+        required: true,
+    },
+});
+
+const {user, isLoggedIn} = useAuth();
 </script>
 
 <template>
@@ -98,7 +109,7 @@ const { user, isLoggedIn } = useAuth();
                     </p>
                     <input
                         type="text"
-                        placeholder="Url wydarzenia*"
+                        placeholder="Url wydarzenia"
                         id="event-slug"
                         pattern="[a-z0-9-]+"
                         name="event-slug"
@@ -171,19 +182,28 @@ const { user, isLoggedIn } = useAuth();
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-location"
-                        >Lokalizacja / Wybrana sala*</label
+                    >Lokalizacja / Wybrana sala*</label
                     >
-                    <input
-                        type="text"
-                        id="event-location"
-                        name="event-location"
-                        required
-                        placeholder="Lokalizacja"
-                        spellcheck="false"
-                        value=""
-                        aria-required="true"
-                        v-model="requestEventForm.event_location"
-                    />
+                    <div class="select-wrap">
+                        <i class="fa fa-chevron-down"></i>
+                        <select
+                            id="event-location"
+                            class="col-12"
+                            v-model="requestEventForm.event_location"
+                        >
+                            <option disabled :value="null">
+                                Wybierz halę
+                            </option>
+                            <option :value="hall.id" v-for="hall in halls">
+                                {{ hall.hall_name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div>
+                        Wizualizacje naszych hal znajdziesz
+                        <Link :href="`${route('about-us')}#halls`">Tutaj</Link>
+                    </div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-email">Email kontaktowy*</label>
@@ -214,16 +234,69 @@ const { user, isLoggedIn } = useAuth();
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-description">Opis*</label>
-                    <textarea
-                        id="event-description"
+                    <Editor
+                        api-key="9xfliuzz7ewega4fyhr4ewcymh6ye1gut2xoz8gc9zd140t7"
                         name="event-description"
-                        required
-                        placeholder="Opis wydarzenia"
                         spellcheck="false"
-                        value=""
-                        aria-required="true"
+                        id="event-description"
+                        placeholder="Opis wydarzenia"
                         v-model="requestEventForm.event_description"
-                    ></textarea>
+                        :init="{
+                    toolbar_mode: 'sliding',
+                            content_style: 'body { font-family: Arial; }',
+                    images_upload_url: route('event-create.image'),
+                    images_upload_credentials: true, // Dodaj to!
+        forced_root_block: false,
+                    plugins: [
+                        'anchor',
+                        'autolink',
+                        'charmap',
+                        'codesample',
+                        'emoticons',
+                        'image',
+                        'link',
+                        'lists',
+                        'media',
+                        'searchreplace',
+                        'table',
+                        'visualblocks',
+                        'wordcount',
+                        'checklist',
+                        'mediaembed',
+                        'casechange',
+                        'formatpainter',
+                        'pageembed',
+                        'a11ychecker',
+                        'tinymcespellchecker',
+                        'permanentpen',
+                        'powerpaste',
+                        'advtable',
+                        'advcode',
+                        'editimage',
+                        'advtemplate',
+                        'mentions',
+                        'tinycomments',
+                        'tableofcontents',
+                        'footnotes',
+                        'mergetags',
+                        'autocorrect',
+                        'typography',
+                        'inlinecss',
+                        'markdown',
+                        'importword',
+                        'exportword',
+                        'exportpdf',
+                    ],
+                    toolbar:
+                        'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat | language',
+                    tinycomments_mode: 'embedded',
+                    tinycomments_author: 'Author name',
+                    mergetags_list: [
+                        { value: 'First.Name', title: 'First Name' },
+                        { value: 'Email', title: 'Email' },
+                    ],
+                }"
+                    />
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-description">Więcej informacji</label>
@@ -232,13 +305,14 @@ const { user, isLoggedIn } = useAuth();
                         name="event-description-additional"
                         placeholder="Więcej informacji"
                         spellcheck="false"
+                        required
                         value=""
                         aria-required="false"
                         v-model="requestEventForm.event_description_additional"
                     ></textarea>
                 </div>
                 <div class="input-wrap col-12">
-                    <input type="submit" value="Stwórz wydarzenie" />
+                    <input type="submit" value="Stwórz wydarzenie"/>
                 </div>
             </form>
         </div>

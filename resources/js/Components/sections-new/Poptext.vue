@@ -147,7 +147,6 @@ const charTotal = computed(() => props.text.length);
         @include mixin.media-breakpoint-up(lg) {
             font-size: 250px;
         }
-
     }
 
     &-logo {
@@ -158,7 +157,7 @@ const charTotal = computed(() => props.text.length);
 
     &-footer {
         font-size: 55px;
-
+        display: flex;
     }
 }
 </style>

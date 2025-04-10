@@ -1,37 +1,65 @@
 <script setup>
 defineProps({
-    id: Number,
-    src: String,
-    mainLink: Array,
-    date: String,
+    events: Array,
 });
 </script>
 <template>
-    <div class="event">
+         <div class="select-filters">
+                <div class="input-wrap select-wrap">
+                    <i class="fa fa-calendar"></i>
+                    <i class="fa fa-chevron-down"></i>
+                    <select class="select-icon">
+                        <option disabled value="">Please select one</option>
+                        <option>Buisness</option>
+                        <option>Concert</option>
+                        <option>Music</option>
+                        <option>Conference</option>
+                        <option>Education</option>
+                        <option>Fashion</option>
+                        <option>Festival</option>
+                        <option>Food & drink</option>
+                        <option>Other</option>
+                        <option>Sport</option>
+                    </select>
+                </div>
+                <div class="input-wrap select-wrap">
+                    <i class="fa fa-map-marker"></i>
+                    <select class="select select-icon">
+                        <option disabled value="">All time</option>
+                        <option>Today</option>
+                        <option>Tommorow</option>
+                        <option>This week</option>
+                        <option>This weekend</option>
+                        <option>Next week</option>
+                        <option>Next month</option>
+                    </select>
+                </div>
+            </div>
+    <div v-for="event in events" :key="event.id" class="event">
         <div class="event-img">
-            <a class="link-stretched" :href="mainLink[0].href"> </a>
-            <img :src="src" alt="" />
+            <a class="link-stretched" :href="event.mainLink[0].href"> </a>
+            <img :src="event.src" alt="" />
         </div>
         <div class="d-flex flex-column col-12">
             <div
                 class="d-flex flex-lg-row justify-content-between align-items-center mt-lg-8px mb-16px"
             >
                 <h6 class="event-title">
-                    <a :href="mainLink.href">{{ mainLink[0].title }}</a>
+                    <a :href="event.mainLink[0].href">{{ event.mainLink[0].title }}</a>
                 </h6>
-                <a class="event-link d-none d-lg-flex" :href="mainLink[0].ahref"
+                <a class="event-link d-none d-lg-flex" :href="event.mainLink[0].ahref"
                     ><i class="fa fa-ticket"></i>
                     Zobacz więcej
                 </a>
             </div>
             <p class="event-date ff-prompt">
-                <i class="fa fa-calendar mr-5px"></i>{{ date }}
+                <i class="fa fa-calendar mr-5px"></i>{{ event.date }}
             </p>
             <p class="event-subtitle">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed,
                 eum?
             </p>
-            <a class="event-link d-lg-none" :href="mainLink[0].ahref"
+            <a class="event-link d-lg-none" :href="event.mainLink[0].ahref"
                 ><i class="fa fa-ticket"></i>
                 Zobacz więcej
             </a>
@@ -61,7 +89,6 @@ defineProps({
         justify-content: space-between;
         align-items: start;
     }
-
 
     &-img {
         max-width: 200px;

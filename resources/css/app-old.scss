@@ -119,6 +119,7 @@ section {
 
     &-full {
         max-width: 100%;
+        padding: 0;
     }
 
     &-big {
@@ -135,6 +136,18 @@ section {
     &-small {
         max-width: 1200px;
     }
+}
+.h-100 {
+    height: 100%;
+}
+.h-fit {
+    height: fit-content;
+}
+.mh-600 {
+    max-height: 600px;
+}
+.of-cover {
+    object-fit: cover;
 }
 
 a {
@@ -658,6 +671,9 @@ img {
 .fw-bold {
     font-weight: 600;
 }
+.text-underline{
+    text-transform: underline;
+}
 
 .orange-underline {
     position: relative;
@@ -1112,6 +1128,15 @@ img {
             opacity: 1;
             right: 0;
             transition: all 0.6s ease-out;
+        }
+    }
+    &-stop {
+        &::after {
+            animation: none;
+            z-index: 0;
+            opacity: 1;
+            animation: none;
+            right: 0;
         }
     }
 }
@@ -1569,59 +1594,63 @@ table {
 
 //event filters here
 
-.event-filters {
+.select-filters {
     display: flex;
     justify-content: flex-start;
     column-gap: 8px;
     margin-bottom: 60px;
-    .event-select-wrap {
-        position: relative;
-        i {
-            position: absolute;
-            left: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 24px;
-            &.fa-chevron-down {
-                left: auto;
-                right: 30px;
-                font-size: 16px;
-            }
+    flex-wrap: wrap;
+    row-gap: 8px;
+}
+.select-wrap {
+    position: relative;
+    i {
+        position: absolute;
+        left: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 24px;
+        &.fa-chevron-down {
+            left: auto;
+            right: 30px;
+            font-size: 16px;
         }
     }
-    .event-select option {
-        padding: 6px 20px !important;
+}
+select option {
+    padding: 6px 20px !important;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 23px;
+    letter-spacing: 0px;
+    font-family: "Krona One";
+}
 
-        font-family: Poppins;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 23px;
-        letter-spacing: 0px;
-    }
-
-    .event-select option:hover {
-        background-color: var(--orange);
-    }
-    .event-select:focus {
-        outline: none;
-    }
-    .event-select {
-        box-shadow: none;
-        min-height: 60px;
-        font-size: 15px;
-        display: block;
-        padding: 0.375rem 0.75rem;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid #ced4da;
-        border-radius: 8px;
-        appearance: none;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        min-width: 300px;
-        width: 100%;
+select option:hover {
+    background-color: var(--orange);
+}
+select:focus {
+    outline: none;
+}
+select {
+    box-shadow: none;
+    min-height: 60px;
+    font-size: 15px;
+    display: block;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    appearance: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    min-width: 300px;
+    padding-left: 15px;
+    font-family: "Krona One";
+    &.select-icon {
         padding-left: 60px;
     }
 }

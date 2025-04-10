@@ -11,6 +11,8 @@ use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 use App\Http\Requests\RequestEventRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 
 class RequestEventController extends Controller
@@ -82,5 +84,23 @@ class RequestEventController extends Controller
 
         }
         return redirect()->route('home');
+    }
+
+    public function storeEventImages(Request $request)
+    {
+        $request->validate([
+           'file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048' 
+        ]);
+
+        $file = $request->file('file');
+        $path = $file->storeAs(
+            'wysiwyg-images',
+            time().'_'.$file->getClientOriginalName(),
+            'public'
+        );
+
+        return response()->json([
+            'location' => Storage::disk('public')->url($path)
+        ]);
     }
 }

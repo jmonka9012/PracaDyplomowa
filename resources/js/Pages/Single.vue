@@ -3,6 +3,7 @@ import EventsAlt from "@/Components/sections-new/EventsAlt.vue";
 import HeroSmall from "@/Components/sections-new/Hero-small.vue";
 
 import HellSpit from "~images/hellspit.jpg";
+import SinglePlch from "~images/single-placeholder.jpg";
 import BangPow from "~images/bangpow.jpg";
 import SingleMap from "~images/single-map.jpg";
 import blogBg from "~images/single-map.jpg";
@@ -111,7 +112,7 @@ const latest = [
                 <img class="single__map" :src="SingleMap" alt="" />
                 <div class="bb-1 b-secondary"></div>
                 <div
-                    class="d-flex flex-lg-row column-gap-10px mt-30px mb-100px"
+                    class="d-flex row-gap-10px column-gap-10px mt-30px mb-100px"
                 >
                     <a class="social-link" href=""
                         ><i class="fab fa-twitter"></i
@@ -131,12 +132,12 @@ const latest = [
                 </div>
                 <h3 class="mb-30px">Related Events</h3>
                 <EventsAlt :latest="latest" />
-                <h3 class="mb-40px">Leave a Reply</h3>
+                <!-- <h3 class="mb-40px">Leave a Reply</h3>
                 <p class="fs-14 mb-20px">
                     Your email address will not be published. Required fields
                     are marked *
-                </p>
-                <form action="" class="form">
+                </p> -->
+                <!-- <form action="" class="form">
                     <div class="input-wrap col-12 col-lg-6">
                         <input type="text" placeholder="Your Name*" required />
                     </div>
@@ -164,7 +165,7 @@ const latest = [
                     <div class="input-wrap col-12">
                         <input type="submit" value="post comment" />
                     </div>
-                </form>
+                </form> -->
             </div>
         </div>
     </section>
@@ -187,6 +188,11 @@ const latest = [
     }
     &__intro {
         margin-bottom: 50px;
+        display: flex;
+        justify-content: center;
+        img {
+            max-height: 600px;
+        }
     }
     &__title {
         margin-bottom: 50px;

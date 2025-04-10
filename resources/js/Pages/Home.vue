@@ -196,51 +196,7 @@ const events = [
         <div class="container flex-column align-items-center">
             <p class="sub-title sub-title-lprpl mb-20px">FUTURE EVENTS</p>
             <h3 class="title-1 mb-20px">Festivals This December</h3>
-            <div class="event-filters">
-                <div class="input-wrap event-select-wrap">
-                    <i class="fa fa-calendar"></i>
-                    <i class="fa fa-chevron-down"></i>
-                    <select class="event-select" v-model="selectedCategory">
-                        <option disabled value="">Please select one</option>
-                        <option>Buisness</option>
-                        <option>Concert</option>
-                        <option>Music</option>
-                        <option>Conference</option>
-                        <option>Education</option>
-                        <option>Fashion</option>
-                        <option>Festival</option>
-                        <option>Food & drink</option>
-                        <option>Other</option>
-                        <option>Sport</option>
-                    </select>
-                </div>
-                <div class="input-wrap event-select-wrap">
-                    <i class="fa fa-map-marker"></i>
-                    <select class="event-select" v-model="selectedTime">
-                        <option disabled value="">All time</option>
-                        <option>Today</option>
-                        <option>Tommorow</option>
-                        <option>This week</option>
-                        <option>This weekend</option>
-                        <option>Next week</option>
-                        <option>Next month</option>
-                    </select>
-                </div>
-            </div>
-            <select>
-                <option disabled value="">Please select one</option>
-                <option>Buisness</option>
-                <option>Concert</option>
-                <option>Music</option>
-                <option>Conference</option>
-                <option>Education</option>
-                <option>Fashion</option>
-                <option>Festival</option>
-                <option>Food & drink</option>
-                <option>Other</option>
-                <option>Sport</option>
-            </select>
-            <Events v-for="event in events" v-bind="event" :key="event.id" />
+            <Events :events="events" />
         </div>
     </section>
     <Services />
@@ -248,7 +204,7 @@ const events = [
         <template #subtitle>Meet Our Team</template>
         <template #title>Our Professionals</template>
     </Team>
-    <section class="pt-100px pb-100px">
+    <!-- <section class="pt-100px pb-100px">
         <div class="container">
             <SliderGallery
                 :slides-per-view="1"
@@ -262,5 +218,5 @@ const events = [
                 </template>
             </SliderGallery>
         </div>
-    </section>
+    </section> -->
 </template>

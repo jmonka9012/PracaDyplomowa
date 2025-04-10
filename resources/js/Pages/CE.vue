@@ -511,7 +511,6 @@ const latest = [
                 :init="{
                     toolbar_mode: 'sliding',
                     plugins: [
-                        // Core editing features
                         'anchor',
                         'autolink',
                         'charmap',
@@ -525,8 +524,6 @@ const latest = [
                         'table',
                         'visualblocks',
                         'wordcount',
-                        // Your account includes a free trial of TinyMCE premium features
-                        // Try the most popular premium features until Apr 17, 2025:
                         'checklist',
                         'mediaembed',
                         'casechange',
@@ -540,7 +537,6 @@ const latest = [
                         'advcode',
                         'editimage',
                         'advtemplate',
-                        'ai',
                         'mentions',
                         'tinycomments',
                         'tableofcontents',
@@ -555,17 +551,13 @@ const latest = [
                         'exportpdf',
                     ],
                     toolbar:
-                        'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                        'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat | language',
                     tinycomments_mode: 'embedded',
                     tinycomments_author: 'Author name',
                     mergetags_list: [
                         { value: 'First.Name', title: 'First Name' },
                         { value: 'Email', title: 'Email' },
                     ],
-                    ai_request: (request, respondWith) =>
-                        respondWith.string(() =>
-                            Promise.reject('See docs to implement AI Assistant')
-                        ),
                 }"
             />
         </div>
@@ -690,6 +682,69 @@ const latest = [
             </div>
         </section>
     </section>
+    <!-- O nas  -->
+    <HeroSmall :source="blogBg" title="O nas"></HeroSmall>
+    <section class="section-full mb-100px">
+        <div class="container container-full">
+            <div class="col-12 col-lg-6 pl-10px pr-10px pl-lg-0 pr-lg-0">
+                <img class="h-100 of-cover" :src="blogBg" alt="" />
+            </div>
+            <div
+                class="col-12 col-lg-6 pt-30px pb-30px pt-lg-100px pb-lg-100px pl-10px pr-10px pl-md-30px pr-md-30px pl-lg-100px pr-lg-100px"
+            >
+                <h1 class="mb-15px">Lorem ispum</h1>
+                <p class="mb-30px">
+                    <b>Lorem ipsum dolo</b>r sit, amet consectetur adipisicing
+                    elit. Dolorum, itaque. Recusandae cum quaerat explicabo.
+                    Dignissimos quibusdam itaque excepturi quod corporis.
+                </p>
+                <p>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Dolor eveniet ab eum repellat distinctio veritatis
+                    voluptatum enim consectetur explicabo tempore!
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="mb-100px">
+        <div class="container justify-content-center">
+            <h1 class="mb-30px">Lorem Ipsum dolor sit amet</h1>
+            <p class="mb-50px">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil
+                officiis repudiandae totam? Sunt, ratione nam! Sed maxime et
+                quos odit repellendus consectetur ex nulla! Consequuntur magni a
+                possimus omnis laborum, deleniti incidunt, itaque voluptatem
+                odio est quia. Asperiores, facere exercitationem. Velit hic
+                placeat error quibusdam beatae consequatur doloribus enim
+                nesciunt. Lorem ipsum dolor sit amet, consectetur adipisicing
+                elit. Nihil officiis repudiandae totam? Sunt, ratione nam! Sed
+                maxime et quos odit repellendus consectetur ex nulla!
+                Consequuntur magni a possimus omnis laborum, deleniti incidunt,
+                itaque voluptatem odio est quia. Asperiores, facere
+                exercitationem. Velit hic placeat error quibusdam beatae
+                consequatur doloribus enim nesciunt.
+            </p>
+            <img class="mh-600 mb-30px" :src="hellsPit" alt="" />
+            <h3 class="mb-30px">Lorem Ipsum dolor sit amet</h3>
+            <p class="mb-50px">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil
+                officiis repudiandae totam? Sunt, ratione nam! Sed maxime et
+                quos odit repellendus consectetur ex nulla! Consequuntur magni a
+                possimus omnis laborum, deleniti incidunt, itaque voluptatem
+                odio est quia. Asperiores, facere exercitationem. Velit hic
+                placeat error quibusdam beatae consequatur doloribus enim
+                nesciunt. Lorem ipsum dolor sit amet, consectetur adipisicing
+                elit. Nihil officiis repudiandae totam? Sunt, ratione nam! Sed
+                maxime et quos odit repellendus consectetur ex nulla!
+                Consequuntur magni a possimus omnis laborum, deleniti incidunt,
+                itaque voluptatem odio est quia. Asperiores, facere
+                exercitationem. Velit hic placeat error quibusdam beatae
+                consequatur doloribus enim nesciunt.
+            </p>
+            <h3 class="mb-50px">Gdzie jesteśmy ? (tu mapa)</h3>
+            <img :src="blogBg" class="on-map" alt="" />
+        </div>
+    </section>
 </template>
 
 <style lang="scss">
@@ -725,5 +780,13 @@ const latest = [
         flex-direction: row;
         padding-bottom: 100px;
     }
+}
+//tutaj narazie o nas
+
+.on-map {
+    max-height: 600px;
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
 }
 </style>

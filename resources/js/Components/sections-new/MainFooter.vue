@@ -28,7 +28,7 @@ const { siteData } = pageInfo();
             <div class="col-12 col-lg-6 d-flex flex-column align-items-center">
                 <Link :href="route('home')">
                     <Poptext
-                        class="flex-column justify-content-center align-items-center poptext-white poptext-footer"
+                        class="flex-column justify-content-center align-items-center poptext-white poptext-footer "
                         :text="siteData.title"
                     />
                 </Link>

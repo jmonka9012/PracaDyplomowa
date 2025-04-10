@@ -17,7 +17,7 @@ const props = defineProps({
 
 <template>
 
-    <section>
+    <section id="halls">
         <div class="container container-mid">
             <div class="col-lg-12">
                 <Tabs>
