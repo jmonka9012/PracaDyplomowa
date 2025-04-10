@@ -24,6 +24,7 @@ return new class extends Migration
             $table->text('event_description_additional')->nullable();
             $table->string('event_location');
             $table->string('image_path')->nullable();
+            $table->boolean('pending')->default(true);
             $table->timestamps();
         });
     }

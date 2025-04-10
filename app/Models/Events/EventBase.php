@@ -19,6 +19,7 @@ abstract class EventBase extends Model
         'event_description_additional',
         'event_location',
         'image_path',
+        'pending',
     ];
 
     public function getIsArchivedAttribute()
