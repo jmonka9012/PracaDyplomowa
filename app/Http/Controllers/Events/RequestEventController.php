@@ -83,4 +83,9 @@ class RequestEventController extends Controller
         }
         return redirect()->route('home');
     }
+
+    public function storeEventImages()
+    {
+        return 'storage/app/public/event_images/2025/04/12345315125/Y22dA9XQ7EVho95znBXXDFny2XwkTVLUONnKzVMf.jpg';
+    }
 }

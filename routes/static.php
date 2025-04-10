@@ -15,6 +15,7 @@ Route::get('/kontakt', [ContactController::class, 'index'])->name('contact');
 // Strona zorganizuj wydarzenie
 Route::get('/zorganizuj-wydarzenie', [RequestEventController::class, 'index'])->name('event-create');
 Route::post('/zorganizuj-wydarzenie', [RequestEventController::class, 'store'])->name('event-create.post');
+Route::post('/zorganizuj-wydarzenie', [RequestEventController::class, 'storeEventImages'])->name('event-create.image');
 
 // Strona hal
 Route::get('/o-nas', [AboutUsController::class, 'index'])->name('about-us');
