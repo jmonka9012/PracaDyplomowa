@@ -2,9 +2,11 @@
 import useAuth from "@/Utilities/useAuth";
 import HeroSmall from "@/Components/sections-new/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
-import { reactive, ref } from "vue";
-import { router } from "@inertiajs/vue3";
-import { Link } from "@inertiajs/vue3";
+import {reactive, ref} from "vue";
+import {router} from "@inertiajs/vue3";
+import {Link} from "@inertiajs/vue3";
+import Wysiwyg from "../Components/sections-new/Wysiwyg.vue";
+
 const errors = reactive({});
 
 // Przechowywanie danych formularza
@@ -68,7 +70,7 @@ const props = defineProps({
     },
 });
 
-const { user, isLoggedIn } = useAuth();
+const {user, isLoggedIn} = useAuth();
 </script>
 
 <template>
@@ -179,7 +181,7 @@ const { user, isLoggedIn } = useAuth();
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-location"
-                        >Lokalizacja / Wybrana sala*</label
+                    >Lokalizacja / Wybrana sala*</label
                     >
                     <div class="select-wrap">
                         <i class="fa fa-chevron-down"></i>
@@ -231,16 +233,74 @@ const { user, isLoggedIn } = useAuth();
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-description">Opis*</label>
-                    <textarea
-                        id="event-description"
+                    <Wysiwyg
                         name="event-description"
-                        required
-                        placeholder="Opis wydarzenia"
                         spellcheck="false"
-                        value=""
-                        aria-required="true"
+                        id="event-description"
+                        placeholder="Opis wydarzenia"
+                        required
                         v-model="requestEventForm.event_description"
-                    ></textarea>
+                        :init="{
+                    toolbar_mode: 'sliding',
+                    images_upload_url: route('event-create.image'),
+                    plugins: [
+                        // Core editing features
+                        'anchor',
+                        'autolink',
+                        'charmap',
+                        'codesample',
+                        'emoticons',
+                        'image',
+                        'link',
+                        'lists',
+                        'media',
+                        'searchreplace',
+                        'table',
+                        'visualblocks',
+                        'wordcount',
+                        // Your account includes a free trial of TinyMCE premium features
+                        // Try the most popular premium features until Apr 17, 2025:
+                        'checklist',
+                        'mediaembed',
+                        'casechange',
+                        'formatpainter',
+                        'pageembed',
+                        'a11ychecker',
+                        'tinymcespellchecker',
+                        'permanentpen',
+                        'powerpaste',
+                        'advtable',
+                        'advcode',
+                        'editimage',
+                        'advtemplate',
+                        'ai',
+                        'mentions',
+                        'tinycomments',
+                        'tableofcontents',
+                        'footnotes',
+                        'mergetags',
+                        'autocorrect',
+                        'typography',
+                        'inlinecss',
+                        'markdown',
+                        'importword',
+                        'exportword',
+                        'exportpdf',
+                    ],
+                    toolbar:
+                        'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat | language',
+                    tinycomments_mode: 'embedded',
+                    tinycomments_author: 'Author name',
+                    mergetags_list: [
+                        { value: 'First.Name', title: 'First Name' },
+                        { value: 'Email', title: 'Email' },
+                    ],
+                    ai_request: (request, respondWith) =>
+                        respondWith.string(() =>
+                            Promise.reject('See docs to implement AI Assistant')
+                        ),
+                }"
+                    />
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-description">Więcej informacji</label>
@@ -255,7 +315,7 @@ const { user, isLoggedIn } = useAuth();
                     ></textarea>
                 </div>
                 <div class="input-wrap col-12">
-                    <input type="submit" value="Stwórz wydarzenie" />
+                    <input type="submit" value="Stwórz wydarzenie"/>
                 </div>
             </form>
         </div>
