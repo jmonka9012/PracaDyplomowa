@@ -1579,12 +1579,14 @@ table {
 
 //event filters here
 
-.event-filters {
+.select-filters {
     display: flex;
     justify-content: flex-start;
     column-gap: 8px;
     margin-bottom: 60px;
-    .event-select-wrap {
+    flex-wrap: wrap;
+    row-gap: 8px;
+    .select-wrap {
         position: relative;
         i {
             position: absolute;
@@ -1599,39 +1601,38 @@ table {
             }
         }
     }
-    .event-select option {
-        padding: 6px 20px !important;
+}
+select option {
+    padding: 6px 20px !important;
 
-        font-family: Poppins;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 23px;
-        letter-spacing: 0px;
-    }
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 23px;
+    letter-spacing: 0px;
+}
 
-    .event-select option:hover {
-        background-color: var(--orange);
-    }
-    .event-select:focus {
-        outline: none;
-    }
-    .event-select {
-        box-shadow: none;
-        min-height: 60px;
-        font-size: 15px;
-        display: block;
-        padding: 0.375rem 0.75rem;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid #ced4da;
-        border-radius: 8px;
-        appearance: none;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        min-width: 300px;
-        width: 100%;
-        padding-left: 60px;
-    }
+select option:hover {
+    background-color: var(--orange);
+}
+select:focus {
+    outline: none;
+}
+select {
+    box-shadow: none;
+    min-height: 60px;
+    font-size: 15px;
+    display: block;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    appearance: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    min-width: 300px;
+    padding-left: 60px;
 }

@@ -204,7 +204,7 @@ const events = [
         <template #subtitle>Meet Our Team</template>
         <template #title>Our Professionals</template>
     </Team>
-    <section class="pt-100px pb-100px">
+    <!-- <section class="pt-100px pb-100px">
         <div class="container">
             <SliderGallery
                 :slides-per-view="1"
@@ -218,5 +218,5 @@ const events = [
                 </template>
             </SliderGallery>
         </div>
-    </section>
+    </section> -->
 </template>

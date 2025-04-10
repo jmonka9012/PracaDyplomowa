@@ -4,37 +4,10 @@ defineProps({
 });
 </script>
 <template>
-         <div class="event-filters">
-                <div class="input-wrap event-select-wrap">
-                    <i class="fa fa-calendar"></i>
-                    <i class="fa fa-chevron-down"></i>
-                    <select class="event-select">
-                        <option disabled value="">Please select one</option>
-                        <option>Buisness</option>
-                        <option>Concert</option>
-                        <option>Music</option>
-                        <option>Conference</option>
-                        <option>Education</option>
-                        <option>Fashion</option>
-                        <option>Festival</option>
-                        <option>Food & drink</option>
-                        <option>Other</option>
-                        <option>Sport</option>
-                    </select>
-                </div>
-                <div class="input-wrap event-select-wrap">
-                    <i class="fa fa-map-marker"></i>
-                    <select class="event-select">
-                        <option disabled value="">All time</option>
-                        <option>Today</option>
-                        <option>Tommorow</option>
-                        <option>This week</option>
-                        <option>This weekend</option>
-                        <option>Next week</option>
-                        <option>Next month</option>
-                    </select>
-                </div>
-            </div>
+    <div class="select-filters">
+        <div class="input-wrap select-wrap">
+            <i class="fa fa-calendar"></i>
+            <i class="fa fa-chevron-down"></i>
             <select>
                 <option disabled value="">Please select one</option>
                 <option>Buisness</option>
@@ -48,6 +21,20 @@ defineProps({
                 <option>Other</option>
                 <option>Sport</option>
             </select>
+        </div>
+        <div class="input-wrap select-wrap">
+            <i class="fa fa-map-marker"></i>
+            <select class="select">
+                <option disabled value="">All time</option>
+                <option>Today</option>
+                <option>Tommorow</option>
+                <option>This week</option>
+                <option>This weekend</option>
+                <option>Next week</option>
+                <option>Next month</option>
+            </select>
+        </div>
+    </div>
     <div v-for="event in events" :key="event.id" class="event">
         <div class="event-img">
             <a class="link-stretched" :href="event.mainLink[0].href"> </a>
@@ -58,9 +45,13 @@ defineProps({
                 class="d-flex flex-lg-row justify-content-between align-items-center mt-lg-8px mb-16px"
             >
                 <h6 class="event-title">
-                    <a :href="event.mainLink[0].href">{{ event.mainLink[0].title }}</a>
+                    <a :href="event.mainLink[0].href">{{
+                        event.mainLink[0].title
+                    }}</a>
                 </h6>
-                <a class="event-link d-none d-lg-flex" :href="event.mainLink[0].ahref"
+                <a
+                    class="event-link d-none d-lg-flex"
+                    :href="event.mainLink[0].ahref"
                     ><i class="fa fa-ticket"></i>
                     Zobacz więcej
                 </a>
