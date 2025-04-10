@@ -9,7 +9,7 @@ defineProps({
         <div
             v-for="event in latest"
             :key="event.id"
-            class="event-item bt-1 b-secondary pt-25px"
+            class="event-item event-item-blog bt-1 b-secondary pt-25px"
         >
             <h6>
                 <a class="hover-underline-thick" :href="event.link.href">
@@ -32,7 +32,7 @@ defineProps({
 </template>
 
 <style lang="scss">
-.event-item {
+.event-item-blog {
     display: grid;
     grid-template-rows: 1fr 30px 270px;
     grid-row-gap: 30px;
