@@ -511,7 +511,6 @@ const latest = [
                 :init="{
                     toolbar_mode: 'sliding',
                     plugins: [
-                        // Core editing features
                         'anchor',
                         'autolink',
                         'charmap',
@@ -525,8 +524,6 @@ const latest = [
                         'table',
                         'visualblocks',
                         'wordcount',
-                        // Your account includes a free trial of TinyMCE premium features
-                        // Try the most popular premium features until Apr 17, 2025:
                         'checklist',
                         'mediaembed',
                         'casechange',
@@ -540,7 +537,6 @@ const latest = [
                         'advcode',
                         'editimage',
                         'advtemplate',
-                        'ai',
                         'mentions',
                         'tinycomments',
                         'tableofcontents',
@@ -562,10 +558,6 @@ const latest = [
                         { value: 'First.Name', title: 'First Name' },
                         { value: 'Email', title: 'Email' },
                     ],
-                    ai_request: (request, respondWith) =>
-                        respondWith.string(() =>
-                            Promise.reject('See docs to implement AI Assistant')
-                        ),
                 }"
             />
         </div>
