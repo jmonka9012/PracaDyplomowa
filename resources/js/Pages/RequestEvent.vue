@@ -72,39 +72,24 @@ const props = defineProps({
 });
 
 const HandleEditorImage = () => (blobInfo, progress) => {
-    return new Promise((resolve, reject) => {
-        const formData = new FormData();
-        formData.append('image', blobInfo.blob(), blobInfo.filename());
+    const formData = new FormData();
+    formData.append('image', blobInfo.blob(), blobInfo.filename());
 
-        formData.append('_token', document.querySelector('meta[name="csrf-token"]').content);
-
-        const xhr = new XMLHttpRequest();
-
-        xhr.open('POST', route('event-create.image'), true);
-
-        xhr.upload.onprogress = (e) => {
-            if (e.lengthComputable) {
-                progress((e.loaded / e.total) * 100);
+    return axios.post(route('event-create.image'), formData, {
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Content-Type': 'multipart/form-data',
+        },
+        onUploadProgress: (progressEvent) => {
+            if (progressEvent.lengthComputable) {
+                progress((progressEvent.loaded / progressEvent.total) * 100);
             }
-        };
-
-        xhr.onload = () => {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                try {
-                    const response = JSON.parse(xhr.responseText);
-                    resolve(response.location);
-                } catch (e) {
-                    reject('Nieprawidłowa odpowiedź serwera');
-                }
-            } else {
-                reject(`HTTP error: ${xhr.status}`);
-            }
-        };
-
-        xhr.onerror = () => reject('Błąd sieciowy');
-
-        xhr.send(formData);
-    });
+        },
+    })
+        .then(response => response.data.location)
+        .catch(error => {
+            throw new Error(`Upload failed: ${error.message}`);
+        });
 };
 
 const {user, isLoggedIn} = useAuth();
