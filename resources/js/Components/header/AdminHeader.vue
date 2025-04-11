@@ -1,14 +1,16 @@
 <script setup>
 import Poptext from "@/Components/sections-new/Poptext.vue";
-import { Link } from "@inertiajs/vue3";
-import { ref, onMounted, onBeforeUnmount } from "vue";
-import { router } from "@inertiajs/vue3";
+import {Link} from "@inertiajs/vue3";
+import {ref, onMounted, onBeforeUnmount} from "vue";
+import {router} from "@inertiajs/vue3";
 
 import useAuth from "@/Utilities/useAuth";
-const { user, isLoggedIn } = useAuth();
+
+const {user, isLoggedIn} = useAuth();
 
 import pageInfo from "@/Utilities/pageInfo";
-const { siteData } = pageInfo();
+
+const {siteData} = pageInfo();
 
 
 const isOpen = ref(false);
@@ -24,7 +26,7 @@ const Logout = () => {
 };
 
 const toggleDropdown = (id) => {
-    const newStates = { ...dropdownStates.value };
+    const newStates = {...dropdownStates.value};
 
     Object.keys(newStates).forEach((key) => {
         newStates[key] = false;
@@ -90,62 +92,26 @@ onBeforeUnmount(() => {
                 <nav class="header-nav d-none d-lg-flex">
                     <ul>
                         <li>
-                            <Link :href="route('home')"><span>Strona główna</span></Link>
+                            <Link :href="route('admin')"><span>Strona główna</span></Link>
                         </li>
                         <li>
-                            <Link :href="route('about-us')"><span>O nas</span></Link>
+                            <Link :href="route('admin.events')"><span>Zarządzaj wydarzeniami</span></Link>
                         </li>
                         <li>
-                            <Link :href="route('blog')"><span>Blog</span></Link>
+                            <Link :href="route('admin.post')"><span>Dodaj Post</span></Link>
                         </li>
                         <li>
-                            <Link :href="route('post')"><span>Single (CE)</span></Link>
+                            <Link :href="route('admin.posts')"><span>Posty</span></Link>
                         </li>
                         <li>
-                            <Link :href="route('contact')"><span>Kontakt</span></Link>
+                            <Link :href="route('admin.users')"><span>Użytkownicy</span></Link>
                         </li>
                         <li>
-                            <Link :href="route('ce')"><span>CE</span></Link>
+                            <Link :href="route('admin.customer-service')"><span>Obsługa Klienta</span></Link>
                         </li>
-                        <li>
-                            <Link :href="route('jacek')"><span>Jacek CE</span></Link>
-                        </li>
-<!--                        <li class="desk-dropdown">
-                            <span class="desk-dropdown-toggle"
-                                ><span>Toggle</span>
-                                <i class="fa fa-chevron-right"></i>
-                            </span>
-                            <ul class="dropdown-content">
-                                <li><a href="">subitem</a></li>
-                                <li><a href="">subitem2</a></li>
-                                <li><a href="">subitem3</a></li>
-                            </ul>
-                        </li>-->
                     </ul>
                 </nav>
-                <div class="d-none d-lg-flex align-items-center" v-if="!user">
-                    <Link
-                        :href="route('login')"
-                        class="hover-primary header-login"
-                    >
-                        <i class="fa fa-user text-primary mr-8px"></i>Zaloguj
-                    </Link>
-                    <span class="divider divider-dark"></span>
-                    <Link
-                        :href="route('register')"
-                        class="hover-primary header-login"
-                    >
-                        <i class="fa fa-arrow-right text-primary mr-8px"></i>
-                        Zarejestruj
-                    </Link>
-                    <span class="divider divider-dark"></span>
-                    <Link
-                        :href="route('event-create')"
-                        class="ml-30px btn btn-header btn-hovprim"
-                        >+ Zorganizuj wydarzenie</Link
-                    >
-                </div>
-                <div class="d-none d-lg-flex align-items-center" v-else>
+                <div class="d-none d-lg-flex align-items-center">
                     <Link @click="Logout" class="hover-primary header-login">
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
                         Wyloguj
@@ -159,22 +125,22 @@ onBeforeUnmount(() => {
                     </Link>
                     <span class="divider divider-dark"></span>
                     <Link
-                        :href="route('admin')"
+                        :href="route('home')"
                         class="hover-primary header-login"
                     >
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
-                        Backend
+                        Powrót
                     </Link>
                     <Link
                         :href="route('event-create')"
                         class="ml-30px btn btn-header btn-hovprim"
-                        >+ Zorganizuj wydarzenie</Link
+                    >+ Zorganizuj wydarzenie
+                    </Link
                     >
                 </div>
-                <!-- <div class="header-search">
-                    <i class="fa fa-search" />
-                    <div class="mobile-nav__overlay"></div>
-                </div> -->
+                <!--
+                                MOBILE NAV
+                -->
                 <div class="mobile-nav">
                     <a
                         class="mobile-toggle mobile-toggle-innav"
@@ -187,186 +153,75 @@ onBeforeUnmount(() => {
                             <span></span>
                         </div>
                     </a>
-
                     <div class="mobile-nav__content">
                         <div class="container flex-column">
                             <a class="header-logo mb-30px" href="/">
-                                <img :src="placeHolder" alt="" />
+                                <img :src="placeHolder" alt=""/>
                             </a>
                             <nav class="header-nav">
                                 <ul class="header-list">
                                     <li>
-                                        <Link :href="route('home')">Strona główna</Link>
+                                        <Link :href="route('admin')"><span>Strona główna</span></Link>
                                     </li>
                                     <li>
-                                        <Link :href="route('about-us')">O nas</Link>
+                                        <Link :href="route('admin.events')"><span>Zarządzaj wydarzeniami</span></Link>
                                     </li>
                                     <li>
-                                        <Link :href="route('blog')">Blog</Link>
+                                        <Link :href="route('admin.post')"><span>Dodaj Post</span></Link>
                                     </li>
                                     <li>
-                                        <Link :href="route('post')"
-                                            >Single (CE)</Link
-                                        >
+                                        <Link :href="route('admin.posts')"><span>Posty</span></Link>
                                     </li>
                                     <li>
-                                        <Link :href="route('contact')"
-                                            >Kontakt</Link
-                                        >
+                                        <Link :href="route('admin.users')"><span>Użytkownicy</span></Link>
                                     </li>
                                     <li>
-                                        <Link :href="route('ce')">CE</Link>
+                                        <Link :href="route('admin.customer-service')"><span>Obsługa Klienta</span>
+                                        </Link>
                                     </li>
-<!--                                    <ul class="header-ddown">
-                                        <li
-                                            class="header-ddown-toggle"
-                                            :class="{ show: dropdownStates.d1 }"
-                                            @click.stop="toggleDropdown('d1')"
-                                        >
-                                            Toggle 1
-                                            <i class="fa fa-chevron-right"></i>
-                                        </li>
-                                        <li
-                                            class="ddown-content"
-                                            :class="{ show: dropdownStates.d1 }"
-                                        >
-                                            <ul>
-                                                <li>
-                                                    <a href="#">About us</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">About us</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">About us</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">About us</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">About us</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">About us</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="header-ddown">
-                                        <li
-                                            class="header-ddown-toggle"
-                                            @click.stop="toggleDropdown('d2')"
-                                            :class="{ show: dropdownStates.d2 }"
-                                        >
-                                            Toggle 1
-                                            <i class="fa fa-chevron-right"></i>
-                                        </li>
-                                        <li
-                                            class="ddown-content"
-                                            :class="{ show: dropdownStates.d2 }"
-                                        >
-                                            <ul>
-                                                <li>
-                                                    <a href="#">About us</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">About us</a>
-                                                </li>
-                                                <li>
-                                                    <a hrKef="#">About us</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">About us</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">About us</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">About us</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>-->
-                                    <li>
-                                        <ul v-if="!user">
-                                            <li>
-                                                <Link
-                                                    :href="route('login')"
-                                                    class="hover-primary header-login"
-                                                >
-                                                    <i
-                                                        class="fa fa-user text-primary mr-8px"
-                                                    ></i
-                                                    >Zaloguj
-                                                </Link>
-                                            </li>
+                                </ul>
 
-                                            <li>
-                                                <Link
-                                                    :href="route('register')"
-                                                    class="hover-primary header-login"
-                                                >
-                                                    <i
-                                                        class="fa fa-arrow-right text-primary mr-8px"
-                                                    ></i>
-                                                    Zarejestruj
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link
-                                                    :href="
+                                <ul>
+                                    <li>
+                                        <Link
+                                            @click="Logout"
+                                            class="hover-primary header-login"
+                                        >
+                                            <i
+                                                class="fa fa-arrow-right text-primary mr-8px"
+                                            ></i>
+                                            Wyloguj
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            :href="route('my-account')"
+                                            class="hover-primary header-login"
+                                        >
+                                            <i
+                                                class="fa fa-user text-primary mr-8px"
+                                            ></i
+                                            >Moje konto
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            :href="route('home')"
+                                            class="hover-primary header-login"
+                                        >
+                                            <i class="fa fa-arrow-right text-primary mr-8px"></i>
+                                            Powrót
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            :href="
                                                         route('event-create')
                                                     "
-                                                    class="btn btn-header btn-hovprim"
-                                                    >+ Zorganizuj wydarzenie</Link
-                                                >
-                                            </li>
-                                        </ul>
-
-                                        <ul v-else>
-                                            <li>
-                                                <Link
-                                                    @click="Logout"
-                                                    class="hover-primary header-login"
-                                                >
-                                                    <i
-                                                        class="fa fa-arrow-right text-primary mr-8px"
-                                                    ></i>
-                                                    Wyloguj
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link
-                                                    :href="route('my-account')"
-                                                    class="hover-primary header-login"
-                                                >
-                                                    <i
-                                                        class="fa fa-user text-primary mr-8px"
-                                                    ></i
-                                                    >Moje konto
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link
-                                                    :href="route('admin')"
-                                                    class="hover-primary header-login"
-                                                >
-                                                    <i
-                                                        class="fa fa-arrow-right text-primary mr-8px"
-                                                    ></i>
-                                                    Backend
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link
-                                                    :href="
-                                                        route('event-create')
-                                                    "
-                                                    class="btn btn-header btn-hovprim"
-                                                    >+ Zorganizuj wydarzenie</Link
-                                                >
-                                            </li>
-                                        </ul>
+                                            class="btn btn-header btn-hovprim"
+                                        >+ Zorganizuj wydarzenie
+                                        </Link
+                                        >
                                     </li>
                                 </ul>
                             </nav>
@@ -380,6 +235,7 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 @use "~css/mixin.scss";
+
 .header {
     z-index: 10;
     display: flex;
@@ -423,9 +279,11 @@ onBeforeUnmount(() => {
     height: 30px;
     margin-left: auto;
     margin-right: auto;
+
     img {
         height: 100%;
     }
+
     @include mixin.media-breakpoint-up(lg) {
         margin: 0 0;
         width: auto;
@@ -448,6 +306,7 @@ onBeforeUnmount(() => {
         align-items: center;
         height: 90px;
     }
+
     ul {
         display: flex;
         flex-direction: column;
@@ -595,6 +454,7 @@ onBeforeUnmount(() => {
     @include mixin.media-breakpoint-up(lg) {
         display: none;
     }
+
     .container {
         width: 100%;
     }
@@ -743,6 +603,7 @@ onBeforeUnmount(() => {
         @media screen and (min-width: 1000px) and (max-width: 1200px) {
             font-size: 12px;
         }
+
         &:hover {
             color: var(--primary);
 
@@ -802,7 +663,7 @@ onBeforeUnmount(() => {
             justify-content: space-between;
             font-weight: 500;
             transition: all 0s, transform 0.3s, text-decoration 0.3s ease-in-out,
-                -webkit-text-decoration 0.3s ease-in-out;
+            -webkit-text-decoration 0.3s ease-in-out;
             padding: 1px 30px;
 
             &:hover {
