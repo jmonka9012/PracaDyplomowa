@@ -71,6 +71,42 @@ const props = defineProps({
     },
 });
 
+const HandleEditorImage = () => (blobInfo, progress) => {
+    return new Promise((resolve, reject) => {
+        const formData = new FormData();
+        formData.append('image', blobInfo.blob(), blobInfo.filename());
+
+        formData.append('_token', document.querySelector('meta[name="csrf-token"]').content);
+
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('POST', route('event-create.image'), true);
+
+        xhr.upload.onprogress = (e) => {
+            if (e.lengthComputable) {
+                progress((e.loaded / e.total) * 100);
+            }
+        };
+
+        xhr.onload = () => {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                try {
+                    const response = JSON.parse(xhr.responseText);
+                    resolve(response.location);
+                } catch (e) {
+                    reject('Nieprawidłowa odpowiedź serwera');
+                }
+            } else {
+                reject(`HTTP error: ${xhr.status}`);
+            }
+        };
+
+        xhr.onerror = () => reject('Błąd sieciowy');
+
+        xhr.send(formData);
+    });
+};
+
 const {user, isLoggedIn} = useAuth();
 </script>
 
@@ -243,8 +279,8 @@ const {user, isLoggedIn} = useAuth();
                         v-model="requestEventForm.event_description"
                         :init="{
                     toolbar_mode: 'sliding',
-                            content_style: 'body { font-family: Arial; }',
-                    images_upload_url: route('event-create.image'),
+                    content_style: 'body { font-family: Arial; }',
+                    images_upload_handler: HandleEditorImage(),
                     images_upload_credentials: true, // Dodaj to!
         forced_root_block: false,
                     plugins: [
