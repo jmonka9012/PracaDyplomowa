@@ -89,18 +89,18 @@ class RequestEventController extends Controller
     public function storeEventImages(Request $request)
     {
         $request->validate([
-           'file' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+           'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $file = $request->file('file');
-        $path = $file->storeAs(
+        $image = $request->file('image');
+        $path = $image->storeAs(
             'wysiwyg-images',
-            time().'_'.$file->getClientOriginalName(),
+            time().'_'.$image->getClientOriginalName(),
             'public'
         );
 
         return response()->json([
-            'location' => Storage::disk('public')->url($path)
+            'location' => asset(Storage::url($path))
         ]);
     }
 }
