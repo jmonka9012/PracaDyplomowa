@@ -25,12 +25,10 @@ const requestEventForm = reactive({
     event_location: null,
 });
 
-// Plik przechowujemy osobno
 const eventImage = ref(null);
 
-// Obsługa zmiany pliku
 const handleFileUpload = (event) => {
-    const file = event.target.files[0]; // Pobranie pierwszego pliku
+    const file = event.target.files[0];
     if (file) {
         eventImage.value = file;
     }
@@ -47,12 +45,10 @@ function submitEventRequest() {
         }
     });
 
-    // Dodajemy plik, jeśli został wybrany
     if (eventImage.value) {
         formData.append("event_image", eventImage.value);
     }
 
-    // Wysyłanie żądania POST do serwera
     router.post(route("event-create.post"), formData, {
         preserveScroll: () => hadError,
         onError: (err) => {
