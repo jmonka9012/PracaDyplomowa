@@ -16,8 +16,8 @@ const RegShow = () => {
     }
 };
 
-const errors = reactive({});
-
+const loginErrors = reactive({});
+const registerErrors = reactive({});
 const liveErrors = reactive({
     emailError: "",
     nameError: "",
@@ -81,13 +81,13 @@ const registerForm = reactive({
 });
 
 function submitLoginRequest() {
-    let hadError = false;
+    let hadError = true;
 
     router.post(route("login.post"), loginForm, {
         preserveScroll: () => hadError,
         onError: (err) => {
             hadError = true;
-            Object.assign(errors, err);
+            Object.assign(loginErrors, err);
         },
         onSuccess: () => {
             hadError = false;
@@ -96,16 +96,19 @@ function submitLoginRequest() {
 }
 
 function submitRegisterRequest() {
-    let hadError = false;
+    let hadError = true;
 
     router.post(route("register.post"), registerForm, {
         preserveScroll: () => hadError,
         onError: (err) => {
             hadError = true;
-            Object.assign(errors, err);
+            Object.assign(registerErrors, err);
             liveErrors.emailError = null;
             liveErrors.nameError = null;
         },
+        onSuccess: () => {
+            hadError = false;
+        }
     });
 }
 </script>
@@ -129,8 +132,8 @@ function submitRegisterRequest() {
                             aria-required="true"
                             v-model="loginForm.login"
                         />
-                        <div class="error-msg" v-if="errors.login">
-                            {{ errors.login }}
+                        <div class="error-msg" v-if="loginErrors.login">
+                            {{ loginErrors.login }}
                         </div>
                     </div>
                     <div class="input-wrap col-12">
@@ -144,8 +147,8 @@ function submitRegisterRequest() {
                             required=""
                             aria-required="true"
                         />
-                        <div class="error-msg" v-if="errors.password">
-                            {{ errors.password }}
+                        <div class="error-msg" v-if="loginErrors.password">
+                            {{ loginErrors.password }}
                         </div>
                     </div>
                     <div class="input-wrap input-wrap-check col-12 mb-20px">
@@ -192,8 +195,8 @@ function submitRegisterRequest() {
                             v-model="registerForm.name"
                             @input="onInput('verification.user')"
                         />
-                        <div class="error-msg" v-if="errors.name">
-                            {{ errors.name }}
+                        <div class="error-msg" v-if="registerErrors.name">
+                            {{ registerErrors.name }}
                         </div>
                         <div class="error-msg" v-if="liveErrors.nameError">
                             {{ liveErrors.nameError }}
@@ -212,14 +215,11 @@ function submitRegisterRequest() {
                             v-model="registerForm.email"
                             @input="onInput('verification.email')"
                         />
-                        <div class="error-msg" v-if="errors.email">
-                            {{ errors.email }}
+                        <div class="error-msg" v-if="registerErrors.email">
+                            {{ registerErrors.email }}
                         </div>
                         <div class="error-msg" v-if="liveErrors.emailError">
                             {{ liveErrors.emailError }}
-                        </div>
-                        <div class="error-msg" v-if="errors.email">
-                            {{ errors.email }}
                         </div>
                     </div>
                     <div class="input-wrap col-12">
@@ -234,8 +234,8 @@ function submitRegisterRequest() {
                             aria-required="true"
                             v-model="registerForm.first_name"
                         />
-                        <div class="error-msg" v-if="errors.first_name">
-                            {{ errors.first_name }}
+                        <div class="error-msg" v-if="registerErrors.first_name">
+                            {{ registerErrors.first_name }}
                         </div>
                     </div>
                     <div class="input-wrap col-12">
@@ -250,8 +250,8 @@ function submitRegisterRequest() {
                             aria-required="true"
                             v-model="registerForm.last_name"
                         />
-                        <div class="error-msg" v-if="errors.last_name">
-                            {{ errors.last_name }}
+                        <div class="error-msg" v-if="registerErrors.last_name">
+                            {{ registerErrors.last_name }}
                         </div>
                     </div>
                     <div class="input-wrap col-12">
@@ -265,8 +265,8 @@ function submitRegisterRequest() {
                             aria-required="true"
                             v-model="registerForm.password"
                         />
-                        <div class="error-msg" v-if="errors.password">
-                            {{ errors.password }}
+                        <div class="error-msg" v-if="registerErrors.password">
+                            {{ registerErrors.password }}
                         </div>
                     </div>
                     <div class="input-wrap col-12">
@@ -284,9 +284,9 @@ function submitRegisterRequest() {
                         />
                         <div
                             class="error-msg"
-                            v-if="errors.password_confirmation"
+                            v-if="registerErrors.password_confirmation"
                         >
-                            {{ errors.password_confirmation }}
+                            {{ registerErrors.password_confirmation }}
                         </div>
                     </div>
                     <div class="input-wrap col-12 mb-20px">
