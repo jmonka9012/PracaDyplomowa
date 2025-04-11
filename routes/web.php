@@ -31,3 +31,6 @@ require __DIR__.'/liveverification.php';
 
 //panel admina
 require __DIR__.'/admin.php';
+
+//generowanie stron eventów
+require __DIR__.'/events.php';
