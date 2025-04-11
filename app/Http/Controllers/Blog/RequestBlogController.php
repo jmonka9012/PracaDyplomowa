@@ -20,11 +20,11 @@ class RequestBlogController extends Controller
     {
         $validatedData = $request->validated();
 
-        if ($request->hasFile('event_image')) {
+        if ($request->hasFile('blog_image')) {
             $blogPostName = Str::slug($request->input('blog_post_name'));
             $folder = 'blog_images/' . now()->format('Y/m') . '/' . $blogPostName;
         
-            $imagePath = $request->file('event_image')->store($folder, 'public');
+            $imagePath = $request->file('blog_image')->store($folder, 'public');
         } else {
             $imagePath = null;
         }
