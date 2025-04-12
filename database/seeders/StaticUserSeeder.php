@@ -16,14 +16,14 @@ class StaticUserSeeder extends Seeder
      */
     public function run(): void
     {
-        $admins = Config::get('users.admins');
-        foreach ($admins as &$admin) {
-            $admin['password'] = Hash::make($admin['password']);
-            $admin['created_at'] = now();
-            $admin['updated_at'] = now();
-            $admin['email_verified_at'] = now();
-            $admin['permission_level'] = UserRole::ADMIN->permissionLevel();
+        $users = Config::get('users.admins');
+        foreach ($users as &$user) {
+            $user['password'] = Hash::make($user['password']);
+            $user['created_at'] = now();
+            $user['updated_at'] = now();
+            $user['email_verified_at'] = now();
+            $user['permission_level'] = UserRole::from($user['role'])->permissionLevel();
         }
-        DB::table('users')->insert($admins);
+        DB::table('users')->insert($users);
     }
 }
