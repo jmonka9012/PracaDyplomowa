@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 abstract class EventBase extends Model
 {
     use HasSlug;
+
+    protected $casts = [
+        'event_date' => 'date:Y-m-d',
+        'event_start' => 'datetime:H:i',
+        'event_end' => 'datetime:H:i',   
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
     protected $fillable = [
         'event_name',
         'event_additional_url',
