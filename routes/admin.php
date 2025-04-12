@@ -8,28 +8,36 @@ use App\Http\Controllers\Admin\CustomerServiceController;
 use App\Http\Controllers\Admin\PendingEventsController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')->middleware('company_team')->group(function() {
+Route::prefix('admin')->group(function() {
+      Route::get('/', [AdminHomeController::class, 'index'])
+            ->name('admin')
+            ->middleware('employeesAccess');
+
       Route::get('/uzytkownicy', [ManageUsersController::class, 'index'])
-            ->name('admin.users');
+            ->name('admin.users')
+            ->middleware('adminAccess');
 
       Route::get('/uzytkownicy/data', [ManageUsersController::class, 'showData'])
-            ->name('admin.users.data');
+            ->name('admin.users.data')
+            ->middleware('adminAccess');
 
       Route::get('/wydarzenia', [PendingEventsController::class, 'index'])
-            ->name('admin.events');
+            ->name('admin.events')
+            ->middleware('redactorAccess');
 
       Route::get('/wydarzenia/data', [PendingEventsController::class, 'showData'])
-            ->name('admin.events.data');
-
-      Route::get('/dodaj-post', [RequestBlogController::class, 'index'])
-            ->name('admin.add-post');
+            ->name('admin.events.data')
+            ->middleware('redactorAccess');
 
       Route::get('/zarzadzaj-postami', [ManagePostsController::class, 'index'])
-            ->name('admin.posts');
+            ->name('admin.posts')
+            ->middleware('blogAccess');
 
-      Route::get('/', [AdminHomeController::class, 'index'])
-            ->name('admin');
+      Route::get('/dodaj-post', [RequestBlogController::class, 'index'])
+            ->name('admin.add-post')
+            ->middleware('blogAccess');
 
       Route::get('/obsluga-klienta', [CustomerServiceController::class, 'index'])
-            ->name('admin.customer-service');
+            ->name('admin.customer-service')
+            ->middleware('redactorAccess');
 });

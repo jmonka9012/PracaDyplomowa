@@ -21,25 +21,31 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => CheckRolePermission::class,
         ]);
 
-        $middleware->group('company_team', [
+        $middleware->group('employeesAccess', [
             'auth',
-            'role:admin,moderator,redactor'
+            'role:admin, moderator, redactor, blog_author'
         ]);
 
-        $middleware->group('organizers', [
+        $middleware->group('adminAccess', [
             'auth',
-            'role:admin,moderator,redactor,organizer'
+            'role:admin, moderator'
         ]);
 
-        $middleware->group('verified_users', [
+        $middleware->group('redactorAccess', [
             'auth',
-            'role:admin,moderator,redactor,organizer,verified_user'
+            'role:admin, moderator, redactor'
         ]);
 
-        $middleware->group('unverified_users', [
+        $middleware->group('blogAccess', [
             'auth',
-            'role:admin,moderator,redactor,organizer,verified_user,unverified_user'
+            'role:admin, moderator, redactor, blog_authors'
         ]);
+
+        $middleware->group('loggedInAccess', [
+            'auth',
+            'role:admin,moderator,redactor, blog_author, organizer, verified_user, unverified_user'
+        ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
