@@ -17,7 +17,7 @@ class EventBrowserResource extends JsonResource
         return [
             'id' => $this->id,
             'event_name' => $this->event_name,
-            'event_url' => $this->event_url,
+            'event_additional_url' => $this->event_additional_url,
             'slug' => $this->slug,
             'event_date' => $this->event_date,
             'event_start' => $this->event_start,

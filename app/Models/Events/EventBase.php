@@ -10,7 +10,7 @@ abstract class EventBase extends Model
     use HasSlug;
     protected $fillable = [
         'event_name',
-        'event_url',
+        'event_additional_url',
         'event_date',
         'slug',
         'event_start',

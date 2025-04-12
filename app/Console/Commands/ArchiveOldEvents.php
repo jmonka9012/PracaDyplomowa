@@ -16,8 +16,8 @@ class ArchiveOldEvents extends Command
 
         DB::insert('
         INSERT INTO events_archive
-        (id, event_name, event_url, event_date, event_start, event_end, contact_email, contact_email_additional, event_description, event_description_additional, event_location, image_path)
-        SELECT id, event_name, event_url, event_date, event_start, event_end, contact_email, contact_email_additional, event_description, event_description_additional, event_location, image_path
+        (id, event_name, event_additional_url, event_date, event_start, event_end, contact_email, contact_email_additional, event_description, event_description_additional, event_location, image_path)
+        SELECT id, event_name, event_additional_url, event_date, event_start, event_end, contact_email, contact_email_additional, event_description, event_description_additional, event_location, image_path
         FROM events
         WHERE event_date < ?
         ', [$cutoffDate]);

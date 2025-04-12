@@ -45,7 +45,7 @@ class RequestEventController extends Controller
 
         $event = Event::create([
             'event_name'=> $validatedData['event_name'],
-            'event_url'=> $validatedData['event_url'],
+            'event_additional_url'=> $validatedData['event_additional_url'],
             'event_date'=> $validatedData['event_date'],
             'event_start'=> $validatedData['event_start'],
             'event_end'=> $validatedData['event_end'],

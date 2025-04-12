@@ -22,94 +22,114 @@ class StaticEventSeeder extends Seeder
             return;
         }
 
+        $eventDescription =
+            '<p><img src="../storage/event_images/placeholder.jpg"></p>
+            <hr>
+            <div id="Content">
+            <div id="bannerL">
+            <div id="lipsumcom_left_siderail_1" align="center" data-google-query-id="COrJj9r40owDFZ3MOwIdsHAG1w" data-freestar-ad="__300x600 __400x225"></div>
+            <div id="lipsumcom_left_siderail_2" align="center" data-freestar-ad="__300x600"></div>
+            </div>
+            <div id="bannerR">
+            <div id="lipsumcom_right_siderail_1" align="center" data-google-query-id="COvJj9r40owDFZ3MOwIdsHAG1w" data-freestar-ad="__300x600 __400x225"></div>
+            <div id="lipsumcom_right_siderail_2" align="center" data-freestar-ad="__300x600"></div>
+            </div>
+            <div>
+            <div id="lipsum">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pellentesque massa eu leo dictum, vel condimentum diam volutpat. Aenean eu porttitor massa, quis malesuada tellus. Vestibulum lobortis, ex ac sagittis consequat, sapien risus mattis ante, ut pretium eros urna eu sapien. Vivamus eu mollis nunc, quis iaculis nunc. Donec semper purus diam, consectetur porttitor justo pretium in. Pellentesque dictum dui at ipsum consequat, a convallis enim mollis. Etiam facilisis blandit turpis, varius rutrum lorem rutrum vitae. Quisque a massa consequat, congue risus a, rutrum dolor.</p>
+            <p>Quisque ut lorem nisi. Vestibulum ornare a dolor sollicitudin consequat. Ut ornare eleifend arcu in finibus. Cras sed efficitur nisl, quis tempor urna. Curabitur tellus ipsum, mollis vitae ex ut, ultrices vestibulum massa. Suspendisse non magna eget augue porta dignissim id eget neque. Duis eget sollicitudin velit, vitae posuere dui. Etiam tincidunt facilisis ipsum eu faucibus. Proin posuere, mauris in imperdiet venenatis, purus augue elementum nibh, quis tempor ante lorem at libero. In hac habitasse platea dictumst. Aenean porttitor iaculis augue non sagittis. Donec placerat faucibus metus eget cursus. Integer eu luctus quam. Vestibulum sollicitudin at sem auctor aliquet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum lobortis, turpis sed placerat blandit, dui nulla accumsan felis, vel dignissim nisi est et risus.</p>
+            </div>
+            </div>
+            </div>';
+
         $events =[
             [
                 'event_name' => 'David Bowie 2020s',
-                'event_url' => 'https://open.spotify.com/artist/0oSGxfWSnnOXhD2fKuz2Gy',
+                'event_additional_url' => 'https://open.spotify.com/artist/0oSGxfWSnnOXhD2fKuz2Gy',
                 'event_date' => now()->addMonth(),
                 'event_start' => '09:00:00',
                 'event_end' => '17:00:00',
                 'contact_email' => 'david@bowie.com',
                 'contact_email_additional' => 'agent@bowie.com',
-                'event_description' => 'Ziggy Stardust to fajny gość',
+                'event_description' => $eventDescription,
                 'event_description_additional' => 'Fajnie będzie ogółem',
                 'event_location' => 1,
                 'image_path' => 'event_images/placeholder.jpg',
             ],
             [
                 'event_name' => 'David Bowie 2070s',
-                'event_url' => 'https://bowie-emperor.gov.com/hail-the-king',
+                'event_additional_url' => 'https://bowie-emperor.gov.com/hail-the-king',
                 'event_date' => now()->addYears(50),
                 'event_start' => '00:00:00',
                 'event_end' => '24:00:00',
                 'contact_email' => 'greatemperorbowie@gov.com',
                 'contact_email_additional' => 'hismajesty@gov.com',
-                'event_description' => 'Kult Kult Kult Kult Kult',
+                'event_description' => $eventDescription,
                 'event_description_additional' => 'He Has Risen',
                 'event_location' => 2,
                 'image_path' => 'event_images/placeholder.jpg',
             ],
             [
                 'event_name' => 'Motorhead 2025',
-                'event_url' => 'https://open.spotify.com/artist/1DFr97A9HnbV3SKTJFu62M',
+                'event_additional_url' => 'https://open.spotify.com/artist/1DFr97A9HnbV3SKTJFu62M',
                 'event_date' => now()->addMonths(5),
                 'event_start' => '12:00:00',
                 'event_end' => '17:00:00',
                 'contact_email' => 'lemmy@motorhead.com',
                 'contact_email_additional' => 'agent@motorhead.com',
-                'event_description' => 'The Ace of Spades has arrived',
+                'event_description' => $eventDescription,
                 'event_description_additional' => 'Lemmy będzie',
                 'event_location' => 1,
                 'image_path' => 'event_images/placeholder.jpg',
             ],
             [
                 'event_name' => 'Opeth Reveries 202X',
-                'event_url' => 'https://open.spotify.com/artist/0ybFZ2Ab08V8hueghSXm6E',
+                'event_additional_url' => 'https://open.spotify.com/artist/0ybFZ2Ab08V8hueghSXm6E',
                 'event_date' => now()->addMonths(8),
                 'event_start' => '12:00:00',
                 'event_end' => '13:00:00',
                 'contact_email' => 'mikael@opeth.com',
                 'contact_email_additional' => 'agent@opeth.com',
-                'event_description' => 'Opeth robi znowu dobrą muzykę(?!)',
+                'event_description' => $eventDescription,
                 'event_description_additional' => 'Growle będą',
                 'event_location' => 2,
                 'image_path' => 'event_images/placeholder.jpg',
             ],
             [
                 'event_name' => 'Acid Bath.mp4',
-                'event_url' => 'https://open.spotify.com/artist/3n5jeTRWZEbTPJWyHSYUqn',
+                'event_additional_url' => 'https://open.spotify.com/artist/3n5jeTRWZEbTPJWyHSYUqn',
                 'event_date' => now()->addYear(),
                 'event_start' => '06:06:06',
                 'event_end' => '07:07:07',
                 'contact_email' => 'dmca@takedown.com',
                 'contact_email_additional' => 'youtube@upload.com',
-                'event_description' => 'Acid Bath znowu usunięte z youtube',
+                'event_description' => $eventDescription,
                 'event_description_additional' => 'Pierwsze uderzenie konta youtube',
                 'event_location' =>1,
                 'image_path' => 'event_images/placeholder.jpg',
             ],
             [
                 'event_name' => 'System Of A Down Reunion',
-                'event_url' => 'https://open.spotify.com/artist/5eAWCfyUhZtHHtBdNk56l1',
+                'event_additional_url' => 'https://open.spotify.com/artist/5eAWCfyUhZtHHtBdNk56l1',
                 'event_date' => now()->addYears(2),
                 'event_start' => '10:00:00',
                 'event_end' => '15:00:00',
                 'contact_email' => 'serji@soad.com',
                 'contact_email_additional' => 'serji2real@soad.com',
-                'event_description' => 'Nowy album anytime now, stay tuned.',
+                'event_description' => $eventDescription,
                 'event_description_additional' => 'tell me lies tell me sweet little lies',
                 'event_location' =>2,
                 'image_path' => 'event_images/placeholder.jpg',
             ],
             [
                 'event_name' => 'Archive Test Event',
-                'event_url' => 'https://open.spotify.com/artist/5eAWCfyUhZtHHtBdNk56l1',
+                'event_additional_url' => 'https://open.spotify.com/artist/5eAWCfyUhZtHHtBdNk56l1',
                 'event_date' => now()->subYears(value: 2),
                 'event_start' => '10:00:00',
                 'event_end' => '15:00:00',
                 'contact_email' => 'archive@test.com',
                 'contact_email_additional' => 'archive@test.com',
-                'event_description' => 'archive@test.com',
+                'event_description' => $eventDescription,
                 'event_description_additional' => 'archive@test.com',
                 'event_location' =>2,
                 'image_path' => 'event_images/placeholder.jpg',
