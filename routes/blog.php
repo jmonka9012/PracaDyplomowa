@@ -10,6 +10,3 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 
 //Strona pojedynczego posta
 Route::get('/post', [PostController::class, 'index'])->name('post');
-
-//strone dodawania bloga
-Route::get('/stworz-post', [RequestBlogController::class, 'index'])->name('blog-create');
