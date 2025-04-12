@@ -14,7 +14,7 @@ const errors = reactive({});
 // Przechowywanie danych formularza
 const requestEventForm = reactive({
     event_name: null,
-    event_url: null,
+    event_additional_url: null,
     event_date: null,
     event_start: null,
     event_end: null,
