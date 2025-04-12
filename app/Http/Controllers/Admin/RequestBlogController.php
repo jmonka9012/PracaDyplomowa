@@ -13,7 +13,7 @@ class RequestBlogController extends Controller
 {
     public function index()
     {
-        return Inertia::render('BlogRequest');
+        return Inertia::render('Admin/AddPost');
     }
 
     public function store(RequestBlogRequest $request): RedirectResponse
