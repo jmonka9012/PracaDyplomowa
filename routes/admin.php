@@ -12,6 +12,8 @@ Route::get('/admin/uzytkownicy', [ManageUsersController::class, 'index'])->name(
 Route::get('/admin/uzytkownicy/data', [ManageUsersController::class, 'showData'])->name('admin.users.data');
 
 Route::get('/admin/wydarzenia', [PendingEventsController::class, 'index'])->name('admin.events');
+Route::get('/admin/wydarzenia/data', [PendingEventsController::class, 'showData'])->name('admin.events.data');
+
 Route::get('/admin/dodaj-post', [RequestBlogController::class, 'index'])->name('admin.add-post');
 Route::get('/admin/zarzadzaj-postami', [ManagePostsController::class, 'index'])->name('admin.posts');
 Route::get('/admin', [AdminHomeController::class, 'index'])->name('admin');
