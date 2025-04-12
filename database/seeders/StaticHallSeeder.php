@@ -23,7 +23,7 @@ class StaticHallSeeder extends Seeder
         ]);
         $hall->sections()->createMany([
             [
-                'section_name' => 'Hala 1',
+                'section_name' => 'Sekcja 1',
                 'section_type' => 'seat',
                 'row' => 6,
                 'col' => 10,
@@ -31,7 +31,7 @@ class StaticHallSeeder extends Seeder
                 'section_width' => '1'
             ],
             [
-                'section_name' => 'Hala 2',
+                'section_name' => 'Sekcja 2',
                 'section_type' => 'stand',
                 'row' => null,
                 'col' => null,
@@ -40,7 +40,7 @@ class StaticHallSeeder extends Seeder
                 'capacity' => 100,
             ],
             [
-                'section_name' => 'Hala 3',
+                'section_name' => 'Sekcja 3',
                 'section_type' => 'seat',
                 'row' => 6,
                 'col' => 10,
@@ -48,7 +48,7 @@ class StaticHallSeeder extends Seeder
                 'section_width' => '3'
             ],
             [
-                'section_name' => 'Hala 4',
+                'section_name' => 'Sekcja 4',
                 'section_type' => 'seat',
                 'row' => 3,
                 'col' => 10,
@@ -56,7 +56,7 @@ class StaticHallSeeder extends Seeder
                 'section_width' => '1'
             ],
             [
-                'section_name' => 'Hala 5',
+                'section_name' => 'Sekcja 5',
                 'section_type' => 'seat',
                 'row' => 6,
                 'col' => 10,
@@ -64,7 +64,7 @@ class StaticHallSeeder extends Seeder
                 'section_width' => '2'
             ],
             [
-                'section_name' => 'Hala 6',
+                'section_name' => 'Sekcja 6',
                 'section_type' => 'seat',
                 'row' => 3,
                 'col' => 10,
@@ -81,7 +81,7 @@ class StaticHallSeeder extends Seeder
         ]);
         $hall->sections()->createMany([
             [
-                'section_name' => 'Halla 1',
+                'section_name' => 'Sekcja 1',
                 'section_type' => 'stand',
                 'row' => null,
                 'col' => null,
@@ -90,7 +90,7 @@ class StaticHallSeeder extends Seeder
                 'section_width' => '1'
             ],
             [
-                'section_name' => 'Halla 2',
+                'section_name' => 'Sekcja 2',
                 'section_type' => 'stand',
                 'row' => null,
                 'col' => null,
@@ -99,7 +99,7 @@ class StaticHallSeeder extends Seeder
                 'section_width' => '2'
             ],
             [
-                'section_name' => 'Hala 3',
+                'section_name' => 'Sekcja 3',
                 'section_type' => 'seat',
                 'row' => 10,
                 'col' => 5,
@@ -108,7 +108,7 @@ class StaticHallSeeder extends Seeder
                 'section_width' => '1'
             ],
             [
-                'section_name' => 'Hala 4',
+                'section_name' => 'Sekcja 4',
                 'section_type' => 'seat',
                 'row' => 10,
                 'col' => 5,

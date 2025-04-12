@@ -26,11 +26,13 @@ class EventResource extends JsonResource
             'contact_email_additional' => $this->contact_email_additional,
             'event_description' => $this->event_description,
             'event_description_additional' => $this->event_description_additional,
-            'event_location' => $this->event_location,
+            'event_location' => new HallResource($this->whenLoaded('hall')),
             'image_path' => $this->image_path,
             'pending' => $this->pending,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'seats' => EventSeatResource::collection($this->whenLoaded('seats')),
+            'standing_tickets' => EventStandingTicketResource::collection($this->whenLoaded('standingTickets'))
         ];
     }
 }

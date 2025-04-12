@@ -43,9 +43,4 @@ class HallSection extends Model
             }
         });
     }
-
-    public function halls()
-    {
-        return $this->belongsTo(Hall::class);
-    }
 }
