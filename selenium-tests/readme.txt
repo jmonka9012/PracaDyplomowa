@@ -14,3 +14,4 @@ Założenia:
     <nazwa_testu>/<nazwa_testu>.js
 6.  Żeby odpalić test piszesz w terminalu:
     npm run test --file=<nazwa_testu>
+7.  Rób git pull co każdy push na #push-alert
