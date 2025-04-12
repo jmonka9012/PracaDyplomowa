@@ -7,73 +7,79 @@ import { logTestResult } from '../logUtils.js'; // Logowanie wyniku testu
 dotenv.config();
 const BASE_URL = process.env.APP_URL.replace(/"/g, '');
 
+// Asynchroniczna funkcja testująca szybkie klikanie w przycisk logowania
 (async function rapidLoginClickTest() {
   let driver;
   let testPassed = false;
 
   try {
-    // Konfiguracja opcji przeglądarki
+    // Konfiguracja opcji przeglądarki Chrome
     const options = new chrome.Options();
-    options.addArguments('--disable-dev-shm-usage');
-    options.addArguments('--no-sandbox');
-    options.addArguments('--remote-debugging-port=9222');
+    options.addArguments('--disable-dev-shm-usage');       // Optymalizacja zużycia pamięci
+    options.addArguments('--no-sandbox');                   // Wyłączenie sandboxa 
+    options.addArguments('--remote-debugging-port=9222');   // Port debugowania (opcjonalny)
 
-    // Inicjalizacja sterownika
+    // Inicjalizacja sterownika przeglądarki
     driver = await new Builder()
       .forBrowser('chrome')
       .setChromeOptions(options)
       .build();
 
-    // Ustawienie rozmiaru okna
+    // Ustawienie rozmiaru okna przeglądarki
     await driver.manage().window().setRect({ width: 1400, height: 1000 });
 
-    // Otwarcie strony bazowej
-    console.log('Przejście na stronę główną aplikacji');
+    console.log('Przejście na stronę główną aplikacji...');
     await driver.get(BASE_URL);
     await driver.sleep(100);
 
-    // Inicjalizacja liczników wyników
-    let sukcesy = 0;
-    let błędy = 0;
+    // Liczniki sukcesów i błędów
+    let successCount = 0;
+    let errorCount = 0;
+    const attempts = 100;
 
-    console.log('Rozpoczęcie szybkiego klikania w "Login"');
+    console.log(`Rozpoczęcie ${attempts} prób kliknięcia przycisku "Zaloguj"...`);
 
-    // Wykonanie 100 prób kliknięcia w przycisk "Login"
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < attempts; i++) {
       try {
-        // Wyszukiwanie i klikanie przycisku "Login"
-        const loginBtn = await driver.wait(until.elementLocated(By.linkText('Login')), 100);
+        // Wyszukanie przycisku logowania po klasie CSS
+        const loginBtn = await driver.wait(
+          until.elementLocated(By.css('a.header-login')),
+          200
+        );
         await loginBtn.click();
 
-        // Oczekiwanie na pojawienie się formularza logowania
-        await driver.wait(until.elementLocated(By.css('form input[type="text"]')), 200);
+        // Sprawdzenie, czy pojawił się formularz logowania
+        await driver.wait(until.elementLocated(By.css('form input[type="text"]')), 300);
 
-        // Zliczanie udanego przejścia
-        sukcesy++;
-      } catch {
-        // Zliczanie błędnego przejścia
-        błędy++;
+        successCount++;
+      } catch (err) {
+        // Zliczanie nieudanych prób (np. brak elementu lub timeout)
+        errorCount++;
       }
 
-      // Powrót na stronę główną
+      // Powrót do strony głównej przed kolejną iteracją
       await driver.get(BASE_URL);
     }
 
-    // Podsumowanie wyników
-    console.log(`Liczba prób: 100`);
-    console.log(`Udane przejścia do logowania: ${sukcesy}`);
-    console.log(`Nieudane próby: ${błędy}`);
+    // Raport z wynikami testu
+    console.log(`Liczba prób: ${attempts}`);
+    console.log(`Udane przejścia do logowania: ${successCount}`);
+    console.log(`Nieudane próby: ${errorCount}`);
 
-    // Ocena powodzenia testu
-    if (sukcesy >= 90) testPassed = true;
+    // Ocena sukcesu testu — wymagane minimum 90% skuteczności
+    if (successCount >= 90) {
+      testPassed = true;
+    }
 
-    // Zamykanie przeglądarki
+    // Zamykanie przeglądarki po zakończeniu testu
     await driver.quit();
+
   } catch (error) {
+    // Obsługa ewentualnych błędów testu
     console.error('Błąd podczas wykonywania testu:', error);
     if (driver) await driver.quit();
   } finally {
-    // Zapis wyniku testu do pliku logów
+    // Zapisanie wyniku testu do logów
     logTestResult('100_login_test', testPassed);
   }
 })();

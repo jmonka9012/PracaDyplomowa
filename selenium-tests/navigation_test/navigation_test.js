@@ -1,67 +1,104 @@
 import { Builder, By, until } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
 import dotenv from 'dotenv';
-import { logTestResult } from '../logUtils.js'; // Import funkcji logującej wynik testu
+import { logTestResult } from '../logUtils.js'; // Narzędzie logujące wynik testu
 
-// Załaduj zmienne środowiskowe z pliku .env
+// Wczytanie zmiennych środowiskowych z pliku .env
 dotenv.config();
+
+// Pobranie adresu URL aplikacji z konfiguracji środowiska
 const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, '');
-const testName = 'navigation_test';
+const testName = 'navigation_test'; // Nazwa testu (do logów i plików)
 
 (async function runNavigationTest() {
+  console.log('Test nawigacji został uruchomiony');
+
   let driver;
-  let passed = true; // Domyślnie zakładamy, że test zakończy się sukcesem
+  let passed = true; // Domyślna wartość, test uznany za zaliczony, jeśli nic nie pójdzie nie tak
 
   try {
-    // Konfiguracja opcji przeglądarki Chrome
+    // Konfiguracja opcji przeglądarki Chrome w trybie headless
     const options = new chrome.Options();
-    options.addArguments('--disable-dev-shm-usage');
-    options.addArguments('--no-sandbox');
-    options.addArguments('--remote-debugging-port=9222');
+    options.addArguments('--headless=new');              // Tryb headless (bez GUI)
+    options.addArguments('--disable-dev-shm-usage');     // Optymalizacja zasobów dla Linux/WSL
+    options.addArguments('--no-sandbox');                // Wyłączenie sandboxa (niezbędne np. w CI/CD)
 
-    // Inicjalizacja WebDrivera
+    // Inicjalizacja WebDrivera z Chrome
     driver = await new Builder()
       .forBrowser('chrome')
       .setChromeOptions(options)
       .build();
 
+    // Ustawienie okna przeglądarki oraz timeoutów
     await driver.manage().window().setRect({ width: 1400, height: 1000 });
-    console.log('Przeglądarka została uruchomiona.');
+    await driver.manage().setTimeouts({ implicit: 5000 });
 
-    // Przejście na stronę główną
+    // Wejście na stronę główną aplikacji
     await driver.get(BASE_URL);
-    console.log('Strona główna została załadowana.');
-    await driver.sleep(3500); // Dodatkowe opóźnienie dla stabilności
+    console.log('Załadowano stronę główną');
+    await driver.sleep(1000); // Krótkie opóźnienie na załadowanie zasobów
 
-    // Funkcja klikająca w podany link w menu
-    const clickMenu = async (linkText) => {
-      try {
-        const link = await driver.wait(until.elementLocated(By.linkText(linkText)), 5000);
-        await link.click();
-        console.log(`Kliknięto w link: ${linkText}`);
-        await driver.sleep(2000); // Pozwól stronie się załadować po kliknięciu
-      } catch (err) {
-        console.warn(`Nie znaleziono linku: "${linkText}"`);
-        passed = false;
+    // Znalezienie elementu nawigacji 
+    const nav = await driver.wait(until.elementLocated(By.css('nav.header-nav')), 5000);
+
+    // Pobranie wszystkich linków (a) w obrębie nawigacji
+    const links = await nav.findElements(By.css('a'));
+
+    console.log('Znalezione linki w navbarze:');
+    const menuItems = []; // Przechowuje linki widoczne i możliwe do kliknięcia
+
+    // Iteracja przez każdy znaleziony link
+    for (const link of links) {
+      const text = await link.getText();                // Pobranie tekstu linku
+      const href = await link.getAttribute('href');     // Pobranie atrybutu href
+
+      if (text.trim() !== '') {
+        console.log(`- ${text} (${href})`);
+        menuItems.push({ label: text.trim(), href });   // Zapisanie tylko niepustych linków
       }
-    };
-
-    // Lista pozycji menu do przetestowania
-    const menuItems = ['Blog', 'Single', 'Kontakt', 'Home'];
-    for (const item of menuItems) {
-      await clickMenu(item);
     }
 
-    // Zamknięcie przeglądarki po zakończeniu testu
-    await driver.quit();
-    console.log('Przeglądarka zamknięta. Test zakończony.');
+    // Klikanie po kolei w każdy zapisany link
+    for (const { label, href } of menuItems) {
+      try {
+        // Znalezienie linku po jego widocznym tekście
+        const element = await driver.findElement(By.linkText(label));
+        console.log(`Klikam w "${label}"`);
+        await element.click();
+        await driver.sleep(1200); // Krótkie oczekiwanie na załadowanie strony
 
-    // Zalogowanie wyniku testu
-    logTestResult(testName, passed);
+        // Sprawdzenie, czy URL po kliknięciu zawiera ostatni segment z href
+        const currentUrl = await driver.getCurrentUrl();
+        if (!currentUrl.includes(href.split('/').pop())) {
+          console.warn(`Nie przeszedłeś poprawnie na stronę "${label}". Obecny URL: ${currentUrl}`);
+          passed = false;
+        }
+
+        // Powrót do strony głównej po każdym kliknięciu
+        await driver.get(BASE_URL);
+        await driver.sleep(1000);
+      } catch (err) {
+        console.warn(`Nie udało się kliknąć w: "${label}"`);
+        passed = false;
+      }
+    }
+
+    // Zakończenie testu
+    console.log('Test nawigacji zakończony');
+    console.log(`Wynik końcowy: ${passed ? 'SUKCES' : 'BŁĘDY'}`);
+
+    // Zamknięcie przeglądarki
+    await driver.quit();
+
+    // Logowanie do pliku wynikowego
+    logTestResult(testName, passed, passed ? undefined : 'Niektóre linki w navbarze nie działają lub są niewidoczne');
 
   } catch (error) {
+    // Obsługa nieoczekiwanych błędów
     console.error('Wystąpił błąd krytyczny:', error.message);
     if (driver) await driver.quit();
-    logTestResult(testName, false, error.message); // Logujemy niepowodzenie
+
+    // Logujemy wynik negatywny z komunikatem błędu
+    logTestResult(testName, false, error.message);
   }
 })();

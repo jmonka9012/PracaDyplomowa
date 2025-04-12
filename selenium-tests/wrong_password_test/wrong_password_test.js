@@ -3,60 +3,54 @@ import chrome from 'selenium-webdriver/chrome.js';
 import dotenv from 'dotenv';
 import { logTestResult } from '../logUtils.js';
 
-// Ładowanie zmiennych środowiskowych z pliku .env
+// Wczytaj zmienne środowiskowe z pliku .env
 dotenv.config();
-
-// Uzyskanie adresu URL aplikacji z pliku konfiguracyjnego
 const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, '');
-
-// Nazwa testu, używana do logowania wyników
 const testName = 'wrong_password_test';
 
 (async function wrongPasswordTest() {
   let driver;
 
   try {
-    // Konfiguracja opcji przeglądarki Chrome
+    // Konfiguracja opcji przeglądarki
     const options = new chrome.Options();
-    options.addArguments('--disable-dev-shm-usage');  // Wyłączenie dev/shm dla dużych aplikacji
-    options.addArguments('--no-sandbox');  // Wyłączenie sandboxa w celu uniknięcia błędów na systemach Linux
-    options.addArguments('--remote-debugging-port=9222');  // Uruchomienie portu debugowania zdalnego
+    options.addArguments('--disable-dev-shm-usage');
+    options.addArguments('--no-sandbox');
+    options.addArguments('--remote-debugging-port=9222');
 
-    // Budowanie instancji WebDrivera z wybranym profilem przeglądarki Chrome
+    // Uruchomienie przeglądarki
     driver = await new Builder()
       .forBrowser('chrome')
       .setChromeOptions(options)
       .build();
 
-    // Ustawienie rozmiaru okna przeglądarki
     await driver.manage().window().setRect({ width: 1400, height: 1000 });
     console.log('Rozpoczęcie testu z błędnym hasłem...');
 
-    // Otwieranie strony głównej aplikacji
+    // Przejście na stronę główną
     await driver.get(BASE_URL);
-    await driver.sleep(1000);  // Czekamy 1 sekundę, by strona zdążyła się załadować
+    await driver.sleep(1000);
 
-    // Czekamy na załadowanie i kliknięcie w link "Login"
-    const loginLink = await driver.wait(until.elementLocated(By.linkText('Login')), 5000);
+    // Kliknięcie przycisku "Zaloguj"
+    const loginLink = await driver.wait(
+      until.elementLocated(By.css('a.header-login[href$="/login"]')),
+      5000
+    );
     await loginLink.click();
-    console.log('Kliknięto "Login"');
+    console.log('Kliknięto "Zaloguj"');
 
-    await driver.sleep(1500);  // Czekamy chwilę, aby strona się zaktualizowała
+    await driver.sleep(1000);
 
-    // Wyszukiwanie pól formularza logowania (nazwa użytkownika i hasło)
-    const usernameInput = await driver.wait(until.elementLocated(By.css('input[type="text"]')), 5000);
-    const passwordInput = await driver.wait(until.elementLocated(By.css('input[type="password"]')), 5000);
-    await driver.sleep(500);  // Czekamy chwilę, aby upewnić się, że pola są gotowe do użycia
-
-    // Wpisywanie danych logowania z błędnym hasłem
+    // Wprowadzenie błędnych danych logowania
+    const usernameInput = await driver.wait(until.elementLocated(By.id('login')), 5000);
+    const passwordInput = await driver.wait(until.elementLocated(By.id('password')), 5000);
     await usernameInput.sendKeys('pgalimski');
     await passwordInput.sendKeys('zlehaslo123');
 
-    // Przewijanie strony, aby upewnić się, że przycisk "Zaloguj się" jest widoczny
     await driver.executeScript('window.scrollBy(0, window.innerHeight / 3);');
-    await driver.sleep(800);  // Czekamy, aż przewinięcie się zakończy
+    await driver.sleep(500);
 
-    // Czekamy na załadowanie przycisku "Zaloguj się" i klikamy
+    // Kliknięcie przycisku "Zaloguj się"
     const submitButton = await driver.wait(
       until.elementLocated(By.css('input[type="submit"][value="Zaloguj się"]')),
       5000
@@ -64,36 +58,29 @@ const testName = 'wrong_password_test';
     await submitButton.click();
     console.log('Kliknięto "Zaloguj się"');
 
-    await driver.sleep(1500);  // Czekamy chwilę na reakcję po kliknięciu
+    await driver.sleep(1500);
 
-    // Sprawdzanie, czy na stronie pojawił się komunikat o błędzie
+    // Weryfikacja komunikatu błędu
     const bodyText = await driver.findElement(By.tagName('body')).getText();
-    const lines = bodyText.split('\n');
-
-    // Definiowanie słów kluczowych, które mogą wskazywać na błąd przy logowaniu
     const keywords = ['nie istnieje', 'błędne', 'niepoprawne', 'nieprawidłowe', 'invalid'];
 
-    // Szukanie linii tekstu zawierającej słowa kluczowe
-    const errorLine = lines.find(line =>
-      keywords.some(keyword => line.toLowerCase().includes(keyword))
+    const foundKeyword = keywords.find(keyword =>
+      bodyText.toLowerCase().includes(keyword)
     );
 
-    // Jeśli znaleziono komunikat błędu, test jest uznany za pomyślny
-    if (errorLine) {
-      console.log('Komunikat błędu:', errorLine);
+    if (foundKeyword) {
+      console.log(`Znaleziono komunikat o błędzie zawierający: "${foundKeyword}"`);
       logTestResult(testName, true);
     } else {
-      // Jeśli brak komunikatu o błędzie, test jest uzanany za nieudany
-      console.log('Nie znaleziono komunikatu o błędzie.');
+      console.warn('Nie znaleziono komunikatu o błędzie.');
       logTestResult(testName, false, 'Brak komunikatu o błędzie przy złym haśle.');
     }
 
-    // Czekanie chwilę przed zamknięciem przeglądarki
-    await driver.sleep(3000);
+    // Zamknięcie przeglądarki po zakończeniu testu
     await driver.quit();
 
   } catch (error) {
-    // Obsługa błędów, logowanie błędu i zamykanie przeglądarki w przypadku awarii
+    // Obsługa błędów i zamknięcie przeglądarki
     console.error('Błąd:', error);
     if (driver) await driver.quit();
     logTestResult(testName, false, error.message);

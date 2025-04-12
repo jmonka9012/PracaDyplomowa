@@ -1,51 +1,59 @@
 import { Builder, By, until } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
 import dotenv from 'dotenv';
-import { logTestResult } from '../logUtils.js'; // Funkcja do logowania wyników testów
+import { logTestResult } from '../logUtils.js';
 
 // Wczytanie zmiennych środowiskowych z pliku .env
 dotenv.config();
-const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, ''); // Usunięcie potencjalnych cudzysłowów
+const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, '');
+
+// Nazwa testu do logowania wyników
+const testName = 'login_test';
 
 (async function runLoginTest() {
   let driver;
-  const testName = 'login_test';
   let passed = false;
 
   try {
-    // Konfiguracja opcji przeglądarki Chrome 
+    // Konfiguracja opcji przeglądarki Chrome
     const options = new chrome.Options();
     options.addArguments('--disable-dev-shm-usage');
     options.addArguments('--no-sandbox');
     options.addArguments('--remote-debugging-port=9222');
 
-    // Inicjalizacja WebDrivera
+    // Inicjalizacja WebDrivera z Chrome
     driver = await new Builder()
       .forBrowser('chrome')
       .setChromeOptions(options)
       .build();
 
-    // Ustawienie rozmiaru okna
+    // Ustawienie rozmiaru okna przeglądarki
     await driver.manage().window().setRect({ width: 1400, height: 1000 });
-
     console.log('Rozpoczynanie testu logowania...');
+
+    // Otwórz stronę główną
     await driver.get(BASE_URL);
     await driver.sleep(1000);
 
-    // Kliknięcie w link logowania
-    const loginLink = await driver.wait(until.elementLocated(By.linkText('Login')), 5000);
+    // Kliknięcie przycisku logowania po klasie i href
+    const loginLink = await driver.wait(
+      until.elementLocated(By.css('a.header-login[href$="/login"]')),
+      5000
+    );
     await loginLink.click();
     console.log('Przejście do formularza logowania');
     await driver.sleep(1500);
 
-    // Wprowadzenie niepoprawnych danych logowania
-    const usernameInput = await driver.wait(until.elementLocated(By.css('input[type="text"]')), 5000);
-    const passwordInput = await driver.wait(until.elementLocated(By.css('input[type="password"]')), 5000);
+    // Znalezienie pól formularza po ID
+    const usernameInput = await driver.wait(until.elementLocated(By.id('login')), 5000);
+    const passwordInput = await driver.wait(until.elementLocated(By.id('password')), 5000);
     await driver.sleep(500);
+
+    // Wprowadzenie niepoprawnych danych
     await usernameInput.sendKeys('bzdura');
     await passwordInput.sendKeys('123');
 
-    // Przewinięcie widoku w dół (jeśli formularz nie jest w pełni widoczny)
+    // Przewinięcie widoku w dół (jeśli przycisk jest poza ekranem)
     await driver.executeScript('window.scrollBy(0, window.innerHeight / 3);');
     await driver.sleep(800);
 
@@ -75,13 +83,16 @@ const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, ''); // Usunięcie pote
       console.log('Brak komunikatu o błędzie logowania');
     }
 
+    // Zamknięcie przeglądarki
     await driver.sleep(3000);
     await driver.quit();
+
   } catch (error) {
+    // Obsługa błędów
     console.error('Wystąpił błąd podczas testu logowania:', error);
     if (driver) await driver.quit();
   } finally {
-    // Logowanie wyniku testu (sukces/porażka)
+    // Logowanie wyniku testu
     logTestResult(testName, passed);
   }
 })();

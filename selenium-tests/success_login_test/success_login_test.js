@@ -3,61 +3,54 @@ import chrome from 'selenium-webdriver/chrome.js';
 import dotenv from 'dotenv';
 import { logTestResult } from '../logUtils.js';
 
-// Ładowanie zmiennych środowiskowych z pliku .env
+// Wczytanie zmiennych środowiskowych
 dotenv.config();
-
-// Uzyskanie adresu URL aplikacji z pliku konfiguracyjnego
 const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, '');
-
-// Nazwa testu, używana do logowania wyników
 const testName = 'success_login_test';
 
 (async function successLoginTest() {
   let driver;
-  let passed = true;  // Flaga określająca, czy test przeszedł pomyślnie
+  let passed = true;
 
   try {
-    // Konfiguracja opcji przeglądarki Chrome
+    // Konfiguracja przeglądarki Chrome
     const options = new chrome.Options();
-    options.addArguments('--disable-dev-shm-usage');  // Wyłączenie dev/shm dla dużych aplikacji
-    options.addArguments('--no-sandbox');  // Wyłączenie sandboxa w celu uniknięcia błędów na systemach Linux
-    options.addArguments('--remote-debugging-port=9222');  // Uruchomienie portu debugowania zdalnego
+    options.addArguments('--disable-dev-shm-usage');
+    options.addArguments('--no-sandbox');
+    options.addArguments('--remote-debugging-port=9222');
 
-    // Budowanie instancji WebDrivera z wybranym profilem przeglądarki Chrome
     driver = await new Builder()
       .forBrowser('chrome')
       .setChromeOptions(options)
       .build();
 
-    // Ustawienie rozmiaru okna przeglądarki
     await driver.manage().window().setRect({ width: 1400, height: 1000 });
     console.log('Rozpoczęcie testu poprawnego logowania...');
 
-    // Otwieranie strony głównej aplikacji
+    // Wejście na stronę główną
     await driver.get(BASE_URL);
-    await driver.sleep(1000);  // Czekamy 1 sekundę, by strona zdążyła się załadować
+    await driver.sleep(1000);
 
-    // Czekamy na załadowanie i kliknięcie w link "Login"
-    const loginLink = await driver.wait(until.elementLocated(By.linkText('Login')), 5000);
-    await loginLink.click();
-    console.log('Kliknięto "Login"');
+    // Kliknięcie przycisku logowania
+    const loginBtn = await driver.wait(
+      until.elementLocated(By.css('a.header-login[href$="/login"]')),
+      5000
+    );
+    await loginBtn.click();
+    console.log('Kliknięto "Zaloguj"');
 
-    await driver.sleep(1500);  // Czekamy chwilę, aby strona się zaktualizowała
+    await driver.sleep(1500);
 
-    // Wyszukiwanie pól formularza logowania (nazwa użytkownika i hasło)
-    const usernameInput = await driver.wait(until.elementLocated(By.css('input[type="text"]')), 5000);
-    const passwordInput = await driver.wait(until.elementLocated(By.css('input[type="password"]')), 5000);
-    await driver.sleep(500);  // Czekamy chwilę, aby upewnić się, że pola są gotowe do użycia
-
-    // Wpisywanie danych logowania
+    // Wypełnienie formularza logowania
+    const usernameInput = await driver.wait(until.elementLocated(By.css('input[name="login"]')), 5000);
+    const passwordInput = await driver.wait(until.elementLocated(By.css('input[name="password"]')), 5000);
     await usernameInput.sendKeys('pgalimski');
     await passwordInput.sendKeys('12341234');
 
-    // Przewijanie strony, aby upewnić się, że przycisk "Zaloguj się" jest widoczny
     await driver.executeScript('window.scrollBy(0, window.innerHeight / 3);');
-    await driver.sleep(800);  // Czekamy, aż przewinięcie się zakończy
+    await driver.sleep(800);
 
-    // Czekamy na załadowanie przycisku "Zaloguj się" i klikamy
+    // Kliknięcie przycisku "Zaloguj się"
     const submitButton = await driver.wait(
       until.elementLocated(By.css('input[type="submit"][value="Zaloguj się"]')),
       5000
@@ -65,34 +58,26 @@ const testName = 'success_login_test';
     await submitButton.click();
     console.log('Kliknięto "Zaloguj się"');
 
-    await driver.sleep(1500);  // Czekamy chwilę na reakcję po kliknięciu
+    await driver.sleep(1500);
 
-    // Sprawdzanie, czy użytkownik jest zalogowany poprzez analizę tekstu na stronie
-    const bodyText = await driver.findElement(By.tagName('body')).getText();
-    const lines = bodyText.split('\n');
+    // Sprawdzenie obecności komunikatu powitalnego
+    const introDiv = await driver.wait(until.elementLocated(By.css('.ma-lcol-intro')), 5000);
+    const text = await introDiv.getText();
 
-    // Wyszukiwanie fraz sugerujących, że użytkownik jest zalogowany
-    const loggedIn = lines.find(line =>
-      line.toLowerCase().includes('wyloguj') || line.toLowerCase().includes('logout')
-    );
-
-    if (loggedIn) {
-      // Jeśli użytkownik jest zalogowany, test jest uznany za pomyślny
+    if (text.toLowerCase().includes('witaj ponownie')) {
       console.log('Zalogowano pomyślnie!');
       logTestResult(testName, true);
     } else {
-      // Jeśli brak potwierdzenia logowania, test jest uznany za nieudany
       console.log('Nie znaleziono potwierdzenia logowania.');
       passed = false;
-      logTestResult(testName, false, 'Nie znaleziono potwierdzenia logowania.');
+      logTestResult(testName, false, 'Brak potwierdzenia "Witaj ponownie"');
     }
 
-    // Czekanie chwilę przed zamknięciem przeglądarki
     await driver.sleep(3000);
     await driver.quit();
 
   } catch (error) {
-    // Obsługa błędów, logowanie błędu i zamykanie przeglądarki w przypadku awarii
+    // Obsługa błędów
     console.error('Błąd:', error);
     if (driver) await driver.quit();
     logTestResult(testName, false, error.message);
