@@ -156,7 +156,7 @@ class StaticEventSeeder extends Seeder
                                 'seat_row' => $row,
                                 'seat_number' => $col,
                                 'price' => 10.50,
-                                'status' => 'available',
+                                'status' => ['available', 'sold'][array_rand(['available', 'sold'])],
                             ]);
                         }
                     }
@@ -165,6 +165,7 @@ class StaticEventSeeder extends Seeder
                         'hall_section_id' => $section->id,
                         'event_id' => $event->id,
                         'capacity' => $section->capacity,
+                        'sold' => rand(0, $section->capacity),
                         'price' => 5.50,
                     ]);
                 }
