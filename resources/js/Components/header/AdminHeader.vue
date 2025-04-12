@@ -98,7 +98,7 @@ onBeforeUnmount(() => {
                             <Link :href="route('admin.events')"><span>Zarządzaj wydarzeniami</span></Link>
                         </li>
                         <li>
-                            <Link :href="route('admin.post')"><span>Dodaj Post</span></Link>
+                            <Link :href="route('admin.add-post')"><span>Dodaj Post</span></Link>
                         </li>
                         <li>
                             <Link :href="route('admin.posts')"><span>Posty</span></Link>
@@ -164,19 +164,19 @@ onBeforeUnmount(() => {
                                         <Link :href="route('admin')"><span>Strona główna</span></Link>
                                     </li>
                                     <li>
-                                        <Link :href="route('admin.events')"><span>Zarządzaj wydarzeniami</span></Link>
+                                        <Link v-if="user.permission_level <=2" :href="route('admin.events')"><span>Zarządzaj wydarzeniami</span></Link>
                                     </li>
                                     <li>
-                                        <Link :href="route('admin.post')"><span>Dodaj Post</span></Link>
+                                        <Link :href="route('admin.add-post')"><span>Dodaj Post</span></Link>
                                     </li>
                                     <li>
                                         <Link :href="route('admin.posts')"><span>Posty</span></Link>
                                     </li>
                                     <li>
-                                        <Link :href="route('admin.users')"><span>Użytkownicy</span></Link>
+                                        <Link v-if="user.permission_level <=1" :href="route('admin.users')"><span>Użytkownicy</span></Link>
                                     </li>
                                     <li>
-                                        <Link :href="route('admin.customer-service')"><span>Obsługa Klienta</span>
+                                        <Link v-if="user.permission_level <=2" :href="route('admin.customer-service')"><span>Obsługa Klienta</span>
                                         </Link>
                                     </li>
                                 </ul>

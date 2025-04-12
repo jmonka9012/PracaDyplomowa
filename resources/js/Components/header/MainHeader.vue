@@ -138,12 +138,6 @@ onBeforeUnmount(() => {
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
                         Zarejestruj
                     </Link>
-                    <span class="divider divider-dark"></span>
-                    <Link
-                        :href="route('event-create')"
-                        class="ml-30px btn btn-header btn-hovprim"
-                        >+ Zorganizuj wydarzenie</Link
-                    >
                 </div>
                 <div class="d-none d-lg-flex align-items-center" v-else>
                     <Link @click="Logout" class="hover-primary header-login">
@@ -157,8 +151,9 @@ onBeforeUnmount(() => {
                     >
                         <i class="fa fa-user text-primary mr-8px"></i>Moje konto
                     </Link>
-                    <span class="divider divider-dark"></span>
+                    <span v-if="user.permission_level<=3" class="divider divider-dark"></span>
                     <Link
+                        v-if="user.permission_level<=3"
                         :href="route('admin')"
                         class="hover-primary header-login"
                     >
@@ -166,6 +161,7 @@ onBeforeUnmount(() => {
                         Backend
                     </Link>
                     <Link
+                        v-if="user.permission_level<=4"
                         :href="route('event-create')"
                         class="ml-30px btn btn-header btn-hovprim"
                         >+ Zorganizuj wydarzenie</Link
@@ -312,15 +308,6 @@ onBeforeUnmount(() => {
                                                     Zarejestruj
                                                 </Link>
                                             </li>
-                                            <li>
-                                                <Link
-                                                    :href="
-                                                        route('event-create')
-                                                    "
-                                                    class="btn btn-header btn-hovprim"
-                                                    >+ Zorganizuj wydarzenie</Link
-                                                >
-                                            </li>
                                         </ul>
 
                                         <ul v-else>
@@ -348,6 +335,7 @@ onBeforeUnmount(() => {
                                             </li>
                                             <li>
                                                 <Link
+                                                    v-if="user.permission_level<=3"
                                                     :href="route('admin')"
                                                     class="hover-primary header-login"
                                                 >
@@ -359,6 +347,7 @@ onBeforeUnmount(() => {
                                             </li>
                                             <li>
                                                 <Link
+                                                    v-if="user.permission_level<=4"
                                                     :href="
                                                         route('event-create')
                                                     "
