@@ -16,7 +16,7 @@ class RequestEventTest extends TestCase
         $data = [
             'event_name'=>'Test456',
             'event_url'=>'Test456',
-            'event_date'=>'1111-11-11',
+            'event_date'=>'2222-11-11',
             'event_start'=>'12:12:00',
             'event_end'=>'12:12:00',
             'contact_email'=>'Test456@test.com',
@@ -32,7 +32,7 @@ class RequestEventTest extends TestCase
         $this->assertDatabaseHas('events', [
             'event_name'=>'Test456',
             'event_url'=>'Test456',
-            'event_date'=>'1111-11-11',
+            'event_date'=>'2222-11-11',
             'event_start'=>'12:12:00',
             'event_end'=>'12:12:00',
             'contact_email'=>'Test456@test.com',
