@@ -41,6 +41,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'role:admin, moderator, redactor, blog_authors'
         ]);
 
+        $middleware->group('organizerAccess', [
+            'auth',
+            'role:admin, moderator, redactor, blog_authors, organizer'
+        ]);
+
         $middleware->group('loggedInAccess', [
             'auth',
             'role:admin,moderator,redactor, blog_author, organizer, verified_user, unverified_user'
