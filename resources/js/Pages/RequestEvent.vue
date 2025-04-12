@@ -7,6 +7,7 @@ import {router} from "@inertiajs/vue3";
 import {Link} from "@inertiajs/vue3";
 import Wysiwyg from "../Components/sections-new/Wysiwyg.vue";
 import Editor from "@tinymce/tinymce-vue";
+import axios from "axios";
 
 const errors = reactive({});
 
@@ -24,12 +25,10 @@ const requestEventForm = reactive({
     event_location: null,
 });
 
-// Plik przechowujemy osobno
 const eventImage = ref(null);
 
-// Obsługa zmiany pliku
 const handleFileUpload = (event) => {
-    const file = event.target.files[0]; // Pobranie pierwszego pliku
+    const file = event.target.files[0];
     if (file) {
         eventImage.value = file;
     }
@@ -46,12 +45,10 @@ function submitEventRequest() {
         }
     });
 
-    // Dodajemy plik, jeśli został wybrany
     if (eventImage.value) {
         formData.append("event_image", eventImage.value);
     }
 
-    // Wysyłanie żądania POST do serwera
     router.post(route("event-create.post"), formData, {
         preserveScroll: () => hadError,
         onError: (err) => {
@@ -70,6 +67,27 @@ const props = defineProps({
         required: true,
     },
 });
+
+const HandleEditorImage = () => (blobInfo, progress) => {
+    const formData = new FormData();
+    formData.append('image', blobInfo.blob(), blobInfo.filename());
+
+    return axios.post(route('event-create.image'), formData, {
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Content-Type': 'multipart/form-data',
+        },
+        onUploadProgress: (progressEvent) => {
+            if (progressEvent.lengthComputable) {
+                progress((progressEvent.loaded / progressEvent.total) * 100);
+            }
+        },
+    })
+        .then(response => response.data.location)
+        .catch(error => {
+            throw new Error(`Upload failed: ${error.message}`);
+        });
+};
 
 const {user, isLoggedIn} = useAuth();
 </script>
@@ -243,8 +261,8 @@ const {user, isLoggedIn} = useAuth();
                         v-model="requestEventForm.event_description"
                         :init="{
                     toolbar_mode: 'sliding',
-                            content_style: 'body { font-family: Arial; }',
-                    images_upload_url: route('event-create.image'),
+                    content_style: 'body { font-family: Arial; }',
+                    images_upload_handler: HandleEditorImage(),
                     images_upload_credentials: true, // Dodaj to!
         forced_root_block: false,
                     plugins: [

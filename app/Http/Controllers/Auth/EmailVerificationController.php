@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Mail\VerifyEmail;
-use Illuminate\Support\Facades\Mail; 
+use Illuminate\Support\Facades\Mail;
+use App\Enums\UserRole;
+
 
 class EmailVerificationController extends Controller
 {
@@ -24,6 +26,8 @@ class EmailVerificationController extends Controller
         }
 
         $user->email_verified_at = now();
+        $user->role = UserRole::VERIFIED_USER->value;
+        $user->permission_level = UserRole::VERIFIED_USER->permissionLevel();
         $user->save();
 
         return redirect()->route('my-account')->with('status', 'Email zweryfikowany');

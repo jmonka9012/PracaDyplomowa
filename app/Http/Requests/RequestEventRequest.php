@@ -24,7 +24,7 @@ class RequestEventRequest extends FormRequest
         return [
             'event_name' => 'required|string|max:255|unique:events,event_name|unique:events_archive,event_name',
             'event_url' => 'string|max:255|unique:events,event_url',
-            'event_date' => 'date|required|after:+6 days',
+            'event_date' => 'required|date|after:+'.now()->addDays(6),
             'event_start' => 'required',
             'event_end' => 'required',
             'contact_email' => 'email|max:255',

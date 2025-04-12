@@ -14,7 +14,7 @@ class LoginUserController extends Controller
 {
     public function create(): Response
     {
-        return Inertia::render('Forms', [
+        return Inertia::render('SignIn', [
             'message' => 'Logowanie',
             'csrf_token' => csrf_token(),
         ]);

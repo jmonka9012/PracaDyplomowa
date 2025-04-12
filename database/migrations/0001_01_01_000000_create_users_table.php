@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\UserRole;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,9 +20,22 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->integer('permission_level')->default(6);
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
+
+            $table->enum('role', [
+                UserRole::ADMIN->value,
+                UserRole::MODERATOR->value,
+                UserRole::REDACTOR->value,
+                UserRole::BLOG_AUTHOR->value,
+                UserRole::ORGANIZER->value,
+                UserRole::VERIFIED_USER->value,
+                UserRole::UNVERIFIED_USER->value,
+                UserRole::GUEST->value
+            ])->default(UserRole::UNVERIFIED_USER->value);
+
+            $table->unsignedTinyInteger('permission_level')
+                ->default(UserRole::UNVERIFIED_USER->permissionLevel());
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

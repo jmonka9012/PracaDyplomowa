@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Blog;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog\BlogPost;
@@ -13,18 +13,18 @@ class RequestBlogController extends Controller
 {
     public function index()
     {
-        return Inertia::render('BlogRequest');
+        return Inertia::render('Admin/AddPost');
     }
 
     public function store(RequestBlogRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();
 
-        if ($request->hasFile('event_image')) {
+        if ($request->hasFile('blog_image')) {
             $blogPostName = Str::slug($request->input('blog_post_name'));
             $folder = 'blog_images/' . now()->format('Y/m') . '/' . $blogPostName;
         
-            $imagePath = $request->file('event_image')->store($folder, 'public');
+            $imagePath = $request->file('blog_image')->store($folder, 'public');
         } else {
             $imagePath = null;
         }

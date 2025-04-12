@@ -2,15 +2,17 @@
 
 namespace App\Models\Events;
 
-
+use App\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class EventBase extends Model
 {
+    use HasSlug;
     protected $fillable = [
         'event_name',
         'event_url',
         'event_date',
+        'slug',
         'event_start',
         'event_end',
         'contact_email',

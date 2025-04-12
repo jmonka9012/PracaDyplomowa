@@ -29,17 +29,17 @@ class RequestEventController extends Controller
     public function store(RequestEventRequest $request): RedirectResponse
     {
 
-        $validatedData = $request->validated(); 
-        
+        $validatedData = $request->validated();
+
         if ($request->hasFile('event_image')) {
             $eventName = Str::slug($request->input('event_name'));
             $folder = 'event_images/' . now()->format('Y/m') . '/' . $eventName;
-        
+
             $imagePath = $request->file('event_image')->store($folder, 'public');
         } else {
             $imagePath = null;
         }
-        
+
 
         $request->merge(['image_path' => $imagePath]);
 
@@ -89,18 +89,18 @@ class RequestEventController extends Controller
     public function storeEventImages(Request $request)
     {
         $request->validate([
-           'file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048' 
+           'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $file = $request->file('file');
-        $path = $file->storeAs(
+        $image = $request->file('image');
+        $path = $image->storeAs(
             'wysiwyg-images',
-            time().'_'.$file->getClientOriginalName(),
+            time().'_'.$image->getClientOriginalName(),
             'public'
         );
 
         return response()->json([
-            'location' => Storage::disk('public')->url($path)
+            'location' => asset(Storage::url($path))
         ]);
     }
 }

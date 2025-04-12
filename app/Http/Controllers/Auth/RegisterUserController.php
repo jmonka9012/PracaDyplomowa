@@ -17,15 +17,15 @@ use App\Http\Requests\RegisterUserRequest;
 class RegisterUserController extends Controller{
 
     public function create(): Response{
-        return Inertia::render('Forms', [
+        return Inertia::render('SignIn', [
             'message' => 'Rejestracja',
             'csrf_token' => csrf_token(),
         ]);
     }
 
     public function store(RegisterUserRequest $request): RedirectResponse{
-        
-        $validatedData = $request->validated(); 
+
+        $validatedData = $request->validated();
 
         $user = User::create([
             'name' => $validatedData['name'],
