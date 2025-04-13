@@ -314,9 +314,6 @@ const latest = [
                                 Email dodatkowy
                             </th>
                             <th class="t-details-events__desc">Opis</th>
-                            <th class="t-details-events__mr-info">
-                                Więcej informacji
-                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -350,18 +347,7 @@ const latest = [
                             <td><a href="#email-main">Główny email</a></td>
                             <td><a href="#email-add">Dodatkowy email</a></td>
                             <td class="t-details-events__td-desc">
-                                Lorem ipsum dolor sit, amet consectetur
-                                adipisicing elit. Expedita suscipit nisi cum
-                                reiciendis exercitationem. Placeat magnam
-                                explicabo consequatur quam possimus dolore iste
-                                harum eum perferendis repellendus, dolorem
-                                cupiditate error beatae?
-                            </td>
-                            <td class="t-details-events__td-desc">
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipisicing elit. Sed culpa vero dicta facere
-                                quaerat nam ullam fuga harum exercitationem
-                                illum?
+                                <a href="text-primary">Podgląd</a>
                             </td>
                         </tr>
                     </tbody>
@@ -392,7 +378,6 @@ const latest = [
                             <th>Email gł.</th>
                             <th>Email dodatkowy</th>
                             <th>Opis</th>
-                            <th>Więcej informacji</th>
                         </tr>
                     </tfoot>
                 </table>
