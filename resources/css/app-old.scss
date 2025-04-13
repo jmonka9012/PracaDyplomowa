@@ -183,6 +183,10 @@ button {
         padding: 19px 25px;
     }
 }
+.btn-reset {
+    background-color: transparent;
+    border: 0;
+}
 
 .btn-or-wh {
     border-style: solid;
@@ -430,6 +434,9 @@ img {
         display: none !important;
     }
 }
+.flex-auto {
+    flex: auto;
+}
 
 .flex-row {
     flex-direction: row;
@@ -671,7 +678,7 @@ img {
 .fw-bold {
     font-weight: 600;
 }
-.text-underline{
+.text-underline {
     text-transform: underline;
 }
 

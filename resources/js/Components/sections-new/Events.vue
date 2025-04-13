@@ -1,40 +1,232 @@
 <script setup>
+import { ref } from "vue";
+
 defineProps({
     events: Array,
 });
+
+const scrollContainer = ref(null);
+const scrollAmount = 50;
+
+const scrollLeft = () => {
+    if (scrollContainer.value) {
+        scrollContainer.value.scrollBy(-scrollAmount, 0);
+    }
+};
+
+const scrollRight = () => {
+    if (scrollContainer.value) {
+        scrollContainer.value.scrollBy(scrollAmount, 0);
+    }
+};
 </script>
 <template>
-         <div class="select-filters">
-                <div class="input-wrap select-wrap">
-                    <i class="fa fa-calendar"></i>
-                    <i class="fa fa-chevron-down"></i>
-                    <select class="select-icon">
-                        <option disabled value="">Please select one</option>
-                        <option>Buisness</option>
-                        <option>Concert</option>
-                        <option>Music</option>
-                        <option>Conference</option>
-                        <option>Education</option>
-                        <option>Fashion</option>
-                        <option>Festival</option>
-                        <option>Food & drink</option>
-                        <option>Other</option>
-                        <option>Sport</option>
-                    </select>
+    <div class="select-filters">
+        <div class="input-wrap select-wrap">
+            <i class="fa fa-calendar"></i>
+            <i class="fa fa-chevron-down"></i>
+            <select class="select-icon">
+                <option disabled value="">Please select one</option>
+                <option>Buisness</option>
+                <option>Concert</option>
+                <option>Music</option>
+                <option>Conference</option>
+                <option>Education</option>
+                <option>Fashion</option>
+                <option>Festival</option>
+                <option>Food & drink</option>
+                <option>Other</option>
+                <option>Sport</option>
+            </select>
+        </div>
+        <div class="input-wrap select-wrap">
+            <i class="fa fa-map-marker"></i>
+            <select class="select select-icon">
+                <option disabled value="">All time</option>
+                <option>Today</option>
+                <option>Tommorow</option>
+                <option>This week</option>
+                <option>This weekend</option>
+                <option>Next week</option>
+                <option>Next month</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="select-event-date">
+        <div class="date-jump">
+            <button class="btn-reset date-jump__btn" @click="scrollLeft(50)">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+            <div ref="scrollContainer" class="date-jump__cont">
+                <a href="" class="date-jump__link">Dziś</a>
+                <a href="" class="date-jump__link">Jutro</a>
+                <a href="" class="date-jump__link">Ten tydzień</a>
+                <a href="" class="date-jump__link">Następny tydzień</a>
+                <a href="" class="date-jump__link">Najbliższy weekend</a>
+                <a href="" class="date-jump__link">Następny weekend</a>
+                <a href="" class="date-jump__link">Ten miesiąc</a>
+                <a href="" class="date-jump__link">Najbliższe 30 dni</a>
+            </div>
+            <button class="btn-reset date-jump__btn" @click="scrollRight(50)">
+                <i class="fa fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="d-flex flex-column">
+            <div class="date-head">
+                <div class="date-sec">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <button class="date-dir">
+                            <i class="fa fa-chevron-left"></i>
+                            <i class="fa fa-chevron-left"></i>
+                        </button>
+                        <button class="date-dir">
+                            <i class="fa fa-chevron-left"></i>
+                        </button>
+                    </div>
+                    <div
+                        class="d-flex justify-content-center align-items-center flex-auto"
+                    >
+                        <button class="date-range">2025</button>
+                        <button class="date-range">Kwie</button>
+                    </div>
+
+                    <div
+                        class="d-flex justify-content-end align-items-center d-lg-none"
+                    >
+                        <button class="date-dir">
+                            <i class="fa fa-chevron-right"></i>
+                        </button>
+                        <button class="date-dir">
+                            <i class="fa fa-chevron-right"></i>
+                            <i class="fa fa-chevron-right"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="input-wrap select-wrap">
-                    <i class="fa fa-map-marker"></i>
-                    <select class="select select-icon">
-                        <option disabled value="">All time</option>
-                        <option>Today</option>
-                        <option>Tommorow</option>
-                        <option>This week</option>
-                        <option>This weekend</option>
-                        <option>Next week</option>
-                        <option>Next month</option>
-                    </select>
+                <div class="date-sec d-none d-lg-flex">
+                    <div
+                        class="d-flex justify-content-center align-items-center flex-auto"
+                    >
+                        <button class="date-range">2025</button>
+                        <button class="date-range">Kwie</button>
+                    </div>
+                    <div class="d-flex justify-content-end align-items-center">
+                        <button class="date-dir">
+                            <i class="fa fa-chevron-right"></i>
+                        </button>
+                        <button class="date-dir">
+                            <i class="fa fa-chevron-right"></i>
+                            <i class="fa fa-chevron-right"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
+            <div class="date-content">
+                <div class="date-content__block">
+                    <span class="date-item date-item--th">pon</span>
+                    <span class="date-item date-item--th">wto</span>
+                    <span class="date-item date-item--th">śro</span>
+                    <span class="date-item date-item--th">czw</span>
+                    <span class="date-item date-item--th">pią</span>
+                    <span class="date-item date-item--th">sob</span>
+                    <span class="date-item date-item--th">nie</span>
+                    <a class="date-item disabled">31</a>
+                    <a class="date-item disabled">1</a>
+                    <a class="date-item disabled">2</a>
+                    <a class="date-item disabled">3</a>
+                    <a class="date-item disabled">4</a>
+                    <a class="date-item disabled">5</a>
+                    <a class="date-item disabled">6</a>
+                    <a class="date-item disabled">7</a>
+                    <a class="date-item disabled">8</a>
+                    <a class="date-item disabled">9</a>
+                    <a class="date-item disabled">10</a>
+                    <a class="date-item disabled">11</a>
+                    <a class="date-item">12</a>
+                    <a class="date-item">13</a>
+                    <a class="date-item">14</a>
+                    <a class="date-item">15</a>
+                    <a class="date-item">16</a>
+                    <a class="date-item">17</a>
+                    <a class="date-item">18</a>
+                    <a class="date-item">19</a>
+                    <a class="date-item">20</a>
+                    <a class="date-item">21</a>
+                    <a class="date-item">22</a>
+                    <a class="date-item">23</a>
+                    <a class="date-item">24</a>
+                    <a class="date-item">25</a>
+                    <a class="date-item">26</a>
+                    <a class="date-item selected">27</a>
+                    <a class="date-item">28</a>
+                    <a class="date-item">29</a>
+                    <a class="date-item">30</a>
+                    <a class="date-item future">1</a>
+                    <a class="date-item future">2</a>
+                    <a class="date-item future">3</a>
+                    <a class="date-item future">4</a>
+                    <a class="date-item future">5</a>
+                    <a class="date-item future">6</a>
+                    <a class="date-item future">7</a>
+                    <a class="date-item future">8</a>
+                    <a class="date-item future">9</a>
+                    <a class="date-item future">10</a>
+                    <a class="date-item future">11</a>
+                </div>
+                <div class="date-content__block">
+                    <span class="date-item date-item--th">pon</span>
+                    <span class="date-item date-item--th">wto</span>
+                    <span class="date-item date-item--th">śro</span>
+                    <span class="date-item date-item--th">czw</span>
+                    <span class="date-item date-item--th">pią</span>
+                    <span class="date-item date-item--th">sob</span>
+                    <span class="date-item date-item--th">nie</span>
+                    <a class="date-item">31</a>
+                    <a class="date-item">1</a>
+                    <a class="date-item">2</a>
+                    <a class="date-item">3</a>
+                    <a class="date-item">4</a>
+                    <a class="date-item">5</a>
+                    <a class="date-item">6</a>
+                    <a class="date-item">7</a>
+                    <a class="date-item">8</a>
+                    <a class="date-item">9</a>
+                    <a class="date-item">10</a>
+                    <a class="date-item">11</a>
+                    <a class="date-item">12</a>
+                    <a class="date-item">13</a>
+                    <a class="date-item">14</a>
+                    <a class="date-item">15</a>
+                    <a class="date-item">16</a>
+                    <a class="date-item">17</a>
+                    <a class="date-item">18</a>
+                    <a class="date-item">19</a>
+                    <a class="date-item">20</a>
+                    <a class="date-item">21</a>
+                    <a class="date-item">22</a>
+                    <a class="date-item">23</a>
+                    <a class="date-item">24</a>
+                    <a class="date-item">25</a>
+                    <a class="date-item">26</a>
+                    <a class="date-item">27</a>
+                    <a class="date-item">28</a>
+                    <a class="date-item">29</a>
+                    <a class="date-item">30</a>
+                    <a class="date-item future">1</a>
+                    <a class="date-item future">2</a>
+                    <a class="date-item future">3</a>
+                    <a class="date-item future">4</a>
+                    <a class="date-item future">5</a>
+                    <a class="date-item future">6</a>
+                    <a class="date-item future">7</a>
+                    <a class="date-item future">8</a>
+                    <a class="date-item future">9</a>
+                    <a class="date-item future">10</a>
+                    <a class="date-item future">11</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div v-for="event in events" :key="event.id" class="event">
         <div class="event-img">
             <a class="link-stretched" :href="event.mainLink[0].href"> </a>
@@ -45,9 +237,13 @@ defineProps({
                 class="d-flex flex-lg-row justify-content-between align-items-center mt-lg-8px mb-16px"
             >
                 <h6 class="event-title">
-                    <a :href="event.mainLink[0].href">{{ event.mainLink[0].title }}</a>
+                    <a :href="event.mainLink[0].href">{{
+                        event.mainLink[0].title
+                    }}</a>
                 </h6>
-                <a class="event-link d-none d-lg-flex" :href="event.mainLink[0].ahref"
+                <a
+                    class="event-link d-none d-lg-flex"
+                    :href="event.mainLink[0].ahref"
                     ><i class="fa fa-ticket"></i>
                     Zobacz więcej
                 </a>
@@ -188,6 +384,152 @@ defineProps({
         .event-date,
         .event-subtitle {
             color: #191028;
+        }
+    }
+}
+.select-event-date {
+    background: #fff;
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #edecee;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    // max-width: 352px;
+    max-height: 60vh;
+    column-gap: 8px;
+    width: 100%;
+    @include mixin.media-breakpoint-up(lg) {
+        flex-direction: row;
+        width: fit-content;
+    }
+    .date-jump {
+        display: flex;
+        @include mixin.media-breakpoint-up(lg) {
+            flex-direction: column;
+        }
+        &__btn {
+            @include mixin.media-breakpoint-up(lg) {
+                display: none;
+            }
+        }
+        &__cont {
+            display: flex;
+            flex-direction: row;
+            scroll-snap-type: x mandatory;
+            overflow-x: auto;
+            max-width: 275px;
+            gap: 8px;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            padding-bottom: 5px;
+            @include mixin.media-breakpoint-up(lg) {
+                flex-direction: column;
+                padding-bottom: 5px;
+            }
+        }
+        &__link {
+            font-size: 14px;
+            height: 32px;
+            color: #000;
+            padding: 0 14px;
+            font-weight: 500;
+            align-items: center;
+            transition: all 0.5s ease;
+            border-radius: 0.5rem;
+            border: 2px solid transparent;
+            width: 100%;
+            white-space: nowrap;
+            &:hover {
+                background-color: var(--primary);
+                border: 2px solid var(--text);
+            }
+        }
+    }
+    .date-sec {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+        @include mixin.media-breakpoint-up(lg) {
+            justify-content: center;
+        }
+    }
+    .date-head {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        column-gap: 16px;
+        border-bottom: 1px solid var(--primary);
+    }
+    .date-dir,
+    .date-range {
+        background-color: transparent;
+        border: 0;
+        line-height: 40px;
+        font-weight: 500;
+        font-family: "Krona One";
+        transition: var(--trans-def);
+    }
+    .date-range {
+        &:hover {
+            color: var(--primary);
+        }
+    }
+    .date-dir {
+        display: flex;
+        align-items: center;
+        color: var(--gray2);
+        &:hover {
+            color: var(--text);
+        }
+    }
+    .date-content {
+        display: flex;
+        &__block {
+            display: grid;
+            grid-template-columns: repeat(7, auto);
+            grid-auto-rows: 38px;
+            padding: 8px 12px;
+            width: 280px;
+        }
+    }
+
+    .date-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        line-height: 32px;
+        height: 32px;
+        font-weight: 400;
+        transition: var(--trans-def);
+        border-radius: 2px;
+        width: 100%;
+        &.selected {
+            border: 1px solid var(--primary);
+        }
+        &:hover:not(.date-item--th:hover) {
+            background-color: #f5f5f5;
+        }
+        &.disabled {
+            color: #00000040;
+            pointer-events: none;
+        }
+        &--th {
+            color: #000;
+        }
+    }
+    .date-sec:nth-of-type(2) {
+        display: none;
+        @include mixin.media-breakpoint-up(lg) {
+            display: flex;
+        }
+    }
+    .date-content__block:nth-of-type(2) {
+        display: none;
+        @include mixin.media-breakpoint-up(lg) {
+            display: grid;
         }
     }
 }
