@@ -18,7 +18,7 @@ class StaticBlogPostSeeder extends Seeder
         $blogContent =
         '<p><img src="../storage/event_images/placeholder.jpg"></p>
         <hr>
-        <div id="Content">
+        <div class="single-info" id="Content">
         <div id="bannerL">
         <div id="lipsumcom_left_siderail_1" align="center" data-google-query-id="COrJj9r40owDFZ3MOwIdsHAG1w" data-freestar-ad="__300x600 __400x225"></div>
         <div id="lipsumcom_left_siderail_2" align="center" data-freestar-ad="__300x600"></div>

@@ -227,6 +227,25 @@ const scrollRight = () => {
             </div>
         </div>
     </div>
+    <div class="event-select-location">
+        <i class="fa fa-map-marker"></i><span class="pl-20px">Lokalizacja</span
+        ><i class="fa fa-chevron-down ml-auto"></i>
+        <ul class="event-select-location__dropdown">
+            <ul class="dropdown-ndlevel">
+                <li></li>
+            </ul>
+            <li class="dropdown-item">
+                <a href="">item1</a>
+            </li>
+            <li class="dropdown-item">
+                <a href="">item2</a>
+            </li>
+            <li class="dropdown-item">
+                <a href="">item3</a>
+            </li>
+        </ul>
+    </div>
+
     <div v-for="event in events" :key="event.id" class="event">
         <div class="event-img">
             <a class="link-stretched" :href="event.mainLink[0].href"> </a>
@@ -530,6 +549,49 @@ const scrollRight = () => {
         display: none;
         @include mixin.media-breakpoint-up(lg) {
             display: grid;
+        }
+    }
+}
+
+.event-select-location {
+    box-shadow: none;
+    min-height: 60px;
+    display: block;
+    padding: 0.375rem 0.75rem;
+    padding-left: 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    appearance: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    min-width: 300px;
+    padding-left: 60px;
+    font-family: "Krona One";
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    &:focus {
+        border: 1px solid var(--primary);
+    }
+    i {
+        &.fa-map-marker {
+            font-size: 24px;
+        }
+        &.fa-chevron-down {
+            font-size: 16px;
+        }
+    }
+    &__dropdown {
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+        
+        .dropdown-item{
+            
         }
     }
 }
