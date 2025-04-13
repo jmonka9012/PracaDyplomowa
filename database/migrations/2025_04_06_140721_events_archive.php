@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('event_name');
             $table->string('event_additional_url');
             $table->string('slug')->nullable();
+            $table->string('event_url')->nullable();
             $table->date('event_date');
             $table->time('event_start');
             $table->time('event_end');

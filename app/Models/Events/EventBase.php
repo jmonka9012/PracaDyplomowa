@@ -21,6 +21,7 @@ abstract class EventBase extends Model
         'event_additional_url',
         'event_date',
         'slug',
+        'event_url',
         'event_start',
         'event_end',
         'contact_email',

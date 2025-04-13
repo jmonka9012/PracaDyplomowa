@@ -9,11 +9,13 @@ trait HasSlug
     {
         static::creating(function($model){
             $model->generateSlug();
+            $model->generateUrl();
         });
 
         static::updating(function($model) {
             if ($model->isDirty($model->getSlugFromColumn())) {
                 $model->generateSlug();
+                $model->generateUrl();
             }
         });
     } 
@@ -50,4 +52,14 @@ trait HasSlug
             default => 'event_name',
         };
     }
+
+    protected function generateUrl()
+    {
+        if (get_class($this) === 'App\Models\Blog\BlogPost') {
+            return;
+        }
+        
+        $this->event_url = '/event/' . $this->slug;
+    }
+
 }
