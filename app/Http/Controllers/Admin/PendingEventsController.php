@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use App\Models\Events\Event;
-use App\Http\Resources\EventBrowserResource;
+use App\Http\Resources\EventBrowserAdminResource;
 
 
 class PendingEventsController extends Controller
@@ -15,7 +15,7 @@ class PendingEventsController extends Controller
         $events = Event::all();
 
         return Inertia::render('Admin/PendingEvents', [
-            'events' => EventBrowserResource::collection($events)
+            'events' => EventBrowserAdminResource::collection($events)
         ]);
     }
 
@@ -24,7 +24,7 @@ class PendingEventsController extends Controller
         $events = Event::all();
 
         return response()->json([
-            'events' => EventBrowserResource::collection($events)
+            'events' => EventBrowserAdminResource::collection($events)
         ]);
     }
 }

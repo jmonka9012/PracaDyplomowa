@@ -55,6 +55,7 @@ class StaticEventSeeder extends Seeder
                 'event_description_additional' => 'Fajnie będzie ogółem',
                 'event_location' => 1,
                 'image_path' => 'event_images/placeholder.jpg',
+                'pending' => false,
             ],
             [
                 'event_name' => 'David Bowie 2070s',
@@ -68,6 +69,7 @@ class StaticEventSeeder extends Seeder
                 'event_description_additional' => 'He Has Risen',
                 'event_location' => 2,
                 'image_path' => 'event_images/placeholder.jpg',
+                'pending' => false,
             ],
             [
                 'event_name' => 'Motorhead 2025',
@@ -81,6 +83,7 @@ class StaticEventSeeder extends Seeder
                 'event_description_additional' => 'Lemmy będzie',
                 'event_location' => 1,
                 'image_path' => 'event_images/placeholder.jpg',
+                'pending' => false,
             ],
             [
                 'event_name' => 'Opeth Reveries 202X',

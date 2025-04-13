@@ -20,6 +20,13 @@ Route::prefix('wydarzenia')->group(function() {
             ->name('event-create.image')
             ->Middleware('organizerAccess');
       
+      //Przeglądanie eventów
+      Route::get('/data', [EventController::class, 'eventBrowserData'])
+            ->name('event.browser.data');
+      
+      Route::get('/', [EventController::class, 'eventBrowser'])
+            ->name('event.browser');
+            
       // Strona event
       Route::get('/{event:slug}', [EventController::class, 'show'])
             ->name('event.show');
@@ -27,5 +34,6 @@ Route::prefix('wydarzenia')->group(function() {
       // Dane eventu
       Route::get('/data/{event:slug}', [EventController::class, 'showData'])
             ->name('event.data');
+
 });
 

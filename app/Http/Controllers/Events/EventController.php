@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Events;
 
+use App\Http\Resources\EventBrowserResource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Inertia\Inertia;
@@ -27,6 +28,24 @@ class EventController extends Controller
 
         return response()->json([
             'event' => $event->load(['seats', 'standingTickets'])->toArray()
+        ]);
+    }
+    
+    public function eventBrowser(Event $event)
+    {
+        $events = Event::where('pending', false)->get();
+
+        return Inertia::render('EventBrowser', [
+            'event' => new EventBrowserResource($event)
+        ]);
+    }
+
+    public function eventBrowserData(Event $event)
+    {
+        $events = Event::where('pending', false)->get();
+
+        return response()->json([
+            'events' => EventBrowserResource::collection($events)
         ]);
     }
 }
