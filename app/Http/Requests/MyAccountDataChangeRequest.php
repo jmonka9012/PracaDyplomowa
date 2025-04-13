@@ -35,6 +35,11 @@ class MyAccountDataChangeRequest extends FormRequest
     {
         return [
             'first_name.max' => 'Podane imie jest zbyt długie',
+            'last_name.max' => 'Podane nazwisko jest zbyt długie',
+            
+            'email.email' => 'Nieprawidłowy adres e-mail',
+            'email.unique'=> 'Istnieje już konto z tym emailem',
+            'email.max'=> 'Podany email jest zbyt długi',
         ];
     }
 }

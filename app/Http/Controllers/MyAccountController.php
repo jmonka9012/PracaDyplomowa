@@ -8,7 +8,7 @@ use App\Http\Requests\MyAccountDataChangeRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyEmail;
-
+use App\Enums\UserRole;
 
 class MyAccountController extends Controller
 {
@@ -36,6 +36,10 @@ class MyAccountController extends Controller
 
         if (isset($updateData['email'])) {
             $updateData['email_verified_at'] = null;
+            $user->role = UserRole::UNVERIFIED_USER->value;
+            $user->permission_level = UserRole::UNVERIFIED_USER->permissionLevel();
+            $user->save();
+
             Mail::to($user->email)->send(new VerifyEmail($user));
         }
 
