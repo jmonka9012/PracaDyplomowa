@@ -33,6 +33,10 @@ Route::prefix('admin')->group(function() {
             ->name('admin.posts')
             ->middleware('blogAccess');
 
+      Route::get('/zarzadzaj-postami/data', [ManagePostsController::class, 'showData'])
+            ->name('admin.posts.data')
+            ->middleware('blogAccess');
+
       Route::get('/dodaj-post', [RequestBlogController::class, 'index'])
             ->name('admin.add-post')
             ->middleware('blogAccess');
