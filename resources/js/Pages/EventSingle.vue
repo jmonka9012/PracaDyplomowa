@@ -85,14 +85,12 @@ const latest = [
                         <a class="hover-none" :href="'mailto:' + event.data.contact_email_additional">{{event.data.contact_email_additional}}</a>
                     </div>
                 </div>
-                <h4 class="mb-18px">About Festival</h4>
-                <p>
-                    {{event.data.event_description}}
-                </p>
-                <h4 class="mb-18px">More Information</h4>
-                <p class="mb-65px">
+                <h4 class="mb-18px">O wydarzeniu</h4>
+                <p v-html="event.data.event_description" class="mb-65px"></p>
+                <h4 class="mb-18px">Więcej informacji</h4>
+                <div class="mb-65px">
                     {{event.data.event_description_additional}}
-                </p>
+                </div>
                 <img class="single__map" :src="SingleMap" alt="" />
                 <div class="bb-1 b-secondary"></div>
                 <div
