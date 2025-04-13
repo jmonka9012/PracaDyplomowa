@@ -10,15 +10,6 @@ import Editor from "@tinymce/tinymce-vue";
 import axios from "axios";
 
 const errors = reactive({});
-
-const gowno = reactive({
-    1: null,
-    2: null,
-    3: null,
-    4: null,
-    5: null,
-})
-
 // Przechowywanie danych formularza
 const requestEventForm = reactive({
     event_name: null,
@@ -232,7 +223,7 @@ const {user, isLoggedIn} = useAuth();
                         <Link :href="`${route('about-us')}#halls`">Tutaj</Link>
                     </div>
                 </div>
-                <div class="input-wrap col-12">
+<!--                <div class="input-wrap col-12">
                     <label for="event-location"
                     >Kategoria</label
                     >
@@ -256,7 +247,7 @@ const {user, isLoggedIn} = useAuth();
                         Wizualizacje naszych hal znajdziesz
                         <Link :href="`${route('about-us')}#halls`">Tutaj</Link>
                     </div>
-                </div>
+                </div>-->
                 <div class="input-wrap col-12">
                     <label for="event-email">Email kontaktowy*</label>
                     <input
