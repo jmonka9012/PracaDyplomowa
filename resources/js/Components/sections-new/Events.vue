@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-
+import { onMounted } from "vue";
 defineProps({
     events: Array,
 });
@@ -19,6 +19,23 @@ const scrollRight = () => {
         scrollContainer.value.scrollBy(scrollAmount, 0);
     }
 };
+
+onMounted(() => {
+    const dropDown = document.querySelectorAll(".dropdown-item-toggle");
+    console.log(dropDown);
+
+    dropDown.forEach(function (subMenu) {
+        subMenu.addEventListener("click", function (e) {
+            const submenu = this.querySelector(".dropdown-ndlevel");
+            console.log(submenu);
+            if (submenu) {
+                submenu.classList.toggle("show");
+            }
+            e.stopPropagation();
+            e.preventDefault();
+        });
+    });
+});
 </script>
 <template>
     <div class="select-filters">
@@ -231,18 +248,35 @@ const scrollRight = () => {
         <i class="fa fa-map-marker"></i><span class="pl-20px">Lokalizacja</span
         ><i class="fa fa-chevron-down ml-auto"></i>
         <ul class="event-select-location__dropdown">
-            <ul class="dropdown-ndlevel">
-                <li></li>
-            </ul>
-            <li class="dropdown-item">
-                <a href="">item1</a>
-            </li>
-            <li class="dropdown-item">
-                <a href="">item2</a>
-            </li>
-            <li class="dropdown-item">
-                <a href="">item3</a>
-            </li>
+            <div class="dropdown-inner">
+                <li class="dropdown-item dropdown-item-toggle">
+                    <a href="#">Drilldown<i class="fa fa-chevron-right"></i></a>
+                    <ul class="dropdown-ndlevel">
+                        <li class="ndlevel-back">
+                            <a href="">Drilldown</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#">item1</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#">item2</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#">item3</a>
+                        </li>
+                        <div class="divider"></div>
+                        <li class="dropdown-item">
+                            <a href="#">item4</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#">item5</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#">item6</a>
+                        </li>
+                    </ul>
+                </li>
+            </div>
         </ul>
     </div>
 
@@ -574,6 +608,8 @@ const scrollRight = () => {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    position: relative;
+    margin-bottom: 1000px;
     &:focus {
         border: 1px solid var(--primary);
     }
@@ -588,10 +624,77 @@ const scrollRight = () => {
     &__dropdown {
         display: flex;
         flex-direction: column;
-        padding: 16px;
-        
-        .dropdown-item{
-            
+
+        position: absolute;
+        left: 0;
+        right: 0;
+        border: 1px solid var(--text);
+        top: 100%;
+        border-radius: 8px;
+        .dropdown-inner {
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            overflow-y: auto;
+            column-gap: 10px;
+            font-family: "Prompt";
+            padding: 16px;
+            position: relative;
+        }
+        .dropdown-item {
+            height: 2rem;
+            padding-inline: 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            width: 100%;
+            position: static;
+            &:hover {
+                background-color: #19102814;
+            }
+            a {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                position: relative;
+                width: 100%;
+                i {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    right: 12px;
+                }
+            }
+        }
+        .dropdown-ndlevel {
+            position: absolute;
+            top: 0;
+            transition: var(--trans-def);
+            left: 100%;
+            visibility: hidden;
+            opacity: 0;
+            padding: 16px;
+            background: #fff;
+
+            &.show {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                left: 0;
+                right: 0;
+                visibility: visible;
+                opacity: 1;
+            }
+            .divider {
+                height: 1px;
+                width: 100px;
+                background-color: var(--text);
+            }
+            .ndlevel-back{
+                
+            }
         }
     }
 }
