@@ -3,8 +3,6 @@ import Poptext from "@/Components/sections-new/Poptext.vue";
 import ctaCloud from "~images/cta-cloud.png";
 import ctaCalendar from "~images/cat-calendar.png";
 import { Link } from "@inertiajs/vue3";
-
-
 </script>
 
 <template>
@@ -13,12 +11,20 @@ import { Link } from "@inertiajs/vue3";
             <div class="cta-left">
                 <p class="sub-title mb-17px">Wydarzenia</p>
                 <h3 class="cta-title mb-20px">
-                    Zobacz na jakie wydarzenia możesz się udać w najbliższym czasie!
+                    Zobacz na jakie wydarzenia możesz się udać w najbliższym
+                    czasie!
                 </h3>
                 <p class="mb-35px text-gray">
-                    Kliknij w poniższy link aby przejść na stronę z najbliższymi eventami. Na pewno znajdziesz coś dla siebie!
+                    Kliknij w poniższy link aby przejść na stronę z najbliższymi
+                    eventami. Na pewno znajdziesz coś dla siebie!
                 </p>
-                <Link :href="route('blog')" class="btn btn-md morph-outline" href=""> Zobacz więcej </Link>
+                <Link
+                    :href="route('blog')"
+                    class="btn btn-md morph-outline"
+                    href=""
+                >
+                    Zobacz więcej
+                </Link>
             </div>
             <div class="cta-right">
                 <Poptext class="poptext-cta" text="Najbliższe wydarzenia" />
@@ -75,6 +81,7 @@ import { Link } from "@inertiajs/vue3";
             width: 56%;
             padding-top: 100px;
             order: 1;
+            justify-content: center;
         }
     }
 

@@ -118,8 +118,22 @@ const charTotal = computed(() => props.text.length);
     }
     &-cta {
         z-index: 3;
+        font-size: 5vw;
+        display: flex;
+        column-gap: 20px;
+        @include mixin.media-breakpoint-up(lg) {
+            display: block;
+        }
         @include mixin.media-breakpoint-up(xl) {
             padding-left: 65px;
+        }
+    }
+    &-long {
+        font-size: 5vw;
+        display: flex;
+        column-gap: 20px;
+        @include mixin.media-breakpoint-up(lg) {
+            display: block;
         }
     }
     &-white {
