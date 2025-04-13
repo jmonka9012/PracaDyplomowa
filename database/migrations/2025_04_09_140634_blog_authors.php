@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('author_image_path');
-            $table->string('about_me')->default('brak opisu');
+            $table->text('about_me')->default('brak opisu');
+            $table->timestamps();
 
 
             $table->foreign('user_id')

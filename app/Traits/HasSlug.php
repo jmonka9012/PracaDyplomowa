@@ -45,6 +45,9 @@ trait HasSlug
 
     protected function getSlugFromColumn()
     {
-        return 'event_name';
+        return match(get_class($this)){
+            'App\Models\Blog\BlogPost' => 'blog_post_name',
+            default => 'event_name',
+        };
     }
 }

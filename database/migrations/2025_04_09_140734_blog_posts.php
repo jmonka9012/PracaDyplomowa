@@ -15,8 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('author_id');
             $table->string('blog_post_name');
-            $table->text('blog_post_content'); //wysywig, @Yen1312 i @JacekMonka kiedy będzie
-            $table->string('thumbnail_path')->nullable();
+            $table->string('slug')
+                ->nullable();
+            $table->text('blog_post_content');
+            $table->string('thumbnail_path')
+                ->nullable();
+            $table->timestamps();
             
             $table->foreign('author_id')
             ->references('id')

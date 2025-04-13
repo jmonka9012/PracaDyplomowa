@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
             StaticHallSeeder::class,
             StaticEventSeeder::class,
             StaticUserSeeder::class,
+            StaticAuthorSeeder::class,
+            StaticBlogPostSeeder::class,
         ]);
     }
 }
