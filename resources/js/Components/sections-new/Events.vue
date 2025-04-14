@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { onMounted } from "vue";
+import { onMounted, onUnmounted } from "vue";
 defineProps({
     events: Array,
 });
@@ -20,53 +20,159 @@ const scrollRight = () => {
     }
 };
 
-onMounted(() => {
-    const dropDown = document.querySelectorAll(".dropdown-item-toggle");
-    console.log(dropDown);
+const dropdownHolder = ref(null);
+const dropdownInner = ref(null);
+const isOpen = ref(false);
 
-    dropDown.forEach(function (subMenu) {
-        subMenu.addEventListener("click", function (e) {
+const toggleDropdown = () => {
+    isOpen.value = !isOpen.value;
+    if (isOpen.value) {
+        dropdownHolder.value.classList.add("open");
+    } else {
+        dropdownHolder.value.classList.remove("open");
+    }
+};
+
+const handleClickOutside = (event) => {
+    if (
+        isOpen.value &&
+        dropdownHolder.value &&
+        !dropdownHolder.value.contains(event.target)
+    ) {
+        isOpen.value = false;
+    }
+};
+
+onMounted(() => {
+    const dropDowns = document.querySelectorAll(".dropdown-item-toggle");
+
+    dropDowns.forEach(function (dropdown) {
+        dropdown.addEventListener("click", function (e) {
             const submenu = this.querySelector(".dropdown-ndlevel");
-            console.log(submenu);
-            if (submenu) {
+            if (!submenu) return;
+            const subReturn = e.target.closest(".ndlevel-back");
+            if (subReturn) {
+                submenu.classList.remove("show");
+                e.stopPropagation();
+                e.preventDefault();
+            } else if (!e.target.closest(".dropdown-ndlevel")) {
                 submenu.classList.toggle("show");
+                e.stopPropagation();
+                e.preventDefault();
             }
-            e.stopPropagation();
-            e.preventDefault();
         });
+        const submenu = dropdown.querySelector(".dropdown-ndlevel");
+        if (submenu) {
+            submenu.addEventListener("click", function (e) {
+                if (!e.target.closest(".ndlevel-back")) {
+                    e.stopPropagation();
+                }
+            });
+        }
     });
+    document.addEventListener("click", handleClickOutside);
+});
+onUnmounted(() => {
+    document.removeEventListener("click", handleClickOutside);
 });
 </script>
 <template>
     <div class="select-filters">
-        <div class="input-wrap select-wrap">
-            <i class="fa fa-calendar"></i>
-            <i class="fa fa-chevron-down"></i>
-            <select class="select-icon">
-                <option disabled value="">Please select one</option>
-                <option>Buisness</option>
-                <option>Concert</option>
-                <option>Music</option>
-                <option>Conference</option>
-                <option>Education</option>
-                <option>Fashion</option>
-                <option>Festival</option>
-                <option>Food & drink</option>
-                <option>Other</option>
-                <option>Sport</option>
-            </select>
-        </div>
-        <div class="input-wrap select-wrap">
+        <div
+            class="event-select-location"
+            ref="dropdownHolder"
+            @click="toggleDropdown"
+            :class="{ open: isOpen }"
+        >
             <i class="fa fa-map-marker"></i>
-            <select class="select select-icon">
-                <option disabled value="">All time</option>
-                <option>Today</option>
-                <option>Tommorow</option>
-                <option>This week</option>
-                <option>This weekend</option>
-                <option>Next week</option>
-                <option>Next month</option>
-            </select>
+            <div class="d-flex flex-column col-12">
+                <span class="select-label">Lokalizacja</span>
+                <span class="select-subtext">
+                    Wyszukaj lub wybierz miasto
+                </span>
+            </div>
+
+            <i class="fa fa-chevron-down ml-auto"></i>
+            <ul
+                class="event-select-location__dropdown"
+                ref="dropdownInner"
+                :class="{ open: isOpen }"
+            >
+                <div class="dropdown-inner">
+                    <li class="dropdown-item dropdown-item-toggle">
+                        <a href=""
+                            >Drilldown<i class="fa fa-chevron-right"></i
+                        ></a>
+                        <ul class="dropdown-ndlevel">
+                            <li class="ndlevel-back dropdown-item">
+                                <a href=""
+                                    ><i class="fa fa-chevron-left"></i
+                                    >Drilldown</a
+                                >
+                            </li>
+                            <li class="dropdown-item">
+                                <a href="#">item1</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a href="#">item2</a>
+                            </li>
+                            <div class="divider"></div>
+                            <li class="dropdown-item">
+                                <a href="#">item1</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a href="#">item2</a>
+                            </li>
+                            <div class="divider"></div>
+                            <li class="dropdown-item">
+                                <a href="#">item1</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a href="#">item2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-item dropdown-item-toggle">
+                        <a href=""
+                            >Drilldown<i class="fa fa-chevron-right"></i
+                        ></a>
+                        <ul class="dropdown-ndlevel">
+                            <li class="ndlevel-back dropdown-item">
+                                <a href=""
+                                    ><i class="fa fa-chevron-left"></i
+                                    >Drilldown</a
+                                >
+                            </li>
+                            <li class="dropdown-item">
+                                <a href="#">item4</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a href="#">item3</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#"
+                            >Item 1 <i class="fa fa-chevron-right"></i
+                        ></a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#"
+                            >Item 2 <i class="fa fa-chevron-right"></i
+                        ></a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#"
+                            >Item 3 <i class="fa fa-chevron-right"></i
+                        ></a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#"
+                            >Item 4 <i class="fa fa-chevron-right"></i
+                        ></a>
+                    </li>
+                </div>
+            </ul>
         </div>
     </div>
 
@@ -243,41 +349,6 @@ onMounted(() => {
                 </div>
             </div>
         </div>
-    </div>
-    <div class="event-select-location">
-        <i class="fa fa-map-marker"></i><span class="pl-20px">Lokalizacja</span
-        ><i class="fa fa-chevron-down ml-auto"></i>
-        <ul class="event-select-location__dropdown">
-            <div class="dropdown-inner">
-                <li class="dropdown-item dropdown-item-toggle">
-                    <a href="#">Drilldown<i class="fa fa-chevron-right"></i></a>
-                    <ul class="dropdown-ndlevel">
-                        <li class="ndlevel-back">
-                            <a href="">Drilldown</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="#">item1</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="#">item2</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="#">item3</a>
-                        </li>
-                        <div class="divider"></div>
-                        <li class="dropdown-item">
-                            <a href="#">item4</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="#">item5</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="#">item6</a>
-                        </li>
-                    </ul>
-                </li>
-            </div>
-        </ul>
     </div>
 
     <div v-for="event in events" :key="event.id" class="event">
@@ -602,35 +673,72 @@ onMounted(() => {
     border-radius: 8px;
     appearance: none;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    min-width: 300px;
+    min-width: 330px;
     padding-left: 60px;
     font-family: "Krona One";
     display: flex;
     align-items: center;
     justify-content: flex-start;
     position: relative;
-    margin-bottom: 1000px;
-    &:focus {
+    margin-bottom: 100px;
+    &.open {
         border: 1px solid var(--primary);
+        outline: 1px solid var(--primary);
     }
     i {
         &.fa-map-marker {
             font-size: 24px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 20px;
         }
         &.fa-chevron-down {
             font-size: 16px;
+            transition: all 0.25s ease;
         }
     }
-    &__dropdown {
-        display: flex;
-        flex-direction: column;
+    .select-label {
+        transition: all 0.25s ease;
+    }
+    .select-subtext {
+        color: var(--n-gray);
+        height: 0;
+        line-height: 0;
+        pointer-events: none;
+        font-size: 0;
+        transition: all 0.25s ease;
+    }
+    &.open {
+        .select-label {
+            position: absolute;
+            top: 0;
+            left: 60px;
+            font-size: 12px;
+        }
+        .select-subtext {
+            height: 1em;
+            line-height: 1;
+            font-size: 12px;
+        }
+        .fa-chevron-down {
+            transform: rotateZ(180deg);
+        }
+    }
 
+    &__dropdown {
+        display: none;
+        flex-direction: column;
         position: absolute;
         left: 0;
         right: 0;
-        border: 1px solid var(--text);
+        border: 1px solid var(--n-gray);
         top: 100%;
         border-radius: 8px;
+        background-color: white;
+        &.open {
+            display: flex;
+        }
         .dropdown-inner {
             height: 300px;
             display: flex;
@@ -641,6 +749,7 @@ onMounted(() => {
             font-family: "Prompt";
             padding: 16px;
             position: relative;
+            border-radius: 8px;
         }
         .dropdown-item {
             height: 2rem;
@@ -677,7 +786,9 @@ onMounted(() => {
             opacity: 0;
             padding: 16px;
             background: #fff;
-
+            border-radius: 8px;
+            z-index: 1;
+            height: 100%;
             &.show {
                 display: flex;
                 flex-direction: column;
@@ -689,11 +800,25 @@ onMounted(() => {
             }
             .divider {
                 height: 1px;
-                width: 100px;
-                background-color: var(--text);
+                width: 100%;
+                background-color: var(--n-gray);
             }
-            .ndlevel-back{
-                
+            .ndlevel-back {
+                position: sticky;
+                top: -16px;
+                background-color: white;
+                z-index: 1;
+                padding-left: 45px;
+                &:hover {
+                    background-color: #19102814;
+                }
+                a {
+                    position: relative;
+                }
+                i {
+                    right: auto;
+                    left: -30px;
+                }
             }
         }
     }
