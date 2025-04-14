@@ -19,10 +19,15 @@ Route::prefix('wydarzenia')->group(function() {
       Route::post('/zorganizuj-wydarzenie/zdjecia', [RequestEventController::class, 'storeEventImages'])
             ->name('event-create.image')
             ->Middleware('organizerAccess');
+
+      Route::get('/zorganizuj-wydarzenie/data', [RequestEventController::class, 'showData'])
+            ->name('event-create.data')
+            ->middleware('adminAccess');
       
       //Przeglądanie eventów
       Route::get('/data', [EventController::class, 'eventBrowserData'])
-            ->name('event.browser.data');
+            ->name('event.browser.data')
+            ->middleware('adminAccess');
       
       Route::get('/', [EventController::class, 'eventBrowser'])
             ->name('event.browser');
@@ -33,7 +38,8 @@ Route::prefix('wydarzenia')->group(function() {
 
       // Dane eventu
       Route::get('/data/{event:slug}', [EventController::class, 'showData'])
-            ->name('event.data');
+            ->name('event.data')
+            ->middleware('adminAccess');
 
 });
 

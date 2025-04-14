@@ -26,6 +26,12 @@ class RequestEventController extends Controller
         ]);
     }
 
+    public function showData()
+    {
+        $halls = Hall::with('sections')->get();
+
+        return response()->json($halls);
+    }
     public function store(RequestEventRequest $request): RedirectResponse
     {
 
