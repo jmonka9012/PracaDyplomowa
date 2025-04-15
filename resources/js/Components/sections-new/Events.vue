@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { onMounted, onUnmounted } from "vue";
+import DropDown from "../partials/DropDown.vue";
 defineProps({
     events: Array,
 });
@@ -175,6 +176,67 @@ onUnmounted(() => {
             </ul>
         </div>
     </div>
+    <DropDown title="test" subtitle="Wyszukaj lub wybierz miasto">
+        <div class="dropdown-inner">
+            <li class="dropdown-item dropdown-item-toggle">
+                <a href="">Drilldown<i class="fa fa-chevron-right"></i></a>
+                <ul class="dropdown-ndlevel">
+                    <li class="ndlevel-back dropdown-item">
+                        <a href=""
+                            ><i class="fa fa-chevron-left"></i>Drilldown</a
+                        >
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">item1</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">item2</a>
+                    </li>
+                    <div class="divider"></div>
+                    <li class="dropdown-item">
+                        <a href="#">item1</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">item2</a>
+                    </li>
+                    <div class="divider"></div>
+                    <li class="dropdown-item">
+                        <a href="#">item1</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">item2</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown-item dropdown-item-toggle">
+                <a href="">Drilldown<i class="fa fa-chevron-right"></i></a>
+                <ul class="dropdown-ndlevel">
+                    <li class="ndlevel-back dropdown-item">
+                        <a href=""
+                            ><i class="fa fa-chevron-left"></i>Drilldown</a
+                        >
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">item4</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">item3</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown-item">
+                <a href="#">Item 1 <i class="fa fa-chevron-right"></i></a>
+            </li>
+            <li class="dropdown-item">
+                <a href="#">Item 2 <i class="fa fa-chevron-right"></i></a>
+            </li>
+            <li class="dropdown-item">
+                <a href="#">Item 3 <i class="fa fa-chevron-right"></i></a>
+            </li>
+            <li class="dropdown-item">
+                <a href="#">Item 4 <i class="fa fa-chevron-right"></i></a>
+            </li></div
+    ></DropDown>
 
     <div class="select-event-date">
         <div class="date-jump">
