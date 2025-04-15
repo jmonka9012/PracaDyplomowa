@@ -21,222 +21,71 @@ const scrollRight = () => {
     }
 };
 
-const dropdownHolder = ref(null);
-const dropdownInner = ref(null);
-const isOpen = ref(false);
-
-const toggleDropdown = () => {
-    isOpen.value = !isOpen.value;
-    if (isOpen.value) {
-        dropdownHolder.value.classList.add("open");
-    } else {
-        dropdownHolder.value.classList.remove("open");
-    }
-};
-
-const handleClickOutside = (event) => {
-    if (
-        isOpen.value &&
-        dropdownHolder.value &&
-        !dropdownHolder.value.contains(event.target)
-    ) {
-        isOpen.value = false;
-    }
-};
-
-onMounted(() => {
-    const dropDowns = document.querySelectorAll(".dropdown-item-toggle");
-
-    dropDowns.forEach(function (dropdown) {
-        dropdown.addEventListener("click", function (e) {
-            const submenu = this.querySelector(".dropdown-ndlevel");
-            if (!submenu) return;
-            const subReturn = e.target.closest(".ndlevel-back");
-            if (subReturn) {
-                submenu.classList.remove("show");
-                e.stopPropagation();
-                e.preventDefault();
-            } else if (!e.target.closest(".dropdown-ndlevel")) {
-                submenu.classList.toggle("show");
-                e.stopPropagation();
-                e.preventDefault();
-            }
-        });
-        const submenu = dropdown.querySelector(".dropdown-ndlevel");
-        if (submenu) {
-            submenu.addEventListener("click", function (e) {
-                if (!e.target.closest(".ndlevel-back")) {
-                    e.stopPropagation();
-                }
-            });
-        }
-    });
-    document.addEventListener("click", handleClickOutside);
-});
-onUnmounted(() => {
-    document.removeEventListener("click", handleClickOutside);
-});
 </script>
 <template>
     <div class="select-filters">
-        <div
-            class="event-select-location"
-            ref="dropdownHolder"
-            @click="toggleDropdown"
-            :class="{ open: isOpen }"
-        >
-            <i class="fa fa-map-marker"></i>
-            <div class="d-flex flex-column col-12">
-                <span class="select-label">Lokalizacja</span>
-                <span class="select-subtext">
-                    Wyszukaj lub wybierz miasto
-                </span>
-            </div>
-
-            <i class="fa fa-chevron-down ml-auto"></i>
-            <ul
-                class="event-select-location__dropdown"
-                ref="dropdownInner"
-                :class="{ open: isOpen }"
-            >
-                <div class="dropdown-inner">
-                    <li class="dropdown-item dropdown-item-toggle">
-                        <a href=""
-                            >Drilldown<i class="fa fa-chevron-right"></i
-                        ></a>
-                        <ul class="dropdown-ndlevel">
-                            <li class="ndlevel-back dropdown-item">
-                                <a href=""
-                                    ><i class="fa fa-chevron-left"></i
-                                    >Drilldown</a
-                                >
-                            </li>
-                            <li class="dropdown-item">
-                                <a href="#">item1</a>
-                            </li>
-                            <li class="dropdown-item">
-                                <a href="#">item2</a>
-                            </li>
-                            <div class="divider"></div>
-                            <li class="dropdown-item">
-                                <a href="#">item1</a>
-                            </li>
-                            <li class="dropdown-item">
-                                <a href="#">item2</a>
-                            </li>
-                            <div class="divider"></div>
-                            <li class="dropdown-item">
-                                <a href="#">item1</a>
-                            </li>
-                            <li class="dropdown-item">
-                                <a href="#">item2</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-item dropdown-item-toggle">
-                        <a href=""
-                            >Drilldown<i class="fa fa-chevron-right"></i
-                        ></a>
-                        <ul class="dropdown-ndlevel">
-                            <li class="ndlevel-back dropdown-item">
-                                <a href=""
-                                    ><i class="fa fa-chevron-left"></i
-                                    >Drilldown</a
-                                >
-                            </li>
-                            <li class="dropdown-item">
-                                <a href="#">item4</a>
-                            </li>
-                            <li class="dropdown-item">
-                                <a href="#">item3</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#"
-                            >Item 1 <i class="fa fa-chevron-right"></i
-                        ></a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#"
-                            >Item 2 <i class="fa fa-chevron-right"></i
-                        ></a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#"
-                            >Item 3 <i class="fa fa-chevron-right"></i
-                        ></a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#"
-                            >Item 4 <i class="fa fa-chevron-right"></i
-                        ></a>
-                    </li>
-                </div>
-            </ul>
-        </div>
+        <DropDown title="test" subtitle="Wyszukaj lub wybierz miasto">
+            <div class="dropdown-inner">
+                <li class="dropdown-item dropdown-item-toggle">
+                    <a href="">Drilldown<i class="fa fa-chevron-right"></i></a>
+                    <ul class="dropdown-ndlevel">
+                        <li class="ndlevel-back dropdown-item">
+                            <a href=""
+                                ><i class="fa fa-chevron-left"></i>Drilldown</a
+                            >
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#">item1</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#">item2</a>
+                        </li>
+                        <div class="divider"></div>
+                        <li class="dropdown-item">
+                            <a href="#">item1</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#">item2</a>
+                        </li>
+                        <div class="divider"></div>
+                        <li class="dropdown-item">
+                            <a href="#">item1</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#">item2</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown-item dropdown-item-toggle">
+                    <a href="">Drilldown<i class="fa fa-chevron-right"></i></a>
+                    <ul class="dropdown-ndlevel">
+                        <li class="ndlevel-back dropdown-item">
+                            <a href=""
+                                ><i class="fa fa-chevron-left"></i>Drilldown</a
+                            >
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#">item4</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#">item3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown-item">
+                    <a href="#">Item 1 <i class="fa fa-chevron-right"></i></a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="#">Item 2 <i class="fa fa-chevron-right"></i></a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="#">Item 3 <i class="fa fa-chevron-right"></i></a>
+                </li>
+                <li class="dropdown-item">
+                    <a href="#">Item 4 <i class="fa fa-chevron-right"></i></a>
+                </li></div
+        ></DropDown>
     </div>
-    <DropDown title="test" subtitle="Wyszukaj lub wybierz miasto">
-        <div class="dropdown-inner">
-            <li class="dropdown-item dropdown-item-toggle">
-                <a href="">Drilldown<i class="fa fa-chevron-right"></i></a>
-                <ul class="dropdown-ndlevel">
-                    <li class="ndlevel-back dropdown-item">
-                        <a href=""
-                            ><i class="fa fa-chevron-left"></i>Drilldown</a
-                        >
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">item1</a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">item2</a>
-                    </li>
-                    <div class="divider"></div>
-                    <li class="dropdown-item">
-                        <a href="#">item1</a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">item2</a>
-                    </li>
-                    <div class="divider"></div>
-                    <li class="dropdown-item">
-                        <a href="#">item1</a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">item2</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown-item dropdown-item-toggle">
-                <a href="">Drilldown<i class="fa fa-chevron-right"></i></a>
-                <ul class="dropdown-ndlevel">
-                    <li class="ndlevel-back dropdown-item">
-                        <a href=""
-                            ><i class="fa fa-chevron-left"></i>Drilldown</a
-                        >
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">item4</a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">item3</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown-item">
-                <a href="#">Item 1 <i class="fa fa-chevron-right"></i></a>
-            </li>
-            <li class="dropdown-item">
-                <a href="#">Item 2 <i class="fa fa-chevron-right"></i></a>
-            </li>
-            <li class="dropdown-item">
-                <a href="#">Item 3 <i class="fa fa-chevron-right"></i></a>
-            </li>
-            <li class="dropdown-item">
-                <a href="#">Item 4 <i class="fa fa-chevron-right"></i></a>
-            </li></div
-    ></DropDown>
 
     <div class="select-event-date">
         <div class="date-jump">

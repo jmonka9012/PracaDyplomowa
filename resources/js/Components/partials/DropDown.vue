@@ -43,6 +43,38 @@ const props = defineProps({
         type: String,
     },
 });
+onMounted(() => {
+    const dropDowns = document.querySelectorAll(".dropdown-item-toggle");
+
+    dropDowns.forEach(function (dropdown) {
+        dropdown.addEventListener("click", function (e) {
+            const submenu = this.querySelector(".dropdown-ndlevel");
+            if (!submenu) return;
+            const subReturn = e.target.closest(".ndlevel-back");
+            if (subReturn) {
+                submenu.classList.remove("show");
+                e.stopPropagation();
+                e.preventDefault();
+            } else if (!e.target.closest(".dropdown-ndlevel")) {
+                submenu.classList.toggle("show");
+                e.stopPropagation();
+                e.preventDefault();
+            }
+        });
+        const submenu = dropdown.querySelector(".dropdown-ndlevel");
+        if (submenu) {
+            submenu.addEventListener("click", function (e) {
+                if (!e.target.closest(".ndlevel-back")) {
+                    e.stopPropagation();
+                }
+            });
+        }
+    });
+    document.addEventListener("click", handleClickOutside);
+});
+onUnmounted(() => {
+    document.removeEventListener("click", handleClickOutside);
+});
 </script>
 
 <template>
@@ -56,7 +88,7 @@ const props = defineProps({
         <i class="fa fa-map-marker"></i>
         <div class="d-flex flex-column col-12">
             <span class="select-label">{{ title }}</span>
-            <span class="select-subtext"> {{subtitle}}</span>
+            <span class="select-subtext"> {{ subtitle }}</span>
         </div>
 
         <i class="fa fa-chevron-down ml-auto"></i>
