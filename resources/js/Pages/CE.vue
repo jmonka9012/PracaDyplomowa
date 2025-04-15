@@ -9,6 +9,7 @@ import greatMilenko from "~images/greatmilenko.jpg";
 import jeckelbros from "~images/Jeckelbros.jpg";
 import Wysiwyg from "../Components/sections-new/Wysiwyg.vue";
 import LatestEvents from "../Components/sections-new/LatestEvents.vue";
+import DatePicker from "../Components/sections-new/DatePicker.vue";
 const latest = [
     {
         id: 1,
@@ -729,6 +730,9 @@ const latest = [
             <h3 class="mb-50px">Gdzie jesteśmy ? (tu mapa)</h3>
             <img :src="blogBg" class="on-map" alt="" />
         </div>
+    </section>
+    <section>
+        <div class="container"><DatePicker></DatePicker></div>
     </section>
 </template>
 

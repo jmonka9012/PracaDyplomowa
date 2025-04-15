@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { onMounted, onUnmounted } from "vue";
 import DropDown from "../partials/DropDown.vue";
+import DatePicker from "@/Components/sections-new/DatePicker.vue";
 defineProps({
     events: Array,
 });
@@ -20,7 +21,6 @@ const scrollRight = () => {
         scrollContainer.value.scrollBy(scrollAmount, 0);
     }
 };
-
 </script>
 <template>
     <div class="select-filters">
@@ -87,7 +87,7 @@ const scrollRight = () => {
         ></DropDown>
     </div>
 
-    <div class="select-event-date">
+    <div class="select-event-date mb-100px">
         <div class="date-jump">
             <button class="btn-reset date-jump__btn" @click="scrollLeft(50)">
                 <i class="fa fa-chevron-left"></i>
@@ -261,6 +261,7 @@ const scrollRight = () => {
             </div>
         </div>
     </div>
+    <DatePicker></DatePicker>
 
     <div v-for="event in events" :key="event.id" class="event">
         <div class="event-img">

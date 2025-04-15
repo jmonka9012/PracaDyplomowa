@@ -22,6 +22,7 @@
         "@stripe/stripe-js": "^7.0.0",
         "@tinymce/tinymce-vue": "^6.1.0",
         "@vitejs/plugin-vue": "^5.2.1",
+        "@vuepic/vue-datepicker": "^11.0.2",
         "chai": "^5.2.0",
         "chromedriver": "^134.0.5",
         "dotenv": "^16.4.7",
