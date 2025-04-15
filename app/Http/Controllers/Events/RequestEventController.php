@@ -7,6 +7,7 @@ use App\Models\Events\Event;
 use App\Models\Hall;
 use App\Models\EventSeats\EventSeat;
 use App\Models\EventStandingTickets\EventStandingTicket;
+use App\Models\Events\Genre;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
@@ -20,17 +21,20 @@ class RequestEventController extends Controller
     public function index()
     {
         $halls = Hall::with('sections')->get();
+        $genres = Genre::orderBy('id', 'asc')->get();
 
         return Inertia::render('RequestEvent', [
             'halls' => $halls,
+            'genres' => $genres
         ]);
     }
 
     public function showData()
     {
         $halls = Hall::with('sections')->get();
+        $genres = Genre::orderBy('id', 'asc')->get();
 
-        return response()->json($halls);
+        return response()->json([$halls, $genres]);
     }
     public function store(RequestEventRequest $request): RedirectResponse
     {

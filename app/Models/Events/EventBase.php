@@ -37,5 +37,4 @@ abstract class EventBase extends Model
     {
         return $this->getTable() == 'events_archive';
     }
-
 }

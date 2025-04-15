@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Events\Event;
+use App\Models\Events\Genre;
 use App\Models\Hall;
 use App\Models\EventSeats\EventSeat;
 use App\Models\EventStandingTickets\EventStandingTicket;
@@ -54,6 +55,7 @@ class StaticEventSeeder extends Seeder
                 'event_description' => $eventDescription,
                 'event_description_additional' => 'Fajnie będzie ogółem',
                 'event_location' => 1,
+                'genres' =>['Rock', 'Avant-Garde', 'Rock Alternatywny'],
                 'image_path' => 'event_images/placeholder.jpg',
                 'pending' => false,
             ],
@@ -68,6 +70,7 @@ class StaticEventSeeder extends Seeder
                 'event_description' => $eventDescription,
                 'event_description_additional' => 'He Has Risen',
                 'event_location' => 2,
+                'genres' =>['Rock', 'Avant-Garde', 'Rock Alternatywny'],
                 'image_path' => 'event_images/placeholder.jpg',
                 'pending' => false,
             ],
@@ -82,6 +85,7 @@ class StaticEventSeeder extends Seeder
                 'event_description' => $eventDescription,
                 'event_description_additional' => 'Lemmy będzie',
                 'event_location' => 1,
+                'genres' =>['Metal', 'Rock', 'Heavy Metal', 'Thrash Metal'],
                 'image_path' => 'event_images/placeholder.jpg',
                 'pending' => false,
             ],
@@ -96,6 +100,7 @@ class StaticEventSeeder extends Seeder
                 'event_description' => $eventDescription,
                 'event_description_additional' => 'Growle będą',
                 'event_location' => 2,
+                'genres' =>['Metal', 'Rock', 'Death Metal', 'Progressive Death Metal'],
                 'image_path' => 'event_images/placeholder.jpg',
             ],
             [
@@ -109,6 +114,7 @@ class StaticEventSeeder extends Seeder
                 'event_description' => $eventDescription,
                 'event_description_additional' => 'Pierwsze uderzenie konta youtube',
                 'event_location' =>1,
+                'genres' =>['Metal', 'Rock', 'Sludge Metal'],
                 'image_path' => 'event_images/placeholder.jpg',
             ],
             [
@@ -122,6 +128,7 @@ class StaticEventSeeder extends Seeder
                 'event_description' => $eventDescription,
                 'event_description_additional' => 'tell me lies tell me sweet little lies',
                 'event_location' =>2,
+                'genres' =>['Metal', 'Rock', 'Nu Metal'],
                 'image_path' => 'event_images/placeholder.jpg',
             ],
             [
@@ -135,15 +142,32 @@ class StaticEventSeeder extends Seeder
                 'event_description' => $eventDescription,
                 'event_description_additional' => 'archive@test.com',
                 'event_location' =>2,
+                'genres' =>['Metal', 'Rock'],
                 'image_path' => 'event_images/placeholder.jpg',
             ],
         ];
 
         foreach ($events as $eventData) {
+            $genres = $eventData['genres'] ?? [];
+            unset($eventData['genres']);
+
             $event = Event::create($eventData);
             
             $eventHall = Hall::with('sections')->find($eventData['event_location']);
-        
+            
+            if (!empty($genres)) {
+
+                $genreIds = Genre::whereIn('genre_name', $genres)
+                    ->pluck('id')
+                    ->all();
+                
+                if (!empty($genreIds)) {
+                    $event->genres()->attach($genreIds);
+                } else {
+                    logger()->warning("No matching genres found for: " . implode(', ', $genres));
+                }
+            }
+
             if (!$eventHall) {
                 $this->command->error("Hall not found for event: {$event->event_name}");
                 continue;

@@ -2,55 +2,94 @@
 
 namespace App\Console\Commands;
 
-use DB;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
+use App\Models\Events\Event;
+use App\Models\Events\EventArchived;
+use App\Models\EventSeats\EventSeat;
+use App\Models\EventSeats\EventSeatArchived;
+use App\Models\EventStandingTickets\EventStandingTicket;
+use App\Models\EventStandingTickets\EventStandingTicketArchived;
 
 class ArchiveOldEvents extends Command
 {
     protected $signature = 'events:archive';
-    protected $description = 'Archives events older than the cutoff date';
+    protected $description = 'Archives events older than the cutoff date using Eloquent';
 
     public function handle()
     {
         $cutoffDate = now()->subMonth();
 
-        DB::insert('
-        INSERT INTO events_archive
-        (id, event_name, event_additional_url, event_url, slug,event_date, event_start, event_end, contact_email, contact_email_additional, event_description, event_description_additional, event_location, image_path)
-        SELECT id, event_name, event_additional_url, event_url, slug,event_date, event_start, event_end, contact_email, contact_email_additional, event_description, event_description_additional, event_location, image_path
-        FROM events
-        WHERE event_date < ?
-        ', [$cutoffDate]);
+        DB::transaction(function () use ($cutoffDate) {
+            $events = Event::where('event_date', '<', $cutoffDate)->get();
 
-        $archivedEventIds = DB::table('events')
-        ->where('event_date', '<', $cutoffDate)
-        ->pluck('id')
-        ->toArray();
+            if ($events->isEmpty()) {
+                $this->info('No events to archive.');
+                return;
+            }
 
-        DB::insert('
-        INSERT INTO event_seats_archive
-        (id, event_id, hall_section_id, seat_row, seat_number, price, status)
-        SELECT id, event_id, hall_section_id, seat_row, seat_number, price, status
-        FROM event_seats
-        WHERE event_id IN ('.implode(',', $archivedEventIds).')
-        ');
+            $eventIds = $events->pluck('id')->toArray();
 
-        DB::insert('
-        INSERT INTO event_standing_tickets_archive
-        (id, event_id, hall_section_id, price, capacity, sold)
-        SELECT id, event_id, hall_section_id, price, capacity, sold
-        FROM event_standing_tickets
-        WHERE event_id IN ('.implode(',', $archivedEventIds).')
-        ');
+            $allPivotRows = collect();
 
-        DB::insert('
-        INSERT INTO tickets_archive
-        (id, event_id, user_id, seat, hall_section, insured)
-        SELECT id, event_id, user_id, seat, hall_section, insured
-        FROM tickets
-        WHERE event_id IN ('.implode(',', $archivedEventIds).')
-        ');
+            foreach ($events as $event) {
+                $archiveData = $event->toArray();
+                if (isset($archiveData['pending'])) {
+                    unset($archiveData['pending']);
+                }
 
-       DB::delete('DELETE FROM events WHERE event_date < ?', [$cutoffDate]);
+                $archiveEvent = new EventArchived();
+                $archiveEvent->fill($archiveData);
+                $archiveEvent->id = $event->id;
+                $archiveEvent->save();
+
+                foreach ($event->seats as $seat) {
+                    $seatData = $seat->toArray();
+                    $archiveSeat = new EventSeatArchived();
+                    $archiveSeat->fill($seatData);
+                    $archiveSeat->save();
+                }
+
+                foreach ($event->standingTickets as $standingTicket) {
+                    $standingTicketData = $standingTicket->toArray();
+                    $archiveStandingTicket = new EventStandingTicketArchived();
+                    $archiveStandingTicket->fill($standingTicketData);
+                    $archiveStandingTicket->save();
+                }
+
+                $genrePivotRows = DB::table('event_genres')
+                    ->where('event_id', $event->id)
+                    ->get();
+                $this->info("Event ID {$event->id} - Found {$genrePivotRows->count()} genre pivot rows");
+                $allPivotRows = $allPivotRows->merge($genrePivotRows);
+            }
+
+            $uniquePivotRows = $allPivotRows->unique(function ($item) {
+                return $item->event_id . '-' . $item->genre_id;
+            })->map(function ($item) {
+                return [
+                    'event_id' => $item->event_id,
+                    'genre_id' => $item->genre_id,
+                ];
+            })->values()->toArray();
+
+            $this->info('Unique pivot rows: ' . json_encode($uniquePivotRows));
+
+            if (!empty($uniquePivotRows)) {
+                DB::table('event_genres_archive')->insertOrIgnore($uniquePivotRows);
+            } else {
+                $this->info('No unique pivot rows to insert.');
+            }
+
+            $insertedCount = DB::table('event_genres_archive')->count();
+            $this->info("Number of rows in event_genres_archive: {$insertedCount}");
+
+            DB::table('event_genres')->whereIn('event_id', $eventIds)->delete();
+            EventSeat::whereIn('event_id', $eventIds)->delete();
+            EventStandingTicket::whereIn('event_id', $eventIds)->delete();
+            Event::where('event_date', '<', $cutoffDate)->delete();
+        });
+
+        $this->info('Archiving complete.');
     }
 }
