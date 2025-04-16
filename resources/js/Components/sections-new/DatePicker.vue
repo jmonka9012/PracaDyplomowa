@@ -112,6 +112,7 @@ const presetDates = ref([
 </template>
 
 <style lang="scss">
+@use "~css/mixin.scss";
 .dp__input {
     box-shadow: none;
     min-height: 60px;
@@ -145,7 +146,13 @@ const presetDates = ref([
         outline: 1px solid var(--primary);
     }
 }
-.dp__month_year_wrap {
+.dp__outer_menu_wrap {
+    @include mixin.media-breakpoint-down(xl) {
+        width: 100%;
+    }
+}
+.dp__calendar_header_separator {
+    background-color: transparent;
 }
 .dp__menu_inner {
     padding: 16px 16px 0 16px;
@@ -157,6 +164,10 @@ const presetDates = ref([
     flex-direction: column;
     border-inline-end: 0;
     max-width: 275px;
+}
+.dp--preset-dates[data-dp-mobile] {
+    max-width: 100%;
+    overflow: hidden;
 }
 .dp--preset-range {
     font-size: 14px;
@@ -176,8 +187,28 @@ const presetDates = ref([
         border: 2px solid var(--text);
     }
 }
+.dp--preset-range[data-dp-mobile] {
+    border: 2px solid transparent;
+    &:hover,
+    &:focus {
+        border: 2px solid var(--text);
+    }
+}
+.dp__instance_calendar > .dp--header-wrap {
+    border-bottom: 1px solid var(--primary);
+}
+
+.dp__calendar_next {
+    margin-inline-start: 22.5;
+}
+
 .dp__calendar_row {
     margin: 10px 0;
+}
+.dp__calendar_item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .dp__cell_inner {
     display: flex;
