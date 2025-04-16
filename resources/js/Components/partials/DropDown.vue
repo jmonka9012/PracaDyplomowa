@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted } from "vue";
 
 const dropdownHolder = ref(null);
 const dropdownContent = ref(null);
+
 const isOpen = ref(false);
 
 const toggleDropdown = () => {
@@ -25,11 +26,11 @@ const handleClickOutside = (event) => {
 };
 
 onMounted(() => {
-    document.addEventListener("click", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
 });
 
 onUnmounted(() => {
-    document.removeEventListener("click", handleClickOutside);
+    document.removeEventListener("mousedown", handleClickOutside);
 });
 
 const props = defineProps({
@@ -127,7 +128,10 @@ onUnmounted(() => {
     align-items: center;
     justify-content: flex-start;
     position: relative;
-    margin-bottom: 100px;
+    max-height: 60px;
+    @include mixin.media-breakpoint-down(xl) {
+        width: 100%;
+    }
     &.open {
         border: 1px solid var(--primary);
         outline: 1px solid var(--primary);
@@ -262,9 +266,10 @@ onUnmounted(() => {
         left: 0;
         right: 0;
         border: 1px solid var(--n-gray);
-        top: 100%;
+        top: calc(100% + 2px);
         border-radius: 8px;
         background-color: white;
+        z-index: 100;
         &.open {
             display: flex;
         }

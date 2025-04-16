@@ -14,6 +14,7 @@ import {
     addWeeks,
 } from "date-fns";
 const date = ref();
+
 const today = new Date();
 
 const getNextWeek = () => {
@@ -77,7 +78,23 @@ const presetDates = ref([
         :day-names="['pon', 'wto', 'śro', 'czw', 'pią', 'sob', 'nie']"
         :preview-format="null"
     >
-        >
+        <template #dp-input="{ value, onInput, onEnter, onTab, isMenuOpen }">
+            <div class="dp__input_wrap" :class="{ open: isMenuOpen }">
+                <i class="fa fa-calendar"></i>
+                <input
+                    class="dp__pointer dp__input_readonly dp__input dp__input_icon_pad dp__input_reg"
+                    :value="value"
+                    placeholder="Data"
+                    readonly
+                    autocomplete="off"
+                    aria-label="Datepicker input"
+                    @input="onInput"
+                    @keydown.enter.prevent="onEnter"
+                    @keydown.tab="onTab"
+                />
+                <i class="fa fa-chevron-down"></i>
+            </div>
+        </template>
 
         <template #preset-date-range-button="{ label, value, presetDate }">
             <span
@@ -90,6 +107,7 @@ const presetDates = ref([
                 {{ label }}
             </span>
         </template>
+
         <template #action-row="{ onCancel, onSelect }">
             <div class="dp__action_buttons">
                 <button
@@ -113,6 +131,13 @@ const presetDates = ref([
 
 <style lang="scss">
 @use "~css/mixin.scss";
+.dp__main {
+    max-height: 60px;
+    max-width: 330px;
+    @include mixin.media-breakpoint-down(xl) {
+        max-width: 100%;
+    }
+}
 .dp__input {
     box-shadow: none;
     min-height: 60px;
@@ -135,16 +160,46 @@ const presetDates = ref([
     align-items: center;
     justify-content: flex-start;
     position: relative;
-    margin-bottom: 100px;
     color: var(--text);
+    @include mixin.media-breakpoint-down(xl) {
+        width: 100%;
+    }
     &::placeholder {
         opacity: 1;
         color: var(--text);
     }
-    &_focus {
-        border: 1px solid var(--primary);
-        outline: 1px solid var(--primary);
+}
+.dp__input_wrap {
+    .fa-calendar {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 20px;
+        z-index: 1;
     }
+    .fa-chevron-down {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 12px;
+        z-index: 1;
+    }
+    &.open {
+        .fa-chevron-down {
+            transform: translateY(-50%) rotateZ(180deg);
+        }
+        .dp__input {
+            border: 1px solid var(--primary);
+            outline: 1px solid var(--primary);
+        }
+    }
+}
+
+.dp__input_icons {
+    padding: 0;
+    width: 18px;
+    height: 24px;
+    left: 20px;
 }
 .dp__outer_menu_wrap {
     @include mixin.media-breakpoint-down(xl) {

@@ -21,7 +21,7 @@
     --gray: #515151;
     --gray2: #505558;
     --trans-def: all 0.3s ease;
-    --n-gray:#babac0;
+    --n-gray: #babac0;
 }
 body {
     font-family: "Prompt";
@@ -1610,7 +1610,7 @@ table {
     display: flex;
     justify-content: flex-start;
     column-gap: 8px;
-    margin-bottom: 60px;
+    margin-bottom: 100px;
     flex-wrap: wrap;
     row-gap: 8px;
 }

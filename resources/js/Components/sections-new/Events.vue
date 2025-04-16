@@ -24,7 +24,7 @@ const scrollRight = () => {
 </script>
 <template>
     <div class="select-filters">
-        <DropDown title="test" subtitle="Wyszukaj lub wybierz miasto">
+        <DropDown title="Lokalizacja" subtitle="Wyszukaj lub wybierz miasto">
             <div class="dropdown-inner">
                 <li class="dropdown-item dropdown-item-toggle">
                     <a href="">Drilldown<i class="fa fa-chevron-right"></i></a>
@@ -85,183 +85,8 @@ const scrollRight = () => {
                     <a href="#">Item 4 <i class="fa fa-chevron-right"></i></a>
                 </li></div
         ></DropDown>
+        <DatePicker></DatePicker>
     </div>
-
-    <div class="select-event-date mb-100px">
-        <div class="date-jump">
-            <button class="btn-reset date-jump__btn" @click="scrollLeft(50)">
-                <i class="fa fa-chevron-left"></i>
-            </button>
-            <div ref="scrollContainer" class="date-jump__cont">
-                <a href="" class="date-jump__link">Dziś</a>
-                <a href="" class="date-jump__link">Jutro</a>
-                <a href="" class="date-jump__link">Ten tydzień</a>
-                <a href="" class="date-jump__link">Następny tydzień</a>
-                <a href="" class="date-jump__link">Najbliższy weekend</a>
-                <a href="" class="date-jump__link">Następny weekend</a>
-                <a href="" class="date-jump__link">Ten miesiąc</a>
-                <a href="" class="date-jump__link">Najbliższe 30 dni</a>
-            </div>
-            <button class="btn-reset date-jump__btn" @click="scrollRight(50)">
-                <i class="fa fa-chevron-right"></i>
-            </button>
-        </div>
-        <div class="d-flex flex-column">
-            <div class="date-head">
-                <div class="date-sec">
-                    <div class="d-flex justify-content-end align-items-center">
-                        <button class="date-dir">
-                            <i class="fa fa-chevron-left"></i>
-                            <i class="fa fa-chevron-left"></i>
-                        </button>
-                        <button class="date-dir">
-                            <i class="fa fa-chevron-left"></i>
-                        </button>
-                    </div>
-                    <div
-                        class="d-flex justify-content-center align-items-center flex-auto"
-                    >
-                        <button class="date-range">2025</button>
-                        <button class="date-range">Kwie</button>
-                    </div>
-
-                    <div
-                        class="d-flex justify-content-end align-items-center d-lg-none"
-                    >
-                        <button class="date-dir">
-                            <i class="fa fa-chevron-right"></i>
-                        </button>
-                        <button class="date-dir">
-                            <i class="fa fa-chevron-right"></i>
-                            <i class="fa fa-chevron-right"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="date-sec d-none d-lg-flex">
-                    <div
-                        class="d-flex justify-content-center align-items-center flex-auto"
-                    >
-                        <button class="date-range">2025</button>
-                        <button class="date-range">Kwie</button>
-                    </div>
-                    <div class="d-flex justify-content-end align-items-center">
-                        <button class="date-dir">
-                            <i class="fa fa-chevron-right"></i>
-                        </button>
-                        <button class="date-dir">
-                            <i class="fa fa-chevron-right"></i>
-                            <i class="fa fa-chevron-right"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="date-content">
-                <div class="date-content__block">
-                    <span class="date-item date-item--th">pon</span>
-                    <span class="date-item date-item--th">wto</span>
-                    <span class="date-item date-item--th">śro</span>
-                    <span class="date-item date-item--th">czw</span>
-                    <span class="date-item date-item--th">pią</span>
-                    <span class="date-item date-item--th">sob</span>
-                    <span class="date-item date-item--th">nie</span>
-                    <a class="date-item disabled">31</a>
-                    <a class="date-item disabled">1</a>
-                    <a class="date-item disabled">2</a>
-                    <a class="date-item disabled">3</a>
-                    <a class="date-item disabled">4</a>
-                    <a class="date-item disabled">5</a>
-                    <a class="date-item disabled">6</a>
-                    <a class="date-item disabled">7</a>
-                    <a class="date-item disabled">8</a>
-                    <a class="date-item disabled">9</a>
-                    <a class="date-item disabled">10</a>
-                    <a class="date-item disabled">11</a>
-                    <a class="date-item">12</a>
-                    <a class="date-item">13</a>
-                    <a class="date-item">14</a>
-                    <a class="date-item">15</a>
-                    <a class="date-item">16</a>
-                    <a class="date-item">17</a>
-                    <a class="date-item">18</a>
-                    <a class="date-item">19</a>
-                    <a class="date-item">20</a>
-                    <a class="date-item">21</a>
-                    <a class="date-item">22</a>
-                    <a class="date-item">23</a>
-                    <a class="date-item">24</a>
-                    <a class="date-item">25</a>
-                    <a class="date-item">26</a>
-                    <a class="date-item selected">27</a>
-                    <a class="date-item">28</a>
-                    <a class="date-item">29</a>
-                    <a class="date-item">30</a>
-                    <a class="date-item future">1</a>
-                    <a class="date-item future">2</a>
-                    <a class="date-item future">3</a>
-                    <a class="date-item future">4</a>
-                    <a class="date-item future">5</a>
-                    <a class="date-item future">6</a>
-                    <a class="date-item future">7</a>
-                    <a class="date-item future">8</a>
-                    <a class="date-item future">9</a>
-                    <a class="date-item future">10</a>
-                    <a class="date-item future">11</a>
-                </div>
-                <div class="date-content__block">
-                    <span class="date-item date-item--th">pon</span>
-                    <span class="date-item date-item--th">wto</span>
-                    <span class="date-item date-item--th">śro</span>
-                    <span class="date-item date-item--th">czw</span>
-                    <span class="date-item date-item--th">pią</span>
-                    <span class="date-item date-item--th">sob</span>
-                    <span class="date-item date-item--th">nie</span>
-                    <a class="date-item">31</a>
-                    <a class="date-item">1</a>
-                    <a class="date-item">2</a>
-                    <a class="date-item">3</a>
-                    <a class="date-item">4</a>
-                    <a class="date-item">5</a>
-                    <a class="date-item">6</a>
-                    <a class="date-item">7</a>
-                    <a class="date-item">8</a>
-                    <a class="date-item">9</a>
-                    <a class="date-item">10</a>
-                    <a class="date-item">11</a>
-                    <a class="date-item">12</a>
-                    <a class="date-item">13</a>
-                    <a class="date-item">14</a>
-                    <a class="date-item">15</a>
-                    <a class="date-item">16</a>
-                    <a class="date-item">17</a>
-                    <a class="date-item">18</a>
-                    <a class="date-item">19</a>
-                    <a class="date-item">20</a>
-                    <a class="date-item">21</a>
-                    <a class="date-item">22</a>
-                    <a class="date-item">23</a>
-                    <a class="date-item">24</a>
-                    <a class="date-item">25</a>
-                    <a class="date-item">26</a>
-                    <a class="date-item">27</a>
-                    <a class="date-item">28</a>
-                    <a class="date-item">29</a>
-                    <a class="date-item">30</a>
-                    <a class="date-item future">1</a>
-                    <a class="date-item future">2</a>
-                    <a class="date-item future">3</a>
-                    <a class="date-item future">4</a>
-                    <a class="date-item future">5</a>
-                    <a class="date-item future">6</a>
-                    <a class="date-item future">7</a>
-                    <a class="date-item future">8</a>
-                    <a class="date-item future">9</a>
-                    <a class="date-item future">10</a>
-                    <a class="date-item future">11</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <DatePicker></DatePicker>
 
     <div v-for="event in events" :key="event.id" class="event">
         <div class="event-img">
@@ -597,46 +422,46 @@ const scrollRight = () => {
         border: 1px solid var(--primary);
         outline: 1px solid var(--primary);
     }
-    i {
-        &.fa-map-marker {
-            font-size: 24px;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            left: 20px;
-        }
-        &.fa-chevron-down {
-            font-size: 16px;
-            transition: all 0.25s ease;
-        }
-    }
-    .select-label {
-        transition: all 0.25s ease;
-    }
-    .select-subtext {
-        color: var(--n-gray);
-        height: 0;
-        line-height: 0;
-        pointer-events: none;
-        font-size: 0;
-        transition: all 0.25s ease;
-    }
-    &.open {
-        .select-label {
-            position: absolute;
-            top: 0;
-            left: 60px;
-            font-size: 12px;
-        }
-        .select-subtext {
-            height: 1em;
-            line-height: 1;
-            font-size: 12px;
-        }
-        .fa-chevron-down {
-            transform: rotateZ(180deg);
-        }
-    }
+    // i {
+    //     &.fa-map-marker {
+    //         font-size: 24px;
+    //         position: absolute;
+    //         top: 50%;
+    //         transform: translateY(-50%);
+    //         left: 20px;
+    //     }
+    //     &.fa-chevron-down {
+    //         font-size: 16px;
+    //         transition: all 0.25s ease;
+    //     }
+    // }
+    // .select-label {
+    //     transition: all 0.25s ease;
+    // }
+    // .select-subtext {
+    //     color: var(--n-gray);
+    //     height: 0;
+    //     line-height: 0;
+    //     pointer-events: none;
+    //     font-size: 0;
+    //     transition: all 0.25s ease;
+    // }
+    // &.open {
+    //     .select-label {
+    //         position: absolute;
+    //         top: 0;
+    //         left: 60px;
+    //         font-size: 12px;
+    //     }
+    //     .select-subtext {
+    //         height: 1em;
+    //         line-height: 1;
+    //         font-size: 12px;
+    //     }
+    //     .fa-chevron-down {
+    //         transform: rotateZ(180deg);
+    //     }
+    // }
 
     &__dropdown {
         display: none;
