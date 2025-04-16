@@ -59,7 +59,7 @@ trait HasSlug
             return;
         }
         
-        $this->event_url = '/event/' . $this->slug;
+        $this->event_url = '/wydarzenia/' . $this->slug;
     }
 
 }
