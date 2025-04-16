@@ -2,15 +2,45 @@
 import useAuth from "@/Utilities/useAuth";
 import HeroSmall from "@/Components/sections-new/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
-import {reactive, ref} from "vue";
+import {ref} from "vue";
 import {router} from "@inertiajs/vue3";
+import { reactive, watch, computed } from 'vue';
 import {Link} from "@inertiajs/vue3";
-import Wysiwyg from "../Components/sections-new/Wysiwyg.vue";
 import Editor from "@tinymce/tinymce-vue";
 import axios from "axios";
 
+const props = defineProps({
+    halls: {
+        type: Array,
+        required: true,
+    },
+    genres: {
+        type: Array,
+    }
+});
+
+
+const sectionPrices = reactive({});
+
+const initSectionPrices = () => {
+    props.halls.forEach(hall => {
+        hall.sections?.forEach(section => {
+            if (!sectionPrices.hasOwnProperty(section.id)) {
+                sectionPrices[section.id] = '';
+            }
+        });
+    });
+};
+
+initSectionPrices();
+
+console.log(sectionPrices);
+
+watch(() => props.halls, () => {
+    initSectionPrices();
+});
+
 const errors = reactive({});
-// Przechowywanie danych formularza
 const requestEventForm = reactive({
     event_name: null,
     event_additional_url: null,
@@ -19,10 +49,11 @@ const requestEventForm = reactive({
     event_end: null,
     contact_email: null,
     contact_email_additional: null,
-    event_description: '',
-    event_description_additional: null,
+    event_description: null,
     event_location: null,
-    category: null,
+    event_description_additional: null,
+    genre: null,
+    section_prices: sectionPrices
 });
 
 const eventImage = ref(null);
@@ -61,12 +92,8 @@ function submitEventRequest() {
     });
 }
 
-const props = defineProps({
-    halls: {
-        type: Array,
-        required: true,
-    },
-});
+console.log(props.halls);
+console.log(props.genres);
 
 const HandleEditorImage = () => (blobInfo, progress) => {
     const formData = new FormData();
@@ -134,7 +161,7 @@ const {user, isLoggedIn} = useAuth();
                         spellcheck="false"
                         value=""
                         aria-required="false"
-                        v-model="requestEventForm.event_url"
+                        v-model="requestEventForm.event_additional_url"
                     />
                 </div>
                 <div class="input-wrap col-12">
@@ -202,18 +229,81 @@ const {user, isLoggedIn} = useAuth();
                     <label for="event-location"
                     >Lokalizacja / Wybrana sala*</label
                     >
-                    <div class="select-wrap">
+                    <div class="select-wrap mb-30px">
                         <i class="fa fa-chevron-down"></i>
                         <select
                             id="event-location"
                             class="col-12"
                             v-model="requestEventForm.event_location"
+                            @change="console.log(requestEventForm.event_location)"
                         >
                             <option disabled :value="null">
                                 Wybierz halę
                             </option>
                             <option :value="hall.id" v-for="hall in halls">
                                 {{ hall.hall_name }}
+                            </option>
+                        </select>
+                    </div>
+                    <div>
+                        <div
+                            class="flex-column hall"
+                            v-for="hall in halls"
+                            :key="hall.id"
+                            :title="hall.hall_name"
+                            v-show="requestEventForm.event_location === hall.id"
+                        >
+                            <div
+                                class="hall__row"
+                                v-for="(row, hrowIndex) in hall.hall_height"
+                                :key="hrowIndex"
+                            >
+                                <div
+                                    class="hall__col"
+                                    v-for="(col, hcolIndex) in hall.hall_width"
+                                    :key="hcolIndex"
+                                >
+                                    <div
+                                        class="petla"
+                                        v-for="section in hall.sections.filter(
+                            (section) =>
+                                section.section_height === hrowIndex + 1 &&
+                                section.section_width === hcolIndex + 1
+                        )"
+                                        :key="section.id"
+                                    >
+                                        <div
+                                            class="hall__section-seat"
+                                            v-if="section.section_type === 'seat'"
+                                        >
+                                            <input type="number" v-model="sectionPrices[section.id]" @input="console.log(requestEventForm)">
+                                        </div>
+                                        <div v-else class="hall__section-stand">
+                                            <input type="number" v-model="sectionPrices[section.id]" @input="console.log(requestEventForm)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-wrap col-12">
+                    <label for="event-location"
+                    >Kategoria</label
+                    >
+                    <div class="select-wrap">
+                        <i class="fa fa-chevron-down"></i>
+                        <select
+                            id="event-location"
+                            class="col-12"
+                            v-model="requestEventForm.genre"
+                            @change="console.log(requestEventForm)"
+                        >
+                            <option disabled :value="null">
+                                Wybierz kategorię
+                            </option>
+                            <option :key="genre.id" :value="genre.id" v-for="genre in genres">
+                                {{ genre.genre_name }}
                             </option>
                         </select>
                     </div>
@@ -223,31 +313,6 @@ const {user, isLoggedIn} = useAuth();
                         <Link :href="`${route('about-us')}#halls`">Tutaj</Link>
                     </div>
                 </div>
-<!--                <div class="input-wrap col-12">
-                    <label for="event-location"
-                    >Kategoria</label
-                    >
-                    <div class="select-wrap">
-                        <i class="fa fa-chevron-down"></i>
-                        <select
-                            id="event-location"
-                            class="col-12"
-                            v-model="requestEventForm.category"
-                        >
-                            <option disabled :value="null">
-                                Wybierz halę
-                            </option>
-                            <option :value="hall.id" v-for="hall in halls">
-                                {{ hall.hall_name }}
-                            </option>
-                        </select>
-                    </div>
-
-                    <div>
-                        Wizualizacje naszych hal znajdziesz
-                        <Link :href="`${route('about-us')}#halls`">Tutaj</Link>
-                    </div>
-                </div>-->
                 <div class="input-wrap col-12">
                     <label for="event-email">Email kontaktowy*</label>
                     <input
@@ -345,9 +410,5 @@ const {user, isLoggedIn} = useAuth();
     </section>
 </template>
 <script>
-export default {
-    props: {
-        csrf_token: String,
-    },
-};
+
 </script>

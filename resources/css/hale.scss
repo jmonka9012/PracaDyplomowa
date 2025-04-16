@@ -1,6 +1,6 @@
 .hall {
     width: 100%;
-    margin-bottom: 100px;
+    //margin-bottom: 100px;
     background-color: yellowgreen;
 
     &__row {
@@ -41,8 +41,13 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
-        margin-bottom: 40px;
-        min-height: 100px;
+        min-height: 200px;
+        background-color: pink;
+
+        &:hover {
+            cursor: pointer;
+            background-color: green;
+        }
     }
 
     &__section-stand {
