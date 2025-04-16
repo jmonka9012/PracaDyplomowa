@@ -4,6 +4,7 @@ use App\Http\Controllers\Events\EventController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Events\RequestEventController;
+use App\Http\Controllers\ImageUploadController;
 
 Route::prefix('wydarzenia')->group(function() {
 
@@ -16,7 +17,7 @@ Route::prefix('wydarzenia')->group(function() {
             ->name('event-create.post')
             ->Middleware('organizerAccess');
 
-      Route::post('/zorganizuj-wydarzenie/zdjecia', [RequestEventController::class, 'storeEventImages'])
+      Route::post('/zorganizuj-wydarzenie/zdjecia', [ImageUploadController::class, 'storeImages'])
             ->name('event-create.image')
             ->Middleware('organizerAccess');
 
