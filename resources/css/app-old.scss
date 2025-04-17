@@ -1185,6 +1185,7 @@ img {
     display: flex;
     flex-wrap: wrap;
     margin-left: -15px;
+    width: 100%;
 
     .input-wrap {
         padding: 0 15px;
@@ -1224,7 +1225,6 @@ img {
         height: 40px;
         min-height: 33px;
         background-color: transparent;
-
         &::placeholder {
             color: $secondary;
         }

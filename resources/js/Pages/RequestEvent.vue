@@ -253,6 +253,16 @@ const {user, isLoggedIn} = useAuth();
                             :title="hall.hall_name"
                             v-show="requestEventForm.event_location === hall.id"
                         >
+                            <div class="d-flex flex-column">
+                                <div class="d-flex align-items-center">
+                                    <div class="legend legend-stand"></div>
+                                    <p>Hale z miejscami stojącymi</p>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="legend legend-seat"></div>
+                                    <p>Hale z miejscami siedzącymi</p>
+                                </div>
+                            </div>
                             <div
                                 class="hall__row"
                                 v-for="(row, hrowIndex) in hall.hall_height"
@@ -276,10 +286,57 @@ const {user, isLoggedIn} = useAuth();
                                             class="hall__section-seat"
                                             v-if="section.section_type === 'seat'"
                                         >
-                                            <input type="number" v-model="sectionPrices[section.id]" @input="console.log(requestEventForm)">
+                                            <input type="number" placeholder="Cena za miejsce siedzące" v-model="sectionPrices[section.id]" @input="console.log(requestEventForm)">
+                                            <div class="hall__seat-cont">
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+
+                                            </div>
                                         </div>
                                         <div v-else class="hall__section-stand">
-                                            <input type="number" v-model="sectionPrices[section.id]" @input="console.log(requestEventForm)">
+                                            <input type="number" placeholder="Cena za miejsce stojące   " v-model="sectionPrices[section.id]" @input="console.log(requestEventForm)">
+                                            <div class="hall__seat-cont">
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                                <div class="hall__seat"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
