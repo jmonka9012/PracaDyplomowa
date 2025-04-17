@@ -1,0 +1,50 @@
+@use './mixin.scss';
+@use './base.scss';
+
+.ev-cont {
+    display: grid;
+    grid-column-gap: 30px;
+    row-gap: 30px;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+
+    @include mixin.media-breakpoint-up(md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include mixin.media-breakpoint-up(lg) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    &-lg-three {
+        @include mixin.media-breakpoint-up(lg) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
+
+.event-img {
+    margin-bottom: 25px;
+    width: 100%;
+    height: 100%;
+    max-height: 270px;
+    object-fit: cover;
+    position: relative;
+    z-index: 0;
+    border-radius: inherit;
+    filter: grayscale(0%);
+}
+
+.event-title2 {
+    font-size: 24px;
+    line-height: 1.5;
+    margin-bottom: 17px;
+    font-weight: 500;
+}
+.event-location {
+    color: base.$text;
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 30px;
+}

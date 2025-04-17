@@ -1,0 +1,149 @@
+@use "./base.scss";
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border: unset;
+    border-radius: 50px;
+    font-family: "Krona one";
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 400;
+    color: white;
+    background-color: base.$text;
+    transition: 0.4s;
+    letter-spacing: 0;
+    z-index: 1;
+
+    &-md {
+        padding: 19px 25px;
+    }
+}
+
+.btn-hovprim {
+    &:hover {
+        background-color: base.$primary;
+    }
+}
+
+.btn-outline {
+    &::after {
+        position: absolute;
+        z-index: -1;
+        pointer-events: none;
+        top: -8px;
+        right: -8px;
+        bottom: -8px;
+        left: -8px;
+        border-radius: inherit;
+        transition: inherit;
+        opacity: 0;
+        transform: scale(0.9, 0.8) rotate(0);
+        border-radius: 32% 30% 30% 23%/46% 36% 58% 50%;
+        transform: scale(1, 1) rotate(2deg);
+        opacity: 1;
+        border-style: solid;
+        border-width: 2px 2px 2px 2px;
+        border-color: #fff79a;
+        content: "";
+    }
+}
+
+.btn-white {
+    color: base.$text;
+    border-radius: 30px;
+    padding: 0 10px;
+    border: 2px solid base.$primary;
+    line-height: 24px;
+    background-color: transparent;
+    text-transform: uppercase;
+
+    &:hover {
+        background-color: base.$primary;
+    }
+}
+
+//morph btn
+
+.morph-btn {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border: unset;
+
+    &::after {
+        position: absolute;
+        z-index: -1;
+        pointer-events: none;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-radius: inherit;
+        transition: inherit;
+        opacity: 0;
+        transform: scale(0.9, 0.8) rotate(0);
+        animation: morph 5s linear infinite;
+        border-radius: 32% 30% 30% 23%/46% 36% 58% 50%;
+        content: "";
+        display: block;
+        border-style: solid;
+        border-width: 2px 2px 2px 2px;
+        border-color: base.$primary;
+    }
+
+    &:hover {
+        &::after {
+            opacity: 1;
+            z-index: 0;
+        }
+    }
+
+    &-yellow {
+        &::after {
+            border-color: base.$yellow;
+        }
+    }
+
+    &__holder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        height: 1px;
+
+        img {
+            width: 30px;
+            height: 30px;
+        }
+    }
+}
+
+.morph-outline {
+    &::after {
+        position: absolute;
+        z-index: -1;
+        pointer-events: none;
+        top: -8px;
+        right: -8px;
+        bottom: -8px;
+        left: -8px;
+        border-radius: inherit;
+        transition: inherit;
+        opacity: 1;
+        animation: morph 5s linear infinite;
+        animation-play-state: paused;
+        border-radius: 32% 30% 30% 23%/46% 36% 58% 50%;
+        animation-play-state: paused;
+        transform: scale(1, 1) rotate(2deg);
+        opacity: 1;
+        border-style: solid;
+        border-width: 2px 2px 2px 2px;
+        border-color: base.$yellow;
+        content: "";
+    }
+}

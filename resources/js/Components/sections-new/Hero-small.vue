@@ -35,7 +35,7 @@ defineProps({
 		color: white;
 		font-size: 32px;
 		line-height: 42px;
-
+        text-align:center;
 		z-index: 1;
 	}
 	&__bg {

@@ -1,0 +1,208 @@
+@use './base.scss';
+
+@use "./mixin.scss";
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    &.table-nowrap {
+        th {
+            white-space: nowrap;
+        }
+        tbody {
+            td {
+                white-space: nowrap;
+            }
+        }
+    }
+    &.table-fixed {
+        table-layout: fixed;
+    }
+    td,
+    th {
+        padding: 8px;
+        font-size: 13px;
+        line-height: 20px;
+        font-weight: 400;
+        text-align: left;
+        white-space: nowrap;
+        @include mixin.media-breakpoint-up(lg) {
+            white-space: normal;
+        }
+        &:first-of-type {
+            border-left: 1px solid #161a1d33;
+        }
+        &:last-of-type {
+            border-right: 1px solid #161a1d33;
+        }
+        a {
+            transition: all 0.3s ease;
+            color: base.$primary-darker;
+            &:hover {
+                color: base.$text;
+            }
+        }
+    }
+    th {
+        border-bottom: 1px solid #161a1d33;
+        border-top: 1px solid #161a1d33;
+        vertical-align: middle;
+        a {
+            position: relative;
+            display: flex;
+            align-items: center;
+            .sorters {
+                cursor: pointer;
+                display: grid;
+                margin-left: 10px;
+                .sort {
+                    display: block;
+                    width: 10px;
+                    height: 4px;
+                    margin-top: 4px;
+                    margin-left: 7px;
+                    position: relative;
+                    &:hover {
+                        &::before,
+                        &::after {
+                            color: var(--text);
+                        }
+                    }
+                    &::before,
+                    &::after {
+                        display: inline-block;
+                        padding: 0;
+                        top: -4px;
+                        left: -8px;
+                        line-height: 0.5;
+                        position: relative;
+                        vertical-align: top;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        text-decoration: none !important;
+                        color: #a7aaad;
+                        font-family: "Font Awesome 6 Free";
+                        content: "";
+                    }
+                    &-asc {
+                        &::before {
+                            content: "\f077";
+                        }
+                        &::after {
+                            display: none;
+                        }
+                    }
+                    &-desc {
+                        &::after {
+                            content: "\f078";
+                        }
+                        &::before {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    td {
+        padding: 8px 10px;
+        white-space: nowrap;
+        color: #161a1dcc;
+        vertical-align: top;
+        border-bottom: 1px solid #161a1d33;
+        @include mixin.media-breakpoint-up(lg) {
+            word-wrap: break-word;
+            white-space: normal;
+        }
+    }
+    tbody {
+        tr {
+            &:nth-child(even) {
+                background-color: white;
+            }
+            &:nth-child(odd) {
+                background-color: #f9f9f9;
+            }
+        }
+    }
+    .check {
+        min-width: 18px;
+        height: 18px;
+        margin: 0;
+        &::before {
+            font-size: 10px;
+        }
+    }
+}
+
+.t-details {
+    &__pic {
+        width: 32px;
+        height: 32px;
+        object-fit: cover;
+        float: left;
+        margin-right: 16px;
+    }
+    &__options {
+        position: relative;
+        left: -9999em;
+        display: flex;
+        column-gap: 5px;
+        flex-wrap: wrap;
+        @include mixin.media-breakpoint-down(xl) {
+            flex-wrap: nowrap;
+            float: left;
+        }
+    }
+    &:hover {
+        .t-details__options {
+            position: static;
+        }
+    }
+    &__role {
+        width: 15%;
+    }
+    &__posts {
+        width: 75px;
+    }
+    &-events {
+        &__input {
+            width: 40px;
+            padding: 8px 0;
+            text-align: center;
+            input {
+                vertical-align: middle;
+            }
+        }
+        &__main-img {
+            width: 120px;
+        }
+        &__name {
+            width: 200px;
+        }
+        &__url {
+            width: 120px;
+        }
+        &__date {
+            width: 60px;
+        }
+        &__start {
+            width: 95px;
+        }
+        &__end {
+            width: 80px;
+        }
+        &__loc {
+            width: 85px;
+        }
+        &__e-main {
+            width: 120px;
+        }
+        &__e-add {
+            width: 125px;
+        }
+        &__desc {
+            width: 120px;
+        }
+    }
+}

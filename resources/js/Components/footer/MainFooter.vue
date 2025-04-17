@@ -71,3 +71,36 @@
   </footer>
 </template>
 
+<style lang="scss">
+@use './mixin.scss';
+.footer {
+    &__top {
+        background-color: #f4f4fc;
+        padding: 60px 0px 60px 0px;
+    }
+
+    &__middle {
+        background-color: #343353;
+        display: flex;
+        flex-direction: row;
+        @extend .text-gray;
+        padding: 100px 0 38px 0;
+
+        @include mixin.media-breakpoint-up(lg) {
+            padding: 90px 0px 70px 0px;
+        }
+
+        .container {
+            column-gap: 60px;
+        }
+    }
+
+    &__below {
+        background-color: #22213f;
+        display: flex;
+        justify-content: space-between;
+        padding: 45px 0px 35px 0px;
+    }
+}
+</style>
+
