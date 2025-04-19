@@ -18,22 +18,29 @@ const props = defineProps({
     }
 });
 
+console.log(props);
+
 
 const sectionPrices = reactive({});
 
 const initSectionPrices = () => {
     props.halls.forEach(hall => {
+        if (!sectionPrices[hall.id]) {
+            sectionPrices[hall.id] = {}
+        }
         hall.sections?.forEach(section => {
-            if (!sectionPrices.hasOwnProperty(section.id)) {
-                sectionPrices[section.id] = null;
+            if (!sectionPrices[hall.id].hasOwnProperty(section.id)) {
+                sectionPrices[hall.id][section.id] = null;
             }
         });
     });
 };
 
+
 initSectionPrices();
 
 console.log(sectionPrices);
+
 
 watch(() => props.halls, () => {
     initSectionPrices();
@@ -52,7 +59,6 @@ const requestEventForm = reactive({
     event_location: null,
     event_description_additional: null,
     genre: null,
-    section_prices: sectionPrices
 });
 
 const eventImage = ref(null);
@@ -72,6 +78,10 @@ function submitEventRequest() {
         requestEventForm.event_image = eventImage.value;
     }
 
+    if (sectionPrices && requestEventForm.event_location) {
+        requestEventForm.section_prices = sectionPrices[requestEventForm.event_location];
+    }
+
     router.post(route("event-create.post"), requestEventForm, {
         preserveScroll: () => hadError,
         onError: (err) => {
@@ -83,6 +93,7 @@ function submitEventRequest() {
         },
     });
     console.log(requestEventForm);
+    console.log(errors);
 }
 
 const HandleEditorImage = () => (blobInfo, progress) => {
@@ -106,6 +117,18 @@ const HandleEditorImage = () => (blobInfo, progress) => {
         });
 };
 
+function debugLogForm() {
+    let logReactive = requestEventForm;
+    if (eventImage.value) {
+        logReactive.event_image = eventImage.value;
+    }
+
+    if (sectionPrices && requestEventForm.event_location) {
+        logReactive.section_prices = sectionPrices[requestEventForm.event_location];
+    }
+    console.log(logReactive);
+}
+
 const {user, isLoggedIn} = useAuth();
 </script>
 
@@ -113,7 +136,7 @@ const {user, isLoggedIn} = useAuth();
     <HeroSmall title="Zorganizuj wydarzenie" :source="blogBg"></HeroSmall>
     <section class="pt-50px pb-50px">
         <div class="container">
-            <button @click="console.log(requestEventForm)" class="btn btn-white">Loguj zawartość formularza</button>
+            <button @click="debugLogForm" class="btn btn-white">Loguj zawartość formularza</button>
             <form
                 class="form"
                 enctype="multipart/form-data"
@@ -290,7 +313,7 @@ const {user, isLoggedIn} = useAuth();
                                             class="hall__section-seat"
                                             v-if="section.section_type === 'seat'"
                                         >
-                                            <input type="text" v-number-only inputmode="numeric" maxlength="5" placeholder="Cena za miejsce siedzące" v-model="sectionPrices[section.id]" @input="console.log(requestEventForm)">
+                                            <input type="text" v-number-only inputmode="numeric" placeholder="Cena za miejsce siedzące" v-model="sectionPrices[hall.id][section.id]" @input="console.log(requestEventForm)">
                                             <div class="hall__seat-cont">
                                                 <div class="hall__seat"></div>
                                                 <div class="hall__seat"></div>
@@ -317,13 +340,17 @@ const {user, isLoggedIn} = useAuth();
                                             </div>
                                         </div>
                                         <div v-else class="hall__section-stand">
-                                            <input type="text" v-number-only inputmode="numeric" maxlength="5" placeholder="Cena za miejsce stojące" v-model="sectionPrices[section.id]">
+                                            <input type="text" v-number-only inputmode="numeric" placeholder="Cena za miejsce stojące" v-model="sectionPrices[hall.id][section.id]">
                                             <div class="hall__seat-cont">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div>
+                            Wizualizacje naszych hal znajdziesz
+                            <Link :href="`${route('about-us')}#halls`">Tutaj</Link>
                         </div>
                     </div>
                 </div>
@@ -350,11 +377,6 @@ const {user, isLoggedIn} = useAuth();
                         <div class="error-msg" v-if="errors.genre">
                             {{ errors.genre }}
                         </div>
-                    </div>
-
-                    <div>
-                        Wizualizacje naszych hal znajdziesz
-                        <Link :href="`${route('about-us')}#halls`">Tutaj</Link>
                     </div>
                 </div>
                 <div class="input-wrap col-12">
