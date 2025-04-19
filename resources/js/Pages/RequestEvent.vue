@@ -2,9 +2,8 @@
 import useAuth from "@/Utilities/useAuth";
 import HeroSmall from "@/Components/sections-new/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
-import {ref} from "vue";
 import {router} from "@inertiajs/vue3";
-import { reactive, watch, computed } from 'vue';
+import { reactive, watch, computed, ref } from 'vue';
 import {Link} from "@inertiajs/vue3";
 import Editor from "@tinymce/tinymce-vue";
 import axios from "axios";
@@ -26,7 +25,7 @@ const initSectionPrices = () => {
     props.halls.forEach(hall => {
         hall.sections?.forEach(section => {
             if (!sectionPrices.hasOwnProperty(section.id)) {
-                sectionPrices[section.id] = '';
+                sectionPrices[section.id] = null;
             }
         });
     });
@@ -66,15 +65,8 @@ const handleFileUpload = (event) => {
 };
 
 function submitEventRequest() {
-    //const formData = new FormData();
     let hadError = false;
-
-    // Dodajemy dane formularza do FormData
-   /* Object.entries(requestEventForm).forEach(([key, value]) => {
-        if (value) {
-            formData.append(key, value);
-        }
-    });*/
+    errors.clear;
 
     if (eventImage.value) {
         requestEventForm.event_image = eventImage.value;
@@ -92,9 +84,6 @@ function submitEventRequest() {
     });
     console.log(requestEventForm);
 }
-
-console.log(props.halls);
-console.log(props.genres);
 
 const HandleEditorImage = () => (blobInfo, progress) => {
     const formData = new FormData();
@@ -124,6 +113,7 @@ const {user, isLoggedIn} = useAuth();
     <HeroSmall title="Zorganizuj wydarzenie" :source="blogBg"></HeroSmall>
     <section class="pt-50px pb-50px">
         <div class="container">
+            <button @click="console.log(requestEventForm)" class="btn btn-white">Loguj zawartość formularza</button>
             <form
                 class="form"
                 enctype="multipart/form-data"
@@ -150,20 +140,21 @@ const {user, isLoggedIn} = useAuth();
                 <div class="input-wrap col-12">
                     <label for="event-slug">Url wydarzenia</label>
                     <p class="mb-10px fs-14">
-                        Jeżeli zostawisz pole puste, URL zostanie ustawiony na
-                        podstawie podanego tytułu
+                        Dodatkowy adres URL wydarzenia taki jak link do spotify czy strony wykonawcy/organizatora
                     </p>
                     <input
                         type="text"
                         placeholder="Url wydarzenia"
                         id="event-slug"
-                        pattern="[a-z0-9-]+"
                         name="event-slug"
                         spellcheck="false"
                         value=""
                         aria-required="false"
                         v-model="requestEventForm.event_additional_url"
                     />
+                </div>
+                <div class="error-msg" v-if="errors.event_additional_url">
+                    {{ errors.event_additional_url }}
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-image">Obrazek główny Wydarzenia*</label>
@@ -196,6 +187,9 @@ const {user, isLoggedIn} = useAuth();
                         aria-required="true"
                         v-model="requestEventForm.event_date"
                     />
+                    <div class="error-msg" v-if="errors.event_date">
+                        {{ errors.event_date }}
+                    </div>
                 </div>
 
                 <div class="input-wrap col-12 col-lg-6">
@@ -211,6 +205,9 @@ const {user, isLoggedIn} = useAuth();
                         aria-required="true"
                         v-model="requestEventForm.event_start"
                     />
+                    <div class="error-msg" v-if="errors.event_start">
+                        {{ errors.event_start }}
+                    </div>
                 </div>
                 <div class="input-wrap col-12 col-lg-6">
                     <label for="event-end">Koniec Wydarzenia*</label>
@@ -225,6 +222,9 @@ const {user, isLoggedIn} = useAuth();
                         aria-required="true"
                         v-model="requestEventForm.event_end"
                     />
+                    <div class="error-msg" v-if="errors.event_end">
+                        {{ errors.event_end }}
+                    </div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-location"
@@ -245,6 +245,9 @@ const {user, isLoggedIn} = useAuth();
                                 {{ hall.hall_name }}
                             </option>
                         </select>
+                    </div>
+                    <div class="error-msg" v-if="errors.event_location">
+                        {{ errors.event_location }}
                     </div>
                     <div>
                         <div
@@ -287,7 +290,7 @@ const {user, isLoggedIn} = useAuth();
                                             class="hall__section-seat"
                                             v-if="section.section_type === 'seat'"
                                         >
-                                            <input type="number" placeholder="Cena za miejsce siedzące" v-model="sectionPrices[section.id]" @input="console.log(requestEventForm)">
+                                            <input type="text" v-number-only inputmode="numeric" maxlength="5" placeholder="Cena za miejsce siedzące" v-model="sectionPrices[section.id]" @input="console.log(requestEventForm)">
                                             <div class="hall__seat-cont">
                                                 <div class="hall__seat"></div>
                                                 <div class="hall__seat"></div>
@@ -314,29 +317,8 @@ const {user, isLoggedIn} = useAuth();
                                             </div>
                                         </div>
                                         <div v-else class="hall__section-stand">
-                                            <input type="number" placeholder="Cena za miejsce stojące   " v-model="sectionPrices[section.id]" @input="console.log(requestEventForm)">
+                                            <input type="text" v-number-only inputmode="numeric" maxlength="5" placeholder="Cena za miejsce stojące" v-model="sectionPrices[section.id]">
                                             <div class="hall__seat-cont">
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -347,13 +329,14 @@ const {user, isLoggedIn} = useAuth();
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-location"
-                    >Kategoria</label
+                    >Kategoria*</label
                     >
                     <div class="select-wrap">
                         <i class="fa fa-chevron-down"></i>
                         <select
                             id="event-location"
                             class="col-12"
+                            required
                             v-model="requestEventForm.genre"
                             @change="console.log(requestEventForm)"
                         >
@@ -364,6 +347,9 @@ const {user, isLoggedIn} = useAuth();
                                 {{ genre.genre_name }}
                             </option>
                         </select>
+                        <div class="error-msg" v-if="errors.genre">
+                            {{ errors.genre }}
+                        </div>
                     </div>
 
                     <div>
@@ -384,6 +370,9 @@ const {user, isLoggedIn} = useAuth();
                         aria-required="true"
                         v-model="requestEventForm.contact_email"
                     />
+                    <div class="error-msg" v-if="errors.contact_email">
+                        {{ errors.contact_email }}
+                    </div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-email-additional">Email dodatkowy</label>
@@ -397,6 +386,9 @@ const {user, isLoggedIn} = useAuth();
                         aria-required="false"
                         v-model="requestEventForm.contact_email_additional"
                     />
+                    <div class="error-msg" v-if="errors.contact_email_additional">
+                        {{ errors.contact_email_additional }}
+                    </div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-description">Opis*</label>
@@ -411,7 +403,7 @@ const {user, isLoggedIn} = useAuth();
                     toolbar_mode: 'sliding',
                     content_style: 'body { font-family: Arial; }',
                     images_upload_handler: HandleEditorImage(),
-                    images_upload_credentials: true, // Dodaj to!
+                    images_upload_credentials: true,
         forced_root_block: false,
                     plugins: [
                         'autolink',
@@ -446,6 +438,9 @@ const {user, isLoggedIn} = useAuth();
                     ],
                 }"
                     />
+                    <div class="error-msg" v-if="errors.event_description">
+                        {{ errors.event_description }}
+                    </div>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-description">Więcej informacji</label>
@@ -454,11 +449,12 @@ const {user, isLoggedIn} = useAuth();
                         name="event-description-additional"
                         placeholder="Więcej informacji"
                         spellcheck="false"
-                        required
-                        value=""
                         aria-required="false"
                         v-model="requestEventForm.event_description_additional"
                     ></textarea>
+                    <div class="error-msg" v-if="errors.event_description_additional">
+                        {{ errors.event_description_additional }}
+                    </div>
                 </div>
                 <div class="input-wrap col-12">
                     <input type="submit" value="Stwórz wydarzenie"/>

@@ -4,6 +4,7 @@ import { createInertiaApp } from "@inertiajs/vue3";
 import { ZiggyVue } from "ziggy-js";
 import MainLayout from "@/Layouts/MainLayout.vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
+import numberOnly from "./Utilities/Directives/NumberOnly.js";
 
 createInertiaApp({
     resolve: (name) => {
@@ -19,9 +20,11 @@ createInertiaApp({
         return page;
     },
     setup({ el, App, props, plugin }) {
-        createApp({ render: () => h(App, props) })
-            .use(plugin)
-            .use(ZiggyVue)
-            .mount(el);
+        const app = createApp({ render: () => h(App, props) });
+        app.use(plugin).use(ZiggyVue);
+
+        app.directive("number-only", numberOnly);
+
+        app.mount(el);
     },
 });
