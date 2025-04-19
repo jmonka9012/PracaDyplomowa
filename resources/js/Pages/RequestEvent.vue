@@ -66,21 +66,21 @@ const handleFileUpload = (event) => {
 };
 
 function submitEventRequest() {
-    const formData = new FormData();
+    //const formData = new FormData();
     let hadError = false;
 
     // Dodajemy dane formularza do FormData
-    Object.entries(requestEventForm).forEach(([key, value]) => {
+   /* Object.entries(requestEventForm).forEach(([key, value]) => {
         if (value) {
             formData.append(key, value);
         }
-    });
+    });*/
 
     if (eventImage.value) {
-        formData.append("event_image", eventImage.value);
+        requestEventForm.event_image = eventImage.value;
     }
 
-    router.post(route("event-create.post"), formData, {
+    router.post(route("event-create.post"), requestEventForm, {
         preserveScroll: () => hadError,
         onError: (err) => {
             Object.assign(errors, err);
@@ -90,6 +90,7 @@ function submitEventRequest() {
             "Content-Type": "multipart/form-data",
         },
     });
+    console.log(requestEventForm);
 }
 
 console.log(props.halls);
