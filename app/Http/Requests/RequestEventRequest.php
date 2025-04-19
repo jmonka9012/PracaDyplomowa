@@ -23,7 +23,7 @@ class RequestEventRequest extends FormRequest
     {
         return [
             'event_name' => 'required|string|max:255|unique:events,event_name|unique:events_archive,event_name',
-            'event_additional_url' => 'nullable|string|max:255|unique:events,event_additional_url',
+            'event_additional_url' => 'nullable|string|max:255',
             'event_date' => 'required|date|after:+'.now()->addDays(6),
             'event_start' => 'required',
             'event_end' => 'required',
@@ -32,7 +32,7 @@ class RequestEventRequest extends FormRequest
             'event_description' => 'required|max:65535',
             'event_description_additional' => 'max:65535',
             'event_location' => 'required|string|max:255',
-            'image_path' => 'required|string|max:255|nullable',
+            'event_image' => 'required',
             'genre' => 'required|integer|exists:genres,id',
             'section_prices' => 'required|array',
             'section_prices.*' => 'nullable|numeric|min:0'
@@ -47,7 +47,7 @@ class RequestEventRequest extends FormRequest
             'event_name.max' => 'Nazwa wydarzenia jest zbyt długa',
             'event_additional_url.unique' => 'Istnieje już wydarzenia z tym URLem',
             'event_additional_url.max'=> 'URL wydarzenia jest zbyt długie',
-            'email'=> 'Adres email jest wymagany',
+            'contact_email'=> 'Adres email jest wymagany',
             'event_description.max' => 'Opis jest zbyt długi',
             'event_description_additional.max'=> 'Dodtakowe informacje są zbyt długie',
             'event_description.required'=> 'Brak opisu',
