@@ -41,6 +41,12 @@ class RequestEventController extends Controller
 
         $validatedData = $request->validated();
 
+        $genres = $validatedData['genre'];
+        unset($validatedData['genre']);
+
+        $sectionPrices = $validatedData['section_prices'];
+        unset($validatedData['section_prices']);
+
         if ($request->hasFile('event_image')) {
             $eventName = Str::slug($request->input('event_name'));
             $folder = 'event_images/' . now()->format('Y/m') . '/' . $eventName;
@@ -67,6 +73,8 @@ class RequestEventController extends Controller
             'image_path'=> $imagePath,
         ]);
 
+        $event->genres()->attach($genres);
+
         $hall = Hall::with('sections')->find($validatedData['event_location']);
 
         foreach ($hall->sections as $section) {
@@ -78,7 +86,7 @@ class RequestEventController extends Controller
                             'event_id'=> $event->id,
                             'seat_row'=> $row,
                             'seat_number'=> $col,
-                            'price'=> 10.50,
+                            'price'=> $sectionPrices[$section->id],
                             'status'=> 'available'
                         ]);
                     }
@@ -88,9 +96,9 @@ class RequestEventController extends Controller
                     'hall_section_id'=> $section->id,
                     'event_id'=> $event->id,
                     'capacity'=> $section->capacity,
-                    'price' => 5.50,
+                    'price' => $sectionPrices[$section->id],
                 ]);
-            } //ceny są narazie stałe @JacekMonka trzeba będzie zrobić jakiś wybór ceny sekcji
+            }
 
         }
         return redirect()->route('home');

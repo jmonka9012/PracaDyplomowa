@@ -33,6 +33,9 @@ class RequestEventRequest extends FormRequest
             'event_description_additional' => 'required|max:65535',
             'event_location' => 'string|max:255',
             'image_path' => 'string|max:255|nullable',
+            'genre' => 'required|integer|exists:genres,id',
+            'section_prices' => 'required|array',
+            'section_prices.*' => 'nullable|numeric|min:0'
         ];
     }
 
@@ -48,7 +51,9 @@ class RequestEventRequest extends FormRequest
             'event_description.max' => 'Opis jest zbyt długi',
             'event_description_additional.max'=> 'Dodtakowe informacje są zbyt długie',
             'event_description.required'=> 'Brak opisu',
-            'event_date.after'=> 'Potrzebujemy przynajmniej tygodnia na organizacje wydarzenia, wybierz datę przynajmniej tydzień w przód'
+            'event_date.after'=> 'Potrzebujemy przynajmniej tygodnia na organizacje wydarzenia, wybierz datę przynajmniej tydzień w przód',
+            'genre.exists' => 'Kategoria nie istniej',
+            'section_prices.*.min' => 'Cena musi być ustawiona powyżej 0'
         ];
     }
 }
