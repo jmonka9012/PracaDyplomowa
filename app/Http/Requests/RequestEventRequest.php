@@ -35,7 +35,7 @@ class RequestEventRequest extends FormRequest
             'event_image' => 'required',
             'genre' => 'required|integer|exists:genres,id',
             'section_prices' => 'required|array',
-            'section_prices.*' => 'nullable|numeric|min:0'
+            'section_prices.*' => 'required|numeric|min:0'
         ];
     }
 
