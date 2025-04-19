@@ -19,6 +19,8 @@ class MyAccountController extends Controller
 
     public function store(MyAccountDataChangeRequest $request)
     {
+        $emailWasChanged = false;
+
         if (now()->timestamp - $request->session()->get('auth.password_confirmed_at', 0) > 600) {
             abort(403, 'Potwierdzenie hasła wygasło, proszę spróbuj ponownie.');
         }
@@ -40,11 +42,15 @@ class MyAccountController extends Controller
             $user->permission_level = UserRole::UNVERIFIED_USER->permissionLevel();
             $user->save();
 
-            Mail::to($user->email)->send(new VerifyEmail($user));
+            $emailWasChanged = true;
         }
 
         if (!empty($updateData)) {
             $request->user()->update($updateData);
+
+            if ($emailWasChanged) {
+                Mail::to($user->email)->send(new VerifyEmail($user));
+            }
             return back()->with('success','Profil zauktalizowany');
         }
 
