@@ -23,7 +23,7 @@ class RequestEventRequest extends FormRequest
     {
         return [
             'event_name' => 'required|string|max:255|unique:events,event_name|unique:events_archive,event_name',
-            'event_additional_url' => 'string|max:255|unique:events,event_additional_url',
+            'event_additional_url' => 'nullable|string|max:255|unique:events,event_additional_url',
             'event_date' => 'required|date|after:+'.now()->addDays(6),
             'event_start' => 'required',
             'event_end' => 'required',
@@ -31,7 +31,7 @@ class RequestEventRequest extends FormRequest
             'contact_email_additional' => 'email|max:255',
             'event_description' => 'required|max:65535',
             'event_description_additional' => 'required|max:65535',
-            'event_location' => 'string|max:255',
+            'event_location' => 'required|string|max:255',
             'image_path' => 'string|max:255|nullable',
             'genre' => 'required|integer|exists:genres,id',
             'section_prices' => 'required|array',
