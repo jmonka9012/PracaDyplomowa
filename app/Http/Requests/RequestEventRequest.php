@@ -28,7 +28,7 @@ class RequestEventRequest extends FormRequest
             'event_start' => 'required',
             'event_end' => 'required',
             'contact_email' => 'required|email|max:255',
-            'contact_email_additional' => 'email|max:255',
+            'contact_email_additional' => 'nullable|email|max:255',
             'event_description' => 'required|max:65535',
             'event_description_additional' => 'max:65535',
             'event_location' => 'required|string|max:255',
