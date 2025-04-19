@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Events\Event;
 
 class LiveVerificationController extends Controller
 {
@@ -53,5 +54,28 @@ class LiveVerificationController extends Controller
         return response()->json([
             'valid' => true
         ], 200);
+    }
+
+    public function eventTimeTaken(request $request)
+    {
+        $date = $request->validate([
+            'event_date' => 'required|date|after:+'.now()->addDays(6),
+        ],
+[
+        'event_date.after'=> 'Potrzebujemy przynajmniej tygodnia w celach administracyjnych, proszę wybrać datę tydzień w przyszłość minimum.'
+        ]);
+
+        $dateTaken = Event::where('event_date', $date['event_date'])->exists();
+
+        if ($dateTaken) {
+            return response()->json([
+                'valid' => false,
+                'message' => 'dzień '
+            ]);
+        }
+
+        return response()->json([
+            'valid' => true,
+        ]);
     }
 }
