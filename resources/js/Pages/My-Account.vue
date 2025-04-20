@@ -2,12 +2,13 @@
 import Popup from "@/Components/sections-new/Popup.vue";
 import Tab from "@/Components/sections-new/Tab.vue";
 import Tabs from "@/Components/sections-new/Tabs.vue";
-const showModal = ref(false);
 import useAuth from "@/Utilities/useAuth";
+import ResetObject from "@/Utilities/resetObject";
 import { router } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
 import { ref, reactive, toRaw } from "vue";
 
+const showModal = ref(false);
 const { user, isLoggedIn } = useAuth();
 
 let currentRequest;
@@ -22,6 +23,7 @@ const handleValidationEmit = (state) => {
     if (state === true) {
         router.post(route("my-account.change"), currentRequest, {
             onError: (err) => {
+                ResetObject(errors);
                 Object.assign(errors, err); //errory do poprawienia
             },
             onSuccess: (page) => {

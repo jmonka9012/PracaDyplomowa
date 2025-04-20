@@ -4,6 +4,7 @@ import blogBg from "~images/blog-bg.jpg";
 import { reactive } from "vue";
 import { router } from "@inertiajs/vue3";
 import { debounce } from "@/Utilities/debounce";
+import ResetObject from "@/Utilities/resetObject";
 import axios from "axios";
 
 import { ref } from "vue";
@@ -87,6 +88,7 @@ function submitLoginRequest() {
         preserveScroll: () => hadError,
         onError: (err) => {
             hadError = true;
+            ResetObject(loginErrors);
             Object.assign(loginErrors, err);
         },
         onSuccess: () => {
@@ -102,6 +104,7 @@ function submitRegisterRequest() {
         preserveScroll: () => hadError,
         onError: (err) => {
             hadError = true;
+            ResetObject(registerErrors);
             Object.assign(registerErrors, err);
             liveErrors.emailError = null;
             liveErrors.nameError = null;

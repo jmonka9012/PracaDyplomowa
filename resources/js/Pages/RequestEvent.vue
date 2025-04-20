@@ -1,11 +1,17 @@
 <script setup>
 import useAuth from "@/Utilities/useAuth";
+import ResetObject from "@/Utilities/resetObject";
+import IsNotEmpty from "@/Utilities/isNotEmpty";
+import IsNotEmptyPrefix from "@/Utilities/isNotEmpty";
+
 import HeroSmall from "@/Components/sections-new/Hero-small.vue";
+import {Link} from "@inertiajs/vue3";
 import blogBg from "~images/blog-bg.jpg";
+import Editor from "@tinymce/tinymce-vue";
+
 import {router} from "@inertiajs/vue3";
 import { reactive, watch, computed, ref } from 'vue';
-import {Link} from "@inertiajs/vue3";
-import Editor from "@tinymce/tinymce-vue";
+
 import axios from "axios";
 
 const props = defineProps({
@@ -17,9 +23,7 @@ const props = defineProps({
         type: Array,
     }
 });
-
 console.log(props);
-
 
 const sectionPrices = reactive({});
 
@@ -36,15 +40,7 @@ const initSectionPrices = () => {
     });
 };
 
-
 initSectionPrices();
-
-console.log(sectionPrices);
-
-
-watch(() => props.halls, () => {
-    initSectionPrices();
-});
 
 const errors = reactive({});
 const requestEventForm = reactive({
@@ -57,40 +53,48 @@ const requestEventForm = reactive({
     contact_email_additional: null,
     event_description: null,
     event_location: null,
+    event_image: null,
     event_description_additional: null,
     genre: null,
 });
 
-const eventImage = ref(null);
+//const eventImageUrl = ref(null);
+const eventImageUrl = computed(() => {
+    const file = requestEventForm.event_image;
+    return file ? URL.createObjectURL(file) : null;
+});
+
+//const eventImage = ref(null);
 
 const handleFileUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
-        eventImage.value = file;
+        //eventImage.value = file;
+        requestEventForm.event_image = file;
     }
 };
 
 function submitEventRequest() {
-    let hadError = false;
-    errors.clear;
+    let hadError = ref(false);
 
-    if (eventImage.value) {
+    /*if (eventImage.value) {
         requestEventForm.event_image = eventImage.value;
-    }
+    }*/
 
     if (sectionPrices && requestEventForm.event_location) {
         requestEventForm.section_prices = sectionPrices[requestEventForm.event_location];
     }
 
     router.post(route("event-create.post"), requestEventForm, {
-        preserveScroll: () => hadError,
         onError: (err) => {
+            ResetObject(errors);
             Object.assign(errors, err);
             hadError = true;
         },
         headers: {
             "Content-Type": "multipart/form-data",
         },
+        preserveScroll: () => hadError,
     });
     console.log(requestEventForm);
     console.log(errors);
@@ -119,9 +123,9 @@ const HandleEditorImage = () => (blobInfo, progress) => {
 
 function debugLogForm() {
     let logReactive = requestEventForm;
-    if (eventImage.value) {
+    /*if (eventImage.value) {
         logReactive.event_image = eventImage.value;
-    }
+    }*/
 
     if (sectionPrices && requestEventForm.event_location) {
         logReactive.section_prices = sectionPrices[requestEventForm.event_location];
@@ -137,6 +141,7 @@ const {user, isLoggedIn} = useAuth();
     <section class="pt-50px pb-50px">
         <div class="container">
             <button @click="debugLogForm" class="btn btn-white">Loguj zawartość formularza</button>
+            <button @click="ResetObject(errors)" class="btn btn-white">Resetuj errory</button>
             <form
                 class="form"
                 enctype="multipart/form-data"
@@ -181,6 +186,9 @@ const {user, isLoggedIn} = useAuth();
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-image">Obrazek główny Wydarzenia*</label>
+                    <div v-if="requestEventForm.event_image">
+                        <img :src="eventImageUrl" alt="">
+                    </div>
                     <input
                         type="file"
                         id="event-image"
@@ -313,40 +321,33 @@ const {user, isLoggedIn} = useAuth();
                                             class="hall__section-seat"
                                             v-if="section.section_type === 'seat'"
                                         >
-                                            <input type="text" v-number-only inputmode="numeric" placeholder="Cena za miejsce siedzące" v-model="sectionPrices[hall.id][section.id]" @input="console.log(requestEventForm)">
+                                            <input type="text" v-number-only inputmode="numeric" placeholder="Cena za miejsce siedzące" v-model="sectionPrices[hall.id][section.id]">
                                             <div class="hall__seat-cont">
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-                                                <div class="hall__seat"></div>
-
+                                                <div
+                                                    class="hall__section-row"
+                                                    v-for="(row, rowIndex) in section.row"
+                                                    :key="rowIndex"
+                                                >
+                                                    <div
+                                                        class="hall__seat"
+                                                        v-for="(col, colIndex) in section.col"
+                                                        :key="colIndex"
+                                                    ></div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div v-else class="hall__section-stand">
                                             <input type="text" v-number-only inputmode="numeric" placeholder="Cena za miejsce stojące" v-model="sectionPrices[hall.id][section.id]">
                                             <div class="hall__seat-cont">
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="error-msg mb-20px" v-if="IsNotEmptyPrefix(errors,'section_prices')">
+                            Proszę uzupełnić ceny sekcji
                         </div>
                         <div>
                             Wizualizacje naszych hal znajdziesz
@@ -478,8 +479,11 @@ const {user, isLoggedIn} = useAuth();
                         {{ errors.event_description_additional }}
                     </div>
                 </div>
-                <div class="input-wrap col-12">
+                <div class="input-wrap col-12 mb-20px">
                     <input type="submit" value="Stwórz wydarzenie"/>
+                </div>
+                <div class="error-msg" v-if="IsNotEmpty(errors)">
+                    Nieprawidłowe dane formularza
                 </div>
             </form>
         </div>
