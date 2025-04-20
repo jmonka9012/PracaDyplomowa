@@ -1,6 +1,7 @@
 <script setup>
 import Tab from "@/Components/sections-new/Tab.vue";
 import Tabs from "@/Components/sections-new/Tabs.vue";
+import Hero from "@/Components/sections-new/AboutUsHero.vue";
 
 import useAuth from '@/Utilities/useAuth'
 
@@ -17,6 +18,8 @@ const props = defineProps({
 
 <template>
 
+    <Hero>
+    </Hero>
     <section id="halls">
         <div class="container container-mid">
             <div class="col-lg-12">
