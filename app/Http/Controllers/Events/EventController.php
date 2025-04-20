@@ -17,7 +17,7 @@ class EventController extends Controller
     {
         $event->load(['seats', 'standingTickets']);
 
-        return Inertia::render('EventSingle', [
+        return Inertia::render('Events/EventSingle', [
             'event' => new EventResource($event)
         ]);
     }
@@ -30,13 +30,13 @@ class EventController extends Controller
             'event' => $event->load(['seats', 'standingTickets'])->toArray()
         ]);
     }
-    
+
     public function eventBrowser(Event $event)
     {
         $events = Event::where('pending', false)->get();
 
-        return Inertia::render('EventBrowser', [
-            'event' => new EventBrowserResource($event)
+        return Inertia::render('Events/EventBrowser', [
+            'events' => EventBrowserResource::collection($events)
         ]);
     }
 

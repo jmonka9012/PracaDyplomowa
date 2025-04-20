@@ -27,14 +27,14 @@ import heroBg from "~images/bg_home1.jpg";
                     <input
                         class="hero-input"
                         type="text"
-                        placeholder="Enter name ..."
+                        placeholder="Wyszukaj po nazwie"
                     />
                 </div>
                 <div class="input-wrap hero-select-wrap br-1 b-text-50">
                     <i class="fa fa-th-list"></i>
                     <select class="hero-select">
                         <option disabled selected value="">
-                            Please select one
+                            Wybierz kategorię
                         </option>
                         <option>Buisness</option>
                         <option>Concert</option>
@@ -51,7 +51,7 @@ import heroBg from "~images/bg_home1.jpg";
                 <div class="input-wrap hero-select-wrap">
                     <i class="fa fa-map-marker"></i>
                     <select class="hero-select">
-                        <option disabled selected value="">All time</option>
+                        <option disabled selected value="">Data</option>
                         <option>Today</option>
                         <option>Tommorow</option>
                         <option>This week</option>

@@ -9,6 +9,8 @@ import Cta from "@/Components/sections-new/Cta.vue";
 import TitleNSub from "@/Components/sections-new/TitleNSub.vue";
 import Hero from "@/Components/sections-new/Hero.vue";
 import Poptext from "@/Components/sections-new/Poptext.vue";
+import { Link } from "@inertiajs/vue3";
+
 
 import bangPow from "~images/bangpow.jpg";
 import greatMilenko from "~images/greatmilenko.jpg";
@@ -132,44 +134,13 @@ const latest = [
     },
 ];
 
-const events = [
-    {
-        id: 1,
-        src: eventsBg,
-        mainLink: [
-            {
-                href: "/icp",
-                title: "Bang pow boom at jugaloo island",
-                location: "Jugaloo Island",
-            },
-        ],
-        date: "22.02.2025",
+const props = defineProps({
+    events: {
+        type: Array,
+        required: true,
     },
-    {
-        id: 2,
-        src: eventsBg,
-        mainLink: [
-            {
-                href: "/icp",
-                title: "Proponent for sentience",
-                location: "Alleagon",
-            },
-        ],
-        date: "22.02.2025",
-    },
-    {
-        id: 3,
-        src: eventsBg,
-        mainLink: [
-            {
-                href: "/icp",
-                title: "Proponent for sentience",
-                location: "Alleagon",
-            },
-        ],
-        date: "22.02.2025",
-    },
-];
+});
+
 </script>
 
 <template>
@@ -194,9 +165,10 @@ const events = [
     <CategoriesImg class="pt-70px pt-lg-120px pb-60px pb-lg-90px" />
     <section class="pb-75px">
         <div class="container flex-column align-items-center">
-            <p class="sub-title sub-title-lprpl mb-20px">FUTURE EVENTS</p>
-            <h3 class="title-1 mb-20px">Festivals This December</h3>
-            <Events :events="events" />
+            <p class="sub-title sub-title-lprpl mb-20px">bilety na</p>
+            <h3 class="title-1 mb-20px">Przyszłe wydarzenia</h3>
+            <Events :events="props.events" />
+            <Link class="btn btn-md" :href="route('event.browser')">Zobacz wszystkie wydarzenia</Link>
         </div>
     </section>
     <Services />

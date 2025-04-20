@@ -3,8 +3,12 @@ import { ref } from "vue";
 import { onMounted, onUnmounted } from "vue";
 import DropDown from "../partials/DropDown.vue";
 import DatePicker from "@/Components/sections-new/DatePicker.vue";
-defineProps({
-    events: Array,
+
+const props = defineProps({
+    events: {
+        type: Array,
+        required: true,
+    },
 });
 
 const scrollContainer = ref(null);
@@ -88,35 +92,35 @@ const scrollRight = () => {
         <DatePicker></DatePicker>
     </div>
 
-    <div v-for="event in events" :key="event.id" class="event">
+    <div v-for="event in props.events" :key="event.id" class="event">
         <div class="event-img">
-            <a class="link-stretched" :href="event.mainLink[0].href"> </a>
-            <img :src="event.src" alt="" />
+            <a class="link-stretched" :href="event.event_url"> </a>
+            <img :src="`/storage/${event.image_path}`" alt="" />
         </div>
         <div class="d-flex flex-column col-12">
             <div
                 class="d-flex flex-lg-row justify-content-between align-items-center mt-lg-8px mb-16px"
             >
                 <h6 class="event-title">
-                    <a :href="event.mainLink[0].href">{{
-                        event.mainLink[0].title
+                    <a :href="event.event_url">{{
+                        event.event_name
                     }}</a>
                 </h6>
                 <a
                     class="event-link d-none d-lg-flex"
-                    :href="event.mainLink[0].ahref"
+                    :href="event.event_url"
                     ><i class="fa fa-ticket"></i>
                     Zobacz więcej
                 </a>
             </div>
             <p class="event-date ff-prompt">
-                <i class="fa fa-calendar mr-5px"></i>{{ event.date }}
+                <i class="fa fa-calendar mr-5px"></i>{{ event.event_date }}
             </p>
             <p class="event-subtitle">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed,
                 eum?
             </p>
-            <a class="event-link d-lg-none" :href="event.mainLink[0].ahref"
+            <a class="event-link d-lg-none" :href="event.event_url"
                 ><i class="fa fa-ticket"></i>
                 Zobacz więcej
             </a>

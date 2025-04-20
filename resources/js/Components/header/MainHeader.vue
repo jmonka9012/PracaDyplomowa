@@ -93,22 +93,19 @@ onBeforeUnmount(() => {
                             <Link :href="route('home')"><span>Strona główna</span></Link>
                         </li>
                         <li>
+                            <Link :href="route('event.browser')"><span>Wydarzenia</span></Link>
+                        </li>
+                        <li>
                             <Link :href="route('about-us')"><span>O nas</span></Link>
                         </li>
                         <li>
                             <Link :href="route('blog')"><span>Blog</span></Link>
                         </li>
                         <li>
-                            <Link :href="route('post')"><span>Single (CE)</span></Link>
-                        </li>
-                        <li>
                             <Link :href="route('contact')"><span>Kontakt</span></Link>
                         </li>
                         <li>
                             <Link :href="route('ce')"><span>CE</span></Link>
-                        </li>
-                        <li>
-                            <Link :href="route('jacek')"><span>Jacek CE</span></Link>
                         </li>
 <!--                        <li class="desk-dropdown">
                             <span class="desk-dropdown-toggle"
@@ -195,15 +192,13 @@ onBeforeUnmount(() => {
                                         <Link :href="route('home')">Strona główna</Link>
                                     </li>
                                     <li>
+                                        <Link :href="route('event.browser')">Wydarzenia</Link>
+                                    </li>
+                                    <li>
                                         <Link :href="route('about-us')">O nas</Link>
                                     </li>
                                     <li>
                                         <Link :href="route('blog')">Blog</Link>
-                                    </li>
-                                    <li>
-                                        <Link :href="route('post')"
-                                            >Single (CE)</Link
-                                        >
                                     </li>
                                     <li>
                                         <Link :href="route('contact')"

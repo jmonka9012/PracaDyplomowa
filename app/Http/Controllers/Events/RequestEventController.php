@@ -23,7 +23,7 @@ class RequestEventController extends Controller
         $halls = Hall::with('sections')->get();
         $genres = Genre::orderBy('id', 'asc')->get();
 
-        return Inertia::render('RequestEvent', [
+        return Inertia::render('Events/RequestEvent', [
             'halls' => $halls,
             'genres' => $genres
         ]);
