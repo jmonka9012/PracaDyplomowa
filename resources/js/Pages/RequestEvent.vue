@@ -64,22 +64,33 @@ const eventImageUrl = computed(() => {
     return file ? URL.createObjectURL(file) : null;
 });
 
-//const eventImage = ref(null);
-
 const handleFileUpload = (event) => {
     const file = event.target.files[0];
-    if (file) {
-        //eventImage.value = file;
-        requestEventForm.event_image = file;
+    delete errors.event_image;
+
+    if (file && file.size <= 10000000 && file.type.startsWith('image')) {
+        const img = new Image();
+        const objectUrl = URL.createObjectURL(file);
+
+        img.onload = () => {
+            if (img.width >= 800 && img.height >= 600) {
+                requestEventForm.event_image = file;
+            } else {
+                errors.event_image = 'Obrazek jest za mały';
+            }
+            URL.revokeObjectURL(objectUrl);
+        };
+
+        img.src = objectUrl;
+    } else if (file.size > 10000000) {
+        errors.event_image = 'Obrazek jest za duży';
+    } else if (!file.type.startsWith('image')) {
+        errors.event_image = 'Plik nie jest obrazem';
     }
 };
 
 function submitEventRequest() {
     let hadError = ref(false);
-
-    /*if (eventImage.value) {
-        requestEventForm.event_image = eventImage.value;
-    }*/
 
     if (sectionPrices && requestEventForm.event_location) {
         requestEventForm.section_prices = sectionPrices[requestEventForm.event_location];
@@ -123,9 +134,6 @@ const HandleEditorImage = () => (blobInfo, progress) => {
 
 function debugLogForm() {
     let logReactive = requestEventForm;
-    /*if (eventImage.value) {
-        logReactive.event_image = eventImage.value;
-    }*/
 
     if (sectionPrices && requestEventForm.event_location) {
         logReactive.section_prices = sectionPrices[requestEventForm.event_location];
@@ -141,6 +149,7 @@ const {user, isLoggedIn} = useAuth();
     <section class="pt-50px pb-50px">
         <div class="container">
             <button @click="debugLogForm" class="btn btn-white">Loguj zawartość formularza</button>
+            <button @click="console.log(errors)" class="btn btn-white">Loguj errory</button>
             <button @click="ResetObject(errors)" class="btn btn-white">Resetuj errory</button>
             <form
                 class="form"
@@ -185,25 +194,33 @@ const {user, isLoggedIn} = useAuth();
                     {{ errors.event_additional_url }}
                 </div>
                 <div class="input-wrap col-12">
-                    <label for="event-image">Obrazek główny Wydarzenia*</label>
-                    <div v-if="requestEventForm.event_image">
-                        <img :src="eventImageUrl" alt="">
+                    <label for="event-image" class="d-flex align-items-start flex-column">
+                        <span class="d-flex mb-20px">Obrazek główny Wydarzenia*</span>
+                        <div v-if="requestEventForm.event_image">
+                            <img :src="eventImageUrl" alt="">
+                        </div>
+                        <input
+                            type="file"
+                            id="event-image"
+                            name="event-image"
+                            accept="image/*"
+                            required
+                            placeholder="Obrazek główny*"
+                            spellcheck="false"
+                            value=""
+                            aria-required="true"
+                            class="d-none"
+                            @change="handleFileUpload"
+                        />
+                        <span style="cursor: pointer" class="btn btn-md d-flex mb-10px">Wybierz plik</span>
+                        <span class="mb-10px fw-bold" v-if="requestEventForm.event_image">{{requestEventForm.event_image.name}}</span>
+                        <p class="fs-14">
+                            Zalecane ratio 4:3, Rozdzielczość min. 800x600, maksymalny rozmiar 10MB
+                        </p>
+                    </label>
+                    <div class="error-msg" v-if="errors.event_image">
+                        {{ errors.event_image }}
                     </div>
-                    <input
-                        type="file"
-                        id="event-image"
-                        name="event-image"
-                        accept="image/*"
-                        required
-                        placeholder="Obrazek główny*"
-                        spellcheck="false"
-                        value=""
-                        aria-required="true"
-                        @change="handleFileUpload"
-                    />
-                    <p class="mt-10px fs-14">
-                        Zalecane ratio 3:2, zalecana rozdzielczość 1024x1024
-                    </p>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-date">Data Wydarzenia*</label>
