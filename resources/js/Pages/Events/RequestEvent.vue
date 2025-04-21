@@ -135,7 +135,7 @@ const HandleEditorImage = () => (blobInfo, progress) => {
         })
         .then((response) => response.data.location)
         .catch((error) => {
-            throw new Error(`Upload failed: ${error.message}`);
+            throw new Error(`Wysyłanie zakończone niepowodzeniem: ${error.message}`);
         });
 };
 
