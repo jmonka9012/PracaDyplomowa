@@ -1,5 +1,5 @@
 @use "./mixin.scss";
-@use './read-more.scss';
+@use "./read-more.scss";
 :root {
     //new
     --footer: #070707;
@@ -14,7 +14,7 @@
     --trans-def: all 0.3s ease;
     --n-gray: #babac0;
 }
-$primary: #9d99f2;
+$primary: #c3b9ef;
 $primary-darker: #6f69f7;
 $secondary: #161a1d;
 $dark: #070707;
@@ -32,7 +32,6 @@ body {
     font-family: "Prompt";
 }
 
-
 body {
     font-weight: 400;
     font-size: 16px;
@@ -42,7 +41,6 @@ body {
     margin: 0;
     box-sizing: border-box;
 }
-
 
 * {
     box-sizing: border-box;
@@ -155,7 +153,6 @@ a.link-stretched {
 button {
     cursor: pointer;
 }
-
 
 .btn-reset {
     background-color: transparent;
@@ -331,7 +328,6 @@ img {
     max-width: 100%;
 }
 
-
 .bt-1 {
     border-top: 1px solid;
 }
@@ -431,7 +427,7 @@ img {
 .justify-content-center {
     justify-content: center;
 }
-.justify-content-start{
+.justify-content-start {
     justify-content: flex-start;
 }
 
@@ -640,7 +636,6 @@ img {
     text-decoration: underline;
 }
 
-
 .orange-underline {
     position: relative;
     padding-bottom: 20px;
@@ -796,7 +791,6 @@ img {
     }
 }
 
-
 //breadcrumb
 .bcrumb {
     display: flex;
@@ -816,7 +810,6 @@ img {
         }
     }
 }
-
 
 .social-link {
     line-height: 30px;
