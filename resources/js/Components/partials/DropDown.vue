@@ -77,22 +77,24 @@ onUnmounted(() => {
     document.removeEventListener("click", handleClickOutside);
 });
 </script>
-
 <template>
     <div
         ref="dropdownHolder"
         class="dropdown"
-        @click="toggleDropdown"
         v-bind="$attrs"
         :class="{ open: isOpen }"
     >
         <i class="fa fa-map-marker"></i>
-        <div class="d-flex flex-column col-12">
-            <span class="select-label">{{ title }}</span>
-            <span class="select-subtext"> {{ subtitle }}</span>
+        <div
+            class="d-flex align-items-center col-12 h-100"
+            @click="toggleDropdown"
+        >
+            <div class="d-flex flex-column col-11">
+                <span class="select-label">{{ title }}</span>
+                <span class="select-subtext"> {{ subtitle }}</span>
+            </div>
+            <i class="fa fa-chevron-down ml-auto"></i>
         </div>
-
-        <i class="fa fa-chevron-down ml-auto"></i>
         <div
             ref="dropdownContent"
             class="dropdown__content"
@@ -135,6 +137,14 @@ onUnmounted(() => {
     &.open {
         border: 1px solid var(--primary);
         outline: 1px solid var(--primary);
+        .dropdown__content {
+            border: 0;
+        }
+    }
+
+    &-form.open {
+        outline: none;
+        border: 1px solid #ced4da;
     }
     i {
         &.fa-map-marker {

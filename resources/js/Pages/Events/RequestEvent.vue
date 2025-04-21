@@ -5,6 +5,7 @@ import IsNotEmpty from "@/Utilities/isNotEmpty";
 import IsNotEmptyPrefix from "@/Utilities/isNotEmpty";
 
 import HeroSmall from "@/Components/sections-new/Hero-small.vue";
+import DropDown from "@/Components/partials/DropDown.vue";
 import { Link } from "@inertiajs/vue3";
 import blogBg from "~images/blog-bg.jpg";
 import Editor from "@tinymce/tinymce-vue";
@@ -425,7 +426,9 @@ const { user, isLoggedIn } = useAuth();
                         </div>
                         <div>
                             Wizualizacje naszych hal znajdziesz
-                            <Link class="text-primary" :href="`${route('about-us')}#halls`"
+                            <Link
+                                class="text-primary"
+                                :href="`${route('about-us')}#halls`"
                                 >Tutaj</Link
                             >
                         </div>
@@ -433,9 +436,10 @@ const { user, isLoggedIn } = useAuth();
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-location">Kategoria*</label>
-                    <div class="select-wrap">
+                    <!-- <div class="select-wrap">
                         <i class="fa fa-chevron-down"></i>
                         <select
+                            multiple
                             id="event-location"
                             class="col-12"
                             required
@@ -456,7 +460,29 @@ const { user, isLoggedIn } = useAuth();
                         <div class="error-msg" v-if="errors.genre">
                             {{ errors.genre }}
                         </div>
-                    </div>
+                    </div> -->
+                    <DropDown
+                        class="dropdown-form"
+                        title="Wybierz kategorie"
+                        subtitle=""
+                    >
+                        <select
+                            multiple
+                            id="event-location"
+                            class="col-12"
+                            required
+                            v-model="requestEventForm.genre"
+                            @change="console.log(requestEventForm)"
+                        >
+                            <option
+                                :key="genre.id"
+                                :value="genre.id"
+                                v-for="genre in genres"
+                            >
+                                {{ genre.genre_name }}
+                            </option>
+                        </select>
+                    </DropDown>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-email">Email kontaktowy*</label>
