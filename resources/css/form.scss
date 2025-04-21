@@ -45,7 +45,7 @@
         min-height: 33px;
         background-color: transparent;
         &::placeholder {
-            color: base.$secondary;
+            color: #161a1d4d;
         }
     }
     input {
@@ -67,6 +67,9 @@
         @extend input;
         height: 100px;
         min-height: 100px !important;
+        border-width:1px !important;
+        border-radius:8px;
+        padding: 15px 15px 0;
     }
 
     input[type="submit"],
