@@ -1,5 +1,5 @@
-@use './mixin.scss';
-@use './base.scss';
+@use "./mixin.scss";
+@use "./base.scss";
 
 .ev-cont {
     display: grid;
@@ -47,4 +47,50 @@
     text-transform: uppercase;
     font-size: 12px;
     line-height: 30px;
+}
+.event-pagination {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+
+    ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        column-gap: 10px;
+    }
+    .direction {
+        a {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            column-gap: 10px;
+            &:hover {
+                color: var(--primary);
+            }
+        }
+    }
+    .page {
+        border: 1px solid var(--text);
+        border-radius: 50%;
+        position: relative;
+        a {
+            min-width: 32px;
+            min-height: 32px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        &:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        &-current {
+            border-color: var(--primary);
+            border-width: 1px;
+            color: var(--primary);
+        }
+    }
 }
