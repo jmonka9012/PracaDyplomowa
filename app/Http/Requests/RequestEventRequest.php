@@ -32,10 +32,15 @@ class RequestEventRequest extends FormRequest
             'event_description' => 'required|max:65535',
             'event_description_additional' => 'max:65535',
             'event_location' => 'required|string|max:255',
-            'event_image' => 'required',
             'genre' => 'required|integer|exists:genres,id',
             'section_prices' => 'required|array',
-            'section_prices.*' => 'required|numeric|min:0'
+            'section_prices.*' => 'required|numeric|min:0',
+            'event_image' => [
+                'required',
+                'image',
+                'max:10240',
+                'dimensions:min_width=800, min_height=600'
+            ]
         ];
     }
 
@@ -53,7 +58,10 @@ class RequestEventRequest extends FormRequest
             'event_description.required'=> 'Brak opisu',
             'event_date.after'=> 'Potrzebujemy przynajmniej tygodnia na organizacje wydarzenia, wybierz datę przynajmniej tydzień w przód',
             'genre.exists' => 'Kategoria nie istniej',
-            'section_prices.*.min' => 'Cena musi być ustawiona powyżej 0'
+            'section_prices.*.min' => 'Cena musi być ustawiona powyżej 0',
+            'event_image.image' => 'Wysłany plik nie jest zdjęciem',
+            'event_image.max' => 'Plik jest zbyt duży, maksymalna wielkość pliku to 10MB',
+            'event_image.dimensions' => 'Zdjęcie jest zbyt małe, minimalna rozdzielczość pliku to 800x600 pikseli.',
         ];
     }
 }
