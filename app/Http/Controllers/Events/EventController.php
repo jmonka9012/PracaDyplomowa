@@ -36,7 +36,7 @@ class EventController extends Controller
         $events = Event::where('pending', false)->get();
 
         return Inertia::render('Events/EventBrowser', [
-            'events' => EventBrowserResource::collection($events)
+            'events' => EventBrowserResource::collection($events)->resolve()
         ]);
     }
 
