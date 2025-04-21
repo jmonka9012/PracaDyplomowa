@@ -139,12 +139,16 @@ const props = defineProps({
         type: Array,
         required: true,
     },
+    genres: {
+        type: Array,
+        required: true,
+    }
 });
 
 </script>
 
 <template>
-    <Hero>
+    <Hero :genres="genres">
         <template #title>
             <Poptext
                 class="d-flex flex-column justify-content-center align-items-center poptext-white"

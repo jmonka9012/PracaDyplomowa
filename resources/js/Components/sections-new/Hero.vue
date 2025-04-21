@@ -1,9 +1,12 @@
 <script setup>
-import hellspit from "~images/hellspit.jpg";
-import bangpow from "~images/bangpow.jpg";
-import jeckelbros from "~images/Jeckelbros.jpg";
-import icpLogo from "~images/ICP-Logo.jpg";
 import heroBg from "~images/bg_home1.jpg";
+
+const props = defineProps({
+    genres: {
+        type: String,
+        required: true,
+    },
+});
 </script>
 
 <template>
@@ -36,16 +39,13 @@ import heroBg from "~images/bg_home1.jpg";
                         <option disabled selected value="">
                             Wybierz kategorię
                         </option>
-                        <option>Buisness</option>
-                        <option>Concert</option>
-                        <option>Music</option>
-                        <option>Conference</option>
-                        <option>Education</option>
-                        <option>Fashion</option>
-                        <option>Festival</option>
-                        <option>Food & drink</option>
-                        <option>Other</option>
-                        <option>Sport</option>
+                        <option
+                            :key="genre.id"
+                            :value="genre.id"
+                            v-for="genre in genres"
+                        >
+                            {{ genre.genre_name }}
+                        </option>
                     </select>
                 </div>
                 <div class="input-wrap hero-select-wrap">

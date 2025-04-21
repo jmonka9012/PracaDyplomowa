@@ -17,7 +17,7 @@ console.log(props);
         <div class="container flex-column align-items-center">
             <p class="sub-title sub-title-lprpl mb-20px">bilety na</p>
             <h3 class="title-1 mb-20px">Przyszłe wydarzenia</h3>
-            <Events :events="props.events.data" />
+            <Events :events="props.events" />
 
             <div class="event-pagination">
                 <ul>
