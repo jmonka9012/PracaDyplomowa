@@ -89,16 +89,15 @@ const errors = reactive({});
                             </li>
                             <li><a href="#">Szczegóły profilu</a></li>
                             <li><a href="#">Szczególy sprzedawcy</a></li>
-                            <li><a href="#">Saldo karty podarunkowej</a></li>
                         </ul>
-                        <ul>
+<!--                        <ul>
                             <li>
                                 <button value="">
                                     <i class="fa fa-gear"></i>Moje ustawienia
                                 </button>
                             </li>
                             <li><a href="#">Zarządzaj powiadomieniami</a></li>
-                        </ul>
+                        </ul>-->
                         <ul>
                             <li>
                                 <Link
