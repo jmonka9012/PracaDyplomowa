@@ -56,7 +56,7 @@ class EventController extends Controller
 
         return response()->json([
             'events' => EventBrowserResource::collection($events)->response()->getData(true),
-            $genres = Genre::orderBy('id', 'asc')->get()
+            'genres' => $genres
         ]);
     }
 }
