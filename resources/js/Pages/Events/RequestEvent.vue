@@ -307,7 +307,7 @@ const { user, isLoggedIn } = useAuth();
                     <label for="event-location"
                         >Lokalizacja / Wybrana sala*</label
                     >
-                    <div class="select-wrap mb-30px">
+                    <div class="select-wrap mb-20px">
                         <i class="fa fa-chevron-down"></i>
                         <select
                             id="event-location"
@@ -323,7 +323,7 @@ const { user, isLoggedIn } = useAuth();
                             </option>
                         </select>
                     </div>
-                    <div class="error-msg" v-if="errors.event_location">
+                    <div class="error-msg mb-20px" v-if="errors.event_location">
                         {{ errors.event_location }}
                     </div>
                     <div>

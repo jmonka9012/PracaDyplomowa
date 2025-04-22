@@ -8,7 +8,7 @@ export default function IsNotEmpty(object) {
     }
     return false;
 }
-
+/*
 export function isNotEmptyPrefix(object, prefix) {
     const rawObj = toRaw(object);
 
@@ -17,4 +17,4 @@ export function isNotEmptyPrefix(object, prefix) {
         key.startsWith(prefix) &&
         rawObj[key] !== null
     );
-}
+}*/

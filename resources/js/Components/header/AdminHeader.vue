@@ -98,7 +98,7 @@ onBeforeUnmount(() => {
                             <Link :href="route('admin.events')"><span>Zarządzaj wydarzeniami</span></Link>
                         </li>
                         <li>
-                            <Link :href="route('admin.add-post')"><span>Dodaj Post</span></Link>
+                            <Link :href="route('blog-create')"><span>Dodaj Post</span></Link>
                         </li>
                         <li>
                             <Link :href="route('admin.posts')"><span>Posty</span></Link>
@@ -167,7 +167,7 @@ onBeforeUnmount(() => {
                                         <Link v-if="user.permission_level <=2" :href="route('admin.events')"><span>Zarządzaj wydarzeniami</span></Link>
                                     </li>
                                     <li>
-                                        <Link :href="route('admin.add-post')"><span>Dodaj Post</span></Link>
+                                        <Link :href="route('blog-create')"><span>Dodaj Post</span></Link>
                                     </li>
                                     <li>
                                         <Link :href="route('admin.posts')"><span>Posty</span></Link>
