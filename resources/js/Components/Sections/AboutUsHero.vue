@@ -94,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <section class="animated-sticky-section__section as-hero">
             <div class="as-iconrotate">
                 <IconRotate
+                    class="icon-rotate-holder-as"
                     :background="`url(${spiral})`"
                     rotateText="- Custom Rotating Text - Custom Rotating Text 2 "
                 />
@@ -157,6 +158,9 @@ document.addEventListener("DOMContentLoaded", () => {
     line-height: 1.1;
     text-align: center;
     font-size: 58px;
+    @include mixin.media-breakpoint-down(md){
+        transform: translateY(50px);
+    }
     @include mixin.media-breakpoint-up(md) {
         font-size: 80px;
     }
@@ -169,15 +173,9 @@ document.addEventListener("DOMContentLoaded", () => {
     top: 100px;
     left: 50px;
     @include mixin.media-breakpoint-down(md) {
-        width: 240px;
+        width: 230px;
         top: 30px;
         left: -30px;
-    }
-    .icon-rotate-svg {
-        background-color: red;
-        @include mixin.media-breakpoint-down(md) {
-            width: 100%;
-        }
     }
 }
 .as-cloud {

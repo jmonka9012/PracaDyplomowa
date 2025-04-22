@@ -41,6 +41,7 @@ defineProps({
 </template>
 
 <style lang="scss">
+@use "~css/mixin.scss";
 .icon-rotate-holder {
     background-position: center center;
     background-repeat: no-repeat;
@@ -48,6 +49,13 @@ defineProps({
     font-size: 24px;
     line-height: 0em;
     width: auto;
+    &-as {
+        .icon-rotate-svg {
+            @include mixin.media-breakpoint-down(md) {
+                width: 100%;
+            }
+        }
+    }
 }
 .icon-rotate-svg {
     width: 190px;
