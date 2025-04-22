@@ -65,62 +65,21 @@ const errors = reactive({});
     <section class="ma-hero"></section>
     <section class="bg-grey">
         <div class="container flex-lg-row column-mob-reverse">
-            <div class="col-12 col-lg-3 d-flex ma-lcol flex-column">
-                <div class="ma-lcol-intro">
-                    <p>Witaj ponownie</p>
-                    <p class="fw-bold">{{ user.name }}</p>
-                </div>
-                <div class="ma-lcol-content">
-                    <nav class="ma-lcol-nav">
-                        <ul>
-                            <li>
-                                <button>
-                                    <i class="fa fa-ticket"></i>Moje bilety
-                                </button>
-                            </li>
-                            <li><a href="#">Nadchodzące wydarzenia</a></li>
-                            <li><a href="#">Poprzednie wydarzenia</a></li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <button>
-                                    <i class="fa fa-user"></i>Mój profil
-                                </button>
-                            </li>
-                            <li><a href="#">Szczegóły profilu</a></li>
-                            <li><a href="#">Szczególy sprzedawcy</a></li>
-                        </ul>
-<!--                        <ul>
-                            <li>
-                                <button value="">
-                                    <i class="fa fa-gear"></i>Moje ustawienia
-                                </button>
-                            </li>
-                            <li><a href="#">Zarządzaj powiadomieniami</a></li>
-                        </ul>-->
-                        <ul>
-                            <li>
-                                <Link
-                                    @click="Logout"
-                                    class="text-primary user-functions"
-                                    >Wyloguj się</Link
-                                >
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <div class="col-12 col-lg-9 d-flex flex-column ma-rcol pl-lg-60px">
+            <div class="col-12 d-flex flex-column ma-rcol pl-lg-60px">
                 <div class="bcrumb text-white mb-32px">
                     <a href="">Prev</a>
                     <span class="divider divider-star"></span>
                     <a class="bcrumb__cur" href="">Current</a>
                 </div>
                 <h1 class="ma-title">Mój profil</h1>
-
                 <Tabs class="tabs-white">
                     <Tab title="Moje informacje">
-                        <h3 class="ma-ftitle">Moje informacje</h3>
+                        <div
+                            class="d-flex align-items-center column-gap-10px mb-32px"
+                        >
+                            <h3 class="ma-ftitle">Moje informacje</h3>
+                            <i class="fa fa-user"></i>
+                        </div>
                         <form
                             class="form form-ma"
                             @submit.prevent="handleSubmitClick(fNameForm)"
@@ -238,6 +197,30 @@ const errors = reactive({});
                             </div>
                         </form>
                     </Tab>
+                    <Tab title="Moje bilety">
+                        <div
+                            class="d-flex align-items-center column-gap-10px mb-32px"
+                        >
+                            <h3 class="ma-ftitle">Moje bilety</h3>
+                            <i class="fa fa-ticket"></i>
+                        </div>
+                    </Tab>
+                    <Tab title="Obsługa klienta">
+                        <div
+                            class="d-flex align-items-center column-gap-10px mb-32px"
+                        >
+                            <h3 class="ma-ftitle">Obsługa klienta</h3>
+                            <i class="fa fa-user"></i>
+                        </div>
+                    </Tab>
+                    <Tab title="Sczegóły sprzedawcy">
+                        <div
+                            class="d-flex align-items-center column-gap-10px mb-32px"
+                        >
+                            <h3 class="ma-ftitle">Szcegóły sprzedawcy</h3>
+                            <i class="fa fa-user"></i>
+                        </div>
+                    </Tab>
                 </Tabs>
             </div>
         </div>
@@ -260,7 +243,6 @@ const errors = reactive({});
     line-height: 48px;
     color: var(--text);
     font-weight: 500;
-    margin-bottom: 30px;
 }
 .ma-title {
     font-size: 32px;
@@ -369,6 +351,15 @@ const errors = reactive({});
     margin-bottom: 35px;
     @include mixin.media-breakpoint-up(lg) {
         margin-bottom: 70px;
+    }
+    .tabs__content {
+        min-height: 1260px;
+        @include mixin.media-breakpoint-up(lg) {
+            min-height: 1430px;
+        }
+    }
+    .fa {
+        font-size: 30px;
     }
 }
 .ma-lcol {
