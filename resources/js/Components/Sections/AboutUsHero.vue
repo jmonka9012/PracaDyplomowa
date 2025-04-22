@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
 @use "~css/mixin.scss";
 
 .animated-sticky-section {
-    height: 300vh;
+    height: 200vh;
     @include mixin.media-breakpoint-up(lg) {
         height: 300vh;
     }
@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
 .as-heading {
     line-height: 1.1;
     text-align: center;
-    font-size: 40px;
+    font-size: 58px;
     @include mixin.media-breakpoint-up(md) {
         font-size: 80px;
     }
@@ -168,23 +168,30 @@ document.addEventListener("DOMContentLoaded", () => {
     position: absolute;
     top: 100px;
     left: 50px;
-    @include mixin.media-breakpoint-down(xl) {
-        width: 150px;
-        top: 50px;
+    @include mixin.media-breakpoint-down(md) {
+        width: 240px;
+        top: 30px;
+        left: -30px;
     }
     .icon-rotate-svg {
+        background-color: red;
+        @include mixin.media-breakpoint-down(md) {
+            width: 100%;
+        }
     }
 }
 .as-cloud {
     position: absolute;
-    top: 65%;
     left: -300px;
     width: 100%;
     z-index: 1;
     min-width: 800px;
+    bottom: 0;
     @include mixin.media-breakpoint-up(md) {
         left: -25%;
         min-width: 100%;
+        top: 65%;
+        bottom: auto;
     }
     @include mixin.media-breakpoint-up(lg) {
     }
