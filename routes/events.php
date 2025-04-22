@@ -5,6 +5,7 @@ use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Events\RequestEventController;
 use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\LiveVerificationController;
 
 Route::prefix('wydarzenia')->group(function() {
 
@@ -24,6 +25,11 @@ Route::prefix('wydarzenia')->group(function() {
       Route::get('/zorganizuj-wydarzenie/data', [RequestEventController::class, 'showData'])
             ->name('event-create.data')
             ->middleware('adminAccess');
+
+            
+      Route::post("/zoragnizuj-wydarzenie/walidacja-daty", [LiveVerificationController::class,'eventTimeTaken'])
+            ->name('event-create.hall-check')
+            ->middleware('organizerAccess');
       
       //Przeglądanie eventów
       Route::get('/data', [EventController::class, 'eventBrowserData'])
@@ -33,7 +39,6 @@ Route::prefix('wydarzenia')->group(function() {
       Route::get('/', [EventController::class, 'eventBrowser'])
             ->name('event.browser');
             
- 
       // Dane eventu
       Route::get('/data/{event:slug}', [EventController::class, 'showData'])
             ->name('event.data')

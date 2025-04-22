@@ -65,12 +65,15 @@ class LiveVerificationController extends Controller
         'event_date.after'=> 'Potrzebujemy przynajmniej tygodnia w celach administracyjnych, proszę wybrać datę tydzień w przyszłość minimum.'
         ]);
 
-        $dateTaken = Event::where('event_date', $date['event_date'])->exists();
+        $events = Event::where('event_date', $date['event_date'])->get();
 
-        if ($dateTaken) {
+        $takenHalls = $events->pluck('event_location')->unique()->values();
+
+        if ($takenHalls->isNotEmpty()){
             return response()->json([
                 'valid' => false,
-                'message' => 'dzień '
+                'message' => 'W tym dniu zajetę są sale: ' . $takenHalls->implode(', '),
+                'taken_halls' => $takenHalls,
             ]);
         }
 
