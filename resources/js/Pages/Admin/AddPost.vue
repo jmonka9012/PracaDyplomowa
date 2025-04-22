@@ -1,5 +1,5 @@
 <script setup>
-import axios, {post} from "axios";
+import axios from "axios";
 import { reactive, watch, computed, ref } from "vue";
 import { router } from "@inertiajs/vue3";
 import Editor from "@tinymce/tinymce-vue";
@@ -178,6 +178,7 @@ function submitPostRequest() {
                                 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat | language',
                             tinycomments_mode: 'embedded',
                             tinycomments_author: 'Author name',
+                            relative_urls: false,
                             mergetags_list: [
                                 { value: 'First.Name', title: 'First Name' },
                                 { value: 'Email', title: 'Email' },
