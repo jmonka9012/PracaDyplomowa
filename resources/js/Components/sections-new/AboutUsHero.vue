@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
 @use "~css/mixin.scss";
 
 .animated-sticky-section {
-    height: 200vh;
+    height: 300vh;
     @include mixin.media-breakpoint-up(lg) {
         height: 300vh;
     }

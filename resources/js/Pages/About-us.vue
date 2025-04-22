@@ -18,9 +18,8 @@ const props = defineProps({
 
 <template>
 
-    <Hero>
-    </Hero>
-    <section id="halls">
+    <Hero></Hero>
+    <section id="halls" class="overflow-hidden">
         <div class="container container-mid">
             <div class="col-lg-12">
                 <Tabs>
