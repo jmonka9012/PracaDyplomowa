@@ -15,15 +15,15 @@ Route::prefix('blog')->group(function() {
       Route::get('/post', [PostController::class, 'index'])->name('post');
 
       Route::get('/dodaj-post', [RequestBlogController::class, 'index'])
-      ->name('blog-create')
-      ->middleware('blogAccess');
+            ->name('blog-create')
+            ->middleware('blogAccess');
 
       Route::post('/dodaj-post/dodaj', [RequestBlogController::class, 'store'])
-      ->name('blog-create.post')
-      ->middleware('blogAccess');
+            ->name('blog-create.post')
+            ->middleware('blogAccess');
 
       Route::post('/dodaj-post/zdjecia', [ImageUploadController::class, 'storeImages'])
-      ->name('blog-create.image')
-      ->Middleware('blogAccess');
+            ->name('blog-create.image')
+            ->Middleware('blogAccess');
 
 });

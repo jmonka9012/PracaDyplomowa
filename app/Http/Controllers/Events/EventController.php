@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 use App\Models\Events\Event;
+use App\Models\Events\Genre;
 use App\Http\Resources\EventResource;
 
 
@@ -34,9 +35,11 @@ class EventController extends Controller
     public function eventBrowser(Event $event)
     {
         $events = Event::where('pending', false)->get();
+        $genres = Genre::orderBy('id', 'asc')->get();
 
         return Inertia::render('Events/EventBrowser', [
-            'events' => EventBrowserResource::collection($events)->resolve()
+            'events' => EventBrowserResource::collection($events)->resolve(),
+            'genres' => $genres,
         ]);
     }
 
