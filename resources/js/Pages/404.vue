@@ -1,5 +1,5 @@
 <script setup>
-import Poptext from "@/Components/sections-new/Poptext.vue";
+import Poptext from "@/Components/Sections/Poptext.vue";
 import { ref } from "vue";
 import { Link } from "@inertiajs/vue3";
 const text = ref("404");

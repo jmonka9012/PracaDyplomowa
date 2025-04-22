@@ -1,7 +1,7 @@
 <script setup>
-import HeroSmall from "../Components/sections-new/Hero-small.vue";
-import LatestEvents from "../Components/sections-new/LatestEvents.vue";
-import TitleNSub from "../Components/sections-new/TitleNSub.vue";
+import HeroSmall from "../Components/Sections/Hero-small.vue";
+import LatestEvents from "../Components/Sections/LatestEvents.vue";
+import TitleNSub from "../Components/Sections/TitleNSub.vue";
 
 import bangpow from "~images/bangpow.jpg";
 import greatmilenko from "~images/greatmilenko.jpg";

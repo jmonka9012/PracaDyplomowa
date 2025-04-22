@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import { onMounted, onUnmounted } from "vue";
-import DropDown from "../partials/DropDown.vue";
-import DatePicker from "@/Components/sections-new/DatePicker.vue";
+import DropDown from "../Partials/DropDown.vue";
+import DatePicker from "@/Components/Sections/DatePicker.vue";
 
 const props = defineProps({
     events: {

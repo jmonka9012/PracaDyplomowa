@@ -1,14 +1,13 @@
 <script setup>
-import UpcomingEvents from "@/Components/sections/UpcomingEvents.vue";
-import Team from "@/Components/sections-new/Team.vue";
-import Services from "@/Components/sections-new/Services.vue";
-import CategoriesImg from "@/Components/sections-new/Categories-img.vue";
-import Events from "@/Components/sections-new/Events.vue";
-import LatestEvents from "@/Components/sections-new/LatestEvents.vue";
-import Cta from "@/Components/sections-new/Cta.vue";
-import TitleNSub from "@/Components/sections-new/TitleNSub.vue";
-import Hero from "@/Components/sections-new/Hero.vue";
-import Poptext from "@/Components/sections-new/Poptext.vue";
+import Team from "@/Components/Sections/Team.vue";
+import Services from "@/Components/Sections/Services.vue";
+import CategoriesImg from "@/Components/Sections/Categories-img.vue";
+import Events from "@/Components/Sections/Events.vue";
+import LatestEvents from "@/Components/Sections/LatestEvents.vue";
+import Cta from "@/Components/Sections/Cta.vue";
+import TitleNSub from "@/Components/Sections/TitleNSub.vue";
+import Hero from "@/Components/Sections/Hero.vue";
+import Poptext from "@/Components/Sections/Poptext.vue";
 import { Link } from "@inertiajs/vue3";
 
 
@@ -19,7 +18,7 @@ import jeckelBros from "~images/Jeckelbros.jpg";
 import teamOne from "~images/team-1.jpg";
 import eventsBg from "~images/events-bg-1.jpg";
 import { ref } from "vue";
-import SliderGallery from "../Components/sections-new/SliderGallery.vue";
+import SliderGallery from "../Components/Sections/SliderGallery.vue";
 import { SwiperSlide } from "swiper/vue";
 
 import pageInfo from "@/Utilities/pageInfo";

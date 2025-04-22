@@ -1,15 +1,15 @@
 <script setup>
-import Tab from "@/Components/sections-new/Tab.vue";
-import Tabs from "@/Components/sections-new/Tabs.vue";
-import HeroSmall from "@/Components/sections-new/Hero-small.vue";
+import Tab from "@/Components/Sections/Tab.vue";
+import Tabs from "@/Components/Sections/Tabs.vue";
+import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
 import hellsPit from "~images/hellspit.jpg";
 import bangPow from "~images/bangpow.jpg";
 import greatMilenko from "~images/greatmilenko.jpg";
 import jeckelbros from "~images/Jeckelbros.jpg";
-import Wysiwyg from "../Components/sections-new/Wysiwyg.vue";
-import LatestEvents from "../Components/sections-new/LatestEvents.vue";
-import DatePicker from "../Components/sections-new/DatePicker.vue";
+import Wysiwyg from "../Components/Sections/Wysiwyg.vue";
+import LatestEvents from "../Components/Sections/LatestEvents.vue";
+import DatePicker from "../Components/Sections/DatePicker.vue";
 const latest = [
     {
         id: 1,

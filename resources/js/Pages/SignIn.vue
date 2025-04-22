@@ -1,5 +1,5 @@
 <script setup>
-import HeroSmall from "@/Components/sections-new/Hero-small.vue";
+import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
 import { reactive } from "vue";
 import { router } from "@inertiajs/vue3";

@@ -4,8 +4,8 @@ import ResetObject from "@/Utilities/resetObject";
 import IsNotEmpty from "@/Utilities/isNotEmpty";
 import IsNotEmptyPrefix from "@/Utilities/isNotEmpty";
 
-import HeroSmall from "@/Components/sections-new/Hero-small.vue";
-import DropDown from "@/Components/partials/DropDown.vue";
+import HeroSmall from "@/Components/Sections/Hero-small.vue";
+import DropDown from "@/Components/Partials/DropDown.vue";
 import { Link } from "@inertiajs/vue3";
 import blogBg from "~images/blog-bg.jpg";
 import Editor from "@tinymce/tinymce-vue";

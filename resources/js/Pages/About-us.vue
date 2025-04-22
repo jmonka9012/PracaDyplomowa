@@ -1,7 +1,7 @@
 <script setup>
-import Tab from "@/Components/sections-new/Tab.vue";
-import Tabs from "@/Components/sections-new/Tabs.vue";
-import Hero from "@/Components/sections-new/AboutUsHero.vue";
+import Tab from "@/Components/Sections/Tab.vue";
+import Tabs from "@/Components/Sections/Tabs.vue";
+import Hero from "@/Components/Sections/AboutUsHero.vue";
 
 import useAuth from '@/Utilities/useAuth'
 

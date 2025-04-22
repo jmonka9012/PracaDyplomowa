@@ -1,5 +1,5 @@
 <script setup>
-import Events from "@/Components/sections-new/Events.vue";
+import Events from "@/Components/Sections/Events.vue";
 
 import eventsBg from "~images/events-bg-1.jpg";
 

@@ -4,7 +4,7 @@ import twWhite from "~icons/twitter-circle-white.svg";
 import insWhite from "~icons/instagram-circle-white.svg";
 import logoW from "~icons/logoipsum-364.svg";
 
-import Poptext from "@/Components/sections-new/Poptext.vue";
+import Poptext from "@/Components/Sections/Poptext.vue";
 import { Link } from "@inertiajs/vue3";
 
 import pageInfo from "@/Utilities/pageInfo";
@@ -19,10 +19,10 @@ const { siteData } = pageInfo();
                 class="col-12 col-lg-3 d-flex flex-column text-align-center text-align-lg-start align-items-center align-items-lg-start"
             >
                 <p class="footer__heading">London</p>
-                <a class="text-primary mb-15px" href="/">
+                <a class="text-primary mb-15px" href="/public">
                     london@loremipsum.com
                 </a>
-                <a class="text-primary mb-15px" href="/"> +48 123 456 789 </a>
+                <a class="text-primary mb-15px" href="/public"> +48 123 456 789 </a>
                 <p>3 Lorem Ipsum. <br />London a123 4BCD</p>
             </div>
             <div class="col-12 col-lg-6 d-flex flex-column align-items-center">
@@ -37,10 +37,10 @@ const { siteData } = pageInfo();
                     Accusantium, eveniet.
                 </p>
                 <div class="d-flex flex-row justify-content-center mb-35px">
-                    <a class="text-white hover-primary" href="/"
+                    <a class="text-white hover-primary" href="/public"
                         >Privacy Policy</a
                     ><span class="text-white divider"></span
-                    ><a class="text-white hover-primary" href="/"
+                    ><a class="text-white hover-primary" href="/public"
                         >Terms of use</a
                     >
                 </div>

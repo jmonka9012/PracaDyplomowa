@@ -1,5 +1,5 @@
 <script setup>
-import HeroSmall from "../Components/sections-new/Hero-small.vue";
+import HeroSmall from "../Components/Sections/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
 import contactsMap from "~images/contacts_map.jpg";
 import facebookIcon from "~icons/facebook-circle-black.svg";

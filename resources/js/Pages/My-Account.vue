@@ -1,7 +1,7 @@
 <script setup>
-import Popup from "@/Components/sections-new/Popup.vue";
-import Tab from "@/Components/sections-new/Tab.vue";
-import Tabs from "@/Components/sections-new/Tabs.vue";
+import Popup from "@/Components/Sections/Popup.vue";
+import Tab from "@/Components/Sections/Tab.vue";
+import Tabs from "@/Components/Sections/Tabs.vue";
 import useAuth from "@/Utilities/useAuth";
 import ResetObject from "@/Utilities/resetObject";
 import { router } from "@inertiajs/vue3";

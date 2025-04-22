@@ -1,6 +1,6 @@
 <script setup>
-import EventsAlt from "@/Components/sections-new/EventsAlt.vue";
-import HeroSmall from "@/Components/sections-new/Hero-small.vue";
+import EventsAlt from "@/Components/Sections/EventsAlt.vue";
+import HeroSmall from "@/Components/Sections/Hero-small.vue";
 
 import HellSpit from "~images/hellspit.jpg";
 import SinglePlch from "~images/single-placeholder.jpg";
