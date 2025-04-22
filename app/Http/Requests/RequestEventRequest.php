@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueEventLocationAndDate;
 
 class RequestEventRequest extends FormRequest
 {
@@ -21,6 +22,8 @@ class RequestEventRequest extends FormRequest
      */
     public function rules(): array
     {
+        $eventId = $this->event ? $this->event->id : null;
+
         return [
             'event_name' => 'required|string|max:255',
             'event_additional_url' => 'nullable|string|max:255',
@@ -31,7 +34,6 @@ class RequestEventRequest extends FormRequest
             'contact_email_additional' => 'nullable|email|max:255',
             'event_description' => 'required|max:65535',
             'event_description_additional' => 'max:65535',
-            'event_location' => 'required|string|max:255',
             'genre' => 'required|array',
             'genre.*' => 'exists:genres,id',
 
@@ -53,7 +55,14 @@ class RequestEventRequest extends FormRequest
                 'image',
                 'max:10240',
                 'dimensions:min_width=800, min_height=600'
-            ]
+            ],
+
+            'event_location' => [
+                'required',
+                'string',
+                'max:255',
+                new UniqueEventLocationAndDate($this->event_date, $eventId)
+            ],
         ];
     }
 
