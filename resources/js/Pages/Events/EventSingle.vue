@@ -7,6 +7,8 @@ import BangPow from "~images/bangpow.jpg";
 import SingleMap from "~images/single-map.jpg";
 import blogBg from "~images/single-map.jpg";
 
+const url = window.location.href;
+
 const props = defineProps({
     event: {
         type: Array,
@@ -96,21 +98,24 @@ const latest = [
                 <div
                     class="d-flex row-gap-10px column-gap-10px mt-30px mb-100px"
                 >
-                    <a class="social-link" href=""
+                    <a class="social-link"
+                       :href="`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`"
+                       target="_blank"
                     ><i class="fab fa-twitter"></i
                     ></a>
 
-                    <a class="social-link" href="">
+                    <a class="social-link"
+                       :href="`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`"
+                       target="_blank">
                         <i class="fab fa-facebook"></i
                         ></a>
 
-                    <a class="social-link" href="">
+                    <a class="social-link"
+                       :href="`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}`"
+                       target="_blank"
+                    >
                         <i class="fab fa-pinterest"></i
                         ></a>
-
-                    <a class="social-link" href=""
-                    ><i class="fab fa-instagram"></i
-                    ></a>
                 </div>
                 <h3 class="mb-30px">Related Events</h3>
                 <EventsAlt :latest="latest" />

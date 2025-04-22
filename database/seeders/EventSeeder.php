@@ -53,6 +53,7 @@ class EventSeeder extends Seeder
 
             foreach ($hall->sections as $section) {
                 if ($section->section_type === 'seat') {
+                    $price = $faker->randomFloat(2, 5, 200);
                     for ($row = 1; $row <= $section->row; $row++) {
                         for ($col = 1; $col <= $section->col; $col++) {
                             EventSeat::create([
@@ -60,7 +61,7 @@ class EventSeeder extends Seeder
                                 'event_id' => $event->id,
                                 'seat_row' => $row,
                                 'seat_number' => $col,
-                                'price' => $faker->randomFloat(2, 5, 200),
+                                'price' => $price,
                                 'status' => $faker->randomElement(['available', 'sold']),
                             ]);
                         }
