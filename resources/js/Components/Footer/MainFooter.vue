@@ -9,7 +9,6 @@ import { Link } from "@inertiajs/vue3";
 
 import pageInfo from "@/Utilities/pageInfo";
 const { siteData } = pageInfo();
-
 </script>
 
 <template>
@@ -18,17 +17,50 @@ const { siteData } = pageInfo();
             <div
                 class="col-12 col-lg-3 d-flex flex-column text-align-center text-align-lg-start align-items-center align-items-lg-start"
             >
-                <p class="footer__heading">London</p>
-                <a class="text-primary mb-15px" href="/public">
-                    london@loremipsum.com
-                </a>
-                <a class="text-primary mb-15px" href="/public"> +48 123 456 789 </a>
-                <p>3 Lorem Ipsum. <br />London a123 4BCD</p>
+                <p class="footer__heading">Event machen</p>
+                <ul>
+                    <li class="justify-content-center justify-content-lg-start">
+                        <Link class="text-primary mb-15px" :href="route('home')"
+                            ><span>Strona główna</span></Link
+                        >
+                    </li>
+                    <li class="justify-content-center justify-content-lg-start">
+                        <Link
+                            class="text-primary mb-15px"
+                            :href="route('event.browser')"
+                            ><span>Wydarzenia</span></Link
+                        >
+                    </li>
+                    <li class="justify-content-center justify-content-lg-start">
+                        <Link
+                            class="text-primary mb-15px"
+                            :href="route('about-us')"
+                            ><span>O nas</span></Link
+                        >
+                    </li>
+                    <li class="justify-content-center justify-content-lg-start">
+                        <Link class="text-primary mb-15px" :href="route('blog')"
+                            ><span>Blog</span></Link
+                        >
+                    </li>
+                    <li class="justify-content-center justify-content-lg-start">
+                        <Link
+                            class="text-primary mb-15px"
+                            :href="route('contact')"
+                            ><span>Kontakt</span></Link
+                        >
+                    </li>
+                    <li class="justify-content-center justify-content-lg-start">
+                        <Link class="text-primary mb-30px" :href="route('ce')"
+                            ><span>CE</span></Link
+                        >
+                    </li>
+                </ul>
             </div>
             <div class="col-12 col-lg-6 d-flex flex-column align-items-center">
                 <Link :href="route('home')">
                     <Poptext
-                        class="flex-column justify-content-center align-items-center poptext-white poptext-footer "
+                        class="flex-column justify-content-center align-items-center poptext-white poptext-footer"
                         :text="siteData.title"
                     />
                 </Link>
