@@ -37,9 +37,6 @@ Route::prefix('admin')->group(function() {
             ->name('admin.posts.data')
             ->middleware('blogAccess');
 
-      Route::get('/dodaj-post', [RequestBlogController::class, 'index'])
-            ->name('admin.add-post')
-            ->middleware('blogAccess');
 
       Route::get('/obsluga-klienta', [CustomerServiceController::class, 'index'])
             ->name('admin.customer-service')

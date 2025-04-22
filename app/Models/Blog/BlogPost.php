@@ -11,6 +11,7 @@ class BlogPost extends Model
     use HasFactory;
     use HasSlug;
     protected $fillable = [
+        'author_id',
         'blog_post_name',
         'blog_post_content',
         'thumbnail_path',

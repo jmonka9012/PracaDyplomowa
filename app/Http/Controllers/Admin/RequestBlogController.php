@@ -20,11 +20,11 @@ class RequestBlogController extends Controller
     {
         $validatedData = $request->validated();
 
-        if ($request->hasFile('blog_image')) {
-            $blogPostName = Str::slug($request->input('blog_post_name'));
+        if ($request->hasFile('post_image')) {
+            $blogPostName = Str::slug($request->input('post_name'));
             $folder = 'blog_images/' . now()->format('Y/m') . '/' . $blogPostName;
         
-            $imagePath = $request->file('blog_image')->store($folder, 'public');
+            $imagePath = $request->file('post_image')->store($folder, 'public');
         } else {
             $imagePath = null;
         }
@@ -33,18 +33,16 @@ class RequestBlogController extends Controller
 
         if ($author) {
             $authorID = $author->id;
-        }
+        } else {$authorID=1;}
 
         $request->merge(['thumbnail_path' => $imagePath]);
 
-        $blogPost = BlogPost::create([
+        BlogPost::create([
             'author_id'=>$authorID,
-            'blog_post_name'=> $validatedData['blog_post_name'],
-            'blog_post_content'=> $validatedData['blog_post_content'],    
+            'blog_post_name'=> $validatedData['post_name'],
+            'blog_post_content'=> $validatedData['post_content'],    
             'thumbnail_path'=> $imagePath,
         ]);
         return redirect()->route('home');
     }
-
-
 }

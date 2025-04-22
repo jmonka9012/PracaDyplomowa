@@ -11,7 +11,7 @@ class RequestBlogRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,21 @@ class RequestBlogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'post_name' => 'required|string|max:255|unique:blog_posts,blog_post_name',
+            'post_content' => 'required|max:65535',
+            'post_image' => [
+                'required',
+                'image',
+                'max:10240',
+                'dimensions:min_width=800, min_height=600'
+            ]
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'required'=> 'To pole jest wymagane',
         ];
     }
 }

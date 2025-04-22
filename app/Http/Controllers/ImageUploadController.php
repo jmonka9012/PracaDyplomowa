@@ -16,6 +16,8 @@ class ImageUploadController extends Controller
 
         if ($request->route()->named('event-create.image')){
             $wysywigPath = 'wysywig-events';
+        } else {
+            $wysywigPath = 'wysywig-blog';
         }
 
         $image = $request->file('image');
