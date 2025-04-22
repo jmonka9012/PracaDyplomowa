@@ -535,6 +535,7 @@ const { user, isLoggedIn } = useAuth();
                             images_upload_handler: HandleEditorImage(),
                             images_upload_credentials: true,
                             forced_root_block: false,
+                            relative_urls: false,
                             plugins: [
                                 // 'autolink',
                                 // 'emoticons',

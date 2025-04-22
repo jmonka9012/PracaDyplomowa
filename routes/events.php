@@ -33,14 +33,15 @@ Route::prefix('wydarzenia')->group(function() {
       Route::get('/', [EventController::class, 'eventBrowser'])
             ->name('event.browser');
             
-      // Strona event
-      Route::get('/{event:slug}', [EventController::class, 'show'])
-            ->name('event.show');
-
+ 
       // Dane eventu
       Route::get('/data/{event:slug}', [EventController::class, 'showData'])
             ->name('event.data')
             ->middleware('adminAccess');
 
 });
+
+Route::get('/{event}', [EventController::class, 'show'])
+      ->where('event', '.*')
+      ->name('event.show');
 

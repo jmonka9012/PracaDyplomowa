@@ -13,10 +13,10 @@ use App\Http\Resources\EventResource;
 
 class EventController extends Controller
 {
-    public function show(Event $event)
+    public function show($event)
     {
-        $event->load(['seats', 'standingTickets']);
-
+        $event = Event::where('event_url', $event)->with(['seats', 'standingTickets'])->firstOrFail();
+    
         return Inertia::render('Events/EventSingle', [
             'event' => new EventResource($event)
         ]);

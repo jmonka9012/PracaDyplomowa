@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 trait HasSlug
 {
     public static function bootHasSlug()
@@ -58,8 +59,17 @@ trait HasSlug
         if (get_class($this) === 'App\Models\Blog\BlogPost') {
             return;
         }
-        
-        $this->event_url = '/wydarzenia/' . $this->slug;
-    }
 
+        // Format date as YYYY-MM-DD
+        $datePart = Carbon::parse($this->event_date)->format('Y-m-d');
+        
+        // Slugify the location if needed
+        $locationPart = $this->event_location;
+        
+        $this->event_url = sprintf('wydarzenia/%s/%s/%s',
+            $datePart,
+            $locationPart,
+            $this->slug
+        );
+    }
 }

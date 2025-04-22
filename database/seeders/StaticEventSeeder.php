@@ -24,7 +24,7 @@ class StaticEventSeeder extends Seeder
         }
 
         $eventDescription =
-            '<p><img src="../storage/event_images/placeholder.jpg"></p>
+            '<p><img src="/storage/event_images/placeholder.jpg"></p>
             <hr>
             <div id="Content">
             <div id="bannerL">
