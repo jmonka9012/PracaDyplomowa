@@ -37,6 +37,11 @@ class RequestBlogRequest extends FormRequest
     {
         return [
             'required'=> 'To pole jest wymagane',
+            'post_name.max'=> 'Tytuł jest zbyt długi',
+            'post_name.unique'=> 'Istnieje już post z tą nazwą',
+            'post_content.max'=> 'Post jest zbyt długi',
+            'post.image.max'=> 'Plik jest zbyt duży, maksymalna wielkość to 10MB',
+            'post_image.dimensions'=> 'Zdjęcie jest zbyt małe, minimalna rozdzielczość to 800x600',
         ];
     }
 }
