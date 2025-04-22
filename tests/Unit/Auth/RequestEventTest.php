@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 
 class RequestEventTest extends TestCase
 {
@@ -14,6 +16,9 @@ class RequestEventTest extends TestCase
     #[Test]
     public function it_validates_and_creates_an_event_successfully()//sprawdza tworzenie eventu
     {   
+        Storage::fake('public');
+        $this->withoutExceptionHandling();
+
         $user = User::factory()->create([
             'role' => 'admin'
         ]);
@@ -29,7 +34,18 @@ class RequestEventTest extends TestCase
             'contact_email_additional'=>'Test456@test.com',
             'event_location'=>'1',
             'event_description'=>'Test456',
+            'event_image'=> UploadedFile::fake()->image('event.jpg', 800, 600),
             'event_description_additional'=> 'Test456',
+            'genre' =>[1],
+            'section_prices' => [
+                '1' => '1',
+                '2' => '2', 
+                '3' => '3',
+                '4' => '4',
+                '5' => '5',
+                '6' => '6',
+            ],
+
         ];
 
         $response = $this->post(route('event-create.post'), $data);
@@ -67,7 +83,7 @@ class RequestEventTest extends TestCase
             'contact_email_additional'=>'invalid',
             'event_location'=>str_repeat('a', 500),
             'event_description'=>'',
-            'event_description_additional'=>'',
+            'event_description_additional'=>str_repeat('a', 655356),
         ];
 
         $response = $this->post(route('event-create.post'), $data);

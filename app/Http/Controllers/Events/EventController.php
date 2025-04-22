@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Events;
 
 use App\Http\Resources\EventBrowserResource;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Inertia\Inertia;
-use Illuminate\Support\Str;
 use App\Models\Events\Event;
 use App\Models\Events\Genre;
 use App\Http\Resources\EventResource;
@@ -50,8 +48,8 @@ class EventController extends Controller
     public function eventBrowserData(Event $event)
     {
         $events = Event::where('pending', false)
-        ->orderBy('event_date', 'asc')
-        ->paginate(10);
+            ->orderBy('event_date', 'asc')
+            ->paginate(10);
         $genres = Genre::orderBy('id', 'asc')->get();
 
         return response()->json([
