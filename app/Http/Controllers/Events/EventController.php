@@ -34,21 +34,29 @@ class EventController extends Controller
 
     public function eventBrowser(Event $event)
     {
-        $events = Event::where('pending', false)->get();
+        $events = Event::where('pending', false)
+        ->orderBy('event_date', 'asc')
+        ->paginate(10);
+
         $genres = Genre::orderBy('id', 'asc')->get();
 
         return Inertia::render('Events/EventBrowser', [
-            'events' => EventBrowserResource::collection($events)->resolve(),
+            //'events' => EventBrowserResource::collection($events)->resolve(), stara werjsa, można potem usunąć  
+            'events' => EventBrowserResource::collection($events)->response()->getData(true),
             'genres' => $genres,
         ]);
     }
 
     public function eventBrowserData(Event $event)
     {
-        $events = Event::where('pending', false)->get();
+        $events = Event::where('pending', false)
+        ->orderBy('event_date', 'asc')
+        ->paginate(10);
+        $genres = Genre::orderBy('id', 'asc')->get();
 
         return response()->json([
-            'events' => EventBrowserResource::collection($events)
+            'events' => EventBrowserResource::collection($events)->response()->getData(true),
+            'genres' => $genres
         ]);
     }
 }
