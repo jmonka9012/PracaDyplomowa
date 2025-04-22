@@ -67,55 +67,76 @@ const latest = [
                     <img :src="'/storage/' + event.data.image_path" alt="" />
                 </div>
                 <h1 class="single__title">
-                    {{event.data.event_name}}
+                    {{ event.data.event_name }}
                 </h1>
                 <div class="single__details">
                     <div>
                         <h6 class="mb-13px">Event date:</h6>
                         <p>
-                            {{event.data.event_start}} - {{event.data.event_end}} <br />
-                            {{event.data.event_date}}
+                            {{ event.data.event_start }} -
+                            {{ event.data.event_end }} <br />
+                            {{ event.data.event_date }}
                         </p>
                     </div>
-<!--                    <div>
+                    <!--                    <div>
                         <h6 class="mb-13px">Location:</h6>
                         <a class="text-secondary" href="/">GERMANY</a>
                     </div>-->
                     <div>
                         <h6 class="mb-13px">E-mail:</h6>
-                        <a class="hover-none" :href="'mailto:' + event.data.contact_email">{{event.data.contact_email}}</a>
-                        <a class="hover-none" :href="'mailto:' + event.data.contact_email_additional">{{event.data.contact_email_additional}}</a>
+                        <a
+                            class="hover-primary text-underline"
+                            :href="'mailto:' + event.data.contact_email"
+                            >{{ event.data.contact_email }}</a
+                        >
+                        <a
+                            class="hover-primary text-underline"
+                            :href="
+                                'mailto:' + event.data.contact_email_additional
+                            "
+                            >{{ event.data.contact_email_additional }}</a
+                        >
                     </div>
                 </div>
                 <h4 class="mb-18px">O wydarzeniu</h4>
                 <p v-html="event.data.event_description" class="mb-65px"></p>
                 <h4 class="mb-18px">Więcej informacji</h4>
                 <div class="mb-65px">
-                    {{event.data.event_description_additional}}
+                    {{ event.data.event_description_additional }}
                 </div>
                 <img class="single__map" :src="SingleMap" alt="" />
                 <div class="bb-1 b-secondary"></div>
                 <div
                     class="d-flex row-gap-10px column-gap-10px mt-30px mb-100px"
                 >
-                    <a class="social-link"
-                       :href="`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`"
-                       target="_blank"
-                    ><i class="fab fa-twitter"></i
+                    <a
+                        class="social-link"
+                        :href="`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                            url
+                        )}`"
+                        target="_blank"
+                        ><i class="fab fa-twitter"></i
                     ></a>
 
-                    <a class="social-link"
-                       :href="`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`"
-                       target="_blank">
+                    <a
+                        class="social-link"
+                        :href="`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                            url
+                        )}`"
+                        target="_blank"
+                    >
                         <i class="fab fa-facebook"></i
-                        ></a>
+                    ></a>
 
-                    <a class="social-link"
-                       :href="`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}`"
-                       target="_blank"
+                    <a
+                        class="social-link"
+                        :href="`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(
+                            url
+                        )}`"
+                        target="_blank"
                     >
                         <i class="fab fa-pinterest"></i
-                        ></a>
+                    ></a>
                 </div>
                 <h3 class="mb-30px">Related Events</h3>
                 <EventsAlt :latest="latest" />

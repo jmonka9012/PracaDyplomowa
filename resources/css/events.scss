@@ -75,6 +75,11 @@
         border: 1px solid var(--text);
         border-radius: 50%;
         position: relative;
+        &:first-of-type,
+        &:last-of-type {
+            border-width: 0px;
+            font-weight: 500;
+        }
         a {
             min-width: 32px;
             min-height: 32px;

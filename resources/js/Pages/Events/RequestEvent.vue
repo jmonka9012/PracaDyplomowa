@@ -9,6 +9,7 @@ import DropDown from "@/Components/Partials/DropDown.vue";
 import { Link } from "@inertiajs/vue3";
 import blogBg from "~images/blog-bg.jpg";
 import Editor from "@tinymce/tinymce-vue";
+import MultiSelect from "@/Components/Partials/MultiSelect.vue";
 
 import { router } from "@inertiajs/vue3";
 import { reactive, watch, computed, ref } from "vue";
@@ -135,7 +136,9 @@ const HandleEditorImage = () => (blobInfo, progress) => {
         })
         .then((response) => response.data.location)
         .catch((error) => {
-            throw new Error(`Wysyłanie zakończone niepowodzeniem: ${error.message}`);
+            throw new Error(
+                `Wysyłanie zakończone niepowodzeniem: ${error.message}`
+            );
         });
 };
 
@@ -483,6 +486,7 @@ const { user, isLoggedIn } = useAuth();
                             </option>
                         </select>
                     </DropDown>
+                    <MultiSelect />
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-email">Email kontaktowy*</label>

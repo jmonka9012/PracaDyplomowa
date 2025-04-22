@@ -10,6 +10,7 @@ import jeckelbros from "~images/Jeckelbros.jpg";
 import Wysiwyg from "../Components/Sections/Wysiwyg.vue";
 import LatestEvents from "../Components/Sections/LatestEvents.vue";
 import DatePicker from "../Components/Sections/DatePicker.vue";
+import MultiSelect from "@/Components/Partials/MultiSelect.vue";
 const latest = [
     {
         id: 1,
@@ -733,6 +734,12 @@ const latest = [
     </section>
     <section>
         <div class="container"><DatePicker></DatePicker></div>
+    </section>
+
+    <section>
+        <div class="container">
+            <MultiSelect />
+        </div>
     </section>
 </template>
 
