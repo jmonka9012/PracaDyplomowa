@@ -25,7 +25,7 @@ const Logout = () => {
     router.post(route("logout"), {});
 };
 
-const toggleDropdown = (id) => {
+const toggleDropdown = (id) => {z
     const newStates = {...dropdownStates.value};
 
     Object.keys(newStates).forEach((key) => {
