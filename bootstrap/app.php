@@ -23,32 +23,32 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->group('employeesAccess', [
             'auth',
-            'role:admin, moderator, redactor, blog_author'
+            'role:admin,moderator,redactor,blog_author'
         ]);
 
         $middleware->group('adminAccess', [
             'auth',
-            'role:admin, moderator'
+            'role:admin,moderator'
         ]);
 
         $middleware->group('redactorAccess', [
             'auth',
-            'role:admin, moderator, redactor'
+            'role:admin,moderator,redactor'
         ]);
 
         $middleware->group('blogAccess', [
             'auth',
-            'role:admin, moderator, redactor, blog_authors'
+            'role:admin,moderator,redactor,blog_author'
         ]);
 
         $middleware->group('organizerAccess', [
             'auth',
-            'role:admin, moderator, redactor, blog_authors, organizer'
+            'role:admin,moderator,redactor,blog_author,organizer'
         ]);
 
         $middleware->group('loggedInAccess', [
             'auth',
-            'role:admin,moderator,redactor, blog_author, organizer, verified_user, unverified_user'
+            'role:admin,moderator,redactor,blog_author,organizer,verified_user,unverified_user'
         ]);
 
     })
