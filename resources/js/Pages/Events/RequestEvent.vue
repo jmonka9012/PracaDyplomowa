@@ -420,7 +420,7 @@ const { user, isLoggedIn } = useAuth();
                         </div>
                         <div
                             class="error-msg mb-20px"
-                            v-if="IsNotEmptyPrefix(errors, 'section_prices')"
+                            v-if="IsNotEmpty(errors.section_prices)"
                         >
                             Proszę uzupełnić ceny sekcji
                         </div>
