@@ -153,6 +153,15 @@ function debugLogForm() {
 }
 
 const { user, isLoggedIn } = useAuth();
+
+const options = ref([
+    { name: "Vue.js", language: "JavaScript" },
+    { name: "Adonis", language: "JavaScript" },
+    { name: "Rails", language: "Ruby" },
+    { name: "Sinatra", language: "Ruby" },
+    { name: "Laravel", language: "PHP" },
+    { name: "Phoenix", language: "Elixir" },
+]);
 </script>
 
 <template>
@@ -464,29 +473,10 @@ const { user, isLoggedIn } = useAuth();
                             {{ errors.genre }}
                         </div>
                     </div> -->
-                    <DropDown
-                        class="dropdown-form"
-                        title="Wybierz kategorie"
-                        subtitle=""
-                    >
-                        <select
-                            multiple
-                            id="event-location"
-                            class="col-12"
-                            required
-                            v-model="requestEventForm.genre"
-                            @change="console.log(requestEventForm)"
-                        >
-                            <option
-                                :key="genre.id"
-                                :value="genre.id"
-                                v-for="genre in genres"
-                            >
-                                {{ genre.genre_name }}
-                            </option>
-                        </select>
-                    </DropDown>
-                    <MultiSelect />
+                    <MultiSelect
+                        placeholder="Wybierz kategorie"
+                        :options="options"
+                    />
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-email">Email kontaktowy*</label>

@@ -735,12 +735,6 @@ const latest = [
     <section>
         <div class="container"><DatePicker></DatePicker></div>
     </section>
-
-    <section>
-        <div class="container">
-            <MultiSelect />
-        </div>
-    </section>
 </template>
 
 <style lang="scss">
