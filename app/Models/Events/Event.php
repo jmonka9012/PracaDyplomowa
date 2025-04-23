@@ -34,4 +34,22 @@ class Event extends EventBase
     {
         return $this->belongsTo(Hall::class, 'event_location', 'id');
     }
+
+    public function getRelatedEvents()
+    {
+        $genreIds = $this->genres()->pluck('genres.id');
+
+        if ($genreIds->isEmpty()){
+            return collect();
+        }
+
+        return Event::whereHas('genres', function ($query) use ($genreIds) {
+            $query->whereIn('genre_id', $genreIds);
+        })
+            ->where('id', '!=', $this->id)
+            ->where('event_date', '>',$this->event_date)
+            ->orderByRaw('ABS(DATEDIFF(event_date, ?))', [$this->event_date])
+            ->take(3)
+            ->get();
+    }
 }

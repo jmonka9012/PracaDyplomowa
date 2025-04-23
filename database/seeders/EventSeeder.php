@@ -31,7 +31,7 @@ class EventSeeder extends Seeder
             $eventDescription = "<p><img src='/storage/event_images/placeholder.jpg'></p><hr><div><p>{$faker->paragraphs(3, true)}</p></div>";
 
             $eventData = [
-                'event_name' => $faker->catchPhrase . ' Tour',
+                'event_name' => $faker->catchPhrase,
                 'event_additional_url' => $faker->url,
                 'event_date' => $faker->dateTimeBetween('+1 week', '+2 years'),
                 'event_start' => $faker->time('H:i:s'),
@@ -47,7 +47,7 @@ class EventSeeder extends Seeder
 
             $event = Event::create($eventData);
 
-            $randomGenres = $faker->randomElements($genreNames, rand(1, 50));
+            $randomGenres = $faker->randomElements($genreNames, rand(1, 5));
             $genreIds = Genre::whereIn('genre_name', $randomGenres)->pluck('id')->all();
             $event->genres()->attach($genreIds);
 

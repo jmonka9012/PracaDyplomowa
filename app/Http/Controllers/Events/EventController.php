@@ -14,10 +14,15 @@ class EventController extends Controller
 {
     public function show($event)
     {
-        $event = Event::where('event_url', $event)->with(['seats', 'standingTickets'])->firstOrFail();
-    
+        $event = Event::where('event_url', $event)
+            ->with(['seats', 'standingTickets'])
+            ->firstOrFail();
+        
+        $closestEvents = $event->getRelatedEvents();
+
         return Inertia::render('Events/EventSingle', [
-            'event' => new EventResource($event)
+            'event' => new EventResource($event),
+            'related_events' => EventBrowserResource::collection($closestEvents)
         ]);
     }
 
@@ -25,16 +30,19 @@ class EventController extends Controller
     {
         $event->load(['hall.sections', 'seats', 'standingTickets']);
 
+        $closestEvents = $event->getRelatedEvents();
+
         return response()->json([
-            'event' => $event->load(['seats', 'standingTickets'])->toArray()
+            'event' => $event->load(['seats', 'standingTickets'])->toArray(),
+            'related_events' => EventBrowserResource::collection($closestEvents)
         ]);
     }
 
     public function eventBrowser(Event $event)
     {
         $events = Event::where('pending', false)
-        ->orderBy('event_date', 'asc')
-        ->paginate(10);
+            ->orderBy('event_date', 'asc')
+            ->paginate(10);
 
         $genres = Genre::orderBy('id', 'asc')->get();
 
