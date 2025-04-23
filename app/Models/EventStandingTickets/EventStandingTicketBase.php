@@ -12,6 +12,7 @@ abstract class EventStandingTicketBase extends Model
         'price',
         'capacity',
         'sold',
+        'reserved',
     ];
 
 

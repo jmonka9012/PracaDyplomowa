@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('price', 5,2)->comment('PLN');
             $table->integer('capacity');
             $table->integer('sold')->default(0);
+            $table->integer('reserved')->default(0);
             $table->timestamps();
 
             $table->foreign('event_id')
