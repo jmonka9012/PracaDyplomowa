@@ -130,7 +130,9 @@ class StaticEventSeeder extends Seeder
                 'event_location' =>2,
                 'genres' =>['Metal', 'Rock', 'Nu Metal'],
                 'image_path' => 'event_images/placeholder.jpg',
+                'pending' => 0
             ],
+            
             [
                 'event_name' => 'Archive Test Event',
                 'event_additional_url' => 'https://open.spotify.com/artist/5eAWCfyUhZtHHtBdNk56l1',

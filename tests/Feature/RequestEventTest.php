@@ -14,7 +14,7 @@ class RequestEventTest extends TestCase
     use DatabaseTransactions;
 
     #[Test]
-    public function it_validates_and_creates_an_event_successfully()//sprawdza tworzenie eventu
+    public function it_validates_and_creates_an_event_successfully()
     {   
         Storage::fake('public');
         $this->withoutExceptionHandling();
