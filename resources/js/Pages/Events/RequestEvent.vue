@@ -27,6 +27,18 @@ const props = defineProps({
 });
 console.log(props);
 
+let genres = [];
+
+props.genres.forEach((genre, index) => {
+    genres[index] = {
+        name:  genre.genre_name,
+        value: genre.id,
+    };
+});
+
+console.log(genres);
+
+
 const sectionPrices = reactive({});
 
 const initSectionPrices = () => {
@@ -448,34 +460,10 @@ const options = ref([
                 </div>
                 <div class="input-wrap col-12">
                     <label for="event-location">Kategoria*</label>
-                    <!-- <div class="select-wrap">
-                        <i class="fa fa-chevron-down"></i>
-                        <select
-                            multiple
-                            id="event-location"
-                            class="col-12"
-                            required
-                            v-model="requestEventForm.genre"
-                            @change="console.log(requestEventForm)"
-                        >
-                            <option disabled :value="null">
-                                Wybierz kategorię
-                            </option>
-                            <option
-                                :key="genre.id"
-                                :value="genre.id"
-                                v-for="genre in genres"
-                            >
-                                {{ genre.genre_name }}
-                            </option>
-                        </select>
-                        <div class="error-msg" v-if="errors.genre">
-                            {{ errors.genre }}
-                        </div>
-                    </div> -->
                     <MultiSelect
                         placeholder="Wybierz kategorie"
-                        :options="options"
+                        :options="genres"
+                        v-model="requestEventForm.genre"
                     />
                 </div>
                 <div class="input-wrap col-12">
