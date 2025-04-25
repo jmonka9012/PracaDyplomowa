@@ -95,7 +95,7 @@ onBeforeUnmount(() => {
                             <Link :href="route('admin')"><span>Strona główna</span></Link>
                         </li>
                         <li>
-                            <Link :href="route('admin.events')"><span>Zarządzaj wydarzeniami</span></Link>
+                            <Link :href="route('admin.events')"><span>Wydarzenia</span></Link>
                         </li>
                         <li>
                             <Link :href="route('blog-create')"><span>Dodaj Post</span></Link>
@@ -131,12 +131,6 @@ onBeforeUnmount(() => {
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
                         Powrót
                     </Link>
-                    <Link
-                        :href="route('event-create')"
-                        class="ml-30px btn btn-header btn-hovprim"
-                    >+ Zorganizuj wydarzenie
-                    </Link
-                    >
                 </div>
                 <!--
                                 MOBILE NAV
@@ -164,7 +158,7 @@ onBeforeUnmount(() => {
                                         <Link :href="route('admin')"><span>Strona główna</span></Link>
                                     </li>
                                     <li>
-                                        <Link v-if="user.permission_level <=2" :href="route('admin.events')"><span>Zarządzaj wydarzeniami</span></Link>
+                                        <Link v-if="user.permission_level <=2" :href="route('admin.events')"><span>Wydarzenia</span></Link>
                                     </li>
                                     <li>
                                         <Link :href="route('blog-create')"><span>Dodaj Post</span></Link>
@@ -213,16 +207,8 @@ onBeforeUnmount(() => {
                                             Powrót
                                         </Link>
                                     </li>
-                                    <li>
-                                        <Link
-                                            :href="
-                                                        route('event-create')
-                                                    "
-                                            class="btn btn-header btn-hovprim"
-                                        >+ Zorganizuj wydarzenie
-                                        </Link
-                                        >
-                                    </li>
+<!--                                    <li>
+                                    </li>-->
                                 </ul>
                             </nav>
                         </div>

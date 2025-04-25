@@ -21,7 +21,7 @@ const { siteData } = pageInfo();
                 <ul>
                     <li class="justify-content-center justify-content-lg-start">
                         <Link class="text-primary mb-15px" :href="route('home')"
-                            ><span>Strona główna ziggy</span></Link
+                            ><span>Strona główna</span></Link
                         >
                     </li>
                     <li class="justify-content-center justify-content-lg-start">
