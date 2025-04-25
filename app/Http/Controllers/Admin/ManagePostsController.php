@@ -15,7 +15,7 @@ class ManagePostsController extends Controller
         $blogPosts = BlogPost::all();
 
         return Inertia::render('Admin/ManagePosts', [
-            'events' => BlogPost::collection($blogPosts)
+            'blog_posts' => BlogPostBrowserResource::collection($blogPosts)
         ]);
     }
 
@@ -24,7 +24,7 @@ class ManagePostsController extends Controller
         $blogPosts = BlogPost::all();
 
         return response()->json([
-            'events' => BlogPostBrowserResource::collection($blogPosts)
+            'blog_posts' => BlogPostBrowserResource::collection($blogPosts)
         ]);
     }
 }
