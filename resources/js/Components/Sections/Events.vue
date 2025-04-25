@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import {Link} from "@inertiajs/vue3";
 import { onMounted, onUnmounted } from "vue";
 import DropDown from "../Partials/DropDown.vue";
 import DatePicker from "@/Components/Sections/DatePicker.vue";
@@ -102,9 +103,9 @@ const scrollRight = () => {
                 class="d-flex flex-lg-row justify-content-between align-items-center mt-lg-8px mb-16px"
             >
                 <h6 class="event-title">
-                    <a :href="event.event_url">{{
+                    <Link :href="event.event_url">{{
                         event.event_name
-                    }}</a>
+                    }}</Link>
                 </h6>
                 <a
                     class="event-link d-none d-lg-flex"

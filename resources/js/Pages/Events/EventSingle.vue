@@ -14,48 +14,13 @@ const props = defineProps({
         type: Array,
         required: true,
     },
+    related_events: {
+        type: Array,
+        required: true,
+    }
 });
 
 console.log(props);
-
-const latest = [
-    {
-        id: 1,
-        src: BangPow,
-        title: "Lorem ipsum dolor",
-        link: {
-            href: "/icp",
-            title: "Bang Pow Boom at Jugaloo Island",
-        },
-
-        location: "Bangpowboom",
-        date: "January 22, 2025",
-    },
-    {
-        id: 2,
-        src: HellSpit,
-        title: "Lorem ipsum dolor sit amet lorem ipsum",
-        link: {
-            href: "/icp",
-            title: "Bang Pow Boom at Jugaloo Island",
-        },
-
-        location: "Bangpowboom",
-        date: "January 22, 2025",
-    },
-    {
-        id: 3,
-        src: HellSpit,
-        title: "Lorem ipsum dolor sit amet lorem ipsum",
-        link: {
-            href: "/icp",
-            title: "Riddle box",
-        },
-
-        location: "Riddle box",
-        date: "January 22, 2025",
-    },
-];
 </script>
 
 <template>
@@ -139,13 +104,13 @@ const latest = [
                     ></a>
                 </div>
                 <h3 class="mb-30px">Related Events</h3>
-                <EventsAlt :latest="latest" />
-                <!-- <h3 class="mb-40px">Leave a Reply</h3>
+                <EventsAlt :events="props.related_events" />
+<!--                 <h3 class="mb-40px">Leave a Reply</h3>
                 <p class="fs-14 mb-20px">
                     Your email address will not be published. Required fields
                     are marked *
-                </p> -->
-                <!-- <form action="" class="form">
+                </p>
+                 <form action="" class="form">
                     <div class="input-wrap col-12 col-lg-6">
                         <input type="text" placeholder="Your Name*" required />
                     </div>
@@ -173,7 +138,7 @@ const latest = [
                     <div class="input-wrap col-12">
                         <input type="submit" value="post comment" />
                     </div>
-                </form> -->
+                </form>-->
             </div>
         </div>
     </section>

@@ -1,31 +1,37 @@
 <script setup>
-defineProps({
-    latest: Array,
+import {Link} from "@inertiajs/vue3";
+
+
+const props = defineProps({
+    events: Array,
 });
+
+console.log(props.events);
+
 </script>
 
 <template>
-    <div :class="['ev-cont ev-cont-lg-three', evContClass]">
+    <div :class="['ev-cont ev-cont-lg-three']">
         <div
-            v-for="event in latest"
+            v-for="event in props.events.data"
             :key="event.id"
             class="event-item event-item-blog bt-1 b-secondary pt-25px"
         >
             <h6>
-                <a class="hover-underline-thick" :href="event.link.href">
-                    {{ event.title }}
+                <a class="hover-underline-thick" :href="event.event_url">
+                    {{ event.event_name }}
                 </a>
             </h6>
             <div class="d-flex flex-row h-fit">
                 <p class="event-date">
-                    {{ event.date }}
+                    {{ event.event_date }}
                 </p>
                 <span class="divider divider-dark"></span>
-                <p class="event-location ff-krona">{{ event.location }}</p>
+                <p class="event-location ff-krona">{{ event.event_location }}</p>
             </div>
             <div class="relative mt-auto">
-                <img :src="event.src" alt="" class="event-img event-img-blog" />
-                <a :href="event.link.href" class="link-stretched"></a>
+                <img :src="event.image_path" alt="" class="event-img event-img-blog" />
+                <Link :href="event.event_url" class="link-stretched"></Link>
             </div>
         </div>
     </div>
