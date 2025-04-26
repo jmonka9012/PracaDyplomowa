@@ -351,13 +351,14 @@ const { user, isLoggedIn } = useAuth();
                             <div class="d-flex flex-column">
                                 <div class="d-flex align-items-center">
                                     <div class="legend legend-stand"></div>
-                                    <p>Hale z miejscami stojącymi</p>
+                                    <p>Sekcje z miejscami stojącymi</p>
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <div class="legend legend-seat"></div>
-                                    <p>Hale z miejscami siedzącymi</p>
+                                    <p>Sekcje z miejscami siedzącymi</p>
                                 </div>
                             </div>
+                            <div class="scene">scena</div>
                             <div
                                 class="hall__row"
                                 v-for="(row, hrowIndex) in hall.hall_height"

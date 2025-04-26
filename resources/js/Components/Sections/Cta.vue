@@ -19,7 +19,7 @@ import { Link } from "@inertiajs/vue3";
                     eventami. Na pewno znajdziesz coś dla siebie!
                 </p>
                 <Link
-                    :href="route('blog')"
+                    :href="route('event.browser')"
                     class="btn btn-md morph-outline"
                     href=""
                 >
