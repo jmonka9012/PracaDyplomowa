@@ -2,7 +2,6 @@
 import useAuth from "@/Utilities/useAuth";
 import ResetObject from "@/Utilities/resetObject";
 import IsNotEmpty from "@/Utilities/isNotEmpty";
-import IsNotEmptyPrefix from "@/Utilities/isNotEmpty";
 
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import DropDown from "@/Components/Partials/DropDown.vue";

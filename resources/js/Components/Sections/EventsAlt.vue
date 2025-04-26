@@ -18,20 +18,20 @@ console.log(props.events);
             class="event-item event-item-blog bt-1 b-secondary pt-25px"
         >
             <h6>
-                <Link class="hover-underline-thick" :href="event.event_url">
+                <a class="hover-underline-thick" :href="event.event_url">
                     {{ event.event_name }}
-                </Link>
+                </a>
             </h6>
             <div class="d-flex flex-row h-fit">
                 <p class="event-date">
                     {{ event.event_date }}
                 </p>
                 <span class="divider divider-dark"></span>
-                <p class="event-location ff-krona">placeholder, sala?</p>
+                <p class="event-location ff-krona">{{ event.event_location }}</p>
             </div>
             <div class="relative mt-auto">
-                <img :src="event.image_path" alt="" class="event-img event-img-blog" />
-                <Link :href="event.event_url" class="link-stretched"></Link>
+                <img :src="`/storage/${event.image_path}`" alt="" class="event-img event-img-blog" />
+                <Link :href="`/${event.event_url}`" class="link-stretched"></Link>
             </div>
         </div>
     </div>

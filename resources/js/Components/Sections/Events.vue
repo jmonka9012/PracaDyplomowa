@@ -1,15 +1,35 @@
 <script setup>
-import { ref } from "vue";
+import {reactive, ref} from "vue";
 import {Link} from "@inertiajs/vue3";
 import { onMounted, onUnmounted } from "vue";
 import DropDown from "../Partials/DropDown.vue";
 import DatePicker from "@/Components/Sections/DatePicker.vue";
+import MultiSelect from "@/Components/Partials/MultiSelect.vue";
 
 const props = defineProps({
     events: {
         type: Array,
         required: true,
     },
+    genres: {
+        type: Array,
+        required: true,
+    }
+});
+
+let genres = [];
+
+props.genres.forEach((genre, index) => {
+    genres[index] = {
+        name:  genre.genre_name,
+        value: genre.id,
+    };
+});
+
+const filterRequest = reactive({
+    genres: null,
+    date: null,
+    phrase: null,
 });
 
 const scrollContainer = ref(null);
@@ -29,73 +49,13 @@ const scrollRight = () => {
 </script>
 <template>
     <div class="select-filters">
-        <DropDown title="Lokalizacja" subtitle="Wyszukaj lub wybierz miasto">
-            <div class="dropdown-inner">
-                <li class="dropdown-item dropdown-item-toggle">
-                    <a href="">Drilldown<i class="fa fa-chevron-right"></i></a>
-                    <ul class="dropdown-ndlevel">
-                        <li class="ndlevel-back dropdown-item">
-                            <a href=""
-                                ><i class="fa fa-chevron-left"></i>Drilldown</a
-                            >
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="#">item1</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="#">item2</a>
-                        </li>
-                        <div class="divider"></div>
-                        <li class="dropdown-item">
-                            <a href="#">item1</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="#">item2</a>
-                        </li>
-                        <div class="divider"></div>
-                        <li class="dropdown-item">
-                            <a href="#">item1</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="#">item2</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown-item dropdown-item-toggle">
-                    <a href="">Drilldown<i class="fa fa-chevron-right"></i></a>
-                    <ul class="dropdown-ndlevel">
-                        <li class="ndlevel-back dropdown-item">
-                            <a href=""
-                                ><i class="fa fa-chevron-left"></i>Drilldown</a
-                            >
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="#">item4</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="#">item3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown-item">
-                    <a href="#">Item 1 <i class="fa fa-chevron-right"></i></a>
-                </li>
-                <li class="dropdown-item">
-                    <a href="#">Item 2 <i class="fa fa-chevron-right"></i></a>
-                </li>
-                <li class="dropdown-item">
-                    <a href="#">Item 3 <i class="fa fa-chevron-right"></i></a>
-                </li>
-                <li class="dropdown-item">
-                    <a href="#">Item 4 <i class="fa fa-chevron-right"></i></a>
-                </li></div
-        ></DropDown>
+        <MultiSelect :options="genres" ></MultiSelect>
         <DatePicker></DatePicker>
     </div>
 
     <div v-for="event in props.events" :key="event.id" class="event">
         <div class="event-img">
-            <a class="link-stretched" :href="event.event_url"> </a>
+            <Link class="link-stretched" :href="event.event_url"> </Link>
             <img :src="`/storage/${event.image_path}`" alt="" />
         </div>
         <div class="d-flex flex-column col-12">
@@ -107,12 +67,12 @@ const scrollRight = () => {
                         event.event_name
                     }}</Link>
                 </h6>
-                <a
+                <Link
                     class="event-link d-none d-lg-flex"
                     :href="event.event_url"
                     ><i class="fa fa-ticket"></i>
                     Zobacz więcej
-                </a>
+                </Link>
             </div>
             <p class="event-date ff-prompt">
                 <i class="fa fa-calendar mr-5px"></i>{{ event.event_date }}
@@ -121,10 +81,10 @@ const scrollRight = () => {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed,
                 eum?
             </p>
-            <a class="event-link d-lg-none" :href="event.event_url"
+            <Link class="event-link d-lg-none" :href="event.event_url"
                 ><i class="fa fa-ticket"></i>
                 Zobacz więcej
-            </a>
+            </Link>
         </div>
     </div>
 </template>
