@@ -19,6 +19,7 @@ class BlogPostBrowserResource extends JsonResource
             'author_id' => $this->author_id,
             'blog_post_name' => $this->blog_post_name,
             'blog_post_url' => $this->blog_post_url,
+            'blog_post_type' => $this->blog_post_type,
             'thumbnail_path' => $this->thumbnail_path,
             'blog_date' => $this->created_at->format('d-M-Y'),
         ];
