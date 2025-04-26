@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('blog_post_name');
             $table->string('slug')
                 ->nullable();
+            $table->string('blog_post_url')
+                ->nullable();
             $table->text('blog_post_content');
             $table->string('thumbnail_path')
                 ->nullable();

@@ -57,19 +57,23 @@ trait HasSlug
     protected function generateUrl()
     {
         if (get_class($this) === 'App\Models\Blog\BlogPost') {
-            return;
+            $datePart = Carbon::parse($this->created_at)->format('Y-m-d');
+        
+            
+            $this->blog_post_url = sprintf('blog/%s/%s',
+                $datePart,
+                $this->slug
+            );
+        } else {
+            $datePart = Carbon::parse($this->event_date)->format('Y-m-d');
+        
+            $locationPart = $this->event_location;
+            
+            $this->event_url = sprintf('wydarzenia/%s/%s/%s',
+                $datePart,
+                $locationPart,
+                $this->slug
+            );
         }
-
-        // Format date as YYYY-MM-DD
-        $datePart = Carbon::parse($this->event_date)->format('Y-m-d');
-        
-        // Slugify the location if needed
-        $locationPart = $this->event_location;
-        
-        $this->event_url = sprintf('wydarzenia/%s/%s/%s',
-            $datePart,
-            $locationPart,
-            $this->slug
-        );
     }
 }

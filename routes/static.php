@@ -6,10 +6,16 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 // Strona domowa
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])
+      ->name('home');
+
+Route::get('/data', [HomeController::class, 'showData'])
+      ->name('home');
 
 // Strona kontaktu
-Route::get('/kontakt', [ContactController::class, 'index'])->name('contact');
+Route::get('/kontakt', [ContactController::class, 'index'])
+      ->name('contact');
 
 // Strona hal
-Route::get('/o-nas', [AboutUsController::class, 'index'])->name('about-us');
+Route::get('/o-nas', [AboutUsController::class, 'index'])
+      ->name('about-us');

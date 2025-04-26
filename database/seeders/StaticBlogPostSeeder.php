@@ -44,18 +44,42 @@ class StaticBlogPostSeeder extends Seeder
                 'blog_post_name' => 'About Lore Ipsums',
                 'blog_post_content' => $blogContent,
                 'thumbnail_path' => $imagePath,
+                'created_at' =>  now()->addDays(1),
             ],
             [
                 'author_id' => $authorId,
                 'blog_post_name' => 'About Lore Ipsums 2 : electric boogalo',
                 'blog_post_content' => $blogContent,
                 'thumbnail_path' => $imagePath,
+                'created_at' =>  now()->addDays(2),
             ],
             [
                 'author_id' => $authorId,
                 'blog_post_name' => 'About Lore Ipsums 3 : why even bother',
                 'blog_post_content' => $blogContent,
                 'thumbnail_path' => $imagePath,
+                'created_at' =>  now()->addDays(3),
+            ],
+            [
+                'author_id' => $authorId,
+                'blog_post_name' => 'About Lore Ipsums 4 : why are we',
+                'blog_post_content' => $blogContent,
+                'thumbnail_path' => $imagePath,
+                'created_at' =>  now()->addDays(4),
+            ],
+            [
+                'author_id' => $authorId,
+                'blog_post_name' => 'About Lore Ipsums 5 : still here',
+                'blog_post_content' => $blogContent,
+                'thumbnail_path' => $imagePath,
+                'created_at' =>  now()->addDays(5),
+            ],
+            [
+                'author_id' => $authorId,
+                'blog_post_name' => 'About Lore Ipsums 6 : just to suffer',
+                'blog_post_content' => $blogContent,
+                'thumbnail_path' => $imagePath,
+                'created_at' =>  now()->addDays(6),
             ],
         ];
 

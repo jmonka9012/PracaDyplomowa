@@ -18,8 +18,9 @@ class BlogPostBrowserResource extends JsonResource
             'id' => $this->id,
             'author_id' => $this->author_id,
             'blog_post_name' => $this->blog_post_name,
-            'slug' => $this->slug,
+            'blog_post_url' => $this->blog_post_url,
             'thumbnail_path' => $this->thumbnail_path,
+            'blog_date' => $this->created_at->format('d-M-Y'),
         ];
     }
 }
