@@ -39,5 +39,5 @@ Route::prefix('blog')->group(function() {
 });
 
 Route::get('/{blog}', [BlogController::class, 'show'])
-      ->where('blog', 'blog/[0-9]{4}-[0-9]{2}-[0-9]{2}/([A-Za-z]+(-[A-Za-z]+)+)')
+      ->where('blog', 'blog/[0-9]{4}-[0-9]{2}-[0-9]{2}/([A-Za-z]+(-[A-Za-z0-9]+)+)')
       ->name('blog.show');
