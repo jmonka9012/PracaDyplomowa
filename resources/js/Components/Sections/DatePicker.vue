@@ -133,10 +133,7 @@ const presetDates = ref([
 @use "~css/mixin.scss";
 .dp__main {
     max-height: 60px;
-    max-width: 330px;
-    @include mixin.media-breakpoint-down(xl) {
-        max-width: 100%;
-    }
+    max-width: 100%;
 }
 .dp__input {
     box-shadow: none;

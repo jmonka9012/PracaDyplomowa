@@ -9,9 +9,9 @@ import { Link } from "@inertiajs/vue3";
     <HeroSmall :source="blogBg" title="Zarządzaj wydarzeniami"></HeroSmall>
     <section>
         <div class="container mb-80px">
-            <div class="col-12 d-flex align-items-center">
-                <h2>Wydarzenia</h2>
-                <Link :href="route('event-create')" class="ml-20px btn btn-md"
+            <div class="col-12 d-flex flex-lg-row align-items-lg-center">
+                <h2 class="mb-20px mb-lg-0">Wydarzenia</h2>
+                <Link :href="route('event-create')" class="ml-lg-20px btn btn-md"
                     >Dodaj nowe</Link
                 >
             </div>
@@ -121,9 +121,11 @@ import { Link } from "@inertiajs/vue3";
             </div>
         </div>
         <div class="container">
-            <div class="col-12 d-flex align-items-center">
-                <h3>Wydarzenia oczekujące na zatwierdzenie</h3>
-                <Link :href="route('event-create')" class="ml-20px btn btn-md"
+            <div class="col-12 d-flex flex-lg-row align-items-lg-center">
+                <h3 class="mb-20px mb-lg-0">
+                    Wydarzenia oczekujące na zatwierdzenie
+                </h3>
+                <Link :href="route('event-create')" class="ml-lg-20px btn btn-md"
                     >Dodaj nowe</Link
                 >
             </div>

@@ -7,11 +7,9 @@ import HeroSmall from "@/Components/Sections/Hero-small.vue";
     <HeroSmall :source="blogBg" title="Zarządzaj wydarzeniami"></HeroSmall>
     <section>
         <div class="container">
-            <h1>Jakaś tabelka?</h1>
+            <h2>Jakaś tabelka?</h2>
         </div>
     </section>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
