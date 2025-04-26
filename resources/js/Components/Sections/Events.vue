@@ -35,7 +35,7 @@ const scrollRight = () => {
 <template>
     <div v-for="event in props.events" :key="event.id" class="event">
         <div class="event-img">
-            <Link class="link-stretched" :href="event.event_url"> </Link>
+            <Link class="link-stretched" :href="`/${event.event_url}`"> </Link>
             <img :src="`/storage/${event.image_path}`" alt="" />
         </div>
         <div class="d-flex flex-column col-12">
@@ -43,13 +43,13 @@ const scrollRight = () => {
                 class="d-flex flex-lg-row justify-content-between align-items-center mt-lg-8px mb-16px"
             >
                 <h6 class="event-title">
-                    <Link :href="event.event_url">{{
+                    <Link :href="`/${event.event_url}`">{{
                         event.event_name
                     }}</Link>
                 </h6>
                 <Link
                     class="event-link d-none d-lg-flex"
-                    :href="event.event_url"
+                    :href="`/${event.event_url}`"
                     ><i class="fa fa-ticket"></i>
                     Zobacz więcej
                 </Link>
@@ -61,7 +61,7 @@ const scrollRight = () => {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed,
                 eum?
             </p>
-            <Link class="event-link d-lg-none" :href="event.event_url"
+            <Link class="event-link d-lg-none" :href="`/${event.event_url}`"
                 ><i class="fa fa-ticket"></i>
                 Zobacz więcej
             </Link>

@@ -77,68 +77,16 @@ const team = [
     },
 ];
 
-const latest = [
-    {
-        id: 1,
-        src: bangPow,
-        link: [
-            {
-                href: "/icp",
-                title: "Bang Pow Boom at Jugaloo Island",
-            },
-        ],
-        category: [
-            {
-                href: "/bpb",
-                title: "BangPow",
-            },
-        ],
-        date: "January 22, 2025",
-    },
-    {
-        id: 2,
-        src: greatMilenko,
-        link: [{ href: "/icp", title: "Great MILENKO GREAT MILENKO" }],
-        date: "January 22, 2025",
-        category: [
-            {
-                href: "/bpb",
-                title: "greatmilenko",
-            },
-        ],
-    },
-    {
-        id: 3,
-        src: hellsPit,
-        link: [{ href: "/icp", title: "hellspit" }],
-        date: "January 22, 2025",
-        category: [
-            {
-                href: "/bpb",
-                title: "Hellspit",
-            },
-        ],
-    },
-    {
-        id: 4,
-        src: jeckelBros,
-        link: [{ href: "/icp", title: "Jeckelbross" }],
-        date: "January 22, 2025",
-        category: [
-            {
-                href: "/bpb",
-                title: "Jeckelbros",
-            },
-        ],
-    },
-];
-
 const props = defineProps({
     events: {
         type: Array,
         required: true,
     },
     genres: {
+        type: Array,
+        required: true,
+    },
+    blog_posts: {
         type: Array,
         required: true,
     }
@@ -160,18 +108,18 @@ const props = defineProps({
         <div class="container flex-column align-items-center">
             <p class="sub-title sub-title-lprpl mb-20px">bilety na</p>
             <h3 class="title-1 mb-20px">Przyszłe wydarzenia</h3>
-            <Events :events="props.events" />
-            <Link class="btn btn-md" :href="route('event.browser')">Zobacz wszystkie wydarzenia</Link>
+            <Events class="" :events="props.events" />
+            <Link class="mt-40px btn btn-md" :href="route('event.browser')">Zobacz wszystkie wydarzenia</Link>
         </div>
     </section>
-    <CategoriesImg class="pt-70px pt-lg-120px pb-60px pb-lg-90px" />
+    <CategoriesImg class="pt-60px pb-60px pb-lg-90px" />
     <section class="pt-60px pb-100px">
         <div
             class="container container-big flex-lg-row align-items-start align-items-lg-center justify-content-between"
         >
-            <TitleNSub title="Title test" subtitle="subtitle" class="mb-35px" />
-            <a href="/" class="btn btn-md">View all</a>
-            <LatestEvents :latest="latest"></LatestEvents>
+            <TitleNSub title="Najnowsze posty" subtitle="Blog" class="mb-35px" />
+            <Link :href="route('blog')" class="btn btn-md">Zobacz wszystkie</Link>
+            <LatestEvents :blog_posts="props.blog_posts"></LatestEvents>
         </div>
     </section>
     <Services />
