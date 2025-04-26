@@ -17,7 +17,11 @@ class EventController extends Controller
     {
         $event = Event::where('event_url', $event)
             ->with(['seats', 'standingTickets'])
-            ->firstOrFail();
+            ->first();
+
+        if(!$event){
+            return redirect()->route('error404');
+        }
         
         $closestEvents = $event->getRelatedEvents();
 

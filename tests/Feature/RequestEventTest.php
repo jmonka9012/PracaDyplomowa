@@ -36,7 +36,9 @@ class RequestEventTest extends TestCase
             'event_description'=>'Test456',
             'event_image'=> UploadedFile::fake()->image('event.jpg', 800, 600),
             'event_description_additional'=> 'Test456',
-            'genre' =>[1],
+            'genre' =>[
+                ['value' => 1]
+            ],
             'section_prices' => [
                 '1' => '1',
                 '2' => '2', 

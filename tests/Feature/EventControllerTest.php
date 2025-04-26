@@ -28,11 +28,16 @@ class EventControllerTest extends TestCase
     }
 
     #[Test]
-    public function show_returns_404_for_invalid_event_url()
+    public function component_404_renders_with_non_existent_event()
     {
+        // Ensure no matching event exists
+        Event::where('event_url', 'non-existent-event')->delete();
+    
         $response = $this->get(route('event.show', 'non-existent-event'));
         
-        $response->assertStatus(404);
+        $response->assertInertia(function ($page) {
+            return $page->component('404'); 
+        });
     }
 
     #[Test]

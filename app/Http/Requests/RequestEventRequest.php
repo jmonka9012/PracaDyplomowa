@@ -35,7 +35,7 @@ class RequestEventRequest extends FormRequest
             'event_description' => 'required|max:65535',
             'event_description_additional' => 'max:65535',
             'genre' => 'required|array',
-            'genre.*' => 'exists:genres,id',
+            'genre.*.value' => 'exists:genres,id',
 
             'section_prices' => [
                 'required',

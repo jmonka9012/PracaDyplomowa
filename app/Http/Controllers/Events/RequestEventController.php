@@ -41,7 +41,7 @@ class RequestEventController extends Controller
 
         $validatedData = $request->validated();
 
-        $genres = $validatedData['genre'];
+        $genres = collect($validatedData['genre'])->pluck('value')->toArray();
         unset($validatedData['genre']);
 
         $sectionPrices = $validatedData['section_prices'];
