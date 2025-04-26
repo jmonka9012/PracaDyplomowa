@@ -46,7 +46,7 @@ class BlogController extends Controller
 
 
         return response()->json([
-            'events' => BlogPostBrowserResource::collection($blog)->response()->getData(true),
+            'blog_post' => BlogPostBrowserResource::collection($blog)->response()->getData(true),
             'blogPostTypes' => $blogPostTypes
         ]);
     }
