@@ -11,6 +11,8 @@ const props = defineProps({
     },
 });
 
+console.log(props);
+
 const errors = reactive({});
 const postForm = reactive({
     post_name: null,
@@ -139,9 +141,7 @@ function submitPostRequest() {
                     <label for="post-title">Kategoria wpisu*</label>
                     <select required v-model="postForm.post_type" name="post-category" id="">
                         <option selected disabled value="0">Wybierz kategorię</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
+                        <option v-for="category in props.post_types" :key="category.id" :value="category">{{category}}</option>
                     </select>
                 </div>
                 <div class="error-msg" v-if="errors.post_type">

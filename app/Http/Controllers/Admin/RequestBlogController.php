@@ -17,7 +17,7 @@ class RequestBlogController extends Controller
         $blogPostTypes = BlogPostType::values();
 
         return Inertia::render('Admin/AddPost', [
-            'blogPostTypes' => $blogPostTypes
+            'post_types' => $blogPostTypes
         ]);
     }
 
