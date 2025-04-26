@@ -47,6 +47,5 @@ Route::prefix('wydarzenia')->group(function() {
 });
 
 Route::get('/{event}', [EventController::class, 'show'])
-      ->where('event', '.*')
+      ->where('event', 'wydarzenia/[0-9]{4}-[0-9]{2}-[0-9]{2}/[0-9]+/([A-Za-z0-9]+(-[A-Za-z0-9]+)+)')
       ->name('event.show');
-
