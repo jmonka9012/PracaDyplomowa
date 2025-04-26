@@ -40,12 +40,6 @@ function submitFilterRequest() {
     console.log(filterRequest);
 }
 
-function isCurrentPage(pageId) {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    return urlParams.get("page") === pageId;
-}
-
 console.log(props);
 console.log(route("event.browser"));
 </script>
@@ -77,35 +71,16 @@ console.log(route("event.browser"));
                 <input class="btn btn-md" type="submit" value="Filtruj" />
             </form>
             <Events :events="props.events.data" :genres="props.genres" />
-
             <div class="event-pagination">
                 <ul class="ml-auto mr-auto">
-                    <!--                    <li class="direction">
-                        &lt;!&ndash; ukryć jak jest page 1 &ndash;&gt;
-                        <a href="#forward">
-                            <div class="d-flex">
-                                <i class="fa fa-chevron-left"></i>
-                                <i class="fa fa-chevron-left"></i>
-                            </div>
-                            Powróć
-                        </a>
-                    </li>-->
                     <li
                         :key="page"
                         class="page"
-                        :class="{ 'page-current': isCurrentPage(page.label) }"
+                        :class="{ 'page-current': page.active }"
                         v-for="page in events.meta.links"
                     >
                         <Link :href="page.url" v-html="page.label"></Link>
                     </li>
-                    <!--                    <li class="direction">
-                        <a href="#forward"
-                            >Dalej
-                            <div class="d-flex">
-                                <i class="fa fa-chevron-right"></i>
-                                <i class="fa fa-chevron-right"></i></div
-                        ></a>
-                    </li>-->
                 </ul>
             </div>
         </div>
