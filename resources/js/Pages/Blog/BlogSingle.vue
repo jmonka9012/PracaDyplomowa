@@ -41,7 +41,7 @@ console.log(props.blog_post);
                     class="col-12 col-lg-4 d-flex justify-content-center align-items-center"
                 >
                     <i class="fa fa-user mr-5px"></i>
-                    The Ringmaster
+                    {{ post.author.author_name}}
                 </div>
             </div>
 
@@ -69,7 +69,7 @@ console.log(props.blog_post);
                     class="col-12 col-lg-4 d-flex justify-content-center align-items-center"
                 >
                     <i class="fa fa-user mr-5px"></i>
-                    The Ringmaster
+                    {{ post.author.author_name}}
                 </div>
                 <div
                     class="col-12 col-lg-3 d-flex justify-content-center align-items-center"
