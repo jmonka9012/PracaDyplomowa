@@ -8,12 +8,17 @@ use Inertia\Inertia;
 use App\Http\Requests\RequestBlogRequest;
 use Illuminate\Support\Str;
 use Illuminate\Http\RedirectResponse;
+use App\Enums\BlogPostType;
 
 class RequestBlogController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Admin/AddPost');
+        $blogPostTypes = BlogPostType::values();
+
+        return Inertia::render('Admin/AddPost', [
+            'blogPostTypes' => $blogPostTypes
+        ]);
     }
 
     public function store(RequestBlogRequest $request): RedirectResponse
