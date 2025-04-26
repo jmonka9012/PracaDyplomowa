@@ -3,7 +3,7 @@ import Team from "@/Components/Sections/Team.vue";
 import Services from "@/Components/Sections/Services.vue";
 import CategoriesImg from "@/Components/Sections/Categories-img.vue";
 import Events from "@/Components/Sections/Events.vue";
-import LatestEvents from "@/Components/Sections/PostQuery.vue";
+import PostQuery from "@/Components/Sections/PostQuery.vue";
 import Cta from "@/Components/Sections/Cta.vue";
 import TitleNSub from "@/Components/Partials/TitleNSub.vue";
 import Hero from "@/Components/Sections/Hero.vue";
@@ -118,7 +118,7 @@ const props = defineProps({
         >
             <TitleNSub title="Najnowsze posty" subtitle="Blog" class="mb-35px" />
             <Link :href="route('blog')" class="btn btn-md">Zobacz wszystkie</Link>
-            <LatestEvents :blog_posts="props.blog_posts"></LatestEvents>
+            <PostQuery :blog_posts="props.blog_posts"></PostQuery>
         </div>
     </section>
     <Services />

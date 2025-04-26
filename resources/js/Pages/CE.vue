@@ -7,7 +7,7 @@ import hellsPit from "~images/hellspit.jpg";
 import bangPow from "~images/bangpow.jpg";
 import greatMilenko from "~images/greatmilenko.jpg";
 import jeckelbros from "~images/Jeckelbros.jpg";
-import LatestEvents from "../Components/Sections/PostQuery.vue";
+import PostQuery from "../Components/Sections/PostQuery.vue";
 import DatePicker from "../Components/Partials/DatePicker.vue";
 import MultiSelect from "@/Components/Partials/MultiSelect.vue";
 const latest = [
@@ -292,8 +292,8 @@ const latest = [
         </div>
         <section class="section pb-100px">
             <div class="container container-small">
-                <LatestEvents evContClass="ev-cont-lg-three" :latest="latest">
-                </LatestEvents>
+                <PostQuery evContClass="ev-cont-lg-three" :latest="latest">
+                </PostQuery>
             </div>
         </section>
     </section>
