@@ -10,7 +10,7 @@ Route::get('/', [HomeController::class, 'index'])
       ->name('home');
 
 Route::get('/data', [HomeController::class, 'showData'])
-      ->name('home');
+      ->name('home.data');
 
 // Strona kontaktu
 Route::get('/kontakt', [ContactController::class, 'index'])
