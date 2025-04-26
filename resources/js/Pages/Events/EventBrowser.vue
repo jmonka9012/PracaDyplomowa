@@ -16,14 +16,14 @@ const props = defineProps({
     genres: {
         type: Array,
         required: true,
-    }
+    },
 });
 
 let genres = [];
 
 props.genres.forEach((genre, index) => {
     genres[index] = {
-        name:  genre.genre_name,
+        name: genre.genre_name,
         value: genre.id,
     };
 });
@@ -43,11 +43,11 @@ function submitFilterRequest() {
 function isCurrentPage(pageId) {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    return urlParams.get('page') === (pageId);
+    return urlParams.get("page") === pageId;
 }
 
 console.log(props);
-console.log(route('event.browser'));
+console.log(route("event.browser"));
 </script>
 
 <template>
@@ -55,17 +55,32 @@ console.log(route('event.browser'));
         <div class="container flex-column align-items-center">
             <p class="sub-title sub-title-lprpl mb-20px">bilety na</p>
             <h3 class="title-1 mb-20px">Przyszłe wydarzenia</h3>
-            <form @submit.prevent="submitFilterRequest()" class="select-filters">
-                <input placeholder="Szukaj po nazwie" v-model="filterRequest.phrase" type="text">
-                <MultiSelect v-model="filterRequest.genres" :options="genres" ></MultiSelect>
+            <form
+                @submit.prevent="submitFilterRequest()"
+                class="select-filters col-12 col-lg-8"
+            >
+                <div class="input-wrap relative col-12">
+                    <input
+                        placeholder="Szukaj po nazwie"
+                        v-model="filterRequest.phrase"
+                        type="text"
+                        class="search-input"
+                    />
+                    <i class="fa fa-search search-icon"></i>
+                </div>
+
+                <MultiSelect
+                    v-model="filterRequest.genres"
+                    :options="genres"
+                ></MultiSelect>
                 <DatePicker v-model="filterRequest.date"></DatePicker>
-                <input type="submit" value="Filtruj"/>
+                <input type="submit" value="Filtruj" />
             </form>
             <Events :events="props.events.data" :genres="props.genres" />
 
             <div class="event-pagination">
                 <ul class="ml-auto mr-auto">
-<!--                    <li class="direction">
+                    <!--                    <li class="direction">
                         &lt;!&ndash; ukryć jak jest page 1 &ndash;&gt;
                         <a href="#forward">
                             <div class="d-flex">
@@ -75,10 +90,15 @@ console.log(route('event.browser'));
                             Powróć
                         </a>
                     </li>-->
-                    <li :key="page" class="page" :class="{'page-current': isCurrentPage(page.label)}" v-for="page in events.meta.links">
+                    <li
+                        :key="page"
+                        class="page"
+                        :class="{ 'page-current': isCurrentPage(page.label) }"
+                        v-for="page in events.meta.links"
+                    >
                         <Link :href="page.url" v-html="page.label"></Link>
                     </li>
-<!--                    <li class="direction">
+                    <!--                    <li class="direction">
                         <a href="#forward"
                             >Dalej
                             <div class="d-flex">
