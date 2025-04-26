@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Blog;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BlogPostBrowserResource;
 use App\Http\Resources\BlogResource;
+use App\Http\Resources\AuthorResource;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Blog\BlogPost;
@@ -15,9 +16,9 @@ class BlogController extends Controller
 {
     public function show($blog)
     {
-        $blog = BlogPost::where('blog_post_url', $blog)
-            ->with('author')
-            ->first();
+        $blog = BlogPost::with(['author.user']) // Load author and their user relation
+        ->where('blog_post_url', $blog)
+        ->firstOrFail();
 
         if(!$blog){
             return redirect()->route('error404');
@@ -30,10 +31,10 @@ class BlogController extends Controller
 
     public function showData(BlogPost $blog)
     {
-        $blog->load(['author']);
-
+        $blog->load(['author.user']);
+            
         return response()->json([
-            'blog_post' => $blog->load(['author'])->toArray(),
+            'blog_post' => new BlogResource($blog),
         ]);
     }
 

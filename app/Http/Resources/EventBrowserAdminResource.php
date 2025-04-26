@@ -20,7 +20,7 @@ class EventBrowserAdminResource extends JsonResource
             'event_additional_url' => $this->event_additional_url,
             'slug' => $this->slug,
             'event_url'=> $this->event_url,
-            'event_date' => $this->event_date->format('d-M-Y'),
+            'event_date' => $this->event_date->format('d.m.Y'),
             'event_start' => $this->event_start->format('H:i'),
             'event_end' => $this->event_end->format('H:i'),
             'contact_email' => $this->contact_email,
