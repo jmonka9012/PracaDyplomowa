@@ -14,7 +14,6 @@ Route::prefix('blog')->group(function() {
             ->name('blog.data')
             ->middleware('adminAccess');
       
-      
       Route::get('/', [BlogController::class, 'blogBrowser'])
             ->name('blog');
 
@@ -35,7 +34,7 @@ Route::prefix('blog')->group(function() {
 
       Route::get('/data/{blog:slug}', [BlogController::class, 'showData'])
             ->where('blog_post', '.*')
-            ->name('blog.show')
+            ->name('blog.show.data')
             ->Middleware('adminAccess');
 });
 
