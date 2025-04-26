@@ -1,6 +1,8 @@
 <script setup>
 import Events from "@/Components/Sections/Events.vue";
 import { Link } from "@inertiajs/vue3";
+import DatePicker from "@/Components/Sections/DatePicker.vue";
+import MultiSelect from "@/Components/Partials/MultiSelect.vue";
 
 import eventsBg from "~images/events-bg-1.jpg";
 
@@ -13,6 +15,15 @@ const props = defineProps({
         type: Array,
         required: true,
     }
+});
+
+let genres = [];
+
+props.genres.forEach((genre, index) => {
+    genres[index] = {
+        name:  genre.genre_name,
+        value: genre.id,
+    };
 });
 
 function isCurrentPage(pageId) {
@@ -29,6 +40,10 @@ console.log(route('event.browser'));
         <div class="container flex-column align-items-center">
             <p class="sub-title sub-title-lprpl mb-20px">bilety na</p>
             <h3 class="title-1 mb-20px">Przyszłe wydarzenia</h3>
+            <div class="select-filters">
+                <MultiSelect :options="genres" ></MultiSelect>
+                <DatePicker></DatePicker>
+            </div>
             <Events :events="props.events.data" :genres="props.genres" />
 
             <div class="event-pagination">

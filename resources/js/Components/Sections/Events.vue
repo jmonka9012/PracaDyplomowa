@@ -3,27 +3,12 @@ import {reactive, ref} from "vue";
 import {Link} from "@inertiajs/vue3";
 import { onMounted, onUnmounted } from "vue";
 import DropDown from "../Partials/DropDown.vue";
-import DatePicker from "@/Components/Sections/DatePicker.vue";
-import MultiSelect from "@/Components/Partials/MultiSelect.vue";
 
 const props = defineProps({
     events: {
         type: Array,
         required: true,
     },
-    genres: {
-        type: Array,
-        required: true,
-    }
-});
-
-let genres = [];
-
-props.genres.forEach((genre, index) => {
-    genres[index] = {
-        name:  genre.genre_name,
-        value: genre.id,
-    };
 });
 
 const filterRequest = reactive({
@@ -48,11 +33,6 @@ const scrollRight = () => {
 };
 </script>
 <template>
-    <div class="select-filters">
-        <MultiSelect :options="genres" ></MultiSelect>
-        <DatePicker></DatePicker>
-    </div>
-
     <div v-for="event in props.events" :key="event.id" class="event">
         <div class="event-img">
             <Link class="link-stretched" :href="event.event_url"> </Link>
