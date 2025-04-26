@@ -28,7 +28,7 @@ console.log(props.blog_post);
                     <div
                         class="d-flex flex-row flex-wrap-wrap justify-content-center align-items-center bg-primary pt-12px pb-12px pl-6px pr-6px column-gap-5px border-radius-12px text-white"
                     >
-                        <Link>{{ post.blog_post_type }}</Link>
+                        <Link :href="`${route('blog')}?blog_post_type=${post.blog_post_type}`">{{ post.blog_post_type }}</Link>
                     </div>
                 </div>
                 <div
@@ -56,7 +56,7 @@ console.log(props.blog_post);
                     <div
                         class="d-flex flex-row flex-wrap-wrap justify-content-center align-items-center bg-primary pt-12px pb-12px pl-6px pr-6px column-gap-5px border-radius-12px text-white"
                     >
-                        <Link>{{ post.blog_post_type }}</Link>
+                        <Link :href="`${route('blog')}?blog_post_type=${post.blog_post_type}`">{{ post.blog_post_type }}</Link>
                     </div>
                 </div>
                 <div
