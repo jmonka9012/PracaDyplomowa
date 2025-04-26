@@ -23,7 +23,7 @@ class BlogController extends Controller
             return redirect()->route('error404');
         }
 
-        return Inertia::render('Events/EventSingle', [
+        return Inertia::render('Blog/BlogSingle', [
             'blog_post' => new BlogResource($blog),
         ]);
     }
@@ -41,7 +41,7 @@ class BlogController extends Controller
     {
         $blog = BlogPost::orderBy('created_at', 'desc')
             ->paginate(10);
-            
+
         $blogPostTypes = BlogPostType::values();
 
 
