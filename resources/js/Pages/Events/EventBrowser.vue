@@ -4,6 +4,8 @@ import { Link } from "@inertiajs/vue3";
 import DatePicker from "@/Components/Sections/DatePicker.vue";
 import MultiSelect from "@/Components/Partials/MultiSelect.vue";
 
+import { reactive, watch, computed, ref } from "vue";
+
 import eventsBg from "~images/events-bg-1.jpg";
 
 const props = defineProps({
@@ -26,6 +28,18 @@ props.genres.forEach((genre, index) => {
     };
 });
 
+const filterRequest = reactive({
+    phrase: null,
+    date: null,
+    genres: null,
+});
+
+function submitFilterRequest() {
+    let hadError = ref(false);
+
+    console.log(filterRequest);
+}
+
 function isCurrentPage(pageId) {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -41,10 +55,12 @@ console.log(route('event.browser'));
         <div class="container flex-column align-items-center">
             <p class="sub-title sub-title-lprpl mb-20px">bilety na</p>
             <h3 class="title-1 mb-20px">Przyszłe wydarzenia</h3>
-            <div class="select-filters">
-                <MultiSelect :options="genres" ></MultiSelect>
-                <DatePicker></DatePicker>
-            </div>
+            <form @submit.prevent="submitFilterRequest()" class="select-filters">
+                <input v-model="filterRequest.phrase" type="text">
+                <MultiSelect v-model="filterRequest.genres" :options="genres" ></MultiSelect>
+                <DatePicker v-model="filterRequest.date"></DatePicker>
+                <input type="submit" value="Stwórz wydarzenie" />
+            </form>
             <Events :events="props.events.data" :genres="props.genres" />
 
             <div class="event-pagination">
