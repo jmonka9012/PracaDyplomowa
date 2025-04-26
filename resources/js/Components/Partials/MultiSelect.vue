@@ -100,8 +100,8 @@ const translations = ref({
     color: var(--text);
 }
 .multiselect__tags-wrap {
+    min-width: 100%;
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     column-gap: 10px;
 }
