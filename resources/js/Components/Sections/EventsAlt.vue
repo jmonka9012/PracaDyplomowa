@@ -18,9 +18,9 @@ console.log(props.events);
             class="event-item event-item-blog bt-1 b-secondary pt-25px"
         >
             <h6>
-                <a class="hover-underline-thick" :href="event.event_url">
+                <Link class="hover-underline-thick" :href="`/${event.event_url}`">
                     {{ event.event_name }}
-                </a>
+                </Link>
             </h6>
             <div class="d-flex flex-row h-fit">
                 <p class="event-date">

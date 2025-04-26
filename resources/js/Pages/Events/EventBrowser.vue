@@ -27,8 +27,9 @@ props.genres.forEach((genre, index) => {
 });
 
 function isCurrentPage(pageId) {
-    console.log(pageId);
-    return window.location.href.endsWith(pageId);
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    return urlParams.get('page') === (pageId);
 }
 
 console.log(props);
