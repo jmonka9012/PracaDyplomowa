@@ -56,10 +56,10 @@ console.log(route('event.browser'));
             <p class="sub-title sub-title-lprpl mb-20px">bilety na</p>
             <h3 class="title-1 mb-20px">Przyszłe wydarzenia</h3>
             <form @submit.prevent="submitFilterRequest()" class="select-filters">
-                <input v-model="filterRequest.phrase" type="text">
+                <input placeholder="Szukaj po nazwie" v-model="filterRequest.phrase" type="text">
                 <MultiSelect v-model="filterRequest.genres" :options="genres" ></MultiSelect>
                 <DatePicker v-model="filterRequest.date"></DatePicker>
-                <input type="submit" value="Stwórz wydarzenie" />
+                <input type="submit" value="Filtruj"/>
             </form>
             <Events :events="props.events.data" :genres="props.genres" />
 

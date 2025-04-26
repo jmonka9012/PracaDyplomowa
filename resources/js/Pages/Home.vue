@@ -157,21 +157,21 @@ const props = defineProps({
     </Hero>
     <Cta />
     <section class="pt-110px pb-100px">
+        <div class="container flex-column align-items-center">
+            <p class="sub-title sub-title-lprpl mb-20px">bilety na</p>
+            <h3 class="title-1 mb-20px">Przyszłe wydarzenia</h3>
+            <Events :events="props.events" />
+            <Link class="btn btn-md" :href="route('event.browser')">Zobacz wszystkie wydarzenia</Link>
+        </div>
+    </section>
+    <CategoriesImg class="pt-70px pt-lg-120px pb-60px pb-lg-90px" />
+    <section class="pt-60px pb-100px">
         <div
             class="container container-big flex-lg-row align-items-start align-items-lg-center justify-content-between"
         >
             <TitleNSub title="Title test" subtitle="subtitle" class="mb-35px" />
             <a href="/" class="btn btn-md">View all</a>
             <LatestEvents :latest="latest"></LatestEvents>
-        </div>
-    </section>
-    <CategoriesImg class="pt-70px pt-lg-120px pb-60px pb-lg-90px" />
-    <section class="pb-75px">
-        <div class="container flex-column align-items-center">
-            <p class="sub-title sub-title-lprpl mb-20px">bilety na</p>
-            <h3 class="title-1 mb-20px">Przyszłe wydarzenia</h3>
-            <Events :events="props.events" />
-            <Link class="btn btn-md" :href="route('event.browser')">Zobacz wszystkie wydarzenia</Link>
         </div>
     </section>
     <Services />
