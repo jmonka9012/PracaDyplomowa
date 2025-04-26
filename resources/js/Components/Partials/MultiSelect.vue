@@ -57,7 +57,6 @@ const translations = ref({
     align-items: center;
     justify-content: flex-start;
     position: relative;
-    max-height: 60px;
     box-shadow: none;
     min-height: 60px;
 }
@@ -103,7 +102,7 @@ const translations = ref({
 .multiselect__tags-wrap {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     column-gap: 10px;
 }
 .multiselect__tag {
