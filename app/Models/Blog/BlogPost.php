@@ -14,8 +14,10 @@ class BlogPost extends Model
         'author_id',
         'blog_post_name',
         'blog_post_content',
+        'blog_post_type',
         'thumbnail_path',
         'slug',
+        'blog_post_url',
         'created_at',
         'updated_at'  
     ];

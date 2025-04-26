@@ -27,6 +27,9 @@ return new class extends Migration
             $table->foreign('author_id')
             ->references('id')
             ->on('blog_authors');
+
+            $table->enum('blog_post_type', ['Poradnik' , 'Trendy', 'Marketing', 'Technologia', 'Brak'])
+            ->default('Brak');
         });
 
 

@@ -45,6 +45,7 @@ class StaticBlogPostSeeder extends Seeder
                 'blog_post_content' => $blogContent,
                 'thumbnail_path' => $imagePath,
                 'created_at' =>  now()->addDays(1),
+                'blog_post_type' => 'Trendy'
             ],
             [
                 'author_id' => $authorId,
@@ -52,6 +53,7 @@ class StaticBlogPostSeeder extends Seeder
                 'blog_post_content' => $blogContent,
                 'thumbnail_path' => $imagePath,
                 'created_at' =>  now()->addDays(2),
+                'blog_post_type' => 'Technologia'
             ],
             [
                 'author_id' => $authorId,
@@ -59,6 +61,7 @@ class StaticBlogPostSeeder extends Seeder
                 'blog_post_content' => $blogContent,
                 'thumbnail_path' => $imagePath,
                 'created_at' =>  now()->addDays(3),
+                'blog_post_type' => 'Technologia'
             ],
             [
                 'author_id' => $authorId,
@@ -66,6 +69,7 @@ class StaticBlogPostSeeder extends Seeder
                 'blog_post_content' => $blogContent,
                 'thumbnail_path' => $imagePath,
                 'created_at' =>  now()->addDays(4),
+                'blog_post_type' => 'Marketing'
             ],
             [
                 'author_id' => $authorId,
@@ -73,6 +77,7 @@ class StaticBlogPostSeeder extends Seeder
                 'blog_post_content' => $blogContent,
                 'thumbnail_path' => $imagePath,
                 'created_at' =>  now()->addDays(5),
+                'blog_post_type' => 'Trendy'
             ],
             [
                 'author_id' => $authorId,
@@ -80,6 +85,7 @@ class StaticBlogPostSeeder extends Seeder
                 'blog_post_content' => $blogContent,
                 'thumbnail_path' => $imagePath,
                 'created_at' =>  now()->addDays(6),
+                'blog_post_type' => 'Poradnik'
             ],
         ];
 

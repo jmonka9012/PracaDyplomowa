@@ -27,7 +27,7 @@ class HomeController extends Controller
         return Inertia::render('Home', [
             'genres' => $genres,
             'events' => EventBrowserResource::collection($upcomingEvents)->resolve(),
-            'blog_posts' => BlogPostBrowserResource::collection($newestBlogPosts)->resolve()
+           'blog_posts' => BlogPostBrowserResource::collection($newestBlogPosts)->resolve()
         ]);
     }
 

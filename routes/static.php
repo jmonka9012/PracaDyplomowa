@@ -10,7 +10,8 @@ Route::get('/', [HomeController::class, 'index'])
       ->name('home');
 
 Route::get('/data', [HomeController::class, 'showData'])
-      ->name('home.data');
+      ->name('home.data')
+      ->middleware('adminAccess');
 
 // Strona kontaktu
 Route::get('/kontakt', [ContactController::class, 'index'])
