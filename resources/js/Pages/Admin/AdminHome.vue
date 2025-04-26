@@ -1,6 +1,5 @@
 <script setup>
-import {Link} from "@inertiajs/vue3";
-
+import { Link } from "@inertiajs/vue3";
 </script>
 
 <template>
@@ -8,29 +7,39 @@ import {Link} from "@inertiajs/vue3";
         <div class="container">
             <div class="admin-card__container w-100">
                 <Link :href="route('admin.events')" class="w-100 admin-card">
-                    <img class="mb-20px" src="" alt="<jakaś ikona>">
+                    <i class="mb-20px fa fa-calendar"></i>
                     <p class="fw-bold fs-24">Zarządzaj wydarzeniami</p>
-                    <p class="">Zatwierdź oczekujące wydarzenia, lub usuń już istniejące</p>
+                    <p class="">
+                        Zatwierdź oczekujące wydarzenia, lub usuń już istniejące
+                    </p>
                 </Link>
                 <Link :href="route('blog-create')" class="w-100 admin-card">
-                    <img class="mb-20px" src="" alt="<jakaś ikona>">
+                    <i class="mb-20px fa fa-plus"></i>
                     <p class="fw-bold fs-24">Dodaj wpis</p>
                     <p class="">Napisz wpis na naszego bloga</p>
                 </Link>
                 <Link :href="route('admin.posts')" class="w-100 admin-card">
-                    <img class="mb-20px" src="" alt="<jakaś ikona>">
+                    <i class="mb-20px fa fa-pencil-square"></i>
                     <p class="fw-bold fs-24">Zarządzaj wpisami</p>
                     <p class="">Usuń posty</p>
                 </Link>
                 <Link :href="route('admin.users')" class="w-100 admin-card">
-                    <img class="mb-20px" src="" alt="<jakaś ikona>">
+                    <i class="mb-20px fa fa-address-card"></i>
                     <p class="fw-bold fs-24">Użytkownicy</p>
-                    <p class="">Zarządzaj użytkownikami: usuń, wyślij email weryfikacyjne, itd?</p>
+                    <p class="">
+                        Zarządzaj użytkownikami: usuń, wyślij email
+                        weryfikacyjne, itd?
+                    </p>
                 </Link>
-                <Link :href="route('admin.customer-service')" class="w-100 admin-card">
-                    <img class="mb-20px" src="" alt="<jakaś ikona>">
+                <Link
+                    :href="route('admin.customer-service')"
+                    class="w-100 admin-card"
+                >
+                    <i class="mb-20px fa fa-user"></i>
                     <p class="fw-bold fs-24">Obsługa klienta</p>
-                    <p class="">Zobacz zgłoszenia o pomoc od naszych użytkowników</p>
+                    <p class="">
+                        Zobacz zgłoszenia o pomoc od naszych użytkowników
+                    </p>
                 </Link>
             </div>
         </div>
@@ -62,7 +71,7 @@ import {Link} from "@inertiajs/vue3";
     padding: 20px;
     position: relative;
     display: block;
-    transition: transform .2s ease-out;
+    transition: transform 0.2s ease-out;
 
     &:hover {
         &::before {
@@ -74,15 +83,15 @@ import {Link} from "@inertiajs/vue3";
         }
     }
 
-    &::after, &::before {
-        content: '';
+    &::after,
+    &::before {
+        content: "";
         position: absolute;
         border-radius: 12px;
-        transition: transform .2s ease-out;
+        transition: transform 0.2s ease-out;
         width: 100%;
         height: 100%;
         inset: 0;
-
     }
 
     &::after {
@@ -93,6 +102,9 @@ import {Link} from "@inertiajs/vue3";
     &::before {
         z-index: -2;
         background-color: var(--primary-darker);
+    }
+    i {
+        font-size: 24px;
     }
 }
 </style>

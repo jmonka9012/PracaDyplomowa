@@ -20,20 +20,22 @@ const { siteData } = pageInfo();
                 <p class="footer__heading">Event machen</p>
                 <ul>
                     <li class="justify-content-center justify-content-lg-start">
-                        <Link class="text-primary mb-15px" :href="route('home')"
+                        <Link
+                            class="text-primary hover-white mb-15px"
+                            :href="route('home')"
                             ><span>Strona główna</span></Link
                         >
                     </li>
                     <li class="justify-content-center justify-content-lg-start">
                         <Link
-                            class="text-primary mb-15px"
+                            class="text-primary hover-white mb-15px"
                             :href="route('event.browser')"
                             ><span>Wydarzenia</span></Link
                         >
                     </li>
                     <li class="justify-content-center justify-content-lg-start">
                         <Link
-                            class="text-primary mb-15px"
+                            class="text-primary hover-white mb-15px"
                             :href="route('about-us')"
                             ><span>O nas</span></Link
                         >
@@ -45,13 +47,15 @@ const { siteData } = pageInfo();
                     </li>
                     <li class="justify-content-center justify-content-lg-start">
                         <Link
-                            class="text-primary mb-15px"
+                            class="text-primary hover-white mb-15px"
                             :href="route('contact')"
                             ><span>Kontakt</span></Link
                         >
                     </li>
                     <li class="justify-content-center justify-content-lg-start">
-                        <Link class="text-primary mb-30px" :href="route('ce')"
+                        <Link
+                            class="text-primary hover-white mb-30px"
+                            :href="route('ce')"
                             ><span>CE</span></Link
                         >
                     </li>
@@ -92,10 +96,12 @@ const { siteData } = pageInfo();
                 class="col-12 col-lg-3 d-flex flex-column text-align-center text-align-lg-end align-items-center align-items-lg-end mt-40px mt-lg-0"
             >
                 <p class="footer__heading">New-York</p>
-                <a class="text-primary mb-15px" href="">
+                <a class="text-primary hover-white mb-15px" href="">
                     newyork@loremipsum.com
                 </a>
-                <a class="text-primary mb-15px" href=""> +48 123 456 789 </a>
+                <a class="text-primary hover-white mb-15px" href="">
+                    +48 123 456 789
+                </a>
                 <p>
                     12 Lorem Street, New York <br />
                     TX 98 765, USA

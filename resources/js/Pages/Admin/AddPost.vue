@@ -64,7 +64,9 @@ const HandleEditorImage = () => (blobInfo, progress) => {
         })
         .then((response) => response.data.location)
         .catch((error) => {
-            throw new Error(`Wysyłanie zakończone niepowodzeniem: ${error.message}`);
+            throw new Error(
+                `Wysyłanie zakończone niepowodzeniem: ${error.message}`
+            );
         });
 };
 
@@ -84,22 +86,30 @@ function submitPostRequest() {
     });
     console.log(errors);
 }
-
 </script>
 
 <template>
     <section class="pt-50px pb-50px">
         <div class="container">
-            <button @click="console.log(postForm)" class="btn btn-white">
-                Loguj zawartość formularza
-            </button>
-            <button @click="console.log(errors)" class="btn btn-white">
-                Loguj errory
-            </button>
-            <button @click="ResetObject(errors)" class="btn btn-white">
-                Resetuj errory
-            </button>
-            <form class="form" @submit.prevent="submitPostRequest" enctype="multipart/form-data">
+            <div
+                class="d-flex column-gap-10px mb-20px flex-wrap-wrap row-gap-20px"
+            >
+                <button @click="console.log(postForm)" class="btn btn-white">
+                    Loguj zawartość formularza
+                </button>
+                <button @click="console.log(errors)" class="btn btn-white">
+                    Loguj errory
+                </button>
+                <button @click="ResetObject(errors)" class="btn btn-white">
+                    Resetuj errory
+                </button>
+            </div>
+
+            <form
+                class="form"
+                @submit.prevent="submitPostRequest"
+                enctype="multipart/form-data"
+            >
                 <div class="input-wrap col-12">
                     <label for="post-title">Nazwa wpisu*</label>
                     <input
@@ -121,7 +131,7 @@ function submitPostRequest() {
                         class="d-flex align-items-start flex-column"
                     >
                         <span class="d-flex mb-20px"
-                        >Zdjęcie główne wpisu*</span
+                            >Zdjęcie główne wpisu*</span
                         >
                         <div v-if="postForm.post_image">
                             <img :src="postImageUrl" alt="" />
@@ -142,12 +152,12 @@ function submitPostRequest() {
                         <span
                             style="cursor: pointer"
                             class="btn btn-md d-flex mb-10px"
-                        >Wybierz plik</span
+                            >Wybierz plik</span
                         >
                         <span
                             class="mb-10px fw-bold"
                             v-if="postForm.post_image"
-                        >{{ postForm.post_image.name }}</span
+                            >{{ postForm.post_image.name }}</span
                         >
                         <p class="fs-14">
                             Zalecane ratio 4:3, Rozdzielczość min. 800x600,
@@ -160,7 +170,9 @@ function submitPostRequest() {
                 </div>
 
                 <div class="input-wrap col-12">
-                    <label for="post-description">Zawartość wpisu*</label>
+                    <label class="mb-15px" for="post-description"
+                        >Zawartość wpisu*</label
+                    >
                     <Editor
                         api-key="9xfliuzz7ewega4fyhr4ewcymh6ye1gut2xoz8gc9zd140t7"
                         name="event-description"
@@ -194,6 +206,4 @@ function submitPostRequest() {
     </section>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
