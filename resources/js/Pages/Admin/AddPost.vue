@@ -5,11 +5,18 @@ import { router } from "@inertiajs/vue3";
 import Editor from "@tinymce/tinymce-vue";
 import ResetObject from "@/Utilities/resetObject";
 
+const props = defineProps({
+    post_types: {
+        type: Array,
+    },
+});
+
 const errors = reactive({});
 const postForm = reactive({
     post_name: null,
     post_image: null,
     post_content: null,
+    post_type: null,
 });
 
 const postImageUrl = computed(() => {
@@ -125,6 +132,21 @@ function submitPostRequest() {
                         v-model="postForm.post_name"
                     />
                 </div>
+                <div class="error-msg" v-if="errors.post_name">
+                    {{ errors.post_name }}
+                </div>
+                <div class="input-wrap col-12">
+                    <label for="post-title">Kategoria wpisu*</label>
+                    <select required v-model="postForm.post_type" name="post-category" id="">
+                        <option selected disabled value="0">Wybierz kategorię</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="error-msg" v-if="errors.post_type">
+                    {{ errors.post_type }}
+                </div>
                 <div class="input-wrap col-12">
                     <label
                         for="event-image"
@@ -168,7 +190,9 @@ function submitPostRequest() {
                         {{ errors.post_image }}
                     </div>
                 </div>
-
+                <div class="error-msg" v-if="errors.post_image">
+                    {{ errors.post_image }}
+                </div>
                 <div class="input-wrap col-12">
                     <label class="mb-15px" for="post-description"
                         >Zawartość wpisu*</label
@@ -197,6 +221,9 @@ function submitPostRequest() {
                             ],
                         }"
                     />
+                </div>
+                <div class="error-msg" v-if="errors.post_content">
+                    {{ errors.post_content }}
                 </div>
                 <div class="input-wrap col-12">
                     <input type="submit" value="Stwórz wpis" />
