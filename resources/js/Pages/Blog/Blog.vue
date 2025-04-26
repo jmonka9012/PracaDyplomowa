@@ -1,6 +1,6 @@
 <script setup>
-import HeroSmall from "../Components/Sections/Hero-small.vue";
-import LatestEvents from "../Components/Sections/LatestEvents.vue";
+import HeroSmall from "../../Components/Sections/Hero-small.vue";
+import LatestEvents from "../../Components/Sections/PostQuery.vue";
 import blogBg from "~images/blog-bg.jpg";
 
 const props = defineProps({

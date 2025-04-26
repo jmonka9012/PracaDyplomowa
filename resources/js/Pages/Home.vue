@@ -3,11 +3,11 @@ import Team from "@/Components/Sections/Team.vue";
 import Services from "@/Components/Sections/Services.vue";
 import CategoriesImg from "@/Components/Sections/Categories-img.vue";
 import Events from "@/Components/Sections/Events.vue";
-import LatestEvents from "@/Components/Sections/LatestEvents.vue";
+import LatestEvents from "@/Components/Sections/PostQuery.vue";
 import Cta from "@/Components/Sections/Cta.vue";
-import TitleNSub from "@/Components/Sections/TitleNSub.vue";
+import TitleNSub from "@/Components/Partials/TitleNSub.vue";
 import Hero from "@/Components/Sections/Hero.vue";
-import Poptext from "@/Components/Sections/Poptext.vue";
+import Poptext from "@/Components/Partials/Poptext.vue";
 import { Link } from "@inertiajs/vue3";
 
 
@@ -18,7 +18,6 @@ import jeckelBros from "~images/Jeckelbros.jpg";
 import teamOne from "~images/team-1.jpg";
 import eventsBg from "~images/events-bg-1.jpg";
 import { ref } from "vue";
-import SliderGallery from "../Components/Sections/SliderGallery.vue";
 import { SwiperSlide } from "swiper/vue";
 
 import pageInfo from "@/Utilities/pageInfo";

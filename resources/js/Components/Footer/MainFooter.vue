@@ -4,7 +4,7 @@ import twWhite from "~icons/twitter-circle-white.svg";
 import insWhite from "~icons/instagram-circle-white.svg";
 import logoW from "~icons/logoipsum-364.svg";
 
-import Poptext from "@/Components/Sections/Poptext.vue";
+import Poptext from "@/Components/Partials/Poptext.vue";
 import { Link } from "@inertiajs/vue3";
 
 import pageInfo from "@/Utilities/pageInfo";

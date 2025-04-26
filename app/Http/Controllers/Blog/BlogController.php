@@ -10,6 +10,6 @@ class BlogController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Blog');
+        return Inertia::render('Blog/Blog');
     }
 }

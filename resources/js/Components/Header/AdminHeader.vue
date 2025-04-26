@@ -1,5 +1,5 @@
 <script setup>
-import Poptext from "@/Components/Sections/Poptext.vue";
+import Poptext from "@/Components/Partials/Poptext.vue";
 import {Link} from "@inertiajs/vue3";
 import {ref, onMounted, onBeforeUnmount} from "vue";
 import {router} from "@inertiajs/vue3";

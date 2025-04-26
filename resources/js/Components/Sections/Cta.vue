@@ -1,5 +1,5 @@
 <script setup>
-import Poptext from "@/Components/Sections/Poptext.vue";
+import Poptext from "@/Components/Partials/Poptext.vue";
 import ctaCloud from "~images/cta-cloud.png";
 import ctaCalendar from "~images/cat-calendar.png";
 import { Link } from "@inertiajs/vue3";

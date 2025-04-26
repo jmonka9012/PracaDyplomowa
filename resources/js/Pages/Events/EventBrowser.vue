@@ -1,7 +1,7 @@
 <script setup>
 import Events from "@/Components/Sections/Events.vue";
 import { Link } from "@inertiajs/vue3";
-import DatePicker from "@/Components/Sections/DatePicker.vue";
+import DatePicker from "@/Components/Partials/DatePicker.vue";
 import MultiSelect from "@/Components/Partials/MultiSelect.vue";
 
 import { reactive, watch, computed, ref } from "vue";
