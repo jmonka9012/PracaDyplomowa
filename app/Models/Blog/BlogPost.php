@@ -5,6 +5,7 @@ namespace App\Models\Blog;
 use App\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Blog\BlogAuthor;
 
 class BlogPost extends Model
 {
@@ -21,4 +22,9 @@ class BlogPost extends Model
         'created_at',
         'updated_at'  
     ];
+
+    public function author()
+    {
+        return $this->belongsTo(BlogAuthor::class);
+    }
 }

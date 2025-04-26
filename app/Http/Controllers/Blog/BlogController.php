@@ -3,13 +3,79 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BlogPostBrowserResource;
+use App\Http\Resources\BlogResource;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Blog\BlogPost;
+use App\Enums\BlogPostType;
 
 
 class BlogController extends Controller
 {
-    public function index()
+    public function show($blog)
     {
-        return Inertia::render('Blog/Blog');
+        $blog = BlogPost::where('blog_post_url', $blog)
+            ->with('author')
+            ->first();
+
+        if(!$blog){
+            return redirect()->route('error404');
+        }
+
+        return Inertia::render('Events/EventSingle', [
+            'blog_post' => new BlogResource($blog),
+        ]);
+    }
+
+    public function showData(BlogPost $blog)
+    {
+        $blog->load(['author']);
+
+        return response()->json([
+            'blog_post' => $blog->load(['author'])->toArray(),
+        ]);
+    }
+
+    public function blogBrowserData(BlogPost $blog)
+    {
+        $blog = BlogPost::orderBy('created_at', 'desc')
+            ->paginate(10);
+            
+        $blogPostTypes = BlogPostType::values();
+
+
+        return response()->json([
+            'events' => BlogPostBrowserResource::collection($blog)->response()->getData(true),
+            'blogPostTypes' => $blogPostTypes
+        ]);
+    }
+
+    public function blogBrowser(Request $request)
+    {
+        if (!$request->has('page')) {
+            return redirect()->route('blog', ['page' => 1] + $request->except('page'));
+        }
+
+        $query = BlogPost::orderBy('created_at', 'desc');
+
+        if ($request->filled('blog_post_type')) {
+            $requestType = strtolower($request->blog_post_type);
+            $validTypes = array_map('strtolower', BlogPostType::values());
+
+            if (in_array($requestType, $validTypes)) {
+                $query->whereRaw('LOWER(blog_post_type) = ?', [$requestType]);
+            }
+        }
+
+        $blog_posts = $query->paginate(12);
+
+        $blogPostTypes = BlogPostType::values();
+
+        return Inertia::render('Blog/Blog', [
+            'blog_posts' => BlogPostBrowserResource::collection($blog_posts)->response()->getData(true),
+            'filter' => $request->input('blog_post_type'),
+            'blogPostTypes' => $blogPostTypes
+        ]);
     }
 }
