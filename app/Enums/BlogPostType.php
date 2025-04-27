@@ -8,6 +8,11 @@ enum BlogPostType: string
     case TRENDS = 'Trendy';
     case MARKETING = 'Marketing';
     case TECHNOLOGY = 'Technologia';
+    case BEHIND_THE_SCENES = 'Za Kulisami';
+    case LIFESTYLE = 'Życiowe';
+    case SUMMARY = 'Podsumowanie';
+    case TOP10 = 'Top 10';
+
     case NONE = 'Brak';
     
     public static function values(): array

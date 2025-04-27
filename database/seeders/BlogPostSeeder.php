@@ -20,7 +20,7 @@ class BlogPostSeeder extends Seeder
         $faker = Faker::create();
         $authorId = BlogAuthor::first()->id;
         
-        $postTypes = ['Poradnik', 'Trendy', 'Marketing', 'Technologia', 'Brak'];
+        $postTypes = ['Poradnik', 'Trendy', 'Marketing', 'Technologia', 'Życiowe', 'Podsumowanie', 'Top 10', 'Brak'];
         $titlePrefixes = [
             'About Lore Ipsums',
             'The Complete Guide to',
