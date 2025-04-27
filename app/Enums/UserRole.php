@@ -41,4 +41,3 @@ enum UserRole: string
         };
     }
 }
-//'admin', 'moderator', 'blog_author', 'organizer', 'verified user', 'unverified user', 'guest']

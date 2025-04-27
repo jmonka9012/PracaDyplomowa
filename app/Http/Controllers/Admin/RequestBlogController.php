@@ -46,6 +46,7 @@ class RequestBlogController extends Controller
             'author_id'=>$authorID,
             'blog_post_name'=> $validatedData['post_name'],
             'blog_post_content'=> $validatedData['post_content'],
+            'blog_type' => $validatedData['post_type'],
             'thumbnail_path'=> $imagePath,
         ]);
         return redirect()->route('home');

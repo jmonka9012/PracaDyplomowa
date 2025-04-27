@@ -28,7 +28,7 @@ return new class extends Migration
             ->references('id')
             ->on('blog_authors');
 
-            $table->enum('blog_post_type', ['Poradnik' , 'Trendy', 'Marketing', 'Technologia', 'Brak'])
+            $table->enum('blog_post_type', ['Poradnik' , 'Trendy', 'Marketing', 'Technologia', 'Za Kulisami', 'Życiowe', 'Podsumowanie', 'Top 10', 'Brak'])
             ->default('Brak');
         });
 

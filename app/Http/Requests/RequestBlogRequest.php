@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
+use App\Enums\BlogPostType;
 
 class RequestBlogRequest extends FormRequest
 {
@@ -24,6 +26,10 @@ class RequestBlogRequest extends FormRequest
         return [
             'post_name' => 'required|string|max:255|unique:blog_posts,blog_post_name',
             'post_content' => 'required|max:65535',
+            'post_type' => [
+                'required',
+                new Enum(BlogPostType::class)
+            ],
             'post_image' => [
                 'required',
                 'image',

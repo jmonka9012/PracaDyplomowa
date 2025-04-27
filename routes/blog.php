@@ -17,9 +17,7 @@ Route::prefix('blog')->group(function() {
       Route::get('/', [BlogController::class, 'blogBrowser'])
             ->name('blog');
 
-      //Strona pojedynczego posta
-      Route::get('/post', [PostController::class, 'index'])->name('post');
-
+      //strona tworzenia postów
       Route::get('/dodaj-post', [RequestBlogController::class, 'index'])
             ->name('blog-create')
             ->middleware('blogAccess');
@@ -37,7 +35,7 @@ Route::prefix('blog')->group(function() {
             ->name('blog.show.data')
             ->Middleware('adminAccess');
 });
-
+//generacja stron posta
 Route::get('/{blog}', [BlogController::class, 'show'])
-      ->where('blog', 'blog/[0-9]{4}-[0-9]{2}-[0-9]{2}/([A-Za-z]+(-[A-Za-z]+)+)')
+      ->where('blog', 'blog/[0-9]{4}-[0-9]{2}-[0-9]{2}/([A-Za-z]+(-[A-Za-z0-9]+)+)')
       ->name('blog.show');

@@ -18,7 +18,7 @@ class EventBrowserResource extends JsonResource
             'id' => $this->id,
             'event_name' => $this->event_name,
             'event_url'=> $this->event_url,
-            'event_date' => $this->event_date->format('d-M-Y'),
+            'event_date' => $this->event_date->format('d.m.Y'),
             'event_start' => $this->event_start->format('H:i'),
             'event_end' => $this->event_end->format('H:i'),
             'event_location' => new HallResource($this->whenLoaded('hall')),

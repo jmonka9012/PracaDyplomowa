@@ -22,14 +22,7 @@ const props = defineProps({
                     {{ post.blog_date }}
                 </p>
                 <span class="divider divider-dark"></span>
-<!--                <template v-for="(cat, index) in event.category" :key="index">
-
-                    <span
-                        v-if="index < event.category.length - 1"
-                        class="divider divider-dark"
-                    ></span>
-                </template>-->
-                <Link :href="'/'" class="btn btn-white">
+                <Link :href="`${route('blog')}?blog_post_type=${post.blog_post_type}`" class="btn btn-white">
                     {{ post.blog_post_type }}
                 </Link>
             </div>

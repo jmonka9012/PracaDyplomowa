@@ -16,7 +16,7 @@ class StaticBlogPostSeeder extends Seeder
     public function run(): void
     {
         $blogContent =
-        '<p><img src="../storage/event_images/placeholder.jpg"></p>
+        '<p><img src="/storage/event_images/placeholder.jpg"></p>
         <hr>
         <div class="single-info" id="Content">
         <div id="bannerL">
