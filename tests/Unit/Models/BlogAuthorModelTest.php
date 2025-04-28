@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Models\Blog;
+namespace Tests\Unit\Models;
 
 use App\Models\Blog\BlogAuthor;
 use App\Models\Blog\BlogPost;
@@ -13,87 +13,73 @@ class BlogAuthorModelTest extends TestCase
 {
     use DatabaseTransactions;
 
+    protected User $user;
+    protected BlogAuthor $author;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->user = User::factory()->create();
+        $this->author = BlogAuthor::factory()->create(['user_id' => $this->user->id]);
     }
 
     #[Test]
     public function it_can_be_created_with_fillable_attributes()
     {
-        $author = BlogAuthor::create([
-            'user_id' => $this->user->id,
-            'author_image_path' => 'images/authors/author1.jpg',
-            'about_me' => 'About the author',
-        ]);
-
         $this->assertDatabaseHas('blog_authors', [
-            'id' => $author->id,
+            'id' => $this->author->id,
             'user_id' => $this->user->id,
-            'author_image_path' => 'images/authors/author1.jpg',
-            'about_me' => 'About the author',
+            'author_image_path' => $this->author->author_image_path,
+            'about_me' => $this->author->about_me,
         ]);
     }
 
     #[Test]
     public function it_has_a_user_relationship()
     {
-        $author = BlogAuthor::create([
-            'user_id' => $this->user->id,
-            'author_image_path' => 'path/to/image.jpg',
-            'about_me' => 'Test about me',
-        ]);
-
-        $this->assertInstanceOf(User::class, $author->user);
-        $this->assertEquals($this->user->id, $author->user->id);
+        $this->assertInstanceOf(User::class, $this->author->user);
+        $this->assertEquals($this->user->id, $this->author->user->id);
     }
 
     #[Test]
     public function it_has_posts_relationship()
     {
-        $author = BlogAuthor::create([
-            'user_id' => $this->user->id,
-            'author_image_path' => 'path/to/image.jpg',
-            'about_me' => 'Test about me',
-        ]);
+        $post = BlogPost::factory()->create(['author_id' => $this->author->id]);
 
-        $post = BlogPost::create([
-            'author_id' => $author->id,
-            'blog_post_name' => 'Test Post',
-            'blog_post_content' => 'Test content',
-            'blog_post_type' => 'Poradnik',
-        ]);
-
-        $this->assertTrue($author->posts->contains($post));
-        $this->assertInstanceOf(BlogPost::class, $author->posts->first());
-        $this->assertEquals('author_id', $author->posts()->getForeignKeyName());
+        $this->assertTrue($this->author->posts->contains($post));
+        $this->assertInstanceOf(BlogPost::class, $this->author->posts->first());
+        $this->assertEquals('author_id', $this->author->posts()->getForeignKeyName());
     }
 
     #[Test]
     public function it_has_fillable_attributes()
     {
-        $author = new BlogAuthor();
-        
-        $this->assertEquals([
+        $fillable = [
             'user_id',
             'author_image_path',
             'about_me',
             'created_at',
             'updated_at'
-        ], $author->getFillable());
+        ];
+        
+        $this->assertEquals($fillable, (new BlogAuthor())->getFillable());
     }
 
     #[Test]
     public function it_has_timestamps()
     {
-        $author = BlogAuthor::create([
-            'user_id' => $this->user->id,
-            'author_image_path' => 'path/to/image.jpg',
-            'about_me' => 'Test about me',
-        ]);
-        
-        $this->assertNotNull($author->created_at);
-        $this->assertNotNull($author->updated_at);
+        $this->assertNotNull($this->author->created_at);
+        $this->assertNotNull($this->author->updated_at);
+    }
+
+    #[Test]
+    public function it_uses_factory_states_correctly()
+    {
+        $customAbout = 'Custom about me text';
+        $author = BlogAuthor::factory()
+            ->withAboutMe($customAbout)
+            ->create();
+
+        $this->assertEquals($customAbout, $author->about_me);
     }
 }
