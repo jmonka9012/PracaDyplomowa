@@ -47,7 +47,7 @@ return [
             'email' => 'blog@admin.com',
             'password' => '12341234',
             'role' => 'blog_author',
-            'first_name' => "Blog",
+            'first_name' => "AdminBlog",
             'last_name' => "Machen", 
         ],
         [

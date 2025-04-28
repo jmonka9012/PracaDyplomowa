@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class UserModelTest extends TestCase
 {
@@ -21,6 +22,7 @@ class UserModelTest extends TestCase
         $this->assertEquals($role, $user->role);
     }
 
+    #[Test]
     public function test_password_is_automatically_hashed(): void
     {
         $password = 'secret';
@@ -38,6 +40,7 @@ class UserModelTest extends TestCase
         $this->assertEquals($expectedLevel, $user->getPermissionLevel());
     }
 
+    #[Test]
     public function test_hidden_fields_are_not_serialized(): void
     {
         $user = User::factory()->create();
@@ -47,6 +50,7 @@ class UserModelTest extends TestCase
         $this->assertArrayNotHasKey('remember_token', $userArray);
     }
 
+    #[Test]
     public function test_fillable_fields_are_mass_assignable(): void
     {
         $now = now();

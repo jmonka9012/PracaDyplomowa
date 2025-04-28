@@ -19,7 +19,7 @@ class BlogAuthor extends Model
 
     public function posts()
     {
-        return $this->hasMany(BlogPost::class);
+        return $this->hasMany(BlogPost::class, 'author_id');
     }
 
     public function user()

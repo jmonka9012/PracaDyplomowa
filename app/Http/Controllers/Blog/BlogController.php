@@ -16,9 +16,9 @@ class BlogController extends Controller
 {
     public function show($blog)
     {
-        $blog = BlogPost::with(['author.user']) // Load author and their user relation
-        ->where('blog_post_url', $blog)
-        ->firstOrFail();
+        $blog = BlogPost::with(['author.user'])
+            ->where('blog_post_url', $blog)
+            ->firstOrFail();
 
         if(!$blog){
             return redirect()->route('error404');
