@@ -16,7 +16,11 @@ class EventController extends Controller
     public function show($event)
     {
         $event = Event::where('event_url', $event)
-            ->with(['seats', 'standingTickets'])
+            ->with([
+                'seats',
+                'standingTickets',
+                'hall.sections'
+                ])
             ->first();
 
         if(!$event){
