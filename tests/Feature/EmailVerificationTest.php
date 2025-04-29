@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Unit\Http\Controllers\Auth;
+namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Http\Controllers\Auth\EmailVerificationController;

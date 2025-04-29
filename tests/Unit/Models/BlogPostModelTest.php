@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Models\Blog;
+namespace Tests\Unit\Models;
 
 use App\Models\Blog\BlogAuthor;
 use App\Models\Blog\BlogPost;

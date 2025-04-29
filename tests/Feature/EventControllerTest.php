@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers\Events;
+namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\Events\Event;
