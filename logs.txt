@@ -1,6 +1,0 @@
-
-Test Name: unauthorized_access_admin_test
-Result: PASSED
-Message: Brak dodatkowych wiadomości
-Timestamp: 4/27/2025, 10:34:27 PM
-  
