@@ -203,6 +203,9 @@ select {
         padding-left: 60px;
     }
 }
+.hero select {
+    min-width: 100%;
+}
 
 .error-msg {
     margin-top: 10px;

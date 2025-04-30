@@ -25,7 +25,7 @@ const props = defineProps({
                 </slot>
             </div>
             <form class="hero-form" action="submit">
-                <div class="input-wrap hero-input-wrap br-1 b-text-50">
+                <div class="input-wrap hero-input-wrap">
                     <i class="fa fa-search"></i>
                     <input
                         class="hero-input"
@@ -33,7 +33,7 @@ const props = defineProps({
                         placeholder="Wyszukaj po nazwie"
                     />
                 </div>
-                <div class="input-wrap hero-select-wrap br-1 b-text-50">
+                <div class="input-wrap hero-select-wrap">
                     <i class="fa fa-th-list"></i>
                     <select class="hero-select">
                         <option disabled selected value="">
@@ -118,6 +118,8 @@ const props = defineProps({
     flex-direction: column;
     row-gap: 20px;
     z-index: 1;
+    background-color: white;
+    border-radius: 8px;
 }
 
 @media screen and (min-width: 992px) {
@@ -174,11 +176,26 @@ const props = defineProps({
 
 .hero-input-wrap {
     width: 100%;
+    border-right: 1px solid var(--primary-lighter);
+    border-radius: 8px 0 0 8px;
+    input {
+        border-radius: 8px 0 0 8px;
+    }
+    @include mixin.media-breakpoint-down(xl) {
+        border-radius: 8px 8px 0px 0px;
+        input {
+            border-radius: 8px 8px 0px 0px;
+        }
+    }
 }
 
 .hero-select-wrap {
     width: 100%;
     position: relative;
+    border-right: 1px solid var(--primary-lighter);
+    &:last-of-type {
+        border-right: 0;
+    }
     &::after {
         position: absolute;
         display: block;
@@ -200,7 +217,7 @@ const props = defineProps({
 .hero-search {
     width: 100%;
     background-color: var(--primary);
-    border-radius: 0 4px 4px 0;
+    border-radius: 0 8px 8px 0;
     width: 100%;
     display: inline-block;
     height: 60px;
@@ -213,6 +230,12 @@ const props = defineProps({
     &:hover {
         background-color: var(--text);
         border-color: var(--text);
+    }
+    @include mixin.media-breakpoint-down(xl) {
+        border-radius: 0px 0px 8px 8px;
+        input {
+            border-radius: 0px 0px 8px 8px;
+        }
     }
 }
 
@@ -229,7 +252,9 @@ const props = defineProps({
         width: 20%;
     }
 }
-
+.hero-select {
+    border-radius: 0;
+}
 .hero-select option {
     padding: 6px 20px !important;
     appearance: none;
