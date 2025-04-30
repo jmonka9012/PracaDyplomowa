@@ -52,4 +52,9 @@ class Event extends EventBase
             ->take(3)
             ->get();
     }
+    
+    public function getEventGenres()
+        {
+            return $this->genres()->get();
+        }
 }

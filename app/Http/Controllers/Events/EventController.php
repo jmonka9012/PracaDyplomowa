@@ -53,7 +53,8 @@ class EventController extends Controller
             return redirect()->route('event.browser', ['page' => 1] + $request->except('page'));
         }
 
-        $query = Event::where('pending', false);
+        $query = Event::with('genres')
+        ->where('pending', false);
 
         if($request->has('event_name') && !empty($request->event_name)){
             $query->where('event_name', 'like', '%' . $request->event_name . '%');
@@ -105,7 +106,8 @@ class EventController extends Controller
 
     public function eventBrowserData(Event $event)
     {
-        $events = Event::where('pending', false)
+        $events = Event::with('genres')
+            ->where('pending', false)
             ->orderBy('event_date', 'asc')
             ->paginate(10);
         $genres = Genre::orderBy('id', 'asc')->get();
