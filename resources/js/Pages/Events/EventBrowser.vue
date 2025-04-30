@@ -67,7 +67,10 @@ console.log(route("event.browser"));
                     v-model="filterRequest.genres"
                     :options="genres"
                 ></MultiSelect>
-                <DatePicker v-model="filterRequest.date"></DatePicker>
+                <DatePicker
+                    format="MM/dd/yyyy"
+                    v-model="filterRequest.date"
+                ></DatePicker>
                 <input class="btn btn-md" type="submit" value="Filtruj" />
             </form>
             <Events :events="props.events.data" :genres="props.genres" />

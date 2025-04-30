@@ -13,7 +13,7 @@ import {
     addDays,
     addWeeks,
 } from "date-fns";
-const date = ref();
+const date = ref(new Date());
 
 const today = new Date();
 
@@ -77,6 +77,7 @@ const presetDates = ref([
         locale="pl"
         :day-names="['pon', 'wto', 'śro', 'czw', 'pią', 'sob', 'nie']"
         :preview-format="null"
+        model-type="dd-MM-yyyy"
     >
         <template #dp-input="{ value, onInput, onEnter, onTab, isMenuOpen }">
             <div class="dp__input_wrap" :class="{ open: isMenuOpen }">
