@@ -20,16 +20,41 @@ const props = defineProps({
     }
 });
 
+const hall = props.event.data.event_location;
+
+function isTaken(sectionID, row, col) {
+    for (const seat of props.event.data.seats) {
+        if (
+            seat.hall_section_id === sectionID &&
+            seat.seat_row        === row       &&
+            seat.seat_number     === col       &&
+            (seat.status === 'sold' || seat.status === 'reserved')
+        ) {
+            return 'true';
+        }
+    }
+    return false;
+}
+
+function AvailibleTickets(hRow, hCol, sID) {
+    for(const section of props.event.data.standing_tickets) {
+        if (section.hall_section_id === sID) {
+            return section.sold;
+        }
+    }
+    return null;
+}
+
 console.log(props);
 </script>
 
 <template>
-    <HeroSmall :source="blogBg" :title="event.data.event_name" />
+    <HeroSmall :source="blogBg" :title="event.data.event_name"/>
     <section class="single">
         <div class="container container-small">
             <div class="single__content">
                 <div class="single__intro">
-                    <img :src="'/storage/' + event.data.image_path" alt="" />
+                    <img :src="'/storage/' + event.data.image_path" alt=""/>
                 </div>
                 <h1 class="single__title">
                     {{ event.data.event_name }}
@@ -39,7 +64,7 @@ console.log(props);
                         <h6 class="mb-13px">Event date:</h6>
                         <p>
                             {{ event.data.event_start }} -
-                            {{ event.data.event_end }} <br />
+                            {{ event.data.event_end }} <br/>
                             {{ event.data.event_date }}
                         </p>
                     </div>
@@ -52,14 +77,14 @@ console.log(props);
                         <a
                             class="hover-primary text-underline"
                             :href="'mailto:' + event.data.contact_email"
-                            >{{ event.data.contact_email }}</a
+                        >{{ event.data.contact_email }}</a
                         >
                         <a
                             class="hover-primary text-underline"
                             :href="
                                 'mailto:' + event.data.contact_email_additional
                             "
-                            >{{ event.data.contact_email_additional }}</a
+                        >{{ event.data.contact_email_additional }}</a
                         >
                     </div>
                 </div>
@@ -69,7 +94,91 @@ console.log(props);
                 <div class="mb-65px">
                     {{ event.data.event_description_additional }}
                 </div>
-                <img class="single__map" :src="SingleMap" alt="" />
+                <h4 class="mb-18px">Miejsca</h4>
+                <div>
+                    <h5>{{ hall.hall_name }}</h5>
+                    <div>
+                        <div>
+                            <div class="d-flex flex-column">
+                                <div class="d-flex align-items-center">
+                                    <div class="legend legend-stand"></div>
+                                    <p>Sekcje z miejscami stojącymi</p>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="legend legend-seat"></div>
+                                    <p>Sekcje z miejscami siedzącymi</p>
+                                </div>
+                            </div>
+                            <div class="scene">scena</div>
+                            <div
+                                class="hall__row"
+                                v-for="(row, hrowIndex) in hall.hall_height"
+                                :key="hrowIndex"
+                            >
+                                <div
+                                    class="hall__col"
+                                    v-for="(col, hcolIndex) in hall.hall_width"
+                                    :key="hcolIndex"
+                                >
+                                    <div
+                                        class="petla"
+                                        v-for="section in hall.sections.filter(
+                                            (section) =>
+                                                section.section_height ===
+                                                    hrowIndex + 1 &&
+                                                section.section_width ===
+                                                    hcolIndex + 1
+                                        )"
+                                        :key="section.id"
+                                    >
+<!--
+                                        Div boży 1
+-->
+                                        <div
+                                            class="hall__section-seat"
+                                            v-if="
+                                                section.section_type === 'seat'
+                                            "
+                                        >
+                                            <div class="hall__seat-cont">
+                                                <div
+                                                    class="hall__section-row"
+                                                    v-for="(
+                                                        row, rowIndex
+                                                    ) in section.row"
+                                                    :key="rowIndex"
+                                                >
+                                                    <div
+                                                        class="hall__seat"
+                                                        v-for="(
+                                                            col, colIndex
+                                                        ) in section.col"
+                                                        :key="colIndex"
+                                                        :data-sID="section.id"
+                                                        :data-col="colIndex"
+                                                        :data-row="rowIndex"
+                                                        :class="{ 'taken': isTaken(section.id, rowIndex + 1, colIndex + 1) }"
+                                                    ></div>
+                                                </div>
+                                            </div>
+                                        </div>
+<!--
+                                        Div boży 2
+-->
+                                        <div v-else class="hall__section-stand">
+                                            <div class="hall__seat-cont">
+                                                <div v-html="`${AvailibleTickets(hrowIndex + 1, hcolIndex + 1, section.id)}/${section.capacity}`">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <img class="single__map" :src="SingleMap" alt=""/>
                 <div class="bb-1 b-secondary"></div>
                 <div
                     class="d-flex row-gap-10px column-gap-10px mt-30px mb-100px"
@@ -80,7 +189,7 @@ console.log(props);
                             url
                         )}`"
                         target="_blank"
-                        ><i class="fab fa-twitter"></i
+                    ><i class="fab fa-twitter"></i
                     ></a>
 
                     <a
@@ -91,7 +200,7 @@ console.log(props);
                         target="_blank"
                     >
                         <i class="fab fa-facebook"></i
-                    ></a>
+                        ></a>
 
                     <a
                         class="social-link"
@@ -101,44 +210,44 @@ console.log(props);
                         target="_blank"
                     >
                         <i class="fab fa-pinterest"></i
-                    ></a>
+                        ></a>
                 </div>
                 <h3 class="mb-30px">Related Events</h3>
-                <EventsAlt :events="props.related_events" />
-<!--                 <h3 class="mb-40px">Leave a Reply</h3>
-                <p class="fs-14 mb-20px">
-                    Your email address will not be published. Required fields
-                    are marked *
-                </p>
-                 <form action="" class="form">
-                    <div class="input-wrap col-12 col-lg-6">
-                        <input type="text" placeholder="Your Name*" required />
-                    </div>
-                    <div class="input-wrap col-12 col-lg-6">
-                        <input type="text" placeholder="Your Email*" required />
-                    </div>
-                    <div class="input-wrap col-12">
-                        <input type="text" placeholder="Website" />
-                    </div>
-                    <div class="input-wrap col-12">
-                        <textarea placeholder="Your Comment..."></textarea>
-                    </div>
-                    <div class="input-wrap input-wrap-check col-12">
-                        <input
-                            type="checkbox"
-                            v-model="toggle"
-                            true-value="yes"
-                            false-value="no"
-                        />
-                        <label for="checkbox"
-                            >Save my name, email, and website in this browser
-                            for the next time I comment.
-                        </label>
-                    </div>
-                    <div class="input-wrap col-12">
-                        <input type="submit" value="post comment" />
-                    </div>
-                </form>-->
+                <EventsAlt :events="props.related_events"/>
+                <!--                 <h3 class="mb-40px">Leave a Reply</h3>
+                                <p class="fs-14 mb-20px">
+                                    Your email address will not be published. Required fields
+                                    are marked *
+                                </p>
+                                 <form action="" class="form">
+                                    <div class="input-wrap col-12 col-lg-6">
+                                        <input type="text" placeholder="Your Name*" required />
+                                    </div>
+                                    <div class="input-wrap col-12 col-lg-6">
+                                        <input type="text" placeholder="Your Email*" required />
+                                    </div>
+                                    <div class="input-wrap col-12">
+                                        <input type="text" placeholder="Website" />
+                                    </div>
+                                    <div class="input-wrap col-12">
+                                        <textarea placeholder="Your Comment..."></textarea>
+                                    </div>
+                                    <div class="input-wrap input-wrap-check col-12">
+                                        <input
+                                            type="checkbox"
+                                            v-model="toggle"
+                                            true-value="yes"
+                                            false-value="no"
+                                        />
+                                        <label for="checkbox"
+                                            >Save my name, email, and website in this browser
+                                            for the next time I comment.
+                                        </label>
+                                    </div>
+                                    <div class="input-wrap col-12">
+                                        <input type="submit" value="post comment" />
+                                    </div>
+                                </form>-->
             </div>
         </div>
     </section>
@@ -146,6 +255,7 @@ console.log(props);
 
 <style scoped lang="scss">
 @use "~css/mixin.scss";
+
 .single {
     &__content {
         width: 100%;
@@ -159,14 +269,17 @@ console.log(props);
             margin-bottom: 110px;
         }
     }
+
     &__intro {
         margin-bottom: 50px;
         display: flex;
         justify-content: center;
+
         img {
             max-height: 600px;
         }
     }
+
     &__title {
         margin-bottom: 50px;
         font-size: 28px;
@@ -177,6 +290,7 @@ console.log(props);
             font-size: 42px;
         }
     }
+
     &__details {
         display: grid;
         grid-template-columns: 1fr;
@@ -184,6 +298,7 @@ console.log(props);
             grid-template-columns: repeat(3, 1fr);
             grid-column-gap: 60px;
         }
+
         div {
             font-size: 12px;
             line-height: 30px;
@@ -193,6 +308,7 @@ console.log(props);
             display: flex;
             flex-direction: column;
             margin: 0;
+
             &::before {
                 position: absolute;
                 left: 0px;
@@ -207,19 +323,23 @@ console.log(props);
         p {
         }
     }
+
     &__map {
         margin-bottom: 50px;
     }
+
     h3 {
         font-size: 24px;
         @include mixin.media-breakpoint-up(lg) {
             font-size: 36px;
         }
     }
+
     h4 {
         color: var(--text);
     }
 }
+
 textarea {
     height: 85px;
 }
