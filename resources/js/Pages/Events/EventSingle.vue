@@ -2,10 +2,10 @@
 import EventsAlt from "@/Components/Sections/EventsAlt.vue";
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 
-import HellSpit from "~images/hellspit.jpg";
-import BangPow from "~images/bangpow.jpg";
 import SingleMap from "~images/single-map.jpg";
 import blogBg from "~images/single-map.jpg";
+
+import {reactive, ref} from "vue";
 
 const url = window.location.href;
 
@@ -45,7 +45,70 @@ function AvailibleTickets(hRow, hCol, sID) {
     return null;
 }
 
-console.log(props);
+const standingTickets = reactive({});
+function InitStandingTickets() {
+    props.event.data.standing_tickets.forEach((section) => {
+        if (!standingTickets[section.hall_section_id]) {
+            standingTickets[section.hall_section_id] = {};
+        }
+        standingTickets[section.hall_section_id].hall_section_id = section.hall_section_id;
+        standingTickets[section.hall_section_id].price = section.price;
+        standingTickets[section.hall_section_id].amount = null;
+    });
+}
+InitStandingTickets();
+
+console.log(standingTickets);
+
+const seats = reactive({});
+function InitSeats() {
+    props.event.data.seats.forEach((seat) => {
+        if (!seats[seat.hall_section_id]) {
+            seats[seat.hall_section_id] = {};
+        }
+        if (!seats[seat.hall_section_id][seat.seat_row]) {
+            seats[seat.hall_section_id][seat.seat_row] = {};
+        }
+        if (!seats[seat.hall_section_id][seat.seat_row][seat.seat_number]) {
+            seats[seat.hall_section_id][seat.seat_row][seat.seat_number] = {};
+        }
+        seats[seat.hall_section_id][seat.seat_row][seat.seat_number] = {
+            hall_section_id: seat.hall_section_id,
+            price: seat.price,
+            seat_row: seat.seat_row,
+            seat_number: seat.seat_number,
+            id: seat.id,
+            status: seat.status,
+            chosen: false,
+        };
+    });
+}
+InitSeats();
+
+console.log(seats);
+
+const seatTickets = reactive({});
+
+function HandleSeat(sID, row, col) {
+    if (seats[sID][row][col].status === 'available') {
+        if (seats[sID][row][col].chosen === false) {
+            seats[sID][row][col].chosen = true;
+            if(!seatTickets[seats[sID][row][col].id]) {
+                seatTickets[seats[sID][row][col].id] = {};
+            }
+            seatTickets[seats[sID][row][col].id] = seats[sID][row][col];
+        } else {
+            seats[sID][row][col].chosen = false;
+            delete seatTickets[seats[sID][row][col].id];
+        }
+    }
+    console.log(seatTickets);
+}
+
+function SubmitTicketRequest() {
+
+}
+
 </script>
 
 <template>
@@ -98,7 +161,7 @@ console.log(props);
                 <div>
                     <h5>{{ hall.hall_name }}</h5>
                     <div>
-                        <div>
+                        <form class="mb-40px" @submit.prevent="SubmitTicketRequest">
                             <div class="d-flex flex-column">
                                 <div class="d-flex align-items-center">
                                     <div class="legend legend-stand"></div>
@@ -153,11 +216,11 @@ console.log(props);
                                                         v-for="(
                                                             col, colIndex
                                                         ) in section.col"
+                                                        @click="HandleSeat(section.id, rowIndex + 1, colIndex + 1)"
                                                         :key="colIndex"
                                                         :data-sID="section.id"
-                                                        :data-col="colIndex"
-                                                        :data-row="rowIndex"
-                                                        :class="{ 'taken': isTaken(section.id, rowIndex + 1, colIndex + 1) }"
+                                                        :data-col="colIndex + 1"
+                                                        :class="{ 'taken': isTaken(section.id, rowIndex + 1, colIndex + 1), 'chosen': seats[section.id][rowIndex+1][colIndex+1].chosen }"
                                                     ></div>
                                                 </div>
                                             </div>
@@ -168,14 +231,15 @@ console.log(props);
                                         <div v-else class="hall__section-stand">
                                             <div class="hall__seat-cont">
                                                 <div v-html="`${AvailibleTickets(hrowIndex + 1, hcolIndex + 1, section.id)}/${section.capacity}`">
-
                                                 </div>
+                                                <input @input="console.log(standingTickets)" v-model="standingTickets[section.id].amount" class="stand-input" v-number-only type="text" placeholder="Ilość">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <button type="submit" class="btn btn-md">Kup bilety</button>
+                        </form>
                     </div>
                 </div>
                 <img class="single__map" :src="SingleMap" alt=""/>
@@ -212,7 +276,7 @@ console.log(props);
                         <i class="fab fa-pinterest"></i
                         ></a>
                 </div>
-                <h3 class="mb-30px">Related Events</h3>
+                <h3 class="mb-30px align-self-middle">Related Events</h3>
                 <EventsAlt :events="props.related_events"/>
                 <!--                 <h3 class="mb-40px">Leave a Reply</h3>
                                 <p class="fs-14 mb-20px">
@@ -255,6 +319,27 @@ console.log(props);
 
 <style scoped lang="scss">
 @use "~css/mixin.scss";
+
+.stand-input {
+    padding: 20px;
+    border: 1px solid #E3AD84;
+    border-radius: 8px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.hall {
+    &__seat {
+        &.taken {
+            pointer-events: none;
+        }
+        &.chosen {
+            background-color: var(--yellow);
+        }
+    }
+}
 
 .single {
     &__content {
