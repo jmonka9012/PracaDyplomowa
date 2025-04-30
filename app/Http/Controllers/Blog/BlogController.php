@@ -24,17 +24,22 @@ class BlogController extends Controller
             return redirect()->route('error404');
         }
 
+        $relatedPosts = $blog->getRelatedPosts();
+
         return Inertia::render('Blog/BlogSingle', [
             'blog_post' => new BlogResource($blog),
+            'related_posts' => BlogPostBrowserResource::collection($relatedPosts),
         ]);
     }
 
     public function showData(BlogPost $blog)
     {
         $blog->load(['author.user']);
-            
+        $relatedPosts = $blog->getRelatedPosts();
+
         return response()->json([
             'blog_post' => new BlogResource($blog),
+            'related_posts' => BlogPostBrowserResource::collection($relatedPosts),
         ]);
     }
 

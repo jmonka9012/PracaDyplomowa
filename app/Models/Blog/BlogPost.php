@@ -27,4 +27,13 @@ class BlogPost extends Model
     {
         return $this->belongsTo(BlogAuthor::class, 'author_id');
     }
+
+    public function getRelatedPosts()
+    {
+        return static::where('blog_post_type', $this->blog_post_type)
+            ->where('id', '!=', $this->id)
+            ->orderByRaw('ABS(DATEDIFF(created_at, ?))', [$this->created_at])
+            ->take(3)
+            ->get();
+    }
 }
