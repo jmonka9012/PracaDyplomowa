@@ -9,12 +9,16 @@ const props = defineProps({
     blog_post: {
         type: Array,
         required: true
+    },
+    related_posts: {
+        type: Array,
+        required: true,
     }
 });
 
 const post = props.blog_post.data;
 
-console.log(props.blog_post);
+console.log(props.related_posts);
 
 </script>
 
@@ -82,7 +86,7 @@ console.log(props.blog_post);
         </div>
         <section class="section pb-100px">
             <div class="container container-small">
-                <PostQuery evContClass="ev-cont-lg-three" :latest="latest">
+                <PostQuery evContClass="ev-cont-lg-three" :blog_posts="props.related_posts.data">
                 </PostQuery>
             </div>
         </section>

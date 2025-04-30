@@ -3,6 +3,7 @@ import Events from "@/Components/Sections/Events.vue";
 import { Link } from "@inertiajs/vue3";
 import DatePicker from "@/Components/Partials/DatePicker.vue";
 import MultiSelect from "@/Components/Partials/MultiSelect.vue";
+import { router } from '@inertiajs/vue3'
 
 import { reactive, watch, computed, ref } from "vue";
 
@@ -28,20 +29,44 @@ props.genres.forEach((genre, index) => {
     };
 });
 
+
 const filterRequest = reactive({
-    phrase: null,
-    date: null,
+    event_name: null,
     genres: null,
+    date: null,
 });
 
 function submitFilterRequest() {
-    let hadError = ref(false);
+    const filters = {};
 
-    console.log(filterRequest);
+    if (filterRequest.date) {
+        if (Array.isArray(filterRequest.date)) {
+            if (filterRequest.date[1]) {
+                filters.date_from = filterRequest.date[0];
+                filters.date_to = filterRequest.date[1];
+            } else if (filterRequest.date[0]) {
+                filters.date = filterRequest.date[0];
+            }
+        } else {
+            filters.date = filterRequest.date;
+        }
+    }
+
+    if (filterRequest.genres?.length) {
+        filters.genres = filterRequest.genres
+            .filter(genre => genre)
+            .map(genre => genre.id || genre.value);
+    }
+
+    if (filterRequest.event_name) {
+        filters.event_name = filterRequest.event_name;
+    }
+
+    router.get(route('event.browser'), filters, {
+        replace: true,
+    });
 }
 
-console.log(props);
-console.log(route("event.browser"));
 </script>
 
 <template>
@@ -56,7 +81,7 @@ console.log(route("event.browser"));
                 <div class="input-wrap relative col-12">
                     <input
                         placeholder="Szukaj po nazwie"
-                        v-model="filterRequest.phrase"
+                        v-model="filterRequest.event_name"
                         type="text"
                         class="search-input"
                     />
