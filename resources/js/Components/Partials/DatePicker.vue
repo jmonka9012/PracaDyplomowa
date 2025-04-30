@@ -332,4 +332,8 @@ const presetDates = ref([
         color: white;
     }
 }
+
+.dp--clear-btn {
+    display: none;
+}
 </style>
