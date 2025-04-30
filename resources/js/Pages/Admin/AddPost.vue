@@ -139,9 +139,22 @@ function submitPostRequest() {
                 </div>
                 <div class="input-wrap col-12">
                     <label for="post-title">Kategoria wpisu*</label>
-                    <select required v-model="postForm.post_type" name="post-category" id="">
-                        <option selected disabled value="0">Wybierz kategorię</option>
-                        <option v-for="category in props.post_types" :key="category.id" :value="category">{{category}}</option>
+                    <select
+                        required
+                        v-model="postForm.post_type"
+                        name="post-category"
+                        id=""
+                    >
+                        <option disabled :value="null">
+                            Wybierz kategorię
+                        </option>
+                        <option
+                            v-for="category in props.post_types"
+                            :key="category.id"
+                            :value="category"
+                        >
+                            {{ category }}
+                        </option>
                     </select>
                 </div>
                 <div class="error-msg" v-if="errors.post_type">
