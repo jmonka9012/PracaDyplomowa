@@ -74,7 +74,9 @@ class BlogController extends Controller
             }
         }
 
-        $blog_posts = $query->paginate(12);
+        $blog_posts = $query
+            ->paginate(12)
+            ->appends($request->query());
 
         $blogPostTypes = BlogPostType::values();
 

@@ -86,7 +86,8 @@ class EventController extends Controller
         
         $events = $query
             ->orderBy('event_date', 'asc')
-            ->paginate(10);
+            ->paginate(10)
+            ->appends($request->query());
 
         $genres = Genre::orderBy('id', 'asc')->get();
 
