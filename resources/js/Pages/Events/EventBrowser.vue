@@ -20,6 +20,8 @@ const props = defineProps({
     },
 });
 
+console.log(props.events);
+
 let genres = [];
 
 props.genres.forEach((genre, index) => {
@@ -76,14 +78,14 @@ function submitFilterRequest() {
             <h3 class="title-1 mb-20px">Przyszłe wydarzenia</h3>
             <form
                 @submit.prevent="submitFilterRequest()"
-                class="select-filters col-12 col-lg-8"
+                class="select-filters col-12 col-lg-8 align-items-center d-flex flex-column"
             >
                 <div class="input-wrap relative col-12">
                     <input
                         placeholder="Szukaj po nazwie"
                         v-model="filterRequest.event_name"
                         type="text"
-                        class="search-input"
+                        class="search-input pl-10px"
                     />
                     <i class="fa fa-search search-icon"></i>
                 </div>
@@ -96,7 +98,7 @@ function submitFilterRequest() {
                     format="MM/dd/yyyy"
                     v-model="filterRequest.date"
                 ></DatePicker>
-                <input class="btn btn-md" type="submit" value="Filtruj" />
+                <input id="submitFilter" class="btn cursor-pointer btn-md mt-30px" type="submit" value="Filtruj" />
             </form>
             <Events :events="props.events.data" :genres="props.genres" />
             <div class="event-pagination">
@@ -115,4 +117,8 @@ function submitFilterRequest() {
     </section>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+#submitFilter {
+    min-width: 200px;
+}
+</style>

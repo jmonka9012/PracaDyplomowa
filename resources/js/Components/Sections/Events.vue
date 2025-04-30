@@ -11,12 +11,6 @@ const props = defineProps({
     },
 });
 
-const filterRequest = reactive({
-    genres: null,
-    date: null,
-    phrase: null,
-});
-
 const scrollContainer = ref(null);
 const scrollAmount = 50;
 
@@ -58,8 +52,8 @@ const scrollRight = () => {
                 <i class="fa fa-calendar mr-5px"></i>{{ event.event_date }}
             </p>
             <p class="event-subtitle">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed,
-                eum?
+                Kategorie: <Link class="event-category-link" :href="`${route('event.browser')}?genres=${genre.id}`"  v-for="(genre, index) in event.genres">{{ genre.name }}<span v-if="index < event.genres.length - 1">, </span>
+            </Link>
             </p>
             <Link class="event-link d-lg-none" :href="`/${event.event_url}`"
                 ><i class="fa fa-ticket"></i>
@@ -90,6 +84,14 @@ const scrollRight = () => {
         flex-direction: row;
         justify-content: space-between;
         align-items: start;
+    }
+
+    &-category-link {
+        transition: color .2s ease-out;
+
+        &:hover {
+            color: var(--primary);
+        }
     }
 
     &-img {

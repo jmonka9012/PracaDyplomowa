@@ -55,6 +55,10 @@ body {
     overflow-x: scroll;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 #app {
     //overflow-x: hidden;
     display: flex;
