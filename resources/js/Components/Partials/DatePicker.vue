@@ -107,20 +107,25 @@ const presetDates = ref([
                 {{ label }}
             </span>
         </template>
-
-        <template #action-row="{ onCancel, onSelect }">
+        <template #action-row="{ internalModelValue, selectDate, closePicker }">
             <div class="dp__action_buttons">
                 <button
                     type="button"
                     class="dp__action_button dp__action_cancel"
-                    @click="onCancel"
+                    @click="closePicker"
                 >
                     Anuluj
                 </button>
                 <button
                     type="button"
                     class="dp__action_button dp__action_select"
-                    @click="onSelect"
+                    @click="
+                        () => {
+                            selectDate();
+                            closePicker();
+                            console.log('Selected:', internalModelValue);
+                        }
+                    "
                 >
                     Wybierz
                 </button>
