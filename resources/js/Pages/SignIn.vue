@@ -7,11 +7,10 @@ import { debounce } from "@/Utilities/debounce";
 import ResetObject from "@/Utilities/resetObject";
 import axios from "axios";
 
-
 const isVis = ref(false);
 
-const params = new URLSearchParams(window.location.search)
-isVis.value = params.get('reg') === 'true' || false;
+const params = new URLSearchParams(window.location.search);
+isVis.value = params.get("reg") === "true" || false;
 
 const RegShow = () => {
     if (!isVis.value) {
@@ -122,7 +121,7 @@ function submitRegisterRequest() {
         },
         onSuccess: () => {
             hadError = false;
-        }
+        },
     });
 }
 </script>
@@ -193,7 +192,9 @@ function submitRegisterRequest() {
                 :class="{ show: isVis }"
             >
                 <h1 class="title-1 mb-20px">Rejestracja</h1>
-                <button @click="console.log(registerForm)" class="btn btn-md">Loguj formularz rejestracyjny</button>
+                <button @click="console.log(registerForm)" class="btn btn-md">
+                    Loguj formularz rejestracyjny
+                </button>
                 <form class="form" @submit.prevent="submitRegisterRequest">
                     <div class="input-wrap col-12">
                         <label for="register-username"
@@ -337,7 +338,10 @@ function submitRegisterRequest() {
                             Chcę założyć konto organizatora.
                         </label>
                     </div>
-                    <div class="organizer-form" v-if="registerForm.organizer_request">
+                    <div
+                        class="organizer-form"
+                        v-if="registerForm.organizer_request"
+                    >
                         <div class="input-wrap col-12">
                             <label for="register-username">Nazwa firmy*</label>
                             <input
@@ -349,12 +353,23 @@ function submitRegisterRequest() {
                                 spellcheck="false"
                                 v-model="organizerDetails.company_name"
                             />
-                            <div class="error-msg" v-if="registerErrors.organizer_details?.company_name">
-                                {{ registerErrors.organizer_details.company_name }}
+                            <div
+                                class="error-msg"
+                                v-if="
+                                    registerErrors.organizer_details
+                                        ?.company_name
+                                "
+                            >
+                                {{
+                                    registerErrors.organizer_details
+                                        .company_name
+                                }}
                             </div>
                         </div>
                         <div class="input-wrap col-12">
-                            <label for="register-username">Telefon kontaktowy*</label>
+                            <label for="register-username"
+                                >Telefon kontaktowy*</label
+                            >
                             <input
                                 type="tel"
                                 id="register-company-number"
@@ -365,8 +380,17 @@ function submitRegisterRequest() {
                                 spellcheck="false"
                                 v-model="organizerDetails.phone_number"
                             />
-                            <div class="error-msg" v-if="registerErrors.organizer_details?.phone_number">
-                                {{ registerErrors.organizer_details.phone_number }}
+                            <div
+                                class="error-msg"
+                                v-if="
+                                    registerErrors.organizer_details
+                                        ?.phone_number
+                                "
+                            >
+                                {{
+                                    registerErrors.organizer_details
+                                        .phone_number
+                                }}
                             </div>
                         </div>
                         <div class="input-wrap col-12">
@@ -381,8 +405,16 @@ function submitRegisterRequest() {
                                 spellcheck="false"
                                 v-model="organizerDetails.company_nip"
                             />
-                            <div class="error-msg" v-if="registerErrors.organizer_details?.company_nip">
-                                {{ registerErrors.organizer_details.company_nip }}
+                            <div
+                                class="error-msg"
+                                v-if="
+                                    registerErrors.organizer_details
+                                        ?.company_nip
+                                "
+                            >
+                                {{
+                                    registerErrors.organizer_details.company_nip
+                                }}
                             </div>
                         </div>
                         <div class="input-wrap col-12">
@@ -396,12 +428,23 @@ function submitRegisterRequest() {
                                 spellcheck="false"
                                 v-model="organizerDetails.company_address"
                             />
-                            <div class="error-msg" v-if="registerErrors.organizer_details?.company_address">
-                                {{ registerErrors.organizer_details.company_address }}
+                            <div
+                                class="error-msg"
+                                v-if="
+                                    registerErrors.organizer_details
+                                        ?.company_address
+                                "
+                            >
+                                {{
+                                    registerErrors.organizer_details
+                                        .company_address
+                                }}
                             </div>
                         </div>
                         <div class="input-wrap col-12">
-                            <label for="register-username">Numer konta bankowego*</label>
+                            <label for="register-username"
+                                >Numer konta bankowego*</label
+                            >
                             <input
                                 type="text"
                                 v-number-only
@@ -412,8 +455,17 @@ function submitRegisterRequest() {
                                 spellcheck="false"
                                 v-model="organizerDetails.bank_account"
                             />
-                            <div class="error-msg" v-if="registerErrors.organizer_details?.bank_account">
-                                {{ registerErrors.organizer_details.bank_account }}
+                            <div
+                                class="error-msg"
+                                v-if="
+                                    registerErrors.organizer_details
+                                        ?.bank_account
+                                "
+                            >
+                                {{
+                                    registerErrors.organizer_details
+                                        .bank_account
+                                }}
                             </div>
                         </div>
                     </div>
@@ -439,8 +491,12 @@ function submitRegisterRequest() {
     width: 100%;
     z-index: 5;
     margin-bottom: 30px;
+    label {
+        margin-bottom: 10px;
+    }
 
-    input, textarea {
+    input,
+    textarea {
         border-radius: 8px;
         background-color: #fff !important;
     }
