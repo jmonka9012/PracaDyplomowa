@@ -24,6 +24,7 @@ const hall = props.event.data.event_location;
 const seats = reactive({});
 const standingTickets = reactive({});
 const seatTickets = reactive({});
+const standingSectionPrices = reactive({});
 const summary = reactive({
     seats: null,
     seats_price: null,
@@ -68,8 +69,18 @@ function InitSeats() {
         };
     });
 }
+function InitSectionPrices() {
+    Object.keys(props.event.data.standing_tickets).forEach((key) => {
+        if (!standingSectionPrices[props.event.data.standing_tickets[key].hall_section_id]) {
+            standingSectionPrices[props.event.data.standing_tickets[key].hall_section_id] = {};
+        }
+        standingSectionPrices[props.event.data.standing_tickets[key].hall_section_id].price = props.event.data.standing_tickets[key].price;
+    });
+    console.log(standingSectionPrices);
+}
 InitStandingTickets();
 InitSeats();
+InitSectionPrices();
 
 watch(seatTickets, (newState) => {
     let price = 0;
@@ -254,7 +265,22 @@ function SubmitTicketRequest() {
                                                         :data-sID="section.id"
                                                         :data-col="colIndex + 1"
                                                         :class="{ 'taken': isTaken(section.id, rowIndex + 1, colIndex + 1), 'chosen': seats[section.id][rowIndex+1][colIndex+1].chosen }"
-                                                    ></div>
+                                                    >
+                                                        <div class="hall__seat-tooltip">
+                                                            <div class="d-flex">
+                                                                <div>rząd: </div>
+                                                                <div>{{ rowIndex + 1 }}</div>
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <div>kolumna: </div>
+                                                                <div>{{ colIndex + 1 }}</div>
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <div>cena: </div>
+                                                                <div>{{ seats[section.id][rowIndex+1][colIndex+1].price }}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -263,15 +289,15 @@ function SubmitTicketRequest() {
 -->
                                         <div v-else class="hall__section-stand">
                                             <div class="hall__seat-cont">
-                                                <div v-html="`${AvailibleTickets(hrowIndex + 1, hcolIndex + 1, section.id)}/${section.capacity}`">
-                                                </div>
+                                                <div v-html="`${AvailibleTickets(hrowIndex + 1, hcolIndex + 1, section.id)}/${section.capacity}`"></div>
+                                                <div>{{ standingSectionPrices[section.id].price }} pln</div>
                                                 <input @input="" v-model="standingTickets[section.id].amount" class="stand-input" v-number-only type="text" placeholder="Ilość">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex flex-column">
+                            <div v-if="summary" class="d-flex flex-column mb-40px">
                                 <div class="d-flex flex-row" v-if="summary.seats && summary.seats_price">
                                     <div class="mr-40px">Ilość wybranych miejsc siedzących: {{summary.seats}}</div>
                                     <div class="mr-40px">Cena wybranych miejsc siedzących: {{summary.seats_price}}</div>
@@ -282,7 +308,7 @@ function SubmitTicketRequest() {
                                 </div>
                                 <div class="d-flex flex-row" v-if="summary.standing && summary.standing_price && summary.seats && summary.seats_price">
                                     <div class="mr-40px">Łączna ilość wybranych miejsc: {{summary.standing + summary.seats}}</div>
-                                    <div class="mr-40px">Łączna cena wybranych miejsc: {{summary.standing_price + summary.seats_price}}</div>
+                                    <div class="mr-40px">Łączna cena wybranych miejsc: {{(summary.standing_price + summary.seats_price).toFixed(2)}}</div>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-md mb-30px">Kup bilety</button>
