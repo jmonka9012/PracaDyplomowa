@@ -10,6 +10,7 @@ const props = defineProps({
     },
 });
 
+<<<<<<< Updated upstream
 const searchForm = reactive({
     phrase: null,
     genres: null,
@@ -19,6 +20,8 @@ const searchForm = reactive({
 function SearchEvents() {
 
 }
+=======
+>>>>>>> Stashed changes
 const filterRequest = reactive({
     date: null,
 });
@@ -175,7 +178,7 @@ const filterRequest = reactive({
     border: 0;
     font-family: "Krona one";
     &::placeholder {
-        color: var(--text);
+        color: #495057;
     }
 }
 

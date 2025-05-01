@@ -3,7 +3,7 @@ import ctaCloud from "~images/cta-cloud.png";
 import spiral from "~images/spiral.png";
 import IconRotate from "@/Components/icons/IconRotate.vue";
 
-import {onMounted} from "vue";
+import { onMounted } from "vue";
 
 onMounted(() => {
     const animatedStickySections = document.querySelectorAll(
@@ -88,7 +88,7 @@ onMounted(() => {
         window.addEventListener("scroll", UpdateText);
         UpdateText();
     });
-})
+});
 </script>
 
 <template>
@@ -104,8 +104,8 @@ onMounted(() => {
 
             <div class="container">
                 <h1
-                    data-from="red"
-                    data-to="yellow"
+                    data-from="#000000"
+                    data-to="#f4ecff"
                     class="animated-sticky-section__target as-heading"
                 >
                     Poznaj nasz nowoczesny obiekt
@@ -144,7 +144,7 @@ onMounted(() => {
     }
 }
 
-.letter {
+.as-heading span {
     transition: color 0.8s ease-in-out;
 } // nie działa?
 
@@ -160,7 +160,7 @@ onMounted(() => {
     line-height: 1.1;
     text-align: center;
     font-size: 58px;
-    @include mixin.media-breakpoint-down(md){
+    @include mixin.media-breakpoint-down(md) {
         transform: translateY(50px);
     }
     @include mixin.media-breakpoint-up(md) {
