@@ -2,6 +2,7 @@
 import heroBg from "~images/bg_home1.jpg";
 import DatePicker from "@/Components/Partials/DatePicker.vue";
 import { reactive, watch, computed, ref } from "vue";
+import {router} from "@inertiajs/vue3";
 
 const props = defineProps({
     genres: {
@@ -11,15 +12,42 @@ const props = defineProps({
 });
 
 const searchForm = reactive({
-    phrase: null,
-    genres: null,
+    event_name: null,
+    genre: null,
     date: null,
 });
 
-function SearchEvents() {}
-const filterRequest = reactive({
-    date: null,
-});
+function SearchEvents() {
+    console.log(searchForm);
+
+    const filters = {};
+
+    if (searchForm.date) {
+        if (Array.isArray(searchForm.date)) {
+            if (searchForm.date[1]) {
+                filters.date_from = searchForm.date[0];
+                filters.date_to = searchForm.date[1];
+            } else if (searchForm.date[0]) {
+                filters.date = searchForm.date[0];
+            }
+        } else {
+            filters.date = searchForm.date;
+        }
+    }
+
+    if (searchForm.genre) {
+        filters.genres = searchForm.genre;
+    }
+
+    if (searchForm.event_name) {
+        filters.event_name = searchForm.event_name;
+    }
+
+    router.get(route('event.browser'), filters, {
+        replace: true,
+    });
+}
+
 </script>
 
 <template>
@@ -44,11 +72,13 @@ const filterRequest = reactive({
                         class="hero-input"
                         type="text"
                         placeholder="Wyszukaj po nazwie"
+                        v-model="searchForm.event_name"
                     />
                 </div>
                 <div class="input-wrap hero-select-wrap">
                     <i class="fa fa-th-list"></i>
-                    <select class="hero-select">
+                    <select class="hero-select"
+                            v-model="searchForm.genre">
                         <option disabled selected value="">
                             Wybierz kategorię
                         </option>
@@ -64,11 +94,11 @@ const filterRequest = reactive({
                 <div class="input-wrap hero-select-wrap hero-select-wrap-data">
                     <DatePicker
                         class="datepicker-hero"
-                        v-model="filterRequest.date"
+                        v-model="searchForm.date"
                         format="MM/dd/yyyy"
                     ></DatePicker>
                 </div>
-                <button class="hero-search">Search</button>
+                <button class="hero-search">Szukaj</button>
             </form>
         </div>
     </section>
