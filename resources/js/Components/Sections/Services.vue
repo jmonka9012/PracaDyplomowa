@@ -1,27 +1,27 @@
+<script setup>
+import { Link } from "@inertiajs/vue3";
+
+</script>
 <template>
 
     <section class="pt-45px pb-25px bg-dark">
         <div class="container container-full">
-            <a href="#" class="serv-item">
+            <Link :href="route('contact')" class="serv-item">
                 <i class="fa     fa-heart"></i>
-                Tickets reserve
-            </a>
-            <a href="#" class="serv-item">
+                Kontakt
+            </Link>
+            <Link :href="route('about-us')" class="serv-item">
                 <i class="fa     fa-heart"></i>
-                music fests
-            </a>
-            <a href="#" class="serv-item">
+                O nas
+            </Link>
+            <Link :href="route('terms-of-use')" class="serv-item">
                 <i class="fa     fa-heart"></i>
-                fast support
-            </a>
-            <a href="#" class="serv-item">
+                Regulamin
+            </Link>
+            <Link :href="route('privacy-policy')" class="serv-item">
                 <i class="fa     fa-heart"></i>
-                Secure Payments
-            </a>
-            <a href="#" class="serv-item">
-                <i class="fa     fa-heart"></i>
-                Easy to return
-            </a>
+                Polityka prywatności
+            </Link>
         </div>
     </section>
 

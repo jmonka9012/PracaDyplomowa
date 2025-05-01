@@ -10,16 +10,6 @@ import Hero from "@/Components/Sections/Hero.vue";
 import Poptext from "@/Components/Partials/Poptext.vue";
 import { Link } from "@inertiajs/vue3";
 
-
-import bangPow from "~images/bangpow.jpg";
-import greatMilenko from "~images/greatmilenko.jpg";
-import hellsPit from "~images/hellspit.jpg";
-import jeckelBros from "~images/Jeckelbros.jpg";
-import teamOne from "~images/team-1.jpg";
-import eventsBg from "~images/events-bg-1.jpg";
-import { ref } from "vue";
-import { SwiperSlide } from "swiper/vue";
-
 import pageInfo from "@/Utilities/pageInfo";
 const { siteData } = pageInfo();
 
@@ -69,23 +59,4 @@ const props = defineProps({
             <PostQuery :blog_posts="props.blog_posts"></PostQuery>
         </div>
     </section>
-<!--    <Team :team="team">
-        <template #subtitle>Meet Our Team</template>
-        <template #title>Our Professionals</template>
-    </Team>-->
-    <!-- <section class="pt-100px pb-100px">
-        <div class="container">
-            <SliderGallery
-                :slides-per-view="1"
-                :space-between="50"
-                :breakpoints="{ 992: { slidesPerView: 2 } }"
-            >
-                <template #content>
-                    <swiper-slide v-for="event in events" :key="event.id">
-                        <Events v-bind="event" />
-                    </swiper-slide>
-                </template>
-            </SliderGallery>
-        </div>
-    </section> -->
 </template>
