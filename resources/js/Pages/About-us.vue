@@ -4,9 +4,9 @@ import Tabs from "@/Components/Partials/Tabs.vue";
 import Hero from "@/Components/Sections/AboutUsHero.vue";
 import blogBg from "~images/blog-bg.jpg";
 
-import useAuth from '@/Utilities/useAuth'
+import useAuth from "@/Utilities/useAuth";
 
-const {user, isLoggedIn} = useAuth()
+const { user, isLoggedIn } = useAuth();
 
 const props = defineProps({
     halls: {
@@ -14,11 +14,9 @@ const props = defineProps({
         required: true,
     },
 });
-
 </script>
 
 <template>
-
     <Hero></Hero>
     <section class="section-full mb-100px">
         <div class="container container-full">
@@ -44,7 +42,7 @@ const props = defineProps({
     </section>
     <section id="halls" class="overflow-hidden">
         <div class="container container-mid">
-            <div class="col-lg-12">
+            <div class="col-12">
                 <Tabs>
                     <Tab
                         class="flex-column hall"
@@ -141,7 +139,6 @@ const props = defineProps({
             </p>
         </div>
     </section>
-
 </template>
 
 <style lang="scss">
