@@ -45,6 +45,7 @@ function InitStandingTickets() {
         standingTickets[section.hall_section_id].hall_section_id = section.hall_section_id;
         standingTickets[section.hall_section_id].price = section.price;
         standingTickets[section.hall_section_id].amount = null;
+        standingTickets[section.hall_section_id].id = section.id;
     });
 }
 function InitSeats() {

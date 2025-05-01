@@ -1,11 +1,7 @@
 <script setup>
 import heroBg from "~images/bg_home1.jpg";
-<<<<<<< Updated upstream
-import { reactive } from "vue";
-=======
 import DatePicker from "@/Components/Partials/DatePicker.vue";
 import { reactive, watch, computed, ref } from "vue";
->>>>>>> Stashed changes
 
 const props = defineProps({
     genres: {
@@ -14,7 +10,6 @@ const props = defineProps({
     },
 });
 
-<<<<<<< Updated upstream
 const searchForm = reactive({
     phrase: null,
     genres: null,
@@ -24,11 +19,9 @@ const searchForm = reactive({
 function SearchEvents() {
 
 }
-=======
 const filterRequest = reactive({
     date: null,
 });
->>>>>>> Stashed changes
 </script>
 
 <template>
