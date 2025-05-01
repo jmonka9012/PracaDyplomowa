@@ -119,7 +119,7 @@ function isTaken(sectionID, row, col) {
             seat.seat_number     === col       &&
             (seat.status === 'sold' || seat.status === 'reserved')
         ) {
-            return 'true';
+            return true;
         }
     }
     return false;
