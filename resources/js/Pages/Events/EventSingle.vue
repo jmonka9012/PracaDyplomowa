@@ -289,7 +289,7 @@ function SubmitTicketRequest() {
 -->
                                         <div v-else class="hall__section-stand">
                                             <div class="hall__seat-cont">
-                                                <div v-html="`${AvailibleTickets(hrowIndex + 1, hcolIndex + 1, section.id)}/${section.capacity}`"></div>
+                                                <div v-html="`${AvailibleTickets(hrowIndex + 1, hcolIndex + 1, section.id)}/${section.capacity} miejsc zajętych`"></div>
                                                 <div>{{ standingSectionPrices[section.id].price }} pln</div>
                                                 <input @input="" v-model="standingTickets[section.id].amount" class="stand-input" v-number-only type="text" placeholder="Ilość">
                                             </div>
