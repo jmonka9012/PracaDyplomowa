@@ -1,6 +1,6 @@
 <script setup>
-import {reactive, ref} from "vue";
-import {Link} from "@inertiajs/vue3";
+import { reactive, ref } from "vue";
+import { Link } from "@inertiajs/vue3";
 import { onMounted, onUnmounted } from "vue";
 import DropDown from "../Partials/DropDown.vue";
 
@@ -34,7 +34,7 @@ const scrollRight = () => {
         </div>
         <div class="d-flex flex-column col-12">
             <div
-                class="d-flex flex-lg-row justify-content-between align-items-center mt-lg-8px mb-16px"
+                class="d-flex flex-lg-row justify-content-between align-items-start mt-lg-8px mb-16px"
             >
                 <h6 class="event-title">
                     <Link :href="`/${event.event_url}`">{{

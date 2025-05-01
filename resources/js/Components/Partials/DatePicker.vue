@@ -337,4 +337,26 @@ const presetDates = ref([
 .dp--clear-btn {
     display: none;
 }
+
+.datepicker-hero {
+    .dp__input {
+        min-width: 100%;
+        font-size: 12px;
+        border-radius: 0;
+        border: 0;
+        padding-left: 35px;
+        color: #495057;
+    }
+    .fa {
+        color: #495057;
+    }
+    .fa-calendar {
+        left: 12px;
+        color: var(--primary);
+    }
+    .dp__input_wrap.open .dp__input {
+        border: 0;
+        outline: 0;
+    }
+}
 </style>

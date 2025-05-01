@@ -1,6 +1,11 @@
 <script setup>
 import heroBg from "~images/bg_home1.jpg";
+<<<<<<< Updated upstream
 import { reactive } from "vue";
+=======
+import DatePicker from "@/Components/Partials/DatePicker.vue";
+import { reactive, watch, computed, ref } from "vue";
+>>>>>>> Stashed changes
 
 const props = defineProps({
     genres: {
@@ -9,6 +14,7 @@ const props = defineProps({
     },
 });
 
+<<<<<<< Updated upstream
 const searchForm = reactive({
     phrase: null,
     genres: null,
@@ -18,6 +24,11 @@ const searchForm = reactive({
 function SearchEvents() {
 
 }
+=======
+const filterRequest = reactive({
+    date: null,
+});
+>>>>>>> Stashed changes
 </script>
 
 <template>
@@ -59,17 +70,12 @@ function SearchEvents() {
                         </option>
                     </select>
                 </div>
-                <div class="input-wrap hero-select-wrap">
-                    <i class="fa fa-map-marker"></i>
-                    <select class="hero-select">
-                        <option disabled selected value="">Data</option>
-                        <option>Today</option>
-                        <option>Tommorow</option>
-                        <option>This week</option>
-                        <option>This weekend</option>
-                        <option>Next week</option>
-                        <option>Next month</option>
-                    </select>
+                <div class="input-wrap hero-select-wrap hero-select-wrap-data">
+                    <DatePicker
+                        class="datepicker-hero"
+                        v-model="filterRequest.date"
+                        format="MM/dd/yyyy"
+                    ></DatePicker>
                 </div>
                 <button class="hero-search">Search</button>
             </form>
@@ -148,11 +154,11 @@ function SearchEvents() {
     position: absolute;
     color: var(--primary);
     position: absolute;
-    left: 20px;
+    left: 10px;
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
-    font-size: 20px;
+    font-size: 16px;
     display: block;
 }
 
@@ -172,7 +178,7 @@ function SearchEvents() {
     appearance: none;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     width: 100%;
-    padding-left: 55px;
+    padding-left: 40px;
     border: 0;
     font-family: "Krona one";
     &::placeholder {
@@ -219,9 +225,14 @@ function SearchEvents() {
         margin-left: -4px;
         margin-top: -2px;
         position: absolute;
-        top: calc(50% + 5px);
+        top: calc(50%);
         transform: translateY(-50%);
         width: 0;
+    }
+    &-data {
+        &::after {
+            display: none;
+        }
     }
 }
 
@@ -252,11 +263,14 @@ function SearchEvents() {
 
 @media screen and (min-width: 992px) {
     .hero-input-wrap {
-        width: 30%;
+        width: 25%;
     }
 
     .hero-select-wrap {
         width: 25%;
+    }
+    .hero-select-wrap-data {
+        width: 30%;
     }
 
     .hero-search {
