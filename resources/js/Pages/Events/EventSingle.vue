@@ -5,7 +5,7 @@ import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import SingleMap from "~images/single-map.jpg";
 import blogBg from "~images/single-map.jpg";
 
-import {reactive, ref} from "vue";
+import {reactive, ref, computed, watch} from "vue";
 
 const url = window.location.href;
 
@@ -21,6 +21,84 @@ const props = defineProps({
 });
 
 const hall = props.event.data.event_location;
+const seats = reactive({});
+const standingTickets = reactive({});
+const seatTickets = reactive({});
+const summary = reactive({
+    seats: null,
+    seats_price: null,
+    standing: null,
+    standing_price: null,
+});
+const ticketRequest = reactive({
+    event_id: props.event.data.id,
+    seats: seatTickets,
+    standing_tickets: standingTickets,
+});
+
+function InitStandingTickets() {
+    props.event.data.standing_tickets.forEach((section) => {
+        if (!standingTickets[section.hall_section_id]) {
+            standingTickets[section.hall_section_id] = {};
+        }
+        standingTickets[section.hall_section_id].hall_section_id = section.hall_section_id;
+        standingTickets[section.hall_section_id].price = section.price;
+        standingTickets[section.hall_section_id].amount = null;
+    });
+}
+function InitSeats() {
+    props.event.data.seats.forEach((seat) => {
+        if (!seats[seat.hall_section_id]) {
+            seats[seat.hall_section_id] = {};
+        }
+        if (!seats[seat.hall_section_id][seat.seat_row]) {
+            seats[seat.hall_section_id][seat.seat_row] = {};
+        }
+        if (!seats[seat.hall_section_id][seat.seat_row][seat.seat_number]) {
+            seats[seat.hall_section_id][seat.seat_row][seat.seat_number] = {};
+        }
+        seats[seat.hall_section_id][seat.seat_row][seat.seat_number] = {
+            hall_section_id: seat.hall_section_id,
+            price: seat.price,
+            seat_row: seat.seat_row,
+            seat_number: seat.seat_number,
+            id: seat.id,
+            status: seat.status,
+            chosen: false,
+        };
+    });
+}
+InitStandingTickets();
+InitSeats();
+
+watch(seatTickets, (newState) => {
+    let price = 0;
+    Object.keys(newState).forEach((key) => {
+        const seatPrice = Number(newState[key]?.price);
+        price += seatPrice;
+    });
+    summary.seats = Object.keys(seatTickets).length;
+    summary.seats_price = price;
+    console.log(summary);
+});
+
+watch(standingTickets, (newState) => {
+    let sum = 0;
+    let price = 0;
+
+    Object.keys(newState).forEach((key) => {
+        const amount = Number(newState[key]?.amount) || 0;
+        const itemPrice = Number(newState[key]?.price) || 0;
+
+        sum += amount;
+        price += amount * itemPrice;
+    });
+
+    summary.standing_price = price;
+    summary.standing = sum;
+
+    console.log(summary);
+});
 
 function isTaken(sectionID, row, col) {
     for (const seat of props.event.data.seats) {
@@ -45,50 +123,6 @@ function AvailibleTickets(hRow, hCol, sID) {
     return null;
 }
 
-const standingTickets = reactive({});
-function InitStandingTickets() {
-    props.event.data.standing_tickets.forEach((section) => {
-        if (!standingTickets[section.hall_section_id]) {
-            standingTickets[section.hall_section_id] = {};
-        }
-        standingTickets[section.hall_section_id].hall_section_id = section.hall_section_id;
-        standingTickets[section.hall_section_id].price = section.price;
-        standingTickets[section.hall_section_id].amount = null;
-    });
-}
-InitStandingTickets();
-
-console.log(standingTickets);
-
-const seats = reactive({});
-function InitSeats() {
-    props.event.data.seats.forEach((seat) => {
-        if (!seats[seat.hall_section_id]) {
-            seats[seat.hall_section_id] = {};
-        }
-        if (!seats[seat.hall_section_id][seat.seat_row]) {
-            seats[seat.hall_section_id][seat.seat_row] = {};
-        }
-        if (!seats[seat.hall_section_id][seat.seat_row][seat.seat_number]) {
-            seats[seat.hall_section_id][seat.seat_row][seat.seat_number] = {};
-        }
-        seats[seat.hall_section_id][seat.seat_row][seat.seat_number] = {
-            hall_section_id: seat.hall_section_id,
-            price: seat.price,
-            seat_row: seat.seat_row,
-            seat_number: seat.seat_number,
-            id: seat.id,
-            status: seat.status,
-            chosen: false,
-        };
-    });
-}
-InitSeats();
-
-console.log(seats);
-
-const seatTickets = reactive({});
-
 function HandleSeat(sID, row, col) {
     if (seats[sID][row][col].status === 'available') {
         if (seats[sID][row][col].chosen === false) {
@@ -102,17 +136,9 @@ function HandleSeat(sID, row, col) {
             delete seatTickets[seats[sID][row][col].id];
         }
     }
-    console.log(seatTickets);
 }
 
-const ticketRequest = reactive({
-    event_id: props.event.data.id,
-    seats: seatTickets,
-    standing_tickets: standingTickets,
-});
-
 function SubmitTicketRequest() {
-
     console.log(ticketRequest);
 }
 
@@ -239,13 +265,27 @@ function SubmitTicketRequest() {
                                             <div class="hall__seat-cont">
                                                 <div v-html="`${AvailibleTickets(hrowIndex + 1, hcolIndex + 1, section.id)}/${section.capacity}`">
                                                 </div>
-                                                <input @input="console.log(standingTickets)" v-model="standingTickets[section.id].amount" class="stand-input" v-number-only type="text" placeholder="Ilość">
+                                                <input @input="" v-model="standingTickets[section.id].amount" class="stand-input" v-number-only type="text" placeholder="Ilość">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-md">Kup bilety</button>
+                            <div class="d-flex flex-column">
+                                <div class="d-flex flex-row" v-if="summary.seats && summary.seats_price">
+                                    <div class="mr-40px">Ilość wybranych miejsc siedzących: {{summary.seats}}</div>
+                                    <div class="mr-40px">Cena wybranych miejsc siedzących: {{summary.seats_price}}</div>
+                                </div>
+                                <div class="d-flex flex-row" v-if="summary.standing && summary.standing_price">
+                                    <div class="mr-40px">Ilość wybranych miejsc stojących: {{summary.standing}}</div>
+                                    <div class="mr-40px">Cena wybranych miejsc stojących: {{summary.standing_price}}</div>
+                                </div>
+                                <div class="d-flex flex-row" v-if="summary.standing && summary.standing_price && summary.seats && summary.seats_price">
+                                    <div class="mr-40px">Łączna ilość wybranych miejsc: {{summary.standing + summary.seats}}</div>
+                                    <div class="mr-40px">Łączna cena wybranych miejsc: {{summary.standing_price + summary.seats_price}}</div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-md mb-30px">Kup bilety</button>
                         </form>
                     </div>
                 </div>
