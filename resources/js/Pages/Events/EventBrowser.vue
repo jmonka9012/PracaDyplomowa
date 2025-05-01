@@ -91,6 +91,7 @@ function submitFilterRequest() {
                 </div>
 
                 <MultiSelect
+                    placeholder="Wybierz kategorie"
                     v-model="filterRequest.genres"
                     :options="genres"
                 ></MultiSelect>
