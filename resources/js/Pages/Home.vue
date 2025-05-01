@@ -23,59 +23,6 @@ import { SwiperSlide } from "swiper/vue";
 import pageInfo from "@/Utilities/pageInfo";
 const { siteData } = pageInfo();
 
-const team = [
-    {
-        id: 1,
-        teamImg: teamOne,
-        teamLink: "/chad",
-        teamLinkFb: "/fb",
-        teamLinkTw: "/tw",
-        teamLinkIns: "/ins",
-        teamName: "Chad",
-        teamProps: "HNIC",
-    },
-    {
-        id: 2,
-        teamImg: teamOne,
-        teamLink: "/chad",
-        teamLinkFb: "/fb",
-        teamLinkTw: "/tw",
-        teamLinkIns: "/ins",
-        teamName: "Chad",
-        teamProps: "HNIC",
-    },
-    {
-        id: 3,
-        teamImg: teamOne,
-        teamLink: "/chad",
-        teamLinkFb: "/fb",
-        teamLinkTw: "/tw",
-        teamLinkIns: "/ins",
-        teamName: "Chad",
-        teamProps: "HNIC",
-    },
-    {
-        id: 4,
-        teamImg: teamOne,
-        teamLink: "/chad",
-        teamLinkFb: "/fb",
-        teamLinkTw: "/tw",
-        teamLinkIns: "/ins",
-        teamName: "Chadk",
-        teamProps: "HNIC",
-    },
-    {
-        id: 5,
-        teamImg: teamOne,
-        teamLink: "/chad",
-        teamLinkFb: "/fb",
-        teamLinkTw: "/tw",
-        teamLinkIns: "/ins",
-        teamName: "Chad",
-        teamProps: "HNIC",
-    },
-];
-
 const props = defineProps({
     events: {
         type: Array,
@@ -112,6 +59,7 @@ const props = defineProps({
         </div>
     </section>
     <CategoriesImg class="pt-60px pb-60px pb-lg-90px" />
+    <Services />
     <section class="pt-60px pb-100px">
         <div
             class="container container-big flex-lg-row align-items-start align-items-lg-center justify-content-between"
@@ -121,11 +69,10 @@ const props = defineProps({
             <PostQuery :blog_posts="props.blog_posts"></PostQuery>
         </div>
     </section>
-    <Services />
-    <Team :team="team">
+<!--    <Team :team="team">
         <template #subtitle>Meet Our Team</template>
         <template #title>Our Professionals</template>
-    </Team>
+    </Team>-->
     <!-- <section class="pt-100px pb-100px">
         <div class="container">
             <SliderGallery
