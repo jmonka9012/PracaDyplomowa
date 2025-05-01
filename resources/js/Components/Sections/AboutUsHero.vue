@@ -138,7 +138,7 @@ onMounted(() => {
     }
 }
 ::v-deep(.as-heading .letter) {
-    transition: color 0.3s;
+    transition: color 0.8s;
 }
 .as-hero {
     background-image: url("");
