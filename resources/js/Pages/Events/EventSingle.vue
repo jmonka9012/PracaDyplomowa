@@ -105,8 +105,15 @@ function HandleSeat(sID, row, col) {
     console.log(seatTickets);
 }
 
+const ticketRequest = reactive({
+    event_id: props.event.data.id,
+    seats: seatTickets,
+    standing_tickets: standingTickets,
+});
+
 function SubmitTicketRequest() {
 
+    console.log(ticketRequest);
 }
 
 </script>
