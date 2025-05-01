@@ -127,12 +127,6 @@ onMounted(() => {
         height: 300vh;
     }
     position: relative;
-
-    &__target {
-        .letter {
-            transition: color 0.8s;
-        } // nie działa?
-    }
     &__section {
         position: sticky;
         height: 100vh;
@@ -143,11 +137,9 @@ onMounted(() => {
         overflow: hidden;
     }
 }
-
-.as-heading span {
-    transition: color 0.8s ease-in-out;
-} // nie działa?
-
+::v-deep(.as-heading .letter) {
+    transition: color 0.3s;
+}
 .as-hero {
     background-image: url("");
     background-color: var(--primary);
