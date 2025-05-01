@@ -1,5 +1,6 @@
 <script setup>
 import heroBg from "~images/bg_home1.jpg";
+import { reactive } from "vue";
 
 const props = defineProps({
     genres: {
@@ -7,6 +8,16 @@ const props = defineProps({
         required: true,
     },
 });
+
+const searchForm = reactive({
+    phrase: null,
+    genres: null,
+    date: null,
+});
+
+function SearchEvents() {
+
+}
 </script>
 
 <template>
@@ -24,7 +35,7 @@ const props = defineProps({
                     </h1>
                 </slot>
             </div>
-            <form class="hero-form" action="submit">
+            <form class="hero-form" @submit.prevent="SearchEvents()">
                 <div class="input-wrap hero-input-wrap">
                     <i class="fa fa-search"></i>
                     <input

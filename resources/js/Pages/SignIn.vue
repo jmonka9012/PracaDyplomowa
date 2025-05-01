@@ -23,6 +23,30 @@ const liveErrors = reactive({
     emailError: "",
     nameError: "",
 });
+const loginForm = reactive({
+    login: null,
+    password: null,
+    remember: false,
+});
+
+const organizerDetails = reactive({
+    company_name: null,
+    company_address: null,
+    phone_number: null,
+    company_nip: null,
+    bank_account: null,
+});
+
+const registerForm = reactive({
+    name: null,
+    email: null,
+    password: null,
+    password_confirmation: null,
+    first_name: null,
+    last_name: null,
+    organizer_request: false,
+    organizer_details: organizerDetails,
+});
 
 let registerNameCorrect = false;
 let registerEmailCorrect = false;
@@ -65,21 +89,6 @@ const validationRequest = debounce((routeName) => {
 function onInput(routeName) {
     validationRequest(routeName);
 }
-
-const loginForm = reactive({
-    login: null,
-    password: null,
-    remember: false,
-});
-
-const registerForm = reactive({
-    name: null,
-    email: null,
-    password: null,
-    password_confirmation: null,
-    first_name: null,
-    last_name: null,
-});
 
 function submitLoginRequest() {
     let hadError = true;
@@ -182,6 +191,7 @@ function submitRegisterRequest() {
                 :class="{ show: isVis }"
             >
                 <h1 class="title-1 mb-20px">Rejestracja</h1>
+                <button @click="console.log(registerForm)" class="btn btn-md">Loguj formularz rejestracyjny</button>
                 <form class="form" @submit.prevent="submitRegisterRequest">
                     <div class="input-wrap col-12">
                         <label for="register-username"
@@ -313,6 +323,98 @@ function submitRegisterRequest() {
                             nasza polityka prywatności.
                         </label>
                     </div>
+                    <div class="input-wrap input-wrap-check col-12 mb-20px">
+                        <input
+                            type="checkbox"
+                            name="organizer"
+                            id="organizer"
+                            v-model="registerForm.organizer_request"
+                            @input="console.log(registerForm)"
+                        />
+                        <label for="confirmation">
+                            Chcę założyć konto organizatora.
+                        </label>
+                    </div>
+                    <div class="organizer-form" v-if="registerForm.organizer_request">
+                        <div class="input-wrap col-12">
+                            <label for="register-username">Nazwa firmy*</label>
+                            <input
+                                type="text"
+                                id="register-company-name"
+                                name="company-name"
+                                :required="registerForm.organizer_request"
+                                :aria-required="registerForm.organizer_request"
+                                spellcheck="false"
+                                v-model="organizerDetails.company_name"
+                            />
+                            <div class="error-msg" v-if="registerErrors.organizer_details?.company_name">
+                                {{ registerErrors.organizer_details.company_name }}
+                            </div>
+                        </div>
+                        <div class="input-wrap col-12">
+                            <label for="register-username">Telefon kontaktowy*</label>
+                            <input
+                                type="tel"
+                                id="register-company-number"
+                                name="company-number"
+                                v-number-only
+                                :required="registerForm.organizer_request"
+                                :aria-required="registerForm.organizer_request"
+                                spellcheck="false"
+                                v-model="organizerDetails.phone_number"
+                            />
+                            <div class="error-msg" v-if="registerErrors.organizer_details?.phone_number">
+                                {{ registerErrors.organizer_details.phone_number }}
+                            </div>
+                        </div>
+                        <div class="input-wrap col-12">
+                            <label for="register-username">NIP*</label>
+                            <input
+                                type="text"
+                                v-number-only
+                                id="register-company-NIP"
+                                name="company-NIP"
+                                :required="registerForm.organizer_request"
+                                :aria-required="registerForm.organizer_request"
+                                spellcheck="false"
+                                v-model="organizerDetails.company_nip"
+                            />
+                            <div class="error-msg" v-if="registerErrors.organizer_details?.company_nip">
+                                {{ registerErrors.organizer_details.company_nip }}
+                            </div>
+                        </div>
+                        <div class="input-wrap col-12">
+                            <label for="register-username">Adres firmy*</label>
+                            <textarea
+                                type="text"
+                                id="register-company-address"
+                                name="company-address"
+                                :required="registerForm.organizer_request"
+                                :aria-required="registerForm.organizer_request"
+                                spellcheck="false"
+                                v-model="organizerDetails.company_address"
+                            />
+                            <div class="error-msg" v-if="registerErrors.organizer_details?.company_address">
+                                {{ registerErrors.organizer_details.company_address }}
+                            </div>
+                        </div>
+                        <div class="input-wrap col-12">
+                            <label for="register-username">Numer konta bankowego*</label>
+                            <input
+                                type="text"
+                                v-number-only
+                                id="register-company-bank"
+                                name="company-bank"
+                                :required="registerForm.organizer_request"
+                                :aria-required="registerForm.organizer_request"
+                                spellcheck="false"
+                                v-model="organizerDetails.bank_account"
+                            />
+                            <div class="error-msg" v-if="registerErrors.organizer_details?.bank_account">
+                                {{ registerErrors.organizer_details.bank_account }}
+                            </div>
+                        </div>
+                    </div>
                     <div class="input-wrap col-12">
                         <input
                             type="submit"
@@ -328,6 +430,20 @@ function submitRegisterRequest() {
 </template>
 <style lang="scss">
 @use "~css/mixin.scss";
+.organizer-form {
+    padding: 20px;
+    background-color: var(--primary);
+    border-radius: 8px;
+    width: 100%;
+    z-index: 5;
+    margin-bottom: 30px;
+
+    input, textarea {
+        border-radius: 8px;
+        background-color: #fff !important;
+    }
+}
+
 #rcol {
     visibility: hidden;
     opacity: 0;
@@ -337,7 +453,7 @@ function submitRegisterRequest() {
     &.show {
         visibility: visible;
         opacity: 1;
-        max-height: 1000px;
+        max-height: 2000px;
         transition: max-height 1s ease-in-out;
         @include mixin.media-breakpoint-down(lg) {
             margin-top: 60px;
