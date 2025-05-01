@@ -10,6 +10,13 @@ const props = defineProps({
     },
 });
 
+const searchForm = reactive({
+    phrase: null,
+    genres: null,
+    date: null,
+});
+
+function SearchEvents() {}
 const filterRequest = reactive({
     date: null,
 });
