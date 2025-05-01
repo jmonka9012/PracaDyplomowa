@@ -300,11 +300,11 @@ function SubmitTicketRequest() {
                             <div v-if="summary" class="d-flex flex-column mb-40px">
                                 <div class="d-flex flex-row" v-if="summary.seats && summary.seats_price">
                                     <div class="mr-40px">Ilość wybranych miejsc siedzących: {{summary.seats}}</div>
-                                    <div class="mr-40px">Cena wybranych miejsc siedzących: {{summary.seats_price}}</div>
+                                    <div class="mr-40px">Cena wybranych miejsc siedzących: {{summary.seats_price.toFixed(2)}}</div>
                                 </div>
                                 <div class="d-flex flex-row" v-if="summary.standing && summary.standing_price">
                                     <div class="mr-40px">Ilość wybranych miejsc stojących: {{summary.standing}}</div>
-                                    <div class="mr-40px">Cena wybranych miejsc stojących: {{summary.standing_price}}</div>
+                                    <div class="mr-40px">Cena wybranych miejsc stojących: {{summary.standing_price.toFixed(2)}}</div>
                                 </div>
                                 <div class="d-flex flex-row" v-if="summary.standing && summary.standing_price && summary.seats && summary.seats_price">
                                     <div class="mr-40px">Łączna ilość wybranych miejsc: {{summary.standing + summary.seats}}</div>
