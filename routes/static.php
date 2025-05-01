@@ -3,9 +3,10 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TermsOfUseController;
+use App\Http\Controllers\PrivacyPolicyController;
 use Illuminate\Support\Facades\Route;
 
-// Strona domowa
 Route::get('/', [HomeController::class, 'index'])
       ->name('home');
 
@@ -13,10 +14,14 @@ Route::get('/data', [HomeController::class, 'showData'])
       ->name('home.data')
       ->middleware('adminAccess');
 
-// Strona kontaktu
 Route::get('/kontakt', [ContactController::class, 'index'])
       ->name('contact');
 
-// Strona hal
 Route::get('/o-nas', [AboutUsController::class, 'index'])
       ->name('about-us');
+
+Route::get('/regulamin', [TermsOfUseController::class, 'index'])
+      ->name('terms-of-use');
+
+Route::get('/polityka-prywatnosci', [PrivacyPolicyController::class, 'index'])
+      ->name('privacy-policy');
