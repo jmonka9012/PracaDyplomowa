@@ -49,6 +49,9 @@ function InitStandingTickets() {
         standingTickets[section.hall_section_id].price = section.price;
         standingTickets[section.hall_section_id].amount = null;
         standingTickets[section.hall_section_id].id = section.id;
+        standingTickets[section.hall_section_id].sold = section.sold;
+        standingTickets[section.hall_section_id].reserved = section.reserved;
+        standingTickets[section.hall_section_id].capacity = section.capacity;
     });
 }
 function InitSeats() {
@@ -309,7 +312,7 @@ function SubmitTicketRequest() {
                                             <div class="hall__seat-cont">
                                                 <div v-html="`${AvailibleTickets(hrowIndex + 1, hcolIndex + 1, section.id)}/${section.capacity} miejsc zajętych`"></div>
                                                 <div>{{ standingSectionPrices[section.id].price }} pln</div>
-                                                <input @input="" v-model="standingTickets[section.id].amount" class="stand-input" v-number-only type="text" placeholder="Ilość">
+                                                <input @blur="standingTickets[section.id].amount = standingTickets[section.id].amount || null" v-model.trim="standingTickets[section.id].amount" class="stand-input" v-number-only type="text" placeholder="Ilość">
                                             </div>
                                         </div>
                                     </div>
