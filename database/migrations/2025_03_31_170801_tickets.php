@@ -13,21 +13,35 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('order_id')->nullable(); // na razie nullabe. trzeba stworzyc logike do faktur
             $table->unsignedBigInteger('event_id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('seat');
-            $table->string('hall_section');
+            $table->boolean('is_guest')->default(true);
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->boolean('insured')->default(false);
+            $table->boolean('is_seat');
+            $table->unsignedBigInteger('seat_id')->nullable();
+            $table->unsignedBigInteger('standing_id')->nullable();
             $table->timestamps();
 
             $table->foreign('event_id')
-                ->references('id')
-                ->on('events')
-                ->onDelete('cascade');
+                 ->references('id')
+                 ->on('events');
 
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
+
+            $table->foreign('seat_id')
+                ->references('id')
+                ->on('event_seats');
+
+            $table->foreign('standing_id')
+                ->references('id')
+                ->on('event_standing_tickets');
+
+            $table->foreign('order_id')
+                ->references('id')
+                ->on('orders');
         });
     }
 

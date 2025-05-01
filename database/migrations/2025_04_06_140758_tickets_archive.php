@@ -14,20 +14,30 @@ return new class extends Migration
         Schema::create('tickets_archive', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('event_id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('seat');
-            $table->string('hall_section');
+            $table->boolean('is_guest')->default(true);
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->boolean('insured')->default(false);
             $table->dateTime('archived_at')->useCurrent();
+            $table->boolean('is_seat');
+            $table->unsignedBigInteger('seat_id')->nullable();
+            $table->unsignedBigInteger('standing_id')->nullable();
             $table->timestamps();
 
             $table->foreign('event_id')
-                ->references('id')
-                ->on('events_archive');
+                 ->references('id')
+                 ->on('events_archive');
 
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
+
+            $table->foreign('seat_id')
+                ->references('id')
+                ->on('event_seats_archive');
+
+            $table->foreign('standing_id')
+                ->references('id')
+                ->on('event_standing_tickets_archive');
         });
     }
 

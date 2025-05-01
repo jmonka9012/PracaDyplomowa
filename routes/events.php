@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Events\RequestEventController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\LiveVerificationController;
+use App\Http\Controllers\Events\TicketSaleController;
 
 Route::prefix('wydarzenia')->group(function() {
 
@@ -38,6 +39,9 @@ Route::prefix('wydarzenia')->group(function() {
       
       Route::get('/', [EventController::class, 'eventBrowser'])
             ->name('event.browser');
+
+      Route::post('/kupuj', [TicketSaleController::class, 'store'])
+            ->name('event-ticket.buy');
             
       // Dane eventu
       Route::get('/data/{event:slug}', [EventController::class, 'showData'])

@@ -20,4 +20,9 @@ abstract class EventStandingTicketBase extends Model
     {
         return $this->getTable() == 'events_standing_tickets_archive';
     }
+
+    public function getAvailableAttribute()
+    {
+        return $this->capacity - $this->sold - $this->reserved;
+    }
 }
