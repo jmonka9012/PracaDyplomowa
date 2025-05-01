@@ -129,7 +129,7 @@ onBeforeUnmount(() => {
                     </Link>
                     <span class="divider divider-dark"></span>
                     <Link
-                        :href="route('register')"
+                        :href="`${route('register')}?reg=true`"
                         class="hover-primary header-login"
                     >
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
@@ -294,7 +294,7 @@ onBeforeUnmount(() => {
 
                                             <li>
                                                 <Link
-                                                    :href="route('register')"
+                                                    :href="`${route('register')}?reg=true`"
                                                     class="hover-primary header-login"
                                                 >
                                                     <i

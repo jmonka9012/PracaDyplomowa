@@ -1,15 +1,17 @@
 <script setup>
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { router } from "@inertiajs/vue3";
 import { debounce } from "@/Utilities/debounce";
 import ResetObject from "@/Utilities/resetObject";
 import axios from "axios";
 
-import { ref } from "vue";
 
 const isVis = ref(false);
+
+const params = new URLSearchParams(window.location.search)
+isVis.value = params.get('reg') === 'true' || false;
 
 const RegShow = () => {
     if (!isVis.value) {
