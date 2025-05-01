@@ -186,7 +186,7 @@ function submitPostRequest() {
                         />
                         <span
                             style="cursor: pointer"
-                            class="btn btn-md d-flex mb-10px"
+                            class="btn btn-md btn-hovprim d-flex mb-10px"
                             >Wybierz plik</span
                         >
                         <span

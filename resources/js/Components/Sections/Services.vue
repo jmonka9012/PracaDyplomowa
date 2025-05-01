@@ -1,31 +1,27 @@
 <script setup>
 import { Link } from "@inertiajs/vue3";
-
 </script>
 <template>
-
     <section class="pt-45px pb-25px bg-dark">
         <div class="container container-full">
             <Link :href="route('contact')" class="serv-item">
-                <i class="fa     fa-heart"></i>
+                <i class="fa fa-heart"></i>
                 Kontakt
             </Link>
             <Link :href="route('about-us')" class="serv-item">
-                <i class="fa     fa-heart"></i>
+                <i class="fa fa-heart"></i>
                 O nas
             </Link>
             <Link :href="route('terms-of-use')" class="serv-item">
-                <i class="fa     fa-heart"></i>
+                <i class="fa fa-heart"></i>
                 Regulamin
             </Link>
             <Link :href="route('privacy-policy')" class="serv-item">
-                <i class="fa     fa-heart"></i>
+                <i class="fa fa-heart"></i>
                 Polityka prywatności
             </Link>
         </div>
     </section>
-
-
 </template>
 
 <style scoped lang="scss">
@@ -40,8 +36,9 @@ import { Link } from "@inertiajs/vue3";
     border-style: solid;
     border-width: 0 0 0 0;
 
-    border-color: #FFF;
-    transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+    border-color: #fff;
+    transition: background 0.3s, border 0.3s, border-radius 0.3s,
+        box-shadow 0.3s;
     margin: 0px 0px 20px 0px;
     width: 100%;
     margin-bottom: 20px;
@@ -60,11 +57,11 @@ import { Link } from "@inertiajs/vue3";
     }
 
     @include mixin.media-breakpoint-up(lg) {
-        width: 20% !important;
+        width: 25% !important;
         border-width: 0 1px 0 0;
 
         &:last-of-type {
-            width: 20% !important;
+            width: 25% !important;
             border-width: 0 0 0 0;
         }
     }
@@ -73,7 +70,7 @@ import { Link } from "@inertiajs/vue3";
         font-size: 30px;
         margin-right: 20px;
         color: white;
-        transition: all .3s;
+        transition: all 0.3s;
     }
 
     &:hover {

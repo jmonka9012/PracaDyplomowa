@@ -25,9 +25,8 @@ const props = defineProps({
     blog_posts: {
         type: Array,
         required: true,
-    }
+    },
 });
-
 </script>
 
 <template>
@@ -45,7 +44,11 @@ const props = defineProps({
             <p class="sub-title sub-title-lprpl mb-20px">bilety na</p>
             <h3 class="title-1 mb-20px">Przyszłe wydarzenia</h3>
             <Events class="" :events="props.events" />
-            <Link class="mt-40px btn btn-md" :href="route('event.browser')">Zobacz wszystkie wydarzenia</Link>
+            <Link
+                class="mt-40px btn btn-md btn-hovprim"
+                :href="route('event.browser')"
+                >Zobacz wszystkie wydarzenia</Link
+            >
         </div>
     </section>
     <CategoriesImg class="pt-60px pb-60px pb-lg-90px" />
@@ -54,8 +57,14 @@ const props = defineProps({
         <div
             class="container container-big flex-lg-row align-items-start align-items-lg-center justify-content-between"
         >
-            <TitleNSub title="Najnowsze posty" subtitle="Blog" class="mb-35px" />
-            <Link :href="route('blog')" class="btn btn-md">Zobacz wszystkie</Link>
+            <TitleNSub
+                title="Najnowsze posty"
+                subtitle="Blog"
+                class="mb-35px"
+            />
+            <Link :href="route('blog')" class="btn btn-md btn-hovprim"
+                >Zobacz wszystkie</Link
+            >
             <PostQuery :blog_posts="props.blog_posts"></PostQuery>
         </div>
     </section>

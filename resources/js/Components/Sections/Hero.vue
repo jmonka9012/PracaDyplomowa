@@ -2,7 +2,7 @@
 import heroBg from "~images/bg_home1.jpg";
 import DatePicker from "@/Components/Partials/DatePicker.vue";
 import { reactive, watch, computed, ref } from "vue";
-import {router} from "@inertiajs/vue3";
+import { router } from "@inertiajs/vue3";
 
 const props = defineProps({
     genres: {
@@ -43,11 +43,10 @@ function SearchEvents() {
         filters.event_name = searchForm.event_name;
     }
 
-    router.get(route('event.browser'), filters, {
+    router.get(route("event.browser"), filters, {
         replace: true,
     });
 }
-
 </script>
 
 <template>
@@ -77,9 +76,8 @@ function SearchEvents() {
                 </div>
                 <div class="input-wrap hero-select-wrap">
                     <i class="fa fa-th-list"></i>
-                    <select class="hero-select"
-                            v-model="searchForm.genre">
-                        <option disabled selected value="">
+                    <select class="hero-select" v-model="searchForm.genre">
+                        <option disabled :value="null">
                             Wybierz kategorię
                         </option>
                         <option

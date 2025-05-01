@@ -3,7 +3,7 @@ import Events from "@/Components/Sections/Events.vue";
 import { Link } from "@inertiajs/vue3";
 import DatePicker from "@/Components/Partials/DatePicker.vue";
 import MultiSelect from "@/Components/Partials/MultiSelect.vue";
-import { router } from '@inertiajs/vue3'
+import { router } from "@inertiajs/vue3";
 
 import { reactive, watch, computed, ref } from "vue";
 
@@ -31,7 +31,6 @@ props.genres.forEach((genre, index) => {
     };
 });
 
-
 const filterRequest = reactive({
     event_name: null,
     genres: null,
@@ -56,19 +55,18 @@ function submitFilterRequest() {
 
     if (filterRequest.genres?.length) {
         filters.genres = filterRequest.genres
-            .filter(genre => genre)
-            .map(genre => genre.id || genre.value);
+            .filter((genre) => genre)
+            .map((genre) => genre.id || genre.value);
     }
 
     if (filterRequest.event_name) {
         filters.event_name = filterRequest.event_name;
     }
 
-    router.get(route('event.browser'), filters, {
+    router.get(route("event.browser"), filters, {
         replace: true,
     });
 }
-
 </script>
 
 <template>
@@ -99,7 +97,12 @@ function submitFilterRequest() {
                     format="MM/dd/yyyy"
                     v-model="filterRequest.date"
                 ></DatePicker>
-                <input id="submitFilter" class="btn cursor-pointer btn-md mt-30px" type="submit" value="Filtruj" />
+                <input
+                    id="submitFilter"
+                    class="btn cursor-pointer btn-md btn-hovprim mt-30px"
+                    type="submit"
+                    value="Filtruj"
+                />
             </form>
             <Events :events="props.events.data" :genres="props.genres" />
             <div class="event-pagination">

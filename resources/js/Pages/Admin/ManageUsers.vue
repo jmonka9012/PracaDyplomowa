@@ -10,7 +10,7 @@ import HeroSmall from "@/Components/Sections/Hero-small.vue";
         <div class="container">
             <div class="col-12 d-flex flex-lg-row align-items-lg-center">
                 <h2 class="mb-20px mb-lg-0">Użytkownicy</h2>
-                <a href="#" class="ml-lg-20px btn btn-md">Dodaj nowego</a>
+                <a href="#" class="ml-lg-20px btn btn-md btn-hovprim">Dodaj nowego</a>
             </div>
             <div class="col-12 mt-30px mb-30px overflow-x-scroll">
                 <table>
