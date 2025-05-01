@@ -3,7 +3,9 @@ import ctaCloud from "~images/cta-cloud.png";
 import spiral from "~images/spiral.png";
 import IconRotate from "@/Components/icons/IconRotate.vue";
 
-document.addEventListener("DOMContentLoaded", () => {
+import {onMounted} from "vue";
+
+onMounted(() => {
     const animatedStickySections = document.querySelectorAll(
         ".animated-sticky-section"
     );
@@ -86,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener("scroll", UpdateText);
         UpdateText();
     });
-});
+})
 </script>
 
 <template>
@@ -96,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <IconRotate
                     class="icon-rotate-holder-as"
                     :background="`url(${spiral})`"
-                    rotateText="- Custom Rotating Text - Custom Rotating Text 2 "
+                    rotateText="Nowoczesna hale koncertowo/wykładowe"
                 />
             </div>
 
