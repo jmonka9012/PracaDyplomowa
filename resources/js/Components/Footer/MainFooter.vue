@@ -73,12 +73,9 @@ const { siteData } = pageInfo();
                     Accusantium, eveniet.
                 </p>
                 <div class="d-flex flex-row justify-content-center mb-35px">
-                    <a class="text-white hover-primary" href="/public"
-                        >Privacy Policy</a
-                    ><span class="text-white divider"></span
-                    ><a class="text-white hover-primary" href="/public"
-                        >Terms of use</a
-                    >
+                    <Link class="text-white hover-primary" :href="route('privacy-policy')">Polityka prywatności</Link>
+                    <span class="text-white divider"></span>
+                    <Link class="text-white hover-primary" :href="route('terms-of-use')">Regulamin</Link>
                 </div>
                 <div class="d-flex flex-row w-fit justify-content-between">
                     <a class="morph-btn footer__icon" href="">
