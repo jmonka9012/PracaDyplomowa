@@ -5,6 +5,7 @@ import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import SingleMap from "~images/single-map.jpg";
 import blogBg from "~images/single-map.jpg";
 
+import { router } from "@inertiajs/vue3";
 import {reactive, ref, computed, watch} from "vue";
 
 const url = window.location.href;
@@ -25,6 +26,7 @@ const seats = reactive({});
 const standingTickets = reactive({});
 const seatTickets = reactive({});
 const standingSectionPrices = reactive({});
+const errors = reactive({});
 const summary = reactive({
     seats: null,
     seats_price: null,
@@ -151,6 +153,20 @@ function HandleSeat(sID, row, col) {
 }
 
 function SubmitTicketRequest() {
+    let hadError = ref(false);
+
+    router.post(route("event-ticket.buy"), ticketRequest, {
+        onError: (err) => {
+            ResetObject(errors);
+            Object.assign(errors, err);
+            hadError = true;
+        },
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+        preserveScroll: () => hadError,
+    });
+    console.log(errors);
     console.log(ticketRequest);
 }
 
