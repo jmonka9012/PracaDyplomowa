@@ -5,6 +5,7 @@ import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import SingleMap from "~images/single-map.jpg";
 import blogBg from "~images/single-map.jpg";
 
+import ResetObject from "@/Utilities/resetObject";
 import { router } from "@inertiajs/vue3";
 import {reactive, ref, computed, watch} from "vue";
 
