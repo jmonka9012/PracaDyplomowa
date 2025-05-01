@@ -10,7 +10,6 @@ const props = defineProps({
     },
 });
 
-<<<<<<< Updated upstream
 const searchForm = reactive({
     phrase: null,
     genres: null,
@@ -20,8 +19,6 @@ const searchForm = reactive({
 function SearchEvents() {
 
 }
-=======
->>>>>>> Stashed changes
 const filterRequest = reactive({
     date: null,
 });
