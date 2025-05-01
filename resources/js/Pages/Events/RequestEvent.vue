@@ -30,13 +30,12 @@ let genres = [];
 
 props.genres.forEach((genre, index) => {
     genres[index] = {
-        name:  genre.genre_name,
+        name: genre.genre_name,
         value: genre.id,
     };
 });
 
 console.log(genres);
-
 
 const sectionPrices = reactive({});
 
@@ -248,7 +247,7 @@ const { user, isLoggedIn } = useAuth();
                         />
                         <span
                             style="cursor: pointer"
-                            class="btn btn-md d-flex mb-10px"
+                            class="btn btn-md btn-hovprim d-flex mb-10px"
                             >Wybierz plik</span
                         >
                         <span

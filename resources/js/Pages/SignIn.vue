@@ -192,7 +192,7 @@ function submitRegisterRequest() {
                 :class="{ show: isVis }"
             >
                 <h1 class="title-1 mb-20px">Rejestracja</h1>
-                <button @click="console.log(registerForm)" class="btn btn-md">
+                <button @click="console.log(registerForm)" class="btn btn-md btn-hovprim">
                     Loguj formularz rejestracyjny
                 </button>
                 <form class="form" @submit.prevent="submitRegisterRequest">

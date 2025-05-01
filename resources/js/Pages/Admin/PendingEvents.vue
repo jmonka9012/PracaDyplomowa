@@ -11,7 +11,7 @@ import { Link } from "@inertiajs/vue3";
         <div class="container mb-80px">
             <div class="col-12 d-flex flex-lg-row align-items-lg-center">
                 <h2 class="mb-20px mb-lg-0">Wydarzenia</h2>
-                <Link :href="route('event-create')" class="ml-lg-20px btn btn-md"
+                <Link :href="route('event-create')" class="ml-lg-20px btn btn-md btn-hovprim"
                     >Dodaj nowe</Link
                 >
             </div>
@@ -125,7 +125,7 @@ import { Link } from "@inertiajs/vue3";
                 <h3 class="mb-20px mb-lg-0">
                     Wydarzenia oczekujące na zatwierdzenie
                 </h3>
-                <Link :href="route('event-create')" class="ml-lg-20px btn btn-md"
+                <Link :href="route('event-create')" class="ml-lg-20px btn btn-md btn-hovprim"
                     >Dodaj nowe</Link
                 >
             </div>

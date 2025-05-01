@@ -329,7 +329,7 @@ function SubmitTicketRequest() {
                                     <div class="mr-40px">Łączna cena wybranych miejsc: {{(summary.standing_price + summary.seats_price).toFixed(2)}}</div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-md mb-30px">Kup bilety</button>
+                            <button type="submit" class="btn btn-md btn-hovprim mb-30px">Kup bilety</button>
                         </form>
                     </div>
                 </div>
