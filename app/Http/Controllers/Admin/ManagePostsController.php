@@ -12,19 +12,23 @@ class ManagePostsController extends Controller
 {
     public function index()
     {   
-        $blogPosts = BlogPost::all();
+        $blogPosts = BlogPost::with(['author.user'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
 
         return Inertia::render('Admin/ManagePosts', [
-            'blog_posts' => BlogPostBrowserResource::collection($blogPosts)
+            'blog_posts' => BlogPostBrowserResource::collection($blogPosts)->response()->getData(true)
         ]);
     }
 
     public function showData()
     {
-        $blogPosts = BlogPost::all();
+        $blogPosts = BlogPost::with(['author.user'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
 
         return response()->json([
-            'blog_posts' => BlogPostBrowserResource::collection($blogPosts)
+            'blog_posts' => BlogPostBrowserResource::collection($blogPosts)->response()->getData(true),
         ]);
     }
 }
