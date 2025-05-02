@@ -47,7 +47,7 @@ function SendContactEmail() {
                     class="d-flex flex-lg-row justify-content-between pb-16px mb-20px bb-1 b-secondary"
                 >
                     <p class="fs-24 ff-krona">Poznań</p>
-                    <p class="text-gray">ul. Koncertowa 12, 66-666</p>
+                    <p class="text-gray">ul. Koncertowa 12, 66-666 Poznań</p>
                 </div>
                 <div
                     class="d-flex flex-lg-row justify-content-between mb-30px mb-lg-65px"

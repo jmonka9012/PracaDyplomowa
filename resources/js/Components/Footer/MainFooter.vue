@@ -62,15 +62,14 @@ const { siteData } = pageInfo();
                 </ul>
             </div>
             <div class="col-12 col-lg-6 d-flex flex-column align-items-center">
-                <Link :href="route('home')">
+                <Link class="mb-20px" :href="route('home')">
                     <Poptext
                         class="flex-column justify-content-center align-items-center poptext-white poptext-footer"
                         :text="siteData.title"
                     />
                 </Link>
                 <p class="text-align-center mb-25px">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Accusantium, eveniet.
+                    Kup bilety na niezapomniane wydarzenia w nowoczesnych halach naszego obiektu!
                 </p>
                 <div class="d-flex flex-row justify-content-center mb-35px">
                     <Link class="text-white hover-primary" :href="route('privacy-policy')">Polityka prywatności</Link>
@@ -94,16 +93,16 @@ const { siteData } = pageInfo();
             <div
                 class="col-12 col-lg-3 d-flex flex-column text-align-center text-align-lg-end align-items-center align-items-lg-end mt-40px mt-lg-0"
             >
-                <p class="footer__heading">New-York</p>
-                <a class="text-primary hover-white mb-15px" href="">
-                    newyork@loremipsum.com
+                <p class="footer__heading">Poznań</p>
+                <a class="text-primary hover-white mb-15px" href="mailto:kontakt@eventmachen.pl">
+                    kontakt@eventmachen.pl
                 </a>
-                <a class="text-primary hover-white mb-15px" href="">
-                    +48 123 456 789
+                <a class="text-primary hover-white mb-15px" href="tel:+48111222333">
+                    +48 111 222 333
                 </a>
                 <p>
-                    12 Lorem Street, New York <br />
-                    TX 98 765, USA
+                    ul. Koncertowa 12, <br />
+                    66-666 Poznań
                 </p>
             </div>
         </div>
