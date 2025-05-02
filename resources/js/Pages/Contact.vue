@@ -8,6 +8,8 @@ import instagramIcon from "~icons/instagram-black.svg";
 
 import {reactive} from "vue";
 import {Link} from "@inertiajs/vue3";
+import useAuth from "@/Utilities/useAuth";
+const { user, isLoggedIn } = useAuth();
 
 const contactForm = reactive({
     name: null,
@@ -79,8 +81,8 @@ function SendContactEmail() {
                     </div>
                 </div>
                 <div class="col-12 d-flex flex-column">
-                    <h4 class="fs-36 mb-20px">Wyślij e-mail</h4>
-                    <form class="form" @submit.prevent="SendContactEmail">
+                    <h4 class="fs-36 mb-20px">Wyślij zapytanie</h4>
+                    <form v-if="!isLoggedIn" class="form" @submit.prevent="SendContactEmail">
                         <div class="input-wrap col-12 col-lg-6">
                             <input v-model="contactForm.name" type="text" required name="contact-name"
                                    placeholder="Twoje imie*"/>
@@ -106,6 +108,10 @@ function SendContactEmail() {
                             Więcej informacji znajdziesz w naszej Polityce prywatności.</p>
                         <input type="submit" value="wyślij"/>
                     </form>
+                    <div v-if="isLoggedIn">
+                        <p class="mb-20px">Jako zalogowany użytkownik masz dostęp do formularza kontaktowego w panelu użytkownika w zakładce "Obsługa Klienta"</p>
+                        <Link :href="route('my-account')" class="btn btn-md">Panel użytkownika</Link>
+                    </div>
                 </div>
             </div>
         </div>
