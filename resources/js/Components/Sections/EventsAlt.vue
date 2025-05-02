@@ -25,7 +25,10 @@ const props = defineProps({
                     {{ event.event_date }}
                 </p>
                 <span class="divider divider-dark"></span>
-                <p class="event-location ff-krona">{{ event.event_location }}</p>
+                <p class="event-location ff-krona">
+                    Kategorie: <Link class="event-category-link" :href="`${route('event.browser')}?genres=${genre.id}`"  v-for="(genre, index) in event.genres">{{ genre.name }}<span v-if="index < event.genres.length - 1">, </span>
+                </Link>
+                </p>
             </div>
             <div class="relative mt-auto">
                 <img :src="`/storage/${event.image_path}`" alt="" class="event-img event-img-blog" />

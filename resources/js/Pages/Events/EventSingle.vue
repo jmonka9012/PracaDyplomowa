@@ -7,6 +7,7 @@ import blogBg from "~images/single-map.jpg";
 
 import ResetObject from "@/Utilities/resetObject";
 import { router } from "@inertiajs/vue3";
+import {Link} from "@inertiajs/vue3";
 import {reactive, ref, computed, watch} from "vue";
 
 const url = window.location.href;
@@ -22,6 +23,7 @@ const props = defineProps({
     }
 });
 
+console.log(props);
 const hall = props.event.data.event_location;
 const seats = reactive({});
 const standingTickets = reactive({});
@@ -196,10 +198,6 @@ function SubmitTicketRequest() {
                             {{ event.data.event_date }}
                         </p>
                     </div>
-                    <!--                    <div>
-                        <h6 class="mb-13px">Location:</h6>
-                        <a class="text-secondary" href="/">GERMANY</a>
-                    </div>-->
                     <div>
                         <h6 class="mb-13px">E-mail:</h6>
                         <a
@@ -214,6 +212,15 @@ function SubmitTicketRequest() {
                             "
                         >{{ event.data.contact_email_additional }}</a
                         >
+                    </div>
+                    <div>
+                        <h6 class="mb-13px">Kategorie</h6>
+                        <p class="event-location ff-krona">
+                            <Link class="event-category-link" :href="`${route('event.browser')}?genres=${genre.id}`"
+                                  v-for="(genre, index) in event.data.genres">{{ genre.name }}<span
+                                v-if="index < event.data.genres.length - 1">, </span>
+                            </Link>
+                        </p>
                     </div>
                 </div>
                 <h4 class="mb-18px">O wydarzeniu</h4>
