@@ -33,7 +33,15 @@ class EventResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'seats' => EventSeatResource::collection($this->whenLoaded('seats')),
-            'standing_tickets' => EventStandingTicketResource::collection($this->whenLoaded('standingTickets'))
+            'standing_tickets' => EventStandingTicketResource::collection($this->whenLoaded('standingTickets')),
+            'genres' => $this->whenLoaded('genres', function () {
+                return $this->genres->map(function ($genre) {
+                    return [
+                        'id' => $genre->id,
+                        'name' => $genre->genre_name
+                    ];
+                });
+            }),
         ];
     }
 }

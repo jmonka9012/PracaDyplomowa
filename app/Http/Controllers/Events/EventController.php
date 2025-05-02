@@ -19,7 +19,8 @@ class EventController extends Controller
             ->with([
                 'seats',
                 'standingTickets',
-                'hall.sections'
+                'hall.sections',
+                'genres'
                 ])
             ->first();
 
@@ -27,7 +28,7 @@ class EventController extends Controller
             return redirect()->route('error404');
         }
         
-        $closestEvents = $event->getRelatedEvents();
+        $closestEvents = $event->getRelatedEvents()->load('genres');
 
         return Inertia::render('Events/EventSingle', [
             'event' => new EventResource($event),
@@ -37,9 +38,9 @@ class EventController extends Controller
 
     public function showData(Event $event)
     {
-        $event->load(['hall.sections', 'seats', 'standingTickets']);
+        $event->load(['hall.sections', 'seats', 'standingTickets', 'genres']);
 
-        $closestEvents = $event->getRelatedEvents();
+        $closestEvents = $event->getRelatedEvents()->load('genres');
 
         return response()->json([
             'event' => $event->load(['seats', 'standingTickets'])->toArray(),
