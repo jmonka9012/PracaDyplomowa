@@ -12,11 +12,11 @@ defineProps({
 			<h1 class="hero-small__title">
 				{{ title }}
 			</h1>
-			<div class="bcrumb text-white">
+<!--			<div class="bcrumb text-white">
 				<a href="">Prev</a>
 				<span class="divider divider-star"></span>
 				<a class="bcrumb__cur" href="">Current</a>
-			</div>
+			</div>-->
 		</div>
 	</section>
 </template>

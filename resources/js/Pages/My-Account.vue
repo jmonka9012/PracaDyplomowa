@@ -66,11 +66,11 @@ const errors = reactive({});
     <section class="bg-grey">
         <div class="container flex-lg-row column-mob-reverse">
             <div class="col-12 d-flex flex-column ma-rcol pl-lg-60px">
-                <div class="bcrumb text-white mb-32px">
+<!--                <div class="bcrumb text-white mb-32px">
                     <a href="">Prev</a>
                     <span class="divider divider-star"></span>
                     <a class="bcrumb__cur" href="">Current</a>
-                </div>
+                </div>-->
                 <h1 class="ma-title">Mój profil</h1>
                 <Tabs class="tabs-white">
                     <Tab title="Moje informacje">
