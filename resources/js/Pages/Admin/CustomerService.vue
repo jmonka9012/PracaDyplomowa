@@ -4,7 +4,7 @@ import HeroSmall from "@/Components/Sections/Hero-small.vue";
 </script>
 
 <template>
-    <HeroSmall :source="blogBg" title="Zarządzaj wydarzeniami"></HeroSmall>
+    <HeroSmall :source="blogBg" title="Obsługa klienta"></HeroSmall>
     <section>
         <div class="container">
             <h2>Jakaś tabelka?</h2>
