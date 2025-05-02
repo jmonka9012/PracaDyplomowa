@@ -20,6 +20,10 @@ import { Link } from "@inertiajs/vue3";
                 <i class="fa fa-heart"></i>
                 Polityka prywatności
             </Link>
+            <Link :href="route('faq')" class="serv-item">
+                <i class="fa fa-heart"></i>
+                FAQ
+            </Link>
         </div>
     </section>
 </template>

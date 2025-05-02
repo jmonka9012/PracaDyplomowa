@@ -76,6 +76,8 @@ const { siteData } = pageInfo();
                     <Link class="text-white hover-primary" :href="route('privacy-policy')">Polityka prywatności</Link>
                     <span class="text-white divider"></span>
                     <Link class="text-white hover-primary" :href="route('terms-of-use')">Regulamin</Link>
+                    <span class="text-white divider"></span>
+                    <Link class="text-white hover-primary" :href="route('faq')">FAQ</Link>
                 </div>
                 <div class="d-flex flex-row w-fit justify-content-between">
                     <a class="morph-btn footer__icon" href="">
