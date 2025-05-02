@@ -28,7 +28,7 @@ class EventController extends Controller
             return redirect()->route('error404');
         }
         
-        $closestEvents = $event->getRelatedEvents()->load('genres');
+        $closestEvents = $event->getRelatedEvents()->load('genres', 'standingTickets', 'standingTickets');
 
         return Inertia::render('Events/EventSingle', [
             'event' => new EventResource($event),
@@ -40,7 +40,7 @@ class EventController extends Controller
     {
         $event->load(['hall.sections', 'seats', 'standingTickets', 'genres']);
 
-        $closestEvents = $event->getRelatedEvents()->load('genres');
+        $closestEvents = $event->getRelatedEvents()->load('genres', 'standingTickets', 'standingTickets');
 
         return response()->json([
             'event' => $event->load(['seats', 'standingTickets'])->toArray(),
@@ -54,7 +54,7 @@ class EventController extends Controller
             return redirect()->route('event.browser', ['page' => 1] + $request->except('page'));
         }
 
-        $query = Event::with('genres')
+        $query = Event::with('genres', 'standingTickets', 'standingTickets')
         ->where('pending', false);
 
         if($request->has('event_name') && !empty($request->event_name)){
@@ -107,7 +107,7 @@ class EventController extends Controller
 
     public function eventBrowserData(Event $event)
     {
-        $events = Event::with('genres')
+        $events = Event::with('genres', 'standingTickets', 'standingTickets')
             ->where('pending', false)
             ->orderBy('event_date', 'asc')
             ->paginate(10);

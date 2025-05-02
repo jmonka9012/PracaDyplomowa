@@ -14,10 +14,12 @@ class HomeController extends Controller
     public function index()
     {
         $genres = Genre::orderBy('id', 'asc')->get();
+
         $upcomingEvents = Event::where('event_date', '>', now())
             ->where('pending', false)
             ->orderBy('event_date', 'asc')
             ->take(3)
+            ->with(['standingTickets', 'standingTickets'])
             ->get();
         
         $newestBlogPosts = BlogPost::orderBy('created_at', 'desc')
