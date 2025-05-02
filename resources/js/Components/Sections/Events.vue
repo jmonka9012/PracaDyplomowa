@@ -41,12 +41,15 @@ const scrollRight = () => {
                         event.event_name
                     }}</Link>
                 </h6>
-                <Link
-                    class="event-link d-none d-lg-flex"
-                    :href="`/${event.event_url}`"
+                <div>
+                    <Link
+                        class="event-link d-none d-lg-flex"
+                        :href="`/${event.event_url}`"
                     ><i class="fa fa-ticket"></i>
-                    Zobacz więcej
-                </Link>
+                        Zobacz więcej
+                    </Link>
+                    <div>Ceny od {{event.lowest_price}} zł</div>
+                </div>
             </div>
             <p class="event-date ff-prompt">
                 <i class="fa fa-calendar mr-5px"></i>{{ event.event_date }}
@@ -55,10 +58,13 @@ const scrollRight = () => {
                 Kategorie: <Link class="event-category-link" :href="`${route('event.browser')}?genres=${genre.id}`"  v-for="(genre, index) in event.genres">{{ genre.name }}<span v-if="index < event.genres.length - 1">, </span>
             </Link>
             </p>
-            <Link class="event-link d-lg-none" :href="`/${event.event_url}`"
+            <div>
+                <Link class="event-link d-lg-none" :href="`/${event.event_url}`"
                 ><i class="fa fa-ticket"></i>
-                Zobacz więcej
-            </Link>
+                    Zobacz więcej
+                </Link>
+                <div>Ceny od {{event.lowest_price}} zł</div>
+            </div>
         </div>
     </div>
 </template>
