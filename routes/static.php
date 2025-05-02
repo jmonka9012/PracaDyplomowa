@@ -3,8 +3,9 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\TermsOfUseController;
-use App\Http\Controllers\PrivacyPolicyController;
+use App\Http\Controllers\Static\PrivacyPolicyController;
+use App\Http\Controllers\Static\TermsOfUseController;
+use App\Http\Controllers\Static\FAQController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])
@@ -25,3 +26,6 @@ Route::get('/regulamin', [TermsOfUseController::class, 'index'])
 
 Route::get('/polityka-prywatnosci', [PrivacyPolicyController::class, 'index'])
       ->name('privacy-policy');
+
+Route::get('/faq', [FAQController::class, 'index'])
+      ->name('faq');
