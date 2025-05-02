@@ -29,13 +29,17 @@ Route::prefix('admin')->group(function() {
             ->name('admin.events.data')
             ->middleware('redactorAccess');
 
-      Route::get('/zarzadzaj-postami', [ManagePostsController::class, 'index'])
+      Route::get('/zarzadzaj-postami', [ManagePostsController::class, 'blogBrowserAdminShow'])
             ->name('admin.posts')
             ->middleware('blogAccess');
 
-      Route::get('/zarzadzaj-postami/data', [ManagePostsController::class, 'showData'])
+      Route::get('/zarzadzaj-postami/data', [ManagePostsController::class, 'blogBrowserAdminShowData'])
             ->name('admin.posts.data')
             ->middleware('blogAccess');
+
+      Route::post('/zaradzaj-postami/usun', [ManagePostsController::class, 'deletePost'])
+            ->name('admin.posts.delete')
+            ->middleware('adminAccess');
 
 
       Route::get('/obsluga-klienta', [CustomerServiceController::class, 'index'])
