@@ -56,11 +56,8 @@ class ManagePostsController extends Controller
 
             DB::commit();
 
-            return response()->json([
-                'blog_deleted' => true,
-                'message' => 'Post został usunięty',
-                'deleted_id' => $validatedData['blog_id']
-            ]);
+            return Inertia::location($request->headers->get('referer'));
+            
         } catch (\Exception $e){
             DB::rollBack();
 
