@@ -4,6 +4,15 @@ import blogBg from "~images/blog-bg.jpg";
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 
 import {Link} from "@inertiajs/vue3";
+
+const props = defineProps({
+    blog_posts: {
+        required: true,
+    }
+});
+
+console.log(props);
+
 </script>
 
 <template>
@@ -52,7 +61,7 @@ import {Link} from "@inertiajs/vue3";
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="t-details">
+                        <tr v-for="post in props.blog_posts.data" class="t-details">
                             <td class="t-details__select">
                                 <input
                                     class="check"
@@ -62,16 +71,15 @@ import {Link} from "@inertiajs/vue3";
                             </td>
                             <td>
                                 <img
-                                    :src="hellsPit"
+                                    :src="`/storage/${post.thumbnail_path}`"
                                     class="t-details__pic mr-0"
                                 />
                             </td>
                             <td>
-                                <a href="#event-link">Wydarzenie numer 1</a>
+                                <a href="#event-link">{{post.blog_post_name}}</a>
                                 <div class="t-details__options">
-                                    <a href="#edit">Edytuj</a>
                                     <a href="#delete">Usuń</a>
-                                    <a href="#view">Zobacz</a>
+                                    <Link :href="`/${post.blog_post_url}`">Zobacz</Link>
                                 </div>
                             </td>
                             <td>/Lorem-ipsum-1</td>
@@ -86,6 +94,7 @@ import {Link} from "@inertiajs/vue3";
                             </td>
                         </tr>
                     </tbody>
+<!--
                     <tfoot>
                         <tr>
                             <th>
@@ -116,10 +125,61 @@ import {Link} from "@inertiajs/vue3";
                             <th>Opis</th>
                         </tr>
                     </tfoot>
+-->
                 </table>
+            </div>
+            <h1>Odebrane dane z backendu</h1>
+            <div>
+                <div class="d-flex" v-for="post in props.blog_posts.data">
+                    <div>
+                        <div>Obrazek</div>
+                        <img class="max-100" :src="`/storage/${post.thumbnail_path}`" alt="">
+                    </div>
+                    <div>
+                        <div>ID posta:</div>
+                        <div>{{post.id}}</div>
+                    </div>
+                    <div>
+                        <div>Nazwa</div>
+                        <Link :href="`/${post.blog_post_url}`">{{post.blog_post_name}}</Link>
+                    </div>
+                    <div>
+                        <div>Kategoria posta:</div>
+                        <div>{{post.blog_post_type}}</div>
+                    </div>
+                    <div>
+                        <div>Data dodania:</div>
+                        <div>{{post.blog_date}}</div>
+                    </div>
+                    <div>
+                        <div>Autor:</div>
+                        <div>{{post.author_name}}</div>
+                    </div>
+                    <div>
+                        <Link preserve-scroll method="post" :href="route('admin.posts.delete', {blog_id: post.id})" >Usuń</Link>
+                    </div>
+                </div>
+            </div>
+            <div class="event-pagination">
+                <ul class="ml-auto mr-auto">
+                    <li
+                        :key="page"
+                        class="page"
+                        :class="{ 'page-current': page.active }"
+                        v-for="page in blog_posts.meta.links"
+                    >
+                        <Link :href="page.url" v-html="page.label"></Link>
+                    </li>
+                </ul>
             </div>
         </div>
     </section>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.max-100 {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+</style>
