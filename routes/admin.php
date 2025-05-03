@@ -41,7 +41,15 @@ Route::prefix('admin')->group(function() {
             ->middleware('adminAccess');
 
 
-      Route::get('/obsluga-klienta', [CustomerServiceController::class, 'index'])
+      Route::get('/obsluga-klienta', [CustomerServiceController::class, 'show'])
             ->name('admin.customer-service')
+            ->middleware('redactorAccess');
+
+      Route::get('/obsluga-klienta/data', [CustomerServiceController::class, 'showData'])
+            ->name('admin.customer-service.data')
+            ->middleware('redactorAccess');
+      
+      Route::put('/obsluga-klienta/{id}/status', [CustomerServiceController::class, 'changeStatus'])
+            ->name('admin.customer-service.change_status')
             ->middleware('redactorAccess');
 });
