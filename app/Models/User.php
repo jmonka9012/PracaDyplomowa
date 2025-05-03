@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Blog\BlogAuthor;
 use App\Models\Tickets\Ticket;
+use App\Models\OrganizerInformation;
 
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -71,4 +72,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return UserRole::from($this->attributes['role'])->permissionLevel();
     }
+
+    public function organizer()
+        {
+            return $this->hasOne(OrganizerInformation::class);
+        }
 }

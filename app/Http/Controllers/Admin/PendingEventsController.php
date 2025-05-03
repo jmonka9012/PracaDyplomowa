@@ -5,26 +5,26 @@ namespace App\Http\Controllers\Admin;
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use App\Models\Events\Event;
-use App\Http\Resources\EventBrowserAdminResource;
+use App\Http\Resources\PendingEventResource;
 
 
 class PendingEventsController extends Controller
 {
     public function index()
     {   
-        $events = Event::all();
+        $events = Event::where('pending', true)->get();
 
         return Inertia::render('Admin/PendingEvents', [
-            'events' => EventBrowserAdminResource::collection($events)
+            'pending_events' => PendingEventResource::collection($events)
         ]);
     }
 
     public function showData()
     {
-        $events = Event::all();
+        $events = Event::where('pending', true)->get();
 
         return response()->json([
-            'events' => EventBrowserAdminResource::collection($events)
+            'pending_events' => PendingEventResource::collection($events)
         ]);
     }
 }

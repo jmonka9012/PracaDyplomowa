@@ -16,6 +16,7 @@ class EventController extends Controller
     public function show($event)
     {
         $event = Event::where('event_url', $event)
+            ->where('pending', false)
             ->with([
                 'seats',
                 'standingTickets',
