@@ -18,7 +18,7 @@ const contactForm = reactive({
     message: null,
 });
 
-function SendContactEmail() {
+function SendTicket() {
     console.log(contactForm);
 }
 </script>
@@ -82,7 +82,7 @@ function SendContactEmail() {
                 </div>
                 <div class="col-12 d-flex flex-column">
                     <h4 class="fs-36 mb-20px">Wyślij zapytanie</h4>
-                    <form v-if="!isLoggedIn" class="form" @submit.prevent="SendContactEmail">
+                    <form v-if="!isLoggedIn" class="form" @submit.prevent="SendTicket">
                         <div class="input-wrap col-12 col-lg-6">
                             <input v-model="contactForm.name" type="text" required name="contact-name"
                                    placeholder="Twoje imie*"/>

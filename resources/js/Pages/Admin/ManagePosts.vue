@@ -156,7 +156,14 @@ console.log(props);
                         <div>{{post.author_name}}</div>
                     </div>
                     <div>
-                        <Link preserve-scroll method="post" :href="route('admin.posts.delete', {blog_id: post.id})" >Usuń</Link>
+                        <Link
+                            method="delete"
+                            preserve-scroll
+                            :href="route('admin.posts.delete')"
+                            :data="{ blog_id: post.id }"
+                        >
+                            Usuń
+                        </Link>
                     </div>
                     <div>
                         <Link :href="`/${post.blog_post_url}`" >Podgląd</Link>

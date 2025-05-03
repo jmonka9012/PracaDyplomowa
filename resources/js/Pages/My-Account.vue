@@ -4,36 +4,14 @@ import Tab from "@/Components/Partials/Tab.vue";
 import Tabs from "@/Components/Partials/Tabs.vue";
 import useAuth from "@/Utilities/useAuth";
 import ResetObject from "@/Utilities/resetObject";
-import { router } from "@inertiajs/vue3";
-import { Link } from "@inertiajs/vue3";
-import { ref, reactive, toRaw } from "vue";
+import {router} from "@inertiajs/vue3";
+import {Link} from "@inertiajs/vue3";
+import {ref, reactive, toRaw} from "vue";
 
 const showModal = ref(false);
-const { user, isLoggedIn } = useAuth();
+const {user, isLoggedIn} = useAuth();
 
 let currentRequest;
-
-function handleSubmitClick(form) {
-    showModal.value = true;
-    currentRequest = form;
-}
-
-//$event.target.value
-const handleValidationEmit = (state) => {
-    if (state === true) {
-        router.post(route("my-account.change"), currentRequest, {
-            onError: (err) => {
-                ResetObject(errors);
-                Object.assign(errors, err); //errory do poprawienia
-            },
-            onSuccess: (page) => {
-                currentRequest = null;
-                showModal.value = false;
-            },
-        });
-    }
-};
-
 const Logout = () => {
     router.post(route("logout"), {});
 };
@@ -58,7 +36,36 @@ const passwordForm = reactive({
     password: null,
 });
 
+const contactForm = reactive({
+    topic: null,
+    message: null,
+});
+
 const errors = reactive({});
+
+function handleSubmitClick(form) {
+    showModal.value = true;
+    currentRequest = form;
+}
+
+const handleValidationEmit = (state) => {
+    if (state === true) {
+        router.post(route("my-account.change"), currentRequest, {
+            onError: (err) => {
+                ResetObject(errors);
+                Object.assign(errors, err); //errory do poprawienia
+            },
+            onSuccess: (page) => {
+                currentRequest = null;
+                showModal.value = false;
+            },
+        });
+    }
+};
+
+function SendTicket() {
+    console.log(contactForm);
+}
 </script>
 
 <template>
@@ -66,11 +73,11 @@ const errors = reactive({});
     <section class="bg-grey">
         <div class="container flex-lg-row column-mob-reverse">
             <div class="col-12 d-flex flex-column ma-rcol pl-lg-60px">
-<!--                <div class="bcrumb text-white mb-32px">
-                    <a href="">Prev</a>
-                    <span class="divider divider-star"></span>
-                    <a class="bcrumb__cur" href="">Current</a>
-                </div>-->
+                <!--                <div class="bcrumb text-white mb-32px">
+                                    <a href="">Prev</a>
+                                    <span class="divider divider-star"></span>
+                                    <a class="bcrumb__cur" href="">Current</a>
+                                </div>-->
                 <h1 class="ma-title">Mój profil</h1>
                 <Tabs class="tabs-white">
                     <Tab title="Moje informacje">
@@ -193,7 +200,7 @@ const errors = reactive({});
                         <h3 class="ma-ftitle">Potwierdź Email</h3>
                         <form class="form form-ma">
                             <div class="input-wrap d-flex flex-column col-12">
-                                <input type="submit" value="Potwierdź" />
+                                <input type="submit" value="Potwierdź"/>
                             </div>
                         </form>
                     </Tab>
@@ -207,10 +214,27 @@ const errors = reactive({});
                     </Tab>
                     <Tab title="Obsługa klienta">
                         <div
-                            class="d-flex align-items-center column-gap-10px mb-32px"
+                            class="d-flex flex-column align-items-center column-gap-10px mb-32px"
                         >
-                            <h3 class="ma-ftitle">Obsługa klienta</h3>
-                            <i class="fa fa-user"></i>
+                            <h3 class="fs-36 mb-20px">Wyślij zapytanie</h3>
+                            <form class="form" @submit.prevent="SendTicket">
+                                <div class="input-wrap col-12">
+                                    <input v-model="contactForm.topic" type="text" required name="contact-topic"
+                                           placeholder="Temat wiadomości*"/>
+                                </div>
+                                <div class="input-wrap col-12">
+                                    <textarea
+                                        v-model="contactForm.message"
+                                        name="contact-message"
+                                        id=""
+                                        placeholder="Wiadomość"
+                                    ></textarea>
+                                </div>
+                                <p class="mb-16px">Jeżeli chcesz zwrotu pieniędzy za bilet umieść wszystkie dane
+                                    odnośnie transakcji takie jak ID biletu, data, wydarzenie tak aby dział księgowości
+                                    mógł odnaleść płatność.</p>
+                                <input type="submit" value="wyślij"/>
+                            </form>
                         </div>
                     </Tab>
                     <Tab title="Sczegóły sprzedawcy">
@@ -234,16 +258,19 @@ const errors = reactive({});
 
 <style lang="scss">
 @use "~css/mixin.scss";
+
 .ma-hero {
     background-color: var(--primary);
     min-height: 380px;
 }
+
 .ma-ftitle {
     font-size: 32px;
     line-height: 48px;
     color: var(--text);
     font-weight: 500;
 }
+
 .ma-title {
     font-size: 32px;
     font-stretch: normal;
@@ -253,6 +280,7 @@ const errors = reactive({});
     margin-bottom: 30px;
     color: white;
 }
+
 .ma-divider {
     margin: 32px 0px 0px;
     border-width: 1px 0px 0px;
@@ -262,6 +290,7 @@ const errors = reactive({});
     height: 0px;
     overflow: visible;
 }
+
 .ma-lcol-intro {
     padding: 32px;
     display: flex;
@@ -274,6 +303,7 @@ const errors = reactive({});
         min-height: 200px;
     }
 }
+
 .ma-lcol-content {
     padding: 16px 0 88px;
     background-color: rgb(255, 255, 255);
@@ -282,12 +312,15 @@ const errors = reactive({});
     flex-direction: column;
     height: 100%;
 }
+
 .ma-lcol-nav {
     color: rgb(18, 18, 18);
+
     ul {
         padding-bottom: 5px;
         margin-bottom: 5px;
         position: relative;
+
         &::after {
             width: calc(100% - 32px);
             left: 16px;
@@ -299,8 +332,10 @@ const errors = reactive({});
             content: "";
             bottom: 0;
         }
+
         li {
             position: relative;
+
             button {
                 padding: 16px 64px;
                 background-color: transparent;
@@ -310,10 +345,12 @@ const errors = reactive({});
                 font-family: "Prompt";
                 width: 100%;
                 text-align: start;
+
                 &:hover {
                     background-color: #f6f6f6;
                     text-decoration: underline;
                 }
+
                 i {
                     position: absolute;
                     position: absolute;
@@ -323,6 +360,7 @@ const errors = reactive({});
                     color: rgb(100, 100, 100);
                 }
             }
+
             a {
                 padding: 12px 24px 12px 64px;
                 color: rgb(18, 18, 18);
@@ -330,15 +368,18 @@ const errors = reactive({});
                 line-height: 1.5;
                 letter-spacing: 0.32px;
                 width: 100%;
+
                 &.user-functions {
                     padding-left: 24px;
                 }
+
                 &:hover {
                     background-color: #f6f6f6;
                     text-decoration: underline;
                 }
             }
         }
+
         &:last-of-type {
             &::after {
                 display: none;
@@ -346,22 +387,26 @@ const errors = reactive({});
         }
     }
 }
+
 .ma-rcol {
     margin-top: -240px;
     margin-bottom: 35px;
     @include mixin.media-breakpoint-up(lg) {
         margin-bottom: 70px;
     }
+
     .tabs__content {
         min-height: 1260px;
         @include mixin.media-breakpoint-up(lg) {
             min-height: 1430px;
         }
     }
+
     .fa {
         font-size: 30px;
     }
 }
+
 .ma-lcol {
     @include mixin.media-breakpoint-up(lg) {
         margin-top: -200px;
