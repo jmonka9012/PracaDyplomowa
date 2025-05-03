@@ -36,7 +36,7 @@ Route::prefix('admin')->group(function() {
             ->name('admin.posts.data')
             ->middleware('blogAccess');
 
-      Route::post('/zaradzaj-postami/usun', [ManagePostsController::class, 'deletePost'])
+      Route::delete('/zaradzaj-postami/usun', [ManagePostsController::class, 'deletePost'])
             ->name('admin.posts.delete')
             ->middleware('adminAccess');
 

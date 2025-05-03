@@ -52,7 +52,7 @@ class ManagePostsController extends Controller
             
 
             $post = BlogPost::findOrFail($validatedData['blog_id']);
-            $post->DB::delete();
+            $post->delete(); 
 
             DB::commit();
 
