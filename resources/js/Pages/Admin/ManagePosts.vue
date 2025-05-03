@@ -158,6 +158,9 @@ console.log(props);
                     <div>
                         <Link preserve-scroll method="post" :href="route('admin.posts.delete', {blog_id: post.id})" >Usuń</Link>
                     </div>
+                    <div>
+                        <Link :href="`/${post.blog_post_url}`" >Podgląd</Link>
+                    </div>
                 </div>
             </div>
             <div class="event-pagination">
