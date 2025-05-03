@@ -161,6 +161,7 @@ console.log(props);
                             preserve-scroll
                             :href="route('admin.posts.delete')"
                             :data="{ blog_id: post.id }"
+                            :only="['blog_posts']"
                         >
                             Usuń
                         </Link>
