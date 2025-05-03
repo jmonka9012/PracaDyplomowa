@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('address_city');
             $table->string('address_street');
             $table->string('bank_account_number');
-            $table->enum('account_status', ['pending','verified','awaiting clarification'])
+            $table->enum('account_status', ['pending','verified','awaiting clarification','denied'])
                 ->default('pending');
             $table->timestamps();
 

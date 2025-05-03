@@ -16,9 +16,6 @@ use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\OrganizerDetailsRequest;
 use Illuminate\Support\Facades\Validator;
 
-
-use Illuminate\Support\Facades\Log;
-
 class RegisterUserController extends Controller{
 
     public function create(): Response{
