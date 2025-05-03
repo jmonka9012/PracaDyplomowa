@@ -1,6 +1,5 @@
 <?php
 
-use App\Console\Commands\ArchiveOldEvents;
 use Illuminate\Support\Facades\Schedule;
 
 

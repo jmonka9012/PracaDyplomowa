@@ -1,9 +1,7 @@
 <?php
 
 use App\Http\Controllers\Blog\BlogController;
-use App\Http\Controllers\Blog\PostController;
 use App\Http\Controllers\Admin\RequestBlogController;
-use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImageUploadController;
 

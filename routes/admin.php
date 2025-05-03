@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Admin\ManageUsersController;
 use App\Http\Controllers\Admin\ManagePostsController;
-use App\Http\Controllers\Admin\RequestBlogController;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\CustomerServiceController;
 use App\Http\Controllers\Admin\PendingEventsController;

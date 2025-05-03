@@ -2,7 +2,6 @@
 
 namespace App\Models\EventStandingTickets;
 
-use App\Models\Events\Event;
 use App\Models\Events\EventArchived;
 
 class EventStandingTicketArchived extends EventStandingTicketBase

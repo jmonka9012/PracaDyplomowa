@@ -12,9 +12,6 @@ use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 use App\Http\Requests\RequestEventRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-
 
 class RequestEventController extends Controller
 {

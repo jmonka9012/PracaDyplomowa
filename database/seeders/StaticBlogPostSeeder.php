@@ -3,10 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Blog\BlogPost;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Blog\BlogAuthor;
-use Illuminate\Validation\Rules\Exists;
+
 
 class StaticBlogPostSeeder extends Seeder
 {

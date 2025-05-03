@@ -2,8 +2,6 @@
 
 namespace App\Models\Tickets;
 
-
-use App\Models\User;
 use App\Models\Events\Event;
 use App\Models\EventSeats\EventSeat;
 use App\Models\EventStandingTickets\EventStandingTicket;

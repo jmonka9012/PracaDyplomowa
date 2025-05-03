@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Events;
 
 use App\Http\Requests\TicketSaleRequest;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Tickets\Ticket;

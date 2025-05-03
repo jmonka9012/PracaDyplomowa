@@ -7,7 +7,6 @@ use App\Models\User;
 use App\Enums\UserRole;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
 use App\Mail\VerifyEmail;
 use PHPUnit\Framework\Attributes\Test;
 use Faker\Factory as Faker;
