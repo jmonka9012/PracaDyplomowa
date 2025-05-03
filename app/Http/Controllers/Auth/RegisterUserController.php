@@ -45,8 +45,6 @@ class RegisterUserController extends Controller{
         if ($request->organizer_request) {
             $organizerData = $request->organizer_details;
 
-            Log::debug('Raw organizer_details input:', $organizerData);
-
             $formRequest = new OrganizerDetailsRequest();
             $rules       = $formRequest->rules();
             $messages    = $formRequest->messages();
@@ -54,8 +52,6 @@ class RegisterUserController extends Controller{
             $validator = Validator::make((array) $organizerData, $rules, $messages);
 
             $validatedOrganizerData = $validator->validated();
-            
-            Log::debug('validated data:', $validatedOrganizerData);
 
             OrganizerInformation::Create([
                 'user_id' => $user->id,
