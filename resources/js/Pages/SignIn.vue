@@ -32,10 +32,13 @@ const loginForm = reactive({
 
 const organizerDetails = reactive({
     company_name: null,
-    company_address: null,
     phone_number: null,
     company_nip: null,
     bank_account: null,
+    company_country: null,
+    company_city: null,
+    company_zip_code: null,
+    company_street: null,
 });
 
 const registerForm = reactive({
@@ -418,26 +421,98 @@ function submitRegisterRequest() {
                             </div>
                         </div>
                         <div class="input-wrap col-12">
-                            <label for="register-username">Adres firmy*</label>
-                            <textarea
+                            <label for="register-username">Kraj*</label>
+                            <input
                                 type="text"
-                                id="register-company-address"
+                                id="register-company-country"
                                 name="company-address"
                                 :required="registerForm.organizer_request"
                                 :aria-required="registerForm.organizer_request"
                                 spellcheck="false"
-                                v-model="organizerDetails.company_address"
+                                v-model="organizerDetails.company_country"
                             />
                             <div
                                 class="error-msg"
                                 v-if="
                                     registerErrors.organizer_details
-                                        ?.company_address
+                                        ?.company_country
                                 "
                             >
                                 {{
                                     registerErrors.organizer_details
-                                        .company_address
+                                        .company_country
+                                }}
+                            </div>
+                        </div>
+                        <div class="input-wrap col-12">
+                            <label for="register-username">Miasto*</label>
+                            <input
+                                type="text"
+                                id="register-company-country"
+                                name="company-address"
+                                :required="registerForm.organizer_request"
+                                :aria-required="registerForm.organizer_request"
+                                spellcheck="false"
+                                v-model="organizerDetails.company_city"
+                            />
+                            <div
+                                class="error-msg"
+                                v-if="
+                                    registerErrors.organizer_details
+                                        ?.company_city
+                                "
+                            >
+                                {{
+                                    registerErrors.organizer_details
+                                        .company_city
+                                }}
+                            </div>
+                        </div>
+                        <div class="input-wrap col-12">
+                            <label for="register-username">Kod pocztowy*</label>
+                            <input
+                                type="text"
+                                id="register-company-country"
+                                name="company-address"
+                                :required="registerForm.organizer_request"
+                                :aria-required="registerForm.organizer_request"
+                                spellcheck="false"
+                                v-model="organizerDetails.company_zip_code"
+                            />
+                            <div
+                                class="error-msg"
+                                v-if="
+                                    registerErrors.organizer_details
+                                        ?.company_zip_code
+                                "
+                            >
+                                {{
+                                    registerErrors.organizer_details
+                                        .company_zip_code
+                                }}
+                            </div>
+                        </div>
+                        <div class="input-wrap col-12">
+                            <label for="register-username">Ulica*</label>
+                            <input
+                                type="text"
+                                id="register-company-country"
+                                name="company-address"
+                                :required="registerForm.organizer_request"
+                                :aria-required="registerForm.organizer_request"
+                                spellcheck="false"
+                                v-model="organizerDetails.company_street"
+                            />
+                            <div
+                                class="error-msg"
+                                v-if="
+                                    registerErrors.organizer_details
+                                        ?.company_street
+                                "
+                            >
+                                {{
+                                    registerErrors.organizer_details
+                                        .company_street
                                 }}
                             </div>
                         </div>
