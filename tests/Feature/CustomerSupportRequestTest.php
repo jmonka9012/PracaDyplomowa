@@ -21,8 +21,6 @@ class CustomerSupportRequestTest extends TestCase
             'name' => 'Guest User',
         ]);
 
-        $response->dump();
-
         $this->assertDatabaseHas('support_tickets', [
             'topic' => 'Login issues',
             'email' => 'guest@example.com',

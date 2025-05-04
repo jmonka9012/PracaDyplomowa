@@ -28,7 +28,6 @@ class CustomerServiceControllerTest extends TestCase
             'id' => $ticket->id,
         ]);
 
-
         $this->assertDatabaseHas('support_tickets', [
             'id' => $ticket->id,
             'status' => 'closed',

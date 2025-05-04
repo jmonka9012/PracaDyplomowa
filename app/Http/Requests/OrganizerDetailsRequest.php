@@ -23,13 +23,24 @@ class OrganizerDetailsRequest extends FormRequest
     {
         return [
             'company_name' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:20',
             'company_nip' => 'required|string|max:20',
-            'bank_account' => 'required|string|max:34',
-            'company_country' => 'required|string|max:100',
-            'company_city' => 'required|string|max:100',
+            'company_country' => 'required|string|alpha|max:100',
+            'company_city' => 'required|string|alpha|max:100',
             'company_zip_code' => 'required|string|max:20',
-            'company_street' => 'required|string|max:255',       
+            'company_street' => 'required|string|max:255',   
+            
+            'phone_number' => [
+                'required',
+                'string',
+                'regex:/^\+?[0-9\s\-\(\)]{7,20}$/' //nr. telefonu, opcjolany kod kraju (+48 np)
+            ],
+
+            'bank_account' => [
+                'required',
+                'string',
+                'regex:/^([A-Z]{2}[0-9]{2})?[A-Z0-9]{11,30}$/', // IBAN miedzynarodowy, opcjonalnie 2 znaki kraju
+                'max:34'
+            ],
         ];
     }
 
@@ -37,6 +48,10 @@ class OrganizerDetailsRequest extends FormRequest
     {
         return [
             'required' => 'To pole jest wymagane',
+            'max' => 'Maksymalna wielkoś tego pola to :max znaków',
+            'company_city.alpha' => 'Tylko litery są dozwolone w tym polu',
+            'phone_number.regex' => 'Numer telefonu ma nieprawidłowy format.',
+            'bank_account.regex' => 'Numer konta bankowego ma nieprawidłowy format, prosimy o numer konta w formacie IBAN'
         ];
     }
 }
