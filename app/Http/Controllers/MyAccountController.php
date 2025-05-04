@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\SupportTicketResource;
+use App\Models\SupportTicket;
 use Inertia\Inertia;
 use App\Http\Requests\MyAccountDataChangeRequest;
 use Illuminate\Support\Facades\Hash;
@@ -13,7 +15,12 @@ class MyAccountController extends Controller
 {
     public function index()
     {
-        return Inertia::render('My-Account');
+        $supportTickets = SupportTicket::where('user_id', auth()->id())->get()
+        ->sortBy('created_at');
+
+        return Inertia::render('My-Account', [
+            'support_tickets' => SupportTicketResource::collection($supportTickets),
+        ]);
     }
 
     public function store(MyAccountDataChangeRequest $request)
