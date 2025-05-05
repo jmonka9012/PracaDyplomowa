@@ -16,7 +16,7 @@ class MyAccountController extends Controller
     public function index()
     {
         $supportTickets = SupportTicket::where('user_id', auth()->id())->get()
-        ->sortBy('created_at');
+        ->sortByDesc('created_at');
 
         return Inertia::render('My-Account', [
             'support_tickets' => SupportTicketResource::collection($supportTickets),
