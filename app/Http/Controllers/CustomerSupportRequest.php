@@ -14,7 +14,6 @@ class CustomerSupportRequest extends Controller
     {
         $ticket = SupportTicket::create($request->validated());
     
-        return redirect()
-            ->route('my-account');
+        return back()->with('success', true);
     }
 }
