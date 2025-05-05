@@ -56,7 +56,7 @@ class CustomerServiceController extends Controller
     public function changeStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|string|in:open,in_progress,closed,resolved',
+            'status' => 'required|string|in:in_progress,solved',
             'id' => 'required|exists:support_tickets,id'
         ]);
     

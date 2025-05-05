@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('topic');
             $table->text('message');
-            $table->enum('status', ['in_progress','closed'])->default('in_progress');
+            $table->enum('status', ['in_progress','solved'])->default('in_progress');
             $table->timestamps();
         });
     }
