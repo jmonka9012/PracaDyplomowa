@@ -42,6 +42,7 @@ const contactForm = reactive({
 });
 
 const errors = reactive({});
+const ticketErrors = reactive({});
 
 function handleSubmitClick(form) {
     showModal.value = true;
@@ -65,6 +66,19 @@ const handleValidationEmit = (state) => {
 
 function SendTicket() {
     console.log(contactForm);
+    let hadError = true;
+
+    router.post(route("support-ticket-send"), contactForm, {
+        preserveScroll: () => hadError,
+        onError: (err) => {
+            hadError = true;
+            ResetObject(ticketErrors);
+            Object.assign(ticketErrors, err);
+        },
+        onSuccess: () => {
+            hadError = false;
+        },
+    });
 }
 </script>
 
@@ -222,6 +236,9 @@ function SendTicket() {
                                     <input v-model="contactForm.topic" type="text" required name="contact-topic"
                                            placeholder="Temat wiadomości*"/>
                                 </div>
+                                <div class="error-msg" v-if="ticketErrors.topic">
+                                    {{ ticketErrors.topic }}
+                                </div>
                                 <div class="input-wrap col-12">
                                     <textarea
                                         v-model="contactForm.message"
@@ -229,6 +246,9 @@ function SendTicket() {
                                         id=""
                                         placeholder="Wiadomość"
                                     ></textarea>
+                                </div>
+                                <div class="error-msg" v-if="ticketErrors.message">
+                                    {{ ticketErrors.message }}
                                 </div>
                                 <p class="mb-16px">Jeżeli chcesz zwrotu pieniędzy za bilet umieść wszystkie dane
                                     odnośnie transakcji takie jak ID biletu, data, wydarzenie tak aby dział księgowości

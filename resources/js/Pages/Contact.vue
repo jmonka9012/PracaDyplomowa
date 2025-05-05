@@ -7,9 +7,11 @@ import twitterIcon from "~icons/twitter-black.svg";
 import instagramIcon from "~icons/instagram-black.svg";
 
 import {reactive} from "vue";
-import {Link} from "@inertiajs/vue3";
+import {Link, router} from "@inertiajs/vue3";
 import useAuth from "@/Utilities/useAuth";
 const { user, isLoggedIn } = useAuth();
+
+import ResetObject from "@/Utilities/resetObject";
 
 const contactForm = reactive({
     name: null,
@@ -18,8 +20,23 @@ const contactForm = reactive({
     message: null,
 });
 
+const errors = reactive({});
+
 function SendTicket() {
     console.log(contactForm);
+    let hadError = true;
+
+    router.post(route("support-ticket-send"), contactForm, {
+        preserveScroll: () => hadError,
+        onError: (err) => {
+            hadError = true;
+            ResetObject(errors);
+            Object.assign(errors, err);
+        },
+        onSuccess: () => {
+            hadError = false;
+        },
+    });
 }
 </script>
 
@@ -87,13 +104,22 @@ function SendTicket() {
                             <input v-model="contactForm.name" type="text" required name="contact-name"
                                    placeholder="Twoje imie*"/>
                         </div>
+                        <div class="error-msg" v-if="errors.name">
+                            {{ errors.name }}
+                        </div>
                         <div class="input-wrap col-12 col-lg-6">
                             <input v-model="contactForm.email" type="text" required name="contact-mail"
                                    placeholder="Twój email*"/>
                         </div>
+                        <div class="error-msg" v-if="errors.email">
+                            {{ errors.email }}
+                        </div>
                         <div class="input-wrap col-12">
                             <input v-model="contactForm.topic" type="text" required name="contact-topic"
                                    placeholder="Temat wiadomości*"/>
+                        </div>
+                        <div class="error-msg" v-if="errors.topic">
+                            {{ errors.topic }}
                         </div>
                         <div class="input-wrap col-12">
                             <textarea
@@ -102,6 +128,9 @@ function SendTicket() {
                                 id=""
                                 placeholder="Wiadomość"
                             ></textarea>
+                        </div>
+                        <div class="error-msg" v-if="errors.message">
+                            {{ errors.message }}
                         </div>
                         <p class="mb-16px">Administratorem Twoich danych osobowych jest Event Machen Sp. z o.o. z siedzibą w Poznaniu przy ul. Koncertowej 12. Dane przekazane w formularzu kontaktowym będą przetwarzane wyłącznie w celu obsługi Twojego zapytania, na podstawie uzasadnionego interesu administratora (art. 6 ust. 1 lit. f RODO). Twoje dane nie będą udostępniane podmiotom trzecim. Masz prawo dostępu do treści swoich danych, ich sprostowania, usunięcia, ograniczenia przetwarzania oraz wniesienia sprzeciwu.
 
