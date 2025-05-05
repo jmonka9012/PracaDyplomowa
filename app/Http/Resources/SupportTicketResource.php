@@ -22,7 +22,7 @@ class SupportTicketResource extends JsonResource
             'topic' => $this->topic,
             'message' => $this->message,
             'status' => $this->status,
-            'created_at' => $this->created_at,
+            'created_at' => $this->created_at->format('d.m.Y'),
         ];
     }
 }
