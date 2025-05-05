@@ -11,6 +11,15 @@ import {ref, reactive, toRaw} from "vue";
 const showModal = ref(false);
 const {user, isLoggedIn} = useAuth();
 
+const props = defineProps({
+    support_tickets: {
+        type: Array,
+        required: true,
+    }
+})
+
+console.log(props);
+
 let currentRequest;
 const Logout = () => {
     router.post(route("logout"), {});
@@ -70,6 +79,7 @@ function SendTicket() {
 
     router.post(route("support-ticket-send"), contactForm, {
         preserveScroll: () => hadError,
+        only: ['support_tickets'],
         onError: (err) => {
             hadError = true;
             ResetObject(ticketErrors);
@@ -255,6 +265,15 @@ function SendTicket() {
                                     mógł odnaleść płatność.</p>
                                 <input type="submit" value="wyślij"/>
                             </form>
+                            <h3>Twoje zapytania</h3>
+                            <div class="support-tickets" >
+                                <div class="support-tickets__ticket" v-for="ticket in props.support_tickets.data">
+                                    <div>{{ticket.topic}}</div>
+                                    <div>{{ticket.created_at}}</div>
+                                    <div v-html="ticket.status === 'in_progress' ? 'W trakcie rozpatrywania' : 'Zamknięte'  " :class="{ 'in-progress' : ticket.status === 'in_progress', 'closed' : ticket.status === 'closed' }" class="support-tickets__status"></div>
+                                    <div>{{ticket.message}}</div>
+                                </div>
+                            </div>
                         </div>
                     </Tab>
                     <Tab title="Sczegóły sprzedawcy">
@@ -278,6 +297,36 @@ function SendTicket() {
 
 <style lang="scss">
 @use "~css/mixin.scss";
+
+.support-tickets {
+    width: 100%;
+    display: grid;
+
+    &__ticket {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin-bottom: 40px;
+
+        & > div:last-child {
+            grid-column: 1 / -1;
+        }
+    }
+
+    &__status {
+        width: 100%;
+        border-radius: 8px;
+        padding: 8px 16px;
+
+        &.in-progress {
+            background-color: var(--primary);
+        }
+
+        &.closed {
+            background-color: var(--yellow);
+        }
+    }
+}
 
 .ma-hero {
     background-color: var(--primary);
