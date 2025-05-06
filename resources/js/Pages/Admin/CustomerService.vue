@@ -10,17 +10,34 @@ const props = defineProps({
     }
 });
 
+function FilterByUser(ticket) {
+    if (ticket.user_id) {
+        return
+    } else {
+        return null;
+    }
+}
+
+console.log(props.tickets)
+
 </script>
 
 <template>
     <HeroSmall :source="blogBg" title="Obsługa klienta"></HeroSmall>
     <section class="pb-100px">
         <div class="container flex-column">
-            <h2 class="mb-40px">Jakaś tabelka?</h2>
+            <h2 class="mb-40px">Zgłoszenia kontaktowe</h2>
             <div class="ticket-query mb-40px">
                 <div class="ticket-query__ticket" v-for="ticket in props.tickets.data">
                     <div>{{ ticket.topic }}</div>
-                    <div>{{ ticket.name }}</div>
+                    <Link
+                        v-if="ticket.user_id"
+                        :href="`/admin/obsluga-klienta?user_id=${ticket.user_id}`"
+                        method="get"
+                    >
+                        {{ ticket.name }}
+                    </Link>
+                    <div v-else>{{ ticket.name }}</div>
                     <div>{{ ticket.created_at }}</div>
                     <div>{{ ticket.email }}</div>
                     <div
