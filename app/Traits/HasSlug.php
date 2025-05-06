@@ -69,7 +69,7 @@ trait HasSlug
         
             $locationPart = $this->event_location;
             
-            $this->event_url = sprintf('wydarzenia/%s/%s/%s',
+            $this->event_url = sprintf('wydarzenia/wydarzenie/%s/%s/%s',
                 $datePart,
                 $locationPart,
                 $this->slug

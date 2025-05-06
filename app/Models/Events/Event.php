@@ -46,6 +46,7 @@ class Event extends EventBase
         return Event::whereHas('genres', function ($query) use ($genreIds) {
             $query->whereIn('genre_id', $genreIds);
         })
+            ->where('pending', false)
             ->where('id', '!=', $this->id)
             ->where('event_date', '>',$this->event_date)
             ->orderByRaw('ABS(DATEDIFF(event_date, ?))', [$this->event_date])
