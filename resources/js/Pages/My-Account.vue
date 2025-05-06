@@ -266,12 +266,15 @@ function SendTicket() {
                                 <input type="submit" value="wyślij"/>
                             </form>
                             <h3>Twoje zapytania</h3>
-                            <div class="support-tickets" >
+                            <div class="support-tickets">
                                 <div class="support-tickets__ticket" v-for="ticket in props.support_tickets.data">
-                                    <div>{{ticket.topic}}</div>
-                                    <div>{{ticket.created_at}}</div>
-                                    <div v-html="ticket.status === 'in_progress' ? 'W trakcie rozpatrywania' : 'Zamknięte'  " :class="{ 'in-progress' : ticket.status === 'in_progress', 'closed' : ticket.status === 'closed' }" class="support-tickets__status"></div>
-                                    <div>{{ticket.message}}</div>
+                                    <div>{{ ticket.topic }}</div>
+                                    <div>{{ ticket.created_at }}</div>
+                                    <div
+                                        v-html="ticket.status === 'in_progress' ? 'W trakcie rozpatrywania' : 'Zamknięte'  "
+                                        :class="{ 'in-progress' : ticket.status === 'in_progress', 'closed' : ticket.status === 'closed' }"
+                                        class="support-tickets__status"></div>
+                                    <div>{{ ticket.message }}</div>
                                 </div>
                             </div>
                         </div>
