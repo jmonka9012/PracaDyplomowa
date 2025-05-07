@@ -216,7 +216,9 @@ function SubmitTicketRequest() {
                     <div>
                         <h6 class="mb-13px">Kategorie</h6>
                         <p class="event-location ff-krona">
-                            <Link class="event-category-link" :href="`${route('event.browser')}?genres=${genre.id}`"
+                            <Link class="event-category-link"
+                                  :href="route('event.browser')"
+                                  :data="{genres: genre.id}"
                                   v-for="(genre, index) in event.data.genres">{{ genre.name }}<span
                                 v-if="index < event.data.genres.length - 1">, </span>
                             </Link>

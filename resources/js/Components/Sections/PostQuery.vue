@@ -22,7 +22,9 @@ const props = defineProps({
                     {{ post.blog_date }}
                 </p>
                 <span class="divider divider-dark"></span>
-                <Link :href="`${route('blog')}?blog_post_type=${post.blog_post_type}`" class="btn btn-white">
+                <Link :href="route('blog')"
+                      :data="{blog_post_type: post.blog_post_type}"
+                      class="btn btn-white">
                     {{ post.blog_post_type }}
                 </Link>
             </div>

@@ -1,7 +1,9 @@
 <script setup>
 import blogBg from "~images/blog-bg.jpg";
-import {Link} from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
+import { onMounted, ref, computed } from 'vue';
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
+import Collapse from "../../Components/Partials/Collapse.vue";
 
 const props = defineProps({
     tickets: {
@@ -10,15 +12,21 @@ const props = defineProps({
     }
 });
 
-function FilterByUser(ticket) {
-    if (ticket.user_id) {
-        return
-    } else {
-        return null;
-    }
-}
+const currentUserID = ref(null)
+const currentUserName = computed(() => {
+    if (!currentUserID.value) return null
 
-console.log(props.tickets)
+    const ticket = props.tickets.data.find(
+        t => t.user_id == currentUserID.value
+    )
+
+    return ticket?.name || 'Nieznany użytkownik'
+})
+
+onMounted(() => {
+    const params = new URLSearchParams(window.location.search)
+    currentUserID.value = params.get('user_id')
+})
 
 </script>
 
@@ -26,13 +34,15 @@ console.log(props.tickets)
     <HeroSmall :source="blogBg" title="Obsługa klienta"></HeroSmall>
     <section class="pb-100px">
         <div class="container flex-column">
-            <h2 class="mb-40px">Zgłoszenia kontaktowe</h2>
+            <h2 class="mb-30px">Zgłoszenia kontaktowe <span v-if="currentUserID">od: {{currentUserName}}</span></h2>
+            <Link v-if="currentUserID" preserve-scroll class="btn btn-md mb-30px" :href="route('admin.customer-service')">Wróć do wszystkich zgłoszeń</Link>
             <div class="ticket-query mb-40px">
                 <div class="ticket-query__ticket" v-for="ticket in props.tickets.data">
                     <div>{{ ticket.topic }}</div>
                     <Link
                         v-if="ticket.user_id"
-                        :href="`/admin/obsluga-klienta?user_id=${ticket.user_id}`"
+                        :href="route('admin.customer-service')"
+                        :data="{user_id: ticket.user_id}"
                         method="get"
                     >
                         {{ ticket.name }}
@@ -44,7 +54,16 @@ console.log(props.tickets)
                         v-html="ticket.status === 'in_progress' ? 'W trakcie rozpatrywania' : 'Zamknięte'  "
                         :class="{ 'in-progress' : ticket.status === 'in_progress', 'closed' : ticket.status === 'closed' }"
                         class="ticket-query__status"></div>
-                    <div>{{ ticket.message }}</div>
+                    <Collapse class="w-100">
+                        <template #trigger="{ isOpen }">
+                            <button class="btn btn-md">
+                                {{ isOpen ? 'Zwiń wiadomość' : 'Rozwiń wiadomość' }}
+                            </button>
+                        </template>
+                        <div class="content pt-20px">
+                            <p>{{ticket.message}}</p>
+                        </div>
+                    </Collapse>
                 </div>
             </div>
             <div class="event-pagination">
@@ -73,10 +92,24 @@ console.log(props.tickets)
         background-color: var(--primary);
         padding: 20px;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        align-items: center;
 
         div:nth-child(6) {
             margin-top: 20px;
             grid-column: 1/-1;
+        }
+    }
+
+    &__status {
+        padding: 8px 16px;
+        border-radius: 8px;
+
+        &.in-progress {
+            background-color: var(--yellow);
+        }
+
+        &.closed {
+            background-color: #73f0ad;
         }
     }
 }
