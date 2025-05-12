@@ -39,7 +39,6 @@ import { Link } from "@inertiajs/vue3";
     padding: 0 15px;
     border-style: solid;
     border-width: 0 0 0 0;
-
     border-color: #fff;
     transition: background 0.3s, border 0.3s, border-radius 0.3s,
         box-shadow 0.3s;
@@ -61,11 +60,11 @@ import { Link } from "@inertiajs/vue3";
     }
 
     @include mixin.media-breakpoint-up(lg) {
-        width: 25% !important;
+        width: 20% !important;
         border-width: 0 1px 0 0;
 
         &:last-of-type {
-            width: 25% !important;
+            width: 20% !important;
             border-width: 0 0 0 0;
         }
     }
