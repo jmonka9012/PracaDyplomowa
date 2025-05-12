@@ -4,19 +4,19 @@ import Tab from "@/Components/Partials/Tab.vue";
 import Tabs from "@/Components/Partials/Tabs.vue";
 import useAuth from "@/Utilities/useAuth";
 import ResetObject from "@/Utilities/resetObject";
-import {router} from "@inertiajs/vue3";
-import {Link} from "@inertiajs/vue3";
-import {ref, reactive, toRaw} from "vue";
+import { router } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
+import { ref, reactive, toRaw } from "vue";
 
 const showModal = ref(false);
-const {user, isLoggedIn} = useAuth();
+const { user, isLoggedIn } = useAuth();
 
 const props = defineProps({
     support_tickets: {
         type: Array,
         required: true,
-    }
-})
+    },
+});
 
 console.log(props);
 
@@ -79,7 +79,7 @@ function SendTicket() {
 
     router.post(route("support-ticket-send"), contactForm, {
         preserveScroll: () => hadError,
-        only: ['support_tickets'],
+        only: ["support_tickets"],
         onError: (err) => {
             hadError = true;
             ResetObject(ticketErrors);
@@ -224,7 +224,7 @@ function SendTicket() {
                         <h3 class="ma-ftitle">Potwierdź Email</h3>
                         <form class="form form-ma">
                             <div class="input-wrap d-flex flex-column col-12">
-                                <input type="submit" value="Potwierdź"/>
+                                <input type="submit" value="Potwierdź" />
                             </div>
                         </form>
                     </Tab>
@@ -241,12 +241,23 @@ function SendTicket() {
                             class="d-flex flex-column align-items-center column-gap-10px mb-32px"
                         >
                             <h3 class="fs-36 mb-20px">Wyślij zapytanie</h3>
-                            <form class="form" @submit.prevent="SendTicket">
+                            <form
+                                class="form mb-40px ml-auto mr-auto"
+                                @submit.prevent="SendTicket"
+                            >
                                 <div class="input-wrap col-12">
-                                    <input v-model="contactForm.topic" type="text" required name="contact-topic"
-                                           placeholder="Temat wiadomości*"/>
+                                    <input
+                                        v-model="contactForm.topic"
+                                        type="text"
+                                        required
+                                        name="contact-topic"
+                                        placeholder="Temat wiadomości*"
+                                    />
                                 </div>
-                                <div class="error-msg" v-if="ticketErrors.topic">
+                                <div
+                                    class="error-msg"
+                                    v-if="ticketErrors.topic"
+                                >
                                     {{ ticketErrors.topic }}
                                 </div>
                                 <div class="input-wrap col-12">
@@ -257,24 +268,55 @@ function SendTicket() {
                                         placeholder="Wiadomość"
                                     ></textarea>
                                 </div>
-                                <div class="error-msg" v-if="ticketErrors.message">
+                                <div
+                                    class="error-msg"
+                                    v-if="ticketErrors.message"
+                                >
                                     {{ ticketErrors.message }}
                                 </div>
-                                <p class="mb-16px">Jeżeli chcesz zwrotu pieniędzy za bilet umieść wszystkie dane
-                                    odnośnie transakcji takie jak ID biletu, data, wydarzenie tak aby dział księgowości
-                                    mógł odnaleść płatność.</p>
-                                <input type="submit" value="wyślij"/>
+                                <p class="mb-16px">
+                                    Jeżeli chcesz zwrotu pieniędzy za bilet
+                                    umieść wszystkie dane odnośnie transakcji
+                                    takie jak ID biletu, data, wydarzenie tak
+                                    aby dział księgowości mógł odnaleść
+                                    płatność.
+                                </p>
+                                <input type="submit" value="wyślij" />
                             </form>
-                            <h3>Twoje zapytania</h3>
+                            <h3 class="mb-30px">Twoje zapytania</h3>
                             <div class="support-tickets">
-                                <div class="support-tickets__ticket" v-for="ticket in props.support_tickets.data">
-                                    <div>{{ ticket.topic }}</div>
-                                    <div>{{ ticket.created_at }}</div>
+                                <div
+                                    class="support-tickets__ticket"
+                                    v-for="ticket in props.support_tickets.data"
+                                >
                                     <div
-                                        v-html="ticket.status === 'in_progress' ? 'W trakcie rozpatrywania' : 'Zamknięte'  "
-                                        :class="{ 'in-progress' : ticket.status === 'in_progress', 'closed' : ticket.status === 'closed' }"
-                                        class="support-tickets__status"></div>
-                                    <div>{{ ticket.message }}</div>
+                                        class="d-flex justify-content-center align-items-center mb-10px mb-lg-0"
+                                    >
+                                        {{ ticket.topic }}
+                                    </div>
+                                    <div
+                                        class="d-flex justify-content-center align-items-center mb-10px mb-lg-0"
+                                    >
+                                        {{ ticket.created_at }}
+                                    </div>
+                                    <div
+                                        v-html="
+                                            ticket.status === 'in_progress'
+                                                ? 'W trakcie rozpatrywania'
+                                                : 'Zamknięte'
+                                        "
+                                        :class="{
+                                            'in-progress':
+                                                ticket.status === 'in_progress',
+                                            closed: ticket.status === 'closed',
+                                        }"
+                                        class="support-tickets__status"
+                                    ></div>
+                                    <div class="support-tickets__message">
+                                        <div>
+                                            {{ ticket.message }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -308,11 +350,34 @@ function SendTicket() {
     &__ticket {
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 1fr;
         margin-bottom: 40px;
+        @include mixin.media-breakpoint-up(lg) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    &__message {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
 
-        & > div:last-child {
-            grid-column: 1 / -1;
+        @include mixin.media-breakpoint-up(lg) {
+            grid-column: 1 / 4;
+            margin-top: 32px;
+        }
+        div {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            border: 1px solid var(--primary);
+            background-color: rgba(195, 185, 239, 0.0509803922);
+            padding: 20px 50px;
+            border-radius: 12px;
+            @include mixin.media-breakpoint-up(lg) {
+                width: 80%;
+            }
         }
     }
 
@@ -320,6 +385,8 @@ function SendTicket() {
         width: 100%;
         border-radius: 8px;
         padding: 8px 16px;
+        display: flex;
+        justify-content: center;
 
         &.in-progress {
             background-color: var(--primary);
