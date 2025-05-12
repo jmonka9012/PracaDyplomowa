@@ -5,7 +5,7 @@
     --footer: #070707;
     --primary: #c3b9ef;
     --primary-darker: #6f69f7;
-    --primary-lighter:#c3b9ef80;
+    --primary-lighter: #c3b9ef80;
     --additonal: "Krona one";
     --dark: #070707;
     --text: #161a1d;
@@ -17,7 +17,7 @@
     --luna-orange: #ffa755;
 }
 $primary: #c3b9ef;
-$primary-lighter:#c3b9ef80;
+$primary-lighter: #c3b9ef80;
 $primary-darker: #6f69f7;
 $secondary: #161a1d;
 $dark: #070707;
@@ -634,6 +634,10 @@ img {
 
 .text-gray {
     color: $text2 !important;
+}
+
+.fw-med {
+    font-weight: 500;
 }
 
 .fw-bold {
