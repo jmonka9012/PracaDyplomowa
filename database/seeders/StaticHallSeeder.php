@@ -115,5 +115,97 @@ class StaticHallSeeder extends Seeder
                 'section_width' => '2'
             ]
         ]);
+
+        $hall = Hall::create([
+            'hall_name' => 'Eddie Hall',
+            'hall_price'=> 50000,
+            'hall_height'=> '3',
+            'hall_width'=> '3',
+        ]);
+        $hall->sections()->createMany([
+            [
+                'section_name' => 'Sekcja 1',
+                'section_type' => 'stand',
+                'row' => null,
+                'col' => null,
+                'section_height' => '1',
+                'section_width' => '1',
+                'capacity' => 100,
+            ],
+            [
+                'section_name' => 'Sekcja 2',
+                'section_type' => 'stand',
+                'row' => null,
+                'col' => null,
+                'section_height' => '1',
+                'section_width' => '2',
+                'capacity' => 100,
+            ],
+            [
+                'section_name' => 'Sekcja 3',
+                'section_type' => 'stand',
+                'row' => null,
+                'col' => null,
+                'section_height' => '1',
+                'section_width' => '3',
+                'capacity' => 100,
+            ],
+            [
+                'section_name' => 'Sekcja 4',
+                'section_type' => 'stand',
+                'row' => null,
+                'col' => null,
+                'section_height' => '2',
+                'section_width' => '1',
+                'capacity' => 100,
+            ],
+            [
+                'section_name' => 'Sekcja 5',
+                'section_type' => 'stand',
+                'row' => null,
+                'col' => null,
+                'section_height' => '2',
+                'section_width' => '2',
+                'capacity' => 100,
+            ],
+            [
+                'section_name' => 'Sekcja 6',
+                'section_type' => 'stand',
+                'row' => null,
+                'col' => null,
+                'section_height' => '2',
+                'section_width' => '3',
+                'capacity' => 100,
+            ],
+            [
+                'section_name' => 'Sekcja 7',
+                'section_type' => 'stand',
+                'row' => null,
+                'col' => null,
+                'section_height' => '3',
+                'section_width' => '1',
+                'capacity' => 100,
+            ],
+            [
+                'section_name' => 'Sekcja 8',
+                'section_type' => 'stand',
+                'row' => null,
+                'col' => null,
+                'section_height' => '3',
+                'section_width' => '2',
+                'capacity' => 100,
+            ],
+            [
+                'section_name' => 'Sekcja 9',
+                'section_type' => 'stand',
+                'row' => null,
+                'col' => null,
+                'section_height' => '3',
+                'section_width' => '3',
+                'capacity' => 100,
+            ],
+        ]);
     }
+
+    
 }
