@@ -7,8 +7,8 @@ import blogBg from "~images/single-map.jpg";
 
 import ResetObject from "@/Utilities/resetObject";
 import { router } from "@inertiajs/vue3";
-import {Link} from "@inertiajs/vue3";
-import {reactive, ref, computed, watch} from "vue";
+import { Link } from "@inertiajs/vue3";
+import { reactive, ref, computed, watch } from "vue";
 
 const url = window.location.href;
 
@@ -20,7 +20,7 @@ const props = defineProps({
     related_events: {
         type: Array,
         required: true,
-    }
+    },
 });
 
 console.log(props);
@@ -47,7 +47,8 @@ function InitStandingTickets() {
         if (!standingTickets[section.hall_section_id]) {
             standingTickets[section.hall_section_id] = {};
         }
-        standingTickets[section.hall_section_id].hall_section_id = section.hall_section_id;
+        standingTickets[section.hall_section_id].hall_section_id =
+            section.hall_section_id;
         standingTickets[section.hall_section_id].price = section.price;
         standingTickets[section.hall_section_id].amount = null;
         standingTickets[section.hall_section_id].id = section.id;
@@ -80,10 +81,18 @@ function InitSeats() {
 }
 function InitSectionPrices() {
     Object.keys(props.event.data.standing_tickets).forEach((key) => {
-        if (!standingSectionPrices[props.event.data.standing_tickets[key].hall_section_id]) {
-            standingSectionPrices[props.event.data.standing_tickets[key].hall_section_id] = {};
+        if (
+            !standingSectionPrices[
+                props.event.data.standing_tickets[key].hall_section_id
+            ]
+        ) {
+            standingSectionPrices[
+                props.event.data.standing_tickets[key].hall_section_id
+            ] = {};
         }
-        standingSectionPrices[props.event.data.standing_tickets[key].hall_section_id].price = props.event.data.standing_tickets[key].price;
+        standingSectionPrices[
+            props.event.data.standing_tickets[key].hall_section_id
+        ].price = props.event.data.standing_tickets[key].price;
     });
     console.log(standingSectionPrices);
 }
@@ -124,9 +133,9 @@ function isTaken(sectionID, row, col) {
     for (const seat of props.event.data.seats) {
         if (
             seat.hall_section_id === sectionID &&
-            seat.seat_row        === row       &&
-            seat.seat_number     === col       &&
-            (seat.status === 'sold' || seat.status === 'reserved')
+            seat.seat_row === row &&
+            seat.seat_number === col &&
+            (seat.status === "sold" || seat.status === "reserved")
         ) {
             return true;
         }
@@ -135,7 +144,7 @@ function isTaken(sectionID, row, col) {
 }
 
 function AvailibleTickets(hRow, hCol, sID) {
-    for(const section of props.event.data.standing_tickets) {
+    for (const section of props.event.data.standing_tickets) {
         if (section.hall_section_id === sID) {
             return section.sold;
         }
@@ -144,10 +153,10 @@ function AvailibleTickets(hRow, hCol, sID) {
 }
 
 function HandleSeat(sID, row, col) {
-    if (seats[sID][row][col].status === 'available') {
+    if (seats[sID][row][col].status === "available") {
         if (seats[sID][row][col].chosen === false) {
             seats[sID][row][col].chosen = true;
-            if(!seatTickets[seats[sID][row][col].id]) {
+            if (!seatTickets[seats[sID][row][col].id]) {
                 seatTickets[seats[sID][row][col].id] = {};
             }
             seatTickets[seats[sID][row][col].id] = seats[sID][row][col];
@@ -175,16 +184,15 @@ function SubmitTicketRequest() {
     console.log(errors);
     console.log(ticketRequest);
 }
-
 </script>
 
 <template>
-    <HeroSmall :source="blogBg" :title="event.data.event_name"/>
+    <HeroSmall :source="blogBg" :title="event.data.event_name" />
     <section class="single">
         <div class="container container-small">
             <div class="single__content">
                 <div class="single__intro">
-                    <img :src="'/storage/' + event.data.image_path" alt=""/>
+                    <img :src="'/storage/' + event.data.image_path" alt="" />
                 </div>
                 <h1 class="single__title">
                     {{ event.data.event_name }}
@@ -194,7 +202,7 @@ function SubmitTicketRequest() {
                         <h6 class="mb-13px">Event date:</h6>
                         <p>
                             {{ event.data.event_start }} -
-                            {{ event.data.event_end }} <br/>
+                            {{ event.data.event_end }} <br />
                             {{ event.data.event_date }}
                         </p>
                     </div>
@@ -203,24 +211,29 @@ function SubmitTicketRequest() {
                         <a
                             class="hover-primary text-underline"
                             :href="'mailto:' + event.data.contact_email"
-                        >{{ event.data.contact_email }}</a
+                            >{{ event.data.contact_email }}</a
                         >
                         <a
                             class="hover-primary text-underline"
                             :href="
                                 'mailto:' + event.data.contact_email_additional
                             "
-                        >{{ event.data.contact_email_additional }}</a
+                            >{{ event.data.contact_email_additional }}</a
                         >
                     </div>
                     <div>
                         <h6 class="mb-13px">Kategorie</h6>
                         <p class="event-location ff-krona">
-                            <Link class="event-category-link"
-                                  :href="route('event.browser')"
-                                  :data="{genres: genre.id}"
-                                  v-for="(genre, index) in event.data.genres">{{ genre.name }}<span
-                                v-if="index < event.data.genres.length - 1">, </span>
+                            <Link
+                                class="event-category-link"
+                                :href="route('event.browser')"
+                                :data="{ genres: genre.id }"
+                                v-for="(genre, index) in event.data.genres"
+                                >{{ genre.name
+                                }}<span
+                                    v-if="index < event.data.genres.length - 1"
+                                    >,
+                                </span>
                             </Link>
                         </p>
                     </div>
@@ -235,7 +248,10 @@ function SubmitTicketRequest() {
                 <div>
                     <h5>{{ hall.hall_name }}</h5>
                     <div>
-                        <form class="mb-40px" @submit.prevent="SubmitTicketRequest">
+                        <form
+                            class="mb-40px"
+                            @submit.prevent="SubmitTicketRequest"
+                        >
                             <div class="d-flex flex-column">
                                 <div class="d-flex align-items-center">
                                     <div class="legend legend-stand"></div>
@@ -268,8 +284,8 @@ function SubmitTicketRequest() {
                                         )"
                                         :key="section.id"
                                     >
-<!--
-                                        Div boży 1
+                                        <!--
+                                        Div boży 1 xd xd
 -->
                                         <div
                                             class="hall__section-seat"
@@ -290,62 +306,189 @@ function SubmitTicketRequest() {
                                                         v-for="(
                                                             col, colIndex
                                                         ) in section.col"
-                                                        @click="HandleSeat(section.id, rowIndex + 1, colIndex + 1)"
+                                                        @click="
+                                                            HandleSeat(
+                                                                section.id,
+                                                                rowIndex + 1,
+                                                                colIndex + 1
+                                                            )
+                                                        "
                                                         :key="colIndex"
                                                         :data-sID="section.id"
                                                         :data-col="colIndex + 1"
-                                                        :class="{ 'taken': isTaken(section.id, rowIndex + 1, colIndex + 1), 'chosen': seats[section.id][rowIndex+1][colIndex+1].chosen }"
+                                                        :class="{
+                                                            taken: isTaken(
+                                                                section.id,
+                                                                rowIndex + 1,
+                                                                colIndex + 1
+                                                            ),
+                                                            chosen: seats[
+                                                                section.id
+                                                            ][rowIndex + 1][
+                                                                colIndex + 1
+                                                            ].chosen,
+                                                        }"
                                                     >
-                                                        <div class="hall__seat-tooltip">
+                                                        <div
+                                                            class="hall__seat-tooltip"
+                                                        >
                                                             <div class="d-flex">
-                                                                <div>rząd: </div>
-                                                                <div>{{ rowIndex + 1 }}</div>
+                                                                <div>rząd:</div>
+                                                                <div>
+                                                                    {{
+                                                                        rowIndex +
+                                                                        1
+                                                                    }}
+                                                                </div>
                                                             </div>
                                                             <div class="d-flex">
-                                                                <div>kolumna: </div>
-                                                                <div>{{ colIndex + 1 }}</div>
+                                                                <div>
+                                                                    kolumna:
+                                                                </div>
+                                                                <div>
+                                                                    {{
+                                                                        colIndex +
+                                                                        1
+                                                                    }}
+                                                                </div>
                                                             </div>
                                                             <div class="d-flex">
-                                                                <div>cena: </div>
-                                                                <div>{{ seats[section.id][rowIndex+1][colIndex+1].price }}</div>
+                                                                <div>cena:</div>
+                                                                <div>
+                                                                    {{
+                                                                        seats[
+                                                                            section
+                                                                                .id
+                                                                        ][
+                                                                            rowIndex +
+                                                                                1
+                                                                        ][
+                                                                            colIndex +
+                                                                                1
+                                                                        ].price
+                                                                    }}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-<!--
-                                        Div boży 2
+                                        <!--
+                                        Div boży 2 xd xdd 12.05
 -->
                                         <div v-else class="hall__section-stand">
                                             <div class="hall__seat-cont">
-                                                <div v-html="`${AvailibleTickets(hrowIndex + 1, hcolIndex + 1, section.id)}/${section.capacity} miejsc zajętych`"></div>
-                                                <div>{{ standingSectionPrices[section.id].price }} pln</div>
-                                                <input @blur="standingTickets[section.id].amount = standingTickets[section.id].amount || null" v-model.trim="standingTickets[section.id].amount" class="stand-input" v-number-only type="text" placeholder="Ilość">
+                                                <div
+                                                    v-html="
+                                                        `${AvailibleTickets(
+                                                            hrowIndex + 1,
+                                                            hcolIndex + 1,
+                                                            section.id
+                                                        )}/${
+                                                            section.capacity
+                                                        } miejsc zajętych`
+                                                    "
+                                                ></div>
+                                                <div>
+                                                    {{
+                                                        standingSectionPrices[
+                                                            section.id
+                                                        ].price
+                                                    }}
+                                                    pln
+                                                </div>
+                                                <input
+                                                    @blur="
+                                                        standingTickets[
+                                                            section.id
+                                                        ].amount =
+                                                            standingTickets[
+                                                                section.id
+                                                            ].amount || null
+                                                    "
+                                                    v-model.trim="
+                                                        standingTickets[
+                                                            section.id
+                                                        ].amount
+                                                    "
+                                                    class="stand-input"
+                                                    v-number-only
+                                                    type="text"
+                                                    placeholder="Ilość"
+                                                />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="summary" class="d-flex flex-column mb-40px">
-                                <div class="d-flex flex-row" v-if="summary.seats && summary.seats_price">
-                                    <div class="mr-40px">Ilość wybranych miejsc siedzących: {{summary.seats}}</div>
-                                    <div class="mr-40px">Cena wybranych miejsc siedzących: {{summary.seats_price.toFixed(2)}}</div>
+                            <div
+                                v-if="summary"
+                                class="d-flex flex-column mb-40px"
+                            >
+                                <div
+                                    class="d-flex flex-lg-row"
+                                    v-if="summary.seats && summary.seats_price"
+                                >
+                                    <div class="mr-lg-40px">
+                                        Ilość wybranych miejsc siedzących:
+                                        {{ summary.seats }}
+                                    </div>
+                                    <div class="mr-lg-40px">
+                                        Cena wybranych miejsc siedzących:
+                                        {{ summary.seats_price.toFixed(2) }}
+                                    </div>
                                 </div>
-                                <div class="d-flex flex-row" v-if="summary.standing && summary.standing_price">
-                                    <div class="mr-40px">Ilość wybranych miejsc stojących: {{summary.standing}}</div>
-                                    <div class="mr-40px">Cena wybranych miejsc stojących: {{summary.standing_price.toFixed(2)}}</div>
+                                <div
+                                    class="d-flex flex-lg-row"
+                                    v-if="
+                                        summary.standing &&
+                                        summary.standing_price
+                                    "
+                                >
+                                    <div class="mr-lg-40px">
+                                        Ilość wybranych miejsc stojących:
+                                        {{ summary.standing }}
+                                    </div>
+                                    <div class="mr-lg-40px">
+                                        Cena wybranych miejsc stojących:
+                                        {{ summary.standing_price.toFixed(2) }}
+                                    </div>
                                 </div>
-                                <div class="d-flex flex-row" v-if="summary.standing && summary.standing_price && summary.seats && summary.seats_price">
-                                    <div class="mr-40px">Łączna ilość wybranych miejsc: {{summary.standing + summary.seats}}</div>
-                                    <div class="mr-40px">Łączna cena wybranych miejsc: {{(summary.standing_price + summary.seats_price).toFixed(2)}}</div>
+                                <div
+                                    class="d-flex flex-lg-row"
+                                    v-if="
+                                        summary.standing &&
+                                        summary.standing_price &&
+                                        summary.seats &&
+                                        summary.seats_price
+                                    "
+                                >
+                                    <div class="mr-lg-40px">
+                                        Łączna ilość wybranych miejsc:
+                                        {{ summary.standing + summary.seats }}
+                                    </div>
+                                    <div class="mr-lg-40px">
+                                        Łączna cena wybranych miejsc:
+                                        {{
+                                            (
+                                                summary.standing_price +
+                                                summary.seats_price
+                                            ).toFixed(2)
+                                        }}
+                                    </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-md btn-hovprim mb-30px">Kup bilety</button>
+                            <button
+                                type="submit"
+                                class="btn btn-md btn-hovprim mb-30px"
+                            >
+                                Kup bilety
+                            </button>
                         </form>
                     </div>
                 </div>
-                <img class="single__map" :src="SingleMap" alt=""/>
+                <img class="single__map" :src="SingleMap" alt="" />
                 <div class="bb-1 b-secondary"></div>
                 <div
                     class="d-flex row-gap-10px column-gap-10px mt-30px mb-100px"
@@ -356,7 +499,7 @@ function SubmitTicketRequest() {
                             url
                         )}`"
                         target="_blank"
-                    ><i class="fab fa-twitter"></i
+                        ><i class="fab fa-twitter"></i
                     ></a>
 
                     <a
@@ -367,7 +510,7 @@ function SubmitTicketRequest() {
                         target="_blank"
                     >
                         <i class="fab fa-facebook"></i
-                        ></a>
+                    ></a>
 
                     <a
                         class="social-link"
@@ -377,10 +520,10 @@ function SubmitTicketRequest() {
                         target="_blank"
                     >
                         <i class="fab fa-pinterest"></i
-                        ></a>
+                    ></a>
                 </div>
                 <h3 class="mb-30px align-self-middle">Related Events</h3>
-                <EventsAlt :events="props.related_events"/>
+                <EventsAlt :events="props.related_events" />
                 <!--                 <h3 class="mb-40px">Leave a Reply</h3>
                                 <p class="fs-14 mb-20px">
                                     Your email address will not be published. Required fields
@@ -425,7 +568,7 @@ function SubmitTicketRequest() {
 
 .stand-input {
     padding: 20px;
-    border: 1px solid #E3AD84;
+    border: 1px solid #e3ad84;
     border-radius: 8px;
     position: absolute;
     left: 50%;
