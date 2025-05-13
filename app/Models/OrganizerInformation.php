@@ -42,4 +42,11 @@ class OrganizerInformation extends Model
             $this->address_country
         ]));
     }
+
+    public function getOrganizerStatus()
+    {
+        $status = self::ACCOUNT_STATUSES[$this->account_status] ?? $this->account_status;
+    
+        return $status;
+    }
 }

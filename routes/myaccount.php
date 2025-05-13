@@ -12,6 +12,9 @@ Route::middleware('auth')->group(function () {
   //zmiany danych
   Route::post('/moje-konto', [MyAccountController::class, 'store'])
     ->name('my-account.change');
+
+  Route::get('/organizator/status',[MyAccountController::class, 'getOrganizerStatus'])
+    ->name('organizer.status');
 });
 
 
