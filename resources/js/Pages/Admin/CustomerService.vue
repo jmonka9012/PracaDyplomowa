@@ -1,7 +1,7 @@
 <script setup>
 import blogBg from "~images/blog-bg.jpg";
-import { Link } from "@inertiajs/vue3";
-import { onMounted, ref, computed } from 'vue';
+import {Link} from "@inertiajs/vue3";
+import {onMounted, ref, computed} from 'vue';
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import Collapse from "../../Components/Partials/Collapse.vue";
 
@@ -28,14 +28,20 @@ onMounted(() => {
     currentUserID.value = params.get('user_id')
 })
 
+const SwapStatus = (status) => {
+    return status === 'closed' ? 'in_progress' : 'closed';
+};
+
 </script>
 
 <template>
     <HeroSmall :source="blogBg" title="Obsługa klienta"></HeroSmall>
     <section class="pb-100px">
         <div class="container flex-column">
-            <h2 class="mb-30px">Zgłoszenia kontaktowe <span v-if="currentUserID">od: {{currentUserName}}</span></h2>
-            <Link v-if="currentUserID" preserve-scroll class="btn btn-md mb-30px" :href="route('admin.customer-service')">Wróć do wszystkich zgłoszeń</Link>
+            <h2 class="mb-30px">Zgłoszenia kontaktowe <span v-if="currentUserID">od: {{ currentUserName }}</span></h2>
+            <Link v-if="currentUserID" preserve-scroll class="btn btn-md mb-30px"
+                  :href="route('admin.customer-service')">Wróć do wszystkich zgłoszeń
+            </Link>
             <div class="ticket-query mb-40px">
                 <div class="ticket-query__ticket" v-for="ticket in props.tickets.data">
                     <div>{{ ticket.topic }}</div>
@@ -50,10 +56,21 @@ onMounted(() => {
                     <div v-else>{{ ticket.name }}</div>
                     <div>{{ ticket.created_at }}</div>
                     <div>{{ ticket.email }}</div>
-                    <div
-                        v-html="ticket.status === 'in_progress' ? 'W trakcie rozpatrywania' : 'Zamknięte'  "
-                        :class="{ 'in-progress' : ticket.status === 'in_progress', 'closed' : ticket.status === 'closed' }"
-                        class="ticket-query__status"></div>
+                    <div class="relative">
+                        <div
+                            v-html="ticket.status === 'in_progress' ? 'W trakcie rozpatrywania' : 'Zamknięte'"
+                            :class="{ 'in-progress' : ticket.status === 'in_progress', 'closed' : ticket.status === 'closed' }"
+                            class="ticket-query__status">
+                        </div>
+                        <Link
+                            method="put"
+                            :href="route('admin.customer-service.change_status', {id:ticket.id})"
+                            class="ticket-query__status-change"
+                            :data="{ id: ticket.id, status: SwapStatus(ticket.status) }"
+                        >
+                            Zmienić status?
+                        </Link>
+                    </div>
                     <Collapse class="w-100">
                         <template #trigger="{ isOpen }">
                             <button class="btn btn-md">
@@ -61,7 +78,7 @@ onMounted(() => {
                             </button>
                         </template>
                         <div class="content pt-20px">
-                            <p>{{ticket.message}}</p>
+                            <p>{{ ticket.message }}</p>
                         </div>
                     </Collapse>
                 </div>
@@ -103,6 +120,25 @@ onMounted(() => {
     &__status {
         padding: 8px 16px;
         border-radius: 8px;
+        position: relative;
+
+        &-change {
+            position: absolute;
+            padding: 8px 16px;
+            border-radius: 8px;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background-color: white;
+            text-align: center;
+            opacity: 0;
+            transition: opacity .4s ease-out;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
 
         &.in-progress {
             background-color: var(--yellow);
