@@ -6,7 +6,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Http\Resources\UserDataResource;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class ManageUsersController extends Controller
 {
@@ -26,5 +27,32 @@ class ManageUsersController extends Controller
         return response()->json([
             'users' => UserDataResource::collection($users)->response()->getData(true),
         ]);
+    }
+
+    public function deleteUser(Request $request)
+    {
+        $validatedData = $request->validate([
+            'user_id' => 'required|numeric|exists:users,id'
+        ]);
+
+        try{
+            DB::beginTransaction();
+            
+
+            $user = User::findOrFail($validatedData['user_id']);
+            $user->delete(); 
+
+            DB::commit();
+
+            return Inertia::location($request->headers->get('referer'));
+            
+        } catch (\Exception $e){
+            DB::rollBack();
+
+            return response()->json([
+                'user_deleted' => false,
+                'message' => 'Użytkownik nie został usunięty',
+            ]);
+        }
     }
 }

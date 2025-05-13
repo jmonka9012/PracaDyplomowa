@@ -20,6 +20,10 @@ Route::prefix('admin')->group(function() {
             ->name('admin.users.data')
             ->middleware('adminAccess');
 
+      Route::delete('/uzytkownicy/usun', [ManageUsersController::class, 'deleteUser'])
+            ->name('admin.users.delete')
+            ->middleware('adminAccess');
+
       Route::get('/wydarzenia', [PendingEventsController::class, 'index'])
             ->name('admin.events')
             ->middleware('redactorAccess');
