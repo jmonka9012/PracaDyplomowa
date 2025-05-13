@@ -31,7 +31,8 @@ class CustomerServiceController extends Controller
 
         $query = $this->getTickets($request);
 
-        $tickets = $query->paginate(10);
+        $tickets = $query->paginate(10)
+            ->appends($request->query());
 
         return Inertia::render('Admin/CustomerService', [
             'tickets' =>SupportTicketResource::collection($tickets)->response()->getData(true),

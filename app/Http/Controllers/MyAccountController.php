@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyEmail;
 use App\Enums\UserRole;
 
+
 class MyAccountController extends Controller
 {
     public function index()
@@ -61,5 +62,71 @@ class MyAccountController extends Controller
         }
 
         return back()->with('error','błąd');
+    }
+
+    public function getOrganizerStatus()
+    {
+        try {
+            $user = auth()->user();
+
+            if (!$user) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Użytkownik nie zalogowany'
+                ], 401);
+            }
+
+            $organizerData = $user->organizer;
+
+            if (!$organizerData) {
+                return response()->json([
+                    'success' => true,
+                    'is_organizer_account' => false,
+                    'message' => 'Użytkownik nie jest organizatorem'
+                ], 404);
+            }
+
+            $response = [
+                'success' => true,
+                'is_organizer_account' => true,
+                'status' => $organizerData->account_status,
+            ];
+
+            switch($organizerData->account_status){
+                case 'verified':
+                    $response['organizer_details'] = [
+                        'company_name' => $organizerData->company_name,
+                        'phone_number' => $organizerData->phone_number,
+                        'address' => $organizerData->getFullAddress(),
+                        'bank_account_number' => $organizerData->bank_account_number,
+                        'tax_number' => $organizerData->tax_number,
+                    ];
+                    break;
+
+                case 'pending':
+                    $response['message'] = 'Jesteśmy w trakcie weryfikowania konta, jeśli będzie taka potrzeba, skontaktujemy się, proszę czekać.';
+                    break;
+                     
+                case 'awaiting clarification':
+                    $response['message'] = 'Potrzebujemy więcej informacji, proszę sprawdzić podany email kontaktowy.';
+                    break;
+                        
+                case 'denied':
+                    $response['message'] = 'Konto zostało odrzucone';
+                    break;
+                        
+                default:
+                    $response['message'] = 'Brak statusu konta, proszę odświeżyć stronę, w razie dalszego braku informacji proszę skontaktować się z administracją.';
+                    break;
+            }
+
+            return response()->json($response);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve organizer status',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }
