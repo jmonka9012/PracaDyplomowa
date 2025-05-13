@@ -3,16 +3,15 @@ import blogBg from "~images/blog-bg.jpg";
 
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 
-import {Link} from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 
 const props = defineProps({
     blog_posts: {
         required: true,
-    }
+    },
 });
 
 console.log(props);
-
 </script>
 
 <template>
@@ -21,7 +20,11 @@ console.log(props);
         <div class="container">
             <div class="col-12 d-flex flex-lg-row align-items-lg-center">
                 <h2 class="mb-20px mb-lg-0">Posty</h2>
-                <Link :href="route('blog-create')" class="ml-lg-20px btn btn-md btn-hovprim">Dodaj nowy</Link>
+                <Link
+                    :href="route('blog-create')"
+                    class="ml-lg-20px btn btn-md btn-hovprim"
+                    >Dodaj nowy</Link
+                >
             </div>
             <div class="col-12 mt-30px mb-30px overflow-x-scroll">
                 <table class="table-nowrap table-fixed">
@@ -61,7 +64,10 @@ console.log(props);
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="post in props.blog_posts.data" class="t-details">
+                        <tr
+                            v-for="post in props.blog_posts.data"
+                            class="t-details"
+                        >
                             <td class="t-details__select">
                                 <input
                                     class="check"
@@ -76,10 +82,14 @@ console.log(props);
                                 />
                             </td>
                             <td>
-                                <a href="#event-link">{{post.blog_post_name}}</a>
+                                <a href="#event-link">{{
+                                    post.blog_post_name
+                                }}</a>
                                 <div class="t-details__options">
                                     <a href="#delete">Usuń</a>
-                                    <Link :href="`/${post.blog_post_url}`">Zobacz</Link>
+                                    <Link :href="`/${post.blog_post_url}`"
+                                        >Zobacz</Link
+                                    >
                                 </div>
                             </td>
                             <td>/Lorem-ipsum-1</td>
@@ -94,7 +104,7 @@ console.log(props);
                             </td>
                         </tr>
                     </tbody>
-<!--
+                    <!--
                     <tfoot>
                         <tr>
                             <th>
@@ -128,35 +138,45 @@ console.log(props);
 -->
                 </table>
             </div>
-            <h1>Odebrane dane z backendu</h1>
-            <div>
-                <div class="d-flex" v-for="post in props.blog_posts.data">
-                    <div>
+            <h1 class="mb-30px">Odebrane dane z backendu</h1>
+            <div class="col-12">
+                <div
+                    class="post-list-item"
+                    v-for="post in props.blog_posts.data"
+                >
+                    <div class="post-list-item-col">
                         <div>Obrazek</div>
-                        <img class="max-100" :src="`/storage/${post.thumbnail_path}`" alt="">
+                        <img
+                            class="max-100"
+                            :src="`/storage/${post.thumbnail_path}`"
+                            alt=""
+                        />
                     </div>
-                    <div>
+                    <div class="post-list-item-col">
                         <div>ID posta:</div>
-                        <div>{{post.id}}</div>
+                        <div>{{ post.id }}</div>
                     </div>
-                    <div>
+                    <div class="post-list-item-col">
                         <div>Nazwa</div>
-                        <Link :href="`/${post.blog_post_url}`">{{post.blog_post_name}}</Link>
+                        <Link :href="`/${post.blog_post_url}`">{{
+                            post.blog_post_name
+                        }}</Link>
                     </div>
-                    <div>
+                    <div class="post-list-item-col">
                         <div>Kategoria posta:</div>
-                        <div>{{post.blog_post_type}}</div>
+                        <div>{{ post.blog_post_type }}</div>
                     </div>
-                    <div>
+                    <div class="post-list-item-col">
                         <div>Data dodania:</div>
-                        <div>{{post.blog_date}}</div>
+                        <div>{{ post.blog_date }}</div>
                     </div>
-                    <div>
+                    <div class="post-list-item-col">
                         <div>Autor:</div>
-                        <div>{{post.author_name}}</div>
+                        <div>{{ post.author_name }}</div>
                     </div>
-                    <div>
+                    <div class="post-list-item-col post-list-item-col-btns">
                         <Link
+                            class="btn btn-md"
                             method="delete"
                             preserve-scroll
                             :href="route('admin.posts.delete')"
@@ -165,10 +185,13 @@ console.log(props);
                         >
                             Usuń
                         </Link>
+                        <Link
+                            class="btn btn-md"
+                            :href="`/${post.blog_post_url}`"
+                            >Podgląd</Link
+                        >
                     </div>
-                    <div>
-                        <Link :href="`/${post.blog_post_url}`" >Podgląd</Link>
-                    </div>
+                    <div></div>
                 </div>
             </div>
             <div class="event-pagination">
@@ -192,5 +215,26 @@ console.log(props);
     width: 100px;
     height: 100px;
     object-fit: cover;
+    display: block;
+}
+.post-list-item {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+.post-list-item-col {
+    row-gap: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    &-btns {
+        flex-direction: row;
+        justify-content: space-between;
+        grid-column: 3 / 5;
+    }
 }
 </style>
