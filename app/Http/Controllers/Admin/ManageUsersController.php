@@ -12,19 +12,19 @@ class ManageUsersController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(20);
 
         return Inertia::render('Admin/ManageUsers',[
-            'users' => UserDataResource::collection($users)
+            'users' => UserDataResource::collection($users)->response()->getData(true),
         ]);
     }
 
     public function showData()
     {
-        $users = User::all();
+        $users = User::paginate(20);
 
         return response()->json([
-            'users' => UserDataResource::collection($users)
+            'users' => UserDataResource::collection($users)->response()->getData(true),
         ]);
     }
 }
