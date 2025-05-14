@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\UserRole;
+use App\Models\Tickets\TicketArchived;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -63,6 +64,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Ticket::class);
     }
 
+    public function ticketsArchived()
+    {
+        return $this->hasMany(TicketArchived::class);
+    }
     public function author()
     {
         return $this->hasOne(BlogAuthor::class);
@@ -74,7 +79,32 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function organizer()
-        {
-            return $this->hasOne(OrganizerInformation::class);
-        }
+    {
+        return $this->hasOne(OrganizerInformation::class);
+    }
+
+    public function supportTickets()
+    {
+        return $this->hasMany(SupportTicket::class);
+    }
+
+    public function scopeWithTicketCounts($query)
+    {
+        return $query->withCount([
+            'tickets',
+            'ticketsArchived',
+            'supportTickets'
+        ]);
+    }
+
+    public function supportTicketsCount()
+    {
+        return $this->support_tickets_count ?? $this->supportTickets()->count();
+    }
+
+    public function totalTicketsCount()
+    {
+        return ($this->tickets_count ?? $this->tickets()->count()) + 
+            ($this->tickets_archived_count ?? $this->ticketsArchived()->count());
+    }
 }

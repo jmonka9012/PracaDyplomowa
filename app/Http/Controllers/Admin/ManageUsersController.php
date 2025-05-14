@@ -2,30 +2,38 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Resources\UserAdminBrowserResource;
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Http\Resources\UserDataResource;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ManageUsersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(20);
+        if (!$request->has('page')) {
+            return redirect()->route('admin.users', ['page' => 1] + $request->except('page'));
+        }
+
+        $users = $this->getFilteredUsers($request);
 
         return Inertia::render('Admin/ManageUsers',[
-            'users' => UserDataResource::collection($users)->response()->getData(true),
+            'users' => UserAdminBrowserResource::collection($users)->response()->getData(true),
         ]);
     }
 
-    public function showData()
+    public function showData(Request $request)
     {
-        $users = User::paginate(20);
+        if (!$request->has('page')) {
+            return redirect()->route('admin.users.data', ['page' => 1] + $request->except('page'));
+        }
+
+        $users = $this->getFilteredUsers($request);
 
         return response()->json([
-            'users' => UserDataResource::collection($users)->response()->getData(true),
+            'users' => UserAdminBrowserResource::collection($users)->response()->getData(true),
         ]);
     }
 
@@ -54,5 +62,29 @@ class ManageUsersController extends Controller
                 'message' => 'Użytkownik nie został usunięty',
             ]);
         }
+    }
+    
+    protected function getFilteredUsers(Request $request)
+    {
+        $query = User::withTicketCounts();
+    
+        if ($request->filled('name')) {
+            $searchTerm = '%' . $request->name . '%';
+            $query->where(function($q) use ($searchTerm) {
+                $q->where('name', 'like', $searchTerm)
+                  ->orWhereRaw("CONCAT(first_name, ' ', last_name) like ?", [$searchTerm]);
+            });
+        }
+    
+        if ($request->filled('email')) {
+            $query->where('email', 'like', '%' . $request->email . '%');
+        }
+    
+        if ($request->filled('role')) {
+            $query->where('role', 'like', '%' . $request->role . '%');
+        }
+    
+        return $query->paginate(20)
+                    ->appends($request->query());
     }
 }

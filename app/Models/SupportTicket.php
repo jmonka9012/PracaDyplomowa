@@ -20,4 +20,10 @@ class SupportTicket extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public static function totalSupportTickets()
+        {
+            return self::count();
+        }
+
 }
