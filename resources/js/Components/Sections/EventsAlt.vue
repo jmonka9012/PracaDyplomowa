@@ -1,11 +1,9 @@
 <script setup>
-import {Link} from "@inertiajs/vue3";
-
+import { Link } from "@inertiajs/vue3";
 
 const props = defineProps({
     events: Array,
 });
-
 </script>
 
 <template>
@@ -16,23 +14,40 @@ const props = defineProps({
             class="event-item event-item-blog bt-1 b-secondary pt-25px"
         >
             <h6>
-                <Link class="hover-underline-thick" :href="`/${event.event_url}`">
+                <Link
+                    class="hover-underline-thick"
+                    :href="`/${event.event_url}`"
+                >
                     {{ event.event_name }}
                 </Link>
             </h6>
-            <div class="d-flex flex-row h-fit">
+            <div class="d-flex flex-column h-fit">
                 <p class="event-date">
                     {{ event.event_date }}
                 </p>
-                <span class="divider divider-dark"></span>
-                <p class="event-location ff-krona">
-                    Kategorie: <Link class="event-category-link" :href="route('event.browser')" :data="{genres: genre.id}" v-for="(genre, index) in event.genres">{{ genre.name }}<span v-if="index < event.genres.length - 1">, </span>
-                </Link>
+                <span class="divider divider-horizontal divider-dark"></span>
+                <p class="event-category-link ff-krona">
+                    Kategorie:
+                    <Link
+                        class="event-category-link hover-primary"
+                        :href="route('event.browser')"
+                        :data="{ genres: genre.id }"
+                        v-for="(genre, index) in event.genres"
+                        >{{ genre.name
+                        }}<span v-if="index < event.genres.length - 1">, </span>
+                    </Link>
                 </p>
             </div>
-            <div class="relative mt-auto">
-                <img :src="`/storage/${event.image_path}`" alt="" class="event-img event-img-blog" />
-                <Link :href="`/${event.event_url}`" class="link-stretched"></Link>
+            <div class="relative d-flex mt-16px">
+                <img
+                    :src="`/storage/${event.image_path}`"
+                    alt=""
+                    class="event-img event-img-blog"
+                />
+                <Link
+                    :href="`/${event.event_url}`"
+                    class="link-stretched"
+                ></Link>
             </div>
         </div>
     </div>
@@ -40,11 +55,16 @@ const props = defineProps({
 
 <style lang="scss">
 .event-item-blog {
-    display: grid;
-    grid-template-rows: 1fr 30px 270px;
-    grid-row-gap: 30px;
+    display: flex;
+    flex-direction: column;
 }
+
 .event-img-blog {
     margin-bottom: 0;
+}
+.event-category-link {
+    font-size: 12px;
+    line-height: 30px;
+    color: var(--text);
 }
 </style>

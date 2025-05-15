@@ -789,6 +789,16 @@ img {
             background-color: $text;
         }
     }
+    &-horizontal {
+        &::after {
+            margin-top: 10px;
+            height: 1px;
+            width: 100%;
+            margin-bottom: 9px;
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
 }
 
 .divider-star {
