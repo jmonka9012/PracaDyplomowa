@@ -176,7 +176,7 @@ console.log(props);
                     </div>
                     <div class="post-list-item-col post-list-item-col-btns">
                         <Link
-                            class="btn btn-md"
+                            class="btn btn-md col-12"
                             method="delete"
                             preserve-scroll
                             :href="route('admin.posts.delete')"
@@ -186,7 +186,7 @@ console.log(props);
                             Usuń
                         </Link>
                         <Link
-                            class="btn btn-md"
+                            class="btn btn-md col-12"
                             :href="`/${post.blog_post_url}`"
                             >Podgląd</Link
                         >
@@ -211,6 +211,7 @@ console.log(props);
 </template>
 
 <style scoped lang="scss">
+@use "~css/mixin.scss";
 .max-100 {
     width: 100px;
     height: 100px;
@@ -219,22 +220,45 @@ console.log(props);
 }
 .post-list-item {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     padding-bottom: 20px;
     margin-bottom: 40px;
     border-bottom: 1px solid rgb(0, 0, 0, 0.1);
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-}
-.post-list-item-col {
-    row-gap: 20px;
-    display: flex;
-    flex-direction: column;
-    padding: 0 10px;
-    &-btns {
+    @include mixin.media-breakpoint-up(md) {
         flex-direction: row;
         justify-content: space-between;
-        grid-column: 3 / 5;
+    }
+    @include mixin.media-breakpoint-up(lg) {
+        grid-template-columns: repeat(7, auto);
+        display: grid;
+    }
+}
+.post-list-item-col {
+    row-gap: 5px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+    padding-bottom: 10px;
+    padding-top: 10px;
+    &:first-of-type {
+        padding-bottom: 20px;
+    }
+    &:nth-last-of-type(3),
+    &:first-of-type {
+        margin-bottom: 10px;
+    }
+    &:last-of-type,
+    &:nth-last-of-type(2) {
+        border-bottom: 0;
+    }
+    @include mixin.media-breakpoint-up(md) {
+        row-gap: 20px;
+        padding: 0 10px;
+        border-bottom: 0;
+        &:nth-last-of-type(3),
+        &:first-of-type {
+            margin-bottom: 0;
+        }
     }
 }
 </style>
