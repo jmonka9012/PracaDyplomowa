@@ -7,6 +7,7 @@ import ResetObject from "@/Utilities/resetObject";
 import { router } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
 import { ref, reactive, toRaw } from "vue";
+import axios from "axios";
 
 const showModal = ref(false);
 const { user, isLoggedIn } = useAuth();
@@ -49,6 +50,23 @@ const contactForm = reactive({
     topic: null,
     message: null,
 });
+
+const organizer = reactive({});
+
+function GetOrganizerInfo() {
+    if (user.value.permission_level === 4) {
+        axios
+            .get(route('organizer.status'))
+            .then((response) => {
+                Object.assign(organizer, response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+        console.log(organizer);
+    }
+}
+GetOrganizerInfo();
 
 const errors = reactive({});
 const ticketErrors = reactive({});
@@ -328,6 +346,30 @@ function SendTicket() {
                         >
                             <h3 class="ma-ftitle">Szcegóły sprzedawcy</h3>
                             <i class="fa fa-user"></i>
+                        </div>
+                        <div>
+                            <div v-if="organizer.organizer_details" >
+                                <div v-if="organizer.organizer_details.company_name" class="flex-row d-flex">
+                                    <div class="col-6">Nazwa firmy</div>
+                                    <div class="col-6">{{organizer.organizer_details.company_name}}</div>
+                                </div>
+                                <div v-if="organizer.organizer_details.address" class="flex-row d-flex">
+                                    <div class="col-6">Adres</div>
+                                    <div class="col-6">{{organizer.organizer_details.address}}</div>
+                                </div>
+                                <div v-if="organizer.organizer_details.bank_account_number" class="flex-row d-flex">
+                                    <div class="col-6">Numer konta bankowego</div>
+                                    <div class="col-6">{{organizer.organizer_details.bank_account_number}}</div>
+                                </div>
+                                <div v-if="organizer.organizer_details.phone_number" class="flex-row d-flex">
+                                    <div class="col-6">Numer telefonu</div>
+                                    <div class="col-6">{{organizer.organizer_details.phone_number}}</div>
+                                </div>
+                                <div v-if="organizer.organizer_details.tax_number" class="flex-row d-flex">
+                                    <div class="col-6">{{organizer.organizer_details.tax_number}}</div>
+                                </div>
+                            </div>
+                            <div class="error-msg" v-else-if="organizer.message">{{organizer.message}}</div>
                         </div>
                     </Tab>
                 </Tabs>
