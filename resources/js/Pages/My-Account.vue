@@ -75,20 +75,21 @@ const handleValidationEmit = (state) => {
 
 function SendTicket() {
     console.log(contactForm);
-    let hadError = true;
 
     router.post(route("support-ticket-send"), contactForm, {
-        preserveScroll: () => hadError,
-        only: ["support_tickets"],
-        onError: (err) => {
-            hadError = true;
+        preserveScroll: true,
+        onError: (err, response) => {
             ResetObject(ticketErrors);
-            Object.assign(ticketErrors, err);
+            ResetObject(contactForm);
+            if (response && response.status === 429) {
+                alert('Za dużo żądań, spróbuj ponownie później');
+            }
         },
         onSuccess: () => {
-            hadError = false;
+            ResetObject(contactForm);
         },
     });
+    console.log(contactForm);
 }
 </script>
 

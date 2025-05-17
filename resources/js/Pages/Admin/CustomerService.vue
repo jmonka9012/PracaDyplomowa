@@ -66,6 +66,7 @@ const SwapStatus = (status) => {
                             method="put"
                             :href="route('admin.customer-service.change_status', {id:ticket.id})"
                             class="ticket-query__status-change"
+                            preserve-scroll
                             :data="{ id: ticket.id, status: SwapStatus(ticket.status) }"
                         >
                             Zmienić status?
