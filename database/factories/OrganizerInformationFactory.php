@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Organizer;
+use App\Models\OrganizerInformation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class OrganizerFactory extends Factory
+class OrganizerInformationFactory extends Factory
 {
-    protected $model = Organizer::class;
+    protected $model = OrganizerInformation::class;
 
     public function definition()
     {
@@ -21,7 +21,7 @@ class OrganizerFactory extends Factory
             'address_city' => $this->faker->city,
             'address_street' => $this->faker->streetAddress,
             'bank_account_number' => $this->faker->iban('PL'),
-            'account_status' => $this->faker->randomElement(['pending', 'verified', 'awaiting clarification']),
+            'account_status' => $this->faker->randomElement(['pending', 'verified', 'denied']),
         ];
     }
 }

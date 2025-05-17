@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class OrganizerInformation extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'user_id',
         'company_name',
@@ -25,7 +27,7 @@ class OrganizerInformation extends Model
     public const ACCOUNT_STATUSES = [
         'pending' => 'Pending',
         'verified' => 'Verified',
-        'awaiting clarification' => 'Awaiting Clarification'
+        'denied' => 'Denied'
     ];
 
     public function user()
