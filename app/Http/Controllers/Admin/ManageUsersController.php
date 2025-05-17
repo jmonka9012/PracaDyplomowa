@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Resources\AdminPanelOrgarnizerData;
 use App\Http\Resources\UserAdminBrowserResource;
+use App\Models\OrganizerInformation;
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -13,29 +15,31 @@ class ManageUsersController extends Controller
 {
     public function index(Request $request)
     {
-        if (!$request->has('page')) {
-            return redirect()->route('admin.users', ['page' => 1] + $request->except('page'));
+        $defaults = [
+        'page' => 1,
+        'pending_page' => 1,
+        'denied_page' => 1,
+        ];
+        
+        $missing = collect($defaults)->filter(function ($_, $key) use ($request) {
+        return ! $request->has($key);
+        });
+
+        if ($missing->isNotEmpty()) {
+            return redirect()->route('admin.users', array_merge(
+                $request->query(),
+                $missing->all()
+            ));
         }
-
-        $users = $this->getFilteredUsers($request);
-
-        return Inertia::render('Admin/ManageUsers',[
-            'users' => UserAdminBrowserResource::collection($users)->response()->getData(true),
-        ]);
+        
+        return Inertia::render('Admin/ManageUsers', $this->getPageData($request));
     }
 
     public function showData(Request $request)
     {
-        if (!$request->has('page')) {
-            return redirect()->route('admin.users.data', ['page' => 1] + $request->except('page'));
-        }
-
-        $users = $this->getFilteredUsers($request);
-
-        return response()->json([
-            'users' => UserAdminBrowserResource::collection($users)->response()->getData(true),
-        ]);
+        return response()->json($this->getPageData($request));
     }
+
 
     public function deleteUser(Request $request)
     {
@@ -85,6 +89,57 @@ class ManageUsersController extends Controller
         }
     
         return $query->paginate(20)
-                    ->appends($request->query());
+                    ->appends($request->except('page'));
+    }
+
+    public function getPendingOrganizersData(Request $request)
+    {
+        $organizersPending = OrganizerInformation::where('account_status', 'verified')->get();
+        $organizersDenied = OrganizerInformation::where('account_status', 'denied')->get();
+
+        return response()->json([
+            'organizers_pending' => AdminPanelOrgarnizerData::collection($organizersPending),
+            'organizers_denied' => AdminPanelOrgarnizerData::collection($organizersDenied)
+        ]);
+    }
+
+    protected function getOrganizersByStatus(Request $request, string $status, string $pageName)
+    {
+        return OrganizerInformation::where('account_status', $status)
+            ->paginate(20, ['*'], $pageName)
+            ->appends($request->except($pageName));
+    }
+
+    private function getPageData(Request $request): array
+    {
+        $usersPaginator = $this->getFilteredUsers($request);
+
+        $pendingPaginator = $this->getOrganizersByStatus(
+            $request,
+            'pending',
+            'pending_page'
+        );
+
+        $deniedPaginator = $this->getOrganizersByStatus(
+            $request,
+            'denied',
+            'denied_page'
+        );
+
+        return [
+            'users' => UserAdminBrowserResource::collection($usersPaginator)
+                        ->response()
+                        ->getData(true),
+
+            'organizers' => [
+                'pending' => AdminPanelOrgarnizerData::collection($pendingPaginator)
+                                ->response()
+                                ->getData(true),
+
+                'denied'  => AdminPanelOrgarnizerData::collection($deniedPaginator)
+                                ->response()
+                                ->getData(true),
+            ],
+        ];
     }
 }

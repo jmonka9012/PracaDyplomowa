@@ -23,7 +23,11 @@ Route::prefix('admin')->group(function() {
       Route::delete('/uzytkownicy/usun', [ManageUsersController::class, 'deleteUser'])
             ->name('admin.users.delete')
             ->middleware('adminAccess');
-
+      
+      Route::get('/uzytkownicy/organizatorzy/data', [ManageUsersController::class, 'getPendingOrganizersData'])
+            ->name('admin.users.organizers.data')
+            ->middleware('adminAccess');
+      
       Route::get('/wydarzenia', [PendingEventsController::class, 'index'])
             ->name('admin.events')
             ->middleware('redactorAccess');
@@ -43,7 +47,6 @@ Route::prefix('admin')->group(function() {
       Route::delete('/zaradzaj-postami/usun', [ManagePostsController::class, 'deletePost'])
             ->name('admin.posts.delete')
             ->middleware('adminAccess');
-
 
       Route::get('/obsluga-klienta', [CustomerServiceController::class, 'show'])
             ->name('admin.customer-service')
