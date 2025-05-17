@@ -13,13 +13,15 @@ class StaticOrganizerSeeder extends Seeder
         $user1 = User::factory()->create([
             'name' => 'Organizer2',
             'email' => 'organizer2@example.com',
-            'role' => 'organizer'
+            'role' => 'organizer',
+            'permission_level' => 4
         ]);
 
         $user2 = User::factory()->create([
             'name' => 'Organizer3',
             'email' => 'organizer3@example.com',
-            'role' => 'organizer'
+            'role' => 'organizer',
+            'permission_level' => 4
         ]);
 
 
