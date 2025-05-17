@@ -107,10 +107,6 @@ class MyAccountController extends Controller
                     $response['message'] = 'Jesteśmy w trakcie weryfikowania konta, jeśli będzie taka potrzeba, skontaktujemy się, proszę czekać.';
                     break;
                      
-                case 'awaiting clarification':
-                    $response['message'] = 'Potrzebujemy więcej informacji, proszę sprawdzić podany email kontaktowy.';
-                    break;
-                        
                 case 'denied':
                     $response['message'] = 'Konto zostało odrzucone';
                     break;

@@ -33,4 +33,4 @@ Route::get('/faq', [FAQController::class, 'index'])
 
 Route::post('/pomoc', [CustomerSupportRequest::class, 'store'])
       ->name('support-ticket-send')
-      ->middleware('throttle:3,10');
+      ->middleware('throttle.error:5,1');
