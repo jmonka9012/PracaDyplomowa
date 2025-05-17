@@ -322,7 +322,7 @@ function SendTicket() {
                             </div>
                         </div>
                     </Tab>
-                    <Tab title="Sczegóły sprzedawcy">
+                    <Tab v-if="user.permission_level === 4" title="Sczegóły sprzedawcy">
                         <div
                             class="d-flex align-items-center column-gap-10px mb-32px"
                         >

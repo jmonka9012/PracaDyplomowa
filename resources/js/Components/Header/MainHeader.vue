@@ -159,7 +159,7 @@ onBeforeUnmount(() => {
                         Backend
                     </Link>
                     <Link
-                        v-if="user.permission_level<=4"
+                        v-if="user.permission_level===4"
                         :href="route('event-create')"
                         class="ml-30px btn btn-header btn-hovprim"
                         >+ Zorganizuj wydarzenie</Link
@@ -344,7 +344,7 @@ onBeforeUnmount(() => {
                                             </li>
                                             <li>
                                                 <Link
-                                                    v-if="user.permission_level<=4"
+                                                    v-if="user.permission_level===4"
                                                     :href="
                                                         route('event-create')
                                                     "
