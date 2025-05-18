@@ -92,13 +92,14 @@ const handleValidationEmit = (state) => {
 };
 
 function SendTicket() {
-    console.log(contactForm);
 
-    router.post(route("support-ticket-send"), contactForm, {
+    router.post(route('support-ticket-send'), contactForm, {
         preserveScroll: true,
         onError: (err, response) => {
             ResetObject(ticketErrors);
             ResetObject(contactForm);
+            console.log(err);
+            console.log(response);
             if (response && response.status === 429) {
                 alert('Za dużo żądań, spróbuj ponownie później');
             }
@@ -107,7 +108,20 @@ function SendTicket() {
             ResetObject(contactForm);
         },
     });
-    console.log(contactForm);
+/*    axios
+        .post(route("support-ticket-send"), contactForm)
+        .then((response) => {
+            ResetObject(contactForm);
+            router.reload({
+                preserveState: true,
+                preserveScroll: true,
+            })
+            console.log(response);
+        })
+        .catch((error) => {
+            console.error(error);
+        })*/
+
 }
 </script>
 
