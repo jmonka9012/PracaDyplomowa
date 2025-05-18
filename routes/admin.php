@@ -24,10 +24,6 @@ Route::prefix('admin')->group(function() {
       Route::delete('/uzytkownicy/usun', [ManageUsersController::class, 'deleteUser'])
             ->name('admin.users.delete')
             ->middleware('adminAccess');
-      
-      Route::get('/uzytkownicy/organizatorzy/data', [ManageUsersController::class, 'getPendingOrganizersData'])
-            ->name('admin.users.organizers.data')
-            ->middleware('adminAccess');
 
       Route::put('/uzytkownicy/organizatorzy/{id}/status', [ManageOrganizerController::class, 'changeStatus'])
             ->name('admin.users.organizers.change_status')

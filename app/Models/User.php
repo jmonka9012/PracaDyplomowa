@@ -80,7 +80,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function organizer()
     {
-        return $this->hasOne(OrganizerInformation::class);
+        return $this->hasOne(OrganizerInformation::class, 'user_id');
     }
 
     public function supportTickets()

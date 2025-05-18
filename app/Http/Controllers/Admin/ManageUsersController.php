@@ -15,21 +15,8 @@ class ManageUsersController extends Controller
 {
     public function index(Request $request)
     {
-        $defaults = [
-        'page' => 1,
-        'pending_page' => 1,
-        'denied_page' => 1,
-        ];
-        
-        $missing = collect($defaults)->filter(function ($_, $key) use ($request) {
-        return ! $request->has($key);
-        });
-
-        if ($missing->isNotEmpty()) {
-            return redirect()->route('admin.users', array_merge(
-                $request->query(),
-                $missing->all()
-            ));
+        if (!$request->has('page')) {
+            return redirect()->route('admin.users', ['page' => 1] + $request->except('page'));
         }
         
         return Inertia::render('Admin/ManageUsers', $this->getPageData($request));
@@ -37,6 +24,10 @@ class ManageUsersController extends Controller
 
     public function showData(Request $request)
     {
+        if (!$request->has('page')) {
+            return redirect()->route('admin.users.data', ['page' => 1] + $request->except('page'));
+        }
+
         return response()->json($this->getPageData($request));
     }
 
@@ -70,7 +61,8 @@ class ManageUsersController extends Controller
     
     protected function getFilteredUsers(Request $request)
     {
-        $query = User::withTicketCounts();
+        $query = User::withTicketCounts()
+            ->with('organizer');
     
         if ($request->filled('name')) {
             $searchTerm = '%' . $request->name . '%';
@@ -87,59 +79,31 @@ class ManageUsersController extends Controller
         if ($request->filled('role')) {
             $query->where('role', 'like', '%' . $request->role . '%');
         }
+        
+        if ($request->filled('company_name')) {
+        $query->whereHas('organizer', function($q) use ($request) {
+            $q->where('company_name', 'like', '%' . $request->company_name . '%');
+        });
+        }
+
+        if ($request->filled('account_status')) {
+            $query->whereHas('organizer', function($q) use ($request) {
+                $q->where('account_status', $request->account_status);
+            });
+        }
     
         return $query->paginate(20)
                     ->appends($request->except('page'));
-    }
-
-    public function getPendingOrganizersData(Request $request)
-    {
-        $organizersPending = OrganizerInformation::where('account_status', 'verified')->get();
-        $organizersDenied = OrganizerInformation::where('account_status', 'denied')->get();
-
-        return response()->json([
-            'organizers_pending' => AdminPanelOrgarnizerData::collection($organizersPending),
-            'organizers_denied' => AdminPanelOrgarnizerData::collection($organizersDenied)
-        ]);
-    }
-
-    protected function getOrganizersByStatus(Request $request, string $status, string $pageName)
-    {
-        return OrganizerInformation::where('account_status', $status)
-            ->paginate(20, ['*'], $pageName)
-            ->appends($request->except($pageName));
     }
 
     private function getPageData(Request $request): array
     {
         $usersPaginator = $this->getFilteredUsers($request);
 
-        $pendingPaginator = $this->getOrganizersByStatus(
-            $request,
-            'pending',
-            'pending_page'
-        );
-
-        $deniedPaginator = $this->getOrganizersByStatus(
-            $request,
-            'denied',
-            'denied_page'
-        );
-
         return [
             'users' => UserAdminBrowserResource::collection($usersPaginator)
                         ->response()
                         ->getData(true),
-
-            'organizers' => [
-                'pending' => AdminPanelOrgarnizerData::collection($pendingPaginator)
-                                ->response()
-                                ->getData(true),
-
-                'denied'  => AdminPanelOrgarnizerData::collection($deniedPaginator)
-                                ->response()
-                                ->getData(true),
-            ],
         ];
     }
 }

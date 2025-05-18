@@ -108,7 +108,7 @@ class MyAccountController extends Controller
                     break;
                      
                 case 'denied':
-                    $response['message'] = 'Konto zostało odrzucone';
+                    $response['message'] = 'Konto zostało odrzucone, proszę napisać do administracji';
                     break;
                         
                 default:
