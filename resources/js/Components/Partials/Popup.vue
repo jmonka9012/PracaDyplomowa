@@ -1,32 +1,29 @@
 <script setup>
-import {reactive} from "vue";
+import { reactive } from "vue";
 import { router } from "@inertiajs/vue3";
 
 const props = defineProps({
     show: Boolean,
 });
 
-const emit = defineEmits(['password-validation-success']);
+const emit = defineEmits(["password-validation-success"]);
 
 const validationErrors = reactive({});
 function submitPasswordValidation() {
-
     router.post(route("password.confirm"), passwordForm, {
         onError: (err) => {
             Object.assign(validationErrors, err);
         },
         onSuccess: (page) => {
-            emit('password-validation-success', true);
-            validationErrors.password = null
+            emit("password-validation-success", true);
+            validationErrors.password = null;
         },
-
     });
 }
 
 const passwordForm = reactive({
-    password: null
+    password: null,
 });
-
 </script>
 
 <template>
@@ -47,10 +44,17 @@ const passwordForm = reactive({
                         aria-required="true"
                         v-model="passwordForm.password"
                     />
-                    <div class="error-msg" v-if="validationErrors.password">{{ validationErrors.password }}</div>
+                    <div class="error-msg" v-if="validationErrors.password">
+                        {{ validationErrors.password }}
+                    </div>
                 </div>
                 <div class="input-wrap d-flex flex-column col-12">
-                    <input type="submit" class="form-submit" @click="" value="Zaktualizuj" />
+                    <input
+                        type="submit"
+                        class="form-submit"
+                        @click=""
+                        value="Zaktualizuj"
+                    />
                 </div>
             </form>
             <button class="popup__close" @click="$emit('close')">
@@ -74,6 +78,7 @@ const passwordForm = reactive({
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 100vw;
 }
 .popup {
     background-color: white;

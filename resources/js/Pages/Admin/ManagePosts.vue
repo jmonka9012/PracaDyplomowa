@@ -127,7 +127,7 @@ console.log(props);
     </section>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 @use "~css/mixin.scss";
 .max-100 {
     width: 100px;
@@ -176,6 +176,7 @@ console.log(props);
             display: flex;
             justify-content: center;
             align-items: center;
+            max-width: 100vw;
         }
         .popup__close {
             background-color: transparent;
