@@ -51,6 +51,8 @@ const contactForm = reactive({
     message: null,
 });
 
+const supportTicketError = ref(null);
+
 const organizer = reactive({});
 
 function GetOrganizerInfo() {
@@ -93,22 +95,7 @@ const handleValidationEmit = (state) => {
 
 function SendTicket() {
 
-    router.post(route('support-ticket-send'), contactForm, {
-        preserveScroll: true,
-        onError: (err, response) => {
-            ResetObject(ticketErrors);
-            ResetObject(contactForm);
-            console.log(err);
-            console.log(response);
-            if (response && response.status === 429) {
-                alert('Za dużo żądań, spróbuj ponownie później');
-            }
-        },
-        onSuccess: () => {
-            ResetObject(contactForm);
-        },
-    });
-/*    axios
+    axios
         .post(route("support-ticket-send"), contactForm)
         .then((response) => {
             ResetObject(contactForm);
@@ -119,8 +106,9 @@ function SendTicket() {
             console.log(response);
         })
         .catch((error) => {
-            console.error(error);
-        })*/
+            supportTicketError.value = error.response.data.throttle;
+            console.error(supportTicketError);
+        })
 
 }
 </script>
@@ -275,7 +263,7 @@ function SendTicket() {
                         >
                             <h3 class="fs-36 mb-20px">Wyślij zapytanie</h3>
                             <form
-                                class="form mb-40px ml-auto mr-auto"
+                                class="form mb-10px ml-auto mr-auto"
                                 @submit.prevent="SendTicket"
                             >
                                 <div class="input-wrap col-12">
@@ -316,6 +304,7 @@ function SendTicket() {
                                 </p>
                                 <input type="submit" value="wyślij" />
                             </form>
+                            <div v-if="supportTicketError" class="error-msg mb-30px">{{supportTicketError}}</div>
                             <h3 class="mb-30px">Twoje zapytania</h3>
                             <div class="support-tickets">
                                 <div
