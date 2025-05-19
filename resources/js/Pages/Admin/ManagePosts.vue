@@ -81,7 +81,7 @@ console.log(props);
                     <div></div>
                 </div>
             </div>
-            <div class="event-pagination">
+            <div class="event-pagination pb-100px">
                 <ul class="ml-auto mr-auto">
                     <li
                         :key="page"

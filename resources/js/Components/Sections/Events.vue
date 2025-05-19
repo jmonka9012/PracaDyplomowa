@@ -41,14 +41,14 @@ const scrollRight = () => {
                         event.event_name
                     }}</Link>
                 </h6>
-                <div>
+                <div class="d-flex flex-column row-gap-10px">
                     <Link
                         class="event-link d-none d-lg-flex"
                         :href="`/${event.event_url}`"
-                    ><i class="fa fa-ticket"></i>
+                        ><i class="fa fa-ticket"></i>
                         Zobacz więcej
                     </Link>
-                    <div>Ceny od {{event.lowest_price}} zł</div>
+                    <div>Ceny od {{ event.lowest_price }} zł</div>
                 </div>
             </div>
             <p class="event-date ff-prompt">
@@ -56,19 +56,21 @@ const scrollRight = () => {
             </p>
             <p class="event-subtitle">
                 Kategorie:
-                <Link class="event-category-link"
-                      :href="route('event.browser')"
-                      :data="{genres: genre.id}"
-                      v-for="(genre, index) in event.genres">{{ genre.name }}
-                <span v-if="index < event.genres.length - 1">, </span>
-            </Link>
+                <Link
+                    class="event-category-link"
+                    :href="route('event.browser')"
+                    :data="{ genres: genre.id }"
+                    v-for="(genre, index) in event.genres"
+                    >{{ genre.name }}
+                    <span v-if="index < event.genres.length - 1">, </span>
+                </Link>
             </p>
-            <div>
+            <div class="d-flex flex-column row-gap-10px">
                 <Link class="event-link d-lg-none" :href="`/${event.event_url}`"
-                ><i class="fa fa-ticket"></i>
+                    ><i class="fa fa-ticket"></i>
                     Zobacz więcej
                 </Link>
-                <div>Ceny od {{event.lowest_price}} zł</div>
+                <div>Ceny od {{ event.lowest_price }} zł</div>
             </div>
         </div>
     </div>
@@ -86,7 +88,7 @@ const scrollRight = () => {
     word-break: break-word;
     border-radius: 8px;
     width: 100%;
-    margin-bottom: 16px;
+    margin-bottom: 25px;
     &:last-of-type {
         margin-bottom: 0;
     }
@@ -98,7 +100,7 @@ const scrollRight = () => {
     }
 
     &-category-link {
-        transition: color .2s ease-out;
+        transition: color 0.2s ease-out;
 
         &:hover {
             color: var(--primary);
@@ -190,8 +192,8 @@ const scrollRight = () => {
         color: #191028a3;
         width: 100%;
         @include mixin.media-breakpoint-down(lg) {
-            margin-bottom: 25px;
-            margin-top: 25px;
+            margin-bottom: 15px;
+            margin-top: 15px;
         }
     }
     &-subtitle,
