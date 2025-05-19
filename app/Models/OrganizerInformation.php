@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\OrganizerAccountStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,7 +23,7 @@ class OrganizerInformation extends Model
     ];
 
     protected $casts = [
-        'account_status' => 'string',
+        'account_status' => OrganizerAccountStatus::class,
     ];
     public const ACCOUNT_STATUSES = [
         'pending' => 'Pending',

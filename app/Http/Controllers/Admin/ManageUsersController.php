@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Resources\AdminPanelOrgarnizerData;
+use App\Enums\OrganizerAccountStatus;
 use App\Http\Resources\UserAdminBrowserResource;
 use App\Models\OrganizerInformation;
 use Inertia\Inertia;
@@ -96,14 +97,36 @@ class ManageUsersController extends Controller
                     ->appends($request->except('page'));
     }
 
+    public function getAccountStatusStats()
+    {
+                $counts = OrganizerInformation::selectRaw('account_status, count(*) as count')
+            ->groupBy('account_status')
+            ->pluck('count', 'account_status')
+            ->toArray();
+        
+        $results = [];
+        foreach (OrganizerAccountStatus::cases() as $status) {
+            $results[] = [
+                'value' => $status->value,
+                'description' => $status->label(),
+                'count' => $counts[$status->value] ?? 0
+            ];
+        }
+        
+        return response()->json($results);
+    }
+
     private function getPageData(Request $request): array
     {
         $usersPaginator = $this->getFilteredUsers($request);
+        $organizerStats = $this->getAccountStatusStats();
 
         return [
             'users' => UserAdminBrowserResource::collection($usersPaginator)
                         ->response()
                         ->getData(true),
+            
+            'organizer_stats' => $organizerStats
         ];
     }
 }
