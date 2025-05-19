@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Resources\AdminPanelOrgarnizerData;
+use App\Enums\UserRole;
 use App\Enums\OrganizerAccountStatus;
 use App\Http\Resources\UserAdminBrowserResource;
 use App\Models\OrganizerInformation;
@@ -116,17 +116,37 @@ class ManageUsersController extends Controller
         return response()->json($results);
     }
 
+        public function getAccountRoleStats()
+    {
+                $counts = User::selectRaw('role, count(*) as count')
+            ->groupBy('role')
+            ->pluck('count', 'role')
+            ->toArray();
+        
+        $results = [];
+        foreach (UserRole::cases() as $status) {
+            $results[] = [
+                'value' => $status->value,
+                'description' => $status->permissionLabel(),
+                'count' => $counts[$status->value] ?? 0
+            ];
+        }
+        
+        return response()->json($results);
+    }
     private function getPageData(Request $request): array
     {
         $usersPaginator = $this->getFilteredUsers($request);
         $organizerStats = $this->getAccountStatusStats();
+        $userStats = $this->getAccountRoleStats();
 
         return [
             'users' => UserAdminBrowserResource::collection($usersPaginator)
                         ->response()
                         ->getData(true),
             
-            'organizer_stats' => $organizerStats
+            'organizer_stats' => $organizerStats,
+            'user_stats' => $userStats
         ];
     }
 }

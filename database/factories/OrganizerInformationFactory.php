@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\OrganizerInformation;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
 class OrganizerInformationFactory extends Factory
 {
@@ -12,7 +13,12 @@ class OrganizerInformationFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => \App\Models\User::factory(),
+            'user_id' => User::factory()->create([
+                'role' => 'organizer',
+                'permission_level' => 4,
+            ]),
+
+            
             'company_name' => $this->faker->company,
             'phone_number' => $this->faker->phoneNumber,
             'tax_number' => $this->faker->unique()->numerify('##########'),
