@@ -1,4 +1,8 @@
 <script setup>
+import { ref } from "vue";
+
+const activePostId = ref(null);
+
 import blogBg from "~images/blog-bg.jpg";
 
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
@@ -62,23 +66,49 @@ console.log(props);
                         <div>{{ post.author_name }}</div>
                     </div>
                     <div class="post-list-item-col post-list-item-col-btns">
-                        <Link
+                        <button
                             class="btn btn-md col-12"
-                            method="delete"
-                            preserve-scroll
-                            :href="route('admin.posts.delete')"
-                            :data="{ blog_id: post.id }"
-                            :only="['blog_posts']"
+                            @click="activePostId = post.id"
                         >
                             Usuń
-                        </Link>
+                        </button>
                         <Link
                             class="btn btn-md col-12"
                             :href="`/${post.blog_post_url}`"
                             >Podgląd</Link
                         >
                     </div>
-                    <div></div>
+                    <div
+                        v-if="activePostId === post.id"
+                        @click.self="activePostId = null"
+                        class="post-list-item-popup-holder"
+                    >
+                        <div class="post-list-item-popup">
+                            <p class="mb-30px">
+                                Czy na pewno chcesz usunąć posta ?
+                            </p>
+                            <div
+                                class="d-flex flex-row justify-content-between"
+                            >
+                                <Link
+                                    class="btn btn-md w-fit"
+                                    method="delete"
+                                    preserve-scroll
+                                    :href="route('admin.posts.delete')"
+                                    :data="{ blog_id: post.id }"
+                                    :only="['blog_posts']"
+                                >
+                                    Usuń
+                                </Link>
+                                <button
+                                    class="popup__close"
+                                    @click="activePostId = null"
+                                >
+                                    <i class="fa fa-close"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="event-pagination pb-100px">
@@ -111,6 +141,7 @@ console.log(props);
     padding-bottom: 20px;
     margin-bottom: 40px;
     border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+    position: relative;
     @include mixin.media-breakpoint-up(md) {
         flex-direction: row;
         justify-content: space-between;
@@ -118,6 +149,41 @@ console.log(props);
     @include mixin.media-breakpoint-up(lg) {
         grid-template-columns: repeat(7, auto);
         display: grid;
+    }
+    &-popup {
+        width: 50vw;
+        background-color: white;
+        border: 1px solid var(--primary);
+        border-radius: 18px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        @include mixin.media-breakpoint-down(lg) {
+            width: calc(100% - 15px);
+            padding: 15px;
+        }
+        &-holder {
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .popup__close {
+            background-color: transparent;
+            @include mixin.media-breakpoint-down(lg) {
+                top: 5px;
+                right: 5px;
+            }
+        }
     }
 }
 .post-list-item-col {
