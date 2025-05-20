@@ -48,7 +48,13 @@ class ManageUsersController extends Controller
 
             DB::commit();
 
-            return Inertia::location($request->headers->get('referer'));
+            $usersPaginator = $this->getFilteredUsers($request);
+            
+            return Inertia::render('Admin/ManageUsers',[
+                'users' => fn() => UserAdminBrowserResource::collection($usersPaginator)
+                        ->response()
+                        ->getData(true),
+            ]);
             
         } catch (\Exception $e){
             DB::rollBack();
@@ -99,7 +105,7 @@ class ManageUsersController extends Controller
 
     public function getAccountStatusStats()
     {
-                $counts = OrganizerInformation::selectRaw('account_status, count(*) as count')
+        $counts = OrganizerInformation::selectRaw('account_status, count(*) as count')
             ->groupBy('account_status')
             ->pluck('count', 'account_status')
             ->toArray();
@@ -116,9 +122,9 @@ class ManageUsersController extends Controller
         return response()->json($results);
     }
 
-        public function getAccountRoleStats()
+    public function getAccountRoleStats()
     {
-                $counts = User::selectRaw('role, count(*) as count')
+        $counts = User::selectRaw('role, count(*) as count')
             ->groupBy('role')
             ->pluck('count', 'role')
             ->toArray();
