@@ -18,6 +18,7 @@ abstract class TicketBase extends Model
         'is_seat',
         'seat_id',
         'standing_id',
+        'payment_status'
     ];
 
     public function user()

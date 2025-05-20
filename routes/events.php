@@ -41,6 +41,12 @@ Route::prefix('wydarzenia')->group(function() {
 
       Route::post('/kupuj', [TicketSaleController::class, 'store'])
             ->name('event-ticket.buy');
+      
+      Route::get('/tickets/payment/success', [TicketSaleController::class, 'paymentSuccess'])
+            ->name('tickets.payment.success');
+      
+      Route::get('/tickets/payment/cancel', [TicketSaleController::class, 'paymentCancel'])
+            ->name('tickets.payment.cancel');
             
       // Dane eventu
       Route::get('/data/{event:slug}', [EventController::class, 'showData'])
