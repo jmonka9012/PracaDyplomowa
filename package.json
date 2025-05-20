@@ -34,6 +34,7 @@
         "swiper": "^11.2.5",
         "tinymce-i18n": "^25.3.17",
         "vue": "^3.5.13",
+        "vue-easy-lightbox": "^1.19.0",
         "vue-multiselect": "^3.2.0",
         "ziggy-js": "^2.5.2"
     }
