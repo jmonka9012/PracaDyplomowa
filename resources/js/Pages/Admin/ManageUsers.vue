@@ -192,7 +192,7 @@ function FilterUsers() {
                     <div class="user-row__value"> {{ user.total_tickets}} </div>
                     <div class="user-row__value">  </div>
                     <div class="user-row__value">
-                        <Link preserve-scroll method="delete" :only="['users']" :data="{user_id: user.id}" :href="route('admin.users.delete')" >Usuń</Link>
+                        <Link preserve-scroll method="delete" :only="['users']" :href="route('admin.users.delete', {user_id: user.id})" >Usuń</Link>
                     </div>
                 </div>
             </div>
