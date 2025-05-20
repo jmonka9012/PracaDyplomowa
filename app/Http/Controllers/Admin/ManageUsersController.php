@@ -50,12 +50,11 @@ class ManageUsersController extends Controller
 
             $usersPaginator = $this->getFilteredUsers($request);
             
-            return Inertia::render('Admin/ManageUsers',[
-                'users' => fn() => UserAdminBrowserResource::collection($usersPaginator)
-                        ->response()
-                        ->getData(true),
-            ]);
-            
+            return redirect()->route('admin.users')->with([
+                'users' => UserAdminBrowserResource::collection($usersPaginator)
+                                                        ->response()
+                                                        ->getData(true),
+            ]);            
         } catch (\Exception $e){
             DB::rollBack();
 
