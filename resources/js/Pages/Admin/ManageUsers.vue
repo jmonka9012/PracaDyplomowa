@@ -1,5 +1,6 @@
 <script setup>
 import blogBg from "~images/blog-bg.jpg";
+import { router } from "@inertiajs/vue3";
 import { reactive } from "vue";
 import { Link } from "@inertiajs/vue3";
 
@@ -28,7 +29,11 @@ const filterRequest = reactive({
 console.log(props);
 
 function FilterUsers() {
+    console.log(filterRequest);
 
+    router.get(route('admin.users'), filterRequest, {
+        preserveScroll: true,
+    })
 }
 
 </script>
@@ -165,6 +170,7 @@ function FilterUsers() {
                         <option v-for="status in props.user_stats.original" :value="status.value">{{status.description}} ( {{status.count}} )</option>
                     </select>
                 </div>
+                <button type="submit">Filtruj</button>
             </form>
             <div>
                 <div class="user-row user-row--head">
@@ -184,9 +190,9 @@ function FilterUsers() {
                     <div class="user-row__value"> {{ user.full_name}} </div>
                     <div class="user-row__value"> {{ user.role}} </div>
                     <div class="user-row__value"> {{ user.total_tickets}} </div>
-                    <div class="user-row__value"> {{ user.support_tickets}} </div>
+                    <div class="user-row__value">  </div>
                     <div class="user-row__value">
-                        <Link method="DELETE" :href="route('admin.users.delete' , {user_id: user.id})" >Usuń</Link>
+                        <Link preserve-scroll method="delete" :data="{user_id: user.id}" :href="route('admin.users.delete')" >Usuń</Link>
                     </div>
                 </div>
             </div>
