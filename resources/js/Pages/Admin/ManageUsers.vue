@@ -1,13 +1,42 @@
 <script setup>
 import blogBg from "~images/blog-bg.jpg";
+import { reactive } from "vue";
+import { Link } from "@inertiajs/vue3";
 
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
+
+const props = defineProps({
+    users: {
+        required: true
+    },
+    organizer_stats: {
+        required: true
+    },
+    user_stats: {
+        required: true
+    }
+})
+
+const filterRequest = reactive({
+    email: null,
+    role: null,
+    name: null,
+    company_name: null,
+    account_status: null,
+})
+
+console.log(props);
+
+function FilterUsers() {
+
+}
+
 </script>
 
 <template>
     <HeroSmall :source="blogBg" title="Zarządzaj użytkownikami"></HeroSmall>
     <section>
-        <div class="container">
+        <div class="container flex-column">
             <div class="col-12 d-flex flex-lg-row align-items-lg-center">
                 <h2 class="mb-20px mb-lg-0">Użytkownicy</h2>
                 <a href="#" class="ml-lg-20px btn btn-md btn-hovprim">Dodaj nowego</a>
@@ -110,8 +139,85 @@ import HeroSmall from "@/Components/Sections/Hero-small.vue";
                     </tfoot>
                 </table>
             </div>
+            <form  @submit.prevent="FilterUsers()">
+                <div>
+                    <label for="userName">Nazwa:</label>
+                    <input type="text" v-model="filterRequest.name">
+                </div>
+                <div>
+                    <label for="userName">Email:</label>
+                    <input type="text" v-model="filterRequest.email">
+                </div>
+                <div>
+                    <label for="userName">Nazwa firmy:</label>
+                    <input type="text" v-model="filterRequest.company_name">
+                </div>
+                <div>
+                    <label for="userType">Typ użytkownika</label>
+                    <select v-model="filterRequest.account_status" name="userType" id="">
+                        <option disabled value="">Wybierz</option>
+                        <option v-for="status in props.organizer_stats.original" :value="status.value">{{status.description}} ( {{status.count}} )</option>
+                    </select>
+                </div>
+                <div>
+                    <select v-model="filterRequest.role" name="userType" id="">
+                        <option disabled value="">Wybierz</option>
+                        <option v-for="status in props.user_stats.original" :value="status.value">{{status.description}} ( {{status.count}} )</option>
+                    </select>
+                </div>
+            </form>
+            <div>
+                <div class="user-row user-row--head">
+                    <div>ID:</div>
+                    <div>Nazwa:</div>
+                    <div>Email:</div>
+                    <div>Imie i nazwisko:</div>
+                    <div>Rola:</div>
+                    <div>Kupione Bilety:</div>
+                    <div>Zgłoszenia o pomoc:</div>
+                    <div>Akcja:</div>
+                </div>
+                <div class="user-row" v-for="user in props.users.data" >
+                    <div class="user-row__value"> {{ user.id}} </div>
+                    <div class="user-row__value"> {{ user.name}} </div>
+                    <div class="user-row__value"> {{ user.email}} </div>
+                    <div class="user-row__value"> {{ user.full_name}} </div>
+                    <div class="user-row__value"> {{ user.role}} </div>
+                    <div class="user-row__value"> {{ user.total_tickets}} </div>
+                    <div class="user-row__value"> {{ user.support_tickets}} </div>
+                    <div class="user-row__value">
+                        <Link method="DELETE" :href="route('admin.users.delete' , {user_id: user.id})" >Usuń</Link>
+                    </div>
+                </div>
+            </div>
+            <div class="event-pagination">
+                <ul class="ml-auto mr-auto">
+                    <li
+                        :key="page"
+                        class="page"
+                        :class="{ 'page-current': page.active }"
+                        v-for="page in props.users.meta.links"
+                    >
+                        <Link :href="page.url" v-html="page.label"></Link>
+                    </li>
+                </ul>
+            </div>
         </div>
     </section>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.user-row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+
+    &__value {
+
+    }
+
+    &--head {
+        font-weight: 700;
+    }
+}
+</style>
