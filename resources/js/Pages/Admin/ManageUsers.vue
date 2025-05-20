@@ -37,7 +37,8 @@ function FilterUsers() {
 }
 
 function DeleteUser(id) {
-    router.delete(route('admin.users.delete'), {user_id: id}, {
+    router.delete(route('admin.users.delete'), {
+        data: { user_id: id },
         preserveScroll: true,
         only: ['users']
     })
