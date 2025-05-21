@@ -17,9 +17,7 @@ class ManagePostsController extends Controller
             return redirect()->route('admin.posts', ['page' => 1] + $request->except('page'));
         }
 
-        $blogPosts = BlogPost::with(['author.user'])
-            ->orderBy('created_at', 'desc')
-            ->paginate(20);
+        $blogPosts = $this->getBlogPosts($request);
 
         return Inertia::render('Admin/ManagePosts', [
             'blog_posts' => BlogPostBrowserResource::collection($blogPosts)->response()->getData(true)
@@ -32,9 +30,7 @@ class ManagePostsController extends Controller
             return redirect()->route('admin.posts.data', ['page' => 1] + $request->except('page'));
         }
 
-        $blogPosts = BlogPost::with(['author.user'])
-            ->orderBy('created_at', 'desc')
-            ->paginate(20);
+        $blogPosts = $this->getBlogPosts($request);
 
         return response()->json([
             'blog_posts' => BlogPostBrowserResource::collection($blogPosts)->response()->getData(true),
@@ -56,7 +52,11 @@ class ManagePostsController extends Controller
 
             DB::commit();
 
-            return Inertia::location($request->headers->get('referer'));
+            $blogPosts = $this->getBlogPosts($request);
+
+            return redirect()->route('admin.posts')->with([
+                'blog_posts' => BlogPostBrowserResource::collection($blogPosts)->response()->getData(true)
+            ]);            
             
         } catch (\Exception $e){
             DB::rollBack();
@@ -66,5 +66,14 @@ class ManagePostsController extends Controller
                 'message' => 'Post nie został usunięty',
             ]);
         }
+    }
+
+    protected function getBlogPosts(Request $request)
+    {
+        $blogPosts = BlogPost::with(['author.user'])
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(20);
+
+        return $blogPosts;
     }
 }
