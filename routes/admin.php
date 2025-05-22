@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\ManagePostsController;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\CustomerServiceController;
 use App\Http\Controllers\Admin\PendingEventsController;
-use App\Http\Controllers\ManageOrganizerController;
+use App\Http\Controllers\Admin\ManageOrganizerController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function() {
