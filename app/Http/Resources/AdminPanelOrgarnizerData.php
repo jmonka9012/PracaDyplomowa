@@ -20,7 +20,7 @@ class AdminPanelOrgarnizerData extends JsonResource
             'phone_number' => $this->phone_number,
             'email' => $this->user->email,
             'tax_number' => $this->tax_number,
-            'author_name' => trim($this->address_country . ', ' . $this->address_city . ', ' . $this->address_street . ' ' . $this->address_zip_code),
+            'address' => trim($this->address_country . ', ' . $this->address_city . ', ' . $this->address_street . ' ' . $this->address_zip_code),
             'bank_account_number' => $this->bank_account_number,
             'account_status' => $this->account_status
         ];
