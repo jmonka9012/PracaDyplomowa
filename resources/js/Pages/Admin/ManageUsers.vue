@@ -63,6 +63,7 @@ function SetOrganizerStatus(value, userID) {
     }), {
         account_status: value
     }, {
+        only: ['users'],
         onError: (err) => {
             console.log('Błąd:', err);
         },
@@ -70,6 +71,11 @@ function SetOrganizerStatus(value, userID) {
             console.log('Sukces:', page);
         },
     })
+/*    router.reload({
+        preserveState: true,
+        preserveScroll: true,
+        only: ['users'],
+    })*/
 }
 
 </script>
