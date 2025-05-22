@@ -65,7 +65,7 @@ class ManageUsersController extends Controller
         }
     }
     
-    protected function getFilteredUsers(Request $request)
+    public function getFilteredUsers(Request $request)
     {
         $query = User::withTicketCounts()
             ->with('organizer');

@@ -63,6 +63,7 @@ function SetOrganizerStatus(value, userID) {
     }), {
         account_status: value
     }, {
+        preserveScroll: true,
         only: ['users'],
         onError: (err) => {
             console.log('Błąd:', err);

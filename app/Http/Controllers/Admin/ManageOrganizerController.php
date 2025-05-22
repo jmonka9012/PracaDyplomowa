@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\OrganizerInformation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\ManageUsersController;
+use App\Http\Resources\UserAdminBrowserResource;
 
 class ManageOrganizerController extends Controller
 {
@@ -15,12 +17,17 @@ class ManageOrganizerController extends Controller
         ]);
     
         $organizer = OrganizerInformation::findOrFail($id);
-        $organizer->account_status = $request->input($validated['account_status']);
+        $organizer->account_status = $validated['account_status'];
         $organizer->save();
+
+        $manageUsersController = new ManageUsersController();
+        $usersPaginator = $manageUsersController->getFilteredUsers($request);
         
-        return response()->json([
-        'message' => 'Status konta organizatorskiego zmieniony.',
-        'data' => $organizer
-    ]);
+
+        return redirect()->route('admin.users')->with([
+            'users' => UserAdminBrowserResource::collection($usersPaginator)
+                                                    ->response()
+                                                    ->getData(true),
+            ]);
     }
 }
