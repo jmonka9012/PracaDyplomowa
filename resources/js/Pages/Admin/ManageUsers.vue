@@ -57,10 +57,11 @@ function TranslateStatus(status) {
 }
 
 function SetOrganizerStatus(value, userID) {
+    console.log(value);
     router.put(route('admin.users.organizers.change_status', {
-        id: userID // Tutaj przekazujemy ID do parametru URL
+        id: userID,
     }), {
-        status: value // Tylko status w ciele żądania
+        account_status: value
     }, {
         onError: (err) => {
             console.log('Błąd:', err);
@@ -263,8 +264,8 @@ function SetOrganizerStatus(value, userID) {
                                     <div v-html="TranslateStatus(user.organizer.account_status)"></div>
                                     <select @change="SetOrganizerStatus($event.target.value, user.organizer.id)" class="user-row__change-status" name="changeStatus" id="changeStatus">
                                         <option :selected="user.organizer.account_status === 'verified'" :disabled="user.organizer.account_status === 'verified'" value="verified">Zweryfikowany</option>
-                                        <option :selected="user.organizer.account_status === 'denied'" :disabled="user.organizer.account_status === 'denied'" value="verified">Odrzucony</option>
-                                        <option :selected="user.organizer.account_status === 'pending'" :disabled="user.organizer.account_status === 'pending'" value="verified">Oczekujący</option>
+                                        <option :selected="user.organizer.account_status === 'denied'" :disabled="user.organizer.account_status === 'denied'" value="denied">Odrzucony</option>
+                                        <option :selected="user.organizer.account_status === 'pending'" :disabled="user.organizer.account_status === 'pending'" value="pending">Oczekujący</option>
                                     </select>
                                 </div>
                             </div>
