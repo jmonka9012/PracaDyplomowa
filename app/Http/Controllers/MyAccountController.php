@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\SupportTicketResource;
 use App\Models\SupportTicket;
+use App\Models\Tickets\Ticket;
 use Inertia\Inertia;
 use App\Http\Requests\MyAccountDataChangeRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyEmail;
 use App\Enums\UserRole;
+use Illuminate\Support\Facades\Log;
+
 
 
 class MyAccountController extends Controller
@@ -89,10 +92,10 @@ class MyAccountController extends Controller
             $response = [
                 'success' => true,
                 'is_organizer_account' => true,
-                'status' => $organizerData->account_status,
+                'status' => $organizerData->account_status->value,
             ];
 
-            switch($organizerData->account_status){
+            switch($organizerData->account_status->value){
                 case 'verified':
                     $response['organizer_details'] = [
                         'company_name' => $organizerData->company_name,
