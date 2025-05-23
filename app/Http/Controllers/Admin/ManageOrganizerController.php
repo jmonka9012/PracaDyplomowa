@@ -24,7 +24,7 @@ class ManageOrganizerController extends Controller
         $usersPaginator = $manageUsersController->getFilteredUsers($request);
         
 
-        return redirect()->route('admin.users')->with([
+        return redirect()->back()->with([
             'users' => UserAdminBrowserResource::collection($usersPaginator)
                                                     ->response()
                                                     ->getData(true),

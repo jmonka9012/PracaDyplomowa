@@ -50,12 +50,11 @@ class ManageUsersController extends Controller
 
             $usersPaginator = $this->getFilteredUsers($request);
             
-            return redirect()->route('admin.users')->with([
-                'users' => UserAdminBrowserResource::collection($usersPaginator)
-                                                        ->response()
-                                                        ->getData(true),
-            ]);            
-        } catch (\Exception $e){
+            return redirect()->back()->with([
+            'users' => UserAdminBrowserResource::collection($usersPaginator)
+                ->response()
+                ->getData(true)
+        ]);} catch (\Exception $e){
             DB::rollBack();
 
             return response()->json([

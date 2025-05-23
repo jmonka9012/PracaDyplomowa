@@ -54,7 +54,7 @@ class ManagePostsController extends Controller
 
             $blogPosts = $this->getBlogPosts($request);
 
-            return redirect()->route('admin.posts')->with([
+            return redirect()->back()->with([
                 'blog_posts' => BlogPostBrowserResource::collection($blogPosts)->response()->getData(true)
             ]);            
             
