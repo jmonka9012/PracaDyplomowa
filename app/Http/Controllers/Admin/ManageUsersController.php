@@ -123,12 +123,17 @@ class ManageUsersController extends Controller
     public function getAccountRoleStats()
     {
         $counts = User::selectRaw('role, count(*) as count')
+            ->where('role', '!=', UserRole::GUEST->value)
             ->groupBy('role')
             ->pluck('count', 'role')
             ->toArray();
         
         $results = [];
         foreach (UserRole::cases() as $status) {
+            if ($status === UserRole::GUEST) {
+                continue;
+            }
+            
             $results[] = [
                 'value' => $status->value,
                 'description' => $status->permissionLabel(),
