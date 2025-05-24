@@ -12,10 +12,7 @@ class CEController extends Controller
     {
         $routeName = $request->route()->getName();
         if ($routeName === 'jacek') {
-            $halls = Hall::with('sections')->get();
-            return Inertia::render('Jacek', [
-                'halls' => $halls,
-            ]);
+            return Inertia::render('Events/EventForm');
         } else if ($routeName === 'ce') {
             return Inertia::render('CE');
         }
