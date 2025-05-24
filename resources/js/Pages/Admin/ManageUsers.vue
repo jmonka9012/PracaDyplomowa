@@ -240,7 +240,7 @@ function SetOrganizerStatus(value, userID) {
                             :data="{ user_id: user.id }"
                             method="get"
                         >
-                            {{ user.id }}
+                            {{ user.support_tickets }}
                         </Link>
                         <div v-else>{{ user.support_tickets }}</div>
                     </div>
