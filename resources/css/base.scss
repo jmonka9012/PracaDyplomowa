@@ -65,6 +65,10 @@ body {
     flex-direction: column;
 }
 
+.p-10px{
+    padding: 10px;
+}
+
 section {
     align-items: center;
     display: flex;
@@ -346,6 +350,9 @@ img {
     border-bottom: 1px solid;
 }
 
+.ba-1{
+    border: 1px solid;
+}
 .b-primary {
     border-color: $primary;
 }

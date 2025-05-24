@@ -71,7 +71,6 @@ $grid-breakpoints: (
     }
 }
 
-
 @each $breakpoint, $breakpoint-value in $grid-breakpoints {
     @each $key, $value in $spacers {
         @each $side, $abbr in list.zip($sides, $abbrv) {
@@ -137,6 +136,21 @@ $grid-breakpoints: (
             }
         }
     }
+}
+.col-2 {
+    width: 16.66% !important;
+}
+.col-3{
+    width: 25% !important;
+}
+.col-4 {
+    width: 33% !important;
+}
+.col-8 {
+    width: 66% !important;
+}
+.col-10 {
+    width: 83.33% !important;
 }
 .col-12 {
     width: 100%;
