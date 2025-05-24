@@ -233,7 +233,17 @@ function SetOrganizerStatus(value, userID) {
                     <div class="user-row__value"> {{ user.full_name}} </div>
                     <div class="user-row__value"> {{ user.role}} </div>
                     <div class="user-row__value"> {{ user.total_tickets}} </div>
-                    <div class="user-row__value">  </div>
+                    <div class="user-row__value">
+                        <Link
+                            v-if="user.support_tickets !== 0"
+                            :href="route('admin.customer-service')"
+                            :data="{ user_id: user.id }"
+                            method="get"
+                        >
+                            {{ user.id }}
+                        </Link>
+                        <div v-else>{{ user.support_tickets }}</div>
+                    </div>
                     <div class="user-row__value">
                         <Link preserve-scroll method="delete" :only="['users']" @click="DeleteUser(user.id)" >Usuń</Link>
                     </div>
