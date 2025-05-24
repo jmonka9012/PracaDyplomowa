@@ -167,14 +167,15 @@ class TicketSaleController extends Controller
 
             session()->forget('current_stripe_session');
 
-                return response()->json([
-                    'redirect_url' => $session->url
-                ], 200, [
-                    'Access-Control-Allow-Origin' => '*',
-                    'Access-Control-Allow-Methods' => 'POST, OPTIONS',
-                    'Access-Control-Allow-Headers' => 'Content-Type, X-Requested-With'
-                ]);
-                
+                // return response()->json([
+                //     'redirect_url' => $session->url
+                // ], 200, [
+                //     'Access-Control-Allow-Origin' => '*',
+                //     'Access-Control-Allow-Methods' => 'POST, OPTIONS',
+                //     'Access-Control-Allow-Headers' => 'Content-Type, X-Requested-With'
+                // ]);
+                //route do podsumowania tu trzeba zrobić
+                return redirect()->route('home');
 
         }catch (\Exception $e) {
             return redirect()->route('tickets.payment.cancel');
@@ -217,6 +218,16 @@ class TicketSaleController extends Controller
 
             session()->forget('current_stripe_session');
         }
-        return Inertia::render('Home');
+        return redirect()->route('home');
+    }
+
+    public function orderDataForm()
+    {
+        return Inertia::render('Events/EventForm');
+    }
+
+        public function orderDataPost()
+    {
+        return Inertia::render('Events/EventForm');
     }
 }
