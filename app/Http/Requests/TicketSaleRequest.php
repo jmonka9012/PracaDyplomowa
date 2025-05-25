@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\DB;
+use App\Rules\ValidStandingTicketAmount;
 
 class TicketSaleRequest extends FormRequest
 {
@@ -42,30 +42,18 @@ class TicketSaleRequest extends FormRequest
             'numeric',
             Rule::exists('event_standing_tickets', 'id')->where('event_id', $this->input('event_id')),
         ],
+
         'standing_tickets.*.amount' => [
             'sometimes',
             'integer',
             'min:1',
             function ($attribute, $value, $fail) {
                 $index = explode('.', $attribute)[1];
-                $standingTicketId = $this->input("standing_tickets.$index.id");
-                
-                $standingTicket = DB::table('event_standing_tickets')
-                    ->where('id', $standingTicketId)
-                    ->where('event_id', $this->input('event_id'))
-                    ->first();
-                
-                if (!$standingTicket) {
-                    $fail('Invalid standing ticket section.');
-                    return;
+                $rule = new ValidStandingTicketAmount($index, $this);
+                if (!$rule->passes($attribute, $value)) {
+                    $fail($rule->message());
                 }
-                
-                $available = $standingTicket->capacity - $standingTicket->sold - $standingTicket->reserved;
-                
-                if ($value > $available) {
-                    $fail("Zostało tylko {$available} miejsc w tej sekcji (Wybrano: {$value}).");
-                }
-            }
+            },
         ],
     ];       
 }
