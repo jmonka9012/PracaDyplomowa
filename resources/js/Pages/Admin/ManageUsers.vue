@@ -191,21 +191,23 @@ function SetOrganizerStatus(value, userID) {
                     </tfoot>
                 </table>
             </div> -->
-            <form @submit.prevent="FilterUsers()">
-                <div>
+            <form class="form" @submit.prevent="FilterUsers()">
+                <div class="input-wrap col-12">
                     <label for="userName">Nazwa:</label>
                     <input type="text" v-model="filterRequest.name" />
                 </div>
-                <div>
+                <div class="input-wrap col-12">
                     <label for="userName">Email:</label>
                     <input type="text" v-model="filterRequest.email" />
                 </div>
-                <div>
+                <div class="input-wrap col-12">
                     <label for="userName">Nazwa firmy:</label>
                     <input type="text" v-model="filterRequest.company_name" />
                 </div>
-                <div>
-                    <label for="userType">Typ użytkownika</label>
+                <div class="input-wrap col-12">
+                    <label class="mb-10px" for="userType"
+                        >Typ użytkownika</label
+                    >
                     <select
                         v-model="filterRequest.account_status"
                         name="userType"
@@ -220,7 +222,7 @@ function SetOrganizerStatus(value, userID) {
                         </option>
                     </select>
                 </div>
-                <div>
+                <div class="input-wrap col-12">
                     <select v-model="filterRequest.role" name="userType" id="">
                         <option disabled value="">Wybierz</option>
                         <option
@@ -231,7 +233,11 @@ function SetOrganizerStatus(value, userID) {
                         </option>
                     </select>
                 </div>
-                <button type="submit">Filtruj</button>
+                <div class="input-wrap col-12">
+                    <button class="btn btn-md w-fit" type="submit">
+                        Filtruj
+                    </button>
+                </div>
             </form>
             <div class="d-flex flex-column">
                 <div
