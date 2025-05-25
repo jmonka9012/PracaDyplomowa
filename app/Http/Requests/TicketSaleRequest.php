@@ -74,6 +74,7 @@ class TicketSaleRequest extends FormRequest
     {
         return [
             'require' => 'To pole jest wymagane.',
+            'seats.*.id.exists' => 'Wybrane miejsce jest nieprawidłowe lub niedostępne dla tego wydarzenia.'
             // todo reszta bo nie wiem które będą sie wyśiwetały a ktore nie '' => '',
         ];
     }
