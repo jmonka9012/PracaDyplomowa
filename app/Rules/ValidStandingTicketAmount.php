@@ -10,6 +10,7 @@ class ValidStandingTicketAmount implements Rule
     protected $index;
     protected $request;
     protected $message = 'Nieprawidłowa ilość biletów stojących.';
+    protected $sectionId;
 
     public function __construct($index, $request)
     {
@@ -19,19 +20,24 @@ class ValidStandingTicketAmount implements Rule
 
     public function passes($attribute, $value)
     {
-        $standingTicketId = $this->request->input("standing_tickets.{$this->index}.id");
+        $this->sectionId = $this->request->input("standing_tickets.{$this->index}.id");
 
-        $standingTicket = DB::table('event_standing_tickets')
-            ->where('id', $standingTicketId)
-            ->where('event_id', $this->request->input('event_id'))
-            ->first();
-
-        if (!$standingTicket) {
+        if (!$this->sectionId) {
             $this->message = 'Nieprawidłowa sekcja biletów stojących.';
             return false;
         }
 
-        $available = $standingTicket->capacity - $standingTicket->sold - $standingTicket->reserved;
+        $ticket = DB::table('event_standing_tickets')
+            ->where('id', $this->sectionId)
+            ->where('event_id', $this->request->input('event_id'))
+            ->first();
+
+        if (!$ticket) {
+            $this->message = 'Nieprawidłowa sekcja biletów stojących.';
+            return false;
+        }
+
+        $available = $ticket->capacity - $ticket->sold - $ticket->reserved;
 
         if ($value > $available) {
             $this->message = "Zostało tylko {$available} miejsc w tej sekcji (Wybrano: {$value}).";
@@ -44,5 +50,10 @@ class ValidStandingTicketAmount implements Rule
     public function message()
     {
         return $this->message;
+    }
+
+    public function getSectionId()
+    {
+        return $this->sectionId;
     }
 }

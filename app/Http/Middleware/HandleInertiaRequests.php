@@ -48,7 +48,31 @@ class HandleInertiaRequests extends Middleware
             ],
             'site_data' => [
                 'title' => 'Event Machen',
-            ]
+            ],
+            'errors' => function () use ($request) {
+            if ($request->session()->has('nested_errors')) {
+                return $request->session()->get('nested_errors');
+            }
+
+            $errors = $request->session()->get('errors');
+
+            if (!$errors) {
+                return (object)[];
+            }
+
+            $messages = $errors->getBag('default')->getMessages();
+
+            $transformed = [];
+            foreach ($messages as $key => $msgs) {
+                if (count($msgs) === 1) {
+                    $transformed[$key] = $msgs[0];
+                } else {
+                    $transformed[$key] = $msgs; 
+                }
+            }
+
+            return $transformed;
+            },
         ]);
     }
 }
