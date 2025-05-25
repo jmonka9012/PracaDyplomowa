@@ -23,6 +23,17 @@ const paymentForm = reactive({
 
 function SubmitPaymentDetails() {
     console.log(paymentForm);
+
+    router.post(route('route-8'), paymentForm, {
+        preserveScroll: true,
+        onError: (err) => {
+            ResetObject(errors);
+            Object.assign(errors, err);
+        },
+        onSuccess: (test) => {
+            console.log(test);
+        },
+    })
 }
 </script>
 
