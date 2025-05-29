@@ -27,7 +27,7 @@ class TicketSaleRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'no_ticket' => 'required',
+            
             'event_id' => 'required|numeric|exists:events,id',
             'seats' => 'sometimes|array',
             'seats.*.id' => [
@@ -162,19 +162,23 @@ class TicketSaleRequest extends FormRequest
         return $ticket?->hall_section_id;
     }
 
-    protected function prepareForValidation()
+    public function withValidator($validator)
     {
-        $validSeats = collect($this->input('seats', []))->filter(function ($seat) {
-            return isset($seat['id']) && is_numeric($seat['id']);
-        });
+        $validator->after(function ($validator) {
+            $seats = collect($this->input('seats'))->filter(function ($seat) {
+                return isset($seat['id']) && is_numeric($seat['id']);
+            });
 
-        $validStandingTickets = collect($this->input('standing_tickets', []))->filter(function ($ticket) {
-            return isset($ticket['id']) && is_numeric($ticket['id']) &&
-                isset($ticket['amount']) && is_numeric($ticket['amount']) && $ticket['amount'] > 0;
-        });
+            $standing = collect($this->input('standing_tickets'))->filter(function ($ticket) {
+                return isset($ticket['id'], $ticket['amount']) &&
+                    is_numeric($ticket['id']) && is_numeric($ticket['amount']) &&
+                    $ticket['amount'] > 0;
+            });
 
-        if ($validSeats->isEmpty() && $validStandingTickets->isEmpty()) {
-            $rules['no_ticket'] = ['required'];
-        }
+            if ($seats->isEmpty() && $standing->isEmpty()) {
+                $validator->errors()->add('no_ticket', 'Musisz wybrać przynajmniej jedno miejsce lub bilet stojący.');
+            }
+        });
     }
+
 }
