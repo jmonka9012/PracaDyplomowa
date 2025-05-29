@@ -22,8 +22,9 @@ const props = defineProps({
         required: true,
     },
 });
-
 console.log(props);
+
+//console.log(props);
 const hall = props.event.data.event_location;
 const seats = reactive({});
 const standingTickets = reactive({});
@@ -94,7 +95,7 @@ function InitSectionPrices() {
             props.event.data.standing_tickets[key].hall_section_id
         ].price = props.event.data.standing_tickets[key].price;
     });
-    console.log(standingSectionPrices);
+    //console.log(standingSectionPrices);
 }
 InitStandingTickets();
 InitSeats();
@@ -108,7 +109,7 @@ watch(seatTickets, (newState) => {
     });
     summary.seats = Object.keys(seatTickets).length;
     summary.seats_price = price;
-    console.log(summary);
+   // console.log(summary);
 });
 
 watch(standingTickets, (newState) => {
@@ -126,7 +127,7 @@ watch(standingTickets, (newState) => {
     summary.standing_price = price;
     summary.standing = sum;
 
-    console.log(summary);
+    //console.log(summary);
 });
 
 function isTaken(sectionID, row, col) {
@@ -146,7 +147,7 @@ function isTaken(sectionID, row, col) {
 function AvailibleTickets(hRow, hCol, sID) {
     for (const section of props.event.data.standing_tickets) {
         if (section.hall_section_id === sID) {
-            return section.sold;
+            return (Number(section.sold) + Number(section.reserved));
         }
     }
     return null;
@@ -182,7 +183,7 @@ function SubmitTicketRequest() {
         preserveScroll: () => hadError,
     });
     console.log(errors);
-    console.log(ticketRequest);
+    //console.log(ticketRequest);
 }
 </script>
 
@@ -373,6 +374,9 @@ function SubmitTicketRequest() {
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div v-if="errors?.seats?.[section.id]" class="error-msg">
+                                                <div v-html="errors?.seats?.[section.id]"></div>
+                                            </div>
                                         </div>
                                         <!--
                                         Div boży 2 xd xdd 12.05
@@ -417,6 +421,9 @@ function SubmitTicketRequest() {
                                                     type="text"
                                                     placeholder="Ilość"
                                                 />
+                                            </div>
+                                            <div v-if="errors?.standing_tickets?.[section.id]" class="error-msg">
+                                                <div v-html="errors?.standing_tickets?.[section.id]"></div>
                                             </div>
                                         </div>
                                     </div>
