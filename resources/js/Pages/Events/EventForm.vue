@@ -7,6 +7,12 @@ import useAuth from "@/Utilities/useAuth";
 
 const { user, isLoggedIn } = useAuth();
 
+
+const props = defineProps({
+  order: Object
+});
+
+
 const errors = reactive({});
 
 const paymentForm = reactive({
@@ -24,7 +30,11 @@ const paymentForm = reactive({
 function SubmitPaymentDetails() {
     console.log(paymentForm);
 
-    router.post(route('route-8'), paymentForm, {
+    router.post(
+        route('event-ticket.buy.form.details.post', {
+            order_number: props.order.order_number
+        }),
+        paymentForm, {
         preserveScroll: true,
         onError: (err) => {
             ResetObject(errors);

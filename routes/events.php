@@ -39,8 +39,17 @@ Route::prefix('wydarzenia')->group(function() {
       Route::get('/', [EventController::class, 'eventBrowser'])
             ->name('event.browser');
 
-      Route::post('/kupuj', [TicketSaleController::class, 'store'])
-            ->name('event-ticket.buy');
+      Route::get('/kupuj/{order}/platnosc', [TicketSaleController::class, 'payment'])
+            ->name('event-ticket.buy.payment');
+
+      Route::post('/kupuj/form/post', [TicketSaleController::class, 'orderDataForm'])
+            ->name('event-ticket.buy.form.post');
+
+      Route::get('/kupuj/{order}/detale', [TicketSaleController::class, 'orderDetailsForm'])
+            ->name('event-ticket.buy.form.details');
+
+      Route::post('/kupuj/{order}/detale/update', [TicketSaleController::class, 'orderDetailsUpdate'])
+            ->name('event-ticket.buy.form.details.post');
       
       Route::get('/tickets/payment/success', [TicketSaleController::class, 'paymentSuccess'])
             ->name('tickets.payment.success');
@@ -52,7 +61,6 @@ Route::prefix('wydarzenia')->group(function() {
       Route::get('/data/{event:slug}', [EventController::class, 'showData'])
             ->name('event.data')
             ->middleware('adminAccess');
-
 });
 
 Route::get('/{event}', [EventController::class, 'show'])

@@ -13,19 +13,32 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->boolean('is_guest');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('event_id');
-            $table->decimal('total_price', 5,2)->comment('PLN');
-            $table->string('customer_number')->nullable();
-            $table->string('customer_email')->nullable();
+            $table->string('order_number')->unique();
+            $table->foreignId('user_id')->nullable();
+            $table->foreignId('event_id')->nullable();
+            $table->decimal('total_price', 8,2)->comment('PLN');
+            $table->string('name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
             $table->string('country')->default('Poland');
-            $table->string('zip_code');
-            $table->string('city');
-            $table->string('address');
-            $table->string('apartment_number')->nullable();
+            $table->string('city')->nullable();
+            $table->string('street')->nullable();
+            $table->string('house_number')->nullable();
+            $table->string('zip_code')->nullable();
+            $table->enum('payment_status', ['pending', 'cancelled', 'paid'])->default('pending');
             $table->timestamps();
+
+            $table->foreign('event_id')
+                 ->references('id')
+                 ->on('events');
+
+            $table->foreign('user_id')
+                 ->references('id')
+                 ->on('users');
         });
+
+        
     }
 
     /**

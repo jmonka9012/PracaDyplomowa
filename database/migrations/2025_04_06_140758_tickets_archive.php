@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('is_seat');
             $table->unsignedBigInteger('seat_id')->nullable();
             $table->unsignedBigInteger('standing_id')->nullable();
+            $table->decimal('price', 5,2)->comment('PLN')->nullable;
             $table->enum('payment_status', ['unpaid','paid'])->default('unpaid');
             $table->timestamps();
 

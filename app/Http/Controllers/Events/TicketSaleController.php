@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Events;
 
+use App\Http\Requests\OrderDetailsRequest;
 use App\Http\Requests\TicketSaleRequest;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
@@ -13,125 +14,71 @@ use Stripe\Checkout\Session;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
+use App\Models\Events\Order;
+
 
 class TicketSaleController extends Controller
 {
-    public function store(TicketSaleRequest $request): SymfonyResponse
+    public function payment(Order $order)
     {
-            
-        $validatedData = $request->validated();
+        if ($order->payment_status === 'paid') {
+            return redirect()->route('home')->with('error', 'Zamówienie zostało już opłacone.');
+        }
+        
+        $totalPrice = 0;
+        $ticketDetails = [];
 
-        return DB::transaction(function () use ($validatedData){
-            $tickets = [];
-            $userId = Auth::id();
-            $isGuest = Auth::guest();
-            $totalPrice = 0;
-            $ticketDetails = [];
+        foreach ($order->tickets as $ticket) {
+            $price = $ticket->price;
+            $totalPrice += $price;
 
-            if (isset($validatedData['seats'])){
-                foreach($validatedData['seats'] as $seat) {
-                    $seatPrice = DB::table('event_seats')
-                        ->where('id', $seat['id'])
-                        ->value('price');
-                    
-                    $tickets[] = Ticket::create([
-                        'event_id' => $validatedData['event_id'],
-                        'user_id' => $userId,
-                        'is_seat' => true,
-                        'seat_id' => $seat['id'],
-                        'standing_id' => null,
-                        'insured' => false,
-                        'is_guest' => $isGuest,
-                    ]);
+            $label = $ticket->is_seat
+                ? "Seat Ticket: {$ticket->seat_id}"
+                : "Standing Ticket: {$ticket->standing_id}";
+            $ticketDetails[] = "{$label} - PLN " . number_format($price, 2);
+        }
 
-                    $totalPrice += $seatPrice;
-                    $ticketDetails[] = "Seat Ticket: {$seat['id']} - PLN" . number_format($seatPrice, 2);
+        Stripe::setApiKey(config('services.stripe.secret'));
 
-                    DB::table('event_seats')
-                        ->where('id', $seat['id'])
-                        ->update(['status' => 'reserved']);
-                }
-            }
+        try {
+            $session = Session::create([
+                'payment_method_types' => ['card'],
+                'line_items' => [[
+                    'price_data' => [
+                        'currency' => 'pln',
+                        'product_data' => [
+                            'name' => 'Bilety',
+                            'description' => implode("\n", $ticketDetails),
+                        ],
+                        'unit_amount' => $totalPrice * 100,
+                    ],
+                    'quantity' => 1,
+                ]],
+                'mode' => 'payment',
+                'success_url' => route('tickets.payment.success') . '?session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => route('tickets.payment.cancel'),
+                'metadata' => [
+                    'user_id' => $order->user_id ?? 'guest',
+                    'order_number' => $order->order_number,
+                ],
+            ]);
 
-            if (!empty($validatedData['standing_tickets'])) {
-                foreach($validatedData['standing_tickets'] as $standingTicket) {
-                    if (!isset($standingTicket['amount']) || $standingTicket['amount'] < 1) {
-                        continue;
-                    }
-            
-                    $standingPrice = DB::table('event_standing_tickets')
-                        ->where('id', $standingTicket['id'])
-                        ->value('price');
+            session([
+                'current_stripe_session' => $session->id,
+                'current_order_number' => $order->order_number,
+            ]);
 
-                    DB::table('event_standing_tickets')
-                        ->where('id', $standingTicket['id'])
-                        ->increment('reserved', $standingTicket['amount']);
+            return Inertia::location($session->url);
 
-                    for ($i = 0; $i < $standingTicket['amount']; $i++) {
-                        $tickets[] = Ticket::create([
-                            'event_id' => $validatedData['event_id'],
-                            'user_id' => $userId,
-                            'is_seat' => false,
-                            'seat_id' => null,
-                            'standing_id' => $standingTicket['id'],
-                            'insured' => $validatedData['insured'] ?? false,
-                            'is_guest' => $isGuest,
-                        ]);
-                    }
-            
-                    $totalPrice += $standingPrice * $standingTicket['amount'];
-                    $ticketDetails[] = "Standing Ticket: {$standingTicket['id']} x {$standingTicket['amount']} - PLN" . number_format($standingPrice, 2);
-                }
-
-                    Stripe::setApiKey(config('services.stripe.secret'));
-
-                    \Log::debug('Attempting Stripe checkout with amount: ' . $totalPrice);
-
-                    try {
-                        $session = Session::create([
-                            'payment_method_types' => ['card'],
-                            'line_items' => [[
-                                'price_data' => [
-                                    'currency' => 'pln',
-                                    'product_data' => [
-                                        'name' => 'Bilety',
-                                        'description' => implode("\n", $ticketDetails),
-                                    ],
-                                    'unit_amount' => $totalPrice * 100,
-                                ],
-                                'quantity' => 1,
-                            ]],
-                            'mode' => 'payment',
-                            'success_url' => route('tickets.payment.success') . '?session_id={CHECKOUT_SESSION_ID}',
-                            'cancel_url' => route('tickets.payment.cancel'),
-                            'metadata' => [
-                                'user_id' => $userId ?? 'guest',
-                                'event_id' => $validatedData['event_id'],
-                                'ticket_ids' => json_encode(array_column($tickets, 'id')),
-                            ],
-                        ]);
-
-                        session([
-                            'current_stripe_session' => $session->id,
-                            'reserved_ticket_ids' => collect($tickets)->pluck('id')->toArray(),
-                        ]);
-
-                        // return redirect()   ->away($session->url)
-                        //                     ->header('Access-Control-Allow-Origin', 'https://checkout.stripe.com')
-                        //                     ->header('Access-Control-Allow-Credentials', 'true');
-                        return Inertia::location($session->url);
-                    } catch (\Exception $e) {
-                                    DB::rollBack();
-                                    return back()->with('error', 'Payment processing error: ' . $e->getMessage());
-                    }
-                } 
-        });
+        } catch (\Exception $e) {
+            return back()->with('error', 'Błąd płatności: ' . $e->getMessage());
+    }
     }
 
     public function paymentSuccess(Request $request)
     {
         Stripe::setApiKey(config('services.stripe.secret'));
-        
+
         try {
             $session = Session::retrieve($request->get('session_id'));
 
@@ -139,48 +86,47 @@ class TicketSaleController extends Controller
                 throw new \Exception('Invalid session ID');
             }
 
-            $ticketIds = json_decode($session->metadata->ticket_ids);
-            $tickets = Ticket::whereIn('id', $ticketIds)->get();
+            $orderNumber = $session->metadata->order_number;
+            $order = Order::with('tickets')->where('order_number', $orderNumber)->firstOrFail();
+
+            if ($order->payment_status === 'paid') {
+                return redirect()->route('home')->with('error', 'Zamówienie zostało już opłacone.');
+            }
+
+            $tickets = $order->tickets;
 
             $standingUpdates = [];
-
             foreach ($tickets as $ticket) {
                 if (!$ticket->is_seat && $ticket->standing_id) {
-                    if (!isset($standingUpdates[$ticket->standing_id])) {
-                        $standingUpdates[$ticket->standing_id] = 0;
-                    }
-                    $standingUpdates[$ticket->standing_id]++;
+                    $standingUpdates[$ticket->standing_id] = ($standingUpdates[$ticket->standing_id] ?? 0) + 1;
                 }
             }
 
-        foreach ($standingUpdates as $standingId => $count) {
-            DB::table('event_standing_tickets')
-                ->where('id', $standingId)
-                ->decrement('reserved', $count);
-                
-            DB::table('event_standing_tickets')
-                ->where('id', $standingId)
-                ->increment('sold', $count);
+            foreach ($standingUpdates as $standingId => $count) {
+                DB::table('event_standing_tickets')
+                    ->where('id', $standingId)
+                    ->decrement('reserved', $count);
+
+                DB::table('event_standing_tickets')
+                    ->where('id', $standingId)
+                    ->increment('sold', $count);
             }
 
-            Ticket::whereIn('id', $ticketIds)->update(['payment_status' => 'paid']);
+            Ticket::whereIn('id', $tickets->pluck('id'))->update(['payment_status' => 'paid']);
+
+            $order->update(['payment_status' => 'paid']);
 
             session()->forget('current_stripe_session');
+            session()->forget('current_order_number');
 
-                // return response()->json([
-                //     'redirect_url' => $session->url
-                // ], 200, [
-                //     'Access-Control-Allow-Origin' => '*',
-                //     'Access-Control-Allow-Methods' => 'POST, OPTIONS',
-                //     'Access-Control-Allow-Headers' => 'Content-Type, X-Requested-With'
-                // ]);
-                //route do podsumowania tu trzeba zrobić
-                return redirect()->route('home');
+            return redirect()->route('home')->with('success', 'Payment successful!');
 
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
+            \Log::error('Payment success handling error: ' . $e->getMessage());
             return redirect()->route('tickets.payment.cancel');
         }
     }
+
 
     public function paymentCancel()
     {
@@ -191,43 +137,153 @@ class TicketSaleController extends Controller
                 Stripe::setApiKey(config('services.stripe.secret'));
                 $session = Session::retrieve($sessionId);
 
-                $ticketIds = json_decode($session->metadata->ticket_ids);
-                $tickets = Ticket::whereIn('id', $ticketIds)->get();
+                $orderNumber = $session->metadata->order_number;
+                $order = Order::with('tickets')->where('order_number', $orderNumber)->first();
 
-                $standingUpdates = [];
-                foreach ($tickets as $ticket) {
-                    if (!$ticket->is_seat && $ticket->standing_id) {
-                        if (!isset($standingUpdates[$ticket->standing_id])) {
-                            $standingUpdates[$ticket->standing_id] = 0;
+                if ($order) {
+                    $tickets = $order->tickets;
+
+                    $standingUpdates = [];
+                    foreach ($tickets as $ticket) {
+                        if (!$ticket->is_seat && $ticket->standing_id) {
+                            $standingUpdates[$ticket->standing_id] = ($standingUpdates[$ticket->standing_id] ?? 0) + 1;
                         }
-                        $standingUpdates[$ticket->standing_id]++;
                     }
-                }
 
-                foreach ($standingUpdates as $standingId => $count) {
-                    DB::table('event_standing_tickets')
-                        ->where('id', $standingId)
-                        ->decrement('reserved', $count);
-                }
+                    foreach ($standingUpdates as $standingId => $count) {
+                        DB::table('event_standing_tickets')
+                            ->where('id', $standingId)
+                            ->decrement('reserved', $count);
+                    }
 
-                Ticket::whereIn('id', $ticketIds)->delete();
-                
+                    Ticket::whereIn('id', $tickets->pluck('id'))->delete();
+                    $order->delete();
+                }
             } catch (\Exception $e) {
-            \Log::error('!!!IMPORTANT!!! Failed to clean up after canceled payment: ' . $e->getMessage());
+                \Log::error('!!!IMPORTANT!!! Failed to clean up after canceled payment: ' . $e->getMessage());
             }
 
             session()->forget('current_stripe_session');
+            session()->forget('current_order_number');
         }
-        return redirect()->route('home');
+
+        return redirect()->route('home')->with('error', 'Anulowano płatność.');
     }
 
-    public function orderDataForm()
+    public function orderDataForm(TicketSaleRequest $request)
     {
-        return Inertia::render('Events/EventForm');
+        return DB::transaction(function () use ($request) {
+
+            $userId = Auth::id();
+            $isGuest = Auth::guest();
+
+            $order = Order::create([
+                'order_number' => 'ORD-' . strtoupper(uniqid()),
+                'total_price' => 0,
+                'payment_status' => 'pending',
+                'event_id' => $request->event_id,
+                'user_id' => $userId
+            ]);
+
+            $totalPrice = $this->processSeats($request, $order);
+            $totalPrice += $this->processStandingTickets($request, $order);
+
+            $order->update(['total_price' => $totalPrice]);
+
+            return redirect()->route('event-ticket.buy.form.details', $order);
+        });
     }
 
-        public function orderDataPost()
+    private function processSeats(TicketSaleRequest $request, Order $order): float
     {
-        return Inertia::render('Events/EventForm');
+        $totalPrice = 0;
+        $userId = Auth::id();
+        $isGuest = Auth::guest();
+
+        if (isset($request->validated()['seats'])) {
+            foreach ($request->validated()['seats'] as $seat) {
+                $seatPrice = DB::table('event_seats')
+                    ->where('id', $seat['id'])
+                    ->value('price');
+
+                Ticket::create([
+                    'event_id' => $request->event_id,
+                    'order_id' => $order->id,
+                    'user_id' => $userId,
+                    'is_seat' => true,
+                    'seat_id' => $seat['id'],
+                    'standing_id' => null,
+                    'insured' => false,
+                    'is_guest' => $isGuest,
+                    'status' => 'reserved',
+                    'price' => $seatPrice
+                ]);
+
+                $totalPrice += $seatPrice;
+
+                DB::table('event_seats')
+                    ->where('id', $seat['id'])
+                    ->update(['status' => 'reserved']);
+            }
+        }
+
+        return $totalPrice;
+    }
+
+    private function processStandingTickets(TicketSaleRequest $request, Order $order): float
+    {
+        $totalPrice = 0;
+        $userId = Auth::id();
+        $isGuest = Auth::guest();
+
+        if (!empty($request->validated()['standing_tickets'])) {
+            foreach ($request->validated()['standing_tickets'] as $standingTicket) {
+                if (!isset($standingTicket['amount']) || $standingTicket['amount'] < 1) {
+                    continue;
+                }
+
+                $standingPrice = DB::table('event_standing_tickets')
+                    ->where('id', $standingTicket['id'])
+                    ->value('price');
+
+                for ($i = 0; $i < $standingTicket['amount']; $i++) {
+                    Ticket::create([
+                        'event_id' => $request->event_id,
+                        'order_id' => $order->id,
+                        'user_id' => $userId,
+                        'is_seat' => false,
+                        'seat_id' => null,
+                        'standing_id' => $standingTicket['id'],
+                        'insured' => $request->insured ?? false,
+                        'is_guest' => $isGuest,
+                        'status' => 'pending',
+                        'price' => $standingPrice
+                    ]);
+                }
+
+                DB::table('event_standing_tickets')
+                    ->where('id', $standingTicket['id'])
+                    ->increment('reserved', $standingTicket['amount']);
+
+                $totalPrice += $standingPrice * $standingTicket['amount'];
+            }
+        }
+
+        return $totalPrice;
+    }
+
+    public function orderDetailsForm(Order $order)
+    {
+        return Inertia::render('Events/EventForm', [
+            'order' => $order->load('tickets')
+        ]);
+    }
+
+
+    public function orderDetailsUpdate(OrderDetailsRequest $request, Order $order)
+    {
+        $order->update($request->validated());
+
+        return $this->payment($order);
     }
 }

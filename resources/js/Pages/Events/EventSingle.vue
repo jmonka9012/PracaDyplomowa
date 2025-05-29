@@ -170,7 +170,7 @@ function HandleSeat(sID, row, col) {
 function SubmitTicketRequest() {
     let hadError = ref(false);
 
-    router.post(route("event-ticket.buy"), ticketRequest, {
+    router.post(route("event-ticket.buy.form.post"), ticketRequest, {
         onError: (err) => {
             ResetObject(errors);
             Object.assign(errors, err);
