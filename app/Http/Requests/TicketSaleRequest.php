@@ -65,21 +65,30 @@ class TicketSaleRequest extends FormRequest
         $transformedErrors = [];
 
         $standingErrors = [];
+
         foreach ($this->input('standing_tickets', []) as $index => $ticket) {
-            $sectionId = (string)($ticket['id'] ?? $index);
+            $rawId = $ticket['id'] ?? null;
+            $sectionId = null;
+
+            if (is_numeric($rawId)) {
+                $sectionId = $this->getSectionIdForStanding($rawId);
+            }
+
+            $sectionId = (string)($sectionId ?? $index);
             $amountKey = "standing_tickets.$index.amount";
             $sectionKey = "standing_tickets.$index.id";
 
             if (isset($errors[$amountKey])) {
-                $standingErrors[$sectionId] = $errors[$amountKey][0];
+                $standingErrors[$sectionId] = implode(' ', $errors[$amountKey]);
                 unset($errors[$amountKey]);
             }
 
             if (isset($errors[$sectionKey])) {
-                $standingErrors[$sectionId] = $errors[$sectionKey][0];
+                $standingErrors[$sectionId] = implode(' ', $errors[$sectionKey]);
                 unset($errors[$sectionKey]);
             }
         }
+
 
         if (!empty($standingErrors)) {
             $transformedErrors['standing_tickets'] = $standingErrors;
@@ -137,4 +146,18 @@ class TicketSaleRequest extends FormRequest
         return $seat ? $seat->hall_section_id : null;
     }
 
+
+    private function getSectionIdForStanding($ticketId)
+    {
+        if (!$ticketId) {
+            return null;
+        }
+
+        $ticket = \DB::table('event_standing_tickets')
+            ->select('hall_section_id')
+            ->where('id', $ticketId)
+            ->first();
+
+        return $ticket?->hall_section_id;
+    }
 }
