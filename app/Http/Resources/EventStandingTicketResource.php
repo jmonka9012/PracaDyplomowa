@@ -20,7 +20,8 @@ class EventStandingTicketResource extends JsonResource
             'hall_section_id' => $this->hall_section_id,
             'price' => $this->price,
             'capacity' => $this->capacity,
-            'sold' => $this->sold
+            'sold' => $this->sold,
+            'reserved' => $this->reserved
         ];
     }
 }
