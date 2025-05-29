@@ -27,8 +27,8 @@ class TicketSaleRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
+            'no_ticket' => 'required',
             'event_id' => 'required|numeric|exists:events,id',
-
             'seats' => 'sometimes|array',
             'seats.*.id' => [
                 'required',
@@ -56,6 +56,7 @@ class TicketSaleRequest extends FormRequest
                 new ValidStandingTicketAmount($index, $this),
             ];
         }
+
         return $rules;
     }
 
@@ -104,7 +105,7 @@ class TicketSaleRequest extends FormRequest
                     $sectionId = (string)$this->getSectionIdForSeat($seatId);
 
                     if ($sectionId) {
-                        $seatErrors[$sectionId] = "W danej sekcji wybrano zajęte już miejsce";
+                        $seatErrors[$sectionId] = "Co najmniej jedno z wybranych miejsc zostało zajęte w czasie podejmowania wyboru. Proszę odświeżyć stronę.";
                         unset($errors[$key]);
                     } else {
                         $seatErrors[$seatId] = $messages[0];
@@ -135,8 +136,8 @@ class TicketSaleRequest extends FormRequest
     {
         return [
             'require' => 'To pole jest wymagane.',
-            'seats.*.id.exists' => 'Wybrane miejsce jest nieprawidłowe lub niedostępne dla tego wydarzenia.'
-            // todo reszta bo nie wiem które będą sie wyśiwetały a ktore nie '' => '',
+            'seats.*.id.exists' => 'Wybrane miejsce jest nieprawidłowe lub niedostępne dla tego wydarzenia.',
+            'no_ticket.required' => 'Nie wybrano żadnych miejsc',
         ];
     }
 
@@ -159,5 +160,21 @@ class TicketSaleRequest extends FormRequest
             ->first();
 
         return $ticket?->hall_section_id;
+    }
+
+    protected function prepareForValidation()
+    {
+        $validSeats = collect($this->input('seats', []))->filter(function ($seat) {
+            return isset($seat['id']) && is_numeric($seat['id']);
+        });
+
+        $validStandingTickets = collect($this->input('standing_tickets', []))->filter(function ($ticket) {
+            return isset($ticket['id']) && is_numeric($ticket['id']) &&
+                isset($ticket['amount']) && is_numeric($ticket['amount']) && $ticket['amount'] > 0;
+        });
+
+        if ($validSeats->isEmpty() && $validStandingTickets->isEmpty()) {
+            $rules['no_ticket'] = ['required'];
+        }
     }
 }
