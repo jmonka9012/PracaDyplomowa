@@ -74,6 +74,10 @@ class BlogController extends Controller
             }
         }
 
+        if($request->has('blog_post_name') && !empty($request->blog_post_name)){
+            $query->where('blog_post_name', 'like', '%' . $request->blog_post_name . '%');
+        }
+
         $blog_posts = $query
             ->paginate(12)
             ->appends($request->query());
