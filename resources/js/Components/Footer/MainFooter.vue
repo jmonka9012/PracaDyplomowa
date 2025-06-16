@@ -12,104 +12,106 @@ const { siteData } = pageInfo();
 </script>
 
 <template>
-    <section class="footer">
-        <div class="container">
-            <div
-                class="col-12 col-lg-3 d-flex flex-column text-align-center text-align-lg-start align-items-center align-items-lg-start"
-            >
-                <p class="footer__heading">Event machen</p>
-                <ul>
-                    <li class="justify-content-center justify-content-lg-start">
-                        <Link
-                            class="text-primary hover-white mb-15px"
-                            :href="route('home')"
+    <footer>
+        <section class="footer">
+            <div class="container">
+                <div
+                    class="col-12 col-lg-3 d-flex flex-column text-align-center text-align-lg-start align-items-center align-items-lg-start"
+                >
+                    <p class="footer__heading">Event machen</p>
+                    <ul>
+                        <li class="justify-content-center justify-content-lg-start">
+                            <Link
+                                class="text-primary hover-white mb-15px"
+                                :href="route('home')"
                             ><span>Strona główna</span></Link
-                        >
-                    </li>
-                    <li class="justify-content-center justify-content-lg-start">
-                        <Link
-                            class="text-primary hover-white mb-15px"
-                            :href="route('event.browser')"
+                            >
+                        </li>
+                        <li class="justify-content-center justify-content-lg-start">
+                            <Link
+                                class="text-primary hover-white mb-15px"
+                                :href="route('event.browser')"
                             ><span>Wydarzenia</span></Link
-                        >
-                    </li>
-                    <li class="justify-content-center justify-content-lg-start">
-                        <Link
-                            class="text-primary hover-white mb-15px"
-                            :href="route('about-us')"
+                            >
+                        </li>
+                        <li class="justify-content-center justify-content-lg-start">
+                            <Link
+                                class="text-primary hover-white mb-15px"
+                                :href="route('about-us')"
                             ><span>O nas</span></Link
-                        >
-                    </li>
-                    <li class="justify-content-center justify-content-lg-start">
-                        <Link class="text-primary mb-15px" :href="route('blog')"
+                            >
+                        </li>
+                        <li class="justify-content-center justify-content-lg-start">
+                            <Link class="text-primary mb-15px" :href="route('blog')"
                             ><span>Blog</span></Link
-                        >
-                    </li>
-                    <li class="justify-content-center justify-content-lg-start">
-                        <Link
-                            class="text-primary hover-white mb-15px"
-                            :href="route('contact')"
+                            >
+                        </li>
+                        <li class="justify-content-center justify-content-lg-start">
+                            <Link
+                                class="text-primary hover-white mb-15px"
+                                :href="route('contact')"
                             ><span>Kontakt</span></Link
-                        >
-                    </li>
-                    <li class="justify-content-center justify-content-lg-start">
-                        <Link
-                            class="text-primary hover-white mb-30px"
-                            :href="route('ce')"
+                            >
+                        </li>
+                        <li class="justify-content-center justify-content-lg-start">
+                            <Link
+                                class="text-primary hover-white mb-30px"
+                                :href="route('ce')"
                             ><span>CE</span></Link
-                        >
-                    </li>
-                </ul>
-            </div>
-            <div class="col-12 col-lg-6 d-flex flex-column align-items-center">
-                <Link class="mb-20px" :href="route('home')">
-                    <Poptext
-                        class="flex-column justify-content-center align-items-center poptext-white poptext-footer"
-                        :text="siteData.title"
-                    />
-                </Link>
-                <p class="text-align-center mb-25px">
-                    Kup bilety na niezapomniane wydarzenia w nowoczesnych halach naszego obiektu!
-                </p>
-                <div class="d-flex flex-row justify-content-center mb-35px">
-                    <Link class="text-white hover-primary" :href="route('privacy-policy')">Polityka prywatności</Link>
-                    <span class="text-white divider"></span>
-                    <Link class="text-white hover-primary" :href="route('terms-of-use')">Regulamin</Link>
-                    <span class="text-white divider"></span>
-                    <Link class="text-white hover-primary" :href="route('faq')">FAQ</Link>
+                            >
+                        </li>
+                    </ul>
                 </div>
-                <div class="d-flex flex-row w-fit justify-content-between">
-                    <a class="morph-btn footer__icon" href="">
-                        <img :src="fbWhite" alt="Facebook"
-                    /></a>
-                    <a class="morph-btn footer__icon" href="">
-                        <img :src="twWhite" alt="Twitter"
-                    /></a>
-                    <a class="morph-btn footer__icon" href=""
+                <div class="col-12 col-lg-6 d-flex flex-column align-items-center">
+                    <Link class="mb-20px" :href="route('home')">
+                        <Poptext
+                            class="flex-column justify-content-center align-items-center poptext-white poptext-footer"
+                            :text="siteData.title"
+                        />
+                    </Link>
+                    <p class="text-align-center mb-25px">
+                        Kup bilety na niezapomniane wydarzenia w nowoczesnych halach naszego obiektu!
+                    </p>
+                    <div class="d-flex flex-row justify-content-center mb-35px">
+                        <Link class="text-white hover-primary" :href="route('privacy-policy')">Polityka prywatności</Link>
+                        <span class="text-white divider"></span>
+                        <Link class="text-white hover-primary" :href="route('terms-of-use')">Regulamin</Link>
+                        <span class="text-white divider"></span>
+                        <Link class="text-white hover-primary" :href="route('faq')">FAQ</Link>
+                    </div>
+                    <div class="d-flex flex-row w-fit justify-content-between">
+                        <a class="morph-btn footer__icon" href="">
+                            <img :src="fbWhite" alt="Facebook"
+                            /></a>
+                        <a class="morph-btn footer__icon" href="">
+                            <img :src="twWhite" alt="Twitter"
+                            /></a>
+                        <a class="morph-btn footer__icon" href=""
                         ><img :src="insWhite" alt="Instagram"
-                    /></a>
+                        /></a>
+                    </div>
+                </div>
+                <div
+                    class="col-12 col-lg-3 d-flex flex-column text-align-center text-align-lg-end align-items-center align-items-lg-end mt-40px mt-lg-0"
+                >
+                    <p class="footer__heading">Poznań</p>
+                    <a class="text-primary hover-white mb-15px" href="mailto:kontakt@eventmachen.pl">
+                        kontakt@eventmachen.pl
+                    </a>
+                    <a class="text-primary hover-white mb-15px" href="tel:+48111222333">
+                        +48 111 222 333
+                    </a>
+                    <p>
+                        ul. Koncertowa 12, <br />
+                        66-666 Poznań
+                    </p>
                 </div>
             </div>
-            <div
-                class="col-12 col-lg-3 d-flex flex-column text-align-center text-align-lg-end align-items-center align-items-lg-end mt-40px mt-lg-0"
-            >
-                <p class="footer__heading">Poznań</p>
-                <a class="text-primary hover-white mb-15px" href="mailto:kontakt@eventmachen.pl">
-                    kontakt@eventmachen.pl
-                </a>
-                <a class="text-primary hover-white mb-15px" href="tel:+48111222333">
-                    +48 111 222 333
-                </a>
-                <p>
-                    ul. Koncertowa 12, <br />
-                    66-666 Poznań
-                </p>
-            </div>
-        </div>
-    </section>
-    <section class="footer__under">
-        <p>Copyright © 2024 PracaDyplomowa by My. All Rights Reserved</p>
-    </section>
+        </section>
+        <section class="footer__under">
+            <p>Copyright © 2024 PracaDyplomowa by My. All Rights Reserved</p>
+        </section>
+    </footer>
 </template>
 
 <style lang="scss">
