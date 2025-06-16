@@ -124,7 +124,7 @@ onMounted(() => {
 .animated-sticky-section {
     height: 200vh;
     @include mixin.media-breakpoint-up(lg) {
-        height: 300vh;
+        height: 200vh;
     }
     position: relative;
     &__section {
