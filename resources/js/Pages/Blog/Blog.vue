@@ -23,10 +23,12 @@ const filterRequest = reactive({
 });
 
 const currentCategory = ref(null);
+const currentSearchPhrase = ref(null);
 
 onMounted(() => {
     const params = new URLSearchParams(window.location.search);
     currentCategory.value = params.get('blog_post_type');
+    currentSearchPhrase.value = params.get('blog_post_name');
 });
 
 function FilterBlog() {
@@ -52,7 +54,7 @@ function FilterBlog() {
         <div class="container container-small flex-column align-items-start justify-content-start">
             <form @submit.prevent="FilterBlog()" class="mb-40px">
                 <div class="d-flex flex-row align-items-center">
-                    <input v-model="filterRequest.blog_post_name" type="text">
+                    <input :placeholder="currentSearchPhrase" v-model="filterRequest.blog_post_name" type="text">
                     <select v-model="filterRequest.blog_post_type">
                         <option :value="null">
                             Jakakolwiek

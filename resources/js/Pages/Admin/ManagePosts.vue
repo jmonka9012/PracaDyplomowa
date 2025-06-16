@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import blogBg from "~images/blog-bg.jpg";
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import { Link, router } from "@inertiajs/vue3";
@@ -31,6 +31,13 @@ function FilterPosts() {
         })
 }
 
+const currentSearchPhrase = ref(null);
+
+onMounted(() => {
+    const params = new URLSearchParams(window.location.search);
+    currentSearchPhrase.value = params.get('blog_post_name');
+});
+
 </script>
 
 <template>
@@ -47,7 +54,7 @@ function FilterPosts() {
             </div>
             <form @submit.prevent="FilterPosts()" class="mb-40px">
                 <div class="d-flex flex-row align-items-center">
-                    <input v-model="filterRequest.blog_post_name" type="text">
+                    <input :placeholder="currentSearchPhrase" v-model="filterRequest.blog_post_name" type="text">
                     <select v-model="filterRequest.blog_post_type">
                         <option :value="null">
                             Jakakolwiek
