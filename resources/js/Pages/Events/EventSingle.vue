@@ -3,7 +3,7 @@ import EventsAlt from "@/Components/Sections/EventsAlt.vue";
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 
 import SingleMap from "~images/single-map.jpg";
-import blogBg from "~images/single-map.jpg";
+import blogBg from "~images/blog-bg.jpg";
 
 import ResetObject from "@/Utilities/resetObject";
 import { router } from "@inertiajs/vue3";
