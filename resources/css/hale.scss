@@ -54,9 +54,10 @@
 
     &__seat {
         width: 100%;
-        height: 10px;
+        height: 14px;
         background-color: var(--primary);
         position: relative;
+        border-radius: 4px;
 
         &-tooltip {
             max-width: 200px;
@@ -83,7 +84,7 @@
         }
 
         &.taken {
-            background-color: red;
+            background-color: rgba(225, 225, 225, 0.56);
         }
     }
 
