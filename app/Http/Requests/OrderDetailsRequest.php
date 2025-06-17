@@ -22,7 +22,7 @@ class OrderDetailsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
+            'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required',
             'phone' => 'required',

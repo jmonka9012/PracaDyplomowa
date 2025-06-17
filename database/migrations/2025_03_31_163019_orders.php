@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable();
             $table->foreignId('event_id')->nullable();
             $table->decimal('total_price', 8,2)->comment('PLN');
-            $table->string('name')->nullable();
+            $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();

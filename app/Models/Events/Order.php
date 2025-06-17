@@ -23,7 +23,7 @@ class Order extends Model
         'house_number',
         'zip_code',
         'payment_status',
-        'name',
+        'first_name',
         'last_name'
     ];
 
