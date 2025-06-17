@@ -198,12 +198,14 @@ const paymentForm = reactive({
                                 />
                             </div>
                         </form>
-                        <h3 class="ma-ftitle">Potwierdź Email</h3>
-                        <form class="form form-ma">
-                            <div class="input-wrap d-flex flex-column col-12">
-                                <input type="submit" value="Potwierdź" />
-                            </div>
-                        </form>
+                        <div v-if="user.permission_level === 8">
+                            <h3 class="ma-ftitle mb-20px">Potwierdź Email</h3>
+                            <form class="form form-ma">
+                                <div class="input-wrap d-flex flex-column col-12">
+                                    <input type="submit" value="Potwierdź" />
+                                </div>
+                            </form>
+                        </div>
                     </Tab>
                     <Tab title="Informacje do faktur">
                         <div class="d-flex flex-column align-items-start">
