@@ -212,7 +212,7 @@ function submitRegisterRequest() {
                             value=""
                             aria-required="true"
                             v-model="registerForm.name"
-                            @input="onInput('verification.user')"
+                            @input="validationRequest('verification.user')"
                         />
                         <div class="error-msg" v-if="registerErrors.name">
                             {{ registerErrors.name }}
@@ -232,7 +232,7 @@ function submitRegisterRequest() {
                             value=""
                             aria-required="true"
                             v-model="registerForm.email"
-                            @input="onInput('verification.email')"
+                            @input="validationRequest('verification.email')"
                         />
                         <div class="error-msg" v-if="registerErrors.email">
                             {{ registerErrors.email }}
