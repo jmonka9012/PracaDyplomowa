@@ -52,7 +52,6 @@ const contactForm = reactive({
 });
 
 const supportTicketError = ref(null);
-
 const organizer = reactive({});
 
 function GetOrganizerInfo() {
@@ -72,6 +71,8 @@ GetOrganizerInfo();
 
 const errors = reactive({});
 const ticketErrors = reactive({});
+
+
 
 function handleSubmitClick(form) {
     showModal.value = true;
@@ -109,8 +110,20 @@ function SendTicket() {
             supportTicketError.value = error.response.data.throttle;
             console.error(supportTicketError);
         })
-
 }
+
+const paymentForm = reactive({
+    first_name: null,
+    last_name: null,
+    email: null,
+    phone: null,
+    country: null,
+    city: null,
+    street: null,
+    house_number: null,
+    zip_code: null,
+});
+
 </script>
 
 <template>
@@ -125,70 +138,13 @@ function SendTicket() {
                                 </div>-->
                 <h1 class="ma-title">Mój profil</h1>
                 <Tabs class="tabs-white">
-                    <Tab title="Moje informacje">
+                    <Tab title="Konto">
                         <div
                             class="d-flex align-items-center column-gap-10px mb-32px"
                         >
                             <h3 class="ma-ftitle">Moje informacje</h3>
                             <i class="fa fa-user"></i>
                         </div>
-                        <form
-                            class="form form-ma"
-                            @submit.prevent="handleSubmitClick(fNameForm)"
-                        >
-                            <div class="input-wrap d-flex flex-column col-12">
-                                <label for="first-name-input">Imię</label>
-                                <input
-                                    type="text"
-                                    id="change-first-name"
-                                    autocomplete="first-name-input"
-                                    name="first-name-input"
-                                    spellcheck="false"
-                                    value=""
-                                    required=""
-                                    aria-required="true"
-                                    :placeholder="user.first_name"
-                                    v-model="fNameForm.first_name"
-                                />
-                            </div>
-                            <div class="error-msg" v-if="errors.first_name">
-                                {{ errors.first_name }}
-                            </div>
-                            <div class="input-wrap col-12">
-                                <input
-                                    value="zaktualizuj szczegóły"
-                                    type="submit"
-                                    class="form-submit"
-                                />
-                            </div>
-                        </form>
-                        <form
-                            class="form form-ma"
-                            @submit.prevent="handleSubmitClick(lNameForm)"
-                        >
-                            <div class="input-wrap d-flex flex-column col-12">
-                                <label for="last-name-input">Nazwisko</label>
-                                <input
-                                    type="text"
-                                    id="change-last-name"
-                                    autocomplete="last-name-input"
-                                    name="last-name-input"
-                                    spellcheck="false"
-                                    value=""
-                                    required=""
-                                    aria-required="true"
-                                    :placeholder="user.last_name"
-                                    v-model="lNameForm.last_name"
-                                />
-                            </div>
-                            <div class="input-wrap col-12">
-                                <input
-                                    type="submit"
-                                    value="zaktualizuj szczegóły"
-                                />
-                            </div>
-                        </form>
-
                         <h3 class="ma-ftitle">Adres Email</h3>
                         <form
                             class="form form-ma"
@@ -248,6 +204,149 @@ function SendTicket() {
                                 <input type="submit" value="Potwierdź" />
                             </div>
                         </form>
+                    </Tab>
+                    <Tab title="Informacje do faktur">
+                        <div class="d-flex flex-column align-items-start">
+                            <h3>Informacje do faktur</h3>
+                            <form @submit.prevent="handleSubmitClick(paymentForm)">
+                                <div class="input-wrap col-12">
+                                    <label for="name">Imię</label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        autocomplete="first_name"
+                                        name="name"
+                                        spellcheck="false"
+                                        aria-required="true"
+                                        v-model="paymentForm.first_name"
+                                    />
+                                    <div class="error-msg" v-if="errors.name">
+                                        {{ errors.name }}
+                                    </div>
+                                </div>
+                                <div class="input-wrap col-12">
+                                    <label for="last_name">Nazwisko</label>
+                                    <input
+                                        type="text"
+                                        id="last_name"
+                                        autocomplete="last_name"
+                                        name="last_name"
+                                        spellcheck="false"
+                                        aria-required="true"
+                                        v-model="paymentForm.last_name"
+                                    />
+                                    <div class="error-msg" v-if="errors.last_name">
+                                        {{ errors.last_name }}
+                                    </div>
+                                </div>
+                                <div class="input-wrap col-12">
+                                    <label for="email">E-mail</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        autocomplete="email"
+                                        name="email"
+                                        spellcheck="false"
+                                        aria-required="true"
+                                        v-model="paymentForm.email"
+                                    />
+                                    <div class="error-msg" v-if="errors.email">
+                                        {{ errors.email }}
+                                    </div>
+                                </div>
+                                <div class="input-wrap col-12">
+                                    <label for="phone">Telefon</label>
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        autocomplete="phone"
+                                        name="phone"
+                                        spellcheck="false"
+                                        aria-required="true"
+                                        v-model="paymentForm.phone"
+                                    />
+                                    <div class="error-msg" v-if="errors.phone">
+                                        {{ errors.email }}
+                                    </div>
+                                </div>
+                                <div class="input-wrap col-12">
+                                    <label for="country">Kraj</label>
+                                    <input
+                                        type="text"
+                                        id="country"
+                                        autocomplete="country"
+                                        name="country"
+                                        spellcheck="false"
+                                        aria-required="true"
+                                        v-model="paymentForm.country"
+                                    />
+                                    <div class="error-msg" v-if="errors.country">
+                                        {{ errors.country }}
+                                    </div>
+                                </div>
+                                <div class="input-wrap col-12">
+                                    <label for="city">Miasto</label>
+                                    <input
+                                        type="text"
+                                        id="city"
+                                        autocomplete="city"
+                                        name="city"
+                                        spellcheck="false"
+                                        aria-required="true"
+                                        v-model="paymentForm.city"
+                                    />
+                                    <div class="error-msg" v-if="errors.city">
+                                        {{ errors.city }}
+                                    </div>
+                                </div>
+                                <div class="input-wrap col-12">
+                                    <label for="street">Ulica</label>
+                                    <input
+                                        type="text"
+                                        id="street"
+                                        autocomplete="street"
+                                        name="street"
+                                        spellcheck="false"
+                                        aria-required="true"
+                                        v-model="paymentForm.street"
+                                    />
+                                    <div class="error-msg" v-if="errors.street">
+                                        {{ errors.street }}
+                                    </div>
+                                </div>
+                                <div class="input-wrap col-12">
+                                    <label for="house_number">Numer domu/mieszkania</label>
+                                    <input
+                                        type="text"
+                                        id="house_number"
+                                        autocomplete="house_number"
+                                        name="house_number"
+                                        spellcheck="false"
+                                        aria-required="true"
+                                        v-model="paymentForm.house_number"
+                                    />
+                                    <div class="error-msg" v-if="errors.house_number">
+                                        {{ errors.house_number }}
+                                    </div>
+                                </div>
+                                <div class="input-wrap col-12">
+                                    <label for="zip_code">Kod pocztowy</label>
+                                    <input
+                                        type="text"
+                                        id="zip_code"
+                                        autocomplete="zip_code"
+                                        name="zip_code"
+                                        spellcheck="false"
+                                        aria-required="true"
+                                        v-model="paymentForm.zip_code"
+                                    />
+                                    <div class="error-msg" v-if="errors.zip_code">
+                                        {{ errors.zip_code }}
+                                    </div>
+                                </div>
+                                <input value="Zaktualizuj dane" class="btn btn-md" type="submit">
+                            </form>
+                        </div>
                     </Tab>
                     <Tab title="Moje bilety">
                         <div
