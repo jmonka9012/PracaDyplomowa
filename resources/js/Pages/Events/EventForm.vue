@@ -16,7 +16,7 @@ const props = defineProps({
 const errors = reactive({});
 
 const paymentForm = reactive({
-    name: null,
+    first_name: null,
     last_name: null,
     email: null,
     phone: null,
@@ -63,10 +63,10 @@ function SubmitPaymentDetails() {
                             spellcheck="false"
                             required=""
                             aria-required="true"
-                            v-model="paymentForm.name"
+                            v-model="paymentForm.first_name"
                         />
-                        <div class="error-msg" v-if="errors.name">
-                            {{ errors.name }}
+                        <div class="error-msg" v-if="errors.first_name">
+                            {{ errors.first_name }}
                         </div>
                     </div>
                     <div class="input-wrap col-12">
