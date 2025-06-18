@@ -15,6 +15,9 @@ Route::middleware('auth')->group(function () {
 
   Route::get('/organizator/status',[MyAccountController::class, 'getOrganizerStatus'])
     ->name('organizer.status');
+
+  Route::get('/moje-konto/bilety', [MyAccountController::class, 'getUserTickets'])
+  ->name('my-account.tickets'); //todo nie skończone
 });
 
 

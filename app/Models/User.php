@@ -29,7 +29,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'first_name',
         'last_name',
-        'email_verified_at',
+        'phone',
+        'country',
+        'city',
+        'street',
+        'house_number',
+        'zip_code',
+        'email_verified_at'
     ];
 
     protected $casts = [
