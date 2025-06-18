@@ -48,9 +48,11 @@ class MyAccountController extends Controller
 
         if (isset($updateData['email'])) {
             $updateData['email_verified_at'] = null;
-            $user->role = UserRole::UNVERIFIED_USER->value;
-            $user->permission_level = UserRole::UNVERIFIED_USER->permissionLevel();
-            $user->save();
+            if ($user->role === UserRole::VERIFIED_USER->value) {
+                $user->role = UserRole::UNVERIFIED_USER->value;
+                $user->permission_level = UserRole::UNVERIFIED_USER->permissionLevel();
+                $user->save();
+            }
 
             $emailWasChanged = true;
         }
@@ -124,6 +126,29 @@ class MyAccountController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to retrieve organizer status',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    //todo nie skończone
+    public function getUserTickets()
+    {
+        try{
+            $user = auth()->user();
+
+            $tickets = Ticket::with('event')
+                ->where('user_id', auth()->id())->get()
+                ->groupBy('event_id');
+            $ticketsArchive = 1;
+
+            return response()->json([
+                'ticketsLive' => $tickets,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve tickets',
                 'error' => $e->getMessage()
             ], 500);
         }
