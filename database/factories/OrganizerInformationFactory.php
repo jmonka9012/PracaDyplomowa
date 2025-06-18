@@ -13,12 +13,7 @@ class OrganizerInformationFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory()->create([
-                'role' => 'organizer',
-                'permission_level' => 4,
-            ]),
-
-            
+            'user_id' => null,
             'company_name' => $this->faker->company,
             'phone_number' => $this->faker->phoneNumber,
             'tax_number' => $this->faker->unique()->numerify('##########'),
