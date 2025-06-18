@@ -27,6 +27,18 @@
         background-color: base.$primary;
     }
 }
+.btn-ghost{
+    &:hover{
+        background-color: white;
+        outline: 1px solid base.$primary;
+        color: black;
+    }
+    &--dark{
+        &:hover{
+            outline: 1px solid black;
+        }
+    }
+}
 
 .btn-outline {
     &::after {

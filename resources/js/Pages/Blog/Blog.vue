@@ -67,7 +67,7 @@ function FilterBlog() {
                         </option>
                     </select>
                 </div>
-                <input class="btn btn-md cursor-pointer" type="submit">
+                <input class="btn btn-md cursor-pointer btn-hovprim" type="submit">
             </form>
             <h3 v-if="currentCategory" class="mb-40px"> Posty z kategorii: {{currentCategory}}</h3>
             <PostQuery class="mb-50px" evContClass="ev-cont-lg-three" :blog_posts="props.blog_posts.data">

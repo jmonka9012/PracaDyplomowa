@@ -193,7 +193,9 @@ function SendTicket() {
                             kontaktowego w panelu użytkownika w zakładce
                             "Obsługa Klienta"
                         </p>
-                        <Link :href="route('my-account')" class="btn btn-md"
+                        <Link
+                            :href="route('my-account')"
+                            class="btn btn-md btn-hovprim"
                             >Panel użytkownika</Link
                         >
                     </div>

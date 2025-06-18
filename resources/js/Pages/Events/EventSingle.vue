@@ -6,9 +6,9 @@ import SingleMap from "~images/single-map.jpg";
 import blogBg from "~images/blog-bg.jpg";
 
 import ResetObject from "@/Utilities/resetObject";
-import {router} from "@inertiajs/vue3";
-import {Link} from "@inertiajs/vue3";
-import {reactive, ref, computed, watch} from "vue";
+import { router } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
+import { reactive, ref, computed, watch } from "vue";
 
 const url = window.location.href;
 
@@ -87,15 +87,15 @@ function InitSectionPrices() {
         if (
             !standingSectionPrices[
                 props.event.data.standing_tickets[key].hall_section_id
-                ]
+            ]
         ) {
             standingSectionPrices[
                 props.event.data.standing_tickets[key].hall_section_id
-                ] = {};
+            ] = {};
         }
         standingSectionPrices[
             props.event.data.standing_tickets[key].hall_section_id
-            ].price = props.event.data.standing_tickets[key].price;
+        ].price = props.event.data.standing_tickets[key].price;
     });
     //console.log(standingSectionPrices);
 }
@@ -150,7 +150,7 @@ function isTaken(sectionID, row, col) {
 function AvailibleTickets(hRow, hCol, sID) {
     for (const section of props.event.data.standing_tickets) {
         if (section.hall_section_id === sID) {
-            return (Number(section.sold) + Number(section.reserved));
+            return Number(section.sold) + Number(section.reserved);
         }
     }
     return null;
@@ -192,12 +192,12 @@ function SubmitTicketRequest() {
 </script>
 
 <template>
-    <HeroSmall :source="blogBg" :title="event.data.event_name"/>
+    <HeroSmall :source="blogBg" :title="event.data.event_name" />
     <section class="single">
         <div class="container container-small">
             <div class="single__content">
                 <div class="single__intro">
-                    <img :src="'/storage/' + event.data.image_path" alt=""/>
+                    <img :src="'/storage/' + event.data.image_path" alt="" />
                 </div>
                 <h1 class="single__title">
                     {{ event.data.event_name }}
@@ -207,15 +207,24 @@ function SubmitTicketRequest() {
                         <h6 class="mb-13px">Event date:</h6>
                         <p>
                             {{ event.data.event_start }} -
-                            {{ event.data.event_end }} <br/>
+                            {{ event.data.event_end }} <br />
                             {{ event.data.event_date }}
                         </p>
                     </div>
                     <div>
                         <h6 class="mb-13px">E-mail:</h6>
-                        <a :href="'mailto:' + event.data.contact_email" class="hover-primary text-underline">{{ event.data.contact_email }}</a>
-                        <a :href="'mailto:' + event.data.contact_email_additional"
-                            class="hover-primary text-underline">{{ event.data.contact_email_additional }}</a>
+                        <a
+                            :href="'mailto:' + event.data.contact_email"
+                            class="hover-primary text-underline"
+                            >{{ event.data.contact_email }}</a
+                        >
+                        <a
+                            :href="
+                                'mailto:' + event.data.contact_email_additional
+                            "
+                            class="hover-primary text-underline"
+                            >{{ event.data.contact_email_additional }}</a
+                        >
                     </div>
                     <div>
                         <h6 class="mb-13px">Kategorie</h6>
@@ -225,7 +234,10 @@ function SubmitTicketRequest() {
                                 :data="{ genres: genre.id }"
                                 :href="route('event.browser')"
                                 class="hover-primary"
-                            >{{genre.name }}<span v-if="index < event.data.genres.length - 1">,
+                                >{{ genre.name
+                                }}<span
+                                    v-if="index < event.data.genres.length - 1"
+                                    >,
                                 </span>
                             </Link>
                         </p>
@@ -241,7 +253,10 @@ function SubmitTicketRequest() {
                 <div>
                     <h5>{{ hall.hall_name }}</h5>
                     <div>
-                        <form class="mb-40px" @submit.prevent="SubmitTicketRequest">
+                        <form
+                            class="mb-40px"
+                            @submit.prevent="SubmitTicketRequest"
+                        >
                             <div class="d-flex flex-column">
                                 <div class="d-flex align-items-center">
                                     <div class="legend legend-stand"></div>
@@ -253,81 +268,194 @@ function SubmitTicketRequest() {
                                 </div>
                             </div>
                             <div class="scene">scena</div>
-                            <div v-for="(row, hrowIndex) in hall.hall_height"
+                            <div
+                                v-for="(row, hrowIndex) in hall.hall_height"
                                 :key="hrowIndex"
-                                class="hall__row">
+                                class="hall__row"
+                            >
                                 <div
                                     v-for="(col, hcolIndex) in hall.hall_width"
                                     :key="hcolIndex"
-                                    class="hall__col">
+                                    class="hall__col"
+                                >
                                     <div
-                                        v-for="section in hall.sections.filter((section) =>section.section_height ===hrowIndex + 1 &&section.section_width ===hcolIndex + 1)"
+                                        v-for="section in hall.sections.filter(
+                                            (section) =>
+                                                section.section_height ===
+                                                    hrowIndex + 1 &&
+                                                section.section_width ===
+                                                    hcolIndex + 1
+                                        )"
                                         :key="section.id"
-                                        class="petla">
+                                        class="petla"
+                                    >
                                         <!--
                                         Div boży 1 xd xd
 -->
                                         <div
-                                            v-if="section.section_type === 'seat'"
-                                            class="hall__section-seat">
+                                            v-if="
+                                                section.section_type === 'seat'
+                                            "
+                                            class="hall__section-seat"
+                                        >
                                             <div class="hall__seat-cont">
                                                 <div
-                                                    v-for="(row, rowIndex) in section.row"
+                                                    v-for="(
+                                                        row, rowIndex
+                                                    ) in section.row"
                                                     :key="rowIndex"
-                                                    class="hall__section-row">
+                                                    class="hall__section-row"
+                                                >
                                                     <div
-                                                        v-for="(col, colIndex) in section.col"
+                                                        v-for="(
+                                                            col, colIndex
+                                                        ) in section.col"
                                                         :key="colIndex"
-                                                        :class="{taken: isTaken(section.id,rowIndex + 1,colIndex + 1),chosen: seats[section.id][rowIndex + 1][colIndex + 1].chosen,}"
+                                                        :class="{
+                                                            taken: isTaken(
+                                                                section.id,
+                                                                rowIndex + 1,
+                                                                colIndex + 1
+                                                            ),
+                                                            chosen: seats[
+                                                                section.id
+                                                            ][rowIndex + 1][
+                                                                colIndex + 1
+                                                            ].chosen,
+                                                        }"
                                                         :data-col="colIndex + 1"
                                                         :data-sID="section.id"
                                                         class="hall__seat"
-                                                        @click="HandleSeat(section.id,rowIndex + 1,colIndex + 1)">
+                                                        @click="
+                                                            HandleSeat(
+                                                                section.id,
+                                                                rowIndex + 1,
+                                                                colIndex + 1
+                                                            )
+                                                        "
+                                                    >
                                                         <div
-                                                            class="hall__seat-tooltip">
-                                                            <div class="d-flex">
-                                                                <div>rząd:</div>
-                                                                <div>{{ rowIndex + 1 }}</div>
+                                                            class="hall__seat-tooltip"
+                                                        >
+                                                            <div class="d-flex column-gap-4px">
+                                                                <div>rząd: </div>
+                                                                <div class="fw-med text-black">
+                                                                    {{
+                                                                        rowIndex +
+                                                                        1
+                                                                    }}
+                                                                </div>
                                                             </div>
-                                                            <div class="d-flex">
-                                                                <div>kolumna:</div>
-                                                                <div>{{ colIndex + 1 }}</div>
-                                                            </div>
-                                                            <div class="d-flex">
-                                                                <div>cena:</div>
+                                                            <div class="d-flex column-gap-4px">
                                                                 <div>
-                                                                    {{seats[section.id][rowIndex + 1][colIndex + 1].price }}
+                                                                    kolumna: 
+                                                                </div>
+                                                                <div class="fw-med text-black">
+                                                                    {{
+                                                                        colIndex +
+                                                                        1
+                                                                    }}
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex column-gap-4px">
+                                                                <div>cena: </div>
+                                                                <div class="fw-med text-black">
+                                                                    {{
+                                                                        seats[
+                                                                            section
+                                                                                .id
+                                                                        ][
+                                                                            rowIndex +
+                                                                                1
+                                                                        ][
+                                                                            colIndex +
+                                                                                1
+                                                                        ].price
+                                                                    }}
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div v-if="errors?.seats?.[section.id]" class="error-msg">
-                                                <div v-html="errors?.seats?.[section.id]"></div>
+                                            <div
+                                                v-if="
+                                                    errors?.seats?.[section.id]
+                                                "
+                                                class="error-msg"
+                                            >
+                                                <div
+                                                    v-html="
+                                                        errors?.seats?.[
+                                                            section.id
+                                                        ]
+                                                    "
+                                                ></div>
                                             </div>
                                         </div>
                                         <!--
                                         Div boży 2 xd xdd 12.05
 -->
                                         <div v-else class="hall__section-stand">
-                                            <div class="hall__seat-cont">
-                                                <div
-                                                    v-html="`${AvailibleTickets(hrowIndex + 1,hcolIndex + 1,section.id)}/${section.capacity} miejsc zajętych`">
-                                                </div>
-                                                <div>
-                                                    {{ standingSectionPrices[section.id].price }} pln
-                                                </div>
+                                            <div
+                                                class="hall__seat-cont hall__seat-cont--info"
+                                            >
+                                                <p
+                                                    
+                                                    v-html="
+                                                        `${AvailibleTickets(
+                                                            hrowIndex + 1,
+                                                            hcolIndex + 1,
+                                                            section.id
+                                                        )}/${
+                                                            section.capacity
+                                                        } miejsc zajętych.`
+                                                    "
+                                                ></p>
+                                                <p>
+                                                    {{
+                                                        standingSectionPrices[
+                                                            section.id
+                                                        ].price
+                                                    }}
+                                                    PLN
+                                                </p>
                                                 <input
-                                                    v-model.trim="standingTickets[section.id].amount"
+                                                    v-model.trim="
+                                                        standingTickets[
+                                                            section.id
+                                                        ].amount
+                                                    "
                                                     v-number-only
                                                     class="stand-input"
                                                     placeholder="Ilość"
                                                     type="text"
-                                                    @blur="standingTickets[section.id].amount =standingTickets[section.id].amount || null"/>
+                                                    @blur="
+                                                        standingTickets[
+                                                            section.id
+                                                        ].amount =
+                                                            standingTickets[
+                                                                section.id
+                                                            ].amount || null
+                                                    "
+                                                />
                                             </div>
-                                            <div v-if="errors?.standing_tickets?.[section.id]" class="error-msg">
-                                                <div v-html="errors?.standing_tickets?.[section.id]"></div>
+                                            <div
+                                                v-if="
+                                                    errors?.standing_tickets?.[
+                                                        section.id
+                                                    ]
+                                                "
+                                                class="error-msg"
+                                            >
+                                                <div
+                                                    v-html="
+                                                        errors
+                                                            ?.standing_tickets?.[
+                                                            section.id
+                                                        ]
+                                                    "
+                                                ></div>
                                             </div>
                                         </div>
                                     </div>
@@ -338,10 +466,12 @@ function SubmitTicketRequest() {
                             </div>
                             <div
                                 v-if="summary"
-                                class="d-flex flex-column mb-40px">
+                                class="d-flex flex-column mb-40px"
+                            >
                                 <div
                                     v-if="summary.seats && summary.seats_price"
-                                    class="d-flex flex-lg-row">
+                                    class="d-flex flex-lg-row"
+                                >
                                     <div class="mr-lg-40px">
                                         Ilość wybranych miejsc siedzących:
                                         {{ summary.seats }}
@@ -356,7 +486,8 @@ function SubmitTicketRequest() {
                                         summary.standing &&
                                         summary.standing_price
                                     "
-                                    class="d-flex flex-lg-row">
+                                    class="d-flex flex-lg-row"
+                                >
                                     <div class="mr-lg-40px">
                                         Ilość wybranych miejsc stojących:
                                         {{ summary.standing }}
@@ -367,7 +498,12 @@ function SubmitTicketRequest() {
                                     </div>
                                 </div>
                                 <div
-                                    v-if=" summary.standing &&summary.standing_price &&summary.seats &&summary.seats_price"
+                                    v-if="
+                                        summary.standing &&
+                                        summary.standing_price &&
+                                        summary.seats &&
+                                        summary.seats_price
+                                    "
                                     class="d-flex flex-lg-row"
                                 >
                                     <div class="mr-lg-40px">
@@ -376,39 +512,56 @@ function SubmitTicketRequest() {
                                     </div>
                                     <div class="mr-lg-40px">
                                         Łączna cena wybranych miejsc:
-                                        {{(summary.standing_price + summary.seats_price).toFixed(2) }}
+                                        {{
+                                            (
+                                                summary.standing_price +
+                                                summary.seats_price
+                                            ).toFixed(2)
+                                        }}
                                     </div>
                                 </div>
                             </div>
                             <button
                                 class="btn btn-md btn-hovprim mb-30px"
-                                type="submit">Kup bilety</button>
+                                type="submit"
+                            >
+                                Kup bilety
+                            </button>
                         </form>
                     </div>
                 </div>
-                <img :src="SingleMap" alt="" class="single__map"/>
+                <img :src="SingleMap" alt="" class="single__map" />
                 <div class="bb-1 b-secondary"></div>
-                <div class="d-flex row-gap-10px column-gap-10px mt-30px mb-100px">
+                <div
+                    class="d-flex row-gap-10px column-gap-10px mt-30px mb-100px"
+                >
                     <a
                         :href="`https://twitter.com/intent/tweet?url=${encodeURIComponent(
                             url
                         )}`"
                         class="social-link"
-                        target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a :href="`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                            url
-                        )}`"
-                        class="social-link"
-                        target="_blank"><i class="fab fa-facebook"></i></a>
-                    <a :href="`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(
+                        target="_blank"
+                        ><i class="fab fa-twitter"></i
+                    ></a>
+                    <a
+                        :href="`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
                             url
                         )}`"
                         class="social-link"
                         target="_blank"
-                    ><i class="fab fa-pinterest"></i></a>
+                        ><i class="fab fa-facebook"></i
+                    ></a>
+                    <a
+                        :href="`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(
+                            url
+                        )}`"
+                        class="social-link"
+                        target="_blank"
+                        ><i class="fab fa-pinterest"></i
+                    ></a>
                 </div>
                 <h3 class="mb-30px align-self-middle">Related Events</h3>
-                <EventsAlt :events="props.related_events"/>
+                <EventsAlt :events="props.related_events" />
                 <!--                 <h3 class="mb-40px">Leave a Reply</h3>
                                 <p class="fs-14 mb-20px">
                                     Your email address will not be published. Required fields
@@ -457,8 +610,8 @@ function SubmitTicketRequest() {
     border-radius: 8px;
     position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
+    bottom: 25%;
 }
 
 .hall {

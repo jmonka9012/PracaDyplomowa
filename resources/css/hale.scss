@@ -71,6 +71,7 @@
             transition: .2s ease-out opacity, .2s ease-out visibility;
             background-color: #fff;
             z-index: 2;
+            text-transform: capitalize;
         }
 
         &:hover {
@@ -100,6 +101,12 @@
         grid-column-gap: 10px;
         grid-auto-rows: 10px;
         grid-row-gap: 10px;
+        &--info{
+            display: flex;
+            flex-direction: column;
+            grid-row-gap: 0;
+            
+        }
     }
 
 

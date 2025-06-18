@@ -67,7 +67,7 @@ onMounted(() => {
                         </option>
                     </select>
                 </div>
-                <input class="btn btn-md cursor-pointer" type="submit">
+                <input class="btn btn-md cursor-pointer btn-hovprim" type="submit">
             </form>
             <div class="col-12">
                 <div
@@ -106,13 +106,13 @@ onMounted(() => {
                     </div>
                     <div class="post-list-item-col post-list-item-col-btns">
                         <button
-                            class="btn btn-md col-12"
+                            class="btn btn-md btn-hovprim col-12"
                             @click="activePostId = post.id"
                         >
                             Usuń
                         </button>
                         <Link
-                            class="btn btn-md col-12"
+                            class="btn btn-md btn-hovprim col-12"
                             :href="`/${post.blog_post_url}`"
                             >Podgląd</Link
                         >
@@ -130,7 +130,7 @@ onMounted(() => {
                                 class="d-flex flex-row justify-content-between"
                             >
                                 <Link
-                                    class="btn btn-md w-fit"
+                                    class="btn btn-md btn-hovprim w-fit"
                                     method="delete"
                                     preserve-scroll
                                     :href="route('admin.posts.delete')"

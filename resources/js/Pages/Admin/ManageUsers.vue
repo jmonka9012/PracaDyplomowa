@@ -234,12 +234,12 @@ function SetOrganizerStatus(value, userID) {
                     </select>
                 </div>
                 <div class="input-wrap col-12">
-                    <button class="btn btn-md w-fit" type="submit">
+                    <button class="btn btn-md btn-hovprim w-fit" type="submit">
                         Filtruj
                     </button>
                 </div>
             </form>
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-column mb-50px">
                 <div
                     class="d-flex flex-row bb-1 b-text pt-10px pl-lg-10px pr-lg-10px pb-20px flex-wrap-wrap"
                     v-for="user in props.users.data"
@@ -276,7 +276,7 @@ function SetOrganizerStatus(value, userID) {
                         </div>
                         <div class="user-row__value">
                             <Link
-                                class="btn btn-md"
+                                class="btn btn-md btn-hovprim"
                                 preserve-scroll
                                 method="delete"
                                 :only="['users']"
@@ -291,7 +291,7 @@ function SetOrganizerStatus(value, userID) {
                     >
                         <Collapse class="col-12">
                             <template #trigger="{ isOpen }">
-                                <button class="btn btn-md">
+                                <button class="btn btn-md btn-hovprim">
                                     {{
                                         isOpen
                                             ? "Ukryj"
@@ -409,7 +409,7 @@ function SetOrganizerStatus(value, userID) {
                     </div>
                 </div>
             </div>
-            <div class="event-pagination">
+            <div class="event-pagination pb-75px">
                 <ul class="ml-auto mr-auto">
                     <li
                         :key="page"

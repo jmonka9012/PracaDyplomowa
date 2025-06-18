@@ -89,7 +89,7 @@ const SwapStatus = (status) => {
                     </div>
                     <Collapse class="w-100">
                         <template #trigger="{ isOpen }">
-                            <button class="btn btn-md">
+                            <button class="btn btn-md btn-ghost">
                                 {{
                                     isOpen
                                         ? "Zwiń wiadomość"

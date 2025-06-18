@@ -346,7 +346,7 @@ const paymentForm = reactive({
                                         {{ errors.zip_code }}
                                     </div>
                                 </div>
-                                <input value="Zaktualizuj dane" class="btn btn-md" type="submit">
+                                <input value="Zaktualizuj dane" class="btn btn-md btn-hovprim cursor-pointer" type="submit">
                             </form>
                         </div>
                     </Tab>
