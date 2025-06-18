@@ -169,6 +169,7 @@ function submitRegisterRequest() {
                     </div>
                     <div class="input-wrap input-wrap-check col-12 mb-20px">
                         <input
+                            class="check"
                             type="checkbox"
                             name="remember"
                             id="remember"
@@ -317,6 +318,7 @@ function submitRegisterRequest() {
                     <div class="input-wrap input-wrap-check col-12 mb-20px">
                         <input
                             type="checkbox"
+                            class="check"
                             required
                             name="confirmation"
                             id="confirmation"
@@ -332,6 +334,7 @@ function submitRegisterRequest() {
                     <div class="input-wrap input-wrap-check col-12 mb-20px">
                         <input
                             type="checkbox"
+                            class="check"
                             name="organizer"
                             id="organizer"
                             v-model="registerForm.organizer_request"

@@ -42,28 +42,28 @@ import Lightbox from "../Components/Partials/Lightbox.vue";
         >
             <form action="" class="form">
                 <div class="input-wrap input-wrap-check col-12 mb-20px">
-                    <input type="checkbox" name="notif1" id="notif1" />
+                    <input class="check" type="checkbox" name="notif1" id="notif1" />
                     <label for="notif1">
                         Lorem ipsum dolor, sit amet consectetur adipisicing
                         elit. Powiadomienie 1
                     </label>
                 </div>
                 <div class="input-wrap input-wrap-check col-12 mb-20px">
-                    <input type="checkbox" name="notif2" id="notif2" />
+                    <input class="check" type="checkbox" name="notif2" id="notif2" />
                     <label for="notif2">
                         Lorem ipsum dolor, sit amet consectetur adipisicing
                         elit. Powiadomienie 2
                     </label>
                 </div>
                 <div class="input-wrap input-wrap-check col-12 mb-20px">
-                    <input type="checkbox" name="notif3" id="notif3" />
+                    <input class="check" type="checkbox" name="notif3" id="notif3" />
                     <label for="notif3">
                         Lorem ipsum dolor, sit amet consectetur adipisicing
                         elit. Powiadomienie 3
                     </label>
                 </div>
                 <div class="input-wrap input-wrap-check col-12 mb-20px">
-                    <input type="checkbox" name="notif4" id="notif4" />
+                    <input class="check" type="checkbox" name="notif4" id="notif4" />
                     <label for="notif4">
                         Lorem ipsum dolor, sit amet consectetur adipisicing
                         elit. Powiadomienie 4

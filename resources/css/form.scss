@@ -115,8 +115,7 @@
     }
 }
 
-.form input[type="checkbox"] {
-    .check {
+.form input[type="checkbox"].check {
         min-width: 24px;
         height: 24px;
         margin-right: 13px;
@@ -141,7 +140,6 @@
                 color: base.$secondary;
             }
         }
-    }
 }
 
 .select-filters {
