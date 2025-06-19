@@ -277,8 +277,26 @@ class TicketSaleController extends Controller
 
     public function orderDetailsForm(Order $order)
     {
+        $userData = [];
+
+        if (Auth::check()) {
+            $user = Auth::user();
+            $userData = [
+                'first_name' => $user->first_name,
+                'last_name' => $user->last_name,
+                'email' => $user->email,
+                'country' => $user->country,
+                'city' => $user->city,
+                'street' => $user->street,
+                'house_number' => $user->house_number,
+                'zip_code' => $user->zip_code,
+                'phone' => $user->phone,
+            ];
+        }
+
         return Inertia::render('Events/EventForm', [
-            'order' => $order->load('tickets')
+            'order' => $order->load('tickets'),
+            'userData' => $userData
         ]);
     }
 
