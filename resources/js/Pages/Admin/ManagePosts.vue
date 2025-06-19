@@ -12,32 +12,30 @@ const props = defineProps({
     },
     blogPostTypes: {
         type: Array,
-        required: true
-    }
+        required: true,
+    },
 });
 
 const filterRequest = reactive({
     blog_post_name: null,
-    blog_post_type: null
+    blog_post_type: null,
 });
 
 function FilterPosts() {
     console.log(filterRequest);
 
-    router.get(
-        route('admin.posts', filterRequest), {
-            preserveScroll: true,
-            only: ['blog_posts'],
-        })
+    router.get(route("admin.posts", filterRequest), {
+        preserveScroll: true,
+        only: ["blog_posts"],
+    });
 }
 
 const currentSearchPhrase = ref(null);
 
 onMounted(() => {
     const params = new URLSearchParams(window.location.search);
-    currentSearchPhrase.value = params.get('blog_post_name');
+    currentSearchPhrase.value = params.get("blog_post_name");
 });
-
 </script>
 
 <template>
@@ -54,11 +52,13 @@ onMounted(() => {
             </div>
             <form @submit.prevent="FilterPosts()" class="mb-40px">
                 <div class="d-flex flex-row align-items-center">
-                    <input :placeholder="currentSearchPhrase" v-model="filterRequest.blog_post_name" type="text">
+                    <input
+                        :placeholder="currentSearchPhrase"
+                        v-model="filterRequest.blog_post_name"
+                        type="text"
+                    />
                     <select v-model="filterRequest.blog_post_type">
-                        <option :value="null">
-                            Jakakolwiek
-                        </option>
+                        <option :value="null">Jakakolwiek</option>
                         <option
                             :value="category"
                             v-for="category in props.blogPostTypes"
@@ -67,7 +67,10 @@ onMounted(() => {
                         </option>
                     </select>
                 </div>
-                <input class="btn btn-md cursor-pointer btn-hovprim" type="submit">
+                <input
+                    class="btn btn-md cursor-pointer btn-hovprim"
+                    type="submit"
+                />
             </form>
             <div class="col-12">
                 <div
@@ -77,7 +80,7 @@ onMounted(() => {
                     <div class="post-list-item-col">
                         <div>Obrazek</div>
                         <img
-                            class="max-100"
+                            class="max-150"
                             :src="`/storage/${post.thumbnail_path}`"
                             alt=""
                         />
@@ -88,7 +91,7 @@ onMounted(() => {
                     </div>
                     <div class="post-list-item-col">
                         <div>Nazwa</div>
-                        <Link :href="`/${post.blog_post_url}`">{{
+                        <Link class="hover-primary fw-med" :href="`/${post.blog_post_url}`">{{
                             post.blog_post_name
                         }}</Link>
                     </div>
@@ -106,13 +109,13 @@ onMounted(() => {
                     </div>
                     <div class="post-list-item-col post-list-item-col-btns">
                         <button
-                            class="btn btn-md btn-hovprim col-12"
+                            class="btn btn-md btn-hovprim"
                             @click="activePostId = post.id"
                         >
                             Usuń
                         </button>
                         <Link
-                            class="btn btn-md btn-hovprim col-12"
+                            class="btn btn-md btn-hovprim"
                             :href="`/${post.blog_post_url}`"
                             >Podgląd</Link
                         >
@@ -167,9 +170,9 @@ onMounted(() => {
 
 <style lang="scss">
 @use "~css/mixin.scss";
-.max-100 {
-    width: 100px;
-    height: 100px;
+.max-150 {
+    width: 150px;
+    height: 150px;
     object-fit: cover;
     display: block;
 }
@@ -180,14 +183,14 @@ onMounted(() => {
     margin-bottom: 40px;
     border-bottom: 1px solid rgb(0, 0, 0, 0.1);
     position: relative;
-    @include mixin.media-breakpoint-up(md) {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    @include mixin.media-breakpoint-up(lg) {
-        grid-template-columns: repeat(7, auto);
-        display: grid;
-    }
+    // @include mixin.media-breakpoint-up(md) {
+    //     flex-direction: row;
+    //     justify-content: space-between;
+    // }
+    // @include mixin.media-breakpoint-up(lg) {
+    //     grid-template-columns: repeat(7, auto);
+    //     display: grid;
+    // }
     &-popup {
         width: 50vw;
         background-color: white;
@@ -243,13 +246,22 @@ onMounted(() => {
     &:nth-last-of-type(2) {
         border-bottom: 0;
     }
-    @include mixin.media-breakpoint-up(md) {
-        row-gap: 20px;
-        padding: 0 10px;
-        border-bottom: 0;
-        &:nth-last-of-type(3),
-        &:first-of-type {
-            margin-bottom: 0;
+    // @include mixin.media-breakpoint-up(md) {
+    //     row-gap: 20px;
+    //     padding: 0 10px;
+    //     border-bottom: 0;
+    //     &:nth-last-of-type(3),
+    //     &:first-of-type {
+    //         margin-bottom: 0;
+    //     }
+    // }
+    &-btns {
+        row-gap: 15px;
+        .btn{
+            width: 100%;
+        }
+        @include mixin.media-breakpoint-up(lg){
+            width: fit-content;
         }
     }
 }

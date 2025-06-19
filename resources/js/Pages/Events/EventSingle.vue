@@ -337,29 +337,41 @@ function SubmitTicketRequest() {
                                                         <div
                                                             class="hall__seat-tooltip"
                                                         >
-                                                            <div class="d-flex column-gap-4px">
-                                                                <div>Rząd: </div>
-                                                                <div class="fw-med text-primary text-black">
+                                                            <div
+                                                                class="d-flex column-gap-4px"
+                                                            >
+                                                                <div>Rząd:</div>
+                                                                <div
+                                                                    class="fw-med text-primary text-black"
+                                                                >
                                                                     {{
                                                                         rowIndex +
                                                                         1
                                                                     }}
                                                                 </div>
                                                             </div>
-                                                            <div class="d-flex column-gap-4px">
+                                                            <div
+                                                                class="d-flex column-gap-4px"
+                                                            >
                                                                 <div>
                                                                     Kolumna:
                                                                 </div>
-                                                                <div class="fw-med text-primary text-black">
+                                                                <div
+                                                                    class="fw-med text-primary text-black"
+                                                                >
                                                                     {{
                                                                         colIndex +
                                                                         1
                                                                     }}
                                                                 </div>
                                                             </div>
-                                                            <div class="d-flex column-gap-4px">
-                                                                <div>Cena: </div>
-                                                                <div class="fw-med text-primary text-black">
+                                                            <div
+                                                                class="d-flex column-gap-4px"
+                                                            >
+                                                                <div>Cena:</div>
+                                                                <div
+                                                                    class="fw-med text-primary text-black"
+                                                                >
                                                                     {{
                                                                         seats[
                                                                             section
@@ -371,7 +383,8 @@ function SubmitTicketRequest() {
                                                                             colIndex +
                                                                                 1
                                                                         ].price
-                                                                    }} PLN
+                                                                    }}
+                                                                    PLN
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -401,7 +414,6 @@ function SubmitTicketRequest() {
                                                 class="hall__seat-cont hall__seat-cont--info"
                                             >
                                                 <p
-
                                                     v-html="
                                                         `${AvailibleTickets(
                                                             hrowIndex + 1,
@@ -461,7 +473,10 @@ function SubmitTicketRequest() {
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="errors?.no_ticket" class="error-msg mb-20px">
+                            <div
+                                v-if="errors?.no_ticket"
+                                class="error-msg mb-20px"
+                            >
                                 <div v-html="errors?.no_ticket"></div>
                             </div>
                             <div
