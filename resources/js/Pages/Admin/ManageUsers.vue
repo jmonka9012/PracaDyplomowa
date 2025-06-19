@@ -1,8 +1,8 @@
 <script setup>
 import blogBg from "~images/blog-bg.jpg";
-import { router } from "@inertiajs/vue3";
-import { reactive } from "vue";
-import { Link } from "@inertiajs/vue3";
+import {router} from "@inertiajs/vue3";
+import {reactive} from "vue";
+import {Link} from "@inertiajs/vue3";
 import useAuth from "@/Utilities/useAuth";
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import Collapse from "../../Components/Partials/Collapse.vue";
@@ -39,7 +39,7 @@ function FilterUsers() {
 
 function DeleteUser(id) {
     router.delete(route("admin.users.delete"), {
-        data: { user_id: id },
+        data: {user_id: id},
         preserveScroll: true,
         only: ["users"],
     });
@@ -55,10 +55,16 @@ function TranslateStatus(status) {
     }
 }
 
-function SetOrganizerStatus(value, userID) {
-    console.log(value);
+function SetUserProperty(value, userID, property) {
+    let routeName = null;
+    if (property === 'organizer_status') {
+        routeName = "admin.users.organizers.change_status";
+    } else if (property === 'role') {
+        //routeName = "placeholder";
+    }
+
     router.put(
-        route("admin.users.organizers.change_status", {
+        route(routeName, {
             id: userID,
         }),
         {
@@ -75,11 +81,6 @@ function SetOrganizerStatus(value, userID) {
             },
         }
     );
-    /*    router.reload({
-        preserveState: true,
-        preserveScroll: true,
-        only: ['users'],
-    })*/
 }
 </script>
 
@@ -89,146 +90,44 @@ function SetOrganizerStatus(value, userID) {
         <div class="container flex-column">
             <div class="col-12 d-flex flex-lg-row align-items-lg-center">
                 <h2 class="mb-20px mb-lg-0">Użytkownicy</h2>
-                <a href="#" class="ml-lg-20px btn btn-md btn-hovprim"
-                    >Dodaj nowego</a
+                <a class="ml-lg-20px btn btn-md btn-hovprim" href="#"
+                >Dodaj nowego</a
                 >
             </div>
-            <!-- <div class="col-12 mt-30px mb-30px overflow-x-scroll">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>
-                                <input
-                                    class="check"
-                                    type="checkbox"
-                                    name="Select all users"
-                                />
-                            </th>
-                            <th>
-                                <a href="#username-sort"
-                                    >Nazwa użytkownika
-                                    <span class="sorters">
-                                        <span class="sort sort-asc fa"></span>
-                                        <span class="sort sort-desc fa"></span>
-                                    </span>
-                                </a>
-                            </th>
-                            <th>Imię & Nazwisko</th>
-                            <th>
-                                <a href="#email-sort"
-                                    >Email
-                                    <span class="sorters">
-                                        <span class="sort sort-asc fa"></span>
-                                        <span class="sort sort-desc fa"></span>
-                                    </span>
-                                </a>
-                            </th>
-                            <th>Rola</th>
-                            <th>Posty?</th>
-                            <th>ID</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="t-details">
-                            <td class="t-details__select">
-                                <input
-                                    class="check"
-                                    type="checkbox"
-                                    name="Select &name user"
-                                />
-                            </td>
-                            <td>
-                                <img :src="hellsPit" class="t-details__pic" />
-                                <a href="admin@gmail.com">Admin</a>
-                                <div class="t-details__options">
-                                    <a href="#edit">Edytuj</a>
-                                    <a href="#delete">Usuń</a>
-                                    <a href="#view">Zobacz</a>
-                                    <a href="#resetPass">Resetuj Hasło</a>
-                                </div>
-                            </td>
-                            <td>Admin Administratorski</td>
-                            <td>
-                                <a href="admin@gmail.com">admin@gmail.com</a>
-                            </td>
-                            <td>Administrator</td>
-                            <td>21</td>
-                            <td>05</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>
-                                <input
-                                    class="check"
-                                    type="checkbox"
-                                    name="Select all users"
-                                />
-                            </th>
-                            <th>
-                                <a href="#username-sort"
-                                    >Nazwa użytkownika
-                                    <span class="sorters">
-                                        <span class="sort sort-asc fa"></span>
-                                        <span class="sort sort-desc fa"></span>
-                                    </span>
-                                </a>
-                            </th>
-                            <th>Imię & Nazwisko</th>
-                            <th>
-                                <a href="#email-sort"
-                                    >Email
-                                    <span class="sorters">
-                                        <span class="sort sort-asc fa"></span>
-                                        <span class="sort sort-desc fa"></span>
-                                    </span>
-                                </a>
-                            </th>
-                            <th>Rola</th>
-                            <th>Posty?</th>
-                            <th>ID</th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div> -->
             <form class="form" @submit.prevent="FilterUsers()">
                 <div class="input-wrap col-12">
                     <label for="userName">Nazwa:</label>
-                    <input type="text" v-model="filterRequest.name" />
+                    <input v-model="filterRequest.name" type="text"/>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="userName">Email:</label>
-                    <input type="text" v-model="filterRequest.email" />
+                    <input v-model="filterRequest.email" type="text"/>
                 </div>
                 <div class="input-wrap col-12">
                     <label for="userName">Nazwa firmy:</label>
-                    <input type="text" v-model="filterRequest.company_name" />
+                    <input v-model="filterRequest.company_name" type="text"/>
                 </div>
                 <div class="input-wrap col-12">
-                    <label class="mb-10px" for="userType"
-                        >Typ użytkownika</label
-                    >
-                    <select
-                        v-model="filterRequest.account_status"
-                        name="userType"
-                        id=""
-                    >
+                    <label class="mb-10px" for="userRole">Rola</label>
+                    <select id="userRole" v-model="filterRequest.role" name="userRole">
                         <option disabled value="">Wybierz</option>
                         <option
-                            v-for="status in props.organizer_stats.original"
-                            :value="status.value"
-                        >
+                            v-for="status in props.user_stats.original"
+                            :value="status.value">
                             {{ status.description }} ( {{ status.count }} )
                         </option>
                     </select>
                 </div>
                 <div class="input-wrap col-12">
-                    <select v-model="filterRequest.role" name="userType" id="">
+                    <label class="mb-10px" for="organizerStatus">Status organizatora:</label>
+                    <select
+                        id="organizerStatus"
+                        v-model="filterRequest.account_status"
+                        name="organizerStatus">
                         <option disabled value="">Wybierz</option>
                         <option
-                            v-for="status in props.user_stats.original"
-                            :value="status.value"
-                        >
+                            v-for="status in props.organizer_stats.original"
+                            :value="status.value">
                             {{ status.description }} ( {{ status.count }} )
                         </option>
                     </select>
@@ -240,10 +139,8 @@ function SetOrganizerStatus(value, userID) {
                 </div>
             </form>
             <div class="d-flex flex-column mb-50px">
-                <div
-                    class="d-flex flex-row bb-1 b-text pt-10px pl-lg-10px pr-lg-10px pb-20px flex-wrap-wrap"
-                    v-for="user in props.users.data"
-                >
+                <div v-for="user in props.users.data"
+                    class="d-flex flex-row bb-1 b-text pt-10px pl-lg-10px pr-lg-10px pb-20px flex-wrap-wrap">
                     <div class="user-row user-row--head">
                         <div>ID:</div>
                         <div>Nazwa:</div>
@@ -259,15 +156,24 @@ function SetOrganizerStatus(value, userID) {
                         <div class="user-row__value">{{ user.name }}</div>
                         <div class="user-row__value">{{ user.email }}</div>
                         <div class="user-row__value">{{ user.full_name }}</div>
-                        <div class="user-row__value">{{ user.role }}</div>
+                        <div v-if="user.role === 'admin'" class="user-row__value">{{ user.role }}</div>
+                        <div v-else>
+                            <select
+                                id="changeStatus"
+                                class=""
+                                name="changeStatus"
+                                @change="SetUserProperty($event.target.value,user.organizer.id,'role')">
+                                <option :selected="role.value === user.role" v-for="role in props.user_stats.original" :value="role.value">{{role.description}}</option>
+                            </select>
+                        </div>
                         <div class="user-row__value">
                             {{ user.total_tickets }}
                         </div>
                         <div class="user-row__value">
                             <Link
                                 v-if="user.support_tickets !== 0"
-                                :href="route('admin.customer-service')"
                                 :data="{ user_id: user.id }"
+                                :href="route('admin.customer-service')"
                                 method="get"
                             >
                                 {{ user.support_tickets }}
@@ -276,12 +182,13 @@ function SetOrganizerStatus(value, userID) {
                         </div>
                         <div class="user-row__value">
                             <Link
-                                class="btn btn-md btn-hovprim"
-                                preserve-scroll
-                                method="delete"
                                 :only="['users']"
+                                class="btn btn-md btn-hovprim"
+                                method="delete"
+                                preserve-scroll
                                 @click="DeleteUser(user.id)"
-                                >Usuń</Link
+                            >Usuń
+                            </Link
                             >
                         </div>
                     </div>
@@ -346,23 +253,24 @@ function SetOrganizerStatus(value, userID) {
                                             "
                                         ></div>
                                         <select
-                                            @change="
-                                                SetOrganizerStatus(
-                                                    $event.target.value,
-                                                    user.organizer.id
-                                                )
-                                            "
+                                            id="changeStatus"
                                             class="user-row__change-status"
                                             name="changeStatus"
-                                            id="changeStatus"
+                                            @change="
+                                                SetUserProperty(
+                                                    $event.target.value,
+                                                    user.organizer.id,
+                                                    'organizer_status'
+                                                )
+                                            "
                                         >
                                             <option
-                                                :selected="
+                                                :disabled="
                                                     user.organizer
                                                         .account_status ===
                                                     'verified'
                                                 "
-                                                :disabled="
+                                                :selected="
                                                     user.organizer
                                                         .account_status ===
                                                     'verified'
@@ -372,27 +280,26 @@ function SetOrganizerStatus(value, userID) {
                                                 Zweryfikowany
                                             </option>
                                             <option
-                                                :selected="
-                                                    user.organizer
-                                                        .account_status ===
-                                                    'denied'
-                                                "
                                                 :disabled="
                                                     user.organizer
                                                         .account_status ===
                                                     'denied'
                                                 "
-                                                value="denied"
-                                            >
+                                                :selected="
+                                                    user.organizer
+                                                        .account_status ===
+                                                    'denied'
+                                                "
+                                                value="denied">
                                                 Odrzucony
                                             </option>
                                             <option
-                                                :selected="
+                                                :disabled="
                                                     user.organizer
                                                         .account_status ===
                                                     'pending'
                                                 "
-                                                :disabled="
+                                                :selected="
                                                     user.organizer
                                                         .account_status ===
                                                     'pending'
@@ -412,10 +319,10 @@ function SetOrganizerStatus(value, userID) {
             <div class="event-pagination pb-75px">
                 <ul class="ml-auto mr-auto">
                     <li
-                        :key="page"
-                        class="page"
-                        :class="{ 'page-current': page.active }"
                         v-for="page in props.users.meta.links"
+                        :key="page"
+                        :class="{ 'page-current': page.active }"
+                        class="page"
                     >
                         <Link :href="page.url" v-html="page.label"></Link>
                     </li>
@@ -425,8 +332,9 @@ function SetOrganizerStatus(value, userID) {
     </section>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @use "~css/mixin.scss";
+
 .user-row {
     width: 50%;
     display: flex;
@@ -444,10 +352,12 @@ function SetOrganizerStatus(value, userID) {
         @include mixin.media-breakpoint-down(xl) {
             font-size: 14px;
         }
+
         &--span {
             padding: 0;
             width: 100%;
             margin-top: 10px;
+
             .user-row {
                 border-bottom: 0;
                 border-left: 0;
@@ -455,12 +365,15 @@ function SetOrganizerStatus(value, userID) {
             }
         }
     }
+
     &__button {
         min-height: 60px;
     }
+
     &_collapsed {
         display: flex;
         flex-direction: column;
+
         .user-row__value {
             justify-content: flex-start;
         }
@@ -478,6 +391,7 @@ function SetOrganizerStatus(value, userID) {
             visibility: visible;
         }
     }
+
     &--head {
         font-weight: 700;
         border-right: 0;
@@ -486,6 +400,7 @@ function SetOrganizerStatus(value, userID) {
             width: 25%;
             padding-right: 10px;
         }
+
         > div {
             display: flex;
             justify-content: center;
@@ -494,12 +409,15 @@ function SetOrganizerStatus(value, userID) {
                 font-size: 14px;
             }
         }
+
         &_collapsed {
             flex-direction: column;
             display: flex;
+
             .user-row__value {
                 white-space: nowrap;
             }
+
             > div {
                 justify-content: flex-start;
                 text-align: left;
@@ -508,6 +426,7 @@ function SetOrganizerStatus(value, userID) {
         }
     }
 }
+
 #changeStatus {
     @include mixin.media-breakpoint-down(xl) {
         min-width: 150px;
