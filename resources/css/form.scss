@@ -11,8 +11,10 @@
         margin: 0 0 26px 0;
         display: flex;
         flex-direction: column;
+
         &-search {
             position: relative;
+
             i,
             svg {
                 position: absolute;
@@ -22,13 +24,16 @@
                 z-index: -1;
             }
         }
+
         &-check {
             flex-direction: row;
         }
     }
+
     input:focus {
         outline: none;
     }
+
     input:not([type="checkbox"]):not(.form-submit):not([type="submit"]):not(
             #tagging
         ) {
@@ -46,10 +51,12 @@
         height: 40px;
         min-height: 33px;
         background-color: transparent;
+
         &::placeholder {
             color: #161a1d4d;
         }
     }
+
     input {
         &.disabled,
         &:disabled {
@@ -57,6 +64,7 @@
             background-color: #5151511a !important;
         }
     }
+
     .form-checkwrap {
         padding-top: 10px;
         padding-bottom: 22px;
@@ -93,11 +101,13 @@
         background-color: base.$secondary;
         color: white;
         border: 0;
+
         &:hover {
             background-color: base.$primary;
             color: base.$secondary;
         }
     }
+
     &-ma {
         margin-bottom: 32px;
         padding-bottom: 32px;
@@ -107,6 +117,7 @@
         border-left: 0;
         border-right: 0;
         border-top: 0;
+
         &:last-of-type {
             margin-bottom: 0;
             padding-bottom: 0;
@@ -116,30 +127,35 @@
 }
 
 .form input[type="checkbox"].check {
-        min-width: 24px;
-        height: 24px;
-        margin-right: 13px;
-        border-radius: 5px;
-        border: 0px;
-        border-color: transparent;
-        background-color: base.$primary;
-        position: relative;
-        appearance: none;
+    min-width: 24px;
+    height: 24px;
+    margin-right: 13px;
+    border-radius: 5px;
+    border: 0px;
+    border-color: transparent;
+    background-color: base.$primary;
+    position: relative;
+    appearance: none;
+    cursor: pointer;
+
+    &::before {
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%) scale(0);
+        position: absolute;
+        content: "\f00c";
+        font-weight: 600;
+        font-family: "Font Awesome 6 Free";
+        color: transparent;
+        transition: transform .2s ease-out;
+    }
+
+    &:checked {
         &::before {
-            top: 50%;
-            left: 50%;
-            transform: translateY(-50%) translateX(-50%);
-            position: absolute;
-            content: "\f00c";
-            font-weight: 600;
-            font-family: "Font Awesome 6 Free";
-            color: transparent;
+            transform: translateY(-50%) translateX(-50%) scale(1.1);
+            color: base.$secondary;
         }
-        &:checked {
-            &::before {
-                color: base.$secondary;
-            }
-        }
+    }
 }
 
 .select-filters {
@@ -150,14 +166,17 @@
     flex-wrap: wrap;
     row-gap: 8px;
 }
+
 .select-wrap {
     position: relative;
+
     i {
         position: absolute;
         left: 30px;
         top: 50%;
         transform: translateY(-50%);
         font-size: 24px;
+
         &.fa-chevron-down {
             left: auto;
             right: 30px;
@@ -165,6 +184,7 @@
         }
     }
 }
+
 select option {
     padding: 6px 20px !important;
     font-weight: 400;
@@ -177,9 +197,11 @@ select option {
 select option:hover {
     background-color: var(--orange);
 }
+
 select:focus {
     outline: none;
 }
+
 select {
     box-shadow: none;
     min-height: 60px;
@@ -197,10 +219,12 @@ select {
     min-width: 300px;
     padding-left: 15px;
     font-family: "Krona One";
+
     &.select-icon {
         padding-left: 60px;
     }
 }
+
 .hero select {
     min-width: 100%;
 }
@@ -231,6 +255,7 @@ select {
     height: 40px;
     min-height: 33px;
     background-color: transparent;
+
     &::placeholder {
         color: #161a1d4d;
     }
