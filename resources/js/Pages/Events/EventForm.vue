@@ -24,9 +24,11 @@ const paymentForm = reactive({
     street: null,
     house_number: null,
     zip_code: null,
-    save_data: null,
-    make_account: null,
-    name: null,
+    save_data: null, // checkbox
+    make_account: null,// checkbox
+    name: null, // nazwa konta
+    password: null,
+    password_confirmation: null,
 });
 
 function SubmitPaymentDetails() {
