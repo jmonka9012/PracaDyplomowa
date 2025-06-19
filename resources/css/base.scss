@@ -6,6 +6,7 @@
     --primary: #c3b9ef;
     --primary-darker: #6f69f7;
     --primary-lighter: #c3b9ef80;
+    --secondary: #161a1d;
     --additonal: "Krona one";
     --dark: #070707;
     --text: #161a1d;
@@ -639,6 +640,10 @@ img {
 
 .text-primary {
     color: $primary !important;
+}
+
+.text-primary-darker {
+    color: $primary-darker !important;
 }
 
 .text-secondary {

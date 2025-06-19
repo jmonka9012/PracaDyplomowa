@@ -338,8 +338,8 @@ function SubmitTicketRequest() {
                                                             class="hall__seat-tooltip"
                                                         >
                                                             <div class="d-flex column-gap-4px">
-                                                                <div>rząd: </div>
-                                                                <div class="fw-med text-black">
+                                                                <div>Rząd: </div>
+                                                                <div class="fw-med text-primary text-black">
                                                                     {{
                                                                         rowIndex +
                                                                         1
@@ -348,9 +348,9 @@ function SubmitTicketRequest() {
                                                             </div>
                                                             <div class="d-flex column-gap-4px">
                                                                 <div>
-                                                                    kolumna:
+                                                                    Kolumna:
                                                                 </div>
-                                                                <div class="fw-med text-black">
+                                                                <div class="fw-med text-primary text-black">
                                                                     {{
                                                                         colIndex +
                                                                         1
@@ -358,8 +358,8 @@ function SubmitTicketRequest() {
                                                                 </div>
                                                             </div>
                                                             <div class="d-flex column-gap-4px">
-                                                                <div>cena: </div>
-                                                                <div class="fw-med text-black">
+                                                                <div>Cena: </div>
+                                                                <div class="fw-med text-primary text-black">
                                                                     {{
                                                                         seats[
                                                                             section
@@ -371,7 +371,7 @@ function SubmitTicketRequest() {
                                                                             colIndex +
                                                                                 1
                                                                         ].price
-                                                                    }}
+                                                                    }} PLN
                                                                 </div>
                                                             </div>
                                                         </div>
