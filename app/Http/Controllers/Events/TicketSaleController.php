@@ -15,7 +15,10 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use App\Models\Events\Order;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerifyEmail;
 
 class TicketSaleController extends Controller
 {
@@ -282,7 +285,30 @@ class TicketSaleController extends Controller
 
     public function orderDetailsUpdate(OrderDetailsRequest $request, Order $order)
     {
-        $order->update($request->validated());
+        $validated = $request->validated();
+        $order->update($validated);
+
+        if ($request->make_account && $request->has('password')){
+            $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
+            'phone' => $validated['phone'],
+            'country' => $validated['country'],
+            'city' => $validated['city'],
+            'street' => $validated['street'],
+            'house_number' => $validated['house_number'],
+            'zip_code' => $validated['zip_code'],
+            ]);
+
+            $order->user_id = $user->id;
+            $order->save();
+
+            Mail::to($user->email)->send(new VerifyEmail($user));
+            Auth::login($user);
+        }
 
         return $this->payment($order);
     }
