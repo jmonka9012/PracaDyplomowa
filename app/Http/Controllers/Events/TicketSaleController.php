@@ -308,6 +308,18 @@ class TicketSaleController extends Controller
 
             Mail::to($user->email)->send(new VerifyEmail($user));
             Auth::login($user);
+        }elseif ($request->save_data && Auth::check()) {
+            $user = Auth::user();
+            $user->update([
+                'first_name' => $validated['first_name'],
+                'last_name' => $validated['last_name'],
+                'phone' => $validated['phone'],
+                'country' => $validated['country'],
+                'city' => $validated['city'],
+                'street' => $validated['street'],
+                'house_number' => $validated['house_number'],
+                'zip_code' => $validated['zip_code'],
+            ]);
         }
 
         return $this->payment($order);

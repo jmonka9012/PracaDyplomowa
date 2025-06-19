@@ -31,7 +31,8 @@ class OrderDetailsRequest extends FormRequest
             'street' => 'required|string|max:255',
             'house_number' => 'required|string|max:20',
             'zip_code' => 'required|string|max:20',
-            'make_account' => 'boolean',
+            'make_account' => 'nullable|boolean',
+            'save_data' => 'nullable|boolean',
 
             'phone' => [
                 'required',
