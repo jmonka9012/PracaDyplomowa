@@ -348,7 +348,7 @@ function SubmitTicketRequest() {
                                                             </div>
                                                             <div class="d-flex column-gap-4px">
                                                                 <div>
-                                                                    kolumna: 
+                                                                    kolumna:
                                                                 </div>
                                                                 <div class="fw-med text-black">
                                                                     {{
@@ -401,7 +401,7 @@ function SubmitTicketRequest() {
                                                 class="hall__seat-cont hall__seat-cont--info"
                                             >
                                                 <p
-                                                    
+
                                                     v-html="
                                                         `${AvailibleTickets(
                                                             hrowIndex + 1,
@@ -461,7 +461,7 @@ function SubmitTicketRequest() {
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="errors?.no_ticket" class="error-msg">
+                            <div v-if="errors?.no_ticket" class="error-msg mb-20px">
                                 <div v-html="errors?.no_ticket"></div>
                             </div>
                             <div

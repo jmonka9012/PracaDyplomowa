@@ -7,7 +7,6 @@ import useAuth from "@/Utilities/useAuth";
 
 const { user, isLoggedIn } = useAuth();
 
-
 const props = defineProps({
   order: Object
 });
@@ -25,6 +24,9 @@ const paymentForm = reactive({
     street: null,
     house_number: null,
     zip_code: null,
+    save_data: null,
+    make_account: null,
+    name: null,
 });
 
 function SubmitPaymentDetails() {
@@ -39,6 +41,7 @@ function SubmitPaymentDetails() {
         onError: (err) => {
             ResetObject(errors);
             Object.assign(errors, err);
+            console.log(errors);
         },
         onSuccess: (test) => {
             console.log(test);
@@ -114,7 +117,7 @@ function SubmitPaymentDetails() {
                             v-model="paymentForm.phone"
                         />
                         <div class="error-msg" v-if="errors.phone">
-                            {{ errors.email }}
+                            {{ errors.phone }}
                         </div>
                     </div>
                     <div class="input-wrap col-12">
@@ -195,6 +198,65 @@ function SubmitPaymentDetails() {
                         />
                         <div class="error-msg" v-if="errors.zip_code">
                             {{ errors.zip_code }}
+                        </div>
+                    </div>
+                    <div v-if="user" class="input-wrap col-12">
+                        <input v-model="paymentForm.save_data" id="save_data" type="checkbox">
+                        <label for="save_data">Zapisz dane do przyszłych transakcji</label>
+                    </div>
+                    <div v-else class="input-wrap col-12">
+                        <input v-model="paymentForm.make_account" id="make_account" type="checkbox">
+                        <label for="make_account">Stwórz konto z podanymi danymi zapamiętać je na przyszłość</label>
+                    </div>
+                    <div v-if="paymentForm.make_account">
+                        <div class="input-wrap col-12">
+                            <label for="zip_code">Nazwa konta</label>
+                            <input
+                                type="text"
+                                id="zip_code"
+                                autocomplete="zip_code"
+                                name="zip_code"
+                                spellcheck="false"
+                                required=""
+                                aria-required="true"
+                                v-model="paymentForm.name"
+                            />
+                            <div class="error-msg" v-if="errors.zip_code">
+                                {{ errors.zip_code }}
+                            </div>
+                        </div>
+                        <div class="input-wrap col-12">
+                            <label for="register-password">Hasło *</label>
+                            <input
+                                type="password"
+                                name="password"
+                                id="register-password"
+                                required=""
+                                aria-required="true"
+                                v-model="paymentForm.password"
+                            />
+                            <div class="error-msg" v-if="errors.password">
+                                {{ errors.password }}
+                            </div>
+                        </div>
+                        <div class="input-wrap col-12">
+                            <label for="register-password-confirm"
+                            >Potwierdź Hasło *</label
+                            >
+                            <input
+                                type="password"
+                                name="password_confirmation"
+                                id="register-password-confirm"
+                                required=""
+                                aria-required="true"
+                                v-model="paymentForm.password_confirmation"
+                            />
+                            <div
+                                class="error-msg"
+                                v-if="errors.password_confirmation"
+                            >
+                                {{ errors.password_confirmation }}
+                            </div>
                         </div>
                     </div>
                     <input type="submit">
