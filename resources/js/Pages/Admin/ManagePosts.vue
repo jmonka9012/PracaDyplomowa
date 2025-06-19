@@ -50,27 +50,39 @@ onMounted(() => {
                     >Dodaj nowy</Link
                 >
             </div>
-            <form @submit.prevent="FilterPosts()" class="mb-40px">
-                <div class="d-flex flex-row align-items-center">
-                    <input
-                        :placeholder="currentSearchPhrase"
-                        v-model="filterRequest.blog_post_name"
-                        type="text"
-                    />
-                    <select v-model="filterRequest.blog_post_type">
-                        <option :value="null">Jakakolwiek</option>
-                        <option
-                            :value="category"
-                            v-for="category in props.blogPostTypes"
+            <form @submit.prevent="FilterPosts()" class="mb-40px form">
+                <div class="d-flex flex-column row-gap-30px">
+                    <div class="input-wrap relative col-12">
+                        <label for="CurrentSearchPhrase"
+                            >Wyszukaj po nazwie</label
                         >
-                            {{ category }}
-                        </option>
-                    </select>
+                        <div class="relative">
+                            <input
+                                :placeholder="currentSearchPhrase"
+                                v-model="filterRequest.blog_post_name"
+                                type="text"
+                            />
+                            <i class="fa fa-search search-icon"></i>
+                        </div>
+                    </div>
+                    <div class="input-wrap col-12">
+                        <select v-model="filterRequest.blog_post_type">
+                            <option :value="null">Jakakolwiek</option>
+                            <option
+                                :value="category"
+                                v-for="category in props.blogPostTypes"
+                            >
+                                {{ category }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-wrap col-12">
+                        <input
+                            class="btn btn-md cursor-pointer btn-hovprim"
+                            type="submit"
+                        />
+                    </div>
                 </div>
-                <input
-                    class="btn btn-md cursor-pointer btn-hovprim"
-                    type="submit"
-                />
             </form>
             <div class="col-12">
                 <div
@@ -91,9 +103,11 @@ onMounted(() => {
                     </div>
                     <div class="post-list-item-col">
                         <div>Nazwa</div>
-                        <Link class="hover-primary fw-med" :href="`/${post.blog_post_url}`">{{
-                            post.blog_post_name
-                        }}</Link>
+                        <Link
+                            class="hover-primary fw-med"
+                            :href="`/${post.blog_post_url}`"
+                            >{{ post.blog_post_name }}</Link
+                        >
                     </div>
                     <div class="post-list-item-col">
                         <div>Kategoria posta:</div>
@@ -257,10 +271,10 @@ onMounted(() => {
     // }
     &-btns {
         row-gap: 15px;
-        .btn{
+        .btn {
             width: 100%;
         }
-        @include mixin.media-breakpoint-up(lg){
+        @include mixin.media-breakpoint-up(lg) {
             width: fit-content;
         }
     }
