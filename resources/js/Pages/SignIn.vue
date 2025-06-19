@@ -1,7 +1,7 @@
 <script setup>
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import blogBg from "~images/blog-bg.jpg";
-import { reactive, ref } from "vue";
+import { reactive, ref, computed } from "vue";
 import { router } from "@inertiajs/vue3";
 import { debounce } from "@/Utilities/debounce";
 import ResetObject from "@/Utilities/resetObject";
@@ -52,30 +52,27 @@ const registerForm = reactive({
     organizer_details: organizerDetails,
 });
 
-let registerNameCorrect = false;
-let registerEmailCorrect = false;
+let registerNameCorrect = ref(false);
+let registerEmailCorrect = ref(false);
 
-let canRegister = false;
-
-function HandleSubmitClass() {
-    canRegister = registerEmailCorrect && registerNameCorrect;
-}
+const canRegister = computed(() =>
+    registerNameCorrect.value && registerEmailCorrect.value
+);
 
 function HandleValidationResponse(routeName, response) {
     switch (routeName) {
         case "verification.user":
             liveErrors.nameError = response.data.message;
-            registerNameCorrect = response.data.valid;
+            registerNameCorrect.value = response.data.valid;
             break;
         case "verification.email":
             liveErrors.emailError = response.data.message;
-            registerEmailCorrect = response.data.valid;
+            registerEmailCorrect.value = response.data.valid;
 
             break;
         default:
             console.error("Nie rozpoznano route walidacyjnego");
     }
-    console.log(`${routeName} valid:`, response.data.valid);
 }
 
 const validationRequest = debounce((routeName) => {
@@ -83,7 +80,7 @@ const validationRequest = debounce((routeName) => {
         .post(route(routeName), registerForm)
         .then((response) => {
             HandleValidationResponse(routeName, response);
-            HandleSubmitClass();
+            //HandleSubmitClass();
         })
         .catch((error) => {
             console.error(error);

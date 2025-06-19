@@ -2,8 +2,10 @@
 import ResetObject from "@/Utilities/resetObject";
 import { router } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import useAuth from "@/Utilities/useAuth";
+import { debounce } from "@/Utilities/debounce";
+import axios from "axios";
 
 const { user, isLoggedIn } = useAuth();
 
@@ -13,6 +15,7 @@ const props = defineProps({
 
 
 const errors = reactive({});
+const liveErrors = reactive({});
 
 const paymentForm = reactive({
     first_name: null,
@@ -50,6 +53,25 @@ function SubmitPaymentDetails() {
         },
     })
 }
+
+let canSubmit = ref(false);
+
+function HandleValidationResponse(routeName, response) {
+    liveErrors.name = response.data.message;
+    canSubmit.value = response.data.valid;
+    console.log(`${routeName} valid:`, response.data.valid);
+}
+
+const validationRequest = debounce((routeName) => {
+    axios
+        .post(route(routeName), paymentForm)
+        .then((response) => {
+            HandleValidationResponse(routeName, response);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+}, 1000);
 </script>
 
 <template>
@@ -222,9 +244,13 @@ function SubmitPaymentDetails() {
                                 required=""
                                 aria-required="true"
                                 v-model="paymentForm.name"
+                                @input="validationRequest('verification.user')"
                             />
-                            <div class="error-msg" v-if="errors.zip_code">
-                                {{ errors.zip_code }}
+                            <div class="error-msg" v-if="errors.name">
+                                {{ errors.name }}
+                            </div>
+                            <div class="error-msg" v-if="liveErrors.name">
+                                {{ liveErrors.name }}
                             </div>
                         </div>
                         <div class="input-wrap col-12">
@@ -261,7 +287,7 @@ function SubmitPaymentDetails() {
                             </div>
                         </div>
                     </div>
-                    <input type="submit">
+                    <input :disabled="!canSubmit" :class="{ disabled: !canSubmit }" type="submit">
                 </form>
             </div>
         </div>
