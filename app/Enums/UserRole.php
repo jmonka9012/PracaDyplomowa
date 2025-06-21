@@ -30,13 +30,13 @@ enum UserRole: string
     public function permissionLabel(): string
     {
         return match($this){
-            self::ADMIN => 'Konto administratorskie',
-            self::MODERATOR => 'Konto moderatorskie',
-            self::REDACTOR => 'Konto Redaktora/ki',
-            self::BLOG_AUTHOR => 'Konto Autora/ki',
-            self::ORGANIZER => 'Konto organizatorskie',
-            self::VERIFIED_USER => 'Konto zweryfikowane',
-            self::UNVERIFIED_USER => 'Konto nie zweryfikowane',
+            self::ADMIN => 'Administrator',
+            self::MODERATOR => 'Moderator',
+            self::REDACTOR => 'Redaktor',
+            self::BLOG_AUTHOR => 'Autor',
+            self::ORGANIZER => 'Organizator',
+            self::VERIFIED_USER => 'Użytkownik',
+            self::UNVERIFIED_USER => 'Użytkownik bez weryfikacji',
             self::GUEST => 'Gość',
         };
     }
