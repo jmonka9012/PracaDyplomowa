@@ -182,7 +182,6 @@ const paymentForm = reactive({
                                 <input
                                     type="password"
                                     id="change-password"
-                                    autocomplete="change-password"
                                     name="change-password"
                                     spellcheck="false"
                                     value=""

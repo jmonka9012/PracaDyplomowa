@@ -156,7 +156,7 @@ function SetUserProperty(value, userID, property) {
                         <div class="user-row__value">{{ user.name }}</div>
                         <div class="user-row__value">{{ user.email }}</div>
                         <div class="user-row__value">{{ user.full_name }}</div>
-                        <div v-if="user.role === 'admin'" class="user-row__value">{{ user.role }}</div>
+                        <div v-if="user.role === 'admin' || user.role === 'organizer'" class="user-row__value">{{ user.role }}</div>
                         <div v-else>
                             <select
                                 id="changeStatus"
