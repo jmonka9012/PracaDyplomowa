@@ -13,7 +13,7 @@ enum OrganizerAccountStatus :string
         return match($this) {
             self::PENDING => 'Konto w trakcie rozpatrywania',
             self::VERIFIED => 'Konto zweryfikowane',
-            self::DENIED => 'Konto odrzucone/potrzeba sprostowania danych',
+            self::DENIED => 'Konto zawieszone',
         };
     }
 
