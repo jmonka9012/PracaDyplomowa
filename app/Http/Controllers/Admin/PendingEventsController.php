@@ -56,6 +56,13 @@ class PendingEventsController extends Controller
     {      
         $query = Event::where('pending', false);
 
+        $sortField = $request->input('event_sort_field', 'event_date');
+
+        $sortDirection = match(strtolower($request->input('event_sort_dir', 'asc'))) {
+            'desc' => 'desc',
+            default => 'asc'
+        };
+
         if ($request->filled('event_name')) {
             $query->where('event_name', 'like', '%' . $request->event_name . '%');
         }
@@ -85,7 +92,7 @@ class PendingEventsController extends Controller
             });
         }
 
-        $events = $query->orderBy('event_date', 'asc')
+        $events = $query->orderBy($sortField, $sortDirection)
                         ->paginate($perPage = 20, $columns = ['*'], $pagename = 'event_page')
                         ->appends($request->query());
 
@@ -95,6 +102,13 @@ class PendingEventsController extends Controller
     public function getEventsPending(Request $request)
     {      
         $query = Event::where('pending', true);
+
+        $sortField = $request->input('pending_sort_field', 'event_date');
+
+        $sortDirection = match(strtolower($request->input('pending_sort_dir', 'asc'))) {
+            'desc' => 'desc',
+            default => 'asc'
+        };
 
         if ($request->filled('pending_name')) {
             $query->where('event_name', 'like', '%' . $request->pending_name . '%');
@@ -125,7 +139,7 @@ class PendingEventsController extends Controller
             });
         }
 
-        $events = $query->orderBy('event_date', 'asc')
+        $events = $query->orderBy($sortField, $sortDirection)
                         ->paginate($perPage = 20, $columns = ['*'], $pagename = 'pending_page')
                         ->appends($request->query());
 
