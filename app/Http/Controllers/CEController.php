@@ -17,4 +17,16 @@ class CEController extends Controller
             return Inertia::render('CE');
         }
     }
+
+    public function getTest1(Request $request){
+         return [
+        'test' => "1 to numer"
+    ]; 
+    }
+
+    public function getTest2(Request $request){
+         return [
+        'test' => "8 to nieskończoność jeśli ją obrócisz"
+    ]; 
+    }
 }
