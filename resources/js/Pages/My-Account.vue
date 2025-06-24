@@ -95,7 +95,15 @@ const handleValidationEmit = (state) => {
 };
 
 const handleAjaxTab = (emittedTab) => {
-    //console.log(emittedTab);
+    const routeName = emittedTab?.routeName;
+    axios
+        .get(route(routeName))
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
 }
 
 function SendTicket() {
@@ -108,7 +116,7 @@ function SendTicket() {
                 preserveState: true,
                 preserveScroll: true,
             })
-            console.log(response);
+            console.log(response.data);
         })
         .catch((error) => {
             supportTicketError.value = error.response.data.throttle;
