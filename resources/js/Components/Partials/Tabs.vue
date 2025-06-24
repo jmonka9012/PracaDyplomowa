@@ -1,12 +1,13 @@
 <template>
     <div class="tabs" v-bind="$attrs">
         <div class="tabs__header">
+            <!-- v-for po obiekcie: (tab, idx) in tabs -->
             <a
                 class="tabs__btn"
-                v-for="(tab, index) in tabs"
-                :key="index"
-                @click="setActiveTab(index)"
-                :class="{ active: activeTabIndex === index }"
+                v-for="(tab, idx) in tabs"
+                :key="idx"
+                @click="setActiveTab(Number(idx))"
+                :class="{ active: activeTabIndex === Number(idx) }"
             >
                 {{ tab.title }}
             </a>
@@ -18,61 +19,86 @@
 </template>
 
 <script setup>
-import { ref, provide } from "vue";
+import { ref, provide, onMounted } from 'vue';
 
-const tabs = ref([]);
+const tabs = ref({});
 const activeTabIndex = ref(0);
+const emit = defineEmits(["update-props"]);
 
-const setActiveTab = (index) => {
+const setActiveTab = (idx) => {
+    const index = Number(idx);
     activeTabIndex.value = index;
+    emit("update-props", tabs.value[index]);
+
+    params.set('tabName', tabs.value[index].title);
+    const newUrl = `${window.location.pathname}?${params.toString()}`;
+    window.history.replaceState({}, '', newUrl);
 };
 
-provide("tabsContext", {
+provide('tabsContext', {
     tabs,
     activeTabIndex,
-    registerTab: (title) => {
-        const index = tabs.value.length;
-        tabs.value.push({ title });
-        return index;
+    registerTab: (title, routeName) => {
+        const idx = Object.keys(tabs.value).length;
+        tabs.value[idx] = { title, routeName };
+        return idx;
     },
+});
+
+let params = null;
+
+onMounted(() => {
+    params = new URLSearchParams(window.location.search);
+    const initialTab = params.get('tabName');
+    if (initialTab) {
+        Object.keys(tabs.value).forEach((key) => {
+            if (tabs.value[key].title === initialTab) {
+                activeTabIndex.value = Number(key);
+            }
+        });
+    }
 });
 </script>
 
 <style lang="scss">
-@use "~css/mixin.scss";
+@use '~css/mixin.scss';
+
 .tabs {
     display: flex;
     flex-direction: column;
+
     &__header {
         display: flex;
-        flex-direction: row;
         gap: 20px;
-        overflow-x: scroll;
+        overflow-x: auto;
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
+
     &__btn {
-        display: block;
         padding: 12px;
-        color: var(--text);
         white-space: nowrap;
         text-decoration: none;
+        color: var(--text);
         &.active {
             border-bottom: 2px solid var(--text);
         }
     }
+
     &__content {
         padding: 31px 12px 16px;
+        background: #fff;
+        box-shadow: rgba(18, 18, 18, 0.15) 0px 1px 4px;
         position: relative;
-        box-shadow: rgba(18, 18, 18, 0.15) 0px 1px 4px 0px;
-        background-color: white;
+
         @include mixin.media-breakpoint-up(lg) {
             padding: 62px 24px 32px;
         }
     }
+
     &-white {
         .tabs__btn {
-            color: white;
+            color: #fff;
         }
     }
 }

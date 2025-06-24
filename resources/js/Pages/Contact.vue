@@ -194,7 +194,7 @@ function SendTicket() {
                             "Obsługa Klienta"
                         </p>
                         <Link
-                            :href="route('my-account')"
+                            :href="route('my-account', {tabName: 'Obsługa klienta'})"
                             class="btn btn-md btn-hovprim"
                             >Panel użytkownika</Link
                         >

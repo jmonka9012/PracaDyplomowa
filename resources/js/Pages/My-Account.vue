@@ -94,6 +94,10 @@ const handleValidationEmit = (state) => {
     }
 };
 
+const handleAjaxTab = (emittedTab) => {
+    //console.log(emittedTab);
+}
+
 function SendTicket() {
 
     axios
@@ -137,8 +141,8 @@ const paymentForm = reactive({
                                     <a class="bcrumb__cur" href="">Current</a>
                                 </div>-->
                 <h1 class="ma-title">Mój profil</h1>
-                <Tabs class="tabs-white">
-                    <Tab title="Konto">
+                <Tabs @update-props="handleAjaxTab" class="tabs-white">
+                    <Tab routeName="jacek.test1" title="Konto">
                         <div
                             class="d-flex align-items-center column-gap-10px mb-32px"
                         >
@@ -206,7 +210,7 @@ const paymentForm = reactive({
                             </form>
                         </div>
                     </Tab>
-                    <Tab title="Informacje do faktur">
+                    <Tab routeName="jacek.test2" title="Informacje do faktur">
                         <div class="d-flex flex-column align-items-start">
                             <h3>Informacje do faktur</h3>
                             <form @submit.prevent="handleSubmitClick(paymentForm)">
@@ -349,7 +353,7 @@ const paymentForm = reactive({
                             </form>
                         </div>
                     </Tab>
-                    <Tab title="Moje bilety">
+                    <Tab routeName="jacek.test1" title="Moje bilety">
                         <div
                             class="d-flex align-items-center column-gap-10px mb-32px"
                         >
@@ -357,7 +361,7 @@ const paymentForm = reactive({
                             <i class="fa fa-ticket"></i>
                         </div>
                     </Tab>
-                    <Tab title="Obsługa klienta">
+                    <Tab routeName="jacek.test2" title="Obsługa klienta">
                         <div
                             class="d-flex flex-column align-items-center column-gap-10px mb-32px"
                         >

@@ -12,10 +12,14 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    routeName: {
+        type: String,
+        required: false,
+    }
 });
 
 const { activeTabIndex, registerTab } = inject("tabsContext");
-const index = registerTab(props.title);
+const index = registerTab(props.title, props.routeName);
 
 const isActive = computed(() => activeTabIndex.value === index);
 </script>
