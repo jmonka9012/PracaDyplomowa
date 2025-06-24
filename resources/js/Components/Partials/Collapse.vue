@@ -31,17 +31,14 @@ const beforeLeave = (element) => {
         <div @click="toggle">
             <slot name="trigger" :is-open="isOpen" />
         </div>
-
         <transition
             @enter="enter"
             @after-enter="afterEnter"
-            @before-leave="beforeLeave"
-        >
+            @before-leave="beforeLeave">
             <div
                 v-show="isOpen"
                 class="collapsible-content"
-                :aria-expanded="isOpen"
-            >
+                :aria-expanded="isOpen">
                 <slot />
             </div>
         </transition>

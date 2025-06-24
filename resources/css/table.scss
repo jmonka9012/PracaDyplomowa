@@ -48,6 +48,7 @@ table {
         border-top: 1px solid #161a1d33;
         vertical-align: middle;
         a {
+            user-select: none;
             position: relative;
             display: flex;
             align-items: center;
@@ -116,13 +117,14 @@ table {
         }
     }
     tbody {
-        tr {
-            &:nth-child(even) {
-                background-color: white;
-            }
-            &:nth-child(odd) {
-                background-color: #f9f9f9;
-            }
+/*        .t-details:nth-child(even) {
+            background-color: white;
+        }
+        .t-details:nth-child(odd) {
+            background-color: #f9f9f9;
+        }*/
+        .t-details.odd {
+            background-color: #f9f9f9;
         }
     }
     .check {

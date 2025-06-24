@@ -1,14 +1,11 @@
 <template>
     <div class="tabs" v-bind="$attrs">
         <div class="tabs__header">
-            <!-- v-for po obiekcie: (tab, idx) in tabs -->
-            <a
-                class="tabs__btn"
+            <a class="tabs__btn"
                 v-for="(tab, idx) in tabs"
                 :key="idx"
                 @click="setActiveTab(Number(idx))"
-                :class="{ active: activeTabIndex === Number(idx) }"
-            >
+                :class="{ active: activeTabIndex === Number(idx) }">
                 {{ tab.title }}
             </a>
         </div>
@@ -80,6 +77,7 @@ onMounted(() => {
         white-space: nowrap;
         text-decoration: none;
         color: var(--text);
+        user-select: none;
         &.active {
             border-bottom: 2px solid var(--text);
         }

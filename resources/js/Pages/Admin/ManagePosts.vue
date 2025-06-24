@@ -51,7 +51,7 @@ onMounted(() => {
                 >
             </div>
             <form @submit.prevent="FilterPosts()" class="mb-40px form">
-                <div class="d-flex flex-column row-gap-30px">
+                <div class="d-flex flex-column row-gap-30px col-12">
                     <div class="input-wrap relative col-12">
                         <label for="CurrentSearchPhrase"
                             >Wyszukaj po nazwie</label
@@ -80,6 +80,7 @@ onMounted(() => {
                         <input
                             class="btn btn-md cursor-pointer btn-hovprim"
                             type="submit"
+                            value="Wyszukaj"
                         />
                     </div>
                 </div>
@@ -121,7 +122,7 @@ onMounted(() => {
                         <div>Autor:</div>
                         <div>{{ post.author_name }}</div>
                     </div>
-                    <div class="post-list-item-col post-list-item-col-btns">
+                    <div class="post-list-item-col d-flex flex-row column-gap-10px">
                         <button
                             class="btn btn-md btn-hovprim"
                             @click="activePostId = post.id"

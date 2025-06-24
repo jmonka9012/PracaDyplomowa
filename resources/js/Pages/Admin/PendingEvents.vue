@@ -1,254 +1,148 @@
 <script setup>
 import blogBg from "~images/blog-bg.jpg";
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
-
+import Tab from "@/Components/Partials/Tab.vue";
+import Tabs from "@/Components/Partials/Tabs.vue";
+import DatePicker from "@/Components/Partials/DatePicker.vue";
+import MultiSelect from "@/Components/Partials/MultiSelect.vue";
 import {Link} from "@inertiajs/vue3";
+import EventTable from "../../Components/Partials/EventTable/EventTable.vue";
+import { router } from "@inertiajs/vue3";
+
+const filterRequest = ({
+    event_name: null,
+    event_genres: null,
+    event_date: null,
+    pending_name: null,
+    pending_genres: null,
+    pending_date: null,
+});
+
+const props = defineProps({
+    events: {
+        required: true,
+        type: Array,
+    },
+    pending_events: {
+        required: true,
+        type: Array,
+    },
+    genres: {
+        required: true,
+        type: Array,
+    }
+});
+
+console.log(props.genres)
+
+function submitFilterRequest() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('tabName')) {
+        filterRequest.tabName = params.get('tabName');
+    }
+
+    router.get(route("admin.events"),filterRequest, {
+        replace: true,
+        only: ['events', 'pending_events'],
+        preserveScroll: true,
+        preserveState: true,
+    });
+}
 </script>
 
 <template>
     <HeroSmall :source="blogBg" title="Zarządzaj wydarzeniami"></HeroSmall>
-    <section>
-        <div class="container mb-80px">
-            <div class="col-12 d-flex flex-lg-row align-items-lg-center">
-                <h2 class="mb-20px mb-lg-0">Wydarzenia</h2>
-                <Link :href="route('event-create')" class="ml-lg-20px btn btn-md btn-hovprim"
-                >Dodaj nowe
-                </Link
-                >
-            </div>
-            <div class="col-12 mt-30px mb-30px overflow-x-scroll">
-                <table class="table-nowrap table-fixed">
-                    <thead>
-                    <tr>
-                        <th class="t-details-events__input">
-                            <input
-                                class="check"
-                                name="Select all users"
-                                type="checkbox"
-                            />
-                        </th>
-                        <th class="t-details-events__main-img">
-                            Obrazek Główny
-                        </th>
-                        <th class="t-details-events__name">
-                            <a href="#username-sort"
-                            >Nazwa
-                                <span class="sorters">
-                                        <span class="sort sort-asc fa"></span>
-                                        <span class="sort sort-desc fa"></span>
-                                    </span>
-                            </a>
-                        </th>
-                        <th class="t-details-events__url">Url</th>
-                        <th class="t-details-events__date">Data</th>
-                        <th class="t-details-events__start">
-                            Początek (h)
-                        </th>
-                        <th class="t-details-events__end">Koniec (h)</th>
-                        <th class="t-details-events__loc">Lokalizacja</th>
-                        <th class="t-details-events__e-main">Email gł.</th>
-                        <th class="t-details-events__e-add">
-                            Email dodatkowy
-                        </th>
-                        <th class="t-details-events__desc">Opis</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="t-details">
-                        <td class="t-details__select">
-                            <input
-                                class="check"
-                                name="Select @name event"
-                                type="checkbox"
-                            />
-                        </td>
-                        <td>
-                            <img
-                                :src="hellsPit"
-                                class="t-details__pic mr-0"
-                            />
-                        </td>
-                        <td>
-                            <a href="#event-link">Wydarzenie numer 1</a>
-                            <div class="t-details__options">
-                                <a href="#edit">Edytuj</a>
-                                <a href="#delete">Usuń</a>
-                                <a href="#view">Zobacz</a>
-                            </div>
-                        </td>
-                        <td>/Lorem-ipsum-1</td>
-                        <td>1.04</td>
-                        <td>16:00</td>
-                        <td>24:00</td>
-                        <td>Sala nr 1</td>
-                        <td><a href="#email-main">Główny email</a></td>
-                        <td><a href="#email-add">Dodatkowy email</a></td>
-                        <td class="t-details-events__td-desc">
-                            <a href="text-primary">Podgląd</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <th>
-                            <input
-                                class="check"
-                                name="Select all users"
-                                type="checkbox"
-                            />
-                        </th>
-                        <th>Obrazek Główny</th>
-
-                        <th>
-                            <a href="#username-sort"
-                            >Nazwa
-                                <span class="sorters">
-                                        <span class="sort sort-asc fa"></span>
-                                        <span class="sort sort-desc fa"></span>
-                                    </span>
-                            </a>
-                        </th>
-                        <th>Url</th>
-                        <th>Data</th>
-                        <th>Początek (h)</th>
-                        <th>Koniec (h)</th>
-                        <th>Lokalizacja</th>
-                        <th>Email gł.</th>
-                        <th>Email dodatkowy</th>
-                        <th>Opis</th>
-                    </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
+    <section class="pb-100px">
         <div class="container">
-            <div class="col-12 d-flex flex-lg-row align-items-lg-center">
-                <h3 class="mb-20px mb-lg-0">
-                    Wydarzenia oczekujące na zatwierdzenie
-                </h3>
-                <Link :href="route('event-create')" class="ml-lg-20px btn btn-md btn-hovprim"
-                >Dodaj nowe
-                </Link
-                >
-            </div>
-            <div class="col-12 mt-30px mb-30px overflow-x-scroll">
-                <table class="table-nowrap table-fixed">
-                    <thead>
-                    <tr>
-                        <th class="t-details-events__input">
+            <Tabs class="col-12">
+                <Tab title="Zatwierdzone wydarzenia">
+                    <h3 class="mb-30px">Zatwierdzone wydarzenia</h3>
+                    <form
+                        class="select-filters col-12 col-lg-8 align-items-center d-flex flex-column"
+                        @submit.prevent="submitFilterRequest()">
+                        <div class="input-wrap relative col-12">
                             <input
-                                class="check"
-                                name="Select all users"
-                                type="checkbox"
-                            />
-                        </th>
-                        <th class="t-details-events__main-img">
-                            Obrazek Główny
-                        </th>
-                        <th class="t-details-events__name">
-                            <a href="#username-sort"
-                            >Nazwa
-                                <span class="sorters">
-                                        <span class="sort sort-asc fa"></span>
-                                        <span class="sort sort-desc fa"></span>
-                                    </span>
-                            </a>
-                        </th>
-                        <th class="t-details-events__url">Url</th>
-                        <th class="t-details-events__date">Data</th>
-                        <th class="t-details-events__start">
-                            Początek (h)
-                        </th>
-                        <th class="t-details-events__end">Koniec (h)</th>
-                        <th class="t-details-events__loc">Lokalizacja</th>
-                        <th class="t-details-events__e-main">Email gł.</th>
-                        <th class="t-details-events__e-add">
-                            Email dodatkowy
-                        </th>
-                        <th class="t-details-events__desc">Opis</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="t-details">
-                        <td class="t-details__select">
+                                v-model="filterRequest.event_name"
+                                class="search-input pl-10px"
+                                placeholder="Szukaj po nazwie"
+                                type="text"/>
+                            <i class="fa fa-search search-icon"></i>
+                        </div>
+                        <MultiSelect
+                            v-model="filterRequest.event_genres"
+                            :options="props.genres"
+                            placeholder="Wybierz kategorie"
+                        ></MultiSelect>
+                        <DatePicker
+                            v-model="filterRequest.event_date"
+                            format="MM/dd/yyyy"
+                        ></DatePicker>
+                        <input
+                            id="submitFilter"
+                            class="btn cursor-pointer btn-md btn-hovprim mt-30px"
+                            type="submit"
+                            value="Filtruj"
+                        />
+                    </form>
+                    <EventTable v-show="Object.keys(props.events.data).length>0" :events="props.events.data" class="mb-40px col-12"></EventTable>
+                    <div v-show="Object.keys(props.events.data)===0">Brak wyników</div>
+                    <div class="event-pagination">
+                        <ul class="ml-auto mr-auto">
+                            <li v-for="page in props.events.meta.links"
+                                :key="page"
+                                :class="{ 'page-current': page.active }"
+                                class="page">
+                                <Link :href="page.url" v-html="page.label"></Link>
+                            </li>
+                        </ul>
+                    </div>
+                </Tab>
+                <Tab title="Oczekujące wydarzenia">
+                    <h3 class="mb-30px">Wydarzenia czekające na zatwierdzenie</h3>
+                    <form
+                        class="select-filters col-12 col-lg-8 align-items-center d-flex flex-column"
+                        @submit.prevent="submitFilterRequest()">
+                        <div class="input-wrap relative col-12">
                             <input
-                                class="check"
-                                name="Select @name event"
-                                type="checkbox"
-                            />
-                        </td>
-                        <td>
-                            <img
-                                :src="hellsPit"
-                                class="t-details__pic mr-0"
-                            />
-                        </td>
-                        <td>
-                            <a href="#event-link">Wydarzenie numer 1</a>
-                            <div class="t-details__options">
-                                <a href="#edit">Edytuj</a>
-                                <a href="#delete">Usuń</a>
-                                <a href="#view">Zobacz</a>
-                            </div>
-                        </td>
-                        <td>/Lorem-ipsum-1</td>
-                        <td>1.04</td>
-                        <td>16:00</td>
-                        <td>24:00</td>
-                        <td>Sala nr 1</td>
-                        <td><a href="#email-main">Główny email</a></td>
-                        <td><a href="#email-add">Dodatkowy email</a></td>
-                        <td class="t-details-events__td-desc">
-                            <a href="text-primary">Podgląd</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <th>
-                            <input
-                                class="check"
-                                name="Select all users"
-                                type="checkbox"
-                            />
-                        </th>
-                        <th>Obrazek Główny</th>
-
-                        <th>
-                            <a href="#username-sort"
-                            >Nazwa
-                                <span class="sorters">
-                                        <span class="sort sort-asc fa"></span>
-                                        <span class="sort sort-desc fa"></span>
-                                    </span>
-                            </a>
-                        </th>
-                        <th>Url</th>
-                        <th>Data</th>
-                        <th>Początek (h)</th>
-                        <th>Koniec (h)</th>
-                        <th>Lokalizacja</th>
-                        <th>Email gł.</th>
-                        <th>Email dodatkowy</th>
-                        <th>Opis</th>
-                    </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
-        <div class="container">
-<!--            <div class="event-pagination">
-                <ul class="ml-auto mr-auto">
-                    <li
-                        v-for="page in events.meta.links"
-                        :key="page"
-                        :class="{ 'page-current': page.active }"
-                        class="page"
-                    >
-                        <Link :href="page.url" v-html="page.label"></Link>
-                    </li>
-                </ul>
-            </div>-->
+                                v-model="filterRequest.pending_name"
+                                class="search-input pl-10px"
+                                placeholder="Szukaj po nazwie"
+                                type="text"/>
+                            <i class="fa fa-search search-icon"></i>
+                        </div>
+                        <MultiSelect
+                            v-model="filterRequest.pending_genres"
+                            :options="props.genres"
+                            placeholder="Wybierz kategorie"
+                        ></MultiSelect>
+                        <DatePicker
+                            v-model="filterRequest.pending_date"
+                            format="MM/dd/yyyy"
+                        ></DatePicker>
+                        <input
+                            id="submitFilter"
+                            class="btn cursor-pointer btn-md btn-hovprim mt-30px"
+                            type="submit"
+                            value="Filtruj"
+                        />
+                    </form>
+                    <EventTable v-show="Object.keys(props.pending_events.data).length>0" :events="props.pending_events.data" :pending="true" class="mb-40px col-12"></EventTable>
+                    <div v-show="Object.keys(props.pending_events.data)===0">Brak wyników</div>
+                    <div class="event-pagination">
+                        <ul class="ml-auto mr-auto">
+                            <li v-for="page in props.pending_events.meta.links"
+                                :key="page"
+                                :class="{ 'page-current': page.active }"
+                                class="page">
+                                <Link :href="page.url" v-html="page.label"></Link>
+                            </li>
+                        </ul>
+                    </div>
+                </Tab>
+                <Tab title="Zakończone wydarzenia">
+                    <h3>?</h3>
+                </Tab>
+            </Tabs>
         </div>
     </section>
 </template>

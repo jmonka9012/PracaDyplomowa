@@ -38,7 +38,6 @@ props.genres.forEach((genre, index) => {
 console.log(genres);
 
 const sectionPrices = reactive({});
-
 const initSectionPrices = () => {
     props.halls.forEach((hall) => {
         if (!sectionPrices[hall.id]) {

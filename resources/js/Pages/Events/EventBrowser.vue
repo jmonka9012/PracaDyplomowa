@@ -63,8 +63,11 @@ function submitFilterRequest() {
         filters.event_name = filterRequest.event_name;
     }
 
-    router.get(route("event.browser"), filters, {
+    router.get(route("event.browser"),filters, {
         replace: true,
+        only: ['events'],
+        preserveScroll: true,
+        preserveState: true,
     });
 }
 </script>
