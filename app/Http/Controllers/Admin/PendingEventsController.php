@@ -54,7 +54,11 @@ class PendingEventsController extends Controller
 
     public function getEvents(Request $request)
     {      
-        $query = Event::where('pending', false);
+        $query = Event::where('pending', false)->with([
+            'hall.sections',
+            'seats.section',
+            'standingTickets.section',
+        ]);
 
         $sortField = $request->input('event_sort_field', 'event_date');
 
@@ -101,7 +105,12 @@ class PendingEventsController extends Controller
 
     public function getEventsPending(Request $request)
     {      
-        $query = Event::where('pending', true);
+        $query = Event::where('pending', true)->with([
+            'hall.sections',
+            'seats.section',
+            'standingTickets.section',
+        ]);
+
 
         $sortField = $request->input('pending_sort_field', 'event_date');
 

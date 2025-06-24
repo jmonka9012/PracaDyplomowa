@@ -3,6 +3,7 @@
 namespace App\Models\EventSeats;
 
 use App\Models\Events\Event;
+use App\Models\HallSection;
 
 class EventSeat extends EventSeatBase
 {
@@ -10,5 +11,9 @@ class EventSeat extends EventSeatBase
 
     public function event(){
         return $this->belongsTo(Event::class);
+    }
+    
+    public function section(){
+        return $this->belongsTo(HallSection::class);
     }
 }

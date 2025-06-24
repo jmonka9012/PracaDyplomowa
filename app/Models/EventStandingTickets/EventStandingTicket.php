@@ -3,6 +3,7 @@
 namespace App\Models\EventStandingTickets;
 
 use App\Models\Events\Event;
+use App\Models\HallSection;
 
 class EventStandingTicket extends EventStandingTicketBase
 {
@@ -10,5 +11,9 @@ class EventStandingTicket extends EventStandingTicketBase
 
     public function event(){
         return $this->belongsTo(Event::class);
+    }
+
+     public function section(){
+        return $this->belongsTo(HallSection::class);
     }
 }
