@@ -36,6 +36,8 @@ class PendingEventResource extends JsonResource
             return $section;
         });
 
+        $totalSaleValue = $sectionsWithStats->sum('total_sold_value');
+
         if (!$this->pending && $this->relationLoaded('hall')) {
             $this->hall->setRelation('sections', $sectionsWithStats);
         }
@@ -43,6 +45,7 @@ class PendingEventResource extends JsonResource
         return [
             'id' => $this->id,
             'event_name' => $this->event_name,
+            'total_sale_value' => $totalSaleValue,
             'event_additional_url' => $this->event_additional_url,
             'slug' => $this->slug,
             'event_url' => $this->event_url,
