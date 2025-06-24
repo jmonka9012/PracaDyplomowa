@@ -41,9 +41,6 @@ class PendingEventResource extends JsonResource
         }
 
         return [
-                        'event_location2' => $this->relationLoaded('hall')
-                ? new HallWithStatsResource($this->hall, $sectionsWithStats)
-                : null,
             'id' => $this->id,
             'event_name' => $this->event_name,
             'event_additional_url' => $this->event_additional_url,
