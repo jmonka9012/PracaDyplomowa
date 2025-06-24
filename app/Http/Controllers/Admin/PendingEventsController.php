@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Events\Event;
 use App\Http\Resources\PendingEventResource;
 use Illuminate\Support\Carbon;
+use App\Models\Events\Genre;
 
 class PendingEventsController extends Controller
 {
@@ -24,10 +25,14 @@ class PendingEventsController extends Controller
         $eventsPending = $this->getEventsPending($request);        
         $events = $this->getEvents($request);
 
+        $genres = Genre::orderBy('id', 'asc')->get();
+
         return Inertia::render('Admin/PendingEvents', [
             'pending_events' => PendingEventResource::collection($eventsPending)->response()->getData(true),
 
-            'events' => PendingEventResource::collection($events)->response()->getData(true)
+            'events' => PendingEventResource::collection($events)->response()->getData(true),
+
+            'genres' => $genres,
         ]);
     }
 
@@ -43,12 +48,14 @@ class PendingEventsController extends Controller
 
         $eventsPending = $this->getEventsPending($request);        
         $events = $this->getEvents($request);
-        
+        $genres = Genre::orderBy('id', 'asc')->get();
 
         return response()->json([
             'pending_events' => PendingEventResource::collection($eventsPending)->response()->getData(true),
 
-            'events' => PendingEventResource::collection($events)->response()->getData(true)
+            'events' => PendingEventResource::collection($events)->response()->getData(true),
+
+            'genres' => $genres,
         ]);
     }
 
