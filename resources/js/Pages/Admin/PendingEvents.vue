@@ -92,7 +92,7 @@ function submitFilterRequest() {
                                 :key="page"
                                 :class="{ 'page-current': page.active }"
                                 class="page">
-                                <Link :href="page.url" v-html="page.label"></Link>
+                                <Link preserve-state :only="['events']" :href="page.url" v-html="page.label"></Link>
                             </li>
                         </ul>
                     </div>
@@ -134,7 +134,7 @@ function submitFilterRequest() {
                                 :key="page"
                                 :class="{ 'page-current': page.active }"
                                 class="page">
-                                <Link :href="page.url" v-html="page.label"></Link>
+                                <Link preserve-state :only="['pending_events']" :href="page.url" v-html="page.label"></Link>
                             </li>
                         </ul>
                     </div>
