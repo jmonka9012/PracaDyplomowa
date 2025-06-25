@@ -37,7 +37,7 @@ class GenreSeeder extends Seeder
             'Crossover Thrash',
             'Ska Punk',
             'Noise Rock',
-            'Klasyczny Punk',
+            'Punk',
             'Metal',
             'Black Metal',
             'Blackened Death Metal',
@@ -90,6 +90,8 @@ class GenreSeeder extends Seeder
             'Sludge Metal',
             'Glam Metal',
             'Gothic Metal',
+            'Rap',
+            'Jazz'
         ];
 
         foreach($genres as $genre){
