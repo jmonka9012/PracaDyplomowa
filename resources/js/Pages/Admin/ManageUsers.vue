@@ -60,7 +60,7 @@ function SetUserProperty(value, userID, property) {
     if (property === 'organizer_status') {
         routeName = "admin.users.organizers.change_status";
     } else if (property === 'role') {
-        //routeName = "placeholder";
+        routeName = "admin.users.change_role";
     }
 
     router.put(
@@ -162,7 +162,7 @@ function SetUserProperty(value, userID, property) {
                                 id="changeStatus"
                                 class=""
                                 name="changeStatus"
-                                @change="SetUserProperty($event.target.value,user.organizer.id,'role')">
+                                @change="SetUserProperty($event.target.value,user.id,'role')">
                                 <option :selected="role.value === user.role" v-for="role in props.user_stats.original" :value="role.value">{{role.description}}</option>
                             </select>
                         </div>

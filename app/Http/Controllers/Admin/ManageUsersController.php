@@ -11,6 +11,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Mail\VerifyEmail;
+use Illuminate\Support\Facades\Mail;
 
 class ManageUsersController extends Controller
 {
@@ -157,5 +160,67 @@ class ManageUsersController extends Controller
             'organizer_stats' => $organizerStats,
             'user_stats' => $userStats
         ];
+    }
+
+    public function changeStatus(Request $request, $id)
+    {
+        $validRoles = array_filter(
+            array_column(UserRole::cases(), 'value'),
+            fn($role) => $role !== UserRole::ORGANIZER->value
+        );
+
+        $validated = $request->validate([
+            'account_status' => ['required', 'string', Rule::in($validRoles)],
+        ]);
+    
+        $user = User::findOrFail($id);
+        $newRole = UserRole::from($validated['account_status']);
+
+        if ($user->role === UserRole::ORGANIZER->value) {
+            return redirect()->back()
+                ->withErrors(['account_status' => 'Nie można zmienić roli organizatora, proszę zmienić status konta organizatora'])
+                ->withInput();
+        }
+        
+        if ($user->role === UserRole::ADMIN->value) {
+            return redirect()->back()
+                ->withErrors(['account_status' => 'Nie można zmienić roli konta administratorskiego'])
+                ->withInput();
+        }
+
+        if($newRole === UserRole::ORGANIZER) {
+            return redirect()->back()
+                ->withErrors(['account_status' => 'Nie można zmienić roli na organizatora, proszę założyć konto organizatorskie'])
+                ->withInput();
+        }
+        
+        if($newRole === UserRole::ADMIN) {
+            return redirect()->back()
+                ->withErrors(['account_status' => 'Nie można zmienić roli na Administratora, proszę założyć konto administratorskie'])
+                ->withInput();
+        }
+
+
+        $user->role = $newRole->value;
+        $user->permission_level = $newRole->permissionLevel();
+
+        if ($newRole === UserRole::UNVERIFIED_USER) {
+            $user->email_verified_at = null;
+            $user->save();        
+            Mail::to($user->email)->send(new VerifyEmail($user));
+        } elseif ($newRole === UserRole::VERIFIED_USER && is_null($user->email_verified_at)) {
+            $user->email_verified_at = now();
+            $user->save();
+        } else {
+            $user->save();
+        }
+
+        $usersPaginator = $this->getFilteredUsers($request);      
+
+        return redirect()->back()->with([
+            'users' => UserAdminBrowserResource::collection($usersPaginator)
+                                                ->response()
+                                                ->getData(true),
+            ]);
     }
 }

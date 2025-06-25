@@ -25,6 +25,10 @@ Route::prefix('admin')->group(function() {
             ->name('admin.users.delete')
             ->middleware('adminAccess');
 
+      Route::put('/uzytkownicy/{id}/status', [ManageUsersController::class, 'changeStatus'])
+            ->name('admin.users.change_role')
+            ->middleware('adminAccess');
+
       Route::put('/uzytkownicy/organizatorzy/{id}/status', [ManageOrganizerController::class, 'changeStatus'])
             ->name('admin.users.organizers.change_status')
             ->middleware('adminAccess');
