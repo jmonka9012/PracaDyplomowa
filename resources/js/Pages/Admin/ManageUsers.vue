@@ -91,6 +91,7 @@ function SetUserProperty(value, userID, property) {
         }
     );
 }
+
 </script>
 
 <template>
@@ -165,7 +166,7 @@ function SetUserProperty(value, userID, property) {
                         <div class="user-row__value">{{ user.name }}</div>
                         <div class="user-row__value">{{ user.email }}</div>
                         <div class="user-row__value">{{ user.full_name }}</div>
-                        <div v-if="user.role === 'admin' || user.role === 'organizer'" class="user-row__value">{{ user.role }}</div>
+                        <div v-if="user.role === 'admin' || user.role === 'organizer'" v-html="props.user_stats.original.find(role => role.value === user.role)?.description" class="user-row__value"></div>
                         <div v-else>
                             <select
                                 id="changeStatus"
