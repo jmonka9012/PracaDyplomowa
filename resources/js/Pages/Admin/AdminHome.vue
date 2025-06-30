@@ -1,5 +1,5 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
 import { reactive } from "vue";
 
 const props = defineProps({
@@ -7,33 +7,34 @@ const props = defineProps({
         type: Array,
         required: true,
     },
-    featured_genres: {
+    featured_categories: {
         type: Array,
     }
 });
+console.log(props);
 
 const featuredCategories = reactive({
+    0: {
+        id: props.featured_categories[0].id ? props.featured_categories[0].id : 0,
+        file: null,
+    },
     1: {
-        id: null,
+        id: props.featured_categories[1].id ? props.featured_categories[1].id : 0,
         file: null,
     },
     2: {
-        id: null,
+        id: props.featured_categories[2].id ? props.featured_categories[2].id : 0,
         file: null,
     },
     3: {
-        id: null,
+        id: props.featured_categories[3].id ? props.featured_categories[3].id : 0,
         file: null,
     },
     4: {
-        id: null,
+        id: props.featured_categories[4].id ? props.featured_categories[4].id : 0,
         file: null,
-    },
-    5: {
-        id: null,
-        file: null,
-    },
-});
+    }
+})
 
 const iconPreviews = reactive({})
 
@@ -49,10 +50,18 @@ function HandleIconChange(event, index) {
     reader.readAsText(file)
 }
 
-
 function SetFeaturedCategories() {
-    console.log("nic sie nigdy nie dzieje");
     console.log(featuredCategories);
+    router.post(route('admin.featured.update'), featuredCategories, {
+        preserveScroll: true,
+        only: ["users"],
+        onError: (err) => {
+            console.log("Błąd:", err);
+        },
+        onSuccess: (page) => {
+            console.log("Sukces:", page);
+        },
+    })
 }
 </script>
 
@@ -99,21 +108,20 @@ function SetFeaturedCategories() {
             <h3 class="mb-30px w-100">Promowane kategorie (strona główna)</h3>
             <div class="featured-categories">
                 <div v-for="i in 5" :key="i" class="featured-categories__cat-box">
-                    <div class="featured-categories__label">Obecna ikona:</div>
+                    <div class="featured-categories__label">Obecna ikona {{i}}:</div>
                     <div class="featured-categories__icon-box">
-                        <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M21.1056 7.82366C21.0368 7.613 20.8562 7.46253 20.6369 7.42814L14.1021 6.4995L11.1614 0.588067C11.0626 0.390303 10.8605 0.265625 10.6412 0.265625C10.422 0.265625 10.2199 0.390303 10.121 0.592366L7.21905 6.521L0.68423 7.49262C0.464969 7.52702 0.284402 7.67749 0.215614 7.88815C0.146827 8.09881 0.207016 8.33097 0.366087 8.48145L5.10813 13.0773L4.01183 19.5863C3.97314 19.8056 4.06342 20.0249 4.24399 20.1538C4.34287 20.2269 4.46325 20.2656 4.58363 20.2656C4.67821 20.2656 4.76849 20.2441 4.85448 20.1968L10.6885 17.1057L16.5398 20.1624C16.6258 20.2054 16.716 20.2269 16.8063 20.2269C17.1245 20.2269 17.3867 19.9647 17.3867 19.6465C17.3867 19.5992 17.3824 19.5563 17.3695 19.5133L16.2388 13.0429L20.9508 8.42126C21.1185 8.26648 21.1743 8.03433 21.1056 7.82366ZM15.2156 12.4281C15.078 12.5614 15.0178 12.7549 15.0522 12.944L16.0368 18.5889L10.9551 15.9363C10.7874 15.846 10.5853 15.8503 10.4134 15.9363L5.34889 18.619L6.29902 12.9655C6.32911 12.7764 6.26892 12.5872 6.13135 12.4539L2.02129 8.46425L7.69197 7.6216C7.88113 7.59151 8.0445 7.47543 8.12619 7.30346L10.6455 2.15728L13.1993 7.29056C13.2853 7.46253 13.4486 7.57861 13.6378 7.6087L19.3128 8.41696L15.2156 12.4281Z"/>
-                        </svg>
+                        <img   :src="`/storage/${props.featured_categories[i-1].image_path}`"
+                               alt="">
                     </div>
-                    <input @change="HandleIconChange($event, i)" type="file" accept=".svg,image/svg+xml">
-                    <div v-if="featuredCategories[i].file">
+                    <input @change="HandleIconChange($event, i-1)" type="file" accept=".svg,image/svg+xml">
+                    <div v-if="featuredCategories[i-1].file">
                         <div class="featured-categories__label">Nowa ikona:</div>
                         <div
                             class="featured-categories__icon-box"
-                            v-html="iconPreviews[i]"
+                            v-html="iconPreviews[i-1]"
                         ></div>                    </div>
                     <label class="featured-categories__label">Obecna kategoria:</label>
-                    <select class="hero-select" v-model="featuredCategories[i].id">
+                    <select class="hero-select" v-model="featuredCategories[i-1].id">
                         <option disabled :value="null">
                             Wybierz kategorię
                         </option>
@@ -121,7 +129,7 @@ function SetFeaturedCategories() {
                             :key="genre.id"
                             :value="genre.id"
                             v-for="genre in props.genres"
-                        >
+                            :selected="Number(genre.id) === Number(featuredCategories[i-1].id)">
                             {{ genre.genre_name }}
                         </option>
                     </select>
