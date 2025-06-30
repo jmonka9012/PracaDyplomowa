@@ -3,6 +3,7 @@ import blogBg from "~images/blog-bg.jpg";
 import {router} from "@inertiajs/vue3";
 import {reactive} from "vue";
 import {Link} from "@inertiajs/vue3";
+import { computed } from 'vue';
 import useAuth from "@/Utilities/useAuth";
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import Collapse from "../../Components/Partials/Collapse.vue";
@@ -17,6 +18,14 @@ const props = defineProps({
     user_stats: {
         required: true,
     },
+});
+
+const filteredRoles = computed(() => {
+    return (props.user_stats.original || [])
+        .filter(role => role
+            && role.value
+            && !['admin', 'organizer'].includes(role.value)
+        );
 });
 
 const filterRequest = reactive({
@@ -163,8 +172,7 @@ function SetUserProperty(value, userID, property) {
                                 class=""
                                 name="changeStatus"
                                 @change="SetUserProperty($event.target.value,user.id,'role')">
-                                <option :selected="role.value === user.role" v-for="role in props.user_stats.original" :value="role.value">{{role.description}}</option>
-                            </select>
+                                <option :selected="role.value === user.role" v-for="role in filteredRoles" :value="role.value">{{role.description}}</option>                            </select>
                         </div>
                         <div class="user-row__value">
                             {{ user.total_tickets }}
