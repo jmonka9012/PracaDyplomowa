@@ -20,8 +20,6 @@ const props = defineProps({
     },
 });
 
-console.log(props.events);
-
 let genres = [];
 
 props.genres.forEach((genre, index) => {
@@ -30,6 +28,9 @@ props.genres.forEach((genre, index) => {
         value: genre.id,
     };
 });
+
+console.log(genres);
+
 
 const filterRequest = reactive({
     event_name: null,

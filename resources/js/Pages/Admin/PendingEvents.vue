@@ -8,6 +8,7 @@ import MultiSelect from "@/Components/Partials/MultiSelect.vue";
 import {Link} from "@inertiajs/vue3";
 import EventTable from "../../Components/Partials/EventTable/EventTable.vue";
 import { router } from "@inertiajs/vue3";
+import axios from "axios";
 
 const filterRequest = ({
     event_name: null,
@@ -33,7 +34,28 @@ const props = defineProps({
     }
 });
 
-console.log(props.genres)
+let genres = [];
+
+props.genres.forEach((genre, index) => {
+    genres[index] = {
+        name: genre.genre_name,
+        value: genre.id,
+    };
+});
+
+console.log(genres);
+
+const handleAjaxTab = (emittedTab) => {
+    const routeName = emittedTab?.routeName;
+    axios
+        .get(route(routeName))
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+}
 
 function submitFilterRequest() {
     const params = new URLSearchParams(window.location.search);
@@ -55,7 +77,7 @@ function submitFilterRequest() {
     <section class="pb-100px">
         <div class="container">
             <Tabs class="col-12">
-                <Tab title="Zatwierdzone wydarzenia">
+                <Tab routeName="jacek.test1" title="Zatwierdzone wydarzenia">
                     <h3 class="mb-30px">Zatwierdzone wydarzenia</h3>
                     <form
                         class="select-filters col-12 col-lg-8 align-items-center d-flex flex-column"
@@ -70,7 +92,7 @@ function submitFilterRequest() {
                         </div>
                         <MultiSelect
                             v-model="filterRequest.event_genres"
-                            :options="props.genres"
+                            :options="genres"
                             placeholder="Wybierz kategorie"
                         ></MultiSelect>
                         <DatePicker
@@ -112,8 +134,9 @@ function submitFilterRequest() {
                         </div>
                         <MultiSelect
                             v-model="filterRequest.pending_genres"
-                            :options="props.genres"
+                            :options="genres"
                             placeholder="Wybierz kategorie"
+
                         ></MultiSelect>
                         <DatePicker
                             v-model="filterRequest.pending_date"

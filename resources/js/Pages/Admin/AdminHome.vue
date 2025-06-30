@@ -1,6 +1,6 @@
 <script setup>
 import { Link, router } from "@inertiajs/vue3";
-import { reactive } from "vue";
+import { reactive, ref, onMounted } from "vue";
 
 const props = defineProps({
     genres: {
@@ -13,7 +13,7 @@ const props = defineProps({
 });
 console.log(props);
 
-const featuredCategories = reactive({
+/*const featuredCategories = reactive({
     0: {
         id: props.featured_categories[0].genre_id ? props.featured_categories[0].genre_id : 0,
         file: null,
@@ -34,14 +34,21 @@ const featuredCategories = reactive({
         id: props.featured_categories[4].genre_id ? props.featured_categories[4].genre_id : 0,
         file: null,
     }
-})
+})*/
+
+const featuredCategories = ref(
+    props.featured_categories.map(sc => ({
+        id:   sc.genre_id,
+        file: null,
+    }))
+);
 
 const iconPreviews = reactive({})
 
 function HandleIconChange(event, index) {
     const file = event.target.files?.[0]
     if (!file) return
-    featuredCategories[index].file = file
+    featuredCategories.value[index].file = file
 
     const reader = new FileReader()
     reader.onload = () => {
@@ -51,8 +58,8 @@ function HandleIconChange(event, index) {
 }
 
 function SetFeaturedCategories() {
-    console.log(featuredCategories);
-    router.post(route('admin.featured.update'), featuredCategories, {
+    console.log(featuredCategories.value);
+    router.post(route('admin.featured.update'), featuredCategories.value, {
         preserveScroll: true,
         only: ["users"],
         onError: (err) => {
