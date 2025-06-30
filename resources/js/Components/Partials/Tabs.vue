@@ -20,12 +20,12 @@ import { ref, provide, onMounted } from 'vue';
 
 const tabs = ref({});
 const activeTabIndex = ref(0);
-const emit = defineEmits(["update-props"]);
+//const emit = defineEmits(["update-props"]);
 
 const setActiveTab = (idx) => {
     const index = Number(idx);
     activeTabIndex.value = index;
-    emit("update-props", tabs.value[index]);
+    //emit("update-props", tabs.value[index]);
 
     params.set('tabName', tabs.value[index].title);
     const newUrl = `${window.location.pathname}?${params.toString()}`;

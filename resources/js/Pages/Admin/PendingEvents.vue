@@ -9,6 +9,7 @@ import {Link} from "@inertiajs/vue3";
 import EventTable from "../../Components/Partials/EventTable/EventTable.vue";
 import { router } from "@inertiajs/vue3";
 import axios from "axios";
+import {onMounted} from "vue";
 
 const filterRequest = ({
     event_name: null,
@@ -17,6 +18,11 @@ const filterRequest = ({
     pending_name: null,
     pending_genres: null,
     pending_date: null,
+});
+
+onMounted(() => {
+    const params = new URLSearchParams(window.location.search);
+    console.log(params);
 });
 
 const props = defineProps({
@@ -44,18 +50,6 @@ props.genres.forEach((genre, index) => {
 });
 
 console.log(genres);
-
-const handleAjaxTab = (emittedTab) => {
-    const routeName = emittedTab?.routeName;
-    axios
-        .get(route(routeName))
-        .then((response) => {
-            console.log(response);
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-}
 
 function submitFilterRequest() {
     const params = new URLSearchParams(window.location.search);

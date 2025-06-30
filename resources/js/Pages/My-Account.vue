@@ -72,8 +72,6 @@ GetOrganizerInfo();
 const errors = reactive({});
 const ticketErrors = reactive({});
 
-
-
 function handleSubmitClick(form) {
     showModal.value = true;
     currentRequest = form;
@@ -93,18 +91,6 @@ const handleValidationEmit = (state) => {
         });
     }
 };
-
-const handleAjaxTab = (emittedTab) => {
-    const routeName = emittedTab?.routeName;
-    axios
-        .get(route(routeName))
-        .then((response) => {
-            console.log(response);
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-}
 
 function SendTicket() {
 
@@ -149,8 +135,8 @@ const paymentForm = reactive({
                                     <a class="bcrumb__cur" href="">Current</a>
                                 </div>-->
                 <h1 class="ma-title">Mój profil</h1>
-                <Tabs @update-props="handleAjaxTab" class="tabs-white">
-                    <Tab routeName="jacek.test1" title="Konto">
+                <Tabs class="tabs-white">
+                    <Tab title="Konto">
                         <div
                             class="d-flex align-items-center column-gap-10px mb-32px"
                         >
@@ -218,7 +204,7 @@ const paymentForm = reactive({
                             </form>
                         </div>
                     </Tab>
-                    <Tab routeName="jacek.test2" title="Informacje do faktur">
+                    <Tab title="Informacje do faktur">
                         <div class="d-flex flex-column align-items-start">
                             <h3>Informacje do faktur</h3>
                             <form @submit.prevent="handleSubmitClick(paymentForm)">
@@ -361,7 +347,7 @@ const paymentForm = reactive({
                             </form>
                         </div>
                     </Tab>
-                    <Tab routeName="jacek.test1" title="Moje bilety">
+                    <Tab title="Moje bilety">
                         <div
                             class="d-flex align-items-center column-gap-10px mb-32px"
                         >
@@ -369,7 +355,7 @@ const paymentForm = reactive({
                             <i class="fa fa-ticket"></i>
                         </div>
                     </Tab>
-                    <Tab routeName="jacek.test2" title="Obsługa klienta">
+                    <Tab title="Obsługa klienta">
                         <div
                             class="d-flex flex-column align-items-center column-gap-10px mb-32px"
                         >

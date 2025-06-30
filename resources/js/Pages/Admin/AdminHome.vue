@@ -36,9 +36,8 @@ function HandleIconChange(event, index) {
 
 function SetFeaturedCategories() {
     console.log(featuredCategories.value);
-    router.post(route('admin.featured.update'), {featured_genres: featuredCategories}, {
+    router.post(route('admin.featured.update'), {featured_genres: featuredCategories.value}, {
         preserveScroll: true,
-        only: ["users"],
         onError: (err) => {
             console.log("Błąd:", err);
         },
