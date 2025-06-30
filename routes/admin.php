@@ -1,12 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\FeaturedGenresController;
 use App\Http\Controllers\Admin\ManageUsersController;
 use App\Http\Controllers\Admin\ManagePostsController;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\CustomerServiceController;
 use App\Http\Controllers\Admin\PendingEventsController;
 use App\Http\Controllers\Admin\ManageOrganizerController;
-use App\Http\Controllers\Admin\FeaturedCategoriesController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function() {
@@ -14,7 +14,7 @@ Route::prefix('admin')->group(function() {
             ->name('admin')
             ->middleware('employeesAccess');
       
-      Route::post('/kategorie/aktualizacja', [FeaturedCategoriesController::class, 'updateCategories'])
+      Route::post('/kategorie/aktualizacja', [FeaturedGenresController::class, 'update'])
             ->name('admin.featured.update')
             ->middleware('employeesAccess');
 

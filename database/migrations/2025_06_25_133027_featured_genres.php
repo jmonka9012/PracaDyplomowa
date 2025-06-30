@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('featured_categories', function (Blueprint $table) 
+        Schema::create('featured_genres', function (Blueprint $table) 
         {
             $table->id();
-            $table->string('image_path');
-            $table->foreignId('genre_id')->constrained()->cascadeOnDelete();
+            $table->string('image_path')->nullable();
+            $table->foreignId('genre_id');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('featured_categories');
+        Schema::dropIfExists('featured_genres');
     }
 };

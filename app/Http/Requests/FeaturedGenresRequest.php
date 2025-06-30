@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class FeaturedCategoriesRequest extends FormRequest
+class FeaturedGenresRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ public function rules()
         return [
             'featured_categories' => 'required|array|min:1|max:5',
             'featured_categories.*' => 'required|array',
-            'featured_categories.*.file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'featured_categories.*.file' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'featured_categories.*.genre_id' => [
                 'required',
                 Rule::exists('genres', 'id')

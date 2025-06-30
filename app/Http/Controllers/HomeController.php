@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
             
+use App\Models\FeaturedGenre;
 use Inertia\Inertia;
 use App\Models\Events\Genre;
 use App\Models\Events\Event;
 use App\Models\Blog\BlogPost;
-use App\Models\FeaturedCategory;
 use App\Http\Resources\EventBrowserResource;
 use App\Http\Resources\BlogPostBrowserResource;
 
@@ -27,7 +27,7 @@ class HomeController extends Controller
             ->take(4)
             ->get();
         
-        $featuredCategories = FeaturedCategory::all();
+        $featuredCategories = FeaturedGenre::all();
 
         return Inertia::render('Home', [
             'genres' => $genres,
@@ -50,7 +50,7 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
-        $featuredCategories = FeaturedCategory::all();
+        $featuredCategories = FeaturedGenre::all();
 
             return response()->json([
             'genres' => $genres,
