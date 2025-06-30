@@ -26,7 +26,12 @@ const props = defineProps({
         type: Array,
         required: true,
     },
+    featured_categories: {
+        type: Array,
+        required: true,
+    }
 });
+
 </script>
 
 <template>
@@ -51,7 +56,7 @@ const props = defineProps({
             >
         </div>
     </section>
-    <CategoriesImg class="pt-60px pb-60px pb-lg-90px" />
+    <CategoriesImg :genres="props.featured_categories" class="pt-60px pb-60px pb-lg-90px" />
     <Services />
     <section class="pt-60px pb-100px">
         <div

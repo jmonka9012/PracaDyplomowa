@@ -1,34 +1,23 @@
 <script setup>
 import catImage from "~images/cat-img-bg-1.jpg";
+import {Link} from "@inertiajs/vue3";
+
+const props = defineProps({
+    genres: {
+        type: Array,
+        required: true,
+    }
+});
+console.log(props.genres);
 </script>
 
 <template>
     <section v-bind="$attrs">
         <div class="container cat-cont">
-            <div class="cat-item">
-                <a href="/" class="link-stretched z-1"></a>
-                <img class="cat-img" :src="catImage" alt="" />
-                <h3 class="cat-name">lorem</h3>
-            </div>
-            <div class="cat-item">
-                <a href="/" class="link-stretched z-1"></a>
-                <img class="cat-img" :src="catImage" alt="" />
-                <h3 class="cat-name">lorem</h3>
-            </div>
-            <div class="cat-item">
-                <a href="/" class="link-stretched z-1"></a>
-                <img class="cat-img" :src="catImage" alt="" />
-                <h3 class="cat-name">lorem</h3>
-            </div>
-            <div class="cat-item">
-                <a href="/" class="link-stretched z-1"></a>
-                <img class="cat-img" :src="catImage" alt="" />
-                <h3 class="cat-name">lorem</h3>
-            </div>
-            <div class="cat-item">
-                <a href="/" class="link-stretched z-1"></a>
-                <img class="cat-img" :src="catImage" alt="" />
-                <h3 class="cat-name">lorem</h3>
+            <div v-for="genre in props.genres" class="cat-item">
+                <Link :href="route('event.browser', {genres: genre.genre_id})" class="link-stretched z-1"></Link>
+                <img class="cat-img" :src="`/storage/${genre.image_path}`" alt="" />
+                <h3 class="cat-name">{{genre.genre_id}}</h3>
             </div>
         </div>
     </section>

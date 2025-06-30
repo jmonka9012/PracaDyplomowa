@@ -15,23 +15,23 @@ console.log(props);
 
 const featuredCategories = reactive({
     0: {
-        id: props.featured_categories[0].id ? props.featured_categories[0].id : 0,
+        id: props.featured_categories[0].genre_id ? props.featured_categories[0].genre_id : 0,
         file: null,
     },
     1: {
-        id: props.featured_categories[1].id ? props.featured_categories[1].id : 0,
+        id: props.featured_categories[1].genre_id ? props.featured_categories[1].genre_id : 0,
         file: null,
     },
     2: {
-        id: props.featured_categories[2].id ? props.featured_categories[2].id : 0,
+        id: props.featured_categories[2].genre_id ? props.featured_categories[2].genre_id : 0,
         file: null,
     },
     3: {
-        id: props.featured_categories[3].id ? props.featured_categories[3].id : 0,
+        id: props.featured_categories[3].genre_id ? props.featured_categories[3].genre_id : 0,
         file: null,
     },
     4: {
-        id: props.featured_categories[4].id ? props.featured_categories[4].id : 0,
+        id: props.featured_categories[4].genre_id ? props.featured_categories[4].genre_id : 0,
         file: null,
     }
 })
