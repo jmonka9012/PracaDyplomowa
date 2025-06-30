@@ -206,9 +206,9 @@ const paymentForm = reactive({
                     </Tab>
                     <Tab title="Informacje do faktur">
                         <div class="d-flex flex-column align-items-start">
-                            <h3>Informacje do faktur</h3>
-                            <form @submit.prevent="handleSubmitClick(paymentForm)">
-                                <div class="input-wrap col-12">
+                            <h3 class="mb-32px">Informacje do faktur</h3>
+                            <form class="form" @submit.prevent="handleSubmitClick(paymentForm)">
+                                <div class="input-wrap col-12 col-lg-6">
                                     <label for="name">Imię</label>
                                     <input
                                         type="text"
@@ -223,7 +223,7 @@ const paymentForm = reactive({
                                         {{ errors.name }}
                                     </div>
                                 </div>
-                                <div class="input-wrap col-12">
+                                <div class="input-wrap col-12 col-lg-6">
                                     <label for="last_name">Nazwisko</label>
                                     <input
                                         type="text"
@@ -238,7 +238,7 @@ const paymentForm = reactive({
                                         {{ errors.last_name }}
                                     </div>
                                 </div>
-                                <div class="input-wrap col-12">
+                                <div class="input-wrap col-12 col-lg-6 ">
                                     <label for="email">E-mail</label>
                                     <input
                                         type="email"
@@ -253,7 +253,7 @@ const paymentForm = reactive({
                                         {{ errors.email }}
                                     </div>
                                 </div>
-                                <div class="input-wrap col-12">
+                                <div class="input-wrap col-12 col-lg-6 ">
                                     <label for="phone">Telefon</label>
                                     <input
                                         type="tel"
@@ -283,7 +283,7 @@ const paymentForm = reactive({
                                         {{ errors.country }}
                                     </div>
                                 </div>
-                                <div class="input-wrap col-12">
+                                <div class="input-wrap col-12 ">
                                     <label for="city">Miasto</label>
                                     <input
                                         type="text"
@@ -298,7 +298,7 @@ const paymentForm = reactive({
                                         {{ errors.city }}
                                     </div>
                                 </div>
-                                <div class="input-wrap col-12">
+                                <div class="input-wrap col-12 ">
                                     <label for="street">Ulica</label>
                                     <input
                                         type="text"
@@ -313,7 +313,7 @@ const paymentForm = reactive({
                                         {{ errors.street }}
                                     </div>
                                 </div>
-                                <div class="input-wrap col-12">
+                                <div class="input-wrap col-12 ">
                                     <label for="house_number">Numer domu/mieszkania</label>
                                     <input
                                         type="text"
@@ -328,7 +328,7 @@ const paymentForm = reactive({
                                         {{ errors.house_number }}
                                     </div>
                                 </div>
-                                <div class="input-wrap col-12">
+                                <div class="input-wrap col-12 ">
                                     <label for="zip_code">Kod pocztowy</label>
                                     <input
                                         type="text"
@@ -343,7 +343,10 @@ const paymentForm = reactive({
                                         {{ errors.zip_code }}
                                     </div>
                                 </div>
-                                <input value="Zaktualizuj dane" class="btn btn-md btn-hovprim cursor-pointer" type="submit">
+                                <div class="input-wrap col-12">
+                                    <input value="Zaktualizuj dane" class="btn btn-md btn-hovprim cursor-pointer" type="submit">
+                                </div>
+                                
                             </form>
                         </div>
                     </Tab>
