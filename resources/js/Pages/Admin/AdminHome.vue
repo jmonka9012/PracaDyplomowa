@@ -93,10 +93,10 @@ function SetFeaturedCategories() {
                 <div v-for="i in 5" :key="i" class="featured-categories__cat-box">
                     <div class="featured-categories__label">Obecna ikona {{i}}:</div>
                     <div class="featured-categories__icon-box">
-                        <img   :src="`/storage/${props.featured_categories[i-1].image_path}`"
+                        <img    :src="`/storage/${props.featured_categories[i-1].image_path}`"
                                alt="">
                     </div>
-                    <input @change="HandleIconChange($event, i-1)" type="file" accept=".svg,image/svg+xml">
+                    <input class="mb-10px" @change="HandleIconChange($event, i-1)" type="file" accept=".svg,image/svg+xml">
                     <div v-if="featuredCategories[i-1].file">
                         <div class="featured-categories__label">Nowa ikona:</div>
                         <div
@@ -104,7 +104,7 @@ function SetFeaturedCategories() {
                             v-html="iconPreviews[i-1]"
                         ></div>                    </div>
                     <label class="featured-categories__label">Obecna kategoria:</label>
-                    <select class="hero-select" v-model="featuredCategories[i-1].id">
+                    <select class="featured-categories__select" v-model="featuredCategories[i-1].id">
                         <option disabled :value="null">
                             Wybierz kategorię
                         </option>
@@ -137,7 +137,7 @@ function SetFeaturedCategories() {
         grid-template-columns: repeat(3, minmax(0, 1fr));
 
         @include mixin.media-breakpoint-up(xl) {
-            grid-template-columns: repeat(5, minmax(0, 1fr));
+            grid-template-columns: repeat(4, minmax(0, 1fr));
         }
     }
 
@@ -153,18 +153,27 @@ function SetFeaturedCategories() {
     }
 
     &__icon-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 100%;
         min-width: 0;
         box-sizing: border-box;
-        border-radius: 8px;
-        border: 1px solid var(--primary);
+        // border-radius: 8px;
+        border-top: 1px solid var(--primary);
+        border-bottom: 1px solid var(--primary);
         padding: 25px;
+        margin-bottom: 15px;
 
         svg {
             width: 100% !important;
             height: auto;
             fill: black;
         }
+    }
+
+    &__select{
+        min-width: auto;
     }
 
     /* reszta styli… */
