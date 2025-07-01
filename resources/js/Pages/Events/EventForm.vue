@@ -22,6 +22,7 @@ const paymentForm = reactive({
     last_name: null,
     email: null,
     phone: null,
+    company: null,
     country: null,
     city: null,
     street: null,
@@ -79,8 +80,8 @@ const validationRequest = debounce((routeName) => {
         <div class="container d-flex flex-column">
             <h2 class="mb-40px">Podaj szczegóły płatności</h2>
             <div>
-                <form @submit.prevent="SubmitPaymentDetails()">
-                    <div class="input-wrap col-12">
+                <form class="form" @submit.prevent="SubmitPaymentDetails()">
+                    <div class="input-wrap col-12 col-lg-6">
                         <label for="name">Imię *</label>
                         <input
                             type="text"
@@ -96,7 +97,7 @@ const validationRequest = debounce((routeName) => {
                             {{ errors.first_name }}
                         </div>
                     </div>
-                    <div class="input-wrap col-12">
+                    <div class="input-wrap col-12 col-lg-6">
                         <label for="last_name">Nazwisko *</label>
                         <input
                             type="text"
@@ -112,7 +113,7 @@ const validationRequest = debounce((routeName) => {
                             {{ errors.last_name }}
                         </div>
                     </div>
-                    <div class="input-wrap col-12">
+                    <div class="input-wrap col-12 col-lg-6">
                         <label for="email">E-mail *</label>
                         <input
                             type="email"
@@ -128,7 +129,7 @@ const validationRequest = debounce((routeName) => {
                             {{ errors.email }}
                         </div>
                     </div>
-                    <div class="input-wrap col-12">
+                    <div class="input-wrap col-12 col-lg-6">
                         <label for="phone">Telefon *</label>
                         <input
                             type="tel"
@@ -144,6 +145,21 @@ const validationRequest = debounce((routeName) => {
                             {{ errors.phone }}
                         </div>
                     </div>
+                     <div class="input-wrap col-12 ">
+                      <label for="company">Firma</label>
+                            <input
+                            type="text"
+                            id="company"
+                            autocomplete="company"
+                            name="company"
+                            spellcheck="false"
+                            aria-required="false"
+                            v-model="paymentForm.company"
+                                    />
+                        <div class="error-msg" v-if="errors.company">
+                                {{ errors.company }}
+                        </div>
+                        </div>
                     <div class="input-wrap col-12">
                         <label for="country">Kraj *</label>
                         <input

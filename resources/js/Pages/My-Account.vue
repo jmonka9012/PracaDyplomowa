@@ -269,10 +269,10 @@ const paymentForm = reactive({
                                         {{ errors.phone }}
                                     </div>
                                 </div>
-                                      <div class="input-wrap col-12 ">
-                                    <label for="phone">Firma</label>
+                                <div class="input-wrap col-12 ">
+                                    <label for="company">Firma</label>
                                     <input
-                                        type="tel"
+                                        type="text"
                                         id="company"
                                         autocomplete="company"
                                         name="company"
