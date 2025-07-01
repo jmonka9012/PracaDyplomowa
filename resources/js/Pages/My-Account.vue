@@ -115,6 +115,7 @@ const paymentForm = reactive({
     last_name: null,
     email: null,
     phone: null,
+    company: null,
     country: null,
     city: null,
     street: null,
@@ -265,7 +266,22 @@ const paymentForm = reactive({
                                         v-model="paymentForm.phone"
                                     />
                                     <div class="error-msg" v-if="errors.phone">
-                                        {{ errors.email }}
+                                        {{ errors.phone }}
+                                    </div>
+                                </div>
+                                      <div class="input-wrap col-12 ">
+                                    <label for="phone">Firma</label>
+                                    <input
+                                        type="tel"
+                                        id="company"
+                                        autocomplete="company"
+                                        name="company"
+                                        spellcheck="false"
+                                        aria-required="true"
+                                        v-model="paymentForm.company"
+                                    />
+                                    <div class="error-msg" v-if="errors.company">
+                                        {{ errors.company }}
                                     </div>
                                 </div>
                                 <div class="input-wrap col-12">
