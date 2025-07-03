@@ -15,7 +15,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <table class="table-nowrap table-fixed">
+    <table class="table--event table-nowrap">
         <thead><EventTableHead></EventTableHead></thead>
         <tbody>
         <EventTableRow :pending="props.pending" v-for="(event, index) in events" :key="event" :index="index" :event="event"></EventTableRow>

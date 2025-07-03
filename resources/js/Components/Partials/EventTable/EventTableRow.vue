@@ -47,14 +47,8 @@ const beforeLeave = el => {
 
 <template>
     <tr class="t-details" :class="{odd: props.index%2 === 0}">
-        <td class="t-details__select">
-            <input
-                class="check"
-                name="Select @name event"
-                type="checkbox"/>
-        </td>
         <td>
-            <img :src="`/storage/${event.image_path}`" class="t-details__pic mr-0"/>
+            <img :src="`/storage/${event.image_path}`" class="t-details__pic ml-auto mr-auto"/>
         </td>
         <td>
             <a target="_blank" :href="`/${props.pending ? 'admin/' + event.event_url : event.event_url}`">{{event.event_name}}</a>
@@ -64,7 +58,6 @@ const beforeLeave = el => {
                 <button @click="toggle" class="btn-link">Szczegóły</button>
             </div>
         </td>
-        <td><a :href="event.event_additional_url">Link</a></td>
         <td>{{event.event_date}}</td>
         <td>{{event.event_start}}</td>
         <td>{{event.event_end}}</td>

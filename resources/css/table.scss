@@ -5,6 +5,16 @@
 table {
     border-collapse: collapse;
     width: 100%;
+
+    &.table--event{
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    @include mixin.media-breakpoint-up(lg){
+        display: table;
+    }
+    }
+
     &.table-nowrap {
         th {
             white-space: nowrap;
