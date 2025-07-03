@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Events\EventController;
 use App\Http\Controllers\Admin\FeaturedGenresController;
 use App\Http\Controllers\Admin\ManageUsersController;
 use App\Http\Controllers\Admin\ManagePostsController;
@@ -45,6 +46,11 @@ Route::prefix('admin')->group(function() {
       Route::get('/wydarzenia/data', [PendingEventsController::class, 'showData'])
             ->name('admin.events.data')
             ->middleware('redactorAccess');
+
+      Route::get('/{event}', [EventController::class, 'showPending'])
+            ->where('event', 'wydarzenia/wydarzenie/[0-9]{4}-[0-9]{2}-[0-9]{2}/[0-9]+/([A-Za-z0-9]+(-[A-Za-z0-9]+)*)')
+            ->name('event.show.pending')
+            ->middleware('employeesAccess');
 
       Route::get('/zarzadzaj-postami', [ManagePostsController::class, 'blogBrowserAdminShow'])
             ->name('admin.posts')

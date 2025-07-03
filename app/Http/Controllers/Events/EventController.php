@@ -49,6 +49,31 @@ class EventController extends Controller
         ]);
     }
 
+    public function showPending($event)
+    {
+        $event = Event::where('event_url', $event)
+            ->where('pending', true)
+            ->with([
+                'seats',
+                'standingTickets',
+                'hall.sections',
+                'genres'
+                ])
+            ->first();
+
+        if(!$event){
+            return redirect()->route('error404');
+        }
+        
+        $closestEvents = $event->getRelatedEvents()->load('genres', 'standingTickets', 'standingTickets');
+
+        return Inertia::render('Events/EventSingle', [
+            'event' => new EventResource($event),
+            'related_events' => EventBrowserResource::collection($closestEvents)
+        ]);
+    }
+
+
     public function eventBrowser(Request $request)
     {   
         if (!$request->has('page')) {
