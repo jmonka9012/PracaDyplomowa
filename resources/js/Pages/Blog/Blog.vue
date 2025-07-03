@@ -52,10 +52,11 @@ function FilterBlog() {
     <HeroSmall :source="blogBg" title="Blog"></HeroSmall>
     <section class="section pb-120px">
         <div class="container container-small flex-column align-items-start justify-content-start">
-            <form @submit.prevent="FilterBlog()" class="mb-40px">
-                <div class="d-flex flex-row align-items-center">
-                    <input :placeholder="currentSearchPhrase" v-model="filterRequest.blog_post_name" type="text">
-                    <select v-model="filterRequest.blog_post_type">
+            <form @submit.prevent="FilterBlog()" class="mb-40px form">
+                <div class="d-flex flex-column justify-content-center">
+                    <label for="search">Wyszukaj po nazwie</label>
+                    <input class="mb-20px" name="search" :placeholder="currentSearchPhrase" v-model="filterRequest.blog_post_name" type="text">
+                    <select class="mb-20px" v-model="filterRequest.blog_post_type">
                         <option :value="null">
                             Jakakolwiek
                         </option>
@@ -66,8 +67,9 @@ function FilterBlog() {
                             {{ category }}
                         </option>
                     </select>
+                    <input class="btn btn-md cursor-pointer btn-hovprim" type="submit">
                 </div>
-                <input class="btn btn-md cursor-pointer btn-hovprim" type="submit">
+                
             </form>
             <h3 v-if="currentCategory" class="mb-40px"> Posty z kategorii: {{currentCategory}}</h3>
             <PostQuery class="mb-50px" evContClass="ev-cont-lg-three" :blog_posts="props.blog_posts.data">
