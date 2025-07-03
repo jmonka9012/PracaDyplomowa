@@ -24,7 +24,6 @@ const filterRequest = reactive({
 
 onMounted(() => {
     const params = new URLSearchParams(window.location.search);
-    console.log(params);
 });
 
 const props = defineProps({
@@ -50,8 +49,6 @@ props.genres.forEach((genre, index) => {
         value: genre.id,
     };
 });
-
-console.log(genres);
 
 function submitFilterRequest() {
     const params = new URLSearchParams(window.location.search);

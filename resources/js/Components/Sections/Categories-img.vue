@@ -17,7 +17,7 @@ console.log(props.genres);
             <div v-for="genre in props.genres" class="cat-item">
                 <Link :href="route('event.browser', {genres: genre.genre_id})" class="link-stretched z-1"></Link>
                 <img class="cat-img" :src="`/storage/${genre.image_path}`" alt="" />
-                <h3 class="cat-name">{{genre.genre_id}}</h3>
+                <h3 class="cat-name">{{genre.genre_name}}</h3>
             </div>
         </div>
     </section>
