@@ -195,10 +195,7 @@ function SetUserProperty(value, userID, property) {
                                 class="btn btn-md btn-hovprim"
                                 method="delete"
                                 preserve-scroll
-                                @click="DeleteUser(user.id)"
-                            >Usuń
-                            </Link
-                            >
+                                @click="DeleteUser(user.id)">Usuń</Link>
                         </div>
                     </div>
                     <div

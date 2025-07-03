@@ -57,10 +57,10 @@ const beforeLeave = el => {
             <img :src="`/storage/${event.image_path}`" class="t-details__pic mr-0"/>
         </td>
         <td>
-            <a target="_blank" :href="`/${event.event_url}`">{{event.event_name}}</a>
+            <a target="_blank" :href="`/${props.pending ? 'admin/' + event.event_url : event.event_url}`">{{event.event_name}}</a>
             <div class="t-details__options">
                 <a class="mr-6px" @click="DeleteEvent(event.id)">Usuń</a>
-                <a target="_blank" class="mr-6px" :href="`/${event.event_url}`">Podgląd</a>
+                <a target="_blank" class="mr-6px" :href="`/${props.pending ? 'admin/' + event.event_url : event.event_url}`">Podgląd</a>
                 <button @click="toggle" class="btn-link">Szczegóły</button>
             </div>
         </td>
