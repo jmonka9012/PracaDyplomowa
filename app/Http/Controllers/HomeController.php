@@ -27,7 +27,17 @@ class HomeController extends Controller
             ->take(4)
             ->get();
         
-        $featuredCategories = FeaturedGenre::all();
+        $featuredCategories = FeaturedGenre::with('genre:id,genre_name')->get()
+            ->map(function ($item) {
+                return array_merge(
+                    $item->toArray(),
+                    ['genre_name' => $item->genre->genre_name]
+                );
+            })
+            ->map(function ($item) {
+                unset($item['genre']);
+                return $item;
+            });
 
         return Inertia::render('Home', [
             'genres' => $genres,
@@ -50,7 +60,17 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
-        $featuredCategories = FeaturedGenre::all();
+        $featuredCategories = FeaturedGenre::with('genre:id,genre_name')->get()
+            ->map(function ($item) {
+                return array_merge(
+                    $item->toArray(),
+                    ['genre_name' => $item->genre->genre_name]
+                );
+            })
+            ->map(function ($item) {
+                unset($item['genre']);
+                return $item;
+            });
 
             return response()->json([
             'genres' => $genres,

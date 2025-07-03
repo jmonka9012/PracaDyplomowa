@@ -16,11 +16,16 @@ class FeaturedGenre extends Model
     ];
 
         protected $attributes = [
-        'genre_id' => 0 // Default value
+        'genre_id' => 0
     ];
     
     public function genres()
     {
         return $this->hasOne(Genre::class);
+    }
+
+    public function genre()
+    {
+        return $this->belongsTo(Genre::class, 'genre_id', 'id');
     }
 }
