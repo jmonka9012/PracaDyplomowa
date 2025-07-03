@@ -68,7 +68,7 @@ public function update(Request $request)
 
         DB::commit();
 
-        return back()->with('success', 'test');
+        return back()->with('success', 'Zaktualizowane promowane kategorie');
 
     } catch (\Exception $e) {
         DB::rollBack();
