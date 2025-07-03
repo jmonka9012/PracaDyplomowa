@@ -80,7 +80,7 @@ const validationRequest = debounce((routeName) => {
         <div class="container d-flex flex-column">
             <h2 class="mb-40px">Podaj szczegóły płatności</h2>
             <div>
-                <form class="form" @submit.prevent="SubmitPaymentDetails()">
+                <form class="form pb-100px" @submit.prevent="SubmitPaymentDetails()">
                     <div class="input-wrap col-12 col-lg-6">
                         <label for="name">Imię *</label>
                         <input
@@ -240,22 +240,22 @@ const validationRequest = debounce((routeName) => {
                             {{ errors.zip_code }}
                         </div>
                     </div>
-                    <div v-if="user" class="input-wrap col-12">
+                    <div v-if="user" class="input-wrap d-flex flex-row align-items-center col-12">
                         <input v-model="paymentForm.save_data" id="save_data" type="checkbox">
                         <label for="save_data">Zapisz dane do przyszłych transakcji</label>
                     </div>
-                    <div v-else class="input-wrap col-12">
+                    <div v-else class="input-wrap input-wrap-check  align-items-center col-12">
                         <input v-model="paymentForm.make_account" id="make_account" type="checkbox">
                         <label for="make_account">Stwórz konto z podanymi danymi zapamiętać je na przyszłość</label>
                     </div>
                     <div v-if="paymentForm.make_account">
                         <div class="input-wrap col-12">
-                            <label for="zip_code">Nazwa konta</label>
+                            <label for="name">Nazwa konta</label>
                             <input
                                 type="text"
-                                id="zip_code"
-                                autocomplete="zip_code"
-                                name="zip_code"
+                                id="name"
+                                autocomplete="name"
+                                name="name"
                                 spellcheck="false"
                                 required=""
                                 aria-required="true"
@@ -302,8 +302,9 @@ const validationRequest = debounce((routeName) => {
                                 {{ errors.password_confirmation }}
                             </div>
                         </div>
+                        <input :disabled="!canSubmit" :class="{ disabled: !canSubmit }" type="submit">
                     </div>
-                    <input :disabled="!canSubmit" :class="{ disabled: !canSubmit }" type="submit">
+                    
                 </form>
             </div>
         </div>
