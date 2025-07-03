@@ -27,8 +27,8 @@
 
         &-check {
             flex-direction: row;
-            align-items:center;
-            column-gap:10px;
+            align-items: center;
+            column-gap: 10px;
         }
     }
 
@@ -84,7 +84,6 @@
         padding: 15px 15px 0;
     }
 
- 
     input[type="submit"],
     input.form-submit {
         display: inline-block;
@@ -150,7 +149,7 @@
         font-weight: 600;
         font-family: "Font Awesome 6 Free";
         color: transparent;
-        transition: transform .2s ease-out;
+        transition: transform 0.2s ease-out;
     }
 
     &:checked {
@@ -219,12 +218,18 @@ select {
     border-radius: 8px;
     appearance: none;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    min-width: 300px;
+    // min-width: 300px;
     padding-left: 15px;
     font-family: "Krona One";
 
     &.select-icon {
         padding-left: 60px;
+    }
+    &.select--small {
+        width: 150px;
+        white-space: nowrap; 
+        overflow: hidden; 
+        text-overflow: ellipsis; 
     }
 }
 
@@ -273,18 +278,18 @@ select {
     z-index: -1;
 }
 
-.upload-label{
-        border: 1px solid var(--primary);
-        border-radius: 8px;
+.upload-label {
+    border: 1px solid var(--primary);
+    border-radius: 8px;
     display: inline-block;
     padding: 2px 10px;
     cursor: pointer;
     transition: all 0.3s ease;
-    &:hover{
+    &:hover {
         background-color: var(--primary);
         color: white;
     }
 }
-input[type="file"]{
-        display: none;
+input[type="file"] {
+    display: none;
 }

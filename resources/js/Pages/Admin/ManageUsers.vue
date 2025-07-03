@@ -119,7 +119,7 @@ function SetUserProperty(value, userID, property) {
                 </div>
                 <div class="input-wrap col-12">
                     <label class="mb-10px" for="userRole">Rola</label>
-                    <select id="userRole" v-model="filterRequest.role" name="userRole">
+                    <select class="select--small" id="userRole" v-model="filterRequest.role" name="userRole">
                         <option disabled value="">Wybierz</option>
                         <option
                             v-for="status in props.user_stats.original"
@@ -131,6 +131,7 @@ function SetUserProperty(value, userID, property) {
                 <div class="input-wrap col-12">
                     <label class="mb-10px" for="organizerStatus">Status organizatora:</label>
                     <select
+                        class="select--small"
                         id="organizerStatus"
                         v-model="filterRequest.account_status"
                         name="organizerStatus">
@@ -169,8 +170,8 @@ function SetUserProperty(value, userID, property) {
                         <div v-if="user.role === 'admin' || user.role === 'organizer'" v-html="props.user_stats.original.find(role => role.value === user.role)?.description" class="user-row__value"></div>
                         <div v-else>
                             <select
+                                class="select--small"
                                 id="changeStatus"
-                                class=""
                                 name="changeStatus"
                                 @change="SetUserProperty($event.target.value,user.id,'role')">
                                 <option :selected="role.value === user.role" v-for="role in filteredRoles" :value="role.value">{{role.description}}</option>                            </select>
