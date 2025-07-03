@@ -12,8 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyEmail;
 use App\Enums\UserRole;
 use Illuminate\Support\Facades\Log;
-
-
+use Illuminate\Support\Facades\Auth;
 
 class MyAccountController extends Controller
 {
@@ -22,8 +21,22 @@ class MyAccountController extends Controller
         $supportTickets = SupportTicket::where('user_id', auth()->id())->get()
         ->sortByDesc('created_at');
 
+        $user = Auth::user();
+        $userData = [
+                'first_name' => $user->first_name,
+                'last_name' => $user->last_name,
+                'email' => $user->email,
+                'country' => $user->country,
+                'city' => $user->city,
+                'street' => $user->street,
+                'house_number' => $user->house_number,
+                'zip_code' => $user->zip_code,
+                'phone' => $user->phone,
+            ];
+        
         return Inertia::render('My-Account', [
             'support_tickets' => SupportTicketResource::collection($supportTickets),
+            'userData' => $userData
         ]);
     }
 
