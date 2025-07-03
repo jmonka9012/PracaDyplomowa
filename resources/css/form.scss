@@ -84,6 +84,7 @@
         padding: 15px 15px 0;
     }
 
+ 
     input[type="submit"],
     input.form-submit {
         display: inline-block;
@@ -270,4 +271,20 @@ select {
     right: 16px;
     font-size: 24px;
     z-index: -1;
+}
+
+.upload-label{
+        border: 1px solid var(--primary);
+        border-radius: 8px;
+    display: inline-block;
+    padding: 2px 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover{
+        background-color: var(--primary);
+        color: white;
+    }
+}
+input[type="file"]{
+        display: none;
 }

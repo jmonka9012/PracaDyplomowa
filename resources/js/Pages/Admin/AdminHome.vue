@@ -97,6 +97,11 @@ function SetFeaturedCategories() {
                                alt="">
                     </div>
                     <input class="mb-10px" @change="HandleIconChange($event, i-1)" type="file" accept=".svg,image/svg+xml">
+                    <label class="upload-label">
+                    <input type="file"/>
+                     Dodaj plik
+                    </label>
+
                     <div v-if="featuredCategories[i-1].file">
                         <div class="featured-categories__label">Nowa ikona:</div>
                         <div
@@ -137,7 +142,7 @@ function SetFeaturedCategories() {
         grid-template-columns: repeat(3, minmax(0, 1fr));
 
         @include mixin.media-breakpoint-up(xl) {
-            grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-template-columns: repeat(5, minmax(0, 1fr));
         }
     }
 
@@ -171,8 +176,12 @@ function SetFeaturedCategories() {
             fill: black;
         }
     }
+    &__label{
+        margin-top: 10px;
+    }
 
     &__select{
+        min-height: 45px;
         min-width: auto;
     }
 
