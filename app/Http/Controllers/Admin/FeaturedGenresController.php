@@ -67,13 +67,8 @@ public function update(Request $request)
         }
 
         DB::commit();
-        $featuredCategories = FeaturedGenre::all();
 
-            return response()->json([
-                  'message' => 'Zaktualizowano promowane kategorie',
-                  'updated_count' => count($results),
-                  'featured_categories' => $featuredCategories
-            ]);
+        return back()->with('success', 'Zaktualizowane promowane kategorie');
 
     } catch (\Exception $e) {
         DB::rollBack();
