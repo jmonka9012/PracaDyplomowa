@@ -100,9 +100,6 @@ function SetUserProperty(value, userID, property) {
         <div class="container flex-column">
             <div class="col-12 d-flex flex-lg-row align-items-lg-center">
                 <h2 class="mb-20px mb-lg-0">Użytkownicy</h2>
-                <a class="ml-lg-20px btn btn-md btn-hovprim" href="#"
-                >Dodaj nowego</a
-                >
             </div>
             <form class="form" @submit.prevent="FilterUsers()">
                 <div class="input-wrap col-12">

@@ -93,7 +93,6 @@ const handleValidationEmit = (state) => {
 };
 
 function SendTicket() {
-
     axios
         .post(route("support-ticket-send"), contactForm)
         .then((response) => {
@@ -362,7 +361,7 @@ const paymentForm = reactive({
                                 <div class="input-wrap col-12">
                                     <input value="Zaktualizuj dane" class="btn btn-md btn-hovprim cursor-pointer" type="submit">
                                 </div>
-                                
+
                             </form>
                         </div>
                     </Tab>
