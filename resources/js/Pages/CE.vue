@@ -8,77 +8,50 @@ import Lightbox from "../Components/Partials/Lightbox.vue";
 
 <template>
     <section>
-        <div class="container justify-content-center">
-            <div class="col-lg-4">
-                <Tabs>
-                    <Tab title="Pierwszy Tab">
-                        <div class="d-flex flex-column">
-                            <h2>Lorem, ipsum dolor.</h2>
-                            <p>Treść pierwszego tabu</p>
-                        </div>
-                    </Tab>
-
-                    <Tab title="Drugi Tab">
-                        <div class="d-flex flex-column">
-                            <h2>Lorem, ipsum dolor.</h2>
-                            <p>Treść drugiego tabu</p>
-                        </div>
-                    </Tab>
-
-                    <Tab title="Trzeci Tab">
-                        <div class="d-flex flex-column">
-                            <h2>Lorem, ipsum dolor.</h2>
-                            <p>Treść trzeciego tabu</p>
-                        </div>
-                    </Tab>
-                </Tabs>
-            </div>
-        </div>
-    </section>
-
-    <section class="pt-100px pb-100px">
-        <div
-            class="container flex-column align-items-center justify-content-center"
-        >
-            <form action="" class="form">
-                <div class="input-wrap input-wrap-check col-12 mb-20px">
-                    <input class="check" type="checkbox" name="notif1" id="notif1" />
-                    <label for="notif1">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Powiadomienie 1
-                    </label>
-                </div>
-                <div class="input-wrap input-wrap-check col-12 mb-20px">
-                    <input class="check" type="checkbox" name="notif2" id="notif2" />
-                    <label for="notif2">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Powiadomienie 2
-                    </label>
-                </div>
-                <div class="input-wrap input-wrap-check col-12 mb-20px">
-                    <input class="check" type="checkbox" name="notif3" id="notif3" />
-                    <label for="notif3">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Powiadomienie 3
-                    </label>
-                </div>
-                <div class="input-wrap input-wrap-check col-12 mb-20px">
-                    <input class="check" type="checkbox" name="notif4" id="notif4" />
-                    <label for="notif4">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Powiadomienie 4
-                    </label>
-                </div>
-                <div class="input-wrap input-wrap-check col-12">
-                    <input type="submit" value="Zapisz zmiany" />
-                </div>
-            </form>
-        </div>
-    </section>
-    <section>
         <div class="container">
-            <div>
-                <Lightbox :imgSrc="hellsPit" />
+            <div class="flex-column order">
+                <h3 class="mb-30px">
+                    Dane tutaj ew do usunięcia
+                </h3>
+                <div class="col-12 order__data">
+                           <div class="flex-column">
+                        <p class="fw-bold text-primary">Nazwa wydarzenia:</p>
+                        <p>Lorem ipsum</p>
+                    </div>
+                    <div class="flex-column">
+                        <p class="fw-bold text-primary">Numer zamówienia:</p>
+                        <p>123</p>
+                    </div>
+                    <div class="flex-column">
+                        <p class="fw-bold text-primary">Koszt:</p>
+                        <p>48zł</p>
+                    </div>
+                    <div class="flex-column">
+                        <p class="fw-bold text-primary">Adres Email:</p>
+                        <p>example@example.com</p>
+                    </div>
+                </div>
+                <div class="flex-column">
+                    <h5>Detale zamówienia</h5>
+                    <div class="order__row order__row--head">
+                        <p class="fw-bold">Typ biletu</p>
+                        <p class="fw-bold">sekcja</p>
+                        <p class="fw-bold">rząd</p>
+                        <p class="fw-bold">cena</p>
+                    </div>
+                    <div class="order__row">
+                        <p>Bilet siedzący</p>
+                        <p>36zł</p>
+                    </div>
+                    <div class="order__row">
+                        <p>Bilet stojący</p>
+                        <p>12zł</p>
+                    </div>
+                    <div class="order__row">
+                        <p class="fw-bold">Cena całkowita</p>
+                        <p>48zł</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -87,6 +60,43 @@ import Lightbox from "../Components/Partials/Lightbox.vue";
 <style lang="scss">
 @use "~css/mixin.scss";
 ///tutaj narazie style dla blog-single
+
+.order {
+    width: 100%;
+    &__data {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-row-gap: 20px;
+        grid-column-gap: 20px;
+
+        @include mixin.media-breakpoint-up(md) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include mixin.media-breakpoint-up(lg) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    &__row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 30px;
+        border-bottom: 1px solid var(--n-gray);
+        border-left: 1px solid var(--n-gray);
+        border-right: 1px solid var(--n-gray);
+
+        &--head{
+            color: var(--primary);
+        }
+
+        &:first-of-type {
+            border-top: 1px solid var(--n-gray);
+        }
+    }
+}
 
 .blog-image {
     max-height: 450px;

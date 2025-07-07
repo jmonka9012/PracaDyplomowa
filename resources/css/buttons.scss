@@ -27,14 +27,14 @@
         background-color: base.$primary;
     }
 }
-.btn-ghost{
-    &:hover{
+.btn-ghost {
+    &:hover {
         background-color: white;
         outline: 1px solid base.$primary;
         color: black;
     }
-    &--dark{
-        &:hover{
+    &--dark {
+        &:hover {
             outline: 1px solid black;
         }
     }

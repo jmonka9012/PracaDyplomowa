@@ -161,7 +161,7 @@ onBeforeUnmount(() => {
                     <Link
                         v-if="user.permission_level===4"
                         :href="route('event-create')"
-                        class="ml-30px btn btn-header btn-hovprim"
+                        class="ml-30px btn btn-header btn-hovdark"
                         >+ Zorganizuj wydarzenie</Link
                     >
                 </div>
@@ -348,7 +348,7 @@ onBeforeUnmount(() => {
                                                     :href="
                                                         route('event-create')
                                                     "
-                                                    class="btn btn-header btn-hovprim"
+                                                    class="btn btn-header btn-hovdark"
                                                     >+ Zorganizuj wydarzenie</Link
                                                 >
                                             </li>
@@ -473,6 +473,7 @@ onBeforeUnmount(() => {
                 &:hover {
                     color: var(--primary);
                 }
+
             }
         }
 
@@ -705,6 +706,10 @@ onBeforeUnmount(() => {
     border-width: 1px 1px 1px 1px;
     border-color: var(--primary);
     white-space: nowrap;
+    &:hover{
+        border-color: var(--secondary);
+        background-color: var(--secondary);
+    }
 }
 
 .desk-dropdown {
