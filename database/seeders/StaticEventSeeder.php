@@ -171,14 +171,18 @@ class StaticEventSeeder extends Seeder
                 if ($section->section_type == 'seat') {
                     for ($row = 1; $row <= $section->row; $row++) {
                         for ($col = 1; $col <= $section->col; $col++) {
-                            EventSeat::create([
-                                'hall_section_id' => $section->id,
-                                'event_id' => $event->id,
-                                'seat_row' => $row,
-                                'seat_number' => $col,
-                                'price' => 10.50,
-                                'status' => ['available', 'sold'][array_rand(['available', 'sold'])],
-                            ]);
+                                $status = ($event->pending == 1) 
+                                ? ['available', 'sold'][array_rand(['available', 'sold'])]
+                                : 'available';
+
+                                EventSeat::create([
+                                    'hall_section_id' => $section->id,
+                                    'event_id' => $event->id,
+                                    'seat_row' => $row,
+                                    'seat_number' => $col,
+                                    'price' => 10.50,
+                                    'status' => $status,
+                                ]);
                         }
                     }
                 } else {
@@ -186,7 +190,7 @@ class StaticEventSeeder extends Seeder
                         'hall_section_id' => $section->id,
                         'event_id' => $event->id,
                         'capacity' => $section->capacity,
-                        'sold' => rand(0, $section->capacity),
+                        'sold' => ($event->pending == 1) ? rand(0, $section->capacity) : 0,
                         'price' => 5.50,
                     ]);
                 }
