@@ -302,8 +302,10 @@ const validationRequest = debounce((routeName) => {
                                 {{ errors.password_confirmation }}
                             </div>
                         </div>
-                        <input v-if="!isLoggedIn" :disabled="!canSubmit" :class="{ disabled: !canSubmit }" type="submit">
-                        <input v-else type="submit">
+                    </div>
+                    <div>
+                        <input v-if="isLoggedIn"  type="submit">
+                        <input v-else :disabled="!canSubmit" :class="{ disabled: !canSubmit }" type="submit">
                     </div>
                 </form>
             </div>
