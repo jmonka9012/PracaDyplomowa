@@ -56,7 +56,7 @@ initSectionPrices();
 const errors = reactive({});
 const requestEventForm = reactive({
     event_name: null,
-    event_additional_url: null,
+    // event_additional_url: null,
     event_date: null,
     event_start: null,
     event_end: null,
@@ -200,13 +200,13 @@ const { user, isLoggedIn } = useAuth();
                         {{ errors.event_name }}
                     </div>
                 </div>
-                <div class="input-wrap col-12">
+<!--                <div class="input-wrap col-12">
                     <label for="event-slug">Url wydarzenia</label>
                     <p class="mb-10px fs-14">
                         Dodatkowy adres URL wydarzenia taki jak link do spotify
                         czy strony wykonawcy/organizatora
                     </p>
-                    <input
+                    <inputUk
                         type="text"
                         placeholder="Url wydarzenia"
                         id="event-slug"
@@ -219,7 +219,7 @@ const { user, isLoggedIn } = useAuth();
                 </div>
                 <div class="error-msg" v-if="errors.event_additional_url">
                     {{ errors.event_additional_url }}
-                </div>
+                </div>-->
                 <div class="input-wrap col-12">
                     <label
                         for="event-image"
