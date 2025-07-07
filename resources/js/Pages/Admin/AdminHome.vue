@@ -1,6 +1,7 @@
 <script setup>
 import { Link, router } from "@inertiajs/vue3";
 import { reactive, ref, onMounted } from "vue";
+import ResetObject from "../../Utilities/resetObject.js";
 
 const props = defineProps({
     genres: {
@@ -42,7 +43,7 @@ function SetFeaturedCategories() {
             console.log("Błąd:", err);
         },
         onSuccess: (page) => {
-            console.log("Sukces:", page);
+            ResetObject(iconPreviews);
         },
     })
 }
@@ -96,13 +97,8 @@ function SetFeaturedCategories() {
                         <img    :src="`/storage/${props.featured_categories[i-1].image_path}`"
                                alt="">
                     </div>
-                    <input class="mb-10px" @change="HandleIconChange($event, i-1)" type="file" accept=".svg,image/svg+xml">
-                    <label class="upload-label">
-                    <input type="file"/>
-                     Dodaj plik
-                    </label>
-
-                    <div v-if="featuredCategories[i-1].file">
+                    <label class="upload-label"><input @change="HandleIconChange($event, i-1)" accept=".svg,image/svg+xml" type="file"/>Dodaj plik</label>
+                    <div v-if="iconPreviews[i-1]">
                         <div class="featured-categories__label">Nowa ikona:</div>
                         <div
                             class="featured-categories__icon-box"
