@@ -1,6 +1,6 @@
 import "./bootstrap";
 import { createApp, h } from "vue";
-import { createInertiaApp } from "@inertiajs/vue3";
+import { createInertiaApp, router } from "@inertiajs/vue3";
 import { ZiggyVue } from "ziggy-js";
 import MainLayout from "@/Layouts/MainLayout.vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
@@ -28,3 +28,23 @@ createInertiaApp({
         app.mount(el);
     },
 });
+
+function setCurrentPage() {
+    const links = document.querySelectorAll('a');
+
+
+    links.forEach((link) => {
+        if (window.location.pathname === link.pathname) {
+            link.setAttribute('aria-current', 'page');
+        }
+    });
+}
+
+setTimeout(()=> {
+    setCurrentPage();
+}, 50);
+router.on('finish', () => {
+    setCurrentPage();
+});
+
+

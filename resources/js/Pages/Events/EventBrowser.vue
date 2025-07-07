@@ -29,9 +29,6 @@ props.genres.forEach((genre, index) => {
     };
 });
 
-console.log(genres);
-
-
 const filterRequest = reactive({
     event_name: null,
     genres: null,

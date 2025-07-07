@@ -8,7 +8,6 @@ const props = defineProps({
         required: true,
     }
 });
-console.log(props.genres);
 </script>
 
 <template>
