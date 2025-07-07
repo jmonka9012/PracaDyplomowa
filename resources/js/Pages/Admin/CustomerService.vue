@@ -1,18 +1,26 @@
 <script setup>
 import blogBg from "~images/blog-bg.jpg";
-import { Link } from "@inertiajs/vue3";
-import { onMounted, ref, computed } from "vue";
+import {Link, router} from "@inertiajs/vue3";
+import {onMounted, ref, computed} from "vue";
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import Collapse from "../../Components/Partials/Collapse.vue";
+import Tab from "@/Components/Partials/Tab.vue";
+import Tabs from "@/Components/Partials/Tabs.vue";
 
 const activeTicketId = ref(null);
+const ticket = ref(null);
 
 const props = defineProps({
-    tickets: {
+    support_tickets: { //rename?
         type: Array,
         required: true,
     },
+    searched_tickets: {
+        type: Array,
+        required: true,
+    }
 });
+
 
 const currentUserID = ref(null);
 const currentUserName = computed(() => {
@@ -39,103 +47,108 @@ const SwapStatus = (status) => {
     <HeroSmall :source="blogBg" title="Obsługa klienta"></HeroSmall>
     <section class="pb-100px col-12">
         <div class="container flex-column">
-            <h2 class="mb-30px">
-                Zgłoszenia kontaktowe
-                <span v-if="currentUserID">od: {{ currentUserName }}</span>
-            </h2>
-            <Link
-                v-if="currentUserID"
-                preserve-scroll
-                class="btn btn-md mb-30px"
-                :href="route('admin.customer-service')"
-                >Wróć do wszystkich zgłoszeń
-            </Link>
-            <div class="ticket-query mb-40px">
-                <div
-                    class="ticket-query__ticket"
-                    v-for="ticket in props.tickets.data"
-                >
-                    <div>{{ ticket.topic }}</div>
+            <Tabs>
+                <Tab title="Zgłoszenia kontaktowe">
+                    <h2 class="mb-30px">
+                        Zgłoszenia kontaktowe
+                        <span v-if="currentUserID">od: {{ currentUserName }}</span>
+                    </h2>
                     <Link
-                        v-if="ticket.user_id"
+                        v-if="currentUserID"
                         :href="route('admin.customer-service')"
-                        :data="{ user_id: ticket.user_id }"
-                        method="get"
-                    >
-                        {{ ticket.name }}
+                        class="btn btn-md mb-30px"
+                        preserve-scroll
+                    >Wróć do wszystkich zgłoszeń
                     </Link>
-                    <div v-else>{{ ticket.name }}</div>
-                    <div>{{ ticket.created_at }}</div>
-                    <div>{{ ticket.email }}</div>
-                    <div class="relative">
+                    <div class="ticket-query mb-40px">
                         <div
-                            v-html="
+                            v-for="ticket in props.support_tickets.data"
+                            class="ticket-query__ticket"
+                        >
+                            <div>{{ ticket.topic }}</div>
+                            <Link
+                                v-if="ticket.user_id"
+                                :data="{ user_id: ticket.user_id }"
+                                :href="route('admin.customer-service')"
+                                method="get"
+                            >
+                                {{ ticket.name }}
+                            </Link>
+                            <div v-else>{{ ticket.name }}</div>
+                            <div>{{ ticket.created_at }}</div>
+                            <div>{{ ticket.email }}</div>
+                            <div class="relative">
+                                <div
+                                    :class="{
+                                'in-progress': ticket.status === 'in_progress',
+                                closed: ticket.status === 'closed',
+                            }"
+                                    class="ticket-query__status"
+                                    v-html="
                                 ticket.status === 'in_progress'
                                     ? 'W trakcie rozpatrywania'
                                     : 'Zamknięte'
                             "
-                            :class="{
-                                'in-progress': ticket.status === 'in_progress',
-                                closed: ticket.status === 'closed',
-                            }"
-                            class="ticket-query__status"
-                        ></div>
-                        <button
-                            class="ticket-query__status-change"
-                            @click="activeTicketId = ticket.id"
-                        >
-                            Zmienić status?
-                        </button>
-                    </div>
-                    <Collapse class="w-100">
-                        <template #trigger="{ isOpen }">
-                            <button class="btn btn-md btn-ghost">
-                                {{
-                                    isOpen
-                                        ? "Zwiń wiadomość"
-                                        : "Rozwiń wiadomość"
-                                }}
-                            </button>
-                        </template>
-                        <div class="content pt-20px">
-                            <p>{{ ticket.message }}</p>
-                        </div>
-                    </Collapse>
-                    <!-- popup -->
-                    <div
-                        v-if="activeTicketId === ticket.id"
-                        @click.self="activeTicketId = null"
-                        class="post-list-item-popup-holder"
-                    >
-                        <div class="post-list-item-popup">
-                            <button
-                                class="popup__close"
-                                @click="activeTicketId = null"
+                                ></div>
+                                <button
+                                    class="ticket-query__status-change"
+                                    @click="activeTicketId = ticket.id"
+                                >
+                                    Zmienić status?
+                                </button>
+                            </div>
+                            <Collapse class="w-100">
+                                <template #trigger="{ isOpen }">
+                                    <button class="btn btn-md btn-ghost">
+                                        {{
+                                            isOpen
+                                                ? "Zwiń wiadomość"
+                                                : "Rozwiń wiadomość"
+                                        }}
+                                    </button>
+                                </template>
+                                <div class="content pt-20px">
+                                    <p>{{ ticket.message }}</p>
+                                </div>
+                            </Collapse>
+                            <!-- popup -->
+                            <div
+                                v-if="activeTicketId === ticket.id"
+                                class="post-list-item-popup-holder"
+                                @click.self="activeTicketId = null"
                             >
-                                <i class="fa fa-close"></i>
-                            </button>
-                            <p class="mb-30px text-align-center col-12">
-                                Potwierdź zmianę statusu.
-                            </p>
+                                <div class="post-list-item-popup">
+                                    <button
+                                        class="popup__close"
+                                        @click="activeTicketId = null"
+                                    >
+                                        <i class="fa fa-close"></i>
+                                    </button>
+                                    <p class="mb-30px text-align-center col-12">
+                                        Potwierdź zmianę statusu.
+                                    </p>
 
-                            <div class="d-flex flex-row justify-content-center">
-                                <div class="relative">
-                                    <div
-                                        v-html="
-                                            ticket.status === 'in_progress'
-                                                ? 'W trakcie rozpatrywania'
-                                                : 'Zamknięte'
-                                        "
-                                        :class="{
+                                    <div class="d-flex flex-row justify-content-center">
+                                        <div class="relative">
+                                            <div
+                                                :class="{
                                             'in-progress':
                                                 ticket.status === 'in_progress',
                                             closed: ticket.status === 'closed',
                                         }"
-                                        class="ticket-query__status"
-                                    ></div>
-                                    <Link
-                                        method="put"
-                                        :href="
+                                                class="ticket-query__status"
+                                                v-html="
+                                            ticket.status === 'in_progress'
+                                                ? 'W trakcie rozpatrywania'
+                                                : 'Zamknięte'
+                                        "
+                                            ></div>
+                                            <Link
+                                                :data="{
+                                            id: ticket.id,
+                                            status: SwapStatus(ticket.status),
+                                        }"
+                                                :href="
                                             route(
                                                 'admin.customer-service.change_status',
                                                 {
@@ -143,40 +156,64 @@ const SwapStatus = (status) => {
                                                 }
                                             )
                                         "
-                                        class="ticket-query__status-change"
-                                        preserve-scroll
-                                        :data="{
-                                            id: ticket.id,
-                                            status: SwapStatus(ticket.status),
-                                        }"
-                                    >
-                                        Potwierdzam
-                                    </Link>
+                                                class="ticket-query__status-change"
+                                                method="put"
+                                                preserve-scroll
+                                            >
+                                                Potwierdzam
+                                            </Link>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <!-- popup end -->
                         </div>
                     </div>
-                    <!-- popup end -->
-                </div>
-            </div>
-            <div class="event-pagination">
-                <ul class="ml-auto mr-auto">
-                    <li
-                        :key="page"
-                        class="page"
-                        :class="{ 'page-current': page.active }"
-                        v-for="page in props.tickets.meta.links"
-                    >
-                        <Link :href="page.url" v-html="page.label"></Link>
-                    </li>
-                </ul>
-            </div>
+                    <div class="event-pagination">
+                        <ul class="ml-auto mr-auto">
+                            <li
+                                v-for="page in props.support_tickets.meta.links"
+                                :key="page"
+                                :class="{ 'page-current': page.active }"
+                                class="page"
+                            >
+                                <Link :href="page.url" v-html="page.label"></Link>
+                            </li>
+                        </ul>
+                    </div>
+                </Tab>
+                <Tab title="Wyszukaj bilet">
+                    <h2 class="mb-30px">Wyszukaj bilet</h2>
+                    <p>W pole poniżej wpisz email lub unikalny numer szukanego biletu</p>
+                    <form @submit.prevent="router.get(route('admin.customer-service'), {tabName: 'Wyszukaj bilet',ticket: ticket}, { preserveScroll: true })">
+                        <input v-model="ticket" type="text">
+                        <input type="submit" value="Szukaj">
+                    </form>
+                    <div v-if="props.searched_tickets">{{ props.searched_tickets }}</div>
+                    <div v-else>
+                        <div>Wysyłam Ci w jako parametr url email lub numer biletu</div>
+                        <div>Wysyłaj mi tutaj jako "tickets" array takich elementów (nigdy ich nie będzie jakoś przesadnie dużo więc niech będą wszystkie na raz):</div>
+                        <ol>
+                            <li>Imie</li>
+                            <li>Nazwisko</li>
+                            <li>email</li>
+                            <li>numer biletu</li>
+                            <li>nazwa eventu na który kupiono bilet</li>
+                            <li>lista miejsc z numerami sekcji, rzędami i kolumnami</li>
+                            <li>łączna kwota</li>
+                            <li>data zakupu</li>
+                        </ol>
+                        <div>Ponadto poproszę dwa POSTY: <br>- jeden z anulowaniem całego biletu (zwalniamy wszystkie miejsca) <br>- drugi na anulowanie danego miejsca jeżeli istnieje taka możliwość</div>
+                    </div>
+                </Tab>
+            </Tabs>
         </div>
     </section>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @use "~css/mixin.scss";
+
 .ticket-query {
     &__ticket {
         display: grid;

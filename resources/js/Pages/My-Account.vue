@@ -413,10 +413,8 @@ const paymentForm = reactive({
                                 </div>
                                 <p class="mb-16px">
                                     Jeżeli chcesz zwrotu pieniędzy za bilet
-                                    umieść wszystkie dane odnośnie transakcji
-                                    takie jak ID biletu, data, wydarzenie tak
-                                    aby dział księgowości mógł odnaleść
-                                    płatność.
+                                    umieść w wiadomości numer biletu. Jeżeli go nie znasz podaj jego szczegóły i
+                                    datę zakupu tak aby administracja mogła go zidentyfikować
                                 </p>
                                 <input type="submit" value="wyślij" />
                             </form>
