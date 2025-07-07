@@ -189,9 +189,6 @@ function submitFilterRequest() {
                         </ul>
                     </div>
                 </Tab>
-                <Tab title="Zakończone wydarzenia">
-                    <h3>?</h3>
-                </Tab>
             </Tabs>
         </div>
     </section>
