@@ -32,7 +32,6 @@ class EventSeeder extends Seeder
 
             $eventData = [
                 'event_name' => $faker->catchPhrase,
-                'event_additional_url' => $faker->url,
                 'event_date' => $faker->dateTimeBetween('+1 week', '+2 years'),
                 'event_start' => $faker->time('H:i:s'),
                 'event_end' => $faker->time('H:i:s'),

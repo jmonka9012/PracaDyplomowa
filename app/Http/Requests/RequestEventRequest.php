@@ -26,7 +26,7 @@ class RequestEventRequest extends FormRequest
 
         return [
             'event_name' => 'required|string|max:255',
-            'event_additional_url' => 'nullable|string|max:255',
+            //'event_additional_url' => 'nullable|string|max:255',
             'event_date' => 'required|date|after:+'.now()->addDays(6),
             'event_start' => 'required',
             'event_end' => 'required',
@@ -72,8 +72,8 @@ class RequestEventRequest extends FormRequest
             'required'=> 'To pole jest wymagane',
             'event_name.unique' => 'Istnieję już wydarzenia z tą nazwą',
             'event_name.max' => 'Nazwa wydarzenia jest zbyt długa',
-            'event_additional_url.unique' => 'Istnieje już wydarzenia z tym URLem',
-            'event_additional_url.max'=> 'URL wydarzenia jest zbyt długie',
+            //'event_additional_url.unique' => 'Istnieje już wydarzenia z tym URLem',
+            //'event_additional_url.max'=> 'URL wydarzenia jest zbyt długie',
             'contact_email'=> 'Adres email jest wymagany',
             'event_description.max' => 'Opis jest zbyt długi',
             'event_description_additional.max'=> 'Dodtakowe informacje są zbyt długie',

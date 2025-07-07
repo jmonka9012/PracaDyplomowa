@@ -37,13 +37,13 @@ class UserRoleEnumTest extends TestCase
     public static function rolePermissionLabelProvider(): array
     {
         return [
-            'Admin' => [UserRole::ADMIN, 'Konto administratorskie',],
-            'Moderator' => [UserRole::MODERATOR, 'Konto moderatorskie',],
-            'Redactor' => [UserRole::REDACTOR, 'Konto Redaktora/ki',],
-            'Blog Author' => [UserRole::BLOG_AUTHOR, 'Konto Autora/ki',],
-            'Organizer' => [UserRole::ORGANIZER, 'Konto organizatorskie',],
-            'Verified User' => [UserRole::VERIFIED_USER, 'Konto zweryfikowane',],
-            'Unverified User' => [UserRole::UNVERIFIED_USER, 'Konto nie zweryfikowane'],
+            'Admin' => [UserRole::ADMIN, 'Administrator',],
+            'Moderator' => [UserRole::MODERATOR, 'Moderator',],
+            'Redactor' => [UserRole::REDACTOR, 'Redaktor',],
+            'Blog Author' => [UserRole::BLOG_AUTHOR, 'Autor',],
+            'Organizer' => [UserRole::ORGANIZER, 'Organizator',],
+            'Verified User' => [UserRole::VERIFIED_USER, 'Użytkownik',],
+            'Unverified User' => [UserRole::UNVERIFIED_USER, 'Użytkownik bez weryfikacji'],
             'Guest' => [UserRole::GUEST, 'Gość'],
         ];
     }

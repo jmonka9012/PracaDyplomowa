@@ -18,7 +18,7 @@ abstract class EventBase extends Model
     ];
     protected $fillable = [
         'event_name',
-        'event_additional_url',
+        //'event_additional_url',
         'event_date',
         'slug',
         'event_url',

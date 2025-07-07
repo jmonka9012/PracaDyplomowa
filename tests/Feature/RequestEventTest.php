@@ -26,7 +26,7 @@ class RequestEventTest extends TestCase
 
         $data = [
             'event_name'=>'Test456',
-            'event_additional_url'=>'Test456',
+            //'event_additional_url'=>'Test456',
             'event_date'=>'2222-11-11',
             'event_start'=>'12:12:00',
             'event_end'=>'12:12:00',
@@ -55,7 +55,7 @@ class RequestEventTest extends TestCase
 
         $this->assertDatabaseHas('events', [
             'event_name'=>'Test456',
-            'event_additional_url'=>'Test456',
+            //'event_additional_url'=>'Test456',
             'event_date'=>'2222-11-11',
             'event_start'=>'12:12:00',
             'event_end'=>'12:12:00',
@@ -77,7 +77,7 @@ class RequestEventTest extends TestCase
 
         $data = [
             'event_name'=>'',
-            'event_additional_url'=>str_repeat('a', 500),
+            //'event_additional_url'=>str_repeat('a', 500),
             'event_date'=>'invalid',
             'event_start'=>'',
             'event_end'=>'',
@@ -90,6 +90,6 @@ class RequestEventTest extends TestCase
 
         $response = $this->post(route('event-create.post'), $data);
 
-        $response->assertSessionHasErrors(['event_name', 'event_additional_url', 'event_date', 'event_start', 'event_end', 'contact_email', 'contact_email_additional', 'event_location', 'event_description', 'event_description_additional']);
+        $response->assertSessionHasErrors(['event_name', 'event_date', 'event_start', 'event_end', 'contact_email', 'contact_email_additional', 'event_location', 'event_description', 'event_description_additional']);
     }
 }

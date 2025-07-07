@@ -45,7 +45,6 @@ class StaticEventSeeder extends Seeder
         $events =[
             [
                 'event_name' => 'David Bowie 2020s',
-                'event_additional_url' => 'https://open.spotify.com/artist/0oSGxfWSnnOXhD2fKuz2Gy',
                 'event_date' => now()->addMonth(),
                 'event_start' => '09:00:00',
                 'event_end' => '17:00:00',
@@ -60,7 +59,6 @@ class StaticEventSeeder extends Seeder
             ],
             [
                 'event_name' => 'David Bowie 2070s',
-                'event_additional_url' => 'https://bowie-emperor.gov.com/hail-the-king',
                 'event_date' => now()->addYears(50),
                 'event_start' => '00:00:00',
                 'event_end' => '24:00:00',
@@ -75,7 +73,6 @@ class StaticEventSeeder extends Seeder
             ],
             [
                 'event_name' => 'Motorhead 2025',
-                'event_additional_url' => 'https://open.spotify.com/artist/1DFr97A9HnbV3SKTJFu62M',
                 'event_date' => now()->addMonths(5),
                 'event_start' => '12:00:00',
                 'event_end' => '17:00:00',
@@ -90,7 +87,6 @@ class StaticEventSeeder extends Seeder
             ],
             [
                 'event_name' => 'Opeth Reveries 202X',
-                'event_additional_url' => 'https://open.spotify.com/artist/0ybFZ2Ab08V8hueghSXm6E',
                 'event_date' => now()->addMonths(8),
                 'event_start' => '12:00:00',
                 'event_end' => '13:00:00',
@@ -104,7 +100,6 @@ class StaticEventSeeder extends Seeder
             ],
             [
                 'event_name' => 'Acid Bath.mp4',
-                'event_additional_url' => 'https://open.spotify.com/artist/3n5jeTRWZEbTPJWyHSYUqn',
                 'event_date' => now()->addYear(),
                 'event_start' => '06:06:06',
                 'event_end' => '07:07:07',
@@ -118,7 +113,6 @@ class StaticEventSeeder extends Seeder
             ],
             [
                 'event_name' => 'System Of A Down Reunion',
-                'event_additional_url' => 'https://open.spotify.com/artist/5eAWCfyUhZtHHtBdNk56l1',
                 'event_date' => now()->addYears(2),
                 'event_start' => '10:00:00',
                 'event_end' => '15:00:00',
@@ -134,7 +128,6 @@ class StaticEventSeeder extends Seeder
             
             [
                 'event_name' => 'Archive Test Event',
-                'event_additional_url' => 'https://open.spotify.com/artist/5eAWCfyUhZtHHtBdNk56l1',
                 'event_date' => now()->subYears(value: 2),
                 'event_start' => '10:00:00',
                 'event_end' => '15:00:00',
