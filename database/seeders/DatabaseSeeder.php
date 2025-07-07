@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             StaticAuthorSeeder::class,
             StaticBlogPostSeeder::class,
             StaticOrganizerSeeder::class,
-            FeaturedGenresDefaultSeeder::class
+            FeaturedGenresDefaultSeeder::class,
+            SupportTicketSeeder::class
         ]);
     }
 }
