@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\EventSeats\EventSeat;
+use App\Models\EventStandingTickets\EventStandingTicket;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -42,5 +44,14 @@ class HallSection extends Model
                 $section->capacity = $section->row * $section->col;
             }
         });
+    }
+
+    public function eventSeats()
+    {
+        return $this->hasMany(EventSeat::class, 'hall_section_id');
+    }
+    public function eventStandingTickets()
+    {
+        return $this->hasMany(EventStandingTicket::class, 'hall_section_id');
     }
 }

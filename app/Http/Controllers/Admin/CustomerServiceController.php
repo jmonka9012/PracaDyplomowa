@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Resources\AdminOrderResource;
 use App\Http\Resources\SupportTicketResource;
+use App\Models\Events\Order;
+use App\Models\EventSeats\EventSeat;
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -34,8 +37,15 @@ class CustomerServiceController extends Controller
         $tickets = $query->paginate(10)
             ->appends($request->query());
 
+        $orders = [];
+
+        if ($request->has('order_lookup')) {
+            $orders = $this->getOrders($request);
+        }
+
         return Inertia::render('Admin/CustomerService', [
             'support_tickets' =>SupportTicketResource::collection($tickets)->response()->getData(true),
+            'orders' => $orders
         ]);
     }
 
@@ -47,10 +57,16 @@ class CustomerServiceController extends Controller
 
         $query = $this->getTickets($request);
 
+        $orders = [];
         $tickets = $query->paginate(10);
+
+        if ($request->has('order_lookup')) {
+            $orders = $this->getOrders($request);
+        }
 
         return response()->json([
             'support_tickets' =>SupportTicketResource::collection($tickets)->response()->getData(true),
+            'orders' => $orders
         ]);
     }
 
@@ -66,4 +82,34 @@ class CustomerServiceController extends Controller
         $ticket->save();
 
     }
+
+public function getOrders(Request $request)
+{
+    $search = $request->input('order_lookup');
+    
+    $query = Order::with([
+        'event',
+        'tickets',
+        'tickets.seat',
+        'tickets.standingTicket',
+        'tickets.seat.section',
+        'tickets.standingTicket.section'
+    ]);
+
+
+    if (str_starts_with($search, 'ORD-')) {
+        $query->where('order_number', $search);
+    }
+    
+    else {
+        $query->where(function($q) use ($search) {
+            $q->where('order_number', 'LIKE', "%{$search}%")
+              ->orWhere('email', 'LIKE', "%{$search}%");
+        });
+    }
+
+    $orders = $query->get();
+
+    return AdminOrderResource::collection($orders);
+}
 }

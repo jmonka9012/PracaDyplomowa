@@ -97,6 +97,7 @@ class StaticEventSeeder extends Seeder
                 'event_location' => 2,
                 'genres' =>['Metal', 'Rock', 'Death Metal', 'Progressive Death Metal'],
                 'image_path' => 'event_images/placeholder.jpg',
+                'pending' => 1
             ],
             [
                 'event_name' => 'Acid Bath.mp4',
@@ -110,6 +111,7 @@ class StaticEventSeeder extends Seeder
                 'event_location' =>1,
                 'genres' =>['Metal', 'Rock', 'Sludge Metal'],
                 'image_path' => 'event_images/placeholder.jpg',
+                'pending' => 1
             ],
             [
                 'event_name' => 'System Of A Down Reunion',
@@ -138,6 +140,7 @@ class StaticEventSeeder extends Seeder
                 'event_location' =>2,
                 'genres' =>['Metal', 'Rock'],
                 'image_path' => 'event_images/placeholder.jpg',
+                'pending' => 1
             ],
         ];
 
@@ -171,7 +174,7 @@ class StaticEventSeeder extends Seeder
                 if ($section->section_type == 'seat') {
                     for ($row = 1; $row <= $section->row; $row++) {
                         for ($col = 1; $col <= $section->col; $col++) {
-                                $status = ($event->pending == 1) 
+                                $status = ($event->pending == 0) 
                                 ? ['available', 'sold'][array_rand(['available', 'sold'])]
                                 : 'available';
 
@@ -190,7 +193,7 @@ class StaticEventSeeder extends Seeder
                         'hall_section_id' => $section->id,
                         'event_id' => $event->id,
                         'capacity' => $section->capacity,
-                        'sold' => ($event->pending == 1) ? rand(0, $section->capacity) : 0,
+                        'sold' => ($event->pending == 0) ? rand(0, $section->capacity) : 0,
                         'price' => 5.50,
                     ]);
                 }

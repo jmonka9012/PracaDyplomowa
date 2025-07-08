@@ -58,4 +58,9 @@ class Event extends EventBase
         {
             return $this->genres()->get();
         }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'event_id');
+    }
 }

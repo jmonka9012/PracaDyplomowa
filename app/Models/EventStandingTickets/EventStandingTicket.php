@@ -13,7 +13,8 @@ class EventStandingTicket extends EventStandingTicketBase
         return $this->belongsTo(Event::class);
     }
 
-     public function section(){
-        return $this->belongsTo(HallSection::class);
+    public function section()
+    {
+        return $this->belongsTo(HallSection::class, 'hall_section_id');
     }
 }

@@ -14,6 +14,6 @@ class EventSeat extends EventSeatBase
     }
     
     public function section(){
-        return $this->belongsTo(HallSection::class);
+        return $this->belongsTo(HallSection::class, 'hall_section_id');
     }
 }
