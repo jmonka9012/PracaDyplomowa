@@ -10,7 +10,6 @@ const { user, isLoggedIn } = useAuth();
 import pageInfo from "@/Utilities/pageInfo";
 const { siteData } = pageInfo();
 
-
 const isOpen = ref(false);
 
 const toggleMenu = () => {
@@ -57,8 +56,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
     window.removeEventListener("click", handleClickOutside);
 });
-
-
 </script>
 
 <template>
@@ -90,24 +87,32 @@ onBeforeUnmount(() => {
                 <nav class="header-nav d-none d-lg-flex">
                     <ul>
                         <li>
-                            <Link :href="route('home')"><span>Strona główna</span></Link>
+                            <Link :href="route('home')"
+                                ><span>Strona główna</span></Link
+                            >
                         </li>
                         <li>
-                            <Link :href="route('event.browser')"><span>Wydarzenia</span></Link>
+                            <Link :href="route('event.browser')"
+                                ><span>Wydarzenia</span></Link
+                            >
                         </li>
                         <li>
-                            <Link :href="route('about-us')"><span>O nas</span></Link>
+                            <Link :href="route('about-us')"
+                                ><span>O nas</span></Link
+                            >
                         </li>
                         <li>
                             <Link :href="route('blog')"><span>Blog</span></Link>
                         </li>
                         <li>
-                            <Link :href="route('contact')"><span>Kontakt</span></Link>
+                            <Link :href="route('contact')"
+                                ><span>Kontakt</span></Link
+                            >
                         </li>
                         <li>
                             <Link :href="route('ce')"><span>CE</span></Link>
                         </li>
-<!--                        <li class="desk-dropdown">
+                        <!--                        <li class="desk-dropdown">
                             <span class="desk-dropdown-toggle"
                                 ><span>Toggle</span>
                                 <i class="fa fa-chevron-right"></i>
@@ -130,7 +135,7 @@ onBeforeUnmount(() => {
                     <span class="divider divider-dark"></span>
                     <Link
                         :href="route('register')"
-                        :data="{reg: true}"
+                        :data="{ reg: true }"
                         class="hover-primary header-login"
                     >
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
@@ -149,9 +154,12 @@ onBeforeUnmount(() => {
                     >
                         <i class="fa fa-user text-primary mr-8px"></i>Moje konto
                     </Link>
-                    <span v-if="user.permission_level<=3" class="divider divider-dark"></span>
+                    <span
+                        v-if="user.permission_level <= 3"
+                        class="divider divider-dark"
+                    ></span>
                     <Link
-                        v-if="user.permission_level<=3"
+                        v-if="user.permission_level <= 3"
                         :href="route('admin')"
                         class="hover-primary header-login"
                     >
@@ -159,7 +167,7 @@ onBeforeUnmount(() => {
                         Backend
                     </Link>
                     <Link
-                        v-if="user.permission_level===4"
+                        v-if="user.permission_level === 4"
                         :href="route('event-create')"
                         class="ml-30px btn btn-header btn-hovdark"
                         >+ Zorganizuj wydarzenie</Link
@@ -190,13 +198,19 @@ onBeforeUnmount(() => {
                             <nav class="header-nav">
                                 <ul class="header-list">
                                     <li>
-                                        <Link :href="route('home')">Strona główna</Link>
+                                        <Link :href="route('home')"
+                                            >Strona główna</Link
+                                        >
                                     </li>
                                     <li>
-                                        <Link :href="route('event.browser')">Wydarzenia</Link>
+                                        <Link :href="route('event.browser')"
+                                            >Wydarzenia</Link
+                                        >
                                     </li>
                                     <li>
-                                        <Link :href="route('about-us')">O nas</Link>
+                                        <Link :href="route('about-us')"
+                                            >O nas</Link
+                                        >
                                     </li>
                                     <li>
                                         <Link :href="route('blog')">Blog</Link>
@@ -209,7 +223,7 @@ onBeforeUnmount(() => {
                                     <li>
                                         <Link :href="route('ce')">CE</Link>
                                     </li>
-<!--                                    <ul class="header-ddown">
+                                    <!--                                    <ul class="header-ddown">
                                         <li
                                             class="header-ddown-toggle"
                                             :class="{ show: dropdownStates.d1 }"
@@ -296,7 +310,7 @@ onBeforeUnmount(() => {
                                             <li>
                                                 <Link
                                                     :href="route('register')"
-                                                    :data="{reg: true}"
+                                                    :data="{ reg: true }"
                                                     class="hover-primary header-login"
                                                 >
                                                     <i
@@ -332,7 +346,10 @@ onBeforeUnmount(() => {
                                             </li>
                                             <li>
                                                 <Link
-                                                    v-if="user.permission_level<=3"
+                                                    v-if="
+                                                        user.permission_level <=
+                                                        3
+                                                    "
                                                     :href="route('admin')"
                                                     class="hover-primary header-login"
                                                 >
@@ -344,12 +361,16 @@ onBeforeUnmount(() => {
                                             </li>
                                             <li>
                                                 <Link
-                                                    v-if="user.permission_level===4"
+                                                    v-if="
+                                                        user.permission_level ===
+                                                        4
+                                                    "
                                                     :href="
                                                         route('event-create')
                                                     "
                                                     class="btn btn-header btn-hovdark"
-                                                    >+ Zorganizuj wydarzenie</Link
+                                                    >+ Zorganizuj
+                                                    wydarzenie</Link
                                                 >
                                             </li>
                                         </ul>
@@ -470,10 +491,13 @@ onBeforeUnmount(() => {
                     color: var(--text);
                 }
 
-                &:hover {
+                &[aria-current="page"] {
                     color: var(--primary);
                 }
 
+                &:hover {
+                    color: var(--primary);
+                }
             }
         }
 
@@ -692,7 +716,6 @@ onBeforeUnmount(() => {
     @media screen and (min-width: 1000px) and (max-width: 1200px) {
         font-size: 12px;
     }
-
 }
 
 .btn-header {
@@ -706,7 +729,7 @@ onBeforeUnmount(() => {
     border-width: 1px 1px 1px 1px;
     border-color: var(--primary);
     white-space: nowrap;
-    &:hover{
+    &:hover {
         border-color: var(--secondary);
         background-color: var(--secondary);
     }
