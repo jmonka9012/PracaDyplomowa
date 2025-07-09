@@ -78,20 +78,22 @@ class PendingEventsController extends Controller
             $query->where('event_name', 'like', '%' . $request->event_name . '%');
         }
 
-        if ($request->filled('event_date')) {
-                $query->whereDate('event_date', 
-                Carbon::parse($request->event_date)->format('Y-m-d'));
-        } else {
-            if ($request->filled('event_date_from')) {
-                $dateFrom = Carbon::parse($request->event_date_from)->format('Y-m-d');
-                $query->whereDate('event_date', '>=', $dateFrom);
-            }
+        //wykomentowane na razie, może potem dodamy
+
+        // if ($request->filled('event_date')) {
+        //         $query->whereDate('event_date', 
+        //         Carbon::parse($request->event_date)->format('Y-m-d'));
+        // } else {
+        //     if ($request->filled('event_date_from')) {
+        //         $dateFrom = Carbon::parse($request->event_date_from)->format('Y-m-d');
+        //         $query->whereDate('event_date', '>=', $dateFrom);
+        //     }
         
-            if ($request->filled('event_date_to')) {
-                $dateTo = Carbon::parse($request->event_date_to)->format('Y-m-d');
-                $query->whereDate('event_date', '<=', $dateTo);
-            }
-        }
+        //     if ($request->filled('event_date_to')) {
+        //         $dateTo = Carbon::parse($request->event_date_to)->format('Y-m-d');
+        //         $query->whereDate('event_date', '<=', $dateTo);
+        //     }
+        // }
 
         if ($request->filled('event_genres')) {
             $genreIds = is_array($request->event_genres) 
@@ -129,21 +131,23 @@ class PendingEventsController extends Controller
         if ($request->filled('pending_name')) {
             $query->where('event_name', 'like', '%' . $request->pending_name . '%');
         }
-
-        if ($request->filled('pending_date')) {
-                $query->whereDate('event_date', 
-                Carbon::parse($request->pending_date)->format('Y-m-d'));
-        } else {
-            if ($request->filled('pending_date_from')) {
-                $dateFrom = Carbon::parse($request->pending_date_from)->format('Y-m-d');
-                $query->whereDate('event_date', '>=', $dateFrom);
-            }
         
-            if ($request->filled('pending_date_to')) {
-                $dateTo = Carbon::parse($request->pending_date_to)->format('Y-m-d');
-                $query->whereDate('event_date', '<=', $dateTo);
-            }
-        }
+        //wykomentowane na razie, może potem dodamy
+        
+        // if ($request->filled('pending_date')) {
+        //         $query->whereDate('event_date', 
+        //         Carbon::parse($request->pending_date)->format('Y-m-d'));
+        // } else {
+        //     if ($request->filled('pending_date_from')) {
+        //         $dateFrom = Carbon::parse($request->pending_date_from)->format('Y-m-d');
+        //         $query->whereDate('event_date', '>=', $dateFrom);
+        //     }
+        
+        //     if ($request->filled('pending_date_to')) {
+        //         $dateTo = Carbon::parse($request->pending_date_to)->format('Y-m-d');
+        //         $query->whereDate('event_date', '<=', $dateTo);
+        //     }
+        // }
 
         if ($request->filled('pending_genres')) {
             $genreIds = is_array($request->pending_genres) 
