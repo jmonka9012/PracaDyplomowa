@@ -3,12 +3,10 @@ import blogBg from "~images/blog-bg.jpg";
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import Tab from "@/Components/Partials/Tab.vue";
 import Tabs from "@/Components/Partials/Tabs.vue";
-import DatePicker from "@/Components/Partials/DatePicker.vue";
 import MultiSelect from "@/Components/Partials/MultiSelect.vue";
 import { Link } from "@inertiajs/vue3";
 import EventTable from "../../Components/Partials/EventTable/EventTable.vue";
 import { router } from "@inertiajs/vue3";
-import axios from "axios";
 import { onMounted } from "vue";
 
 import { reactive, watch, computed, ref } from "vue";
@@ -16,10 +14,10 @@ import { reactive, watch, computed, ref } from "vue";
 const filterRequest = reactive({
     event_name: null,
     event_genres: null,
-    event_date: null,
+    // event_date: null,
     pending_name: null,
     pending_genres: null,
-    pending_date: null,
+    // pending_date: null,
 });
 
 onMounted(() => {
@@ -90,10 +88,10 @@ function submitFilterRequest() {
                             :options="genres"
                             placeholder="Wybierz kategorie"
                         ></MultiSelect>
-                        <DatePicker
+<!--                        <DatePicker
                             v-model="filterRequest.event_date"
                             format="MM/dd/yyyy"
-                        ></DatePicker>
+                        ></DatePicker>-->
                         <input
                             id="submitFilter"
                             class="btn cursor-pointer btn-md btn-hovprim mt-30px"
@@ -149,10 +147,10 @@ function submitFilterRequest() {
                             :options="genres"
                             placeholder="Wybierz kategorie"
                         ></MultiSelect>
-                        <DatePicker
+<!--                        <DatePicker
                             v-model="filterRequest.pending_date"
                             format="MM/dd/yyyy"
-                        ></DatePicker>
+                        ></DatePicker>-->
                         <input
                             id="submitFilter"
                             class="btn cursor-pointer btn-md btn-hovprim mt-30px"
