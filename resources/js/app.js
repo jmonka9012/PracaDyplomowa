@@ -32,13 +32,28 @@ createInertiaApp({
 function setCurrentPage() {
     const links = document.querySelectorAll('a');
 
+    const normalizePath = (path) => {
+        let p = path.replace(/\/$/, '');
+        return p === '' ? '/' : p;
+    };
 
-    links.forEach((link) => {
-        if (window.location.pathname === link.pathname) {
+    const currentPath = normalizePath(window.location.pathname);
+
+    links.forEach(link => {
+        const url = new URL(link.getAttribute('href') || '', window.location.origin);
+        const linkPath = normalizePath(url.pathname);
+
+        if (linkPath === currentPath) {
             link.setAttribute('aria-current', 'page');
+        } else {
+            link.removeAttribute('aria-current');
         }
     });
 }
+
+// Wywołaj po załadowaniu DOM-a
+document.addEventListener('DOMContentLoaded', setCurrentPage);
+
 
 setTimeout(()=> {
     setCurrentPage();
