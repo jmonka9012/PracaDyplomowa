@@ -16,11 +16,11 @@ const props = defineProps({
 
 <template>
     <table class="table--event table-nowrap">
-        <thead><EventTableHead></EventTableHead></thead>
+        <thead><EventTableHead :pending="props.pending"></EventTableHead></thead>
         <tbody>
         <EventTableRow :pending="props.pending" v-for="(event, index) in events" :key="event" :index="index" :event="event"></EventTableRow>
         </tbody>
-        <tfoot><EventTableHead></EventTableHead></tfoot>
+        <tfoot><EventTableHead :pending="props.pending"></EventTableHead></tfoot>
     </table>
 </template>
 
