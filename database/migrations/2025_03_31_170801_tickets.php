@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('seat_id')->nullable();
             $table->unsignedBigInteger('standing_id')->nullable();
             $table->decimal('price', 5,2)->comment('PLN')->nullable();
-            $table->enum('payment_status', ['unpaid','paid'])->default('unpaid');
+            $table->enum('payment_status', ['unpaid','paid', 'cancelled'])->default('unpaid');
             $table->timestamps();
 
             $table->foreign('event_id')

@@ -6,10 +6,13 @@ use App\Http\Resources\AdminOrderResource;
 use App\Http\Resources\SupportTicketResource;
 use App\Models\Events\Order;
 use App\Models\EventSeats\EventSeat;
+use App\Models\EventStandingTickets\EventStandingTicket;
+use App\Models\Tickets\Ticket;
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SupportTicket;
+use Illuminate\Support\Facades\DB;
 
 class CustomerServiceController extends Controller
 {
@@ -83,33 +86,85 @@ class CustomerServiceController extends Controller
 
     }
 
-public function getOrders(Request $request)
-{
-    $search = $request->input('order_lookup');
-    
-    $query = Order::with([
-        'event',
-        'tickets',
-        'tickets.seat',
-        'tickets.standingTicket',
-        'tickets.seat.section',
-        'tickets.standingTicket.section'
-    ]);
+    public function getOrders(Request $request)
+    {
+        $search = $request->input('order_lookup');
+        
+        $query = Order::with([
+            'event',
+            'tickets',
+            'tickets.seat',
+            'tickets.standingTicket',
+            'tickets.seat.section',
+            'tickets.standingTicket.section'
+        ]);
 
 
-    if (str_starts_with($search, 'ORD-')) {
-        $query->where('order_number', $search);
+        if (str_starts_with($search, 'ORD-')) {
+            $query->where('order_number', $search);
+        }
+        
+        else {
+            $query->where(function($q) use ($search) {
+                $q->where('order_number', 'LIKE', "%{$search}%")
+                ->orWhere('email', 'LIKE', "%{$search}%");
+            });
+        }
+
+        $orders = $query->get();
+
+        return AdminOrderResource::collection($orders);
     }
-    
-    else {
-        $query->where(function($q) use ($search) {
-            $q->where('order_number', 'LIKE', "%{$search}%")
-              ->orWhere('email', 'LIKE', "%{$search}%");
-        });
+
+
+    public function cancelTicket(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'id' => 'required|numeric|exists:tickets,id'
+        ]);
+
+        try{
+            DB::beginTransaction();
+
+            $ticket = Ticket::findOrFail($id);
+            $ticketPrice = $ticket->price;
+            $ticket -> payment_status = 'cancelled'; 
+            $ticket->save();
+
+            if ($ticket->is_seat){
+                EventSeat::where('id', $ticket->seat_id)->update(['status' => 'available']);
+            } else {
+                EventStandingTicket::where('id', $ticket->standing_id)->decrement('sold');
+            }
+
+            $order = $ticket->order;
+
+            $order->decrement('total_price', $ticketPrice);
+
+            $remainingActiveTickets = $order->tickets()
+                ->where('payment_status', '!=', 'cancelled')
+                ->exists();
+
+            if(!$remainingActiveTickets){
+                $order->update(['payment_status' => 'cancelled']);
+            }
+
+            DB::commit();
+
+            $orders = [];
+            $orders = $this->getOrders($request);
+            
+            return redirect()->back()->with([
+                'orders' => $orders,
+                'ticket_cancelled' => true,
+                'message' => 'Bilet został anulowany',
+        ]);} catch (\Exception $e){
+            DB::rollBack();
+
+            return response()->json([
+                'ticket_cancelled' => false,
+                'message' => 'Anulowanie biletu się nie powiodło',
+            ]);
+        }
     }
-
-    $orders = $query->get();
-
-    return AdminOrderResource::collection($orders);
-}
 }
