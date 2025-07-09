@@ -31,18 +31,40 @@ class EventSeeder extends Seeder
             $eventDescription = "<p><img src='/storage/event_images/placeholder.jpg'></p><hr><div><p>{$faker->paragraphs(3, true)}</p></div>";
 
             $eventData = [
-                'event_name' => $faker->catchPhrase,
-                'event_date' => $faker->dateTimeBetween('+1 week', '+2 years'),
-                'event_start' => $faker->time('H:i:s'),
-                'event_end' => $faker->time('H:i:s'),
-                'contact_email' => $faker->unique()->safeEmail,
-                'contact_email_additional' => $faker->unique()->safeEmail,
-                'event_description' => $eventDescription,
-                'event_description_additional' => $faker->sentence,
-                'event_location' => $hall->id,
-                'image_path' => 'event_images/placeholder.jpg',
-                'pending' => false,
-            ];
+            'event_name' => $faker->randomElement([
+                'Warsztaty kreatywnego pisania',
+                'Konferencja marketingowa',
+                'Szkolenie z programowania',
+                'Targi pracy IT',
+                'Webinar o sztucznej inteligencji',
+                'Spotkanie networkingowe',
+                'Wystawa sztuki współczesnej',
+                'Koncert muzyki klasycznej',
+                'Festiwalu filmowego',
+                'Targi książki',
+                'Koncert muzyki metalowej',
+                'Koncert muzyki pop',
+                'Koncert muzyki rock',
+                'Koncert muzyki punk',
+            ]),
+            'event_date' => $faker->dateTimeBetween('+1 week', '+2 years'),
+            'event_start' => $faker->time('H:i:s'),
+            'event_end' => $faker->time('H:i:s'),
+            'contact_email' => $faker->unique()->safeEmail,
+            'contact_email_additional' => $faker->unique()->safeEmail,
+            'event_description' => $eventDescription,
+            'event_description_additional' => $faker->randomElement([
+                'Dodatkowe informacje dostępne na stronie internetowej',
+                'Wydarzenie będzie tłumaczone na język migowy',
+                'Dla uczestników przewidziane są certyfikaty',
+                'Jedzenie doliczone w cenie biletu',
+                'Wstęp tylko dla osób pełnoletnich',
+                'Wydarzenie dla rodzin',
+            ]),
+            'event_location' => $hall->id,
+            'image_path' => 'event_images/placeholder.jpg',
+            'pending' => false,
+        ];
 
             $event = Event::create($eventData);
 

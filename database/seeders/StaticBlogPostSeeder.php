@@ -40,7 +40,7 @@ class StaticBlogPostSeeder extends Seeder
         $blogPosts=[
             [
                 'author_id' => $authorId,
-                'blog_post_name' => 'About Lore Ipsums',
+                'blog_post_name' => 'Muzyka Metalowa w 2025',
                 'blog_post_content' => $blogContent,
                 'thumbnail_path' => $imagePath,
                 'created_at' =>  now()->addDays(1),
@@ -48,7 +48,7 @@ class StaticBlogPostSeeder extends Seeder
             ],
             [
                 'author_id' => $authorId,
-                'blog_post_name' => 'About Lore Ipsums 2 : electric boogalo',
+                'blog_post_name' => 'Nowe mikrofony',
                 'blog_post_content' => $blogContent,
                 'thumbnail_path' => $imagePath,
                 'created_at' =>  now()->addDays(2),
@@ -56,7 +56,7 @@ class StaticBlogPostSeeder extends Seeder
             ],
             [
                 'author_id' => $authorId,
-                'blog_post_name' => 'About Lore Ipsums 3 : why even bother',
+                'blog_post_name' => 'Najlepsze słuchawki do słuchania muzyki',
                 'blog_post_content' => $blogContent,
                 'thumbnail_path' => $imagePath,
                 'created_at' =>  now()->addDays(3),
@@ -64,7 +64,7 @@ class StaticBlogPostSeeder extends Seeder
             ],
             [
                 'author_id' => $authorId,
-                'blog_post_name' => 'About Lore Ipsums 4 : why are we',
+                'blog_post_name' => 'Jak sprzedać swoje bilety',
                 'blog_post_content' => $blogContent,
                 'thumbnail_path' => $imagePath,
                 'created_at' =>  now()->addDays(4),
@@ -72,7 +72,7 @@ class StaticBlogPostSeeder extends Seeder
             ],
             [
                 'author_id' => $authorId,
-                'blog_post_name' => 'About Lore Ipsums 5 : still here',
+                'blog_post_name' => 'Najbardziej popularne gatunki muzyki 2025',
                 'blog_post_content' => $blogContent,
                 'thumbnail_path' => $imagePath,
                 'created_at' =>  now()->addDays(5),
@@ -80,7 +80,7 @@ class StaticBlogPostSeeder extends Seeder
             ],
             [
                 'author_id' => $authorId,
-                'blog_post_name' => 'About Lore Ipsums 6 : just to suffer',
+                'blog_post_name' => 'Gdzie zacząć naukę gry na gitarze',
                 'blog_post_content' => $blogContent,
                 'thumbnail_path' => $imagePath,
                 'created_at' =>  now()->addDays(6),
