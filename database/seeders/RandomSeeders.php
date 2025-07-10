@@ -17,7 +17,8 @@ class RandomSeeders extends Seeder
             EventSeeder::class,
             OrganizerSeeder::class,
             SupportTicketSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            OrderSeeder::class
         ]);
     }
 }
