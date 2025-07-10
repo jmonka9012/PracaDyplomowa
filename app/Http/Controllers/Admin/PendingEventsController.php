@@ -165,4 +165,18 @@ class PendingEventsController extends Controller
 
         return $events;
     }
+
+    public function changeEventStatus(Request $request, Event $event)
+    {
+        $request->validate([
+            'new_status' => 'required|in:0,1'
+        ]);
+
+        $event->is_pending = $request->new_status;
+        $event->save();
+
+        return response()->json([
+            'message' => 'Zaktualizowany status wydarzenia'
+        ]);
+    }
 }

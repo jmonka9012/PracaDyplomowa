@@ -47,6 +47,10 @@ Route::prefix('admin')->group(function() {
             ->name('admin.events.data')
             ->middleware('redactorAccess');
 
+      Route::put('/wydarzenia/{event}/status', [EventController::class, 'changeEventStatus'])
+            ->name('admin.events.status')
+            ->middleware('adminAccess');
+
       Route::get('/{event}', [EventController::class, 'showPending'])
             ->where('event', 'wydarzenia/wydarzenie/[0-9]{4}-[0-9]{2}-[0-9]{2}/[0-9]+/([A-Za-z0-9]+(-[A-Za-z0-9]+)*)')
             ->name('event.show.pending')
