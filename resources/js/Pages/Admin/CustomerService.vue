@@ -193,6 +193,10 @@ const SwapStatus = (status) => {
                     <div>
                         <div v-for="order in props.orders.data" :key="order.order_id" class="order">
                             <div class="order__row">
+                                <div>Wydarzenie</div>
+                                <a class="" target="_blank" :href="`/${order.event.event_url}`">{{ order.event.name }}</a>
+                            </div>
+                            <div class="order__row">
                                 <div>created at</div>
                                 <div>{{ order.created_at }}</div>
                             </div>
