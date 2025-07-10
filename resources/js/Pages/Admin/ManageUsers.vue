@@ -114,31 +114,33 @@ function SetUserProperty(value, userID, property) {
                     <label for="userName">Nazwa firmy:</label>
                     <input v-model="filterRequest.company_name" type="text"/>
                 </div>
-                <div class="input-wrap col-12">
-                    <label class="mb-10px" for="userRole">Rola</label>
-                    <select class="select--small" id="userRole" v-model="filterRequest.role" name="userRole">
-                        <option disabled value="">Wybierz</option>
-                        <option
-                            v-for="status in props.user_stats.original"
-                            :value="status.value">
-                            {{ status.description }} ( {{ status.count }} )
-                        </option>
-                    </select>
-                </div>
-                <div class="input-wrap col-12">
-                    <label class="mb-10px" for="organizerStatus">Status organizatora:</label>
-                    <select
-                        class="select--small"
-                        id="organizerStatus"
-                        v-model="filterRequest.account_status"
-                        name="organizerStatus">
-                        <option disabled value="">Wybierz</option>
-                        <option
-                            v-for="status in props.organizer_stats.original"
-                            :value="status.value">
-                            {{ status.description }} ( {{ status.count }} )
-                        </option>
-                    </select>
+                <div class="col-12 d-flex flex-row">
+                    <div class="input-wrap col-6">
+                        <label class="mb-10px" for="userRole">Rola</label>
+                        <select class="select--small" id="userRole" v-model="filterRequest.role" name="userRole">
+                            <option disabled value="">Wybierz</option>
+                            <option
+                                v-for="status in props.user_stats.original"
+                                :value="status.value">
+                                {{ status.description }} ( {{ status.count }} )
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-wrap col-6">
+                        <label class="mb-10px" for="organizerStatus">Status organizatora:</label>
+                        <select
+                            class="select--small"
+                            id="organizerStatus"
+                            v-model="filterRequest.account_status"
+                            name="organizerStatus">
+                            <option disabled value="">Wybierz</option>
+                            <option
+                                v-for="status in props.organizer_stats.original"
+                                :value="status.value">
+                                {{ status.description }} ( {{ status.count }} )
+                            </option>
+                        </select>
+                    </div>
                 </div>
                 <div class="input-wrap col-12">
                     <button class="btn btn-md btn-hovprim w-fit" type="submit">

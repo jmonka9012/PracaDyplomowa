@@ -45,7 +45,7 @@ function GetFilteredResults(method) {
         request,
         {
             preserveScroll: true,
-            only: props.pending ? ['pending'] : ['events'],
+            only: props.pending ? ['pending_events'] : ['events'],
             onError: (err) => console.log(err)
         }
     );

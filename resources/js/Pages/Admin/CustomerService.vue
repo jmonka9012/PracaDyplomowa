@@ -15,7 +15,7 @@ const props = defineProps({
         type: Array,
         required: true,
     },
-    searched_tickets: {
+    orders: {
         type: Array,
         required: true,
     }
@@ -189,22 +189,7 @@ const SwapStatus = (status) => {
                         <input v-model="ticket" type="text">
                         <input type="submit" value="Szukaj">
                     </form>
-                    <div v-if="props.searched_tickets">{{ props.searched_tickets }}</div>
-                    <div v-else>
-                        <div>Wysyłam Ci w jako parametr url email lub numer biletu</div>
-                        <div>Wysyłaj mi tutaj jako "tickets" array takich elementów (nigdy ich nie będzie jakoś przesadnie dużo więc niech będą wszystkie na raz):</div>
-                        <ol>
-                            <li>Imie</li>
-                            <li>Nazwisko</li>
-                            <li>email</li>
-                            <li>numer biletu</li>
-                            <li>nazwa eventu na który kupiono bilet</li>
-                            <li>lista miejsc z numerami sekcji, rzędami i kolumnami</li>
-                            <li>łączna kwota</li>
-                            <li>data zakupu</li>
-                        </ol>
-                        <div>Ponadto poproszę dwa POSTY: <br>- jeden z anulowaniem całego biletu (zwalniamy wszystkie miejsca) <br>- drugi na anulowanie danego miejsca jeżeli istnieje taka możliwość</div>
-                    </div>
+                    <div v-if="props.orders">{{ props.orders }}</div>
                 </Tab>
             </Tabs>
         </div>
