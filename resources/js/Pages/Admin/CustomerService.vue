@@ -21,7 +21,6 @@ const props = defineProps({
     }
 });
 
-
 const currentUserID = ref(null);
 const currentUserName = computed(() => {
     if (!currentUserID.value) return null;
@@ -34,6 +33,7 @@ const currentUserName = computed(() => {
 });
 
 onMounted(() => {
+    console.log(props);
     const params = new URLSearchParams(window.location.search);
     currentUserID.value = params.get("user_id");
 });
@@ -185,11 +185,61 @@ const SwapStatus = (status) => {
                 <Tab title="Wyszukaj bilet">
                     <h2 class="mb-30px">Wyszukaj bilet</h2>
                     <p>W pole poniżej wpisz email lub unikalny numer szukanego biletu</p>
-                    <form @submit.prevent="router.get(route('admin.customer-service'), {tabName: 'Wyszukaj bilet',ticket: ticket}, { preserveScroll: true })">
+                    <form
+                        @submit.prevent="router.get(route('admin.customer-service'), {tabName: 'Wyszukaj bilet',order_lookup: ticket}, { preserveScroll: true })">
                         <input v-model="ticket" type="text">
                         <input type="submit" value="Szukaj">
                     </form>
-                    <div v-if="props.orders">{{ props.orders }}</div>
+                    <div>
+                        <div v-for="order in props.orders.data" :key="order.order_id" class="order">
+                            <div class="order__row">
+                                <div>created at</div>
+                                <div>{{ order.created_at }}</div>
+                            </div>
+                            <div class="order__row">
+                                <div>e-mail</div>
+                                <div>{{ order.email }}</div>
+                            </div>
+                            <div class="order__row">
+                                <div>Imie</div>
+                                <div>{{ order.first_name }}</div>
+                            </div>
+                            <div class="order__row">
+                                <div>Nazwisko</div>
+                                <div>{{ order.last_name }}</div>
+                            </div>
+                            <div class="order__row">
+                                <div>Nr. zamówienia</div>
+                                <div>{{ order.order_number }}</div>
+                            </div>
+                            <div class="order__row">
+                                <div>Status płatnosci</div>
+                                <div>{{ order.payment_status }}</div>
+                            </div>
+                            <div class="order__row">
+                                <div>Łączna cena</div>
+                                <div>{{ order.total_price }}</div>
+                            </div>
+                            <div>
+                                <div>Wykupione miejsca</div>
+                                <div class="order__tickets">
+                                    <div>Sekcja</div>
+                                    <div>Rząd</div>
+                                    <div>Miejsce</div>
+                                    <div>Cena</div>
+                                    <div>Akcja</div>
+                                </div>
+                                <div v-for="ticket in order.tickets" :key="ticket.id" class="order__tickets">
+                                    <div v-html="ticket.is_seat === 1 ? ticket.seat_data.section.name : ticket.standing_ticket_data.section.name"></div>
+                                    <div v-html="ticket.is_seat === 1 ? ticket.seat_data.row : '-'"></div>
+                                    <div v-html="ticket.is_seat === 1 ? ticket.seat_data.number : '-'"></div>
+                                    <div v-html="ticket.is_seat === 1 ? ticket.seat_data.price : ticket.standing_ticket_data.price"></div>
+                                    <div><a href="#">Anuluj miejsce</a></div>
+                                </div>
+                                <a href="#">Anuluj bilet</a>
+                            </div>
+                        </div>
+                    </div>
                 </Tab>
             </Tabs>
         </div>
@@ -198,6 +248,23 @@ const SwapStatus = (status) => {
 
 <style lang="scss" scoped>
 @use "~css/mixin.scss";
+
+.order {
+    width: 100%;
+    display: grid;
+    border: 1px solid red;
+
+    &__row {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    &__tickets {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
 
 .ticket-query {
     &__ticket {

@@ -84,10 +84,7 @@ function SetUserProperty(value, userID, property) {
             only: ["users"],
             onError: (err) => {
                 console.log("Błąd:", err);
-            },
-            onSuccess: (page) => {
-                console.log("Sukces:", page);
-            },
+            }
         }
     );
 }

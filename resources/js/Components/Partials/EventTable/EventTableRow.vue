@@ -51,6 +51,10 @@ const totalSpotsSold = computed(() => {
         return total + (parseInt(section.spots_sold) || 0);
     }, 0);
 });
+
+function DeleteEvent(eventID) {
+    console.log(eventID);
+}
 </script>
 
 <template>
@@ -85,26 +89,6 @@ const totalSpotsSold = computed(() => {
                 <div
                     ref="detailsWrapper"
                     class="event-details__wrapper">
-<!--                    <div class="event-details__container">
-                        <div class="event-details__row event-details__label" :class="{ 'event-details__row&#45;&#45;pending': props.pending }">
-                            <div>Sekcja</div>
-                            <div>Cena za miejsce</div>
-                            <div v-if="!props.pending">Sprzedano biletów</div>
-                            <div v-if="!props.pending">Łączna kwota</div>
-                        </div>
-                        <div v-for="section in event.event_location.sections" class="event-details__row" :class="{ 'event-details__row&#45;&#45;pending': props.pending }">
-                            <div>{{ section.name }}</div>
-                            <div>{{ section.price }} PLN</div>
-                            <div v-if="!props.pending">{{ section.spots_sold }}</div>
-                            <div v-if="!props.pending">{{ section.total_sold_value }} PLN</div>
-                        </div>
-                        <div class="event-details__summary event-details__row" :class="{ 'event-details__row&#45;&#45;pending': props.pending }">
-                            <div>Łącznie</div>
-                            <div>-</div>
-                            <div v-if="!props.pending">{{totalSpotsSold}}</div>
-                            <div v-if="!props.pending">{{ event.total_sale_value }} PLN</div>
-                        </div>
-                    </div>-->
                     <div class="event-details__container">
                         <div class="event-details__row event-details__label">
                             <div>Sekcja</div>
