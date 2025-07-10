@@ -36,7 +36,7 @@ class MyAccountController extends Controller
         
         return Inertia::render('My-Account', [
             'support_tickets' => SupportTicketResource::collection($supportTickets),
-            'userData' => $userData
+            'user_data' => $userData
         ]);
     }
 

@@ -296,7 +296,7 @@ class TicketSaleController extends Controller
 
         return Inertia::render('Events/EventForm', [
             'order' => $order->load('tickets'),
-            'userData' => $userData
+            'user_data' => $userData
         ]);
     }
 
