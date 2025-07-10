@@ -182,11 +182,11 @@ const SwapStatus = (status) => {
                         </ul>
                     </div>
                 </Tab>
-                <Tab title="Wyszukaj bilet">
-                    <h2 class="mb-30px">Wyszukaj bilet</h2>
+                <Tab title="Wyszukaj zamówienie">
+                    <h2 class="mb-30px">Wyszukaj zamówienie</h2>
                     <p>W pole poniżej wpisz email lub unikalny numer szukanego biletu</p>
                     <form
-                        @submit.prevent="router.get(route('admin.customer-service'), {tabName: 'Wyszukaj bilet',order_lookup: ticket}, { preserveScroll: true })">
+                        @submit.prevent="router.get(route('admin.customer-service'), {tabName: 'Wyszukaj zamówienie',order_lookup: ticket}, { preserveScroll: true })">
                         <input v-model="ticket" type="text">
                         <input type="submit" value="Szukaj">
                     </form>
