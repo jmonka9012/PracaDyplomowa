@@ -32,6 +32,8 @@ class MyAccountController extends Controller
                 'house_number' => $user->house_number,
                 'zip_code' => $user->zip_code,
                 'phone' => $user->phone,
+                'tax_number' => $user->tax_number,
+                'company' => $user->company
             ];
         
         return Inertia::render('My-Account', [

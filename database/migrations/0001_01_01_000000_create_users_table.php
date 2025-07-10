@@ -43,6 +43,8 @@ return new class extends Migration
             $table->string('street')->nullable();
             $table->string('house_number')->nullable();
             $table->string('zip_code')->nullable();
+            $table->string('company')->nullable();
+            $table->string('tax_number')->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
