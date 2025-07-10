@@ -69,9 +69,9 @@ function submitFilterRequest() {
         <div class="container">
             <Tabs class="col-12">
                 <Tab routeName="jacek.test1" title="Zatwierdzone wydarzenia">
-                    <h3 class="mb-30px">Zatwierdzone wydarzenia</h3>
+                    <h3 class="mb-30px text-center">Zatwierdzone wydarzenia</h3>
                     <form
-                        class="select-filters col-12 col-lg-8 align-items-center d-flex flex-column"
+                        class="select-filters col-12 col-lg-8 align-items-center d-flex flex-column ml-auto mr-auto"
                         @submit.prevent="submitFilterRequest()"
                     >
                         <div class="input-wrap relative col-12">
@@ -126,13 +126,12 @@ function submitFilterRequest() {
                     </div>
                 </Tab>
                 <Tab title="Oczekujące wydarzenia">
-                    <h3 class="mb-30px">
+                    <h3 class="mb-30px text-center">
                         Wydarzenia czekające na zatwierdzenie
                     </h3>
                     <form
-                        class="select-filters col-12 col-lg-8 align-items-center d-flex flex-column"
-                        @submit.prevent="submitFilterRequest()"
-                    >
+                        class="select-filters col-12 col-lg-8 align-items-center d-flex flex-column ml-auto mr-auto"
+                        @submit.prevent="submitFilterRequest()">
                         <div class="input-wrap relative col-12">
                             <input
                                 v-model="filterRequest.pending_name"

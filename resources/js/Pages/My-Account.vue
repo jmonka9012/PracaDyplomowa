@@ -4,6 +4,7 @@ import Tab from "@/Components/Partials/Tab.vue";
 import Tabs from "@/Components/Partials/Tabs.vue";
 import useAuth from "@/Utilities/useAuth";
 import ResetObject from "@/Utilities/resetObject";
+import {computed} from "vue";
 import { router } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
 import { ref, reactive, toRaw } from "vue";
@@ -17,7 +18,15 @@ const props = defineProps({
         type: Array,
         required: true,
     },
+    user_data: {
+        type: Object,
+        required: false
+    }
 });
+
+const showTaxField = computed(() => {
+    return (paymentForm.company !== null) || props.user_data.tax_number;
+})
 
 console.log(props);
 
@@ -115,6 +124,7 @@ const paymentForm = reactive({
     email: null,
     phone: null,
     company: null,
+    tax_number: null,
     country: null,
     city: null,
     street: null,
@@ -216,7 +226,7 @@ const paymentForm = reactive({
                                         autocomplete="first_name"
                                         name="name"
                                         spellcheck="false"
-                                        aria-required="true"
+                                        :placeholder="props.user_data.first_name"
                                         v-model="paymentForm.first_name"
                                     />
                                     <div class="error-msg" v-if="errors.name">
@@ -231,7 +241,7 @@ const paymentForm = reactive({
                                         autocomplete="last_name"
                                         name="last_name"
                                         spellcheck="false"
-                                        aria-required="true"
+                                        :placeholder="props.user_data.last_name"
                                         v-model="paymentForm.last_name"
                                     />
                                     <div class="error-msg" v-if="errors.last_name">
@@ -246,7 +256,7 @@ const paymentForm = reactive({
                                         autocomplete="email"
                                         name="email"
                                         spellcheck="false"
-                                        aria-required="true"
+                                        :placeholder="props.user_data.email"
                                         v-model="paymentForm.email"
                                     />
                                     <div class="error-msg" v-if="errors.email">
@@ -261,7 +271,7 @@ const paymentForm = reactive({
                                         autocomplete="phone"
                                         name="phone"
                                         spellcheck="false"
-                                        aria-required="true"
+                                        :placeholder="props.user_data.phone"
                                         v-model="paymentForm.phone"
                                     />
                                     <div class="error-msg" v-if="errors.phone">
@@ -276,11 +286,27 @@ const paymentForm = reactive({
                                         autocomplete="company"
                                         name="company"
                                         spellcheck="false"
-                                        aria-required="true"
+                                        :placeholder="props.user_data.company"
                                         v-model="paymentForm.company"
                                     />
                                     <div class="error-msg" v-if="errors.company">
                                         {{ errors.company }}
+                                    </div>
+                                </div>
+                                <div v-if="showTaxField" class="input-wrap col-12 ">
+                                    <label for="company">NIP</label>
+                                    <input
+                                        id="company"
+                                        v-model="paymentForm.tax_number"
+                                        :placeholder="props.user_data.tax_number"
+                                        autocomplete="company"
+                                        name="company"
+                                        spellcheck="false"
+                                        type="text"
+                                        v-number-only
+                                    />
+                                    <div v-if="errors.tax_number" class="error-msg">
+                                        {{ errors.tax_number }}
                                     </div>
                                 </div>
                                 <div class="input-wrap col-12">
@@ -291,7 +317,7 @@ const paymentForm = reactive({
                                         autocomplete="country"
                                         name="country"
                                         spellcheck="false"
-                                        aria-required="true"
+                                        :placeholder="props.user_data.country"
                                         v-model="paymentForm.country"
                                     />
                                     <div class="error-msg" v-if="errors.country">
@@ -306,7 +332,7 @@ const paymentForm = reactive({
                                         autocomplete="city"
                                         name="city"
                                         spellcheck="false"
-                                        aria-required="true"
+                                        :placeholder="props.user_data.city"
                                         v-model="paymentForm.city"
                                     />
                                     <div class="error-msg" v-if="errors.city">
@@ -321,8 +347,8 @@ const paymentForm = reactive({
                                         autocomplete="street"
                                         name="street"
                                         spellcheck="false"
-                                        aria-required="true"
                                         v-model="paymentForm.street"
+                                        :placeholder="props.user_data.street"
                                     />
                                     <div class="error-msg" v-if="errors.street">
                                         {{ errors.street }}
@@ -336,8 +362,8 @@ const paymentForm = reactive({
                                         autocomplete="house_number"
                                         name="house_number"
                                         spellcheck="false"
-                                        aria-required="true"
                                         v-model="paymentForm.house_number"
+                                        :placeholder="props.user_data.house_number"
                                     />
                                     <div class="error-msg" v-if="errors.house_number">
                                         {{ errors.house_number }}
@@ -351,8 +377,8 @@ const paymentForm = reactive({
                                         autocomplete="zip_code"
                                         name="zip_code"
                                         spellcheck="false"
-                                        aria-required="true"
                                         v-model="paymentForm.zip_code"
+                                        :placeholder="props.user_data.zip_code"
                                     />
                                     <div class="error-msg" v-if="errors.zip_code">
                                         {{ errors.zip_code }}
@@ -361,7 +387,6 @@ const paymentForm = reactive({
                                 <div class="input-wrap col-12">
                                     <input value="Zaktualizuj dane" class="btn btn-md btn-hovprim cursor-pointer" type="submit">
                                 </div>
-
                             </form>
                         </div>
                     </Tab>
