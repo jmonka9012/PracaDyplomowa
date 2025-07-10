@@ -35,7 +35,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'street',
         'house_number',
         'zip_code',
-        'email_verified_at'
+        'email_verified_at',
+        'tax_number',
+        'company',
     ];
 
     protected $casts = [

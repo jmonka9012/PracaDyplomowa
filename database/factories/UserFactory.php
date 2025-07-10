@@ -38,6 +38,8 @@ class UserFactory extends Factory
             'city' => $this->faker->city,
             'street' => $this->faker->streetName,
             'house_number' => $this->faker->buildingNumber,
+            'company' => $this->faker->company,
+            'tax_number' => $this->faker->unique()->numerify('##########'),
         ];
     }
 

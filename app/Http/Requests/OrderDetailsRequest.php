@@ -33,6 +33,8 @@ class OrderDetailsRequest extends FormRequest
             'zip_code' => 'required|string|max:20',
             'make_account' => 'nullable|boolean',
             'save_data' => 'nullable|boolean',
+            'company' => 'sometimes|string|max:255',
+            'tax_number' => 'sometimes|string|max:20',
 
             'phone' => [
                 'required',
