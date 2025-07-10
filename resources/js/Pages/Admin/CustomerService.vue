@@ -41,6 +41,16 @@ onMounted(() => {
 const SwapStatus = (status) => {
     return status === "closed" ? "in_progress" : "closed";
 };
+
+function ReturnStatus(status) {
+    if (status === 'paid') {
+        return 'Opłacone';
+    } else if (status === 'cancelled') {
+        return 'Anulowane'
+    } else {
+        return "Oczekujące"
+    }
+}
 </script>
 
 <template>
@@ -218,7 +228,7 @@ const SwapStatus = (status) => {
                             </div>
                             <div class="order__row">
                                 <div>Status płatnosci</div>
-                                <div>{{ order.payment_status }}</div>
+                                <div v-html="ReturnStatus(order.payment_status)"></div>
                             </div>
                             <div class="order__row">
                                 <div>Łączna cena</div>
