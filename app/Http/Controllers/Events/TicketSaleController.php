@@ -321,6 +321,8 @@ class TicketSaleController extends Controller
             'street' => $validated['street'],
             'house_number' => $validated['house_number'],
             'zip_code' => $validated['zip_code'],
+            'company' => $validated['company'],
+            'tax_number' => $validated['tax_number'],
             ]);
 
             $order->user_id = $user->id;
@@ -339,6 +341,8 @@ class TicketSaleController extends Controller
                 'street' => $validated['street'],
                 'house_number' => $validated['house_number'],
                 'zip_code' => $validated['zip_code'],
+                'company' => $validated['company'],
+                'tax_number' => $validated['tax_number'],
             ]);
         }
 
