@@ -1,5 +1,6 @@
 <script setup>
 import { router } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
 const props = defineProps({
     pending: {
@@ -8,69 +9,58 @@ const props = defineProps({
     }
 });
 
-function sortEvents(method, property) {
+const routeParams = computed(() => new URLSearchParams(window.location.search));
+const eventParam = computed(() => routeParams.value.get('event_sort_dir'));
+const pendingParam = computed(() => routeParams.value.get('pending_sort_dir'));
+
+function sortEvents(method) {
     const pending = props.pending;
 
     if (!pending) {
-        if (property === 'name') {
-            if (method === 'asc') {
-/*                router.get(route('admin.events'), {
-                    event_sort_dir: 'asc'
-                }, {
-                    preserveScroll: true
-                })*/
-            } else if (method ==='desc') {
-
-            } else {
-
-            }
-        } else if (property ==='date') {
-            if (method === 'asc') {
-
-            } else if (method ==='desc') {
-
-            } else {
-
-            }
+        if (method === 'toggle') {
+            method = eventParam.value === 'asc' ? 'desc' : 'asc';
         }
+        GetFilteredResults(method);
     } else {
-        if (property === 'name') {
-            if (method === 'asc') {
-
-            } else if (method ==='desc') {
-
-            } else {
-
-            }
-        } else if (property ==='date') {
-            if (method === 'asc') {
-
-            } else if (method ==='desc') {
-
-            } else {
-
-            }
+        if (method === 'toggle') {
+            method = pendingParam.value === 'asc' ? 'desc' : 'asc';
         }
+        GetFilteredResults(method);
     }
+}
+
+function GetFilteredResults(method) {
+    const request = props.pending
+        ? {
+            pending_sort_dir: method,
+            tabName: 'Oczekujące wydarzenia'
+        }
+        : {
+            event_sort_dir: method,
+            tabName: 'Zatwierdzone wydarzenia'
+        };
+
+    router.get(
+        route('admin.events'),
+        request,
+        {
+            preserveScroll: true,
+            only: props.pending ? ['pending'] : ['events'],
+            onError: (err) => console.log(err)
+        }
+    );
 }
 </script>
 
 <template>
     <tr>
         <th class="t-details-events__main-img">Obrazek Główny</th>
-        <th class="t-details-events__name">
-            <a @click="sortEvents('toggle', 'name')" href="#username-sort">Nazwa
-                <span class="sorters">
-          <span @click.stop="sortEvents('asc', 'name')" class="sort sort-asc fa"></span>
-          <span @click.stop="sortEvents('desc', 'name')" class="sort sort-desc fa"></span>
-        </span>
-            </a>
-        </th>
+        <th class="t-details-events__name">Nazwa</th>
         <th class="t-details-events__date">
-            <a @click="sortEvents('toggle', 'date')" href="#username-sort">Data
+            <a @click="sortEvents('toggle')">Data
                 <span class="sorters">
-          <span @click.stop="sortEvents('asc', 'date')" class="sort sort-asc fa"></span>
-          <span @click.stop="sortEvents('desc', 'date')" class="sort sort-desc fa"></span>
+          <span :class="{ active: (eventParam === 'asc' && !props.pending) || (pendingParam === 'asc' && props.pending) }" class="sort sort-asc fa" @click.stop="sortEvents('asc')" />
+          <span :class="{ active: (eventParam === 'desc' && !props.pending) || (pendingParam === 'desc' && props.pending) }" class="sort sort-desc fa" @click.stop="sortEvents('desc')" />
         </span>
             </a>
         </th>
@@ -82,4 +72,4 @@ function sortEvents(method, property) {
     </tr>
 </template>
 
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>
