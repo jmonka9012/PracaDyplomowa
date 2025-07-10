@@ -13,11 +13,17 @@ use App\Mail\VerifyEmail;
 use App\Enums\UserRole;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Http\Request;
+use App\Http\Resources\AdminOrderResource;
+use App\Models\Events\Order;
 class MyAccountController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if (!$request->has('page')) {
+            return redirect()->route('my-account', ['page' => 1] + $request->except('page'));
+        }
+
         $supportTickets = SupportTicket::where('user_id', auth()->id())->get()
         ->sortByDesc('created_at');
 
@@ -35,10 +41,13 @@ class MyAccountController extends Controller
                 'tax_number' => $user->tax_number,
                 'company' => $user->company
             ];
+
+        $orders = $this->getOrders($request);
         
         return Inertia::render('My-Account', [
             'support_tickets' => SupportTicketResource::collection($supportTickets),
-            'user_data' => $userData
+            'user_data' => $userData,
+            'orders' => $orders->response()->getData(true)
         ]);
     }
 
@@ -167,5 +176,25 @@ class MyAccountController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
+    }
+
+    public function getOrders(Request $request)
+    {
+        $user = auth()->user();
+        
+        $orders = Order::with([
+            'event',
+            'tickets',
+            'tickets.seat',
+            'tickets.standingTicket',
+            'tickets.seat.section',
+            'tickets.standingTicket.section'
+        ])
+        ->where('user_id', $user->id)
+        ->orderByDesc('created_at')
+        ->paginate($request->input('per_page', 10))
+        ->appends($request->except('page'));
+
+        return AdminOrderResource::collection($orders);
     }
 }
