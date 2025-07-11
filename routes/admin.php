@@ -83,4 +83,8 @@ Route::prefix('admin')->group(function() {
       Route::put('/obsluga-klienta/{id}/anulowanie-biletu', [CustomerServiceController::class, 'cancelTicket'])
             ->name('admin.customer-service.cancel-ticket')
             ->middleware('adminAccess');
+
+      Route::put('/obsluga-klienta/{order}/anulowanie-zamowienia', [CustomerServiceController::class, 'cancelOrder'])
+            ->name('admin.customer-service.cancel-order')
+            ->middleware('adminAccess');
 });

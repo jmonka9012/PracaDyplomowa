@@ -167,4 +167,50 @@ class CustomerServiceController extends Controller
             ]);
         }
     }
+
+    public function cancelOrder(Request $request, Order $order)
+    {
+        $validatedData = $request->validate([
+            'order_id' => 'required|numeric|exists:orders,id'
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $targerOrder = Order::with('tickets')->findOrFail($order);
+
+            foreach ($targerOrder->tickets as $ticket) {
+                $ticket->payment_status = 'cancelled';
+                $ticket->save();
+
+                if ($ticket->is_seat) {
+                    EventSeat::where('id', $ticket->seat_id)->update(['status' => 'available']);
+                } else {
+                    EventStandingTicket::where('id', $ticket->standing_id)->decrement('sold');
+                }
+            }
+
+            $targerOrder->update([
+                'payment_status' => 'cancelled',
+            ]);
+
+            DB::commit();
+
+            $orders = [];
+            $orders = $this->getOrders($request);
+            
+            return redirect()->back()->with([
+                'orders' => $orders,
+                'order_cancelled' => true,
+                'message' => 'Zamówienie zostało anulowane wraz ze wszystkimi biletami',
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'order_cancelled' => false,
+                'message' => 'Anulowanie zamówienia się nie powiodło',
+            ]);
+        }
+    }
 }
