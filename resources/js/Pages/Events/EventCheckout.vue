@@ -2,7 +2,7 @@
 import Tab from "@/Components/Partials/Tab.vue";
 import Tabs from "@/Components/Partials/Tabs.vue";
 
-import Lightbox from "../Components/Partials/Lightbox.vue";
+import Lightbox from "../../Components/Partials/Lightbox.vue";
 </script>
 
 <template>
