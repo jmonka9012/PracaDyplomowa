@@ -50,6 +50,9 @@ Route::prefix('wydarzenia')->group(function() {
 
       Route::post('/kupuj/{order}/detale/update', [TicketSaleController::class, 'orderDetailsUpdate'])
             ->name('event-ticket.buy.form.details.post');
+
+      Route::get('/kupuj/{order}/podsumowanie', [TicketSaleController::class, 'orderSummary'])
+            ->name('event-ticket.buy.form.summary');
       
       Route::get('/tickets/payment/success', [TicketSaleController::class, 'paymentSuccess'])
             ->name('tickets.payment.success');

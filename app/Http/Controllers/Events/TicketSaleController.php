@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Events;
 
 use App\Http\Requests\OrderDetailsRequest;
 use App\Http\Requests\TicketSaleRequest;
+use App\Http\Resources\AdminOrderResource;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Tickets\Ticket;
@@ -122,7 +123,7 @@ class TicketSaleController extends Controller
             session()->forget('current_stripe_session');
             session()->forget('current_order_number');
 
-            return redirect()->route('home')->with('success', 'Payment successful!');
+            return redirect()->route('event-ticket.buy.form.summary', $order)->with('success', 'Payment successful!');
 
         } catch (\Exception $e) {
             \Log::error('Payment success handling error: ' . $e->getMessage());
@@ -347,5 +348,25 @@ class TicketSaleController extends Controller
         }
 
         return $this->payment($order);
+    }
+
+    public function orderSummary(Request $request, Order $order)
+    {
+        $order = Order::with([
+            'event',
+            'tickets',
+            'tickets.seat',
+            'tickets.standingTicket',
+            'tickets.seat.section',
+            'tickets.standingTicket.section'
+        ])
+        ->where('order_number', $order->order_number)
+        ->get();
+
+        
+
+        return Inertia::render('Events/EventCheckout', [
+            'order' => $order
+        ]);
     }
 }
