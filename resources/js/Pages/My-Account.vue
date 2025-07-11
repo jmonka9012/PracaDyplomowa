@@ -21,6 +21,10 @@ const props = defineProps({
     user_data: {
         type: Object,
         required: false
+    },
+    orders: {
+        type: Object,
+        required: false,
     }
 });
 
@@ -31,20 +35,20 @@ const showTaxField = computed(() => {
 console.log(props);
 
 let currentRequest;
-const Logout = () => {
-    router.post(route("logout"), {});
-};
 
-const TestEmail = () => {
-    router.post(route("test-email"), {});
-};
 
-const fNameForm = reactive({
+const paymentForm = reactive({
     first_name: null,
-});
-
-const lNameForm = reactive({
     last_name: null,
+    email: null,
+    phone: null,
+    company: null,
+    tax_number: null,
+    country: null,
+    city: null,
+    street: null,
+    house_number: null,
+    zip_code: null,
 });
 
 const emailForm = reactive({
@@ -118,19 +122,15 @@ function SendTicket() {
         })
 }
 
-const paymentForm = reactive({
-    first_name: null,
-    last_name: null,
-    email: null,
-    phone: null,
-    company: null,
-    tax_number: null,
-    country: null,
-    city: null,
-    street: null,
-    house_number: null,
-    zip_code: null,
-});
+function ReturnStatus(status) {
+    if (status === 'paid') {
+        return 'Opłacone';
+    } else if (status === 'cancelled') {
+        return 'Anulowane'
+    } else {
+        return "Oczekujące"
+    }
+}
 
 </script>
 
@@ -397,6 +397,69 @@ const paymentForm = reactive({
                             <h3 class="ma-ftitle">Moje bilety</h3>
                             <i class="fa fa-ticket"></i>
                         </div>
+                        <div>
+                            <div v-for="order in props.orders.data" :key="order.order_id" class="order">
+                                <div class="order__row">
+                                    <div>Wydarzenie</div>
+                                    <a class="" target="_blank" :href="`/${order.event.event_url}`">{{ order.event.name }}</a>
+                                </div>
+                                <div class="order__row">
+                                    <div>created at</div>
+                                    <div>{{ order.created_at }}</div>
+                                </div>
+                                <div class="order__row">
+                                    <div>e-mail</div>
+                                    <div>{{ order.email }}</div>
+                                </div>
+                                <div class="order__row">
+                                    <div>Imie</div>
+                                    <div>{{ order.first_name }}</div>
+                                </div>
+                                <div class="order__row">
+                                    <div>Nazwisko</div>
+                                    <div>{{ order.last_name }}</div>
+                                </div>
+                                <div class="order__row">
+                                    <div>Nr. zamówienia</div>
+                                    <div>{{ order.order_number }}</div>
+                                </div>
+                                <div class="order__row">
+                                    <div>Status płatnosci</div>
+                                    <div v-html="ReturnStatus(order.payment_status)"></div>
+                                </div>
+                                <div class="order__row">
+                                    <div>Łączna cena</div>
+                                    <div>{{ order.total_price }}</div>
+                                </div>
+                                <div>
+                                    <div>Wykupione miejsca</div>
+                                    <div class="order__tickets">
+                                        <div>Sekcja</div>
+                                        <div>Rząd</div>
+                                        <div>Miejsce</div>
+                                        <div>Cena</div>
+                                    </div>
+                                    <div v-for="ticket in order.tickets" :key="ticket.id" class="order__tickets">
+                                        <div v-html="ticket.is_seat === 1 ? ticket.seat_data.section.name : ticket.standing_ticket_data.section.name"></div>
+                                        <div v-html="ticket.is_seat === 1 ? ticket.seat_data.row : '-'"></div>
+                                        <div v-html="ticket.is_seat === 1 ? ticket.seat_data.number : '-'"></div>
+                                        <div v-html="ticket.is_seat === 1 ? ticket.seat_data.price : ticket.standing_ticket_data.price"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-pagination">
+                            <ul class="ml-auto mr-auto">
+                                <li
+                                    :key="page"
+                                    class="page"
+                                    :class="{ 'page-current': page.active }"
+                                    v-for="page in props.orders.meta.links"
+                                >
+                                    <Link :href="page.url" v-html="page.label"></Link>
+                                </li>
+                            </ul>
+                        </div>
                     </Tab>
                     <Tab title="Obsługa klienta">
                         <div
@@ -527,6 +590,22 @@ const paymentForm = reactive({
 
 <style lang="scss">
 @use "~css/mixin.scss";
+.order {
+    width: 100%;
+    display: grid;
+    border: 1px solid red;
+
+    &__row {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    &__tickets {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
 
 .support-tickets {
     width: 100%;
