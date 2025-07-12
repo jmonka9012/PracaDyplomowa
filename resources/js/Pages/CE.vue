@@ -91,7 +91,7 @@ import Lightbox from "../Components/Partials/Lightbox.vue";
     </section>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use "~css/mixin.scss";
 ///tutaj narazie style dla blog-single
 

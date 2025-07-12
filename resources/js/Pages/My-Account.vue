@@ -541,24 +541,8 @@ function ReturnStatus(status) {
     ></Popup>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use "~css/mixin.scss";
-.order {
-    width: 100%;
-    display: grid;
-    border: 1px solid red;
-
-    &__row {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-
-    &__tickets {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
 
 .support-tickets {
     width: 100%;
