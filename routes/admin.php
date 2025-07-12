@@ -14,7 +14,7 @@ Route::prefix('admin')->group(function() {
       Route::get('/', [AdminHomeController::class, 'index'])
             ->name('admin')
             ->middleware('employeesAccess');
-      
+
       Route::post('/kategorie/aktualizacja', [FeaturedGenresController::class, 'update'])
             ->name('admin.featured.update')
             ->middleware('employeesAccess');
@@ -38,7 +38,7 @@ Route::prefix('admin')->group(function() {
       Route::put('/uzytkownicy/organizatorzy/{id}/status', [ManageOrganizerController::class, 'changeStatus'])
             ->name('admin.users.organizers.change_status')
             ->middleware('adminAccess');
-      
+
       Route::get('/wydarzenia', [PendingEventsController::class, 'index'])
             ->name('admin.events')
             ->middleware('redactorAccess');
@@ -47,7 +47,7 @@ Route::prefix('admin')->group(function() {
             ->name('admin.events.data')
             ->middleware('redactorAccess');
 
-      Route::put('/wydarzenia/{event}/status', [EventController::class, 'changeEventStatus'])
+      Route::put('/wydarzenia/{event}/status', [PendingEventsController::class, 'changeEventStatus'])
             ->name('admin.events.status')
             ->middleware('adminAccess');
 
@@ -75,7 +75,7 @@ Route::prefix('admin')->group(function() {
       Route::get('/obsluga-klienta/data', [CustomerServiceController::class, 'showData'])
             ->name('admin.customer-service.data')
             ->middleware('redactorAccess');
-      
+
       Route::put('/obsluga-klienta/{id}/status', [CustomerServiceController::class, 'changeStatus'])
             ->name('admin.customer-service.change_status')
             ->middleware('redactorAccess');

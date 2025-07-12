@@ -2,6 +2,7 @@
 import {Link} from "@inertiajs/vue3";
 import {ref} from "vue";
 import {computed} from "vue";
+import {router} from "@inertiajs/vue3";
 
 const isOpen = ref(false);
 
@@ -52,8 +53,21 @@ const totalSpotsSold = computed(() => {
     }, 0);
 });
 
-function DeleteEvent(eventID) {
-    console.log(eventID);
+function DeleteEvent(eID) {
+    console.log(eID);
+}
+
+function AcceptEvent(eID) {
+    const newStatus = 0;
+
+    router.put(route('admin.events.status', {event: eID}), {new_status: newStatus}, {
+        onSuccess: (page) => {
+            console.log(page);
+        },
+        onError: (err) => {
+            console.log(err);
+        }
+    });
 }
 </script>
 
@@ -66,7 +80,8 @@ function DeleteEvent(eventID) {
             <a :href="`/${props.pending ? 'admin/' + event.event_url : event.event_url}`"
                target="_blank">{{ event.event_name }}</a>
             <div class="t-details__options">
-                <a class="mr-6px" @click="DeleteEvent(event.id)">Usuń</a>
+                <a v-if="props.pending" class="mr-6px" @click="DeleteEvent(event.id)">Odmów</a>
+                <a v-if="props.pending" @click="AcceptEvent(event.id)">Zatwierdź</a>
                 <a :href="`/${props.pending ? 'admin/' + event.event_url : event.event_url}`" class="mr-6px"
                    target="_blank">Podgląd</a>
                 <button class="btn-link" @click="toggle">Szczegóły</button>
