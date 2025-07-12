@@ -85,41 +85,41 @@ const handleToggle = (state) => {
         <div class="order-collapse__content">
             <div class="order-collapse__main-table">
                 <div class="order-collapse__row">
-                    <div class="fw-med">Wydarzenie</div>
+                    <div class="order-collapse__label">Wydarzenie</div>
                     <a :href="`/${order.event.event_url}`" class="" target="_blank">{{ order.event.name }}</a>
                 </div>
                 <div class="order-collapse__row">
-                    <div class="fw-med">Data zamówienia</div>
+                    <div class="order-collapse__label">Data zamówienia</div>
                     <div>{{ order.created_at }}</div>
                 </div>
                 <div class="order-collapse__row">
-                    <div class="fw-med">E-mail</div>
+                    <div class="order-collapse__label">E-mail</div>
                     <div>{{ order.email }}</div>
                 </div>
                 <div class="order-collapse__row">
-                    <div class="fw-med">Imie</div>
+                    <div class="order-collapse__label">Imie</div>
                     <div>{{ order.first_name }}</div>
                 </div>
                 <div class="order-collapse__row">
-                    <div class="fw-med">Nazwisko</div>
+                    <div class="order-collapse__label">Nazwisko</div>
                     <div>{{ order.last_name }}</div>
                 </div>
                 <div class="order-collapse__row">
-                    <div class="fw-med">Nr. zamówienia</div>
+                    <div class="order-collapse__label">Nr. zamówienia</div>
                     <div>{{ order.order_number }}</div>
                 </div>
                 <div class="order-collapse__row">
-                    <div class="fw-med">Status płatnosci</div>
+                    <div class="order-collapse__label">Status płatnosci</div>
                     <div v-html="ReturnStatus(order.payment_status)"></div>
                 </div>
                 <div class="order-collapse__row">
-                    <div class="fw-med">Łączna cena</div>
+                    <div class="order-collapse__label">Łączna cena</div>
                     <div>{{ order.total_price }}</div>
                 </div>
             </div>
-            <div v-if="order.payment_status !== 'cancelled'" class="mb-10px">
-                <div>Wykupione miejsca</div>
-                <div :class="{'order-collapse__tickets--admin': props.admin }" class="order-collapse__tickets">
+            <div v-if="order.payment_status !== 'cancelled'" class="order-collapse__ticket-table">
+                <h5 class="fw-bold mb-20px">Wykupione miejsca</h5>
+                <div :class="{'order-collapse__tickets--admin': props.admin }" class="order-collapse__tickets fw-bold">
                     <div>Sekcja</div>
                     <div>Rząd</div>
                     <div>Miejsce</div>
@@ -135,7 +135,7 @@ const handleToggle = (state) => {
                     <div v-if="props.admin"><a @click="CancelTicket(ticket.ticket_id)">Anuluj miejsce</a></div>
                 </div>
             </div>
-            <a v-if="(order.payment_status !== 'cancelled') && props.admin" @click="CancelOrder(order.order_id)">Anuluj zamówienie</a>
+            <a class="btn btn-md btn-ghost ml-auto mr-auto mt-20px" v-if="(order.payment_status !== 'cancelled') && props.admin" @click="CancelOrder(order.order_id)">Anuluj zamówienie</a>
         </div>
     </Collapse>
 </template>
@@ -160,7 +160,10 @@ const handleToggle = (state) => {
     }
 
     &__main-table {
-        margin-bottom: 30px;
+    }
+
+    &__ticket-table {
+        margin-top: 30px;
     }
 
     &__toggle {
@@ -194,18 +197,31 @@ const handleToggle = (state) => {
         }
     }
 
+    &__label {
+        font-weight: 600;
+    }
+
     &__row {
         width: 100%;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 2fr;
+        padding-top: 6px;
+        padding-bottom: 6px;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid black;
+        }
     }
 
     &__tickets {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: 3fr 2fr 2fr 2fr;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid black;
 
         &--admin {
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
         }
     }
 }
