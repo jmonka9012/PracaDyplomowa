@@ -1,4 +1,4 @@
-<script setup>
+z<script setup>
 import blogBg from "~images/blog-bg.jpg";
 import {Link, router} from "@inertiajs/vue3";
 import {onMounted, ref, computed} from "vue";
@@ -26,7 +26,7 @@ const currentUserID = ref(null);
 const currentUserName = computed(() => {
     if (!currentUserID.value) return null;
 
-    const ticket = props.tickets.data.find(
+    const ticket = props.support_tickets.data.find(
         (t) => t.user_id == currentUserID.value
     );
 
@@ -72,7 +72,10 @@ const SwapStatus = (status) => {
                                 v-if="ticket.user_id"
                                 :data="{ user_id: ticket.user_id }"
                                 :href="route('admin.customer-service')"
+                                :only="['support_tickets']"
                                 method="get"
+                                class="hover-underline"
+                                preserve-scroll
                             >
                                 {{ ticket.name }}
                             </Link>
