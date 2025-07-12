@@ -1,6 +1,7 @@
 <script setup>
 import Collapse from "./Collapse.vue";
 import {router} from "@inertiajs/vue3";
+import {Link} from "@inertiajs/vue3";
 import {ref} from "vue";
 
 const props = defineProps({
@@ -136,6 +137,7 @@ const handleToggle = (state) => {
                 </div>
             </div>
             <a class="btn btn-md btn-ghost ml-auto mr-auto mt-20px" v-if="(order.payment_status !== 'cancelled') && props.admin" @click="CancelOrder(order.order_id)">Anuluj zamówienie</a>
+            <Link class="btn btn-md btn-ghost ml-auto mr-auto mt-20px" :href="route('event-ticket.buy.form.details', {order: order.order_number})" v-if="(order.payment_status === 'pending') && !props.admin" >Wróć do płatności</Link>
         </div>
     </Collapse>
 </template>
