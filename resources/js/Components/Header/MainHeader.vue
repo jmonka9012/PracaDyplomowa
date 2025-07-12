@@ -109,9 +109,9 @@ onBeforeUnmount(() => {
                                 ><span>Kontakt</span></Link
                             >
                         </li>
-                        <li>
+<!--                        <li>
                             <Link :href="route('ce')"><span>CE</span></Link>
-                        </li>
+                        </li>-->
                         <!--                        <li class="desk-dropdown">
                             <span class="desk-dropdown-toggle"
                                 ><span>Toggle</span>
@@ -220,9 +220,9 @@ onBeforeUnmount(() => {
                                             >Kontakt</Link
                                         >
                                     </li>
-                                    <li>
+<!--                                    <li>
                                         <Link :href="route('ce')">CE</Link>
-                                    </li>
+                                    </li>-->
                                     <!--                                    <ul class="header-ddown">
                                         <li
                                             class="header-ddown-toggle"

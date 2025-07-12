@@ -1,51 +1,53 @@
 <script setup>
-import Tab from "@/Components/Partials/Tab.vue";
-import Tabs from "@/Components/Partials/Tabs.vue";
 
-import Lightbox from "../../Components/Partials/Lightbox.vue";
+const props = defineProps({
+    order: {
+        type: Object,
+        required: true,
+    }
+})
+
+const order = props.order[0];
+
+console.log(props);
+
 </script>
 
 <template>
     <section class="pt-75px pb-75px">
         <div class="container">
             <div class="flex-column order">
-                <h3 class="mb-30px">Zamówienie NR 123</h3>
+                <h3 class="mb-30px">Zamówienie {{order.order_number}}</h3>
                 <div class="col-12 row-gap-30px mb-30px">
                     <div class="flex-column">
                         <p class="h5 text-lg fw-bold text-primary-darker">
                             Nazwa wydarzenia:
                         </p>
-                        <p class="h6">Lorem ipsum</p>
+                        <p class="h6">{{order.event.event_name}}</p>
                     </div>
                     <div class="flex-column">
                         <p class="h5 text-lg fw-bold text-primary-darker">
                             Data wydarzenia:
                         </p>
-                        <p class="h6">22.02.2222</p>
+                        <p class="h6">{{order.event.event_date}}</p>
                     </div>
                     <div class="flex-column">
                         <p class="h5 text-lg fw-bold text-primary-darker">
                             Godzina wydarzenia:
                         </p>
-                        <p class="h6">14:20</p>
-                    </div>
-                    <div class="flex-column">
-                        <p class="h5 fw-bold text-primary-darker">
-                            Numer zamówienia:
-                        </p>
-                        <p class="h6">123</p>
+                        <p class="h6">{{order.event.event_start}}</p>
                     </div>
                     <div class="flex-column">
                         <p class="h5 fw-bold text-primary-darker">
                             całkowity koszt:
                         </p>
-                        <p class="h6">36zł</p>
+                        <p class="h6">{{order.total_price}} zł</p>
                     </div>
                     <div class="flex-column">
                         <p class="h5 fw-bold text-primary-darker">
                             Adres Email kupującego:
                         </p>
-                        <p class="h6">example@example.com</p>
+                        <p class="h6">{{order.email}}</p>
                     </div>
                 </div>
                 <div class="flex-column">
@@ -57,25 +59,10 @@ import Lightbox from "../../Components/Partials/Lightbox.vue";
                         <p class="fw-bold">Miejsce</p>
                         <p class="fw-bold">Cena</p>
                     </div>
-                    <div class="order__row">
-                        <p>Bilet siedzący</p>
-                        <p>1</p>
-                        <p>3</p>
+                    <div v-for="ticket in order.tickets" class="order__row">
+                        <p>{{ticket.is_seat === 1 ? "Bilet siedzący" : "Bilet stojący"}}</p>
+                        <p v-html="ticket.is_seat === 1 ? ('Siedząca ' + ticket.seat.section_name) : ('Stojąca ' + ticket.standing_ticket.section_name)"></p>                        <p>3</p>
                         <p>5</p>
-                        <p>12zł</p>
-                    </div>
-                    <div class="order__row">
-                        <p>Bilet siedzący</p>
-                        <p>1</p>
-                        <p>3</p>
-                        <p>6</p>
-                        <p>12zł</p>
-                    </div>
-                    <div class="order__row">
-                        <p>Bilet siedzący</p>
-                        <p>1</p>
-                        <p>3</p>
-                        <p>7</p>
                         <p>12zł</p>
                     </div>
                     <div class="order__row order__row--summary">
@@ -90,9 +77,8 @@ import Lightbox from "../../Components/Partials/Lightbox.vue";
     </section>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use "~css/mixin.scss";
-///tutaj narazie style dla blog-single
 
 .order {
     width: 100%;
@@ -134,44 +120,5 @@ import Lightbox from "../../Components/Partials/Lightbox.vue";
             }
         }
     }
-}
-
-.blog-image {
-    max-height: 450px;
-    max-width: 450px;
-    width: 100%;
-    @include mixin.media-breakpoint-up(lg) {
-        max-height: 600px;
-        max-width: 600px;
-    }
-    &-square {
-        max-width: 450px;
-        @include mixin.media-breakpoint-up(lg) {
-            max-width: 600px;
-        }
-    }
-}
-.blog-single__bottom {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    border-top: 1px solid #dddedf;
-    display: flex;
-    flex-direction: column;
-    row-gap: 30px;
-    @include mixin.media-breakpoint-up(lg) {
-        flex-direction: row;
-        padding-bottom: 100px;
-    }
-}
-//tutaj narazie o nas
-
-.on-map {
-    max-height: 600px;
-    width: 100%;
-    object-fit: cover;
-    aspect-ratio: 16 / 9;
 }
 </style>

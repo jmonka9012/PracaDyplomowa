@@ -1,9 +1,5 @@
 <script setup>
-import Tab from "@/Components/Partials/Tab.vue";
-import Tabs from "@/Components/Partials/Tabs.vue";
 
-import hellsPit from "~images/hellspit.jpg";
-import Lightbox from "../Components/Partials/Lightbox.vue";
 </script>
 
 <template>
@@ -135,44 +131,5 @@ import Lightbox from "../Components/Partials/Lightbox.vue";
             }
         }
     }
-}
-
-.blog-image {
-    max-height: 450px;
-    max-width: 450px;
-    width: 100%;
-    @include mixin.media-breakpoint-up(lg) {
-        max-height: 600px;
-        max-width: 600px;
-    }
-    &-square {
-        max-width: 450px;
-        @include mixin.media-breakpoint-up(lg) {
-            max-width: 600px;
-        }
-    }
-}
-.blog-single__bottom {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    border-top: 1px solid #dddedf;
-    display: flex;
-    flex-direction: column;
-    row-gap: 30px;
-    @include mixin.media-breakpoint-up(lg) {
-        flex-direction: row;
-        padding-bottom: 100px;
-    }
-}
-//tutaj narazie o nas
-
-.on-map {
-    max-height: 600px;
-    width: 100%;
-    object-fit: cover;
-    aspect-ratio: 16 / 9;
 }
 </style>
