@@ -21,9 +21,14 @@ return new class extends Migration
             $table->text('message');
             $table->enum('status', ['in_progress','closed'])->default('in_progress');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->cascadeOnDelete();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */
