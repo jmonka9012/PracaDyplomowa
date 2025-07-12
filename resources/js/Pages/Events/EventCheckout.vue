@@ -61,9 +61,10 @@ console.log(props);
                     </div>
                     <div v-for="ticket in order.tickets" class="order__row">
                         <p>{{ticket.is_seat === 1 ? "Bilet siedzący" : "Bilet stojący"}}</p>
-                        <p v-html="ticket.is_seat === 1 ? ('Siedząca ' + ticket.seat.section_name) : ('Stojąca ' + ticket.standing_ticket.section_name)"></p>                        <p>3</p>
-                        <p>5</p>
-                        <p>12zł</p>
+                        <p v-html="ticket.is_seat === 1 ? ticket.seat.section.section_name : ticket.standing_ticket.section.section_name"></p>
+                        <p v-html="ticket.is_seat === 1 ? ticket.seat.seat_row : '-'"></p>
+                        <p v-html="ticket.is_seat === 1 ? ticket.seat.seat_number : '-'"></p>
+                        <p>{{ticket.price}}</p>
                     </div>
                     <div class="order__row order__row--summary">
                         <p class="fw-bold text-primary-darker">
