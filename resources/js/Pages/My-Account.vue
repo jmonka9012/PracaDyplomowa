@@ -398,7 +398,7 @@ function ReturnStatus(status) {
                             <h3 class="ma-ftitle">Moje zamówienia</h3>
                             <i class="fa fa-ticket"></i>
                         </div>
-                        <div class="d-grid row-gap-10px">
+                        <div class="d-grid row-gap-10px mb-30px">
                             <Order :admin="false" :order="order" v-for="order in props.orders.data" :key="order.order_id"></Order>
                         </div>
                         <div class="event-pagination">
