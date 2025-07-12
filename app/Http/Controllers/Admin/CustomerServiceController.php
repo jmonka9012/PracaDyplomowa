@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SupportTicket;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class CustomerServiceController extends Controller
 {
@@ -122,7 +123,13 @@ class CustomerServiceController extends Controller
         $request->merge(['id' => $id]);
 
         $validatedData = $request->validate([
-            'id' => 'required|numeric|exists:tickets,id'
+            'id' => [
+                'required',
+                'numeric',
+                Rule::exists('tickets')->where(function ($query) {
+                    return $query->where('payment_status', 'paid');
+                }),
+            ],
         ]);
 
         try{
@@ -130,8 +137,10 @@ class CustomerServiceController extends Controller
 
             $ticket = Ticket::findOrFail($id);
             $ticketPrice = $ticket->price;
-            $ticket -> payment_status = 'cancelled'; 
-            $ticket->save();
+            
+            $ticket->update([
+                'payment_status' => 'cancelled'
+            ]);
 
             if ($ticket->is_seat){
                 EventSeat::where('id', $ticket->seat_id)->update(['status' => 'available']);
@@ -151,6 +160,9 @@ class CustomerServiceController extends Controller
                 $order->update(['payment_status' => 'cancelled']);
             }
 
+            $ticket->update([
+                'order_id' => null
+            ]);
             DB::commit();
 
             $orders = [];
@@ -178,14 +190,19 @@ class CustomerServiceController extends Controller
             $order = Order::with('tickets')->find($order_id);
             
             foreach ($order->tickets as $ticket) {
-                $ticket->payment_status = 'cancelled';
-                $ticket->save();
+                $ticket->update([
+                    'payment_status' => 'cancelled'
+                ]);
 
                 if ($ticket->is_seat) {
                     EventSeat::where('id', $ticket->seat_id)->update(['status' => 'available']);
                 } else {
                     EventStandingTicket::where('id', $ticket->standing_id)->decrement('sold');
                 }
+
+                $ticket->update([
+                    'order_id' => null
+                ]);
             }
 
             $order->update([
