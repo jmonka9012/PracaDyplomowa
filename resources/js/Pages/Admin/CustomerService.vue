@@ -6,6 +6,7 @@ import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import Collapse from "../../Components/Partials/Collapse.vue";
 import Tab from "@/Components/Partials/Tab.vue";
 import Tabs from "@/Components/Partials/Tabs.vue";
+import Order from "../../Components/Partials/OrderCollapse.vue";
 
 const activeTicketId = ref(null);
 const ticket = ref(null);
@@ -42,15 +43,6 @@ const SwapStatus = (status) => {
     return status === "closed" ? "in_progress" : "closed";
 };
 
-function ReturnStatus(status) {
-    if (status === 'paid') {
-        return 'Opłacone';
-    } else if (status === 'cancelled') {
-        return 'Anulowane'
-    } else {
-        return "Oczekujące"
-    }
-}
 </script>
 
 <template>
@@ -196,63 +188,13 @@ function ReturnStatus(status) {
                     <h2 class="mb-30px">Wyszukaj zamówienie</h2>
                     <p>W pole poniżej wpisz email lub unikalny numer szukanego biletu</p>
                     <form
+                        class="mb-40px"
                         @submit.prevent="router.get(route('admin.customer-service'), {tabName: 'Wyszukaj zamówienie',order_lookup: ticket}, { preserveScroll: true })">
                         <input v-model="ticket" type="text">
                         <input type="submit" value="Szukaj">
                     </form>
-                    <div>
-                        <div v-for="order in props.orders.data" :key="order.order_id" class="order">
-                            <div class="order__row">
-                                <div>Wydarzenie</div>
-                                <a class="" target="_blank" :href="`/${order.event.event_url}`">{{ order.event.name }}</a>
-                            </div>
-                            <div class="order__row">
-                                <div>created at</div>
-                                <div>{{ order.created_at }}</div>
-                            </div>
-                            <div class="order__row">
-                                <div>e-mail</div>
-                                <div>{{ order.email }}</div>
-                            </div>
-                            <div class="order__row">
-                                <div>Imie</div>
-                                <div>{{ order.first_name }}</div>
-                            </div>
-                            <div class="order__row">
-                                <div>Nazwisko</div>
-                                <div>{{ order.last_name }}</div>
-                            </div>
-                            <div class="order__row">
-                                <div>Nr. zamówienia</div>
-                                <div>{{ order.order_number }}</div>
-                            </div>
-                            <div class="order__row">
-                                <div>Status płatnosci</div>
-                                <div v-html="ReturnStatus(order.payment_status)"></div>
-                            </div>
-                            <div class="order__row">
-                                <div>Łączna cena</div>
-                                <div>{{ order.total_price }}</div>
-                            </div>
-                            <div>
-                                <div>Wykupione miejsca</div>
-                                <div class="order__tickets">
-                                    <div>Sekcja</div>
-                                    <div>Rząd</div>
-                                    <div>Miejsce</div>
-                                    <div>Cena</div>
-                                    <div>Akcja</div>
-                                </div>
-                                <div v-for="ticket in order.tickets" :key="ticket.id" class="order__tickets">
-                                    <div v-html="ticket.is_seat === 1 ? ticket.seat_data.section.name : ticket.standing_ticket_data.section.name"></div>
-                                    <div v-html="ticket.is_seat === 1 ? ticket.seat_data.row : '-'"></div>
-                                    <div v-html="ticket.is_seat === 1 ? ticket.seat_data.number : '-'"></div>
-                                    <div v-html="ticket.is_seat === 1 ? ticket.seat_data.price : ticket.standing_ticket_data.price"></div>
-                                    <div><a href="#">Anuluj miejsce</a></div>
-                                </div>
-                                <a href="#">Anuluj bilet</a>
-                            </div>
-                        </div>
+                    <div class="d-grid row-gap-10px">
+                        <Order :admin="true" :order="order" v-for="order in props.orders.data" :key="order.order_id"></Order>
                     </div>
                 </Tab>
             </Tabs>
@@ -262,23 +204,6 @@ function ReturnStatus(status) {
 
 <style lang="scss" scoped>
 @use "~css/mixin.scss";
-
-.order {
-    width: 100%;
-    display: grid;
-    border: 1px solid red;
-
-    &__row {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-
-    &__tickets {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-    }
-}
 
 .ticket-query {
     &__ticket {

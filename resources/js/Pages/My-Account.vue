@@ -9,6 +9,7 @@ import { router } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
 import { ref, reactive, toRaw } from "vue";
 import axios from "axios";
+import Order from "../Components/Partials/OrderCollapse.vue";
 
 const showModal = ref(false);
 const { user, isLoggedIn } = useAuth();
@@ -390,63 +391,15 @@ function ReturnStatus(status) {
                             </form>
                         </div>
                     </Tab>
-                    <Tab title="Moje bilety">
+                    <Tab title="Moje zamówienia">
                         <div
                             class="d-flex align-items-center column-gap-10px mb-32px"
                         >
-                            <h3 class="ma-ftitle">Moje bilety</h3>
+                            <h3 class="ma-ftitle">Moje zamówienia</h3>
                             <i class="fa fa-ticket"></i>
                         </div>
-                        <div>
-                            <div v-for="order in props.orders.data" :key="order.order_id" class="order">
-                                <div class="order__row">
-                                    <div>Wydarzenie</div>
-                                    <a class="" target="_blank" :href="`/${order.event.event_url}`">{{ order.event.name }}</a>
-                                </div>
-                                <div class="order__row">
-                                    <div>created at</div>
-                                    <div>{{ order.created_at }}</div>
-                                </div>
-                                <div class="order__row">
-                                    <div>e-mail</div>
-                                    <div>{{ order.email }}</div>
-                                </div>
-                                <div class="order__row">
-                                    <div>Imie</div>
-                                    <div>{{ order.first_name }}</div>
-                                </div>
-                                <div class="order__row">
-                                    <div>Nazwisko</div>
-                                    <div>{{ order.last_name }}</div>
-                                </div>
-                                <div class="order__row">
-                                    <div>Nr. zamówienia</div>
-                                    <div>{{ order.order_number }}</div>
-                                </div>
-                                <div class="order__row">
-                                    <div>Status płatnosci</div>
-                                    <div v-html="ReturnStatus(order.payment_status)"></div>
-                                </div>
-                                <div class="order__row">
-                                    <div>Łączna cena</div>
-                                    <div>{{ order.total_price }}</div>
-                                </div>
-                                <div>
-                                    <div>Wykupione miejsca</div>
-                                    <div class="order__tickets">
-                                        <div>Sekcja</div>
-                                        <div>Rząd</div>
-                                        <div>Miejsce</div>
-                                        <div>Cena</div>
-                                    </div>
-                                    <div v-for="ticket in order.tickets" :key="ticket.id" class="order__tickets">
-                                        <div v-html="ticket.is_seat === 1 ? ticket.seat_data.section.name : ticket.standing_ticket_data.section.name"></div>
-                                        <div v-html="ticket.is_seat === 1 ? ticket.seat_data.row : '-'"></div>
-                                        <div v-html="ticket.is_seat === 1 ? ticket.seat_data.number : '-'"></div>
-                                        <div v-html="ticket.is_seat === 1 ? ticket.seat_data.price : ticket.standing_ticket_data.price"></div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="d-grid row-gap-10px">
+                            <Order :admin="false" :order="order" v-for="order in props.orders.data" :key="order.order_id"></Order>
                         </div>
                         <div class="event-pagination">
                             <ul class="ml-auto mr-auto">

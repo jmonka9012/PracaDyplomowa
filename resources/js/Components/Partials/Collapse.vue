@@ -2,9 +2,11 @@
 import { ref } from 'vue';
 
 const isOpen = ref(false);
+const emit = defineEmits(['toggle']);
 
 const toggle = () => {
     isOpen.value = !isOpen.value;
+    emit('toggle', isOpen.value)
 };
 
 const enter = (element) => {
