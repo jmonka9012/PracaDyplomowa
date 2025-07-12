@@ -62,6 +62,7 @@ function AcceptEvent(eID) {
 
     router.put(route('admin.events.status', {event: eID}), {new_status: newStatus}, {
         preserveScroll: true,
+        only: ['pending_events', 'events'],
         onSuccess: (page) => {
             console.log(page);
         },

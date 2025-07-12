@@ -13,7 +13,7 @@ use App\Models\Events\Genre;
 class PendingEventsController extends Controller
 {
     public function index(Request $request)
-    {   
+    {
        if (!$request->has('pending_page')) {
             return redirect()->route('admin.events', ['pending_page' => 1] + $request->except('page'));
         }
@@ -22,7 +22,7 @@ class PendingEventsController extends Controller
             return redirect()->route('admin.events', ['event_page' => 1] + $request->except('page'));
         }
 
-        $eventsPending = $this->getEventsPending($request);        
+        $eventsPending = $this->getEventsPending($request);
         $events = $this->getEvents($request);
 
         $genres = Genre::orderBy('id', 'asc')->get();
@@ -46,7 +46,7 @@ class PendingEventsController extends Controller
             return redirect()->route('admin.events.data', ['event_page' => 1] + $request->except('page'));
         }
 
-        $eventsPending = $this->getEventsPending($request);        
+        $eventsPending = $this->getEventsPending($request);
         $events = $this->getEvents($request);
         $genres = Genre::orderBy('id', 'asc')->get();
 
@@ -60,7 +60,7 @@ class PendingEventsController extends Controller
     }
 
     public function getEvents(Request $request)
-    {      
+    {
         $query = Event::where('pending', false)->with([
             'hall.sections',
             'seats.section',
@@ -81,14 +81,14 @@ class PendingEventsController extends Controller
         //wykomentowane na razie, może potem dodamy
 
         // if ($request->filled('event_date')) {
-        //         $query->whereDate('event_date', 
+        //         $query->whereDate('event_date',
         //         Carbon::parse($request->event_date)->format('Y-m-d'));
         // } else {
         //     if ($request->filled('event_date_from')) {
         //         $dateFrom = Carbon::parse($request->event_date_from)->format('Y-m-d');
         //         $query->whereDate('event_date', '>=', $dateFrom);
         //     }
-        
+
         //     if ($request->filled('event_date_to')) {
         //         $dateTo = Carbon::parse($request->event_date_to)->format('Y-m-d');
         //         $query->whereDate('event_date', '<=', $dateTo);
@@ -96,10 +96,10 @@ class PendingEventsController extends Controller
         // }
 
         if ($request->filled('event_genres')) {
-            $genreIds = is_array($request->event_genres) 
-                ? $request->event_genres 
+            $genreIds = is_array($request->event_genres)
+                ? $request->event_genres
                 : explode(',', $request->event_genres);
-            
+
             $query->whereHas('genres', function($q) use ($genreIds) {
                 $q->whereIn('genres.id', $genreIds);
             });
@@ -113,7 +113,7 @@ class PendingEventsController extends Controller
     }
 
     public function getEventsPending(Request $request)
-    {      
+    {
         $query = Event::where('pending', true)->with([
             'hall.sections',
             'seats.section',
@@ -131,18 +131,18 @@ class PendingEventsController extends Controller
         if ($request->filled('pending_name')) {
             $query->where('event_name', 'like', '%' . $request->pending_name . '%');
         }
-        
+
         //wykomentowane na razie, może potem dodamy
-        
+
         // if ($request->filled('pending_date')) {
-        //         $query->whereDate('event_date', 
+        //         $query->whereDate('event_date',
         //         Carbon::parse($request->pending_date)->format('Y-m-d'));
         // } else {
         //     if ($request->filled('pending_date_from')) {
         //         $dateFrom = Carbon::parse($request->pending_date_from)->format('Y-m-d');
         //         $query->whereDate('event_date', '>=', $dateFrom);
         //     }
-        
+
         //     if ($request->filled('pending_date_to')) {
         //         $dateTo = Carbon::parse($request->pending_date_to)->format('Y-m-d');
         //         $query->whereDate('event_date', '<=', $dateTo);
@@ -150,10 +150,10 @@ class PendingEventsController extends Controller
         // }
 
         if ($request->filled('pending_genres')) {
-            $genreIds = is_array($request->pending_genres) 
-                ? $request->event_genres 
+            $genreIds = is_array($request->pending_genres)
+                ? $request->event_genres
                 : explode(',', $request->pending_genres);
-            
+
             $query->whereHas('genres', function($q) use ($genreIds) {
                 $q->whereIn('genres.id', $genreIds);
             });
@@ -182,8 +182,6 @@ class PendingEventsController extends Controller
         $event->pending = $newStatus;
         $event->save();
 
-        return response()->json([
-            'message' => 'Zaktualizowany status wydarzenia'
-        ]);
+        return back()->with('success', true);
     }
 }
