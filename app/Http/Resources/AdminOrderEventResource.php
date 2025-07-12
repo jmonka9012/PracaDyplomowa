@@ -17,7 +17,7 @@ class AdminOrderEventResource extends JsonResource
         return [
             'event_id' => $this->id,
             'name' => $this->event_name,
-            'date' => $this->event_date,
+            'date' => $this->event_date->format('Y.m.d H:i:s'),
             'event_url' => $this->event_url
         ];
     }
