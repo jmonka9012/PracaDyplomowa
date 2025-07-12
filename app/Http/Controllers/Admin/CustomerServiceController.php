@@ -119,6 +119,8 @@ class CustomerServiceController extends Controller
 
     public function cancelTicket(Request $request, $id)
     {
+        $request->merge(['id' => $id]);
+
         $validatedData = $request->validate([
             'id' => 'required|numeric|exists:tickets,id'
         ]);
@@ -168,18 +170,14 @@ class CustomerServiceController extends Controller
         }
     }
 
-    public function cancelOrder(Request $request, Order $order)
+    public function cancelOrder(Request $request, $order_id)
     {
-        $validatedData = $request->validate([
-            'order_id' => 'required|numeric|exists:orders,id'
-        ]);
-
         try {
             DB::beginTransaction();
 
-            $targerOrder = Order::with('tickets')->findOrFail($order);
-
-            foreach ($targerOrder->tickets as $ticket) {
+            $order = Order::with('tickets')->find($order_id);
+            
+            foreach ($order->tickets as $ticket) {
                 $ticket->payment_status = 'cancelled';
                 $ticket->save();
 
@@ -190,13 +188,12 @@ class CustomerServiceController extends Controller
                 }
             }
 
-            $targerOrder->update([
+            $order->update([
                 'payment_status' => 'cancelled',
             ]);
 
             DB::commit();
 
-            $orders = [];
             $orders = $this->getOrders($request);
             
             return redirect()->back()->with([
