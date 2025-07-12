@@ -22,7 +22,7 @@ class AdminOrderResource extends JsonResource
             'last_name' => $this->last_name,
             'email' => $this->email,
             'total_price' => $this->total_price,
-            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
+            'created_at' => $this->created_at->format('Y.m.d H:i:s'),
             'event' => new AdminOrderEventResource($this->whenLoaded('event')),
             'tickets' => AdminOrderTicketResource::collection($this->whenLoaded('tickets')),
         ];
