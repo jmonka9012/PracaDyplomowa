@@ -27,7 +27,7 @@ function ReturnStatus(status) {
 }
 
 function CancelTicket(tID) {
-    router.put(route('admin.customer-service.cancel-ticket', {id: tID}), {id: tID}, {
+    router.put(route('admin.customer-service.cancel-ticket', {id: tID}), {}, {
         preserveScroll: true,
         only: ['orders'],
         onSuccess: (page) => {
@@ -41,7 +41,7 @@ function CancelTicket(tID) {
 
 function CancelOrder(oID) {
     console.log(oID);
-    router.put(route('admin.customer-service.cancel-ticket', {order: oID}), {order_id: oID}, {
+    router.put(route('admin.customer-service.cancel-order', {order: oID}), {}, {
         preserveScroll: true,
         only: ['orders'],
         onSuccess: (page) => {
@@ -82,38 +82,40 @@ const handleToggle = (state) => {
                 </div>
             </div>
         </template>
-        <div class="order-collapse__content mb-20px">
-            <div class="order-collapse__row">
-                <div>Wydarzenie</div>
-                <a :href="`/${order.event.event_url}`" class="" target="_blank">{{ order.event.name }}</a>
-            </div>
-            <div class="order-collapse__row">
-                <div>created at</div>
-                <div>{{ order.created_at }}</div>
-            </div>
-            <div class="order-collapse__row">
-                <div>e-mail</div>
-                <div>{{ order.email }}</div>
-            </div>
-            <div class="order-collapse__row">
-                <div>Imie</div>
-                <div>{{ order.first_name }}</div>
-            </div>
-            <div class="order-collapse__row">
-                <div>Nazwisko</div>
-                <div>{{ order.last_name }}</div>
-            </div>
-            <div class="order-collapse__row">
-                <div>Nr. zamówienia</div>
-                <div>{{ order.order_number }}</div>
-            </div>
-            <div class="order-collapse__row">
-                <div>Status płatnosci</div>
-                <div v-html="ReturnStatus(order.payment_status)"></div>
-            </div>
-            <div class="order-collapse__row">
-                <div>Łączna cena</div>
-                <div>{{ order.total_price }}</div>
+        <div class="order-collapse__content">
+            <div class="order-collapse__main-table">
+                <div class="order-collapse__row">
+                    <div class="fw-med">Wydarzenie</div>
+                    <a :href="`/${order.event.event_url}`" class="" target="_blank">{{ order.event.name }}</a>
+                </div>
+                <div class="order-collapse__row">
+                    <div class="fw-med">Data zamówienia</div>
+                    <div>{{ order.created_at }}</div>
+                </div>
+                <div class="order-collapse__row">
+                    <div class="fw-med">E-mail</div>
+                    <div>{{ order.email }}</div>
+                </div>
+                <div class="order-collapse__row">
+                    <div class="fw-med">Imie</div>
+                    <div>{{ order.first_name }}</div>
+                </div>
+                <div class="order-collapse__row">
+                    <div class="fw-med">Nazwisko</div>
+                    <div>{{ order.last_name }}</div>
+                </div>
+                <div class="order-collapse__row">
+                    <div class="fw-med">Nr. zamówienia</div>
+                    <div>{{ order.order_number }}</div>
+                </div>
+                <div class="order-collapse__row">
+                    <div class="fw-med">Status płatnosci</div>
+                    <div v-html="ReturnStatus(order.payment_status)"></div>
+                </div>
+                <div class="order-collapse__row">
+                    <div class="fw-med">Łączna cena</div>
+                    <div>{{ order.total_price }}</div>
+                </div>
             </div>
             <div v-if="order.payment_status !== 'cancelled'" class="mb-10px">
                 <div>Wykupione miejsca</div>
@@ -141,7 +143,7 @@ const handleToggle = (state) => {
 <style lang="scss" scoped>
 .order-collapse {
 
-    padding: 02px;
+    padding: 2px;
     background-color: #fff;
     border: 2px solid transparent;
     transition: border-color .2s ease-out;
@@ -154,10 +156,15 @@ const handleToggle = (state) => {
     &__content {
         width: 100%;
         display: grid;
+        padding: 20px;
+    }
+
+    &__main-table {
+        margin-bottom: 30px;
     }
 
     &__toggle {
-        padding: 20px;
+        padding: 10px 20px;
         border-radius: 8px;
         grid-template-columns: 1fr 1fr 1fr;
         display: grid;
