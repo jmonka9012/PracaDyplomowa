@@ -172,7 +172,14 @@ class PendingEventsController extends Controller
             'new_status' => 'required|in:0,1'
         ]);
 
-        $event->is_pending = $request->new_status;
+        //tymczasowe do refaktoru event
+        if ($request->new_status = 1){
+            $newStatus = false;
+        } else {
+            $newStatus = true;
+        }
+
+        $event->pending = $newStatus;
         $event->save();
 
         return response()->json([
