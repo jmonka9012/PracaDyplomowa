@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Events;
 use App\Http\Requests\OrderDetailsRequest;
 use App\Http\Requests\TicketSaleRequest;
 use App\Http\Resources\AdminOrderResource;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Tickets\Ticket;
@@ -186,7 +187,8 @@ class TicketSaleController extends Controller
                 'total_price' => 0,
                 'payment_status' => 'pending',
                 'event_id' => $request->event_id,
-                'user_id' => $userId
+                'user_id' => $userId,
+                'last_interaction_time' => Carbon::now()->toDateTimeString()
             ]);
 
             $totalPrice = $this->processSeats($request, $order);
@@ -279,6 +281,7 @@ class TicketSaleController extends Controller
     public function orderDetailsForm(Order $order)
     {
         $userData = [];
+        $order ->update(['last_interaction_time' => Carbon::now()->toDateTimeString()]); 
 
         if (Auth::check()) {
             $user = Auth::user();

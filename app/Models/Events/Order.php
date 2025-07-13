@@ -24,7 +24,8 @@ class Order extends Model
         'zip_code',
         'payment_status',
         'first_name',
-        'last_name'
+        'last_name',
+        'last_interaction_time'
     ];
 
     public function tickets()
