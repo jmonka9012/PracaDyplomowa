@@ -48,7 +48,7 @@ class BlogPostSeeder extends Seeder
                                         fake()->randomElement($titleTopics) . ' ' .
                                         fake()->randomElement(['', 'Cześć 1', 'Część 2', '2025']),
                     'blog_post_content' => $this->generateBlogContent(),
-                    'thumbnail_path' => 'event_images/placeholder.jpg',
+                    'thumbnail_path' => 'demo/blog/blog1.jpg',
                     'blog_post_type' => fake()->randomElement($postTypes),
                 ]);
             });
@@ -56,7 +56,7 @@ class BlogPostSeeder extends Seeder
 
     protected function generateBlogContent(): string
     {
-        return '<p><img src="/storage/event_images/placeholder.jpg"></p>
+        return '<p><img src="/storage/demo/blog/blog2.jpg"></p>
                 <hr>
                 <div class="single-info" id="Content">
                 <div>

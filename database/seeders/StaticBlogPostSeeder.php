@@ -15,7 +15,7 @@ class StaticBlogPostSeeder extends Seeder
     public function run(): void
     {
         $blogContent =
-        '<p><img src="/storage/event_images/placeholder.jpg"></p>
+        '<p><img src="/storage/demo/blog/blog2.jpg"></p>
         <hr>
         <div class="single-info" id="Content">
         <div id="bannerL">
@@ -34,7 +34,7 @@ class StaticBlogPostSeeder extends Seeder
         </div>
         </div>';
 
-        $imagePath = 'event_images/placeholder.jpg';
+        $imagePath = 'demo/blog/blog1.jpg';
         $authorId = BlogAuthor::first()->id;
         
         $blogPosts=[

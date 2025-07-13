@@ -23,3 +23,7 @@ example2 - https://www.publicdomainpictures.net/en/view-image.php?image=64321&pi
 example3 - https://www.publicdomainpictures.net/en/view-image.php?image=158814&picture=band-silhouette
 example4 - https://stocksnap.io/photo/people-old-ZO8H2PT3VI
 example5 - https://stocksnap.io/photo/dark-night-NBP6GJVR0M
+
+blog:
+blog - https://stocksnap.io/photo/books-notebook-GQVPIS7V8S
+blog2 - https://stocksnap.io/photo/sheetmusic-vintage-XCB7KI7WSD
