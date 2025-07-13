@@ -21,7 +21,7 @@ class AdminOrderResource extends JsonResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
-            'total_price' => $this->total_price,
+            'total_price' => number_format((float)$this->total_price, 2, '.', ''),
             'created_at' => $this->created_at->format('Y.m.d H:i:s'),
             'event' => new AdminOrderEventResource($this->whenLoaded('event')),
             'tickets' => AdminOrderTicketResource::collection($this->whenLoaded('tickets')),

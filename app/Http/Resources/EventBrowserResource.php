@@ -25,7 +25,7 @@ class EventBrowserResource extends JsonResource
             'event_end' => $this->event_end->format('H:i'),
             'event_location' => new HallResource($this->whenLoaded('hall')),
             'image_path' => $this->image_path,
-            'lowest_price' => $lowestPrice,
+            'lowest_price' => round((float)$lowestPrice, 2),
             'genres' => $this->whenLoaded('genres', function () {
                 return $this->genres->map(function ($genre) {
                     return [

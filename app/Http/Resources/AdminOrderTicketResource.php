@@ -21,7 +21,7 @@ class AdminOrderTicketResource extends JsonResource
                 'seat_id' => $this->seat->id,
                 'number' => $this->seat->seat_number,
                 'row' => $this->seat->seat_row,
-                'price' => $this->seat->price,
+                'price' => number_format((float)$this->seat->price, 2, '.', ''),
                 'section' => $this->when(
                     $this->seat->relationLoaded('section'),
                     fn() => new AdminOrderSectionResource($this->seat->section)
@@ -30,7 +30,7 @@ class AdminOrderTicketResource extends JsonResource
             'standing_ticket_data' => $this->whenLoaded('standingTicket', fn() => [
                 'standing_id' => $this->standingTicket->id,
                 'hall_section_id' => $this->standingTicket->hall_section_id,
-                'price' => $this->standingTicket->price,
+                'price' => number_format((float)$this->standingTicket->price, 2, '.', ''),
                 'section' => $this->when(
                     $this->standingTicket->relationLoaded('section'),
                     fn() => new AdminOrderSectionResource($this->standingTicket->section)

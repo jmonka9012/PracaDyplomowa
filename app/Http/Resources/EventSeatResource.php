@@ -21,7 +21,7 @@ class EventSeatResource extends JsonResource
             'hall_section_id' => $this->hall_section_id,
             'seat_row' => $this->seat_row,
             'seat_number' => $this->seat_number,
-            'price' => $this->price,
+            'price' => number_format((float)$this->price, 2, '.', ''),
             'status' => $this->status,
             
         ];
