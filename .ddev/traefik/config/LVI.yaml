@@ -1,0 +1,131 @@
+#ddev-generated
+# If you remove the ddev-generated line above you
+# are responsible for maintaining this file. DDEV will not then
+# update it, for example if you add `additional_hostnames`, etc.
+
+http:
+  routers:
+    LVI-xhgui-80-http:
+      entrypoints:
+        - http-8143
+      rule: HostRegexp(`^lvi\.ddev\.site$`)
+      
+      service: "LVI-xhgui-80"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "LVI-redirectHttps"
+    LVI-phpmyadmin-80-http:
+      entrypoints:
+        - http-8036
+      rule: HostRegexp(`^lvi\.ddev\.site$`)
+      
+      service: "LVI-phpmyadmin-80"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "LVI-redirectHttps"
+    LVI-web-80-http:
+      entrypoints:
+        - http-80
+      rule: HostRegexp(`^lvi\.ddev\.site$`)
+      
+      service: "LVI-web-80"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "LVI-redirectHttps"
+    LVI-web-8025-http:
+      entrypoints:
+        - http-8025
+      rule: HostRegexp(`^lvi\.ddev\.site$`)
+      
+      service: "LVI-web-8025"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "LVI-redirectHttps"
+    
+    
+    LVI-xhgui-80-https:
+      entrypoints:
+        - http-8142
+      rule: HostRegexp(`^lvi\.ddev\.site$`)
+      
+      service: "LVI-xhgui-80"
+      ruleSyntax: v3
+      
+      tls: true
+      
+    
+    LVI-phpmyadmin-80-https:
+      entrypoints:
+        - http-8037
+      rule: HostRegexp(`^lvi\.ddev\.site$`)
+      
+      service: "LVI-phpmyadmin-80"
+      ruleSyntax: v3
+      
+      tls: true
+      
+    
+    
+    LVI-web-80-https:
+      entrypoints:
+        - http-443
+      rule: HostRegexp(`^lvi\.ddev\.site$`)
+      
+      service: "LVI-web-80"
+      ruleSyntax: v3
+      
+      tls: true
+      
+    LVI-web-8025-https:
+      entrypoints:
+        - http-8026
+      rule: HostRegexp(`^lvi\.ddev\.site$`)
+      
+      service: "LVI-web-8025"
+      ruleSyntax: v3
+      
+      tls: true
+      
+    
+
+  middlewares:
+    LVI-redirectHttps:
+      redirectScheme:
+        scheme: https
+        permanent: true
+
+  services:
+    LVI-xhgui-80:
+      loadbalancer:
+        servers:
+          - url: http://ddev-LVI-xhgui:80
+        
+    
+    LVI-phpmyadmin-80:
+      loadbalancer:
+        servers:
+          - url: http://ddev-LVI-phpmyadmin:80
+        
+    
+    LVI-web-80:
+      loadbalancer:
+        servers:
+          - url: http://ddev-LVI-web:80
+        
+    LVI-web-8025:
+      loadbalancer:
+        servers:
+          - url: http://ddev-LVI-web:8025
+        
+    
+    
+    
+
+tls:
+  certificates:
+    - certFile: /mnt/ddev-global-cache/traefik/certs/LVI.crt
+      keyFile: /mnt/ddev-global-cache/traefik/certs/LVI.key
