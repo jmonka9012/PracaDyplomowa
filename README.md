@@ -28,9 +28,12 @@ Piotr Galimski - pgalimski@edu.cdv.pl - 27010 - GalimPio
 ## Rozkład pracy
 
 Jacek Mońka - Fullstack
+
 Jędrzej Krzeski - Backend
+
 Mateusz Borkowski - Frontend
-Piotr Galimski
+
+Piotr Galimski - Tester
 
 ## License
 
