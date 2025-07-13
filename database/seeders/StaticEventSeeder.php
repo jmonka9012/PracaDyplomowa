@@ -23,7 +23,7 @@ class StaticEventSeeder extends Seeder
         }
 
         $eventDescription =
-            '<p><img src="/storage/event_images/placeholder.jpg"></p>
+            '<p><img src="/storage/demo/images/example1.jpg"></p>
             <hr>
             <div id="Content">
             <div id="bannerL">
@@ -54,7 +54,7 @@ class StaticEventSeeder extends Seeder
                 'event_description_additional' => 'Fajnie będzie ogółem',
                 'event_location' => 1,
                 'genres' =>['Rock', 'Avant-Garde', 'Rock Alternatywny'],
-                'image_path' => 'event_images/placeholder.jpg',
+                'image_path' => 'demo/posters/example1.jpg',
                 'pending' => false,
             ],
             [
@@ -68,7 +68,7 @@ class StaticEventSeeder extends Seeder
                 'event_description_additional' => 'He Has Risen',
                 'event_location' => 2,
                 'genres' =>['Rock', 'Avant-Garde', 'Rock Alternatywny'],
-                'image_path' => 'event_images/placeholder.jpg',
+                'image_path' => 'demo/posters/example2.jpg',
                 'pending' => false,
             ],
             [
@@ -82,7 +82,7 @@ class StaticEventSeeder extends Seeder
                 'event_description_additional' => 'Lemmy będzie',
                 'event_location' => 1,
                 'genres' =>['Metal', 'Rock', 'Heavy Metal', 'Thrash Metal'],
-                'image_path' => 'event_images/placeholder.jpg',
+                'image_path' => 'demo/posters/example3.jpg',
                 'pending' => false,
             ],
             [
@@ -96,7 +96,7 @@ class StaticEventSeeder extends Seeder
                 'event_description_additional' => 'Growle będą',
                 'event_location' => 2,
                 'genres' =>['Metal', 'Rock', 'Death Metal', 'Progressive Death Metal'],
-                'image_path' => 'event_images/placeholder.jpg',
+                'image_path' => 'demo/posters/example4.jpg',
                 'pending' => 1
             ],
             [
@@ -110,7 +110,7 @@ class StaticEventSeeder extends Seeder
                 'event_description_additional' => 'Pierwsze uderzenie konta youtube',
                 'event_location' =>1,
                 'genres' =>['Metal', 'Rock', 'Sludge Metal'],
-                'image_path' => 'event_images/placeholder.jpg',
+                'image_path' => 'demo/posters/example5.jpg',
                 'pending' => 1
             ],
             [
@@ -124,7 +124,7 @@ class StaticEventSeeder extends Seeder
                 'event_description_additional' => 'tell me lies tell me sweet little lies',
                 'event_location' =>2,
                 'genres' =>['Metal', 'Rock', 'Nu Metal'],
-                'image_path' => 'event_images/placeholder.jpg',
+                'image_path' => 'demo/posters/example6.jpg',
                 'pending' => 0
             ],
             
@@ -139,7 +139,7 @@ class StaticEventSeeder extends Seeder
                 'event_description_additional' => 'archive@test.com',
                 'event_location' =>2,
                 'genres' =>['Metal', 'Rock'],
-                'image_path' => 'event_images/placeholder.jpg',
+                'image_path' => 'demo/posters/example7.jpg',
                 'pending' => 1
             ],
         ];

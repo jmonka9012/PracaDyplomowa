@@ -15,19 +15,19 @@ class FeaturedGenresDefaultSeeder extends Seeder
     public function run(): void
     {
         $genres = [
-            'Rock',
-            'Metal',
-            'Indie',
-            'Punk',
-            'Jazz'
+            'Rock' => 'demo/genres/rock.svg',
+            'Metal' => 'demo/genres/metal.svg',
+            'Indie' => 'demo/genres/indie.svg',
+            'Rap' => 'demo/genres/rap.svg',
+            'Jazz' => 'demo/genres/jazz.svg',
         ];
 
-        foreach($genres as $genreName){
+        foreach($genres as $genreName => $imagePath){
             $genre = Genre::where('genre_name', $genreName)->firstOrFail();
 
             FeaturedGenre::create([
                 'genre_id' => $genre->id,
-                'image_path' => 'event_images/placeholder.jpg' 
+                'image_path' => $imagePath
             ]);
         }
     }

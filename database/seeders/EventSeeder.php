@@ -28,7 +28,25 @@ class EventSeeder extends Seeder
         for ($i = 0; $i < 100; $i++) {
             $hall = $halls->random();
 
-            $eventDescription = "<p><img src='/storage/event_images/placeholder.jpg'></p><hr><div><p>{$faker->paragraphs(3, true)}</p></div>";
+            $placeholderImages = [
+                '/storage/demo/images/example1.jpg',
+                '/storage/demo/images/example2.jpg',
+                '/storage/demo/images/example3.jpg',
+                '/storage/demo/images/example4.jpg',
+                '/storage/demo/images/example5.jpg',
+            ];
+
+            $randomImage = $faker->randomElement($placeholderImages);
+
+            $paragraphCount = $faker->numberBetween(2, 5);
+            $randomParagraphs = $faker->paragraphs($paragraphCount, true);
+
+            $eventDescription = sprintf(
+                "<p><img src='%s' alt='Event Image'></p><hr><div>%s</div>",
+                $randomImage,
+
+                implode('', array_map(fn($p) => "<p>{$p}</p>", explode("\n", $randomParagraphs)))
+            );
 
             $eventData = [
             'event_name' => $faker->randomElement([
@@ -62,7 +80,16 @@ class EventSeeder extends Seeder
                 'Wydarzenie dla rodzin',
             ]),
             'event_location' => $hall->id,
-            'image_path' => 'event_images/placeholder.jpg',
+            'image_path' => $faker->randomElement([
+                'demo/posters/example1.jpg',
+                'demo/posters/example2.jpg',
+                'demo/posters/example3.jpg',
+                'demo/posters/example4.jpg',
+                'demo/posters/example5.jpg',
+                'demo/posters/example6.jpg',
+                'demo/posters/example7.jpg',
+                'demo/posters/example8.jpg',
+            ]),
             'pending' => false,
         ];
 

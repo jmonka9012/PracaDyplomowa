@@ -1,0 +1,25 @@
+wszystkie zdjęcia w czasie pisanie znajdują się z licencji CC0 (public domain/domena publiczna)
+
+genres:
+rock - https://www.svgrepo.com/svg/269074/guitar - cc
+rap - https://www.svgrepo.com/svg/268638/rapper-cap - cc
+jazz - https://www.svgrepo.com/svg/268695/jazz-jazz - cc
+metal - https://www.svgrepo.com/svg/27116/rock-symbol-of-a-hand
+indie - https://www.svgrepo.com/svg/161471/guitar
+
+posters:
+example1 - https://www.publicdomainpictures.net/en/view-image.php?image=78432&picture=vintage-music-festival-poster
+example2 - https://www.publicdomainpictures.net/en/view-image.php?image=157930&picture=vintage-music-poster
+example3 - https://www.publicdomainpictures.net/en/view-image.php?image=393388&picture=cat-bunny-vintage-art
+example4 - https://www.publicdomainpictures.net/en/view-image.php?image=157932&picture=vintage-music-poster
+example5 - https://www.publicdomainpictures.net/en/view-image.php?image=157937&picture=vintage-music-poster
+example6 - https://www.publicdomainpictures.net/en/view-image.php?image=157936&picture=vintage-music-poster
+example7 - https://www.publicdomainpictures.net/en/view-image.php?image=619523&picture=posters-of-virtuosity
+example8 - https://www.publicdomainpictures.net/en/view-image.php?image=619521&picture=creativity-in-jazz
+
+images:
+example1 - https://www.publicdomainpictures.net/en/view-image.php?image=212690&picture=rock-concert
+example2 - https://www.publicdomainpictures.net/en/view-image.php?image=64321&picture=concert-with-purple-lights
+example3 - https://www.publicdomainpictures.net/en/view-image.php?image=158814&picture=band-silhouette
+example4 - https://stocksnap.io/photo/people-old-ZO8H2PT3VI
+example5 - https://stocksnap.io/photo/dark-night-NBP6GJVR0M
