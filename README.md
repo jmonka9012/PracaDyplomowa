@@ -18,8 +18,11 @@ Głównym założeniem projektu jest zarządzanie wydarzeniami, w tym m.in. twor
 Imie Nazwisko - Email - Numer Albumu - Nazwa Użytkownika na GitHubie.
 
 Jacek Mońka - jmonka@edu.cdv.pl - 26880 - JacekMonka
+
 Jędrzej Krzeski - jkrzeski@edu.cdv.pl - 27417 - Yen1312
+
 Mateusz Borkowski - mborkowski2@edu.cdv.pl - 26840 - Materdeo
+
 Piotr Galimski - pgalimski@edu.cdv.pl - 27010 - GalimPio
 
 ## Rozkład pracy
