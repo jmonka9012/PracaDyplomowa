@@ -128,8 +128,7 @@ const handleToggle = (state) => {
                     <div v-if="props.admin">Akcja</div>
                 </div>
                 <div :class="{'order-collapse__tickets--admin': props.admin }" v-for="ticket in order.tickets" :key="ticket.id" class="order-collapse__tickets">
-                    <div
-                        v-html="ticket.is_seat === 1 ? ('Siedząca ' + ticket.seat_data.section.name) : ('Stojąca ' + ticket.standing_ticket_data.section.name)"></div>
+                    <div v-html="ticket.is_seat === 1 ? ('Siedząca ' + ticket.seat_data.section.name) : ('Stojąca ' + ticket.standing_ticket_data.section.name)"></div>
                     <div v-html="ticket.is_seat === 1 ? ticket.seat_data.row : '-'"></div>
                     <div v-html="ticket.is_seat === 1 ? ticket.seat_data.number : '-'"></div>
                     <div v-html="ticket.is_seat === 1 ? ticket.seat_data.price : ticket.standing_ticket_data.price"></div>
@@ -150,6 +149,10 @@ const handleToggle = (state) => {
     border: 2px solid transparent;
     transition: border-color .2s ease-out;
     border-radius: 8px;
+
+    &:hover {
+        border-color: gray;
+    }
 
     &.open {
         border-color: black;
