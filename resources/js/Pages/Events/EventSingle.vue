@@ -493,7 +493,7 @@ function SubmitTicketRequest() {
                                     </div>
                                     <div class="mr-lg-40px">
                                         Cena wybranych miejsc siedzących:
-                                        {{ summary.seats_price.toFixed(2) }}
+                                        {{ summary.seats_price.toFixed(2) }} PLN
                                     </div>
                                 </div>
                                 <div
@@ -509,7 +509,7 @@ function SubmitTicketRequest() {
                                     </div>
                                     <div class="mr-lg-40px">
                                         Cena wybranych miejsc stojących:
-                                        {{ summary.standing_price.toFixed(2) }}
+                                        {{ summary.standing_price.toFixed(2) }} PLN
                                     </div>
                                 </div>
                                 <div
@@ -532,7 +532,7 @@ function SubmitTicketRequest() {
                                                 summary.standing_price +
                                                 summary.seats_price
                                             ).toFixed(2)
-                                        }}
+                                        }} PLN
                                     </div>
                                 </div>
                             </div>

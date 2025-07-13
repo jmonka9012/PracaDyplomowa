@@ -115,7 +115,7 @@ const handleToggle = (state) => {
                 </div>
                 <div class="order-collapse__row">
                     <div class="order-collapse__label">Łączna cena</div>
-                    <div>{{ order.total_price }}</div>
+                    <div>{{ order.total_price }} PLN</div>
                 </div>
             </div>
             <div v-if="order.payment_status !== 'cancelled'" class="order-collapse__ticket-table">
@@ -131,7 +131,7 @@ const handleToggle = (state) => {
                     <div v-html="ticket.is_seat === 1 ? ('Siedząca ' + ticket.seat_data.section.name) : ('Stojąca ' + ticket.standing_ticket_data.section.name)"></div>
                     <div v-html="ticket.is_seat === 1 ? ticket.seat_data.row : '-'"></div>
                     <div v-html="ticket.is_seat === 1 ? ticket.seat_data.number : '-'"></div>
-                    <div v-html="ticket.is_seat === 1 ? ticket.seat_data.price : ticket.standing_ticket_data.price"></div>
+                    <div v-html="ticket.is_seat === 1 ? `${ticket.seat_data.price} PLN` : `${ticket.standing_ticket_data.price} PLN`"></div>
                     <div v-if="props.admin"><a @click="CancelTicket(ticket.ticket_id)">Anuluj miejsce</a></div>
                 </div>
             </div>

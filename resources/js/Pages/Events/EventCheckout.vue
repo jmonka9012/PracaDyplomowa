@@ -41,7 +41,7 @@ console.log(props);
                         <p class="h5 fw-bold text-primary-darker">
                             całkowity koszt:
                         </p>
-                        <p class="h6">{{order.total_price}} zł</p>
+                        <p class="h6">{{order.total_price}} PLN</p>
                     </div>
                     <div class="flex-column">
                         <p class="h5 fw-bold text-primary-darker">
@@ -64,13 +64,13 @@ console.log(props);
                         <p v-html="ticket.is_seat === 1 ? ticket.seat.section.section_name : ticket.standing_ticket.section.section_name"></p>
                         <p v-html="ticket.is_seat === 1 ? ticket.seat.seat_row : '-'"></p>
                         <p v-html="ticket.is_seat === 1 ? ticket.seat.seat_number : '-'"></p>
-                        <p>{{ticket.price}}</p>
+                        <p>{{ticket.price}} PLN</p>
                     </div>
                     <div class="order__row order__row--summary">
                         <p class="fw-bold text-primary-darker">
                             Cena całkowita
                         </p>
-                        <p>36zł</p>
+                        <p>{{order.total_price}} PLN</p>
                     </div>
                 </div>
             </div>

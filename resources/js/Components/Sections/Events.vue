@@ -48,7 +48,7 @@ const scrollRight = () => {
                         ><i class="fa fa-ticket"></i>
                         Zobacz więcej
                     </Link>
-                    <div>Ceny od {{ event.lowest_price }} zł</div>
+                    <div>Ceny od {{ event.lowest_price }} PLN</div>
                 </div>
             </div>
             <p class="event-date ff-prompt">
@@ -70,7 +70,7 @@ const scrollRight = () => {
                     ><i class="fa fa-ticket"></i>
                     Zobacz więcej
                 </Link>
-                <div>Ceny od {{ event.lowest_price }} zł</div>
+                <div>Ceny od {{ event.lowest_price }} PLN</div>
             </div>
         </div>
     </div>
