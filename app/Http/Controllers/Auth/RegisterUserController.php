@@ -70,4 +70,9 @@ class RegisterUserController extends Controller{
         return redirect()->route('my-account');
     }
 
+        public function forgotPasswordShow(){
+        return Inertia::render('ForgotPassword', [
+            //
+        ]);
+    }
 }

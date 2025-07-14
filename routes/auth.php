@@ -37,3 +37,6 @@ Route::post('/email/resend', [EmailVerificationController::class, 'resend'])
 // Potwierdzenie hasła
 Route::post('/confirm-password', [PasswordConfirmationController::class, 'confirmPassword'])
     ->middleware(['auth'])->name('password.confirm'); 
+
+Route::get('/zapomnialem-haslo', [RegisterUserController::class, 'forgotPasswordShow'])
+    ->name('password.forgot');
