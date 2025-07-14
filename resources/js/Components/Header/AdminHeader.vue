@@ -1,17 +1,16 @@
 <script setup>
 import Poptext from "@/Components/Partials/Poptext.vue";
-import {Link} from "@inertiajs/vue3";
-import {ref, onMounted, onBeforeUnmount} from "vue";
-import {router} from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
+import { ref, onMounted, onBeforeUnmount } from "vue";
+import { router } from "@inertiajs/vue3";
 
 import useAuth from "@/Utilities/useAuth";
 
-const {user, isLoggedIn} = useAuth();
+const { user, isLoggedIn } = useAuth();
 
 import pageInfo from "@/Utilities/pageInfo";
 
-const {siteData} = pageInfo();
-
+const { siteData } = pageInfo();
 
 const isOpen = ref(false);
 
@@ -26,7 +25,7 @@ const Logout = () => {
 };
 
 const toggleDropdown = (id) => {
-    const newStates = {...dropdownStates.value};
+    const newStates = { ...dropdownStates.value };
 
     Object.keys(newStates).forEach((key) => {
         newStates[key] = false;
@@ -59,8 +58,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
     window.removeEventListener("click", handleClickOutside);
 });
-
-
 </script>
 
 <template>
@@ -92,22 +89,34 @@ onBeforeUnmount(() => {
                 <nav class="header-nav d-none d-lg-flex">
                     <ul>
                         <li>
-                            <Link :href="route('admin')"><span>Strona główna</span></Link>
+                            <Link :href="route('admin')"
+                                ><span>Strona główna</span></Link
+                            >
                         </li>
                         <li>
-                            <Link :href="route('admin.events')"><span>Wydarzenia</span></Link>
+                            <Link :href="route('admin.events')"
+                                ><span>Wydarzenia</span></Link
+                            >
                         </li>
                         <li>
-                            <Link :href="route('blog-create')"><span>Dodaj Post</span></Link>
+                            <Link :href="route('blog-create')"
+                                ><span>Dodaj Post</span></Link
+                            >
                         </li>
                         <li>
-                            <Link :href="route('admin.posts')"><span>Posty</span></Link>
+                            <Link :href="route('admin.posts')"
+                                ><span>Posty</span></Link
+                            >
                         </li>
                         <li>
-                            <Link :href="route('admin.users')"><span>Użytkownicy</span></Link>
+                            <Link :href="route('admin.users')"
+                                ><span>Użytkownicy</span></Link
+                            >
                         </li>
                         <li>
-                            <Link :href="route('admin.customer-service')"><span>Obsługa Klienta</span></Link>
+                            <Link :href="route('admin.customer-service')"
+                                ><span>Obsługa Klienta</span></Link
+                            >
                         </li>
                     </ul>
                 </nav>
@@ -150,27 +159,46 @@ onBeforeUnmount(() => {
                     <div class="mobile-nav__content">
                         <div class="container flex-column">
                             <a class="header-logo mb-30px" href="/">
-                                <img :src="placeHolder" alt=""/>
+                                <img :src="placeHolder" alt="" />
                             </a>
                             <nav class="header-nav">
                                 <ul class="header-list">
                                     <li>
-                                        <Link :href="route('admin')"><span>Strona główna</span></Link>
+                                        <Link :href="route('admin')"
+                                            ><span>Strona główna</span></Link
+                                        >
                                     </li>
                                     <li>
-                                        <Link v-if="user.permission_level <=2" :href="route('admin.events')"><span>Wydarzenia</span></Link>
+                                        <Link
+                                            v-if="user.permission_level <= 2"
+                                            :href="route('admin.events')"
+                                            ><span>Wydarzenia</span></Link
+                                        >
                                     </li>
                                     <li>
-                                        <Link :href="route('blog-create')"><span>Dodaj Post</span></Link>
+                                        <Link :href="route('blog-create')"
+                                            ><span>Dodaj Post</span></Link
+                                        >
                                     </li>
                                     <li>
-                                        <Link :href="route('admin.posts')"><span>Posty</span></Link>
+                                        <Link :href="route('admin.posts')"
+                                            ><span>Posty</span></Link
+                                        >
                                     </li>
                                     <li>
-                                        <Link v-if="user.permission_level <=1" :href="route('admin.users')"><span>Użytkownicy</span></Link>
+                                        <Link
+                                            v-if="user.permission_level <= 1"
+                                            :href="route('admin.users')"
+                                            ><span>Użytkownicy</span></Link
+                                        >
                                     </li>
                                     <li>
-                                        <Link v-if="user.permission_level <=2" :href="route('admin.customer-service')"><span>Obsługa Klienta</span>
+                                        <Link
+                                            v-if="user.permission_level <= 2"
+                                            :href="
+                                                route('admin.customer-service')
+                                            "
+                                            ><span>Obsługa Klienta</span>
                                         </Link>
                                     </li>
                                 </ul>
@@ -203,11 +231,13 @@ onBeforeUnmount(() => {
                                             :href="route('home')"
                                             class="hover-primary header-login"
                                         >
-                                            <i class="fa fa-arrow-right text-primary mr-8px"></i>
+                                            <i
+                                                class="fa fa-arrow-right text-primary mr-8px"
+                                            ></i>
                                             Powrót
                                         </Link>
                                     </li>
-<!--                                    <li>
+                                    <!--                                    <li>
                                     </li>-->
                                 </ul>
                             </nav>
@@ -330,6 +360,10 @@ onBeforeUnmount(() => {
                 }
 
                 &:hover {
+                    color: var(--primary);
+                }
+
+                &[aria-current="page"] {
                     color: var(--primary);
                 }
             }
@@ -551,7 +585,6 @@ onBeforeUnmount(() => {
     @media screen and (min-width: 1000px) and (max-width: 1200px) {
         font-size: 12px;
     }
-
 }
 
 .btn-header {
@@ -649,7 +682,7 @@ onBeforeUnmount(() => {
             justify-content: space-between;
             font-weight: 500;
             transition: all 0s, transform 0.3s, text-decoration 0.3s ease-in-out,
-            -webkit-text-decoration 0.3s ease-in-out;
+                -webkit-text-decoration 0.3s ease-in-out;
             padding: 1px 30px;
 
             &:hover {
