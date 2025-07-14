@@ -135,7 +135,7 @@ const handleToggle = (state) => {
                     <div v-if="props.admin"><a @click="CancelTicket(ticket.ticket_id)">Anuluj miejsce</a></div>
                 </div>
             </div>
-            <a class="btn btn-md btn-ghost ml-auto mr-auto mt-20px" v-if="(order.payment_status !== 'cancelled') && props.admin" @click="CancelOrder(order.order_id)">Anuluj zamówienie</a>
+            <a class="btn btn-md btn-ghost btn-hovprim ml-auto mr-auto mt-20px" v-if="(order.payment_status !== 'cancelled') && props.admin" @click="CancelOrder(order.order_id)">Anuluj zamówienie</a>
             <Link class="btn btn-md btn-ghost ml-auto mr-auto mt-20px" :href="route('event-ticket.buy.form.details', {order: order.order_number})" v-if="(order.payment_status === 'pending') && !props.admin" >Wróć do płatności</Link>
         </div>
     </Collapse>

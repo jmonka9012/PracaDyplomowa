@@ -41,9 +41,11 @@ onMounted(() => {
 <template>
     <HeroSmall :source="blogBg" title="Zarządzaj postami"></HeroSmall>
     <section>
-        <div class="container">
-            <div class="col-12 d-flex flex-lg-row align-items-lg-center">
-                <h2 class="mb-20px mb-lg-0">Posty</h2>
+        <div class="container justify-content-center">
+            <div
+                class="col-12 d-flex flex-lg-row align-items-lg-center row-gap-20px mb-20px mb-lg-15px"
+            >
+                <h2>Posty</h2>
                 <Link
                     :href="route('blog-create')"
                     class="ml-lg-20px btn btn-md btn-hovprim"
@@ -51,7 +53,7 @@ onMounted(() => {
                 >
             </div>
             <form @submit.prevent="FilterPosts()" class="mb-40px form">
-                <div class="d-flex flex-column row-gap-30px col-12">
+                <div class="d-flex flex-column col-12 col-lg-4">
                     <div class="input-wrap relative col-12">
                         <label for="CurrentSearchPhrase"
                             >Wyszukaj po nazwie</label
@@ -66,7 +68,11 @@ onMounted(() => {
                         </div>
                     </div>
                     <div class="input-wrap col-12">
-                        <select v-model="filterRequest.blog_post_type">
+                        <label class="" for="category">Kategoria postu</label>
+                        <select
+                            name="category"
+                            v-model="filterRequest.blog_post_type"
+                        >
                             <option :value="null">Jakakolwiek</option>
                             <option
                                 :value="category"
@@ -122,7 +128,9 @@ onMounted(() => {
                         <div>Autor:</div>
                         <div>{{ post.author_name }}</div>
                     </div>
-                    <div class="post-list-item-col d-flex flex-row column-gap-10px">
+                    <div
+                        class="post-list-item-col d-flex flex-row column-gap-10px"
+                    >
                         <button
                             class="btn btn-md btn-hovprim"
                             @click="activePostId = post.id"
