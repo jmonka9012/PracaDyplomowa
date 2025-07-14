@@ -36,7 +36,21 @@ Route::post('/email/resend', [EmailVerificationController::class, 'resend'])
 
 // Potwierdzenie hasła
 Route::post('/confirm-password', [PasswordConfirmationController::class, 'confirmPassword'])
-    ->middleware(['auth'])->name('password.confirm'); 
+    ->middleware(['auth'])
+    ->name('password.confirm'); 
 
 Route::get('/zapomnialem-haslo', [RegisterUserController::class, 'forgotPasswordShow'])
+    ->middleware('guest')
     ->name('password.forgot');
+
+Route::post('/zapomnialem-haslo/post', [RegisterUserController::class, 'sendResetEmailLink'])
+    ->middleware('guest')
+    ->name('password.email.post');
+
+Route::get('/zapomnialem-haslo/{token}', [RegisterUserController::class, 'resetFormShow'])
+    ->middleware('guest')
+    ->name('password.reset.form');
+
+Route::get('/zapomnialem-haslo/reset', [RegisterUserController::class, 'resetFormStore'])
+    ->middleware('guest')
+    ->name('password.reset.form.post');
