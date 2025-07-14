@@ -53,9 +53,12 @@ function FilterBlog() {
     <section class="section pb-120px">
         <div class="container container-small flex-column align-items-start justify-content-start">
             <form @submit.prevent="FilterBlog()" class="mb-40px form">
-                <div class="d-flex flex-column justify-content-center">
-                    <label for="search">Wyszukaj po nazwie</label>
-                    <input class="mb-20px" name="search" :placeholder="currentSearchPhrase" v-model="filterRequest.blog_post_name" type="text">
+                <div class="col-12 col-lg-2 d-flex flex-column justify-content-center">    
+                       <label for="search">Wyszukaj po nazwie</label>
+                    <div class="col-12 d-flex flex-row relative mb-20px">
+                    <i class="fa fa-search search-icon"></i>
+                    <input name="search" :placeholder="currentSearchPhrase" v-model="filterRequest.blog_post_name" type="text">
+                    </div>
                     <select class="mb-20px" v-model="filterRequest.blog_post_type">
                         <option :value="null">
                             Jakakolwiek
