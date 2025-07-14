@@ -127,7 +127,7 @@ function submitRegisterRequest() {
 </script>
 
 <template>
-    <HeroSmall title="Forms showcase" :source="blogBg" />
+    <HeroSmall title="Zaloguj się" :source="blogBg" />
     <section class="mb-60px">
         <div class="container align-items-start">
             <div class="col-12 col-lg-6 d-flex flex-column">
