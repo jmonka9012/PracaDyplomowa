@@ -98,10 +98,9 @@ onMounted(() => {
 
 <template>
     <section class="pt-60px pb-60px">
-        <div class="container d-flex flex-column">
+        <div class="container d-flex flex-column align-items-center">
             <h2 class="mb-40px">Podaj szczegóły płatności</h2>
-            <div>
-                <form class="form pb-100px" @submit.prevent="SubmitPaymentDetails()">
+                <form class="form col-12 pb-100px" @submit.prevent="SubmitPaymentDetails()">
                     <div class="input-wrap col-12 col-lg-6">
                         <label for="name">Imię *</label>
                         <input
@@ -285,7 +284,8 @@ onMounted(() => {
                         <input id="make_account" v-model="paymentForm.make_account" type="checkbox">
                         <label for="make_account">Stwórz konto z podanymi danymi zapamiętać je na przyszłość</label>
                     </div>
-                    <div v-if="paymentForm.make_account">
+                    <div class="d-flex flex-column">
+                        <div v-if="paymentForm.make_account">
                         <div class="input-wrap col-12">
                             <label for="name">Nazwa konta</label>
                             <input
@@ -341,11 +341,13 @@ onMounted(() => {
                         </div>
                     </div>
                     <div>
+                        <div class="input-wrap">
                         <input v-if="isLoggedIn" type="submit">
                         <input v-else :class="{ disabled: !canSubmit && paymentForm.make_account }" :disabled="!canSubmit && paymentForm.make_account" type="submit">
+                        </div>
+                    </div>
                     </div>
                 </form>
-            </div>
         </div>
     </section>
 </template>
