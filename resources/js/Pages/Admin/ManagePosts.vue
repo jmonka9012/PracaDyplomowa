@@ -43,7 +43,7 @@ onMounted(() => {
     <section>
         <div class="container justify-content-center">
             <div
-                class="col-12 d-flex flex-lg-row align-items-lg-center row-gap-20px mb-20px mb-lg-15px"
+                class="col-12 d-flex flex-lg-row align-items-lg-center row-gap-20px"
             >
                 <h2>Posty</h2>
                 <Link
@@ -52,9 +52,12 @@ onMounted(() => {
                     >Dodaj nowy</Link
                 >
             </div>
-            <form @submit.prevent="FilterPosts()" class="mb-40px form">
+            <form
+                @submit.prevent="FilterPosts()"
+                class="mb-20px mb-lg-10px form"
+            >
                 <div class="d-flex flex-column col-12 col-lg-4">
-                    <div class="input-wrap relative col-12">
+                    <div class="input-wrap mb-15px relative col-12">
                         <label for="CurrentSearchPhrase"
                             >Wyszukaj po nazwie</label
                         >
@@ -67,7 +70,7 @@ onMounted(() => {
                             <i class="fa fa-search search-icon"></i>
                         </div>
                     </div>
-                    <div class="input-wrap col-12">
+                    <div class="input-wrap mb-15x col-12">
                         <label class="" for="category">Kategoria postu</label>
                         <select
                             name="category"
@@ -82,7 +85,7 @@ onMounted(() => {
                             </option>
                         </select>
                     </div>
-                    <div class="input-wrap col-12">
+                    <div class="input-wrap mb-0 col-12">
                         <input
                             class="btn btn-md cursor-pointer btn-hovprim"
                             type="submit"
