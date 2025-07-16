@@ -26,7 +26,7 @@ const props = defineProps({
                     {{ event.event_date }}
                 </p>
                 <span class="divider divider-horizontal divider-dark"></span>
-                <p class="event-category-link ff-krona">
+                <p class="event-category-link ff-krona mb-16px">
                     Kategorie:
                     <Link
                         class="event-category-link hover-primary"
@@ -38,7 +38,7 @@ const props = defineProps({
                     </Link>
                 </p>
             </div>
-            <div class="relative d-flex mt-16px">
+            <div class="relative d-flex mt-auto">
                 <img
                     :src="`/storage/${event.image_path}`"
                     alt=""
