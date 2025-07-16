@@ -1,4 +1,5 @@
 @use "./base.scss";
+@use "./mixin.scss";
 
 .form {
     display: flex;
@@ -218,18 +219,28 @@ select {
     border-radius: 8px;
     appearance: none;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    // min-width: 300px;
     padding-left: 15px;
     font-family: "Krona One";
-
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: fit-content;
     &.select-icon {
         padding-left: 60px;
     }
     &.select--small {
         width: 150px;
-        white-space: nowrap; 
-        overflow: hidden; 
-        text-overflow: ellipsis; 
+    }
+    &.select--md {
+        width: 200px;
+    }
+    &.select--lg {
+        width: 300px;
+    }
+    &.select--lg-desk {
+        @include mixin.media-breakpoint-up(lg) {
+            width: 300px;
+        }
     }
 }
 

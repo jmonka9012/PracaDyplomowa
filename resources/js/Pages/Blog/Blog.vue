@@ -53,13 +53,14 @@ function FilterBlog() {
     <section class="section pb-120px">
         <div class="container container-small flex-column align-items-start justify-content-start">
             <form @submit.prevent="FilterBlog()" class="mb-40px form">
-                <div class="col-12 col-lg-2 d-flex flex-column justify-content-center">    
-                       <label for="search">Wyszukaj po nazwie</label>
-                    <div class="col-12 d-flex flex-row relative mb-20px">
-                    <i class="fa fa-search search-icon"></i>
-                    <input name="search" :placeholder="currentSearchPhrase" v-model="filterRequest.blog_post_name" type="text">
+                <div class="col-12 d-flex flex-lg-row align-items-lg-center column-gap-20px row-gap-10px row-gap-lg-20px mb-30px">    
+                    <div class="col-6 col-xl-8 d-flex flex-lg-row relative">  
+                         <label class="w-fit ws-nowrap" for="search">Wyszukaj po nazwie</label>
+                        <i class="fa fa-search search-icon"></i>
+                        <input name="search" :placeholder="currentSearchPhrase" v-model="filterRequest.blog_post_name" type="text">
                     </div>
-                    <select class="mb-20px" v-model="filterRequest.blog_post_type">
+                    <label class="ml-lg-auto" for="category">Wyszukaj po kategorii</label>
+                    <select class="select--lg-desk" name="category" v-model="filterRequest.blog_post_type">
                         <option :value="null">
                             Jakakolwiek
                         </option>
@@ -70,9 +71,8 @@ function FilterBlog() {
                             {{ category }}
                         </option>
                     </select>
-                    <input class="btn btn-md cursor-pointer btn-hovprim" type="submit">
                 </div>
-                
+                 <input class="btn btn-md cursor-pointer btn-hovprim" type="submit">
             </form>
             <h3 v-if="currentCategory" class="mb-40px"> Posty z kategorii: {{currentCategory}}</h3>
             <PostQuery class="mb-50px" evContClass="ev-cont-lg-three" :blog_posts="props.blog_posts.data">
