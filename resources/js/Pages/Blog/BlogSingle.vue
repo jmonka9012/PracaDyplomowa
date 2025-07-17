@@ -55,7 +55,7 @@ console.log(props.related_posts);
             >
 
             </div>
-            <div class="blog-single__bottom">
+            <div class="col-12 d-flex align-items-center flex-lg-row row-gap-10px mt-30px">
                 <div class="col-12 col-lg-4">
                     <div
                         class="d-flex flex-row flex-wrap-wrap justify-content-center align-items-center bg-primary pt-12px pb-12px pl-6px pr-6px column-gap-5px border-radius-12px text-white"
