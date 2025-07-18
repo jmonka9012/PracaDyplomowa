@@ -37,7 +37,6 @@ console.log(props);
 
 let currentRequest;
 
-
 const paymentForm = reactive({
     first_name: null,
     last_name: null,
@@ -96,7 +95,7 @@ const handleValidationEmit = (state) => {
         router.post(route("my-account.change"), currentRequest, {
             onError: (err) => {
                 ResetObject(errors);
-                Object.assign(errors, err); //errory do poprawienia
+                Object.assign(errors, err);
             },
             onSuccess: (page) => {
                 currentRequest = null;
@@ -115,22 +114,11 @@ function SendTicket() {
                 preserveState: true,
                 preserveScroll: true,
             })
-            console.log(response.data);
         })
         .catch((error) => {
             supportTicketError.value = error.response.data.throttle;
             console.error(supportTicketError);
         })
-}
-
-function ReturnStatus(status) {
-    if (status === 'paid') {
-        return 'Opłacone';
-    } else if (status === 'cancelled') {
-        return 'Anulowane'
-    } else {
-        return "Oczekujące"
-    }
 }
 
 </script>
@@ -391,7 +379,7 @@ function ReturnStatus(status) {
                             </form>
                         </div>
                     </Tab>
-                    <Tab title="Moje zamówienia">
+                    <Tab v-if="props.orders.data.length > 0" title="Moje zamówienia">
                         <div
                             class="d-flex align-items-center column-gap-10px mb-32px"
                         >
@@ -460,38 +448,40 @@ function ReturnStatus(status) {
                                 <input type="submit" value="wyślij" />
                             </form>
                             <div v-if="supportTicketError" class="error-msg mb-30px">{{supportTicketError}}</div>
-                            <h3 class="mb-30px">Twoje zapytania</h3>
-                            <div class="support-tickets">
-                                <div
-                                    class="support-tickets__ticket"
-                                    v-for="ticket in props.support_tickets.data"
-                                >
+                            <div v-if="props.support_tickets.data.length > 0">
+                                <h3 class="mb-30px">Twoje zapytania</h3>
+                                <div class="support-tickets">
                                     <div
-                                        class="d-flex justify-content-center align-items-center mb-10px mb-lg-0"
+                                        class="support-tickets__ticket"
+                                        v-for="ticket in props.support_tickets.data"
                                     >
-                                        {{ ticket.topic }}
-                                    </div>
-                                    <div
-                                        class="d-flex justify-content-center align-items-center mb-10px mb-lg-0"
-                                    >
-                                        {{ ticket.created_at }}
-                                    </div>
-                                    <div
-                                        v-html="
+                                        <div
+                                            class="d-flex justify-content-center align-items-center mb-10px mb-lg-0"
+                                        >
+                                            {{ ticket.topic }}
+                                        </div>
+                                        <div
+                                            class="d-flex justify-content-center align-items-center mb-10px mb-lg-0"
+                                        >
+                                            {{ ticket.created_at }}
+                                        </div>
+                                        <div
+                                            v-html="
                                             ticket.status === 'in_progress'
                                                 ? 'W trakcie rozpatrywania'
                                                 : 'Zamknięte'
                                         "
-                                        :class="{
+                                            :class="{
                                             'in-progress':
                                                 ticket.status === 'in_progress',
                                             closed: ticket.status === 'closed',
                                         }"
-                                        class="support-tickets__status"
-                                    ></div>
-                                    <div class="support-tickets__message">
-                                        <div>
-                                            {{ ticket.message }}
+                                            class="support-tickets__status"
+                                        ></div>
+                                        <div class="support-tickets__message">
+                                            <div>
+                                                {{ ticket.message }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
