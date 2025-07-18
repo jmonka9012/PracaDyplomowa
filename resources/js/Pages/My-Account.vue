@@ -14,6 +14,8 @@ import Order from "../Components/Partials/OrderCollapse.vue";
 const showModal = ref(false);
 const { user, isLoggedIn } = useAuth();
 
+const userName = user.value.name;
+
 const props = defineProps({
     support_tickets: {
         type: Array,
@@ -32,8 +34,6 @@ const props = defineProps({
 const showTaxField = computed(() => {
     return (paymentForm.company !== null) || props.user_data.tax_number;
 })
-
-console.log(props);
 
 let currentRequest;
 
@@ -128,21 +128,18 @@ function SendTicket() {
     <section class="bg-grey">
         <div class="container flex-lg-row column-mob-reverse">
             <div class="col-12 d-flex flex-column ma-rcol pl-lg-60px">
-                <!--                <div class="bcrumb text-white mb-32px">
-                                    <a href="">Prev</a>
-                                    <span class="divider divider-star"></span>
-                                    <a class="bcrumb__cur" href="">Current</a>
-                                </div>-->
                 <h1 class="ma-title">Mój profil</h1>
                 <Tabs class="tabs-white">
                     <Tab title="Konto">
                         <div
                             class="d-flex align-items-center column-gap-10px mb-32px"
                         >
-                            <h3 class="ma-ftitle">Moje informacje</h3>
-                            <i class="fa fa-user"></i>
+                            <h3 class="ma-ftitle">
+                                <span>Moje Konto </span>
+                                <i class="fa fa-user"></i>
+                                <span v-html="userName" class="username"></span>
+                            </h3>
                         </div>
-                        <h3 class="ma-ftitle">Adres Email</h3>
                         <form
                             class="form form-ma"
                             @submit.prevent="handleSubmitClick(emailForm)"
@@ -163,13 +160,9 @@ function SendTicket() {
                                 />
                             </div>
                             <div class="input-wrap col-12">
-                                <input
-                                    type="submit"
-                                    value="Zaktualizuj E-mail"
-                                />
+                                <button type="submit" class="btn-hover-border btn-hovprim btn btn-md align-self-start" >Zaktualizuj E-mail</button>
                             </div>
                         </form>
-                        <h3 class="ma-ftitle">Zmień hasło</h3>
                         <form
                             class="form form-ma"
                             @submit.prevent="handleSubmitClick(passwordForm)"
@@ -188,17 +181,14 @@ function SendTicket() {
                                 />
                             </div>
                             <div class="input-wrap col-12">
-                                <input
-                                    type="submit"
-                                    value="Zaktualizuj Hasło"
-                                />
+                                <button type="submit" class="btn-hover-border btn-hovprim btn btn-md align-self-start" >Zaktualizuj hasło</button>
                             </div>
                         </form>
                         <div v-if="user.permission_level === 8">
                             <h3 class="ma-ftitle mb-20px">Potwierdź Email</h3>
                             <form class="form form-ma">
                                 <div class="input-wrap d-flex flex-column col-12">
-                                    <input type="submit" value="Potwierdź" />
+                                    <input type="submit" class="btn-hover-border " value="Potwierdź" />
                                 </div>
                             </form>
                         </div>
@@ -374,7 +364,7 @@ function SendTicket() {
                                     </div>
                                 </div>
                                 <div class="input-wrap col-12">
-                                    <input value="Zaktualizuj dane" class="btn btn-md btn-hovprim cursor-pointer" type="submit">
+                                    <button class="btn btn-md btn-hovprim cursor-pointer btn-hover-border align-self-start" type="submit">Zaktualizuj dane</button>
                                 </div>
                             </form>
                         </div>
@@ -445,7 +435,7 @@ function SendTicket() {
                                     umieść w wiadomości numer biletu. Jeżeli go nie znasz podaj jego szczegóły i
                                     datę zakupu tak aby administracja mogła go zidentyfikować
                                 </p>
-                                <input type="submit" value="wyślij" />
+                                <button type="submit" class="btn-hover-border btn-hovprim btn btn-md" >Wyślij</button>
                             </form>
                             <div v-if="supportTicketError" class="error-msg mb-30px">{{supportTicketError}}</div>
                             <div class="mt-40px" v-if="props.support_tickets.data.length > 0">
@@ -533,6 +523,7 @@ function SendTicket() {
 
 <style scoped lang="scss">
 @use "~css/mixin.scss";
+@use "~css/base.scss";
 
 .support-tickets {
     width: 100%;
@@ -741,5 +732,14 @@ function SendTicket() {
     @include mixin.media-breakpoint-up(lg) {
         margin-top: -200px;
     }
+}
+
+.input-wrap {
+    padding: 0 0 !important;
+}
+
+.username {
+    color: var(--primary);
+    margin-left: 10px;
 }
 </style>

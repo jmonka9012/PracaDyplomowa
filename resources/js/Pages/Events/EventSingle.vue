@@ -537,7 +537,7 @@ function SubmitTicketRequest() {
                                 </div>
                             </div>
                             <button
-                                class="btn btn-md btn-hovprim mb-30px"
+                                class="btn btn-md btn-hovprim mb-30px btn-hover-border "
                                 type="submit"
                             >
                                 Kup bilety
@@ -577,40 +577,6 @@ function SubmitTicketRequest() {
                 </div>
                 <h3 class="mb-30px align-self-middle">Related Events</h3>
                 <EventsAlt :events="props.related_events" />
-                <!--                 <h3 class="mb-40px">Leave a Reply</h3>
-                                <p class="fs-14 mb-20px">
-                                    Your email address will not be published. Required fields
-                                    are marked *
-                                </p>
-                                 <form action="" class="form">
-                                    <div class="input-wrap col-12 col-lg-6">
-                                        <input type="text" placeholder="Your Name*" required />
-                                    </div>
-                                    <div class="input-wrap col-12 col-lg-6">
-                                        <input type="text" placeholder="Your Email*" required />
-                                    </div>
-                                    <div class="input-wrap col-12">
-                                        <input type="text" placeholder="Website" />
-                                    </div>
-                                    <div class="input-wrap col-12">
-                                        <textarea placeholder="Your Comment..."></textarea>
-                                    </div>
-                                    <div class="input-wrap input-wrap-check col-12">
-                                        <input
-                                            type="checkbox"
-                                            v-model="toggle"
-                                            true-value="yes"
-                                            false-value="no"
-                                        />
-                                        <label for="checkbox"
-                                            >Save my name, email, and website in this browser
-                                            for the next time I comment.
-                                        </label>
-                                    </div>
-                                    <div class="input-wrap col-12">
-                                        <input type="submit" value="post comment" />
-                                    </div>
-                                </form>-->
             </div>
         </div>
     </section>
