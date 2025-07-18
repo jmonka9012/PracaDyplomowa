@@ -34,7 +34,7 @@ const props = defineProps({
                 </Link>
             </h4>
             <Link :href="`/${post.blog_post_url}`" class="read-more">
-                Read more
+                Czytaj dalej
                 <i class="fa fa-arrow-right"></i>
             </Link>
         </div>
@@ -49,6 +49,10 @@ const props = defineProps({
     &:hover {
         .post-item__photo {
             transform: scale(1.05);
+        }
+
+        .post-item__title a {
+            background-size: 100% 6px;
         }
     }
 
@@ -74,10 +78,11 @@ const props = defineProps({
     &__title {
         margin-bottom: 20px;
         line-height: 36px;
+        min-height: 77px;
+
         a {
             font-size: 26px;
             gap: 0;
-            min-height: 72px;
             cursor: pointer;
             font-weight: 500;
             text-decoration: none;
@@ -88,7 +93,7 @@ const props = defineProps({
                     var(--primary) 0%,
                     var(--primary) 98%
             );
-            background-size: 0 20px;
+            background-size: 0 16px;
             background-repeat: no-repeat;
             background-position: left 100%;
 
