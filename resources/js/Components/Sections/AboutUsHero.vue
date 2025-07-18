@@ -19,9 +19,7 @@ onMounted(() => {
         );
 
         const colorBottom = animationTarget.dataset.from;
-        //const colorBottom = '#DCDCDC';
         const colorTop = animationTarget.dataset.to;
-        //const colorTop = '#0F0F0F';
 
         const wordsArray = [];
         const lettersArray = [];
@@ -104,8 +102,8 @@ onMounted(() => {
 
             <div class="container">
                 <h1
-                    data-from="#000000"
-                    data-to="#f4ecff"
+                    data-from="transparent"
+                    data-to="#fff79a"
                     class="animated-sticky-section__target as-heading"
                 >
                     Poznaj nasz nowoczesny obiekt
@@ -141,7 +139,6 @@ onMounted(() => {
     transition: color 0.8s;
 }
 .as-hero {
-    background-image: url("");
     background-color: var(--primary);
     background-image: url("~images/cta-bg.jpg");
     background-repeat: no-repeat;
@@ -149,17 +146,19 @@ onMounted(() => {
     background-position: center;
 }
 .as-heading {
+    font-family: "Krona one";
+    text-transform: uppercase;
     line-height: 1.1;
     text-align: center;
-    font-size: 58px;
+    font-size: 35px;
     @include mixin.media-breakpoint-down(md) {
         transform: translateY(50px);
     }
     @include mixin.media-breakpoint-up(md) {
-        font-size: 80px;
+        font-size: 60px;
     }
     @include mixin.media-breakpoint-up(lg) {
-        font-size: 100px;
+        font-size: 80px;
     }
 }
 .as-iconrotate {
