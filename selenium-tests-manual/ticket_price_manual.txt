@@ -1,0 +1,83 @@
+Nazwa testu: Kalkulacja ceny biletów stojących
+
+Cel testu:
+Zweryfikowanie, czy system poprawnie oblicza łączną cenę biletów stojących na podstawie liczby wybranych miejsc oraz ceny jednostkowej. Celem jest również potwierdzenie prawidłowego działania interfejsu użytkownika w zakresie prezentacji dostępności oraz ceny.
+
+Warunki początkowe:
+
+Użytkownik niezalogowany
+
+W systemie dostępne jest przynajmniej jedno wydarzenie z możliwością zakupu biletów stojących
+
+Cena jednostkowa biletu widoczna przy wyborze miejsc
+
+Interfejs aplikacji jest w języku polskim
+
+Przeglądarka: Chrome (najnowsza wersja)
+
+Rozdzielczość ekranu: 1920×1080 px
+
+Kroki testowe:
+
+Otwórz aplikację i przejdź na stronę główną
+
+Kliknij w zakładkę „Wydarzenia” dostępną w górnym menu
+
+W sekcji Przyszłe wydarzenia zlokalizuj kartę wydarzenia „David Bowie 2020s”
+
+Kliknij przycisk „Zobacz więcej”, aby przejść do szczegółowego widoku wydarzenia
+
+Sprawdź obecność plakatu, godziny, mapki oraz innych szczegółów wydarzenia
+
+Znajdź sekcję wyboru biletów stojących – zwróć uwagę na:
+
+liczbę zajętych miejsc (np. 21/100)
+
+cenę jednostkową biletu (np. 5.50 PLN)
+
+W polu liczby miejsc wpisz wartość „3”
+
+Obserwuj, czy poniżej pola wyboru pojawia się podsumowanie z wyliczoną ceną
+
+Sprawdź poprawność działania przycisku „Kup bilety” (nie klikaj – test bez finalizacji transakcji)
+
+Oczekiwany rezultat:
+
+Aplikacja wyświetla podsumowanie:
+Ilość wybranych miejsc stojących: 3
+Cena wybranych miejsc: 16,50 PLN
+
+Obliczenie ceny zgodne ze wzorem: 3 × 5,50 PLN = 16,50 PLN
+
+Cena prezentowana jest w prawidłowym formacie liczbowym (z przecinkiem dziesiętnym, jednostką PLN)
+
+Sekcja z informacją o liczbie dostępnych miejsc aktualizuje się dynamicznie
+
+Interfejs zachowuje spójność graficzną i czytelność (bez błędów wizualnych)
+
+Rzeczywisty rezultat:
+
+Ilość: 3
+
+Cena: 16,50 PLN
+
+Widoczna informacja o zajętych miejscach: 21/100 miejsc zajętych. 5.50 PLN
+
+Podsumowanie oraz wyliczona cena zgodne z oczekiwaniami
+
+Brak błędów w prezentacji graficznej i logicznej
+
+Przycisk „Kup bilety” aktywny
+
+Uwagi końcowe:
+
+Tooltip (np. informacja o zajętości miejsc) wyświetla się poprawnie po najechaniu
+
+Wszystkie elementy UI są wyśrodkowane i responsywne
+
+System nie wymusza logowania na etapie wstępnego wyboru biletów
+
+Pole liczby miejsc umożliwia ręczne wpisywanie wartości – brak walidacji dla wartości ujemnych (zalecane przetestowanie w osobnym teście)
+
+Brak błędów wizualnych (rozjechane UI, obcięte przyciski itp.)
+

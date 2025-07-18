@@ -1,0 +1,116 @@
+{
+  "logout_test_Passed": false
+}event_details_test_Passed : true
+event_details_test_Passed : true
+event_details_test_Passed : true
+event_details_test_Passed : true
+admin_backend_access_test_Passed : false
+admin_backend_access_test_Passed : false
+backend_test_Passed : false
+backend_test_Passed : false
+backend_test_Passed : true
+backend_test_Passed : false
+backend_test_Passed : true
+backend_test_Passed : true
+backend_test_Passed : true
+backend_test_Passed : true
+unauthorized_access_admin_test_Passed : true
+unauthorized_access_admin_test_Passed : true
+
+Test Name: unauthorized_access_admin_test
+Result: PASSED
+Message: Brak dodatkowych wiadomości
+Timestamp: 4/27/2025, 10:42:40 PM
+  true
+unauthorized_access_admin_test_Passed : true
+unauthorized_access_admin_test_Passed : true
+unauthorized_access_test_Passed : true
+unauthorized_access_test_Passed : true
+unauthorized_access_test_Passed : true
+search_manual_test_Passed : true
+search_manual_test_Passed : true
+search_manual_test_Passed : true
+search_manual_test_Passed : true
+search_manual_test_Passed : true
+search_manual_test_Passed : true
+search_manual_test_Passed : true
+footer_test_Passed : true
+footer_test_Passed : true
+[2025-07-07T15:38:20.403Z] Test rozpoczęty: Formularz kontaktowy - poprawne dane
+[2025-07-07T15:38:31.715Z] Błąd w teście formularza kontaktowego: Waiting for element to be located By(xpath, //*[contains(text(), 'dziękujemy') or contains(text(), 'wysłana') or contains(text(), 'otrzymaliśmy')])
+Wait timed out after 7012ms
+[2025-07-07T15:39:00.627Z] Test rozpoczęty: Formularz kontaktowy - poprawne dane
+[2025-07-07T15:39:12.508Z] Błąd w teście formularza kontaktowego: Waiting for element to be located By(xpath, //*[contains(text(), 'dziękujemy') or contains(text(), 'wysłana') or contains(text(), 'otrzymaliśmy')])
+Wait timed out after 7210ms
+[2025-07-07T15:47:03.825Z] Test rozpoczęty: Formularz kontaktowy - poprawne dane
+[2025-07-07T15:47:08.256Z] Kliknięto przycisk "wyślij".
+[2025-07-07T15:47:15.357Z] Błąd w teście formularza kontaktowego: Waiting for element to be located By(xpath, //*[contains(text(), 'dziękujemy') or contains(text(), 'wysłana') or contains(text(), 'otrzymaliśmy')])
+Wait timed out after 7100ms
+[2025-07-07T15:47:32.088Z] Test rozpoczęty: Formularz kontaktowy - poprawne dane
+[2025-07-07T15:47:36.762Z] Kliknięto przycisk "wyślij".
+[2025-07-07T15:47:43.867Z] Błąd w teście formularza kontaktowego: Waiting for element to be located By(xpath, //*[contains(text(), 'dziękujemy') or contains(text(), 'wysłana') or contains(text(), 'otrzymaliśmy')])
+Wait timed out after 7104ms
+[2025-07-07T15:48:05.862Z] Test rozpoczęty: Formularz kontaktowy - poprawne dane
+[2025-07-07T15:48:10.869Z] Kliknięto przycisk "wyślij".
+[2025-07-07T15:48:17.919Z] Błąd w teście formularza kontaktowego: Waiting for element to be located By(xpath, //*[contains(text(), 'dziękujemy') or contains(text(), 'wysłana') or contains(text(), 'otrzymaliśmy')])
+Wait timed out after 7050ms
+[2025-07-07T15:50:27.860Z] Test rozpoczęty: Formularz kontaktowy - poprawne dane
+[2025-07-07T15:50:32.269Z] Kliknięto przycisk "wyślij".
+[2025-07-07T15:50:39.372Z] Błąd w teście formularza kontaktowego: Waiting for element to be located By(xpath, //*[contains(text(), 'dziękujemy') or contains(text(), 'wysłana') or contains(text(), 'otrzymaliśmy')])
+Wait timed out after 7103ms
+[2025-07-07T15:51:03.867Z] Test rozpoczęty: Formularz kontaktowy - poprawne dane
+[2025-07-07T15:51:08.660Z] Kliknięto przycisk "wyślij".
+[2025-07-07T15:51:15.701Z] Błąd w teście formularza kontaktowego: Waiting for element to be located By(xpath, //*[contains(text(), 'dziękujemy') or contains(text(), 'wysłana') or contains(text(), 'otrzymaliśmy')])
+Wait timed out after 7039ms
+[2025-07-07T15:52:57.630Z] Test rozpoczęty: Formularz kontaktowy - poprawne dane
+[2025-07-07T15:53:02.031Z] Kliknięto przycisk "wyślij".
+[2025-07-07T15:53:09.092Z] Brak komunikatu potwierdzającego – uznane za poprawne zachowanie.
+[2025-07-07T15:53:09.092Z] Test zakończony pomyślnie.
+contact_form_test_Passed : true
+blog_search_results_test_Passed : true
+blog_search_results_test_Passed : true
+blog_search_results_test_Passed : true
+blog_search_results_test_Passed : true
+blog_search_results_test_Passed : true
+autocomplete_audit_test_Passed : true
+autocomplete_audit_test_Passed : true
+autocomplete_audit_test_Passed : true
+autocomplete_audit_test_Passed : true
+autocomplete_audit_test_Passed : true
+meta_audit_test_Passed : true
+meta_audit_test_Passed : true
+ticket_price_calculation_test_Passed : false
+ticket_price_calculation_test_Passed : false
+ticket_price_calculation_test_Passed : false
+ticket_price_calculation_test_Passed : false
+ticket_price_calculation_test_Passed : false
+ticket_price_calculation_test_Passed : false
+ticket_price_calculation_test_Passed : false
+ticket_price_calculation_test_Passed : false
+ticket_price_calculation_test_Passed : false
+ticket_price_calculation_test_Passed : false
+ticket_price_calculation_test_Passed : true
+ticket_price_calculation_test_Passed : true
+ticket_price_calculation_test_Passed : true
+ticket_price_calculation_test_Passed : true
+ticket_price_calculation_test_Passed : true
+ticket_price_calculation_test_Passed : true
+ticket_price_calculation_test_Passed : true
+ticket_price_calculation_test_Passed : true
+seat_price_calculation_test_Passed : false
+seat_price_calculation_test_Passed : false
+seat_price_calculation_test_Passed : false
+seat_price_calculation_test_Passed : false
+seat_price_calculation_test_Passed : false
+seat_price_calculation_test_Passed : false
+seat_price_calculation_test_Passed : false
+seat_price_calculation_test_Passed : false
+seat_price_calculation_test_Passed : false
+seat_price_calculation_test_Passed : false
+seat_price_calculation_test_Passed : false
+seat_price_calculation_test_Passed : false
+seat_price_calculation_test_Passed : true
+seat_price_calculation_test_Passed : true
+seat_price_calculation_test_Passed : true
+seat_price_calculation_test_Passed : true
+seat_price_calculation_test_Passed : true

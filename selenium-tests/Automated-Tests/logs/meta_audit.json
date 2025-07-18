@@ -1,0 +1,60 @@
+{
+  "generatedAtUTC": "2025-07-13T13:56:14.507Z",
+  "generatedAtLocal": "13.07.2025, 15:56:14",
+  "pages": [
+    {
+      "path": "/",
+      "title": "Event Machen",
+      "meta": {
+        "description": null,
+        "robots": null,
+        "keywords": null
+      }
+    },
+    {
+      "path": "/wydarzenia",
+      "title": "Event Machen",
+      "meta": {
+        "description": null,
+        "robots": null,
+        "keywords": null
+      }
+    },
+    {
+      "path": "/o-nas",
+      "title": "Event Machen",
+      "meta": {
+        "description": null,
+        "robots": null,
+        "keywords": null
+      }
+    },
+    {
+      "path": "/blog",
+      "title": "Event Machen",
+      "meta": {
+        "description": null,
+        "robots": null,
+        "keywords": null
+      }
+    },
+    {
+      "path": "/kontakt",
+      "title": "Event Machen",
+      "meta": {
+        "description": null,
+        "robots": null,
+        "keywords": null
+      }
+    },
+    {
+      "path": "/login",
+      "title": "Event Machen",
+      "meta": {
+        "description": null,
+        "robots": null,
+        "keywords": null
+      }
+    }
+  ]
+}
