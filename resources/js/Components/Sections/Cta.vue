@@ -51,10 +51,10 @@ import {Link} from "@inertiajs/vue3";
     border-top: 1px solid var(--primary);
     background-image: url("~images/cta-bg.jpg");
     background-size: 230%;
-    background-position: center right;
+    background-position: top right;
 
     @include mixin.media-breakpoint-up(lg) {
-        background-size: auto;
+        background-size: 100% auto;
         background-position: center left;
     }
 
