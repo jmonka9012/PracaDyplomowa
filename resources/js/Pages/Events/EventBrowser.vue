@@ -126,12 +126,11 @@ function submitFilterRequest() {
                     format="MM/dd/yyyy"
                     v-model="filterRequest.date"
                 ></DatePicker>
-                <input
+                <button
                     id="submitFilter"
-                    class="btn cursor-pointer btn-md btn-hovprim mt-30px"
+                    class="btn cursor-pointer btn-md btn-hovprim mt-30px btn-hover-border"
                     type="submit"
-                    value="Filtruj"
-                />
+                    value="Filtruj">Szukaj</button>
             </form>
             <Events :events="props.events.data" :genres="props.genres"/>
             <div class="event-pagination" v-if="events.meta.links.length > 3">

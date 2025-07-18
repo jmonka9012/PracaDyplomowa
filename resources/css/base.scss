@@ -972,3 +972,22 @@ img {
         }
     }
 }
+
+.hover-custom-underline {
+    cursor: pointer;
+    text-decoration: none;
+    display: inline;
+    transition: all 0.5s ease-out;
+    background: linear-gradient(
+            to bottom,
+            var(--primary) 0%,
+            var(--primary) 98%
+    );
+    background-size: 0 16px;
+    background-repeat: no-repeat;
+    background-position: left 100%;
+
+    &:hover {
+        background-size: 100% 6px;
+    }
+}

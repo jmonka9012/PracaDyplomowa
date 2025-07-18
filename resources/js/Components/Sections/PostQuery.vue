@@ -43,6 +43,7 @@ const props = defineProps({
 
 <style scoped lang="scss">
 @use "~css/mixin.scss";
+@use "~css/base.scss";
 
 .post-item {
 
@@ -81,25 +82,10 @@ const props = defineProps({
         min-height: 77px;
 
         a {
+            @extend .hover-custom-underline;
             font-size: 26px;
-            gap: 0;
-            cursor: pointer;
             font-weight: 500;
-            text-decoration: none;
-            display: inline;
-            transition: all 0.5s ease-out;
-            background: linear-gradient(
-                    to bottom,
-                    var(--primary) 0%,
-                    var(--primary) 98%
-            );
-            background-size: 0 16px;
-            background-repeat: no-repeat;
-            background-position: left 100%;
-
-            &:hover {
-                background-size: 100% 6px;
-            }
+            gap: 0;
         }
     }
 }
