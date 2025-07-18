@@ -5,9 +5,7 @@ import DatePicker from "@/Components/Partials/DatePicker.vue";
 import MultiSelect from "@/Components/Partials/MultiSelect.vue";
 import { router } from "@inertiajs/vue3";
 
-import { reactive, watch, computed, ref } from "vue";
-
-import eventsBg from "~images/events-bg-1.jpg";
+import {reactive, watch, computed, ref, onMounted} from "vue";
 
 const props = defineProps({
     events: {
@@ -35,7 +33,37 @@ const filterRequest = reactive({
     date: null,
 });
 
+function findGenres(id) {
+    return props.genres[id-1].genre_name; // -1 ponieważ index arraya jest przesunięty o 1 względem ID i możemy wydajniej dotrzeć do nazwy
+}
+
+onMounted(() => {
+    console.log(props);
+    const params = new URLSearchParams(window.location.search);
+    const genres = [];
+
+    if (params.get("genres")) {
+        const value = params.get("genres");
+        genres[0] = {};
+        genres[0].value = value;
+        genres[0].name = findGenres(value);
+    } else {
+        for (const [key, value] of params.entries()) {
+            const match = key.match(/^genres\[(\d+)\]$/);
+            if (match) {
+                const idx = Number(match[1]);
+                genres[idx] = {};
+                genres[idx].value = value;
+                genres[idx].name = findGenres(value);
+            }
+        }
+    }
+
+    filterRequest.genres = genres;
+});
+
 function submitFilterRequest() {
+    console.log(filterRequest.genres)
     const filters = {};
 
     if (filterRequest.date) {
@@ -76,7 +104,7 @@ function submitFilterRequest() {
             <p class="sub-title sub-title-lprpl mb-20px">bilety na</p>
             <h3 class="title-1 mb-20px">Przyszłe wydarzenia</h3>
             <form
-                @submit.prevent="submitFilterRequest()"
+                @submit.prevent="submitFilterRequest"
                 class="select-filters col-12 col-lg-8 align-items-center d-flex flex-column"
             >
                 <div class="input-wrap relative col-12">
@@ -105,7 +133,7 @@ function submitFilterRequest() {
                     value="Filtruj"
                 />
             </form>
-            <Events :events="props.events.data" :genres="props.genres" />
+            <Events :events="props.events.data" :genres="props.genres"/>
             <div class="event-pagination" v-if="events.meta.links.length > 3">
                 <ul class="ml-auto mr-auto">
                     <li

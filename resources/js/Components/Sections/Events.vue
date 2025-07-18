@@ -28,7 +28,7 @@ const scrollRight = () => {
 </script>
 <template>
     <div v-for="event in props.events" :key="event.id" class="event">
-        <div class="event-img">
+        <div class="event__img">
             <Link class="link-stretched" :href="`/${event.event_url}`"> </Link>
             <img :src="`/storage/${event.image_path}`" alt="" />
         </div>
@@ -36,14 +36,14 @@ const scrollRight = () => {
             <div
                 class="d-flex flex-lg-row justify-content-between align-items-start mt-lg-8px mb-16px"
             >
-                <h6 class="event-title">
+                <h6 class="event__title">
                     <Link :href="`/${event.event_url}`">{{
                         event.event_name
                     }}</Link>
                 </h6>
                 <div class="d-flex flex-column row-gap-10px">
                     <Link
-                        class="event-link d-none d-lg-flex"
+                        class="event__link d-none d-lg-flex"
                         :href="`/${event.event_url}`"
                         ><i class="fa fa-ticket"></i>
                         Zobacz więcej
@@ -51,13 +51,13 @@ const scrollRight = () => {
                     <div>Ceny od {{ event.lowest_price }} PLN</div>
                 </div>
             </div>
-            <p class="event-date ff-prompt">
+            <p class="event__date ff-prompt">
                 <i class="fa fa-calendar mr-5px"></i>{{ event.event_date }}
             </p>
-            <p class="event-subtitle">
+            <p class="event__subtitle">
                 Kategorie:
                 <Link
-                    class="event-category-link"
+                    class="event__category-link"
                     :href="route('event.browser')"
                     :data="{ genres: genre.id }"
                     v-for="(genre, index) in event.genres"
@@ -66,7 +66,7 @@ const scrollRight = () => {
                 </Link>
             </p>
             <div class="d-flex flex-column row-gap-10px">
-                <Link class="event-link d-lg-none" :href="`/${event.event_url}`"
+                <Link class="event__link d-lg-none" :href="`/${event.event_url}`"
                     ><i class="fa fa-ticket"></i>
                     Zobacz więcej
                 </Link>
@@ -99,7 +99,7 @@ const scrollRight = () => {
         align-items: start;
     }
 
-    &-category-link {
+    &__category-link {
         transition: color 0.2s ease-out;
 
         &:hover {
@@ -107,8 +107,10 @@ const scrollRight = () => {
         }
     }
 
-    &-img {
-        max-width: 200px;
+    &__img {
+        max-width: 60%;
+        margin-left: auto;
+        margin-right: auto;
         flex-shrink: 0;
         margin-bottom: 20px;
         position: relative;
@@ -121,10 +123,11 @@ const scrollRight = () => {
         @include mixin.media-breakpoint-up(md) {
             margin-right: 16px;
             margin-bottom: 0;
+            max-width: 200px;
         }
     }
 
-    &-title {
+    &__title {
         font-size: 24px;
         line-height: 1.5;
         font-weight: 500;
@@ -149,7 +152,7 @@ const scrollRight = () => {
             }
         }
     }
-    &-link {
+    &__link {
         height: 48px;
         min-width: 48px;
         font-size: 16px;
@@ -166,7 +169,7 @@ const scrollRight = () => {
             background-color: #a499d5;
         }
     }
-    &-date {
+    &__date {
         display: flex;
         align-items: center;
         color: #191028a3;
@@ -182,7 +185,7 @@ const scrollRight = () => {
             margin-bottom: 8px;
         }
     }
-    &-subtitle {
+    &__subtitle {
         border-top: 1px solid #19102814;
         padding-top: 8px;
         margin-top: 30px;
@@ -196,14 +199,14 @@ const scrollRight = () => {
             margin-top: 15px;
         }
     }
-    &-subtitle,
-    &-date {
+    &__subtitle,
+    &__date {
         transition: var(--trans-def);
     }
     &:hover {
         background-color: #19102805;
-        .event-date,
-        .event-subtitle {
+        .event__date,
+        .event__subtitle {
             color: #191028;
         }
     }
