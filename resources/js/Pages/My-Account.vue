@@ -406,7 +406,7 @@ function SendTicket() {
                         <div
                             class="d-flex flex-column align-items-center column-gap-10px mb-32px"
                         >
-                            <h3 class="fs-36 mb-20px">Wyślij zapytanie</h3>
+                            <h3 class="fs-36 mb-20px text-center">Wyślij zapytanie</h3>
                             <form
                                 class="form mb-10px ml-auto mr-auto"
                                 @submit.prevent="SendTicket"
@@ -448,8 +448,8 @@ function SendTicket() {
                                 <input type="submit" value="wyślij" />
                             </form>
                             <div v-if="supportTicketError" class="error-msg mb-30px">{{supportTicketError}}</div>
-                            <div v-if="props.support_tickets.data.length > 0">
-                                <h3 class="mb-30px">Twoje zapytania</h3>
+                            <div class="mt-40px" v-if="props.support_tickets.data.length > 0">
+                                <h3 class="mb-30px text-center fs-36">Twoje zapytania</h3>
                                 <div class="support-tickets">
                                     <div
                                         class="support-tickets__ticket"

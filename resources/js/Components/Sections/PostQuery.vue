@@ -10,9 +10,9 @@ const props = defineProps({
 
 <template>
     <div :class="['ev-cont', props.evContClass]">
-        <div v-for="post in props.blog_posts" :key="post.id" class="event-item">
-            <div class="relative">
-                <img :src="`/storage/${post.thumbnail_path}`" alt="" class="event-img" />
+        <div v-for="post in props.blog_posts" :key="post.id" class="post-item">
+            <div class="relative br-8px post-item__photo-container">
+                <img :src="`/storage/${post.thumbnail_path}`" alt="" class="event-img post-item__photo" />
                 <Link :href="`/${post.blog_post_url}`" class="link-stretched"></Link>
             </div>
             <div
@@ -24,15 +24,15 @@ const props = defineProps({
                 <span class="divider divider-dark"></span>
                 <Link :href="route('blog')"
                       :data="{blog_post_type: post.blog_post_type}"
-                      class="btn btn-white">
+                      class="btn btn-white post-item__category-pill">
                     {{ post.blog_post_type }}
                 </Link>
             </div>
-            <h3 class="event-title2">
-                <Link :href="`/${post.blog_post_url}`" class="hover-underline">
+            <h4 class="post-item__title">
+                <Link :href="`/${post.blog_post_url}`">
                     {{ post.blog_post_name }}
                 </Link>
-            </h3>
+            </h4>
             <Link :href="`/${post.blog_post_url}`" class="read-more">
                 Read more
                 <i class="fa fa-arrow-right"></i>
@@ -40,3 +40,63 @@ const props = defineProps({
         </div>
     </div>
 </template>
+
+<style scoped lang="scss">
+@use "~css/mixin.scss";
+
+.post-item {
+
+    &:hover {
+        .post-item__photo {
+            transform: scale(1.05);
+        }
+    }
+
+    &__category-pill {
+        &:hover {
+            color: white;
+        }
+    }
+
+    &__photo {
+        transition: transform .3s ease-out;
+        margin-bottom: 0;
+        height: 100%;
+        max-height: unset;
+        &-container {
+            overflow: hidden;
+            height: fit-content;
+            display: flex;
+            margin-bottom: 20px;
+        }
+    }
+
+    &__title {
+        margin-bottom: 20px;
+        line-height: 36px;
+        a {
+            font-size: 26px;
+            gap: 0;
+            min-height: 72px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline;
+            transition: all 0.5s ease-out;
+            background: linear-gradient(
+                    to bottom,
+                    var(--primary) 0%,
+                    var(--primary) 98%
+            );
+            background-size: 0 20px;
+            background-repeat: no-repeat;
+            background-position: left 100%;
+
+            &:hover {
+                background-size: 100% 6px;
+            }
+        }
+    }
+}
+
+</style>

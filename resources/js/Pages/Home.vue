@@ -50,7 +50,7 @@ const props = defineProps({
             <h3 class="title-1 mb-20px">Przyszłe wydarzenia</h3>
             <Events class="" :events="props.events" />
             <Link
-                class="mt-40px btn btn-md btn-hovprim"
+                class="mt-40px btn btn-md btn-hovprim btn-hover-border"
                 :href="route('event.browser')"
                 >Zobacz wszystkie wydarzenia</Link
             >
@@ -62,14 +62,15 @@ const props = defineProps({
         <div
             class="container container-big flex-lg-row align-items-start align-items-lg-center justify-content-between"
         >
-            <TitleNSub
-                title="Najnowsze posty"
-                subtitle="Blog"
-                class="mb-35px"
-            />
-            <Link :href="route('blog')" class="btn btn-md btn-hovprim"
+            <div class="mb-35px flex-column align-items-start-start flex-lg-row d-flex align-items-lg-end col-12 justify-content-lg-between">
+                <TitleNSub
+                    title="Najnowsze posty"
+                    subtitle="Blog"
+                />
+                <Link :href="route('blog')" class="btn btn-md btn-hovprim btn-hover-border"
                 >Zobacz wszystkie</Link
-            >
+                >
+            </div>
             <PostQuery :blog_posts="props.blog_posts"></PostQuery>
         </div>
     </section>

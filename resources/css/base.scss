@@ -939,3 +939,36 @@ img {
     white-space: nowrap;
 }
 
+.br-8px {
+    border-radius: 8px;
+}
+
+.btn-hover-border {
+    position: relative;
+    &::after {
+        position: absolute;
+        z-index: -1;
+        pointer-events: none;
+        top: -8px;
+        right: -8px;
+        bottom: -8px;
+        left: -8px;
+        border-radius: inherit;
+        transition: all .3s ease-out;
+        animation: morph 5s linear infinite;
+        animation-play-state: paused;
+        border-radius: 32% 30% 30% 23%/46% 36% 58% 50%;
+        transform: scale(1, 1) rotate(2deg);
+        opacity: 0;
+        border-style: solid;
+        border-width: 2px 2px 2px 2px;
+        border-color: var(--yellow);
+        content: "";
+    }
+
+    &:hover {
+        &::after {
+            opacity: 1;
+        }
+    }
+}
