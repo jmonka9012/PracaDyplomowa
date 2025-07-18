@@ -149,6 +149,7 @@ onMounted(() => {
     font-family: "Krona one";
     text-transform: uppercase;
     line-height: 1.1;
+    color: transparent;
     text-align: center;
     font-size: 35px;
     @include mixin.media-breakpoint-down(md) {
