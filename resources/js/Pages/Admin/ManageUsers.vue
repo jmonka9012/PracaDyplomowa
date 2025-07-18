@@ -319,7 +319,7 @@ function SetUserProperty(value, userID, property) {
                     </div>
                 </div>
             </div>
-            <div class="event-pagination pb-75px">
+            <div class="event-pagination pb-75px" v-if="props.users.meta.links.length > 3">
                 <ul class="ml-auto mr-auto">
                     <li
                         v-for="page in props.users.meta.links"

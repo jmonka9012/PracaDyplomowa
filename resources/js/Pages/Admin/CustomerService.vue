@@ -174,7 +174,7 @@ const SwapStatus = (status) => {
                             <!-- popup end -->
                         </div>
                     </div>
-                    <div class="event-pagination">
+                    <div class="event-pagination" v-if="props.support_tickets.meta.links.length > 3">
                         <ul class="ml-auto mr-auto">
                             <li
                                 v-for="page in props.support_tickets.meta.links"
@@ -196,8 +196,8 @@ const SwapStatus = (status) => {
                         <div class="input-wrap col-12 row-gap-20px">
                               <input v-model="ticket" type="text">  <input type="submit" value="Szukaj">
                         </div>
-                      
-                      
+
+
                     </form>
                     <div class="d-grid row-gap-10px">
                         <Order :admin="true" :order="order" v-for="order in props.orders.data" :key="order.order_id"></Order>

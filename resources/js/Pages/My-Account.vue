@@ -389,7 +389,7 @@ function SendTicket() {
                         <div class="d-grid row-gap-10px mb-30px">
                             <Order :admin="false" :order="order" v-for="order in props.orders.data" :key="order.order_id"></Order>
                         </div>
-                        <div class="event-pagination">
+                        <div class="event-pagination" v-if="props.orders.meta.links.length > 3">
                             <ul class="ml-auto mr-auto">
                                 <li
                                     :key="page"

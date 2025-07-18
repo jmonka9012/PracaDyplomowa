@@ -107,7 +107,7 @@ function submitFilterRequest() {
                     <div v-show="Object.keys(props.events.data) === 0">
                         Brak wyników
                     </div>
-                    <div class="event-pagination">
+                    <div class="event-pagination" v-if="props.events.meta.links.length > 3">
                         <ul class="ml-auto mr-auto">
                             <li
                                 v-for="page in props.events.meta.links"
@@ -168,7 +168,7 @@ function submitFilterRequest() {
                     <div v-show="Object.keys(props.pending_events.data) === 0">
                         Brak wyników
                     </div>
-                    <div class="event-pagination">
+                    <div class="event-pagination" v-if="props.pending_events.meta.links.length > 3">
                         <ul class="ml-auto mr-auto">
                             <li
                                 v-for="page in props.pending_events.meta.links"

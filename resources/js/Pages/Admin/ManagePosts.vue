@@ -178,7 +178,7 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
-            <div class="event-pagination pb-100px">
+            <div class="event-pagination pb-100px" v-if="blog_posts.meta.links.length > 3">
                 <ul class="ml-auto mr-auto">
                     <li
                         :key="page"

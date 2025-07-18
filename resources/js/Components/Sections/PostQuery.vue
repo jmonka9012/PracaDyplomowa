@@ -63,7 +63,7 @@ const props = defineProps({
     }
 
     &__photo {
-        transition: transform .3s ease-out;
+        transition: transform .4s ease-out;
         margin-bottom: 0;
         height: 100%;
         max-height: unset;

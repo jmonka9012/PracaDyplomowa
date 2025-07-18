@@ -106,7 +106,7 @@ function submitFilterRequest() {
                 />
             </form>
             <Events :events="props.events.data" :genres="props.genres" />
-            <div class="event-pagination">
+            <div class="event-pagination" v-if="events.meta.links.length > 3">
                 <ul class="ml-auto mr-auto">
                     <li
                         :key="page"
