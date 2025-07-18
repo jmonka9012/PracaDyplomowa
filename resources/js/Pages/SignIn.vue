@@ -182,20 +182,20 @@ function submitRegisterRequest() {
                     </div>
                 </form>
                 <a
-                    class="h3 hover hover-primary read-more read-more-stop"
+                    class="hover hover-primary read-more read-more-stop"
                     @click="RegShow"
                     >Nie masz konta? Zarejestruj się!</a
                 >
             </div>
             <div
                 id="rcol"
-                class="col-12 col-lg-6 d-flex flex-column"
+                class="col-12 col-lg-6 d-flex flex-column mt-50px"
                 :class="{ show: isVis }"
             >
                 <h1 class="title-1 mb-20px">Rejestracja</h1>
-                <button @click="console.log(registerForm)" class="btn btn-md btn-hovprim">
+<!--                <button @click="console.log(registerForm)" class="btn btn-md btn-hovprim">
                     Loguj formularz rejestracyjny
-                </button>
+                </button>-->
                 <form class="form" @submit.prevent="submitRegisterRequest">
                     <div class="input-wrap col-12">
                         <label for="register-username"
