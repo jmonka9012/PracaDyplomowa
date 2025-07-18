@@ -2,7 +2,7 @@
 import Poptext from "@/Components/Partials/Poptext.vue";
 import ctaCloud from "~images/cta-cloud.png";
 import ctaCalendar from "~images/cat-calendar.png";
-import { Link } from "@inertiajs/vue3";
+import {Link} from "@inertiajs/vue3";
 </script>
 
 <template>
@@ -27,29 +27,37 @@ import { Link } from "@inertiajs/vue3";
                 </Link>
             </div>
             <div class="cta-right">
-                <Poptext class="poptext-cta" text="Najbliższe wydarzenia" />
+                <Poptext class="poptext-cta" text="Najbliższe wydarzenia"/>
             </div>
         </div>
         <div class="cta-cloud">
-            <img :src="ctaCloud" alt="" />
+            <img :src="ctaCloud" alt=""/>
         </div>
         <div class="cta-calendar">
-            <img :src="ctaCalendar" alt="" />
+            <img :src="ctaCalendar" alt=""/>
         </div>
     </section>
 </template>
 
 <style lang="scss" scoped>
 @use "~css/mixin.scss";
+
 .cta {
     column-gap: 30px;
     background-color: var(--primary);
-    background-image: url("~images/cta-bg.jpg");
-    background-position: center right;
     background-repeat: no-repeat;
     overflow: hidden;
     position: relative;
     border-top: 1px solid var(--primary);
+    background-image: url("~images/cta-bg.jpg");
+    background-size: 230%;
+    background-position: center right;
+
+    @include mixin.media-breakpoint-up(lg) {
+        background-size: auto;
+        background-position: center left;
+    }
+
     .container {
         @include mixin.media-breakpoint-up(lg) {
             padding: 0 30px;
@@ -95,6 +103,7 @@ import { Link } from "@inertiajs/vue3";
         border-left: 0;
         border-right: 0;
         white-space: nowrap;
+
         span {
             text-transform: uppercase;
             font-family: "Krona one";
@@ -126,38 +135,50 @@ import { Link } from "@inertiajs/vue3";
 
     &-cloud {
         position: absolute;
-        transform: translateY(-32px);
         transition: transform linear;
         will-change: transform;
-        z-index: 0;
-        display: none;
-        top: 55%;
-        left: 25%;
+        // display: none;
+        top: 65%;
+        left: 15%;
         width: 100%;
         z-index: 1;
+        animation: cloudWiggle 5s infinite ease-in-out;
         @include mixin.media-breakpoint-up(lg) {
             display: block;
+            top: 55%;
+            left: 25%;
         }
     }
 
     &-calendar {
         position: absolute;
-        width: 100%;
         pointer-events: none;
-        transform: translateX(-20px);
         transition: transform linear;
         will-change: transform;
         opacity: 1;
         visibility: visible;
-        display: none;
         top: 15%;
         left: 80%;
-        max-height: 544px;
-        max-width: 390px;
+        width: 100%;
+        max-width: 150px;
         z-index: 0;
+        animation: cloudWiggle 5s infinite ease-in-out;
+        animation-delay: 1s;
         @include mixin.media-breakpoint-up(lg) {
             display: block;
+            max-height: 544px;
+            max-width: 390px;
         }
+    }
+}
+
+@keyframes cloudWiggle {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(40px);
     }
 }
 </style>

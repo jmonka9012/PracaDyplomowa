@@ -52,8 +52,7 @@ const props = defineProps({
             <Link
                 class="mt-40px btn btn-md btn-hovprim btn-hover-border"
                 :href="route('event.browser')"
-                >Zobacz wszystkie wydarzenia</Link
-            >
+                >Zobacz wszystkie wydarzenia</Link>
         </div>
     </section>
     <CategoriesImg :genres="props.featured_categories" class="pt-60px pb-60px pb-lg-90px" />
