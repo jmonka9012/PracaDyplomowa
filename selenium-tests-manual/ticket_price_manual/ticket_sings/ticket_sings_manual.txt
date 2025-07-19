@@ -1,0 +1,58 @@
+Nazwa testu: Walidacja danych wejściowych w polu ilości biletów stojących
+
+Cel testu:
+Sprawdzenie, czy pole umożliwiające wybór liczby biletów stojących odpowiednio blokuje błędne, niepoprawne lub niezgodne z logiką biznesową wartości. Test ma również na celu weryfikację, czy przycisk „Kup bilety” reaguje adekwatnie do wprowadzonych danych oraz czy system wyświetla odpowiednie komunikaty błędów.
+
+Warunki początkowe:
+
+Użytkownik niezalogowany
+
+Wydarzenie dostępne w systemie, zawierające 100 miejsc stojących
+
+89 miejsc jest już zajętych, co daje 11 dostępnych miejsc
+
+Cena jednostkowa biletu: 5,50 PLN
+
+Pole wprowadzania liczby biletów jest aktywne i widoczne
+
+Test wykonywany w nowoczesnej przeglądarce (Chrome, Firefox)
+
+Wartości testowe i oczekiwane reakcje systemu:
+
+Wartość wpisana	Zachowanie systemu
+abc	System nie pozwala na wpisanie liter — klawiatura zablokowana dla znaków alfabetycznych
+-2	Znak minus nie może zostać wpisany; kopiowanie i wklejanie również nieskuteczne
+0	Wartość zostaje przyjęta; przycisk „Kup bilety” jest aktywny, ale po kliknięciu pojawia się komunikat: „Musisz wybrać przynajmniej jedno miejsce” oraz komunikat w języku angielskim: “must be at least 1”
+3.5	System nie akceptuje przecinka ani kropki — liczby zmiennoprzecinkowe są blokowane
+(puste pole)	Po wykasowaniu wartości interfejs reaguje poprawnie — przycisk staje się nieaktywny, a podsumowanie ceny znika
+
+Oczekiwany rezultat:
+
+Pole powinno akceptować tylko liczby całkowite większe lub równe 1
+
+System powinien aktywować przycisk „Kup bilety” tylko dla poprawnych danych
+
+Znaki alfabetyczne, wartości ujemne, zerowe oraz liczby ułamkowe powinny być zablokowane
+
+Komunikaty błędów powinny być czytelne, jednoznaczne i wyświetlane po próbie zakupu
+
+Preferowany język komunikatów: polski, zgodny z językiem interfejsu użytkownika
+
+Rzeczywisty rezultat:
+
+Wszystkie testowe wartości zostały prawidłowo obsłużone
+
+System nie dopuszcza błędnych danych wejściowych
+
+Przycisk „Kup bilety” był nieaktywny lub aktywowany tylko w dopuszczalnych przypadkach
+
+Pojawił się dodatkowy komunikat w języku angielskim — wskazuje to na działanie frameworka lub backendowego mechanizmu walidacji
+
+Uwagi końcowe:
+
+Test zakończony sukcesem — walidacja danych działa skutecznie zarówno na poziomie interfejsu, jak i logiki aplikacji
+
+Pole wyboru ilości jest odpowiednio zabezpieczone
+
+Rekomendacja: Ujednolicenie języka komunikatów (wyłącznie PL) w celu zwiększenia spójności doświadczenia użytkownika
+
