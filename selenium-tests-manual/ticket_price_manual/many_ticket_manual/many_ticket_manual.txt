@@ -1,0 +1,74 @@
+Nazwa testu: Zakup biletów stojących z przekroczeniem dostępnej ilości
+
+Cel testu:
+Zweryfikowanie, czy system poprawnie reaguje na próbę zakupu większej liczby biletów stojących niż dostępna, blokując transakcję oraz informując użytkownika o przekroczeniu limitu. Test obejmuje również ocenę zachowania interfejsu użytkownika oraz walidacji po stronie frontendu i backendu.
+
+Warunki początkowe:
+
+Użytkownik niezalogowany
+
+W systemie dostępne wydarzenie z pulą 100 miejsc stojących
+
+21 miejsc jest już zajętych — dostępne są 79 miejsca
+
+Cena jednostkowa biletu: 5,50 PLN
+
+Interfejs aplikacji w języku polskim
+
+Przeglądarka: Chrome, rozdzielczość 1920×1080 px
+
+Kroki testowe:
+
+Przejdź na stronę główną aplikacji
+
+Kliknij zakładkę „Wydarzenia”
+
+Wybierz wydarzenie „David Bowie 2020s”, które zawiera miejsca stojące
+
+Na stronie szczegółów wydarzenia znajdź sekcję z biletami stojącymi
+
+Sprawdź liczbę zajętych miejsc — powinna wynosić 21/100
+
+W polu wyboru ilości biletów wpisz wartość „999”
+
+Zweryfikuj, czy pojawia się przeliczenie ceny: 999 × 5,50 PLN = 5494,50 PLN
+
+Kliknij przycisk „Kup bilety”
+
+Obserwuj zachowanie systemu i ewentualne komunikaty
+
+Oczekiwany rezultat:
+
+System rozpoznaje, że liczba wybranych biletów przekracza liczbę dostępnych miejsc
+
+Pojawia się komunikat ostrzegawczy, np.:
+
+„Zostało tylko 79 miejsc w tej sekcji (Wybrano: 999)”
+
+Zakup zostaje zablokowany
+
+Użytkownik nie przechodzi do kolejnego kroku rezerwacji
+
+Przycisk „Kup bilety” nie wykonuje akcji, dopóki ilość biletów nie zostanie skorygowana
+
+Rzeczywisty rezultat:
+
+Po wpisaniu 999 system poprawnie wyliczył cenę: 5494,50 PLN
+
+Przycisk „Kup bilety” był dostępny (aktywny)
+
+Po kliknięciu pojawił się komunikat informujący o ograniczeniu liczby dostępnych miejsc
+
+Proces zakupu został zablokowany, zgodnie z oczekiwaniami
+
+Użytkownik nie został przekierowany do następnego kroku
+
+Uwagi końcowe:
+
+Walidacja działa prawidłowo po stronie interfejsu użytkownika
+
+Komunikat jest czytelny i zawiera konkretne dane o liczbie dostępnych miejsc
+
+Dodatkowo warto zweryfikować, czy backend również egzekwuje ten limit – np. przez test REST API lub podmianę wartości w devtools
+
+Rekomenduje się dodanie prewencyjnego ograniczenia maksymalnej wartości wejściowej w polu liczbowym (np. poprzez max="79" w HTML)
