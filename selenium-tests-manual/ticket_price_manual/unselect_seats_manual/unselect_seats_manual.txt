@@ -69,3 +69,63 @@ Aktualizacja danych ilości i ceny po odznaczeniu działa prawidłowo
 Wymagana poprawka danych tekstowych — należy zsynchronizować liczbę zajętych miejsc z realnym stanem mapy
 
 Zgłoszono do poprawy jako błąd wyświetlania lub źródła danych
+
+
+!!!!!!!  poprawka
+
+
+Nazwa testu: Odznaczanie miejsc siedzących po ich wybraniu
+
+Cel testu: Sprawdzić, czy użytkownik może zrezygnować z wcześniej wybranych miejsc siedzących i czy system poprawnie aktualizuje ich status, ilość i cenę.
+
+Warunki początkowe:
+
+Użytkownik niezalogowany
+
+Dostępne wydarzenie z interaktywną mapą miejsc siedzących
+
+Cena jednostkowa siedzenia: 10.50 PLN
+
+Kroki testowe:
+
+Przejdź do strony wydarzenia z miejscami siedzącymi
+
+Na mapie kliknij 2 dostępne miejsca (fioletowe → zmieniają kolor na żółty)
+
+Obserwuj, czy liczba wybranych miejsc i całkowita cena się aktualizują
+
+Kliknij te same miejsca ponownie, aby je odznaczyć (żółte → fioletowe)
+
+Sprawdź, czy liczba miejsc i cena w podsumowaniu się zmniejszyła
+
+Zweryfikuj zgodność wizualizacji miejsc (kolor fioletowy = dostępne)
+
+Oczekiwany rezultat:
+
+Miejsca wracają do koloru fioletowego
+
+Ilość i cena w podsumowaniu zmniejszają się proporcjonalnie
+
+Zmiany są widoczne natychmiast bez odświeżania strony
+
+Kolorystyka na mapie i logika działania są spójne
+
+Rzeczywisty rezultat:
+
+Miejsca odznaczone wróciły do koloru fioletowego
+
+Ilość: spadła z 3 do 1
+
+Cena: spadła z 31.50 PLN do 10.50 PLN
+
+System działa poprawnie pod względem interakcji
+
+Wcześniej zgłoszona rozbieżność liczby miejsc została wyjaśniona — liczba „89/100 miejsc zajętych” dotyczy sekcji miejsc stojących, nie siedzących
+
+Uwagi:
+
+Interfejs mapy działa poprawnie
+
+Kolorystyka i aktualizacja danych ilości/ceny po odznaczeniu działają zgodnie z oczekiwaniami
+
+Wcześniejsza obserwacja o błędnej liczbie dostępnych miejsc siedzących została anulowana – nie dotyczy mapy siedzeń

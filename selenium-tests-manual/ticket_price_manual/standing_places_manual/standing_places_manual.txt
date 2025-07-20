@@ -1,0 +1,67 @@
+Nazwa testu: Zmiana ilości biletów stojących — aktualizacja ceny
+
+Cel testu:
+Zweryfikować, czy zmiana liczby biletów stojących skutkuje poprawną aktualizacją ceny całkowitej oraz stanu przycisku „Kup bilety”, a także czy dla wartości niedozwolonych (np. 0) wyświetlane są odpowiednie komunikaty walidacyjne.
+
+Warunki początkowe:
+
+Użytkownik niezalogowany
+
+Dostępne wydarzenie z biletami stojącymi
+
+Cena jednostkowa biletu stojącego: 5.50 PLN
+
+Kroki testowe:
+
+Przejdź na stronę główną aplikacji.
+
+Wejdź w zakładkę „Wydarzenia” i wybierz wydarzenie zawierające sekcję „Stojące”.
+
+Odczytaj cenę jednostkową biletu stojącego (powinna wynosić 5.50 PLN).
+
+W polu „Ilość biletów stojących” wpisz kolejno:
+a. 3
+b. 5
+c. 0
+
+Po każdej zmianie odczekaj chwilę i zanotuj stan pola ceny oraz status przycisku „Kup bilety”.
+
+Oczekiwany rezultat:
+
+Dla wartości 3:
+Cena całkowita: 16.50 PLN
+Przycisk „Kup bilety” powinien być aktywny
+
+Dla wartości 5:
+Cena całkowita: 27.50 PLN
+Przycisk „Kup bilety” powinien być aktywny
+
+Dla wartości 0:
+Przycisk powinien zostać dezaktywowany
+Użytkownik powinien otrzymać komunikat w języku polskim, np. „Musisz wybrać przynajmniej jedno miejsce”
+
+Rzeczywisty rezultat:
+
+Wartość 3:
+Wyświetlona cena: 16.50 PLN
+Przycisk aktywny
+
+Wartość 5:
+Wyświetlona cena: 27.50 PLN
+Przycisk aktywny
+
+Wartość 0:
+Przycisk pozostaje aktywny mimo niedozwolonej wartości
+Po kliknięciu pojawiają się dwa komunikaty:
+
+„The standing tickets.2.amount field must be at least 1”
+
+„Musisz wybrać przynajmniej jedno miejsce lub bilet stojący”
+
+Uwagi:
+
+System prawidłowo przelicza cenę dla wartości większych od zera.
+
+Brakuje blokady przycisku „Kup bilety” przy wartości 0 — walidacja następuje dopiero po kliknięciu.
+
+Komunikaty błędów są wyświetlane częściowo w języku angielskim. Rekomenduje się ujednolicenie komunikatów i prezentowanie ich w języku polskim, zgodnie z językiem interfejsu użytkownika.
