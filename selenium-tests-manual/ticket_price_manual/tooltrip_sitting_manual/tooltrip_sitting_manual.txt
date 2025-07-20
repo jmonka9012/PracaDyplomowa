@@ -1,0 +1,68 @@
+Nazwa testu: Tooltip przy najechaniu na miejsca siedzące
+
+Cel testu:
+Zweryfikowanie, czy po najechaniu kursorem na miejsce siedzące wyświetlany jest tooltip zawierający kompletne i zgodne z rzeczywistością informacje, oraz ocena jego czytelności i wpływu na komfort użytkownika.
+
+Warunki początkowe:
+
+Użytkownik niezalogowany
+
+Dostępna interaktywna mapa miejsc siedzących
+
+Miejsca w różnych stanach:
+
+Fioletowe — dostępne
+
+Żółte — wybrane
+
+Szare — zajęte
+
+Cena miejsca siedzącego: 10.50 PLN
+
+Kroki testowe:
+
+Przejdź na stronę wydarzenia z mapą miejsc siedzących.
+
+Najedź kursorem na dostępne (fioletowe) miejsce na mapie.
+
+Obserwuj, czy pojawia się tooltip z informacjami.
+
+Zweryfikuj, czy tooltip zawiera następujące dane:
+
+Numer rzędu
+
+Numer miejsca (oznaczenie jako „Kolumna”)
+
+Cena biletu
+
+Powtórz czynność dla kilku różnych miejsc, w różnych częściach mapy.
+
+Oceń, czy tooltip nie zasłania sąsiednich elementów interfejsu.
+
+Oczekiwany rezultat:
+
+Tooltip pojawia się natychmiast po najechaniu kursorem na miejsce.
+
+Zawiera komplet informacji: rząd, miejsce (kolumna), cena.
+
+Jest przejrzysty i nie utrudnia interakcji z innymi elementami mapy.
+
+Dane w tooltipie są zgodne ze stanem i pozycją wybranego miejsca.
+
+Rzeczywisty rezultat:
+
+Tooltip wyświetla się poprawnie przy każdym wskazanym miejscu.
+
+Treść przykładowego tooltipa: „Rząd: 3, Kolumna: 2, Cena: 10.50 PLN”
+
+Informacje są zgodne z rozmieszczeniem miejsc na mapie.
+
+Element graficzny tooltipa nie zasłania żadnych aktywnych elementów.
+
+Mechanizm działa intuicyjnie i bez opóźnień.
+
+Uwagi:
+
+Interakcja jest płynna, a estetyka tooltipa zapewnia dobrą czytelność.
+
+Rekomenduje się zmianę etykiety „Kolumna” na „Miejsce” lub „Siedzenie” — będzie to bardziej intuicyjne z punktu widzenia użytkownika końcowego.
