@@ -1,0 +1,62 @@
+Nazwa testu: Obsługa aplikacji za pomocą klawiatury (nawigacja i zakup biletów)
+
+Cel testu:
+Zweryfikowanie, czy użytkownik może w pełni obsłużyć proces zakupu biletów stojących wyłącznie przy użyciu klawiatury — z pominięciem myszy — oraz ocena dostępności i przewidywalności interakcji.
+
+Warunki początkowe:
+
+Użytkownik niezalogowany
+
+Otwarta strona konkretnego wydarzenia
+
+Widoczna sekcja sprzedaży biletów stojących
+
+Cena jednostkowa biletu stojącego: 5.50 PLN
+
+Kroki testowe:
+
+Kliknij w dowolne miejsce strony, by aktywować fokus klawiatury.
+
+Używaj klawisza Tab, aby przechodzić przez kolejne aktywne elementy formularza.
+
+Zatrzymaj się na polu „Ilość biletów stojących”.
+
+Wpisz wartość (np. 3) i sprawdź, czy cena aktualizuje się automatycznie.
+
+Naciśnij Enter, gdy fokus nadal znajduje się w tym polu.
+
+Obserwuj, czy aplikacja przechodzi do kolejnego kroku — formularza danych użytkownika.
+
+Kontynuuj cały proces zakupu używając wyłącznie klawiatury.
+
+Oczekiwany rezultat:
+
+Klawisz Tab pozwala przechodzić przez wszystkie aktywne pola formularza.
+
+Pole ilości akceptuje dane wejściowe.
+
+Cena całkowita aktualizuje się automatycznie po zmianie ilości.
+
+Klawisz Enter inicjuje przejście do kolejnego etapu zakupu.
+
+Cały proces zakupu (w tym uzupełnianie danych) możliwy jest bez użycia myszy.
+
+Rzeczywisty rezultat:
+
+Nawigacja klawiszem Tab działa prawidłowo dla wszystkich pól formularza oraz przycisków.
+
+Nie można jednak zaznaczyć miejsc siedzących na mapie — nie posiadają one widocznego fokusu.
+
+W przypadku miejsc stojących interakcja działa poprawnie — wpisanie liczby 3 powoduje obliczenie ceny 16.50 PLN.
+
+Naciśnięcie Enter skutkuje przewinięciem strony i przejściem do formularza z danymi osobowymi.
+
+Cała ścieżka zakupu możliwa do przejścia wyłącznie przy użyciu klawiatury.
+
+Uwagi:
+
+Formularz zakupu miejsc stojących spełnia podstawowe wymogi dostępności.
+
+Mapa miejsc siedzących nie umożliwia nawigacji klawiaturą — brak tabindex oraz obsługi fokusu.
+
+Zaleca się dodanie atrybutów tabindex do interaktywnych miejsc na mapie oraz aria-label w celu zwiększenia dostępności dla użytkowników korzystających ze screen readerów lub alternatywnych metod nawigacji.
