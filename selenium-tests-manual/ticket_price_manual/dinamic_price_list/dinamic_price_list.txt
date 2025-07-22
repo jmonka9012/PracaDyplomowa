@@ -1,0 +1,42 @@
+Nazwa testu: Cennik dynamiczny — różne sekcje i ceny siedzeń
+
+Cel testu: 
+Zweryfikować, czy aplikacja obsługuje różne ceny dla miejsc siedzących w zależności od sekcji, oraz czy tooltipy i kalkulacja sumy uwzględniają cenę poszczególnych miejsc.
+
+Warunki początkowe:
+- Użytkownik niezalogowany
+- Interaktywna mapa miejsc siedzących z podziałem na sektory
+- Cena jednostkowa miejsc siedzących: 10.50 PLN
+- Widoczne oznaczenia:
+  - Szare = zajęte
+  - Fioletowe = dostępne
+  - Żółte = wybrane
+
+Kroki testowe:
+1. Otwórz stronę wydarzenia z mapą siedzeń.
+2. Wybierz po jednym miejscu z różnych sektorów (np. dolna lewa, górna środkowa, prawa scena).
+3. Obserwuj tooltip dla każdego miejsca:
+   - Czy pokazuje cenę?
+   - Czy cena różni się między sektorami?
+4. Sprawdź kolory sektorów:
+   - Czy są różnice kolorystyczne sugerujące inne ceny?
+5. Zaznacz trzy różne miejsca (zmienią kolor na żółty).
+6. Sprawdź cenę w podsumowaniu zakupu.
+
+Oczekiwany rezultat:
+- Tooltip pokazuje cenę danego miejsca.
+- Cena miejsc różni się w zależności od sektora.
+- Kolory sektorów sugerują różnice cenowe.
+- Podsumowanie uwzględnia sumę różnych cen.
+
+Rzeczywisty rezultat:
+- Wszystkie miejsca mają identyczną cenę: 10.50 PLN.
+- Tooltip pokazuje prawidłową cenę i dane miejsca.
+- Kolory sektorów nie różnią się — brak wizualnych oznaczeń cenowych.
+- Wybrane miejsca zaznaczone poprawnie (kolor żółty).
+- Cena w podsumowaniu zgadza się z sumą: 3 × 10.50 PLN = 31.50 PLN.
+
+Uwagi:
+- System obecnie nie obsługuje cennika dynamicznego dla sektorów.
+- Brak różnic cenowych może wynikać z jednolitego typu wydarzenia.
+- Można rozważyć dodanie opcji różnicowania cen dla lepszej personalizacji oferty.
