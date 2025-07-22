@@ -1,0 +1,41 @@
+Nazwa testu: Anulowanie procesu zakupu — zachowanie danych i dostępności
+
+Cel testu:
+Zweryfikować, czy po przerwaniu procesu zakupu (np. kliknięciu „Wstecz”) system usuwa wszystkie dane tymczasowe, zwalnia wybrane miejsca i resetuje formularz do stanu początkowego.
+
+Warunki początkowe:
+- Użytkownik niezalogowany
+- Wydarzenie z miejscami siedzącymi i stojącymi
+- Cena miejsc siedzących: 10.50 PLN
+- Cena miejsc stojących: 5.50 PLN
+- Wybrane: 2 miejsca siedzące + 3 miejsca stojące
+
+Kroki testowe:
+1. Wejdź na stronę wydarzenia.
+2. Wybierz 2 miejsca siedzące (fioletowe → żółte).
+3. Wpisz 3 jako ilość biletów stojących.
+4. Sprawdź, czy cena jest poprawnie wyliczona (21.00 + 16.50 = 37.50 PLN).
+5. Kliknij „Kup bilety”, aby przejść do formularza zakupu.
+6. Wypełnij część danych (np. imię i nazwisko).
+7. Kliknij „Wstecz” lub zamknij okno.
+
+Oczekiwany rezultat:
+- Wybrane miejsca zostają zwolnione (kolor wraca na fioletowy).
+- Pole ilości biletów stojących się resetuje.
+- Cena zostaje wyczyszczona.
+- Przycisk „Kup bilety” jest nieaktywny.
+- Żadne dane nie są zapisane.
+
+Rzeczywisty rezultat:
+- Po kliknięciu „Wstecz” strona:
+  - Nie zachowała wybranych miejsc.
+  - Ilość biletów stojących wróciła do zera.
+  - Cena została wyczyszczona.
+  - Przycisk „Kup bilety” nieaktywny.
+  - Dane osobowe nie zostały zachowane.
+  - Miejsca wróciły do pełnej dostępności.
+
+Uwagi:
+- System poprawnie resetuje sesję użytkownika po przerwaniu zakupu.
+- Dobra praktyka: dodać komunikat „Rezerwacja została anulowana” → potwierdza działanie UX i pomaga użytkownikowi zrozumieć, co się stało.
+- Można rozważyć opcję zachowania rezerwacji przez kilka minut na sesji, np. „Masz 5 minut na dokończenie zakupu”.
