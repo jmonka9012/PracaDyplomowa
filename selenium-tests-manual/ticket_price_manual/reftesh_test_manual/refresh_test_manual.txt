@@ -1,0 +1,46 @@
+Nazwa testu: Zachowanie systemu po odświeżeniu strony wydarzenia
+
+Cel testu: 
+Sprawdzić, czy aplikacja zapisuje stan wybranych biletów (siedzących i stojących), cenę oraz inne dane użytkownika po odświeżeniu strony (Ctrl + R) i czy użytkownik zachowuje postęp w procesie zakupu.
+
+Warunki początkowe:
+- Użytkownik niezalogowany
+- Wydarzenie z interaktywną mapą siedzeń
+- Cena: 10.50 PLN (siedzące), 5.50 PLN (stojące)
+- Wybrane miejsca: 2 siedzące + 3 stojące
+
+Kroki testowe:
+1. Wejdź na stronę wydarzenia.
+2. Wybierz dwa miejsca siedzące (np. rząd 6, kolumna 8 i kolumna 9).
+3. Wpisz „3” jako ilość miejsc stojących.
+4. Sprawdź podsumowanie:
+   - Ilość siedzących: 2
+   - Ilość stojących: 3
+   - Cena siedzących: 2 × 10.50 PLN = 21.00 PLN
+   - Cena stojących: 3 × 5.50 PLN = 16.50 PLN
+   - Łącznie: 37.50 PLN
+5. Zweryfikuj, że przycisk „Kup bilety” jest aktywny.
+6. Odśwież stronę (Ctrl + R).
+7. Obserwuj, czy dane się zachowują:
+   - Czy miejsca siedzące są nadal zaznaczone?
+   - Czy wartość w polu „ilość miejsc stojących” pozostała?
+   - Czy cena się zgadza?
+   - Czy przycisk „Kup bilety” jest nadal aktywny?
+
+Oczekiwany rezultat:
+- Aplikacja powinna zachować stan użytkownika: wybrane miejsca, ilość biletów, cena.
+- Odświeżenie nie powinno zerować danych.
+- Użytkownik nie powinien tracić postępu zakupu.
+
+Rzeczywisty rezultat:
+- Po odświeżeniu strony:
+  - Wybrane miejsca siedzące zniknęły.
+  - Liczba miejsc stojących została wyczyszczona.
+  - Cena zresetowana.
+  - Przycisk „Kup bilety” nieaktywny.
+- Wszystko zostało wyczyszczone — system nie zachowuje danych po odświeżeniu.
+
+Uwagi:
+- Aplikacja nie korzysta z sessionStorage ani localStorage do utrzymania stanu użytkownika.
+- Można rozważyć dodanie mechanizmu zachowywania wyboru w sesji, co poprawiłoby użyteczność.
+- Potencjalny punkt do optymalizacji: zachowanie danych użytkownika do momentu finalizacji lub opuszczenia strony.

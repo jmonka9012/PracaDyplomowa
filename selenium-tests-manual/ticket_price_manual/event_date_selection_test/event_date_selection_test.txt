@@ -1,0 +1,45 @@
+Nazwa testu: Wybór daty wydarzenia — aktualizacja dostępności i ceny
+
+Cel testu:
+Sprawdzić, czy system poprawnie reaguje na zmianę daty wydarzenia: filtrowanie dostępnych eventów, aktualizacja dostępności miejsc siedzących/stojących oraz zachowanie ceny biletów.
+
+Warunki początkowe:
+- Użytkownik niezalogowany
+- Wydarzenia dostępne w zakresie 18–19.08.2025
+- System zawiera wydarzenie „David Bowie 2020s” z datą 19.08.2025
+- Ceny biletów: od 5.50 PLN za miejsca stojące, 10.50 PLN na miejsca siedzące
+- Miejsca siedzące dostępne, brak miejsc stojących
+
+Kroki testowe:
+1. Wejdź na stronę wydarzeń.
+2. Skorzystaj z wyszukiwarki — wybierz daty: 18.08.2025 – 19.08.2025.
+3. Sprawdź, ile wydarzeń zostało znalezionych.
+4. Kliknij „Zobacz więcej” przy wyszukanym wydarzeniu.
+5. Otwórz mapę siedzeń.
+6. Wybierz 1 miejsce siedzące.
+7. Zobacz tooltip — czy pokazuje prawidłową cenę (10.50 PLN).
+8. Sprawdź, czy cena w podsumowaniu jest poprawna.
+9. Upewnij się, że nie ma dostępnych miejsc stojących.
+
+Oczekiwany rezultat:
+- Wyszukiwarka zwraca tylko wydarzenia zgodne z zakresem dat.
+- Wydarzenie „David Bowie 2020s” widoczne jako jedyne w wybranym zakresie.
+- Dostępne tylko miejsca siedzące.
+- Cena widoczna w tooltipie i podsumowaniu to 10.50 PLN.
+- Miejsca stojące niedostępne.
+- System nie pozwala dodać biletów stojących.
+
+Rzeczywisty rezultat:
+- Wyszukiwarka działa poprawnie — wydarzenie zgodne z datą zostało odnalezione.
+- Jedno wydarzenie: „David Bowie 2020s” w dniu 19.08.2025.
+- Brak miejsc stojących.
+- Dostępne wyłącznie miejsca siedzące.
+- Cena wybranego miejsca: 10.50 PLN — zgodna w tooltipie i podsumowaniu.
+- Wybrano 1 miejsce — cena w podsumowaniu: 10.50 PLN.
+- Interfejs zachowuje się zgodnie z oczekiwaniami.
+
+Uwagi:
+- System prawidłowo filtruje wydarzenia po dacie.
+- Dane lokalne (dostępność, cena) aktualizują się dynamicznie.
+- UX przy zmianie daty jest intuicyjny.
+- Warto rozważyć dodanie informacji o braku miejsc stojących bezpośrednio przy opisie wydarzenia.
