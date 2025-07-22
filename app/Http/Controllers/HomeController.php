@@ -20,7 +20,7 @@ class HomeController extends Controller
             ->where('pending', false)
             ->orderBy('event_date', 'asc')
             ->take(3)
-            ->with(['standingTickets', 'standingTickets'])
+            ->with(['standingTickets', 'standingTickets', 'genres'])
             ->get();
         
         $newestBlogPosts = BlogPost::orderBy('created_at', 'desc')
