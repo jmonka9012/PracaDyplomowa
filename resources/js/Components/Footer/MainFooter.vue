@@ -109,7 +109,9 @@ const { siteData } = pageInfo();
             </div>
         </section>
         <section class="footer__under">
-            <p>Copyright © 2024 PracaDyplomowa by My. All Rights Reserved</p>
+            <div class="container">
+                <p>Copyright © 2024 PracaDyplomowa by My. All Rights Reserved</p>
+            </div>
         </section>
     </footer>
 </template>
