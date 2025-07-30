@@ -111,8 +111,8 @@ function SetUserProperty(value, userID, property) {
                     <label for="userName">Nazwa firmy:</label>
                     <input v-model="filterRequest.company_name" type="text"/>
                 </div>
-                <div class="col-12 d-flex flex-row">
-                    <div class="input-wrap col-6">
+                <div class="col-12 d-flex flex-lg-row column-gap-30px">
+                    <div class="input-wrap col-12 col-lg-6">
                         <label class="mb-10px" for="userRole">Rola</label>
                         <select class="select" id="userRole" v-model="filterRequest.role" name="userRole">
                             <option disabled value="">Wybierz</option>
@@ -123,7 +123,7 @@ function SetUserProperty(value, userID, property) {
                             </option>
                         </select>
                     </div>
-                    <div class="input-wrap col-6">
+                    <div class="input-wrap col-12 col-lg-6">
                         <label class="mb-10px" for="organizerStatus">Status organizatora:</label>
                         <select
                             class="select"

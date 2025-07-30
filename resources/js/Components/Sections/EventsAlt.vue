@@ -62,9 +62,9 @@ const props = defineProps({
 .event-img--blog {
     margin-bottom: 0;
     padding:10px;
-    border-radius: 8px;
+    border-radius: 8px !important;
     background-color: #c3b9ef33;
-    object-fit: contain;
+    object-fit: contain !important;
 }
 
 .event-category-link {

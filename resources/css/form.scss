@@ -6,9 +6,9 @@
     flex-wrap: wrap;
     // margin-left: -15px; wut
     width: 100%;
+    column-gap:30px;
 
     .input-wrap {
-        padding: 0 15px;
         margin: 0 0 26px 0;
         display: flex;
         flex-direction: column;
