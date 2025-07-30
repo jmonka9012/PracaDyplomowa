@@ -42,7 +42,7 @@ const props = defineProps({
                 <img
                     :src="`/storage/${event.image_path}`"
                     alt=""
-                    class="event-img event-img-blog"
+                    class="event-img event-img--blog"
                 />
                 <Link
                     :href="`/${event.event_url}`"
@@ -59,9 +59,14 @@ const props = defineProps({
     flex-direction: column;
 }
 
-.event-img-blog {
+.event-img--blog {
     margin-bottom: 0;
+    padding:10px;
+    border-radius: 8px;
+    background-color: #c3b9ef33;
+    object-fit: contain;
 }
+
 .event-category-link {
     font-size: 12px;
     line-height: 30px;
