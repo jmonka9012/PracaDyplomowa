@@ -1,0 +1,59 @@
+Nazwa testu: Formularz kontaktowy
+
+Cel testu:
+Zweryfikować funkcjonalność sekcji „Kontakt”, w tym widoczność formularza, poprawność działania walidacji, estetykę i kompletność danych kontaktowych.
+
+Warunki początkowe:
+– Użytkownik niezalogowany
+– Strona uruchomiona lokalnie
+– Dostępne menu główne z pozycją „Kontakt”
+
+Zakres testu:
+– Widoczność i zawartość formularza
+– Działanie przycisku „Wyślij”
+– Komunikaty walidacyjne
+– Estetyka oraz dane dodatkowe 
+
+Kroki testowe:
+1. Kliknięcie w pozycję „Kontakt” w menu głównym – poprawne przekierowanie do sekcji kontaktowej.
+2. Sprawdzenie widoczności pól formularza: imię, e-mail, temat, wiadomość – wszystkie są widoczne i poprawnie oznaczone.
+3. Weryfikacja opisu sekcji – zawiera instrukcję kontaktu oraz dane biura w Poznaniu.
+4. Przeprowadzenie testu walidacji – przy próbie wysłania pustego formularza pojawiają się komunikaty.
+5. Ocena estetyki – formularz jest czytelny, ma przejrzysty układ, dobrze opisane pola.
+6. Test funkcji wysyłania – przy poprawnie uzupełnionych danych formularz działa zgodnie z oczekiwaniami.
+7. Sprawdzenie elementów dodatkowych – obecne ikony social media oraz informacja o administratorze danych.
+
+Szczegóły formularza:
+– Nagłówek: „Masz pytania?”
+– Instrukcja: Pomoc w zakresie zamówień, płatności, faktur, zwrotów
+– Dane kontaktowe:
+   • E-mail: kontakt@eventmachen.pl  
+   • Telefon: 111 222 333  
+   • Adres: ul. Koncertowa 12, 66-666 Poznań
+– Pola formularza:
+   • Imię
+   • E-mail
+   • Temat wiadomości
+   • Treść wiadomości
+– Przycisk: „Wyślij”
+– Walidacja: działa poprawnie, lecz komunikat dotyczący pola e-mail pojawia się w języku angielskim
+– Dodatki: Ikony Facebook, Twitter, Instagram
+– Informacja o administratorze danych – zgodna z RODO, sformułowana jasno
+
+Obserwacja:
+Podczas testu formularza kontaktowego pojawia się komunikat walidacyjny w języku angielskim:  
+"The email field must be a valid email address."
+
+Oczekiwany rezultat:
+Komunikaty walidacyjne powinny być zgodne z językiem interfejsu, czyli w języku polskim.
+
+Przykładowa poprawna treść komunikatu:
+– „Pole e-mail musi zawierać poprawny adres e-mail.”
+– „Wprowadź poprawny adres e-mail.”
+
+Rekomendacja:
+– Zmienić język komunikatów walidacyjnych na polski
+– Sprawdzić, czy wszystkie komunikaty są zgodne językowo z resztą interfejsu
+
+Wnioski końcowe:
+Formularz kontaktowy jest funkcjonalny i estetyczny. Sekcja zawiera kompletne dane, a interfejs jest przejrzysty i zgodny z oczekiwaniami użytkownika. Jedyne zalecenie dotyczy tłumaczenia komunikatów walidacyjnych, które powinny być spójne z językiem strony.

@@ -1,0 +1,40 @@
+Nazwa testu: Przeczytanie bloga – aktualizacja z widokiem strony
+
+Cel testu:
+Zweryfikować funkcjonalność oraz wygląd sekcji „Blog”, w tym widoczność elementów interfejsu, działanie linków i estetykę treści.
+
+Zakres testu:
+– Sekcja bloga (lista artykułów)
+– Wyszukiwarka treści
+– Działanie linków do pełnych wpisów
+– Estetyka oraz intuicyjność przeglądania treści
+
+Warunki początkowe:
+Użytkownik niezalogowany.
+Strona uruchomiona lokalnie.
+Przeglądarka: Firefox Developer Edition.
+
+Potwierdzone funkcje:
+– Sekcja „Blog” jest dobrze wyróżniona: duży nagłówek na ciemnym tle, widoczny od razu po wejściu na stronę.
+– Dostępna wyszukiwarka: pola „Wyszukaj po nazwie”, „Wyszukaj po kategorii” oraz przycisk „Szukaj”.
+– Lista wpisów blogowych zawiera 3 artykuły z następującymi danymi:
+   • Poradnik: „Gdzie zacząć naukę gry na gitarze” – 07.08.2025
+   • Trendy: „Najbardziej popularne gatunki muzyki 2025” – 06.08.2025
+   • Marketing: „Jak sprzedać swoje bilety” – 05.08.2025
+– Każdy wpis posiada datę, kategorię, tytuł oraz grafikę (książka na stole).
+– Linki „CZYTAJ DALEJ” działają poprawnie – przekierowują do pełnych wersji wpisów.
+– Funkcja powrotu do listy działa intuicyjnie i bezbłędnie.
+
+Ocena estetyki i UX:
+– Layout strony bloga jest spójny graficznie z resztą serwisu.
+– Czytelne nagłówki, odpowiednia wielkość czcionek i dobre kontrasty.
+– Grafiki są dopasowane do tematyki artykułów.
+– Wyszukiwarka umożliwia łatwe filtrowanie treści i poprawia użyteczność.
+
+Rzeczywisty rezultat:
+– Wszystkie elementy interfejsu działają zgodnie z założeniami.
+– Nie występują błędy wizualne ani techniczne.
+– Sekcja bloga jest gotowa do publikacji.
+
+Wnioski końcowe:
+Blog jest w pełni funkcjonalny, estetyczny i zapewnia dobre doświadczenie użytkownika. Wszystkie mechanizmy nawigacyjne, wyszukiwania i wyświetlania treści działają prawidłowo. Sekcja nie wymaga poprawek i może zostać uznana za gotową do wdrożenia.

@@ -1,0 +1,39 @@
+Nazwa testu: Formularz logowania
+
+Cel testu:
+Zweryfikować poprawność działania formularza logowania, jego czytelność, zgodność z językiem interfejsu oraz estetykę układu.
+
+Warunki początkowe:
+– Użytkownik niezalogowany  
+– Strona główna uruchomiona  
+– Widoczna pozycja „Zaloguj” w menu głównym
+
+Zakres testu:
+– Widoczność i zawartość formularza  
+– Obsługa poprawnych danych logowania  
+– Czytelność interfejsu  
+– Spójność językowa  
+– Obecność linku do rejestracji  
+
+Kroki testowe:
+1. Kliknięcie w przycisk „Zaloguj” – użytkownik zostaje przekierowany do formularza logowania.
+2. Sprawdzenie obecności pól formularza – widoczne pola do wpisania danych użytkownika i hasła oraz checkbox „Zapamiętaj mnie”.
+3. Ocena estetyki – formularz ma czytelny i uporządkowany układ, etykiety są poprawnie sformułowane.
+4. Wprowadzenie poprawnych danych logowania – brak błędów walidacyjnych.
+5. Kliknięcie przycisku „ZALOGUJ SIĘ” – użytkownik zostaje poprawnie zalogowany.
+6. Weryfikacja obecności linku do rejestracji – widoczny link „Nie masz konta? Zarejestruj się!”
+
+Szczegóły formularza:
+– Nagłówek: „Logowanie”
+– Pola wymagane:
+   • Dane użytkownika (adres e-mail lub login)  
+   • Hasło  
+– Dodatkowe elementy:
+   • Checkbox: „Zapamiętaj mnie”  
+   • Link do rejestracji: „Nie masz konta? Zarejestruj się!”  
+   • Przycisk: „ZALOGUJ SIĘ”
+– Walidacja: poprawnie działa dla prawidłowych danych, brak błędów
+– Język: całość interfejsu w języku polskim, spójny stylistycznie
+
+Wnioski końcowe:
+Formularz logowania jest w pełni funkcjonalny. Zawiera wszystkie wymagane pola i dodatkowe elementy nawigacyjne. Interfejs jest przejrzysty, estetyczny i zgodny z językiem strony. Proces logowania przebiega prawidłowo.

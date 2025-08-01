@@ -1,0 +1,41 @@
+Nazwa testu: Rejestracja z poziomu logowania
+
+Cel testu:
+Sprawdzić możliwość przejścia z formularza logowania do formularza rejestracji oraz ocenić kompletność, estetykę i zgodność formularza rejestracji z wymaganiami interfejsu.
+
+Warunki początkowe:
+– Użytkownik niezalogowany  
+– Strona logowania otwarta  
+– Widoczny link: „Nie masz konta? Zarejestruj się!”
+
+Zakres testu:
+– Nawigacja pomiędzy formularzami  
+– Widoczność i kompletność pól formularza  
+– Czytelność i estetyka  
+– Spójność językowa  
+– Gotowość do dalszego testowania funkcjonalności  
+
+Kroki testowe:
+1. Kliknięcie w „Zaloguj się” w menu – użytkownik zostaje przekierowany do formularza logowania.
+2. Kliknięcie w link „Nie masz konta? Zarejestruj się!” – formularz rejestracji pojawia się bez przeładowania strony, bez błędów.
+3. Sprawdzenie pól formularza – widoczne są: nazwa użytkownika, e-mail, imię, nazwisko, hasło, potwierdzenie hasła.
+4. Sprawdzenie obecności checkboxów – widoczne: zgoda na przetwarzanie danych oraz opcja założenia konta organizatora.
+5. Weryfikacja przycisku – przycisk „ZAREJESTRUJ SIĘ” jest widoczny i aktywny.
+6. Ocena języka interfejsu – wszystkie elementy są w języku polskim, spójne stylistycznie.
+
+Szczegóły formularza:
+– Pola wymagane:
+   • Nazwa użytkownika  
+   • Adres e-mail  
+   • Imię  
+   • Nazwisko  
+   • Hasło  
+   • Potwierdzenie hasła  
+– Checkboxy:
+   • Zgoda na przetwarzanie danych osobowych  
+   • Opcja: zakładam konto jako organizator wydarzeń  
+– Przycisk:
+   • „ZAREJESTRUJ SIĘ” – aktywny, gotowy do użycia
+
+Wnioski końcowe:
+Formularz rejestracji jest poprawnie zintegrowany z formularzem logowania. Przejście między formularzami jest intuicyjne i szybkie. Wszystkie pola i funkcje są widoczne, kompletne i zgodne z językiem strony. Formularz gotowy do dalszych testów walidacyjnych i testów rejestracji.
