@@ -1,0 +1,34 @@
+Nazwa testu: Responsywność — zachowanie menu mobilnego
+
+Cel testu:
+Ocena działania rozwijanego menu na urządzeniu mobilnym w trybie responsywnym, ze szczególnym uwzględnieniem jego zachowania po kliknięciu w pozycję nawigacyjną.
+
+Warunki początkowe:
+- Strona uruchomiona lokalnie przez Visual Studio Code
+- Użytkownik niezalogowany
+- Przeglądarka: Firefox Developer Edition
+- Tryb responsywny: iPhone 11 Pro Max
+
+Kroki testowe:
+1. Uruchom stronę lokalnie.
+2. Włącz narzędzia deweloperskie i przejdź do trybu responsywnego.
+3. Wybierz urządzenie: iPhone 11 Pro Max.
+4. Sprawdź działanie przewijania i obracania ekranu.
+5. Kliknij ikonę menu w lewym górnym rogu.
+6. Kliknij pozycję „Wydarzenia” w rozwijanym menu.
+7. Obserwuj, czy menu automatycznie się zamyka.
+
+Oczekiwany rezultat:
+- Menu rozwija się prawidłowo na urządzeniu mobilnym.
+- Po kliknięciu w pozycję nawigacyjną menu automatycznie się zamyka.
+- Użytkownik nie musi wykonywać dodatkowych kliknięć w celu zamknięcia menu.
+
+Rzeczywisty rezultat:
+- Przewijanie i obracanie ekranu działa poprawnie.
+- Menu rozwija się zgodnie z oczekiwaniami.
+- Po kliknięciu w „Wydarzenia” menu pozostaje otwarte.
+- Użytkownik musi ręcznie kliknąć ikonę zamknięcia („X”), aby zamknąć menu.
+- Potencjalne obniżenie komfortu korzystania z nawigacji na urządzeniach mobilnych.
+
+Rekomendacja:
+Wprowadzić automatyczne zamykanie menu po kliknięciu w dowolną pozycję nawigacyjną.

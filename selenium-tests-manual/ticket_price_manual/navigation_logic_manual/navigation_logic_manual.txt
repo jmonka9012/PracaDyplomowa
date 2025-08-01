@@ -1,0 +1,42 @@
+Nazwa testu: Logika nawigacji – wynik pozytywny
+
+Cel testu:
+Sprawdzić, czy użytkownik łatwo odnajduje się na stronie, wie gdzie kliknąć, a wszystkie przyciski i linki są intuicyjne, dobrze opisane i prowadzą do właściwych miejsc.
+
+Zakres testu:
+– Nawigacja główna
+– Ścieżki użytkownika: wydarzenia, zakup biletu, informacje o stronie, blog, kontakt, logowanie, rejestracja
+– Opisy przycisków i linków
+– Przejrzystość i dostępność funkcji
+
+Warunki początkowe:
+Użytkownik niezalogowany.
+Strona uruchomiona lokalnie.
+Przeglądarka: Firefox Developer Edition.
+
+Kroki testowe:
+1. Kliknij pozycję „Wydarzenia” w menu – powinno nastąpić przejście do listy wydarzeń.
+2. Skorzystaj z wyszukiwarki i kliknij przycisk „Szukaj” – powinno zostać wyświetlone odpowiednie wydarzenie z opcją zakupu.
+3. Kliknij „O Nas” – powinna pojawić się strona z informacjami o platformie.
+4. Kliknij „Blog” – użytkownik powinien otrzymać dostęp do treści artykułów.
+5. Kliknij „Kontakt” – widoczny powinien być formularz kontaktowy.
+6. Kliknij „Zaloguj” – system powinien przekierować do formularza logowania.
+7. Kliknij „Zarejestruj” – użytkownik powinien zostać przeniesiony do formularza rejestracji.
+
+Oczekiwany rezultat:
+– Wszystkie pozycje menu głównego są aktywne i poprawnie przekierowują do odpowiednich podstron.
+– Każdy przycisk lub link jest jednoznaczny i zrozumiały.
+– Użytkownik nie napotyka żadnych trudności w nawigacji.
+– Nie ma zbędnych kliknięć, a ścieżki użytkownika są logiczne.
+
+Rzeczywisty rezultat:
+– Menu główne jest dobrze widoczne i prawidłowo opisane.
+– Wszystkie linki i przyciski działają zgodnie z przeznaczeniem.
+– Nie stwierdzono błędnych przekierowań ani nieintuicyjnych akcji.
+– Nawigacja prowadzi użytkownika płynnie między sekcjami serwisu.
+
+Uwagi:
+Strona zapewnia pozytywne doświadczenie nawigacyjne, zarówno dla nowych, jak i powracających użytkowników. Wszystkie istotne funkcje są łatwo dostępne i dobrze opisane.
+
+Rekomendacja końcowa:
+Interfejs spełnia wymagania w zakresie logiki nawigacji. Nie są wymagane żadne zmiany w układzie, strukturze ani opisie elementów.
