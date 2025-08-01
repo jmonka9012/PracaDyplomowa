@@ -1,0 +1,39 @@
+Nazwa testu: Język interfejsu – wynik pozytywny
+
+Cel testu:
+Zweryfikować, czy interfejs użytkownika jest w pełni przetłumaczony na język polski, stylistycznie spójny i zrozumiały dla użytkownika końcowego.
+
+Zakres testu:
+– Menu główne
+– Formularze wyszukiwania
+– Komunikaty systemowe
+– Przyciskowe akcje
+– Nawigacja i etykiety
+
+Warunki początkowe:
+Użytkownik niezalogowany.
+Strona uruchomiona lokalnie w przeglądarce.
+System ustawiony na język polski.
+
+Kroki testowe:
+1. Otwórz stronę główną aplikacji.
+2. Sprawdź pozycje menu głównego – powinny być wyświetlane po polsku (np. „Strona Główna”, „Wydarzenia”, „O Nas”, „Blog”, „Kontakt”).
+3. Przejdź do panelu logowania i rejestracji – etykiety powinny być w języku polskim („Zaloguj”, „Zarejestruj”).
+4. Skorzystaj z wyszukiwarki wydarzeń – pola powinny zawierać poprawne, polskie etykiety („Wyszukaj po nazwie”, „Wybierz kategorię”, „Data”, „Szukaj”).
+5. Zwróć uwagę na stylistykę języka – powinna być neutralna, jasna i spójna.
+6. Przejrzyj komunikaty systemowe – nie powinny zawierać literówek ani błędów językowych.
+7. Sprawdź obecność hasła „EVENT MACHEN” – powinno być potraktowane jako element brandingowy.
+
+Oczekiwany rezultat:
+– Wszystkie elementy interfejsu użytkownika są w języku polskim.
+– Teksty są zrozumiałe i stylistycznie spójne.
+– Brak błędów językowych, literówek i niejasnych sformułowań.
+– Hasło „EVENT MACHEN” uznane za element graficzny – nie wpływa na funkcjonalność ani zrozumiałość interfejsu.
+
+Rzeczywisty rezultat:
+– Wszystkie elementy zostały poprawnie przetłumaczone.
+– Interfejs jest spójny językowo i funkcjonalnie.
+– Hasło „EVENT MACHEN” występuje, lecz nie wpływa na użyteczność.
+
+Uwagi:
+Interfejs spełnia wymagania językowe dla polskojęzycznego użytkownika. Nie są wymagane żadne zmiany w zakresie tłumaczenia ani stylistyki tekstów.
