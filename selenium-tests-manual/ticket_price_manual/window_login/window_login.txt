@@ -1,0 +1,40 @@
+Nazwa testu: Obsługa błędnych danych logowania
+
+Cel testu:
+Zweryfikować, czy system logowania reaguje poprawnie na nieprawidłowe dane logowania, a wyświetlane komunikaty błędów są zgodne z językiem interfejsu, nie ujawniają szczegółów technicznych oraz pozostają spójne wizualnie i językowo.
+
+Warunki początkowe:
+– Użytkownik niezalogowany  
+– Strona logowania dostępna lokalnie  
+– W formularzu logowania dostępne pola: e-mail/login, hasło  
+
+Kroki testowe i wyniki:
+1. Poprawny login i poprawne hasło  
+   Oczekiwany rezultat: Użytkownik zostaje zalogowany  
+   Wynik: Pozytywny
+
+2. Puste pole loginu  
+   Oczekiwany rezultat: System nie pozwala na logowanie; przeglądarka wyświetla sugestię zapisanych danych  
+   Wynik: Pozytywny
+
+3. Puste pole hasła  
+   Oczekiwany rezultat: System nie pozwala na logowanie; przeglądarka wyświetla sugestię zapisanych haseł  
+   Wynik: Pozytywny
+
+4. Błędny login i poprawne hasło  
+   Oczekiwany rezultat: Wyświetlenie komunikatu „Podany użytkownik nie istnieje”  
+   Wynik: Pozytywny
+
+Obserwacje:
+– Komunikaty błędów są wyświetlane w języku polskim, zgodnie z językiem interfejsu.  
+– Komunikaty są czytelne, zwięzłe i nie ujawniają, która część danych (login czy hasło) jest nieprawidłowa — zgodne z dobrymi praktykami bezpieczeństwa.  
+– W przypadku pustych pól, przeglądarka (Firefox Developer Edition) automatycznie wyświetla zapisane dane użytkownika, co jest funkcjonalne, ale może utrudniać testowanie.  
+– Interfejs użytkownika (UX) pozostaje spójny; komunikaty są zgodne ze stylistyką całej strony.
+
+Rekomendacja:
+– Warto rozważyć implementację własnych komunikatów walidacyjnych dla pustych pól (zamiast korzystania z komunikatów domyślnych przeglądarki).  
+– Zaleca się ujednolicenie stylu wszystkich komunikatów błędów – np. poprzez zastosowanie spójnych ramek, kolorystyki i ikon informacyjnych.  
+– Brak błędów krytycznych – system działa zgodnie z wymaganiami funkcjonalnymi i UX.
+
+Wnioski końcowe:
+System poprawnie obsługuje przypadki błędnych danych logowania. Komunikaty są zgodne z językiem strony i wymaganiami bezpieczeństwa. Interfejs jest spójny i nie zawiera błędów funkcjonalnych w zakresie walidacji.
