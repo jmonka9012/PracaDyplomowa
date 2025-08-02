@@ -1,0 +1,46 @@
+Nazwa testu: Walidacja pola e-mail w formularzu rejestracji
+
+Cel testu:
+Zweryfikować poprawność działania walidacji pola e-mail w formularzu rejestracji, w szczególności:
+– Czy system wykrywa niepoprawny format adresu e-mail?
+– Czy system informuje o istnieniu użytkownika z podanym adresem?
+– Czy komunikaty są dynamiczne i zmieniają się w czasie wpisywania danych?
+
+Środowisko testowe:
+– Przeglądarka: Firefox Developer Edition 
+– System operacyjny: Windows 11  
+– Strona testowana: Formularz rejestracji użytkownika (uruchomiona lokalnie)
+
+Kroki testowe i oczekiwane rezultaty:
+1. Otwórz stronę rejestracji  
+   Oczekiwany rezultat: Formularz rejestracji jest widoczny
+
+2. W polu „Nazwa użytkownika” wpisz: alfred  
+   Oczekiwany rezultat: Pole zostaje poprawnie wypełnione, brak błędów
+
+3. W polu „Email” wpisz: pgalimski  
+   Oczekiwany rezultat: System wyświetla komunikat: „Nieprawidłowy adres e-mail”
+
+4. Zmień e-mail na: pgalimski@edu.cdv.pl  
+   Oczekiwany rezultat: Komunikat o błędnym formacie znika automatycznie podczas wpisywania
+
+5. Kliknij przycisk „Zarejestruj”  
+   Oczekiwany rezultat: System wyświetla komunikat: „Użytkownik z takim adresem e-mail już istnieje”
+
+6. Zmień e-mail na unikalny, np. pgalimski123@edu.cdv.pl  
+   Oczekiwany rezultat: System akceptuje dane i pozwala przejść dalej lub zakończyć rejestrację
+
+Obserwacje:
+– Walidacja pola e-mail działa dynamicznie — komunikat o błędnym formacie znika automatycznie po wprowadzeniu poprawnego adresu. To poprawia doświadczenie użytkownika.  
+– Komunikaty są czytelne, widoczne i wyświetlane w języku polskim.  
+– System prawidłowo odróżnia błędny format adresu od sytuacji, gdy e-mail jest już przypisany do innego konta.
+
+Uwagi dodatkowe:  
+– Rekomenduje się rozszerzenie testu o przypadki graniczne, takie jak:
+  – wklejenie adresu e-mail z niedozwolonymi znakami  
+  – użycie spacji przed/po adresie  
+  – adres e-mail zapisany wielkimi literami  
+  – znaki specjalne i lokalne domeny (np. .pl, .com, .edu)
+
+Wnioski końcowe:
+Walidacja pola e-mail działa zgodnie z wymaganiami funkcjonalnymi i UX. System prawidłowo wykrywa błędny format oraz istniejące adresy. Komunikaty zmieniają się dynamicznie podczas wpisywania danych, co pozytywnie wpływa na użyteczność formularza.
