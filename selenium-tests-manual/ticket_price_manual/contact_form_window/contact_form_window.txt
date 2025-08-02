@@ -1,0 +1,47 @@
+Nazwa testu: Walidacja formularza kontaktowego
+
+Cel testu:
+Zweryfikować, czy formularz kontaktowy na stronie Event Machen realizuje poprawną walidację danych wejściowych, a komunikaty o błędach są zgodne z językiem strony, logiczne i estetyczne.
+
+Zakres testu:
+– Sprawdzenie komunikatów walidacyjnych przy pustych lub błędnie wypełnionych polach  
+– Weryfikacja języka, treści oraz stylu komunikatów  
+– Spójność komunikatów między różnymi elementami formularza  
+
+Warunki początkowe:
+– Użytkownik niezalogowany  
+– Strona uruchomiona lokalnie  
+– Dostępny formularz kontaktowy z polami: imię, e-mail, temat, wiadomość  
+
+Kroki testowe i wyniki:
+1. Pozostawienie pustego pola „Wiadomość”  
+   Oczekiwany rezultat: Wyświetla się komunikat „To pole jest wymagane”  
+   Wynik: Pozytywny
+
+2. Wpisanie niepoprawnego e-maila, np. „ziom”  
+   Oczekiwany rezultat: Komunikat „Nieprawidłowy adres e-mail”  
+   Wynik: Pozytywny
+
+3. Pozostawienie pustego pola „Twój email”  
+   Oczekiwany rezultat: Komunikat systemowy „Proszę wypełnić to pole”  
+   Wynik: Pozytywny
+
+4. Pozostawienie pustego pola „Twoje imię”  
+   Oczekiwany rezultat: Komunikat „Proszę wypełnić to pole”  
+   Wynik: Pozytywny
+
+Obserwacje:
+– Wszystkie komunikaty walidacyjne są w języku polskim, zgodnie z lokalizacją interfejsu.  
+– Komunikaty są jasne i precyzyjne – użytkownik wie, które pole wymaga poprawy.  
+– Zauważono niespójność stylistyczną:
+   • Komunikaty domyślne przeglądarki („Proszę wypełnić to pole”) różnią się wyglądem od niestandardowych komunikatów.  
+   • Komunikat „Nieprawidłowy adres e-mail” prezentuje wyższy poziom estetyczny i spójność z interfejsem.
+
+Rekomendacja:
+– Ujednolicić źródło i sposób wyświetlania komunikatów walidacyjnych:  
+   • Wszystkie powinny pochodzić z jednego systemu walidacji  
+   • Zaleca się użycie spójnych stylów graficznych (kolor, czcionka, ikony, obramowanie)  
+   • Komunikaty powinny być językowo jednolite – preferowana forma: „To pole jest wymagane”
+
+Wnioski końcowe:
+Formularz kontaktowy spełnia funkcjonalne wymagania walidacji. Interfejs jest czytelny, a treść komunikatów – zrozumiała. Zaleca się jednak korektę warstwy prezentacyjnej w celu zapewnienia pełnej spójności stylistycznej i językowej.
