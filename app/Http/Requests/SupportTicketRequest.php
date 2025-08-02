@@ -32,7 +32,13 @@ class SupportTicketRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'sometimes' => 'To pole jest wymagane'
+            'sometimes' => 'To pole jest wymagane',
+            'required' => 'To pole jest wymagane',
+            'email.email' => 'Nieprawidłowy adres e-mail',
+            'user_id.exists' => 'Dany użytkownik nie istnieje',
+            'name.max' => 'Podane imie jest zbyt długie',
+            'email.max' => 'Podany email jest zbyt długi',
+            'topic.max' => 'Podany temat jest zbyt długi'
         ];
     }
 
