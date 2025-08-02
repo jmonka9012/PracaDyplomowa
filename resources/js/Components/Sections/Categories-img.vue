@@ -39,12 +39,6 @@ const props = defineProps({
 
 .cat-img {
     width: 150px;
-    clip-path: polygon(
-        clamp(0px, 0px, 100%) clamp(0px, -30px, 100%),
-        clamp(0px, 100% - 0px * -1, 100%) clamp(0px, -30px * -1, 100%),
-        clamp(0px, 100% - 0px, 100%) clamp(0px, 100% - -30px, 100%),
-        clamp(0px, 0px * -1, 100%) clamp(0px, 100% - -30px * -1, 100%)
-    );
     transition: 0.3s;
     position: relative;
 }
@@ -58,12 +52,7 @@ const props = defineProps({
 }
 
 .cat-item:hover .cat-img {
-    clip-path: polygon(
-        clamp(0px, 0px, 100%) clamp(0px, 30px, 100%),
-        clamp(0px, 100% - 0px * -1, 100%) clamp(0px, 30px * -1, 100%),
-        clamp(0px, 100% - 0px, 100%) clamp(0px, 100% - 30px, 100%),
-        clamp(0px, 0px * -1, 100%) clamp(0px, 100% - 30px * -1, 100%)
-    );
+    transform: scale(0.75);
 }
 
 .cat-name {
