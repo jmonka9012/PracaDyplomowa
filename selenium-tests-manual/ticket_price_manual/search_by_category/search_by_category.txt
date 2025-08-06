@@ -1,0 +1,75 @@
+RAPORT TESTU EKSPLORACYJNYCH
+
+Autor: Piotr Galimski  
+Wersja dokumentu: SEARCH BY CATEGORY 
+Data: 06.08.2025  
+
+──────────────────────────────────────  
+Aplikacja  
+Nazwa: Event Machen  
+Link: eventmachen.ddev.site  
+
+──────────────────────────────────────  
+Środowisko testowe  
+Przeglądarka: Firefox Developer Edition  
+System operacyjny: Windows 11  
+Tryb testowania: ręczny, lokalny  
+Widok: Strona wyników wyszukiwania  
+Urządzenie: Desktop  
+
+──────────────────────────────────────  
+Czas trwania sesji  
+Czas przygotowania: 5 minuty  
+Czas testowania: 15 minut  
+Czas raportowania: 30 minut  
+Łącznie: 50 minut  
+
+──────────────────────────────────────  
+Idea eksploracji  
+Celem testu było sprawdzenie działania filtrowania wydarzeń za pomocą kategorii tematycznych. Test obejmował scenariusze wyszukiwania przy pomocy jednej wybranej kategorii (Rock, Nu Metal), bez dodatkowych słów kluczowych.  
+
+──────────────────────────────────────  
+Procent realizacji idei  
+100% – test został zrealizowany w pełnym zakresie, bez konieczności jego przerywania lub modyfikacji.  
+
+──────────────────────────────────────  
+Scenariusz 1 – Wybór kategorii „Rock”  
+Działanie:  
+Z listy rozwijanej wybrano kategorię „Rock”.  
+Po wybraniu opcji, wyniki pojawiły się automatycznie.  
+
+Wynik:  
+Zostały wyświetlone 2 wydarzenia:  
+– *David Bowie 2020s* (kategorie: Rock, Avant-Garde, Rock Alternatywny)  
+– *Motorhead 2025* (kategorie: Rock)  
+– *System Of A Down Reunion* (kategorie: Rock, Metal, Nu Metal)
+- *David Bowie 2070s* (kategorie: Rock, Avant-Garde, Rock Alternatywny)
+
+Ocena:  
+Wynik zgodny z oczekiwaniami. Wszystkie wydarzenia zawierają przypisaną kategorię „Rock”. System poprawnie interpretuje kategorię główną i powiązane.
+
+──────────────────────────────────────  
+Scenariusz 2 – Wybór kategorii „Nu Metal”  
+Działanie:  
+Wybrano kategorię „Nu Metal” z menu rozwijanego, następnie kliknięto przycisk „Szukaj”.  
+
+Wynik:  
+Wyświetlono jedno wydarzenie:  
+– *System Of A Down Reunion* (kategorie: Rock, Metal, Nu Metal)  
+
+Ocena:  
+Wynik zgodny z oczekiwaniami. System rozpoznał kategorię „Nu Metal” i poprawnie przefiltrował wyniki.
+
+──────────────────────────────────────  
+Dodatkowe obserwacje  
+– Przełączanie między kategoriami odbywa się płynnie, bez przeładowywania całej strony.  
+– Po każdej zmianie filtra system automatycznie reaguje lub aktywuje przycisk „Szukaj” – UX jest spójny.  
+– Wyszukiwanie działa stabilnie, bez błędów renderowania czy opóźnień.  
+– Interfejs użytkownika jest przejrzysty – wyniki wyszukiwania są widoczne i czytelne.  
+
+──────────────────────────────────────  
+Rejestr zmian w dokumencie  
+
+Data: 06.08.2025  
+Zmiana: Utworzenie raportu testu SEARCH BY CATEGORY
+Autor: Piotr Galimski

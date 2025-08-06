@@ -61,5 +61,5 @@ Wynik:
 Rejestr zmian w dokumencie  
 
 Data: 06.08.2025  
-Zmiana: Utworzenie raportu testu SEARCH-FULLNAME-002  
+Zmiana: Utworzenie raportu testu SEARCH BY NAME  
 Autor: Piotr Galimski
