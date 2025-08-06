@@ -1,0 +1,65 @@
+RAPORT TESTU EKSPLORACYJNYCH
+
+Autor: Piotr Galimski  
+Wersja dokumentu: SEARCH BY NAME
+Data: 06.08.2025  
+
+──────────────────────────────────────  
+Aplikacja  
+Nazwa: Event Machen  
+Link: eventmachen.ddev.site  
+
+──────────────────────────────────────  
+Środowisko testowe  
+Przeglądarka: Firefox Developer Edition  
+System operacyjny: Windows 11  
+Tryb testowania: ręczny, lokalny  
+Widok: strona wyników wyszukiwania  
+
+──────────────────────────────────────  
+Czas trwania sesji  
+Czas przygotowania środowiska i projektowania testów: 5 minut  
+Czas testowania: 5 minut  
+Czas raportowania: 20 minut  
+Łącznie: 30 minut  
+
+──────────────────────────────────────  
+Idea eksploracji  
+Celem sesji było zweryfikowanie działania wyszukiwarki po wpisaniu pełnej nazwy wydarzenia „Motorhead 2025”.  
+Zadaniem testera było sprawdzenie, czy system reaguje zgodnie z oczekiwaniami – tj. czy wynik wyszukiwania jest spójny z zapytaniem, odpowiednio sformatowany i kompletny.  
+
+──────────────────────────────────────  
+Procent realizacji idei  
+100% – eksploracja zrealizowana w pełnym zakresie, bez potrzeby przerywania testu lub jego modyfikacji.  
+
+──────────────────────────────────────  
+Defekty  
+Nie wykryto defektów.  
+System poprawnie zareagował na zapytanie. Wynik wyszukiwania zawierał oczekiwane dane, nie zaobserwowano błędów działania ani nieoczekiwanych zachowań interfejsu.  
+
+──────────────────────────────────────  
+Zagadnienia  
+– Wyszukiwanie zainicjowane przez przycisk „Szukaj” działa natychmiastowo  
+– Wynik wyszukiwania dokładnie odpowiada zapytaniu  
+– Karta wydarzenia prezentuje pełny zestaw informacji (nazwa, data, kategorie, cena, grafika)  
+– Interfejs użytkownika jest przejrzysty, a wynik dobrze widoczny i czytelny  
+– Brak opóźnień, błędów renderowania oraz niepożądanych efektów wizualnych  
+
+──────────────────────────────────────  
+Dodatkowe informacje  
+Test wykonano w polu wyszukiwania „Szukaj po nazwie”.  
+Wpisano: Motorhead 2025  
+Wynik:  
+– Wydarzenie: „Motorhead 2025”  
+– Data: 01.01.2026  
+– Kategorie: Rock, Metal, Thrash Metal, Heavy Metal  
+– Cena: od 5.50 PLN  
+– Grafika: czarny kot i królik grający na gitarach (ilustracja opisana jako „The Black Cat”)  
+– Widoczność: przycisk „Zobacz więcej” był dostępny  
+
+──────────────────────────────────────  
+Rejestr zmian w dokumencie  
+
+Data: 06.08.2025  
+Zmiana: Utworzenie raportu testu SEARCH-FULLNAME-002  
+Autor: Piotr Galimski
