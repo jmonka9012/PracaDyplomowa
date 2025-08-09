@@ -1,0 +1,57 @@
+RAPORT TESTU FUNKCJONALNEGO - ZOBACZ WIĘCEJ
+Autor: Piotr Galimski  
+Wersja dokumentu: SEE MORE 
+Data: 09.08.2025  
+
+──────────────────────────────────────  
+Aplikacja  
+Nazwa: Event Machen  
+Cel testu: Weryfikacja poprawności działania strony szczegółów wydarzenia.  
+
+──────────────────────────────────────  
+Środowisko testowe  
+Przeglądarka: Firefox Developer Edition  
+System operacyjny: Windows 11  
+Tryb testowania: ręczny  
+Widok: Lista wydarzeń → Szczegóły wydarzenia  
+
+──────────────────────────────────────  
+Kroki testowe  
+1. Przejście do listy wydarzeń (kategoria: Rock).  
+2. Kliknięcie przycisku „Zobacz więcej” przy wydarzeniu „David Bowie 2020s”.  
+3. Obserwacja strony szczegółów wydarzenia.  
+4. Weryfikacja dostępnych informacji i funkcji.  
+
+──────────────────────────────────────  
+Wynik testu  
+– Strona szczegółów ładuje się poprawnie.  
+– Wyświetlany jest plakat wydarzenia w wysokiej rozdzielczości.  
+– Widoczne są wszystkie kluczowe informacje:  
+  • Tytuł: David Bowie 2020s  
+  • Data: 01.09.2025, godz. 09:00–17:00  
+  • Kategorie: Rock, Avant-Garde, Rock Alternatywny  
+  • E-mail kontaktowy: david@bowie.com, agent@bowie.com  
+  • Cena: od 5,50 PLN  
+– Dostępna jest mapa miejsc (Ziggy Zone) z podziałem na:  
+  • Sekcje siedzące (kolor fioletowy)  
+  • Sekcje stojące (kolor beżowy)  
+  • Informacja o zajętości: 52/100 miejsc zajętych  
+– Możliwość wyboru liczby biletów i przejścia do zakupu.  
+
+──────────────────────────────────────  
+Obserwacje UX  
+– Interfejs jest czytelny i estetyczny.  
+– Mapa miejsc jest intuicyjna i prawidłowo oznaczona.  
+– Informacje kontaktowe są łatwo dostępne i poprawne.  
+– Brak błędów ładowania lub nieczytelnych elementów.  
+
+──────────────────────────────────────  
+Rekomendacje (opcjonalne)  
+– Rozważyć dodanie opisu wydarzenia (np. biografia artysty, program dnia).  
+– Dodać opcję „Udostępnij wydarzenie” (np. przez e-mail lub media społecznościowe).  
+
+──────────────────────────────────────  
+Rejestr zmian w dokumencie  
+Data: 09.08.2025  
+Zmiana: Utworzenie raportu testu SEE MORE  
+Autor: Piotr Galimski

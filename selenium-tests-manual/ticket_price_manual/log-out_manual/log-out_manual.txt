@@ -1,0 +1,39 @@
+RAPORT TESTU FUNKCJONALNEGO – WYLOGOWANIE  
+Autor: Piotr Galimski  
+Wersja dokumentu: LOGOUT 
+Data: 09.08.2025  
+
+──────────────────────────────────────  
+Cel testu  
+Weryfikacja poprawności działania funkcji wylogowania użytkownika.  
+
+──────────────────────────────────────  
+Środowisko testowe  
+Przeglądarka: Firefox Developer Edition  
+System operacyjny: Windows 11  
+Tryb testowania: ręczny  
+Widok: Profil użytkownika → Wylogowanie → Strona logowania  
+
+──────────────────────────────────────  
+Kroki testowe i wyniki  
+1. Zalogowanie jako użytkownik „PGalimski” – wynik pozytywny, zalogowanie przebiegło poprawnie.  
+2. Kliknięcie przycisku „Wyloguj” – wynik pozytywny, przycisk działa zgodnie z oczekiwaniami.  
+3. Przekierowanie na stronę logowania – wynik pozytywny, przekierowanie nastąpiło.  
+4. Odświeżenie strony – wynik pozytywny, użytkownik pozostaje wylogowany.  
+5. Użycie przycisku „Wstecz” w przeglądarce – wynik częściowo negatywny, nastąpił powrót do widoku zalogowanego.  
+
+──────────────────────────────────────  
+Obserwacje  
+– Wylogowanie działa prawidłowo, sesja jest zamykana, a użytkownik nie jest zalogowany po odświeżeniu strony.  
+– Powrót do widoku zalogowanego po użyciu przycisku „Wstecz” może wynikać z braku mechanizmu unieważniania sesji po stronie serwera lub braku nagłówków zapobiegających cache’owaniu.  
+
+──────────────────────────────────────  
+Rekomendacje  
+– Unieważnianie sesji po stronie serwera po wylogowaniu.  
+– Czyszczenie ciasteczek i tokenów autoryzacyjnych po wylogowaniu.  
+
+──────────────────────────────────────  
+Rejestr zmian w dokumencie  
+Data: 09.08.2025  
+Zmiana: Utworzenie raportu testu LOGOUT  
+Autor: Piotr Galimski
