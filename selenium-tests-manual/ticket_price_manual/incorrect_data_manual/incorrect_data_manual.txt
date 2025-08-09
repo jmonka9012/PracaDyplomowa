@@ -1,0 +1,53 @@
+RAPORT TESTU ZŁYCH DANYCH
+Autor: Piotr Galimski  
+Wersja dokumentu: ICORRECT DATA MANUAL 
+Data: 09.08.2025  
+
+──────────────────────────────────────  
+Aplikacja  
+Nazwa: Event Machen  
+Cel testu: Sprawdzenie reakcji systemu na zapytanie, które nie zwraca żadnych wyników.  
+
+──────────────────────────────────────  
+Środowisko testowe  
+Przeglądarka: Firefox Developer Edition  
+System operacyjny: Windows 11  
+Tryb testowania: ręczny  
+Widok: Strona główna → Wyszukiwarka → Lista wydarzeń  
+
+──────────────────────────────────────  
+Kroki testowe  
+1. Przejście na stronę główną Event Machen.  
+2. Wpisanie frazy „xyz123” w polu „Szukaj po nazwie”.  
+3. Pozostawienie ustawień kategorii i daty jako domyślnych.  
+4. Kliknięcie przycisku „Szukaj”.  
+5. Obserwacja zachowania interfejsu.  
+
+──────────────────────────────────────  
+Wynik testu  
+– Wyszukiwarka przekierowuje do sekcji „Przyszłe wydarzenia”.  
+– Lista wyników jest pusta – brak wyświetlonych wydarzeń.  
+– Brak komunikatu informującego o braku wyników.  
+
+Ocena:  
+Funkcjonalność wyszukiwania działa poprawnie w kontekście filtrowania, jednak brak komunikatu o braku wyników może wprowadzać użytkownika w błąd i obniżać czytelność interfejsu.  
+
+──────────────────────────────────────  
+Obserwacje  
+– Interfejs działa stabilnie i bez błędów technicznych.  
+– Brak komunikatu zwrotnego powoduje, że użytkownik może nie mieć pewności, czy wyszukiwanie zostało wykonane poprawnie, czy wystąpił błąd.  
+
+──────────────────────────────────────  
+Rekomendacje UX  
+– Dodać widoczny komunikat w przypadku braku wyników, np.:  
+  „Brak wydarzeń pasujących do wyszukiwania ‘xyz123’. Spróbuj zmienić frazę lub filtr.”  
+– Zalecany wygląd komunikatu:  
+  • Kolor neutralny (np. szary lub niebieski)  
+  • Ikona informacyjna (np. lupa lub symbol braku wyników)  
+  • Lokalizacja: nad listą wydarzeń  
+
+──────────────────────────────────────  
+Rejestr zmian w dokumencie  
+Data: 09.08.2025  
+Zmiana: Utworzenie raportu testu ICORRECT DATA MANUAL   
+Autor: Piotr Galimski
