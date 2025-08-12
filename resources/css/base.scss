@@ -478,10 +478,10 @@ img {
 }
 
 .flex-lg-row {
-    flex-direction: column;
+    flex-direction: column !important;
 
     @include mixin.media-breakpoint-up(lg) {
-        flex-direction: row;
+        flex-direction: row !important;
     }
 }
 
