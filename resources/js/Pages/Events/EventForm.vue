@@ -101,7 +101,7 @@ onMounted(() => {
         <div class="container d-flex flex-column align-items-center">
             <h2 class="mb-40px">Podaj szczegóły płatności</h2>
                 <form class="form col-12 pb-100px" @submit.prevent="SubmitPaymentDetails()">
-                    <div class="input-wrap col-12 col-lg-6">
+                    <div class="input-wrap col-12">
                         <label for="name">Imię *</label>
                         <input
                             id="name"
@@ -117,7 +117,7 @@ onMounted(() => {
                             {{ errors.first_name }}
                         </div>
                     </div>
-                    <div class="input-wrap col-12 col-lg-6">
+                    <div class="input-wrap col-12">
                         <label for="last_name">Nazwisko *</label>
                         <input
                             id="last_name"
@@ -133,7 +133,7 @@ onMounted(() => {
                             {{ errors.last_name }}
                         </div>
                     </div>
-                    <div class="input-wrap col-12 col-lg-6">
+                    <div class="input-wrap col-12">
                         <label for="email">E-mail *</label>
                         <input
                             id="email"
@@ -149,7 +149,7 @@ onMounted(() => {
                             {{ errors.email }}
                         </div>
                     </div>
-                    <div class="input-wrap col-12 col-lg-6">
+                    <div class="input-wrap col-12">
                         <label for="phone">Telefon *</label>
                         <input
                             id="phone"
@@ -165,7 +165,7 @@ onMounted(() => {
                             {{ errors.phone }}
                         </div>
                     </div>
-                    <div class="input-wrap col-12 ">
+                    <div class="input-wrap col-12">
                         <label for="company">Firma</label>
                         <input
                             id="company"
@@ -180,7 +180,7 @@ onMounted(() => {
                             {{ errors.company }}
                         </div>
                     </div>
-                    <div v-if="showTaxField" class="input-wrap col-12 ">
+                    <div v-if="showTaxField" class="input-wrap col-12">
                         <label for="company">NIP</label>
                         <input
                             id="company"

@@ -197,7 +197,7 @@ function SendTicket() {
                         <div class="d-flex flex-column align-items-start">
                             <h3 class="mb-32px">Informacje do faktur</h3>
                             <form class="form" @submit.prevent="handleSubmitClick(paymentForm)">
-                                <div class="input-wrap col-12 col-lg-6">
+                                <div class="input-wrap col-12">
                                     <label for="name">Imię</label>
                                     <input
                                         type="text"
@@ -212,7 +212,7 @@ function SendTicket() {
                                         {{ errors.name }}
                                     </div>
                                 </div>
-                                <div class="input-wrap col-12 col-lg-6">
+                                <div class="input-wrap col-12">
                                     <label for="last_name">Nazwisko</label>
                                     <input
                                         type="text"
@@ -227,7 +227,7 @@ function SendTicket() {
                                         {{ errors.last_name }}
                                     </div>
                                 </div>
-                                <div class="input-wrap col-12 col-lg-6 ">
+                                <div class="input-wrap col-12 ">
                                     <label for="email">E-mail</label>
                                     <input
                                         type="email"
@@ -242,7 +242,7 @@ function SendTicket() {
                                         {{ errors.email }}
                                     </div>
                                 </div>
-                                <div class="input-wrap col-12 col-lg-6 ">
+                                <div class="input-wrap col-12 ">
                                     <label for="phone">Telefon</label>
                                     <input
                                         type="tel"
