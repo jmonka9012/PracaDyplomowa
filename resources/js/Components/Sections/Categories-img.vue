@@ -57,7 +57,7 @@ const props = defineProps({
 
 .cat-name {
     font-size: 22px;
-    margin: 15px 0px 0px 0px;
+    margin: 15px 0 0 0;
     position: relative;
     z-index: 1;
     line-height: 1.5;

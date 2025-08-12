@@ -342,8 +342,8 @@ onMounted(() => {
                     </div>
                     <div>
                         <div class="input-wrap">
-                        <input v-if="isLoggedIn" type="submit">
-                        <input v-else :class="{ disabled: !canSubmit && paymentForm.make_account }" :disabled="!canSubmit && paymentForm.make_account" type="submit">
+                        <input v-if="isLoggedIn" type="submit" value="Przejdź dalej">
+                        <input v-else :class="{ disabled: !canSubmit && paymentForm.make_account }" :disabled="!canSubmit && paymentForm.make_account" type="submit" value="Przejdź dalej">
                         </div>
                     </div>
                     </div>
