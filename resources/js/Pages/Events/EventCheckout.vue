@@ -16,9 +16,14 @@ console.log(props);
 <template>
     <section class="pt-75px pb-75px">
         <div class="container">
+            <div class="d-flex flex-column justify-content-center align-items-center text-align-center col-12 mb-30px mb-lg-50px">
+                <h1 class="h3 mb-20px">Zeskanuj kod QR</h1>
+                <img src="" alt="Placeholder dopóki nie ma qr">
+
+            </div>
             <div class="flex-column order">
-                <h3 class="mb-30px">Zamówienie {{order.order_number}}</h3>
-                <div class="col-12 row-gap-30px mb-30px">
+                <h4 class="pb-15px mb-15px bb-1 b-primary-darker ">Zamówienie <span class="text-primary-darker">{{order.order_number}}</span></h4>
+                <div class="col-12 d-flex flex-column row-gap-20px mb-30px">
                     <div class="flex-column">
                         <p class="h5 text-lg fw-bold text-primary-darker">
                             Nazwa wydarzenia:
@@ -39,7 +44,7 @@ console.log(props);
                     </div>
                     <div class="flex-column">
                         <p class="h5 fw-bold text-primary-darker">
-                            całkowity koszt:
+                            Całkowity koszt:
                         </p>
                         <p class="h6">{{order.total_price}} PLN</p>
                     </div>
@@ -51,7 +56,7 @@ console.log(props);
                     </div>
                 </div>
                 <div class="flex-column">
-                    <h3 class="mb-30px">Detale zamówienia</h3>
+                    <h4 class="mb-30px">Detale zamówienia</h4>
                     <div class="order__row order__row--head">
                         <p class="fw-bold">Typ biletu</p>
                         <p class="fw-bold">Sekcja</p>
@@ -85,15 +90,15 @@ console.log(props);
     width: 100%;
     &__row {
         display: grid;
-        grid-template-columns: 100px 1fr 1fr 1fr 1fr;
+        grid-template-columns: 150px 1fr 1fr 1fr 1fr;
         grid-row-gap: 10px;
-        padding: 20px 10px;
+        padding: 10px 15px;
         border-bottom: 1px solid var(--n-gray);
         border-left: 1px solid var(--n-gray);
         border-right: 1px solid var(--n-gray);
 
         @include mixin.media-breakpoint-up(lg) {
-            padding: 20px 30px;
+            padding: 10px 15px;
         }
 
         &:first-of-type {
@@ -111,11 +116,13 @@ console.log(props);
 
         &--head {
             color: var(--primary-darker);
+            border-radius:8px 8px 0 0;
             p {
                 padding: 0;
             }
         }
         &--summary {
+            border-radius:0 0 8px 8px;
             p:last-of-type {
                 grid-column: 5/6;
             }
