@@ -142,6 +142,7 @@ const handleToggle = (state) => {
 </template>
 
 <style lang="scss" scoped>
+@use "~css/mixin.scss";
 .order-collapse {
 
     padding: 2px;
@@ -151,11 +152,11 @@ const handleToggle = (state) => {
     border-radius: 8px;
 
     &:hover {
-        border-color: gray;
+        border-color: var(--primary);
     }
 
     &.open {
-        border-color: black;
+        border-color: var(--primary-darker);
     }
 
     &__content {
@@ -174,12 +175,15 @@ const handleToggle = (state) => {
     &__toggle {
         padding: 10px 20px;
         border-radius: 8px;
-        grid-template-columns: 1fr 1fr 1fr;
         display: grid;
         background-color: yellow;
         transition: background-color .2s ease-out;
         user-select: none;
         cursor: pointer;
+
+        @include mixin.media-breakpoint-up(lg){
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 
         &.paid {
             background-color: #73f0ad;
@@ -209,25 +213,41 @@ const handleToggle = (state) => {
     &__row {
         width: 100%;
         display: grid;
-        grid-template-columns: 1fr 2fr;
+        grid-template-columns: 1fr;
+
         padding-top: 6px;
         padding-bottom: 6px;
 
+        @include mixin.media-breakpoint-up(lg){
+        grid-template-columns: 1fr 2fr;
+        }
+
         &:not(:last-child) {
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid var(--primary-darker);
         }
     }
 
     &__tickets {
         display: grid;
-        grid-template-columns: 3fr 2fr 2fr 2fr;
+        grid-template-columns: 1fr;
         padding-top: 4px;
         padding-bottom: 4px;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid var(--primary-darker);
+
+        @include mixin.media-breakpoint-up(lg){
+            grid-template-columns: 3fr 2fr 2fr 2fr;
+        }
 
         &--admin {
-            padding:8px 0;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            padding:16px 0;
+            row-gap: 5px;
+
+
+            @include mixin.media-breakpoint-up(lg){
+                grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+                padding: 8px 0;
+                row-gap: 0;
+            }
         }
     }
 }
