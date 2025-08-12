@@ -218,10 +218,10 @@ const SwapStatus = (status) => {
         border-radius: 8px;
         background-color: var(--primary);
         padding: 20px;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 100px 1fr 1fr;
         align-items: center;
         grid-column-gap: 30px;
-        @include mixin.media-breakpoint-down(lg) {
+        @include mixin.media-breakpoint-down(xl) {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -235,7 +235,9 @@ const SwapStatus = (status) => {
     }
 
     &__status {
-        padding: 8px 16px;
+        padding: 16px 8px;
+        font-size: 16px;
+        line-height: 1.2;
         border-radius: 8px;
         position: relative;
 
