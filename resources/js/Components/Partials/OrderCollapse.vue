@@ -132,7 +132,7 @@ const handleToggle = (state) => {
                     <div v-html="ticket.is_seat === 1 ? ticket.seat_data.row : '-'"></div>
                     <div v-html="ticket.is_seat === 1 ? ticket.seat_data.number : '-'"></div>
                     <div v-html="ticket.is_seat === 1 ? `${ticket.seat_data.price} PLN` : `${ticket.standing_ticket_data.price} PLN`"></div>
-                    <div v-if="props.admin"><a @click="CancelTicket(ticket.ticket_id)">Anuluj miejsce</a></div>
+                    <div v-if="props.admin"><a class="btn btn-sm btn-hovprim" @click="CancelTicket(ticket.ticket_id)">Anuluj miejsce</a></div>
                 </div>
             </div>
             <a class="btn btn-md btn-ghost btn-hovprim ml-auto mr-auto mt-20px" v-if="(order.payment_status !== 'cancelled') && props.admin" @click="CancelOrder(order.order_id)">Anuluj zamówienie</a>
@@ -226,6 +226,7 @@ const handleToggle = (state) => {
         border-bottom: 1px solid black;
 
         &--admin {
+            padding:8px 0;
             grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
         }
     }
