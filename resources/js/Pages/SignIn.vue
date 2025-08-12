@@ -129,8 +129,8 @@ function submitRegisterRequest() {
 <template>
     <HeroSmall title="Zaloguj się" :source="blogBg" />
     <section class="mb-60px">
-        <div class="container align-items-start">
-            <div class="col-12 col-lg-6 d-flex flex-column">
+        <div class="container align-items-start justify-content-between">
+            <div class="col-12 col-lg-5 d-flex flex-column">
                 <h1 class="title-1 mb-20px col-12">Logowanie</h1>
                 <form class="form" @submit.prevent="submitLoginRequest">
                     <div class="input-wrap col-12">
@@ -187,11 +187,7 @@ function submitRegisterRequest() {
                     >Nie masz konta? Zarejestruj się!</a
                 >
             </div>
-            <div
-                id="rcol"
-                class="col-12 col-lg-6 d-flex flex-column mt-50px"
-                :class="{ show: isVis }"
-            >
+            <div id="rcol" class="col-12 col-lg-6 d-flex flex-column" :class="{ show: isVis }">
                 <h1 class="title-1 mb-20px">Rejestracja</h1>
 <!--                <button @click="console.log(registerForm)" class="btn btn-md btn-hovprim">
                     Loguj formularz rejestracyjny
