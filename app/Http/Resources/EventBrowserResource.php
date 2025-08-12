@@ -5,6 +5,21 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property mixed $hall Database entry of Hall the event is set in
+ * @property boolean $pending Status of the event, if true then the event is awaiting admin approval
+ * @property int $id unique ID of the event
+ * @property string $event_name name of the event
+ * @property string $event_url event_url based on the slug
+ * @property \DateTime $event_date DateTime the event is set to
+ * @property \DateTime $event_start Hour the event starts at
+ * @property \DateTime $event_end Hour the event ends at
+ * @property string $image_path path to the event's thumbnail
+ * @property mixed $genres database entry of the genre(s) the event is tagged with
+ * @property mixed $seats Database entry of the seats in the section of the hall
+ * @property mixed $standingTickets Database entry of the standing section of the hall 
+ */
+
 class EventBrowserResource extends JsonResource
 {
     /**

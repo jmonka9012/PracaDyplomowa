@@ -5,6 +5,13 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property int $id Unique ID of the event
+ * @property string $event_name Name of the event
+ * @property string $event_url Link for the event
+ * @property \DateTime $event_date DateTime the event is scheduled for
+ */
+
 class AdminOrderEventResource extends JsonResource
 {
     /**

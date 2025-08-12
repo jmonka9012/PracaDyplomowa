@@ -4,6 +4,25 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property mixed $hall Database entry of Hall the event is set in
+ * @property mixed $seats Database entry of the seats in the section of the hall
+ * @property mixed $standingTickets Database entry of the standing section of the hall 
+ * @property boolean $pending Status of the event, if true then the event is awaiting admin approval
+ * @property int $id unique ID of the event
+ * @property string $event_name name of the event
+ * @property string $slug slug used for the Event's URL generated using the event_name property
+ * @property string $event_url event_url based on the slug
+ * @property \DateTime $event_date DateTime the event is set to
+ * @property \DateTime $event_start Hour the event starts at
+ * @property \DateTime $event_end Hour the event ends at
+ * @property string $contact_email The email for contact with the organizer
+ * @property string $contact_email_additional The secondary email for contact with the organizer
+ * @property string $event_description The description used in the event's entry for the users to read
+ * @property string $event_description_additional Additional data about the event for the user like parking info
+ * @property string $image_path path to the event's thumbnail
+ */
+
 class EventBrowserAdminResource extends JsonResource
 {
     public function toArray($request)

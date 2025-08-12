@@ -5,6 +5,17 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property int $id Unique ID of the order
+ * @property string $order_number Unique number of the order
+ * @property string $first_name First name of the customer
+ * @property string $last_name Last name of the  customer
+ * @property string $last_name Last name of the  customer
+ * @property string $email Email of the  customer
+ * @property float $total_price Total price of the order
+ * @property \DateTime $created_at DateTime the order was created
+ * @property \App\Enums\OrderPaymentStatus $payment_status status of the order : paid, cancelled or
+ */
 class AdminOrderResource extends JsonResource
 {
     /**

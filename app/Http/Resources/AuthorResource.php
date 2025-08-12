@@ -5,6 +5,11 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property int $author_image_path Profile picture of the author
+ * @property string $about_me Author's about me blurb
+ * @property mixed $user Holds information about the user associated with the author
+ */
 class AuthorResource extends JsonResource
 {
     /**

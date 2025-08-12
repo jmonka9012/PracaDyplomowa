@@ -5,6 +5,12 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property int $id Unique ID of the ticket
+ * @property boolean $is_seat Is the ticket for a seat
+ * @property mixed $seat Holds information about the seat
+ * @property mixed $standingTicket Holds information about the seat
+ */
 class AdminOrderTicketResource extends JsonResource
 {
     /**

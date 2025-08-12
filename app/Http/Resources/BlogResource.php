@@ -5,6 +5,19 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property int $id Unique ID of the post
+ * @property int $author_id FK to the Author's account
+ * @property string $blog_post_name Name of the post
+ * @property string $slug slug of the blog post used in the creation of the url
+ * @property string $blog_post_url URL leading to the blog post
+ * @property mixed $blog_post_type Type of blog post
+ * @property string $thumbnail_path Image path of the thumbnail
+ * @property \DateTime $created_at Creation date of the post
+ * @property mixed $author Holds data about the author
+ * @property string $blog_post_content content of the blog post
+ */
+
 class BlogResource extends JsonResource
 {
     /**

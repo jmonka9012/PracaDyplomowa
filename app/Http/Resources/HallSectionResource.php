@@ -5,6 +5,17 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property int $id unique ID of the hall section
+ * @property int $hall_id unique ID of the hall the section belongs to
+ * @property mixed $section_type TODO enum here, it is the type of section either seated or standing
+ * @property int $col the column position of the section in the hall
+ * @property int $row the row position of the section in the hall
+ * @property int $capacity the capacity of the hall section
+ * @property int $section_width the section's width in amount of seats
+ * @property int $section_height the section's height in amount of seats
+ */
+
 class HallSectionResource extends JsonResource
 {
     /**
