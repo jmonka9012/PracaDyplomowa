@@ -29,6 +29,7 @@ return new class extends Migration
             $table->enum('payment_status', ['pending', 'cancelled', 'paid'])->default('pending');
             $table->timestamps();
             $table->dateTime('last_interaction_time')->nullable();
+            $table->text('qr_data')->nullable();
 
             $table->foreign('event_id')
                  ->references('id')

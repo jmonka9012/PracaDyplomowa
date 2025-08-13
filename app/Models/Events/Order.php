@@ -25,7 +25,8 @@ class Order extends Model
         'payment_status',
         'first_name',
         'last_name',
-        'last_interaction_time'
+        'last_interaction_time',
+        'qr_data',
     ];
 
     public function tickets()

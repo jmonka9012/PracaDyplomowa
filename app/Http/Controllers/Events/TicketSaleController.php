@@ -21,6 +21,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyEmail;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 class TicketSaleController extends Controller
 {
@@ -119,7 +121,15 @@ class TicketSaleController extends Controller
 
             Ticket::whereIn('id', $tickets->pluck('id'))->update(['payment_status' => 'paid']);
 
-            $order->update(['payment_status' => 'paid']);
+            $qrData = route('event-ticket.buy.form.summary', $order);
+
+            $qrCode = QrCode::size(200)->generate($qrData);
+        
+
+            $order->update([
+                'payment_status' => 'paid',
+                //'qr_data' => $qrCode
+            ]);
 
             session()->forget('current_stripe_session');
             session()->forget('current_order_number');
@@ -366,10 +376,9 @@ class TicketSaleController extends Controller
         ->where('order_number', $order->order_number)
         ->get();
 
-        
-
         return Inertia::render('Events/EventCheckout', [
             'order' => $order
         ]);
     }
+        
 }
