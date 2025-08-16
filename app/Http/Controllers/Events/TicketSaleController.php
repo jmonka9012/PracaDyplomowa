@@ -128,7 +128,7 @@ class TicketSaleController extends Controller
 
             $order->update([
                 'payment_status' => 'paid',
-                //'qr_data' => $qrCode
+                'qr_data' => $qrCode
             ]);
 
             session()->forget('current_stripe_session');
