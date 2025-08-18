@@ -17,6 +17,9 @@ const props = defineProps({
 
 const isOpen = ref(false);
 
+const confirmTicketId = ref(null);
+const confirmOrderId = ref(null);
+
 function ReturnStatus(status) {
     if (status === 'paid') {
         return 'Opłacone';
@@ -58,6 +61,24 @@ const handleToggle = (state) => {
     isOpen.value = state;
 }
 
+
+const openTicketConfirm = (id) => { confirmTicketId.value = id; };
+const openOrderConfirm = (id) => { confirmOrderId.value = id; };
+const closeConfirm = () => { confirmTicketId.value = null; confirmOrderId.value = null; };
+
+const confirmCancelTicket = () => {
+    if (confirmTicketId.value) {
+        CancelTicket(confirmTicketId.value);
+    }
+    closeConfirm();
+};
+
+const confirmCancelOrder = () => {
+    if (confirmOrderId.value) {
+        CancelOrder(confirmOrderId.value);
+    }
+    closeConfirm();
+};
 </script>
 
 <template>
@@ -132,11 +153,70 @@ const handleToggle = (state) => {
                     <div v-html="ticket.is_seat === 1 ? ticket.seat_data.row : '-'"></div>
                     <div v-html="ticket.is_seat === 1 ? ticket.seat_data.number : '-'"></div>
                     <div v-html="ticket.is_seat === 1 ? `${ticket.seat_data.price} PLN` : `${ticket.standing_ticket_data.price} PLN`"></div>
-                    <div v-if="props.admin"><a class="btn btn-sm btn-hovprim" @click="CancelTicket(ticket.ticket_id)">Anuluj miejsce</a></div>
+
+                    <div v-if="props.admin">
+                        <a class="btn btn-sm btn-hovprim" @click="openTicketConfirm(ticket.ticket_id)">Anuluj miejsce</a>
+                    </div>
+
+                    <!-- Popup anulowanie miejsca  -->
+                    <div
+                        v-if="confirmTicketId === ticket.ticket_id"
+                        class="post-list-item-popup-holder"
+                        @click.self="closeConfirm"
+                    >
+                        <div class="post-list-item-popup">
+                            <button class="popup__close" @click="closeConfirm">
+                                <i class="fa fa-close"></i>
+                            </button>
+                            <p class="mb-30px text-align-center col-12">
+                                Potwierdź anulowanie miejsca.
+                            </p>
+                            <div class="d-flex flex-row justify-content-center">
+                                <button class="btn btn-md btn-hovprim" @click="confirmCancelTicket">
+                                    Potwierdzam
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
                 </div>
             </div>
-            <a class="btn btn-md btn-ghost btn-hovprim ml-auto mr-auto mt-20px" v-if="(order.payment_status !== 'cancelled') && props.admin" @click="CancelOrder(order.order_id)">Anuluj zamówienie</a>
-            <Link class="btn btn-md btn-ghost ml-auto mr-auto mt-20px" :href="route('event-ticket.buy.form.details', {order: order.order_number})" v-if="(order.payment_status === 'pending') && !props.admin" >Wróć do płatności</Link>
+            <!-- Anulowanie zamówienia -->
+            <a
+                class="btn btn-md btn-ghost btn-hovprim ml-auto mr-auto mt-20px"
+                v-if="(order.payment_status !== 'cancelled') && props.admin"
+                @click="openOrderConfirm(order.order_id)"
+            >
+                Anuluj zamówienie
+            </a>
+
+            <div
+                v-if="confirmOrderId === order.order_id"
+                class="post-list-item-popup-holder"
+                @click.self="closeConfirm"
+            >
+                <div class="post-list-item-popup">
+                    <button class="popup__close" @click="closeConfirm">
+                        <i class="fa fa-close"></i>
+                    </button>
+                    <p class="mb-30px text-align-center col-12">
+                        Potwierdź anulowanie całego zamówienia.
+                    </p>
+                    <div class="d-flex flex-row justify-content-center">
+                        <button class="btn btn-md btn-hovprim" @click="confirmCancelOrder">
+                            Potwierdzam
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- -->
+            <Link
+                class="btn btn-md btn-ghost ml-auto mr-auto mt-20px"
+                :href="route('event-ticket.buy.form.details', {order: order.order_number})"
+                v-if="(order.payment_status === 'pending') && !props.admin"
+            >
+                Wróć do płatności
+            </Link>
         </div>
     </Collapse>
 </template>
