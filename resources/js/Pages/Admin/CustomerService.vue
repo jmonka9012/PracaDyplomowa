@@ -240,16 +240,20 @@ const SwapStatus = (status) => {
         line-height: 1.2;
         border-radius: 8px;
         position: relative;
+        text-align: center;
 
         &-change {
             position: absolute;
             padding: 8px 16px;
             border-radius: 8px;
+            border:0;
             width: 100%;
             height: 100%;
             left: 0;
             top: 0;
-            background-color: white;
+            background-color: var(--secondary);
+            color: white;
+            font-weight: 700;
             text-align: center;
             opacity: 0;
             transition: opacity 0.4s ease-out;
