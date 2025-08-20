@@ -59,8 +59,8 @@ function GetFilteredResults(method) {
         <th class="t-details-events__date">
             <a @click="sortEvents('toggle')">Data
                 <span class="sorters">
-          <span :class="{ active: (eventParam === 'asc' && !props.pending) || (pendingParam === 'asc' && props.pending) }" class="sort sort-asc fa" @click.stop="sortEvents('asc')" />
-          <span :class="{ active: (eventParam === 'desc' && !props.pending) || (pendingParam === 'desc' && props.pending) }" class="sort sort-desc fa" @click.stop="sortEvents('desc')" />
+          <span :class="{ active: (eventParam === 'asc' && !props.pending) || (pendingParam === 'asc' && props.pending) }" class="sort sort--asc fa" @click.stop="sortEvents('asc')" />
+          <span :class="{ active: (eventParam === 'desc' && !props.pending) || (pendingParam === 'desc' && props.pending) }" class="sort sort--desc fa" @click.stop="sortEvents('desc')" />
         </span>
             </a>
         </th>

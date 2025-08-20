@@ -15,7 +15,7 @@ table {
     }
     }
 
-    &.table-nowrap {
+    &.table--nowrap {
         th {
             white-space: nowrap;
         }
@@ -25,7 +25,7 @@ table {
             }
         }
     }
-    &.table-fixed {
+    &.table--fixed {
         table-layout: fixed;
     }
     td,
@@ -95,7 +95,7 @@ table {
                         font-family: "Font Awesome 6 Free";
                         content: "";
                     }
-                    &-asc {
+                    &--asc {
                         &::before {
                             content: "\f077";
                         }
@@ -103,7 +103,7 @@ table {
                             display: none;
                         }
                     }
-                    &-desc {
+                    &--desc {
                         &::after {
                             content: "\f078";
                         }
