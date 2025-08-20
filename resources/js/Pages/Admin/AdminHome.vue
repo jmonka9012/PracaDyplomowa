@@ -133,15 +133,12 @@ function SetFeaturedCategories() {
     margin-bottom: 40px;
     max-width: 100%;
     align-items: start;
-
     @include mixin.media-breakpoint-up(md) {
         grid-template-columns: repeat(3, minmax(0, 1fr));
-
-        @include mixin.media-breakpoint-up(xl) {
-            grid-template-columns: repeat(5, minmax(0, 1fr));
-        }
     }
-
+    @include mixin.media-breakpoint-up(xl) {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
     &__cat-box {
         min-width: 0;
         box-sizing: border-box;
@@ -194,6 +191,12 @@ function SetFeaturedCategories() {
 }
 
 .admin-card {
+    color: white;
+    padding: 20px;
+    position: relative;
+    display: block;
+    transition: transform 0.2s ease-out;
+
     &__container {
         display: grid;
         gap: 30px;
@@ -202,12 +205,6 @@ function SetFeaturedCategories() {
             grid-template-columns: 1fr 1fr;
         }
     }
-
-    color: white;
-    padding: 20px;
-    position: relative;
-    display: block;
-    transition: transform 0.2s ease-out;
 
     &:hover {
         &::before {

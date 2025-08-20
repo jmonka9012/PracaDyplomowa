@@ -1,7 +1,6 @@
 <script setup>
 import {Link} from "@inertiajs/vue3";
-import {ref} from "vue";
-import {computed} from "vue";
+import {ref, computed} from "vue";
 import {router} from "@inertiajs/vue3";
 
 const isOpen = ref(false);
@@ -53,13 +52,37 @@ const totalSpotsSold = computed(() => {
     }, 0);
 });
 
+/* Confirmation popup state and handlers */
+const confirmAction = ref({ id: null, type: null }); // type: 'accept' | 'delete'
+const openConfirm = (type, id) => { confirmAction.value = { type, id }; };
+const closeConfirm = () => { confirmAction.value = { id: null, type: null }; };
+const confirmProceed = () => {
+    if (!confirmAction.value?.id) return;
+    if (confirmAction.value.type === 'accept') {
+        AcceptEvent(confirmAction.value.id);
+    } else if (confirmAction.value.type === 'delete') {
+        DeleteEvent(confirmAction.value.id);
+    }
+    closeConfirm();
+};
+
 function DeleteEvent(eID) {
-    console.log(eID);
+    // Deny/Reject pending event
+    const newStatus = 2; // adjust if your BE uses a different status code for "denied"
+    router.put(route('admin.events.status', {event: eID}), {new_status: newStatus}, {
+        preserveScroll: true,
+        only: ['pending_events', 'events'],
+        onSuccess: (page) => {
+            console.log(page);
+        },
+        onError: (err) => {
+            console.log(err);
+        }
+    });
 }
 
 function AcceptEvent(eID) {
-    const newStatus = 0;
-
+    const newStatus = 0; // accepted
     router.put(route('admin.events.status', {event: eID}), {new_status: newStatus}, {
         preserveScroll: true,
         only: ['pending_events', 'events'],
@@ -82,8 +105,8 @@ function AcceptEvent(eID) {
             <a :href="`/${props.pending ? 'admin/' + event.event_url : event.event_url}`"
                target="_blank">{{ event.event_name }}</a>
             <div class="t-details__options">
-                <a v-if="props.pending" class="mr-6px" @click="DeleteEvent(event.id)">Odmów</a>
-                <a v-if="props.pending" @click="AcceptEvent(event.id)">Zatwierdź</a>
+                <a v-if="props.pending" class="mr-6px" @click="openConfirm('delete', event.id)">Odmów</a>
+                <a v-if="props.pending" @click="openConfirm('accept', event.id)">Zatwierdź</a>
                 <a :href="`/${props.pending ? 'admin/' + event.event_url : event.event_url}`" class="mr-6px"
                    target="_blank">Podgląd</a>
                 <button class="btn-link" @click="toggle">Szczegóły</button>
@@ -98,6 +121,30 @@ function AcceptEvent(eID) {
         <td><a :href="`mailto:${event.contact_email}`">Główny email</a></td>
         <td><a :href="`mailto:${event.contact_email_additional}`">Dodatkowy email</a></td>
     </tr>
+
+    <!-- Confirmation popup (shared for accept/deny) -->
+    <div
+        v-if="confirmAction.id === event.id"
+        class="post-list-item-popup-holder"
+        @click.self="closeConfirm"
+    >
+        <div class="post-list-item-popup">
+            <button class="popup__close" @click="closeConfirm">
+                <i class="fa fa-close"></i>
+            </button>
+            <p class="mb-30px text-align-center col-12">
+                {{ confirmAction.type === 'accept'
+                    ? 'Potwierdź zatwierdzenie wydarzenia.'
+                    : 'Potwierdź odrzucenie wydarzenia.' }}
+            </p>
+            <div class="d-flex flex-row justify-content-center">
+                <button class="btn btn-md btn-hovprim" @click="confirmProceed">
+                    Potwierdzam
+                </button>
+            </div>
+        </div>
+    </div>
+
     <transition @enter="enter"
                 @after-enter="afterEnter"
                 @before-leave="beforeLeave">
