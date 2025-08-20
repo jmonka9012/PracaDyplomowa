@@ -183,7 +183,7 @@ onMounted(() => {
                     <li
                         :key="page"
                         class="page"
-                        :class="{ 'page-current': page.active }"
+                        :class="{ 'page--current': page.active }"
                         v-for="page in blog_posts.meta.links"
                     >
                         <Link :href="page.url" v-html="page.label"></Link>

@@ -112,7 +112,7 @@ function submitFilterRequest() {
                             <li
                                 v-for="page in props.events.meta.links"
                                 :key="page"
-                                :class="{ 'page-current': page.active }"
+                                :class="{ 'page--current': page.active }"
                                 class="page"
                             >
                                 <Link
@@ -173,7 +173,7 @@ function submitFilterRequest() {
                             <li
                                 v-for="page in props.pending_events.meta.links"
                                 :key="page"
-                                :class="{ 'page-current': page.active }"
+                                :class="{ 'page--current': page.active }"
                                 class="page"
                             >
                                 <Link

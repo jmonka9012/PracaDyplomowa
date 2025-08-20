@@ -384,7 +384,7 @@ function SendTicket() {
                                 <li
                                     :key="page"
                                     class="page"
-                                    :class="{ 'page-current': page.active }"
+                                    :class="{ 'page--current': page.active }"
                                     v-for="page in props.orders.meta.links"
                                 >
                                     <Link :href="page.url" v-html="page.label"></Link>

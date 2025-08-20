@@ -324,7 +324,7 @@ function SetUserProperty(value, userID, property) {
                     <li
                         v-for="page in props.users.meta.links"
                         :key="page"
-                        :class="{ 'page-current': page.active }"
+                        :class="{ 'page--current': page.active }"
                         class="page"
                     >
                         <Link :href="page.url" v-html="page.label"></Link>
