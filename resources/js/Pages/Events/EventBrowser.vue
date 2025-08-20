@@ -128,7 +128,7 @@ function submitFilterRequest() {
                 ></DatePicker>
                 <button
                     id="submitFilter"
-                    class="btn cursor-pointer btn-md btn-hovprim mt-30px btn-hover-border"
+                    class="btn cursor-pointer btn--md btn--hovprim mt-30px btn-hover-border"
                     type="submit"
                     value="Filtruj">Szukaj</button>
             </form>

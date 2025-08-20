@@ -140,7 +140,7 @@ function SetUserProperty(value, userID, property) {
                     </div>
                 </div>
                 <div class="input-wrap col-12">
-                    <button class="btn btn-md btn-hovprim w-fit" type="submit">
+                    <button class="btn btn--md btn--hovprim w-fit" type="submit">
                         Filtruj
                     </button>
                 </div>
@@ -189,7 +189,7 @@ function SetUserProperty(value, userID, property) {
                         <div class="user-row__value">
                             <Link
                                 :only="['users']"
-                                class="btn btn-md btn-hovprim"
+                                class="btn btn--md btn--hovprim"
                                 method="delete"
                                 preserve-scroll
                                 @click="DeleteUser(user.id)">Usuń</Link>
@@ -201,7 +201,7 @@ function SetUserProperty(value, userID, property) {
                     >
                         <Collapse class="col-12">
                             <template #trigger="{ isOpen }">
-                                <button class="btn btn-md btn-hovprim">
+                                <button class="btn btn--md btn--hovprim">
                                     {{
                                         isOpen
                                             ? "Ukryj"

@@ -58,7 +58,7 @@ const SwapStatus = (status) => {
                     <Link
                         v-if="currentUserID"
                         :href="route('admin.customer-service')"
-                        class="btn btn-md mb-30px"
+                        class="btn btn--md mb-30px"
                         preserve-scroll
                     >Wróć do wszystkich zgłoszeń
                     </Link>
@@ -104,7 +104,7 @@ const SwapStatus = (status) => {
                             </div>
                             <Collapse class="w-100">
                                 <template #trigger="{ isOpen }">
-                                    <button class="btn btn-md btn-ghost">
+                                    <button class="btn btn--md btn--ghost">
                                         {{
                                             isOpen
                                                 ? "Zwiń wiadomość"

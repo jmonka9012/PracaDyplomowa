@@ -52,7 +52,7 @@ console.log(props);
             <h3 class="title-1 mb-20px">Przyszłe wydarzenia</h3>
             <Events class="" :events="props.events" />
             <Link
-                class="mt-40px btn btn-md btn-hovprim btn-hover-border"
+                class="mt-40px btn btn--md btn--hovprim btn-hover-border"
                 :href="route('event.browser')"
                 >Zobacz wszystkie wydarzenia</Link>
         </div>
@@ -68,7 +68,7 @@ console.log(props);
                     title="Najnowsze posty"
                     subtitle="Blog"
                 />
-                <Link :href="route('blog')" class="btn btn-md btn-hovprim btn-hover-border"
+                <Link :href="route('blog')" class="btn btn--md btn--hovprim btn-hover-border"
                 >Zobacz wszystkie</Link
                 >
             </div>

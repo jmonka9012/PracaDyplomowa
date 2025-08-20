@@ -24,7 +24,7 @@ const props = defineProps({
                 <span class="divider divider--dark"></span>
                 <Link :href="route('blog')"
                       :data="{blog_post_type: post.blog_post_type}"
-                      class="btn btn-white post-item__category-pill">
+                      class="btn btn--white post-item__category-pill">
                     {{ post.blog_post_type }}
                 </Link>
             </div>

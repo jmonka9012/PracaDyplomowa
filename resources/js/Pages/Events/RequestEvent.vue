@@ -168,13 +168,13 @@ const { user, isLoggedIn } = useAuth();
     <HeroSmall title="Zorganizuj wydarzenie" :source="blogBg"></HeroSmall>
     <section class="pt-50px pb-50px">
         <div class="container">
-            <button @click="debugLogForm" class="btn btn-white">
+            <button @click="debugLogForm" class="btn btn--white">
                 Loguj zawartość formularza
             </button>
-            <button @click="console.log(errors)" class="btn btn-white">
+            <button @click="console.log(errors)" class="btn btn--white">
                 Loguj errory
             </button>
-            <button @click="ResetObject(errors)" class="btn btn-white">
+            <button @click="ResetObject(errors)" class="btn btn--white">
                 Resetuj errory
             </button>
             <form
@@ -246,7 +246,7 @@ const { user, isLoggedIn } = useAuth();
                         />
                         <span
                             style="cursor: pointer"
-                            class="btn btn-md btn-hovprim d-flex mb-10px"
+                            class="btn btn--md btn--hovprim d-flex mb-10px"
                             >Wybierz plik</span
                         >
                         <span

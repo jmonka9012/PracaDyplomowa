@@ -94,7 +94,7 @@ function submitFilterRequest() {
                         ></DatePicker>-->
                         <input
                             id="submitFilter"
-                            class="btn cursor-pointer btn-md btn-hovprim mt-30px"
+                            class="btn cursor-pointer btn--md btn--hovprim mt-30px"
                             type="submit"
                             value="Filtruj"
                         />
@@ -152,7 +152,7 @@ function submitFilterRequest() {
                         ></DatePicker>-->
                         <input
                             id="submitFilter"
-                            class="btn cursor-pointer btn-md btn-hovprim mt-30px"
+                            class="btn cursor-pointer btn--md btn--hovprim mt-30px"
                             type="submit"
                             value="Filtruj"
                         />

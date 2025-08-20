@@ -119,7 +119,7 @@ function SetFeaturedCategories() {
                     </select>
                 </div>
             </div>
-            <button @click="SetFeaturedCategories()" class="ml-auto mr-auto btn btn-md btn-hovprim">Ustaw kategorie</button>
+            <button @click="SetFeaturedCategories()" class="ml-auto mr-auto btn btn--md btn--hovprim">Ustaw kategorie</button>
         </div>
     </section>
 </template>

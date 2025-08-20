@@ -37,7 +37,7 @@
         margin-bottom: 50px;
     }
     button {
-        @extend .btn, .btn-hovprim;
+        @extend .btn, .btn--hovprim;
     }
 }
 

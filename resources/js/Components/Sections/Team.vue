@@ -47,19 +47,19 @@ import spiral from "~images/spiral.png";
                         />
                         <div class="team__content">
                             <a
-                                class="morph-btn morph-btn-yellow team__icon"
+                                class="morph-btn btn--white team__icon"
                                 :href="member.teamLinkFb"
                             >
                                 <img :src="fbWhite" alt="Facebook" />
                             </a>
                             <a
-                                class="morph-btn morph-btn-yellow team__icon"
+                                class="morph-btn btn--white team__icon"
                                 :href="member.teamLinkTw"
                             >
                                 <img :src="twWhite" alt="Twitter" />
                             </a>
                             <a
-                                class="morph-btn morph-btn-yellow team__icon"
+                                class="morph-btn btn--white team__icon"
                                 :href="member.teamLinkIns"
                             >
                                 <img :src="insWhite" alt="Instagram" />

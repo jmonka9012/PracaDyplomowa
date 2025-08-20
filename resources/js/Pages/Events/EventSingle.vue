@@ -537,7 +537,7 @@ function SubmitTicketRequest() {
                                 </div>
                             </div>
                             <button
-                                class="btn btn-md btn-hovprim mb-30px btn-hover-border "
+                                class="btn btn--md btn--hovprim mb-30px btn-hover-border "
                                 type="submit"
                             >
                                 Kup bilety

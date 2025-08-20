@@ -20,7 +20,7 @@ import {Link} from "@inertiajs/vue3";
                 </p>
                 <Link
                     :href="route('event.browser')"
-                    class="btn btn-md btn-hovprim morph-outline"
+                    class="btn btn--md btn--hovprim morph-outline"
                     href=""
                 >
                     Zobacz więcej

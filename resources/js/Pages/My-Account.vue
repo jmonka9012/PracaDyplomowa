@@ -160,7 +160,7 @@ function SendTicket() {
                                 />
                             </div>
                             <div class="input-wrap col-12">
-                                <button type="submit" class="btn-hover-border btn-hovprim btn btn-md align-self-start" >Zaktualizuj E-mail</button>
+                                <button type="submit" class="btn-hover-border btn--hovprim btn btn--md align-self-start" >Zaktualizuj E-mail</button>
                             </div>
                         </form>
                         <form
@@ -181,7 +181,7 @@ function SendTicket() {
                                 />
                             </div>
                             <div class="input-wrap col-12">
-                                <button type="submit" class="btn-hover-border btn-hovprim btn btn-md align-self-start" >Zaktualizuj hasło</button>
+                                <button type="submit" class="btn-hover-border btn--hovprim btn btn--md align-self-start" >Zaktualizuj hasło</button>
                             </div>
                         </form>
                         <div v-if="user.permission_level === 8">
@@ -364,7 +364,7 @@ function SendTicket() {
                                     </div>
                                 </div>
                                 <div class="input-wrap col-12">
-                                    <button class="btn btn-md btn-hovprim cursor-pointer btn-hover-border align-self-start" type="submit">Zaktualizuj dane</button>
+                                    <button class="btn btn--md btn--hovprim cursor-pointer btn-hover-border align-self-start" type="submit">Zaktualizuj dane</button>
                                 </div>
                             </form>
                         </div>
@@ -435,7 +435,7 @@ function SendTicket() {
                                     umieść w wiadomości numer biletu. Jeżeli go nie znasz podaj jego szczegóły i
                                     datę zakupu tak aby administracja mogła go zidentyfikować
                                 </p>
-                                <button type="submit" class="btn-hover-border btn-hovprim btn btn-md" >Wyślij</button>
+                                <button type="submit" class="btn-hover-border btn--hovprim btn btn--md" >Wyślij</button>
                             </form>
                             <div v-if="supportTicketError" class="error-msg mb-30px">{{supportTicketError}}</div>
                             <div class="mt-40px" v-if="props.support_tickets.data.length > 0">

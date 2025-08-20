@@ -48,7 +48,7 @@ onMounted(() => {
                 <h2>Posty</h2>
                 <Link
                     :href="route('blog-create')"
-                    class="ml-lg-20px btn btn-md btn-hovprim"
+                    class="ml-lg-20px btn btn--md btn--hovprim"
                     >Dodaj nowy</Link
                 >
             </div>
@@ -87,7 +87,7 @@ onMounted(() => {
                     </div>
                     <div class="input-wrap mb-0 col-12">
                         <input
-                            class="btn btn-md cursor-pointer btn-hovprim"
+                            class="btn btn--md cursor-pointer btn--hovprim"
                             type="submit"
                             value="Wyszukaj"
                         />
@@ -135,13 +135,13 @@ onMounted(() => {
                         class="post-list-item-col d-flex flex-row column-gap-10px"
                     >
                         <button
-                            class="btn btn-md btn-hovprim"
+                            class="btn btn--md btn--hovprim"
                             @click="activePostId = post.id"
                         >
                             Usuń
                         </button>
                         <Link
-                            class="btn btn-md btn-hovprim"
+                            class="btn btn--md btn--hovprim"
                             :href="`/${post.blog_post_url}`"
                             >Podgląd</Link
                         >
@@ -159,7 +159,7 @@ onMounted(() => {
                                 class="d-flex flex-row justify-content-between"
                             >
                                 <Link
-                                    class="btn btn-md btn-hovprim w-fit"
+                                    class="btn btn--md btn--hovprim w-fit"
                                     method="delete"
                                     preserve-scroll
                                     :href="route('admin.posts.delete')"

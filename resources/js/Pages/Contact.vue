@@ -185,7 +185,7 @@ function SendTicket() {
                             sprzeciwu. Więcej informacji znajdziesz w naszej
                             Polityce prywatności.
                         </p>
-                        <button class="btn-hover-border btn-hovprim btn btn-md" type="submit">Wyślij</button>
+                        <button class="btn-hover-border btn--hovprim btn btn--md" type="submit">Wyślij</button>
                     </form>
                     <div v-if="isLoggedIn">
                         <p class="mb-20px">
@@ -195,7 +195,7 @@ function SendTicket() {
                         </p>
                         <Link
                             :href="route('my-account', {tabName: 'Obsługa klienta'})"
-                            class="btn btn-md btn-hovprim btn-hover-border "
+                            class="btn btn--md btn--hovprim btn-hover-border "
                             >Panel użytkownika</Link
                         >
                     </div>

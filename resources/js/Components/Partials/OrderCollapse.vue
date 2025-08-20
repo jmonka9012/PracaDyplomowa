@@ -155,7 +155,7 @@ const confirmCancelOrder = () => {
                     <div v-html="ticket.is_seat === 1 ? `${ticket.seat_data.price} PLN` : `${ticket.standing_ticket_data.price} PLN`"></div>
 
                     <div v-if="props.admin">
-                        <a class="btn btn-sm btn-hovprim" @click="openTicketConfirm(ticket.ticket_id)">Anuluj miejsce</a>
+                        <a class="btn btn--sm btn--hovprim" @click="openTicketConfirm(ticket.ticket_id)">Anuluj miejsce</a>
                     </div>
 
                     <!-- Popup anulowanie miejsca  -->
@@ -172,7 +172,7 @@ const confirmCancelOrder = () => {
                                 Potwierdź anulowanie miejsca.
                             </p>
                             <div class="d-flex flex-row justify-content-center">
-                                <button class="btn btn-md btn-hovprim" @click="confirmCancelTicket">
+                                <button class="btn btn--md btn--hovprim" @click="confirmCancelTicket">
                                     Potwierdzam
                                 </button>
                             </div>
@@ -183,7 +183,7 @@ const confirmCancelOrder = () => {
             </div>
             <!-- Anulowanie zamówienia -->
             <a
-                class="btn btn-md btn-ghost btn-hovprim ml-auto mr-auto mt-20px"
+                class="btn btn--md btn--ghost btn--hovprim ml-auto mr-auto mt-20px"
                 v-if="(order.payment_status !== 'cancelled') && props.admin"
                 @click="openOrderConfirm(order.order_id)"
             >
@@ -203,7 +203,7 @@ const confirmCancelOrder = () => {
                         Potwierdź anulowanie całego zamówienia.
                     </p>
                     <div class="d-flex flex-row justify-content-center">
-                        <button class="btn btn-md btn-hovprim" @click="confirmCancelOrder">
+                        <button class="btn btn--md btn--hovprim" @click="confirmCancelOrder">
                             Potwierdzam
                         </button>
                     </div>
@@ -211,7 +211,7 @@ const confirmCancelOrder = () => {
             </div>
             <!-- -->
             <Link
-                class="btn btn-md btn-ghost ml-auto mr-auto mt-20px"
+                class="btn btn--md btn--ghost ml-auto mr-auto mt-20px"
                 :href="route('event-ticket.buy.form.details', {order: order.order_number})"
                 v-if="(order.payment_status === 'pending') && !props.admin"
             >

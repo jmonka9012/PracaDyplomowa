@@ -17,21 +17,21 @@
     letter-spacing: 0;
     z-index: 1;
 
-    &-sm{
+    &--sm{
         padding: 10px 15px;
     }
 
-    &-md {
+    &--md {
         padding: 19px 25px;
     }
 }
 
-.btn-hovprim {
+.btn--hovprim {
     &:hover {
         background-color: base.$primary;
     }
 }
-.btn-ghost {
+.btn--ghost {
     &:hover {
         background-color: white;
         outline: 1px solid base.$primary;
@@ -44,7 +44,7 @@
     }
 }
 
-.btn-outline {
+.btn--outline {
     &::after {
         position: absolute;
         z-index: -1;
@@ -67,7 +67,7 @@
     }
 }
 
-.btn-white {
+.btn--white {
     color: base.$text;
     border-radius: 30px;
     padding: 0 10px;
@@ -119,7 +119,7 @@
         }
     }
 
-    &-yellow {
+    &--yellow {
         &::after {
             border-color: base.$yellow;
         }

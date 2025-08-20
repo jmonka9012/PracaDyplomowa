@@ -25,7 +25,7 @@ const text = ref("404");
                     <i class="fa fa-search"></i>
                 </div>
             </form>-->
-            <Link :href="route('home')" class="btn btn-md btn-hovprim"
+            <Link :href="route('home')" class="btn btn--md btn--hovprim"
                 >Powróć do strony</Link
             >
         </div>

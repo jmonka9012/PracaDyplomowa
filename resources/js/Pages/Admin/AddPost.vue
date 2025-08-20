@@ -103,13 +103,13 @@ function submitPostRequest() {
             <div
                 class="d-flex column-gap-10px mb-20px flex-wrap-wrap row-gap-20px"
             >
-                <button @click="console.log(postForm)" class="btn btn-white">
+                <button @click="console.log(postForm)" class="btn btn--white">
                     Loguj zawartość formularza
                 </button>
-                <button @click="console.log(errors)" class="btn btn-white">
+                <button @click="console.log(errors)" class="btn btn--white">
                     Loguj errory
                 </button>
-                <button @click="ResetObject(errors)" class="btn btn-white">
+                <button @click="ResetObject(errors)" class="btn btn--white">
                     Resetuj errory
                 </button>
             </div>
@@ -186,7 +186,7 @@ function submitPostRequest() {
                         />
                         <span
                             style="cursor: pointer"
-                            class="btn btn-md btn-hovprim d-flex mb-10px"
+                            class="btn btn--md btn--hovprim d-flex mb-10px"
                             >Wybierz plik</span
                         >
                         <span

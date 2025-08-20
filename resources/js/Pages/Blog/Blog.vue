@@ -78,7 +78,7 @@ function FilterBlog() {
                         </select>
                     </div>
                     <div class="blog-search__col blog-search__col-btn" >
-                        <button class="btn btn-md cursor-pointer btn-hovprim btn-hover-border blog-search__button" type="submit">Szukaj</button>
+                        <button class="btn btn-md cursor-pointer btn--hovprim btn-hover-border blog-search__button" type="submit">Szukaj</button>
                     </div>
                 </div>
             </form>

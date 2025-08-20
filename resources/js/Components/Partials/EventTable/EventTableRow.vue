@@ -138,7 +138,7 @@ function AcceptEvent(eID) {
                     : 'Potwierdź odrzucenie wydarzenia.' }}
             </p>
             <div class="d-flex flex-row justify-content-center">
-                <button class="btn btn-md btn-hovprim" @click="confirmProceed">
+                <button class="btn btn--md btn--hovprim" @click="confirmProceed">
                     Potwierdzam
                 </button>
             </div>
