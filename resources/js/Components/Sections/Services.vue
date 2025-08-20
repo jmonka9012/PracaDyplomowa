@@ -3,7 +3,7 @@ import { Link } from "@inertiajs/vue3";
 </script>
 <template>
     <section class="pt-45px pb-25px bg-dark">
-        <div class="container container-full">
+        <div class="container container--full">
             <Link :href="route('contact')" class="serv-item">
                 <i class="fa fa-heart"></i>
                 Kontakt

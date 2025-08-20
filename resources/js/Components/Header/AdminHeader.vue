@@ -62,7 +62,7 @@ onBeforeUnmount(() => {
 
 <template>
     <header class="section header" :class="{ open: isOpen }">
-        <div class="container container-big">
+        <div class="container container--big">
             <div
                 class="d-flex flex-row justify-content-between align-items-center col-12"
             >
@@ -125,14 +125,14 @@ onBeforeUnmount(() => {
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
                         Wyloguj
                     </Link>
-                    <span class="divider divider-dark"></span>
+                    <span class="divider divider--dark"></span>
                     <Link
                         :href="route('my-account')"
                         class="hover-primary header-login"
                     >
                         <i class="fa fa-user text-primary mr-8px"></i>Moje konto
                     </Link>
-                    <span class="divider divider-dark"></span>
+                    <span class="divider divider--dark"></span>
                     <Link
                         :href="route('home')"
                         class="hover-primary header-login"

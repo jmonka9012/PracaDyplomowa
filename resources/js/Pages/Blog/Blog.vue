@@ -53,7 +53,7 @@ function FilterBlog() {
 <template>
     <HeroSmall :source="blogBg" title="Blog"></HeroSmall>
     <section class="section pb-80px">
-        <div class="container container-small flex-column justify-content-start">
+        <div class="container container--small flex-column justify-content-start">
             <form @submit.prevent="FilterBlog()" class="form">
                 <div class="blog-search">
                     <div class="blog-search__col">

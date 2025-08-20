@@ -21,7 +21,7 @@ const props = defineProps({
                 <p class="event-date ff-krona">
                     {{ post.blog_date }}
                 </p>
-                <span class="divider divider-dark"></span>
+                <span class="divider divider--dark"></span>
                 <Link :href="route('blog')"
                       :data="{blog_post_type: post.blog_post_type}"
                       class="btn btn-white post-item__category-pill">

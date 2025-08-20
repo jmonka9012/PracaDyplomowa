@@ -48,7 +48,7 @@ console.log(props);
     <Cta />
     <section class="pt-110px pb-100px">
         <div class="container flex-column align-items-center">
-            <p class="sub-title sub-title-lprpl mb-20px">bilety na</p>
+            <p class="sub-title sub-title--lprpl mb-20px">bilety na</p>
             <h3 class="title-1 mb-20px">Przyszłe wydarzenia</h3>
             <Events class="" :events="props.events" />
             <Link
@@ -61,7 +61,7 @@ console.log(props);
     <Services />
     <section class="pt-60px pb-100px">
         <div
-            class="container container-big flex-lg-row align-items-start align-items-lg-center justify-content-between"
+            class="container container--big flex-lg-row align-items-start align-items-lg-center justify-content-between"
         >
             <div class="mb-35px flex-column align-items-start-start flex-lg-row d-flex align-items-lg-end col-12 justify-content-lg-between">
                 <TitleNSub

@@ -194,7 +194,7 @@ function SubmitTicketRequest() {
 <template>
     <HeroSmall :source="blogBg" :title="event.data.event_name" />
     <section class="single">
-        <div class="container container-small">
+        <div class="container container--small">
             <div class="single__content">
                 <div class="single__intro">
                     <img :src="'/storage/' + event.data.image_path" alt="" />

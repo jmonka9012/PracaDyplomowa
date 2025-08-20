@@ -25,7 +25,7 @@ const props = defineProps({
                 <p class="event-date">
                     {{ event.event_date }}
                 </p>
-                <span class="divider divider-horizontal divider-dark"></span>
+                <span class="divider divider--horizontal divider--dark"></span>
                 <p class="event-category-link ff-krona mb-16px">
                     Kategorie:
                     <Link

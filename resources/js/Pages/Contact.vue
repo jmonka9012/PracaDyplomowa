@@ -44,12 +44,12 @@ function SendTicket() {
     <HeroSmall title="Kontakt" :source="blogBg" />
 
     <section class="mt-75px mt-lg-120px mb-75px mb-lg-120px">
-        <div class="container container-small flexc-reverse-mob flex-lg-row">
+        <div class="container container--small flex-reverse-mob flex-lg-row">
             <div class="col-12 col-lg-6 mt-50px mt-lg-0 contact-map">
                 <img src="/public/images/contacts_map.jpg" alt="" />
             </div>
             <div class="col-12 col-lg-6 d-flex flex-column">
-                <a href="" class="sub-title sub-title-lprpl mb-17px">Kontakt</a>
+                <a href="" class="sub-title sub-title--lprpl mb-17px">Kontakt</a>
                 <h3 class="lh-1_4 mb-20px">Masz pytania?</h3>
                 <p class="mb-16px">
                     Potrzebujesz pomocy ze swoim zamówieniem, masz problem z

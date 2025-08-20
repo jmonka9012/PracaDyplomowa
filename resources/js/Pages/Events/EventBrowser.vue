@@ -101,7 +101,7 @@ function submitFilterRequest() {
 <template>
     <section class="pb-75px pt-75px">
         <div class="container flex-column align-items-center">
-            <p class="sub-title sub-title-lprpl mb-20px">bilety na</p>
+            <p class="sub-title sub-title--lprpl mb-20px">bilety na</p>
             <h3 class="title-1 mb-20px">Przyszłe wydarzenia</h3>
             <form
                 @submit.prevent="submitFilterRequest"

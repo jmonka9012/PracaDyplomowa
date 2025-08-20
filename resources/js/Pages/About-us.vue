@@ -20,7 +20,7 @@ const props = defineProps({
   <Hero></Hero>
 
   <section class="section-full mb-100px">
-    <div class="container container-full">
+    <div class="container container--full">
       <div class="col-12 col-lg-6 pl-10px pr-10px pl-lg-0 pr-lg-0">
         <img class="h-100 of-cover" :src="blogBg" alt="" />
       </div>
@@ -39,7 +39,7 @@ const props = defineProps({
   </section>
 
   <section id="halls" class="overflow-hidden">
-    <div class="container container-mid">
+    <div class="container container--mid">
       <div class="col-12">
         <Tabs>
           <Tab

@@ -112,23 +112,23 @@ section {
         max-width: 1200px;
     }
 
-    &-full {
+    &--full {
         max-width: 100%;
         padding: 0;
     }
 
-    &-big {
+    &--big {
         max-width: 1800px;
         @include mixin.media-breakpoint-up(lg) {
             padding: 0 30px;
         }
     }
 
-    &-mid {
+    &--mid {
         max-width: 1400px;
     }
 
-    &-small {
+    &--small {
         max-width: 1200px;
     }
 }
@@ -383,7 +383,7 @@ ul {
         }
     }
 
-    &-prpl {
+    &--prpl {
         li {
             &::before {
                 color: $primary;
@@ -488,7 +488,7 @@ img {
     }
 }
 
-.flexc-reverse-mob {
+.flex-reverse-mob {
     @include mixin.media-breakpoint-down(xl) {
         flex-direction: column-reverse;
     }
@@ -580,7 +580,7 @@ img {
 .grid-cgap-30px {
     grid-column-gap: 30px;
 }
-.column
+
     /*grids*/
 .grid-thr-tw-o {
     display: grid;
@@ -754,7 +754,7 @@ img {
     }
 }
 
-.title2 {
+.title-2 {
     font-size: 36px;
     line-height: 1.2;
     font-weight: 700;
@@ -787,7 +787,7 @@ img {
         letter-spacing: 0;
     }
 
-    &-lprpl {
+    &--lprpl {
         background-color: $primary;
     }
 }
@@ -865,12 +865,12 @@ img {
         position: relative;
     }
 
-    &-dark {
+    &--dark {
         &::after {
             background-color: $text;
         }
     }
-    &-horizontal {
+    &--horizontal {
         &::after {
             margin-top: 10px;
             height: 1px;

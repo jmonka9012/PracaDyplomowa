@@ -7,7 +7,7 @@ import {Link} from "@inertiajs/vue3";
 
 <template>
     <section class="pb-70px pb-lg-105px cta">
-        <div class="container container-big">
+        <div class="container container--big">
             <div class="cta-left">
                 <p class="sub-title mb-17px">Wydarzenia</p>
                 <h3 class="cta-title mb-20px">

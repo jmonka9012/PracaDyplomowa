@@ -7,7 +7,7 @@ defineProps({
 
 <template>
 	<div class="d-flex flex-column" v-bind="$attrs">
-		<p class="sub-title sub-title-lprpl mb-17px">
+		<p class="sub-title sub-title--lprpl mb-17px">
 			<slot name="subtitle">{{ subtitle }}</slot>
 		</p>
 		<h3 class="title-1 mb-17px mb-lg-0">
