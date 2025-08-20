@@ -51,11 +51,11 @@ const props = defineProps({
             <div>
               <div class="d-flex flex-column">
                 <div class="d-flex align-items-center">
-                  <div class="legend legend-stand"></div>
+                  <div class="legend legend--stand"></div>
                   <p>Sekcje z miejscami stojącymi</p>
                 </div>
                 <div class="d-flex align-items-center">
-                  <div class="legend legend-seat"></div>
+                  <div class="legend legend--seat"></div>
                   <p>Sekcje z miejscami siedzącymi</p>
                 </div>
               </div>

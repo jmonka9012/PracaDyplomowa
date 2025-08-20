@@ -171,11 +171,11 @@
     display: block;
     margin-right: 10px;
 
-    &-stand {
+    &--stand {
         background-color: #E3AD84;
     }
 
-    &-seat {
+    &--seat {
         background-color: var(--primary);
     }
 }
