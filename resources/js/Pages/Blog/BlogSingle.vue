@@ -86,7 +86,7 @@ console.log(props.related_posts);
         </div>
         <section class="section pb-100px">
             <div class="container container--small">
-                <PostQuery evContClass="ev-cont-lg-three" :blog_posts="props.related_posts.data">
+                <PostQuery evContClass="ev-cont--lg-three" :blog_posts="props.related_posts.data">
                 </PostQuery>
             </div>
         </section>

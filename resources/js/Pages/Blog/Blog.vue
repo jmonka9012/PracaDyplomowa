@@ -83,7 +83,7 @@ function FilterBlog() {
                 </div>
             </form>
             <h3 v-if="currentCategory" class="mb-40px"> Posty z kategorii: {{currentCategory}}</h3>
-            <PostQuery class="mb-50px" evContClass="ev-cont-lg-three" :blog_posts="props.blog_posts.data">
+            <PostQuery class="mb-50px" evContClass="ev-cont--lg-three" :blog_posts="props.blog_posts.data">
             </PostQuery>
             <div class="event-pagination" v-if="blog_posts.meta.links.length > 3">
                 <ul class="ml-auto mr-auto">

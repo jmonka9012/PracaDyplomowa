@@ -280,7 +280,7 @@ onMounted(() => {
                         <input id="save_data" v-model="paymentForm.save_data" type="checkbox">
                         <label for="save_data">Zapisz dane do przyszłych transakcji</label>
                     </div>
-                    <div v-else class="input-wrap input-wrap-check  align-items-center col-12">
+                    <div v-else class="input-wrap input-wrap--check  align-items-center col-12">
                         <input id="make_account" v-model="paymentForm.make_account" type="checkbox">
                         <label for="make_account">Stwórz konto z podanymi danymi zapamiętać je na przyszłość</label>
                     </div>

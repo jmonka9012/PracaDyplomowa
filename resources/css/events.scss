@@ -17,7 +17,7 @@
     @include mixin.media-breakpoint-up(lg) {
         grid-template-columns: repeat(4, 1fr);
     }
-    &-lg-three {
+    &--lg-three {
         @include mixin.media-breakpoint-up(lg) {
             grid-template-columns: repeat(3, 1fr);
         }

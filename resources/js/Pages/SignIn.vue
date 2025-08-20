@@ -164,7 +164,7 @@ function submitRegisterRequest() {
                             {{ loginErrors.password }}
                         </div>
                     </div>
-                    <div class="input-wrap input-wrap-check col-12 mb-20px">
+                    <div class="input-wrap input-wrap--check col-12 mb-20px">
                         <input
                             type="checkbox"
                             name="remember"
@@ -305,7 +305,7 @@ function submitRegisterRequest() {
                             ustawienia nowego hasła.
                         </p>
                     </div>
-                    <div class="input-wrap input-wrap-check col-12 mb-20px">
+                    <div class="input-wrap input-wrap--check col-12 mb-20px">
                         <input
                             type="checkbox"
                             required
@@ -320,7 +320,7 @@ function submitRegisterRequest() {
                             nasza polityka prywatności.
                         </label>
                     </div>
-                    <div class="input-wrap input-wrap-check col-12 mb-20px">
+                    <div class="input-wrap input-wrap--check col-12 mb-20px">
                         <input
                             type="checkbox"
                             name="organizer"

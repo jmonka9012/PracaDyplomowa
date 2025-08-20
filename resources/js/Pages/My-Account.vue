@@ -141,7 +141,7 @@ function SendTicket() {
                             </h3>
                         </div>
                         <form
-                            class="form form-ma"
+                            class="form form--ma"
                             @submit.prevent="handleSubmitClick(emailForm)"
                         >
                             <div class="input-wrap d-flex flex-column col-12">
@@ -164,7 +164,7 @@ function SendTicket() {
                             </div>
                         </form>
                         <form
-                            class="form form-ma"
+                            class="form form--ma"
                             @submit.prevent="handleSubmitClick(passwordForm)"
                         >
                             <div class="input-wrap d-flex flex-column col-12">
@@ -186,7 +186,7 @@ function SendTicket() {
                         </form>
                         <div v-if="user.permission_level === 8">
                             <h3 class="ma-ftitle mb-20px">Potwierdź Email</h3>
-                            <form class="form form-ma">
+                            <form class="form form--ma">
                                 <div class="input-wrap d-flex flex-column col-12">
                                     <input type="submit" class="btn-hover-border " value="Potwierdź" />
                                 </div>

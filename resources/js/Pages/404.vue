@@ -20,7 +20,7 @@ const text = ref("404");
                 nie istniała.
             </p>
             <!--            <form action="" class="form">
-                <div class="input-wrap input-wrap-search pl-0 pr-0 col-12">
+                <div class="input-wrap input-wrap--search pl-0 pr-0 col-12">
                     <input type="search" placeholder="szukaj" />
                     <i class="fa fa-search"></i>
                 </div>

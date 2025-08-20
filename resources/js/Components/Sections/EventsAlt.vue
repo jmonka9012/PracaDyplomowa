@@ -7,7 +7,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <div :class="['ev-cont ev-cont-lg-three']">
+    <div :class="['ev-cont ev-cont--lg-three']">
         <div
             v-for="event in props.events.data"
             :key="event.id"
