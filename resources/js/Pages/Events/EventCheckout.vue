@@ -18,8 +18,7 @@ console.log(props);
         <div class="container">
             <div class="d-flex flex-column justify-content-center align-items-center text-align-center col-12 mb-30px mb-lg-50px">
                 <h1 class="h3 mb-20px">Zeskanuj kod QR</h1>
-                <img src="" alt="Placeholder dopóki nie ma qr">
-
+                <div class="order-qr" v-html="props.order[0]?.qr_data"></div>
             </div>
             <div class="flex-column order">
                 <h4 class="pb-15px mb-15px bb-1 b-primary-darker ">Zamówienie <span class="text-primary-darker">{{order.order_number}}</span></h4>
