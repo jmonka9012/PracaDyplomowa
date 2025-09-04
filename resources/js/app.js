@@ -51,7 +51,6 @@ function setCurrentPage() {
     });
 }
 
-// Wywołaj po załadowaniu DOM-a
 document.addEventListener('DOMContentLoaded', setCurrentPage);
 
 

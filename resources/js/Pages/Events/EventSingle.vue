@@ -172,19 +172,16 @@ function HandleSeat(sID, row, col) {
 }
 
 function SubmitTicketRequest() {
-    let hadError = ref(false);
     console.log(ticketRequest);
 
     router.post(route("event-ticket.buy.form.post"), ticketRequest, {
         onError: (err) => {
             ResetObject(errors);
             Object.assign(errors, err);
-            hadError = true;
         },
         headers: {
             "Content-Type": "multipart/form-data",
         },
-        preserveScroll: () => hadError,
     });
     console.log(errors);
     //console.log(ticketRequest);
@@ -538,8 +535,7 @@ function SubmitTicketRequest() {
                             </div>
                             <button
                                 class="btn btn--md btn--hovprim mb-30px btn-hover-border "
-                                type="submit"
-                            >
+                                type="submit">
                                 Kup bilety
                             </button>
                         </form>
