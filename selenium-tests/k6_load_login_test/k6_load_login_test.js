@@ -1,5 +1,5 @@
 import http from 'k6/http';
-import { check, sleep } from 'k6';
+import { check, sleep } from 'selenium-tests/k6_load_login_test/k6';
 import { textSummary } from 'https://jslib.k6.io/k6-summary/0.0.1/index.js';
 
 // Pobranie zmiennej APP_URL z pliku .env lub ustawienie domyślnej wartości
