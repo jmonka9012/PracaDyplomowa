@@ -5,7 +5,7 @@ import { logTestResult } from '../logUtils.js'; // Logowanie wyników testu
 
 // Załaduj zmienne środowiskowe z pliku .env
 dotenv.config();
-const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, '');
+const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^https:/i, 'http:');
 const testName = 'register_test';
 
 (async function registerAndLoginUser() {

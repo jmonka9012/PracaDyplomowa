@@ -6,7 +6,7 @@ import { logTestResult } from '../logUtils.js'; // Import funkcji logowania wyni
 
 // Wczytanie zmiennych środowiskowych z pliku .env
 dotenv.config();
-const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, ''); // Usunięcie ewentualnych cudzysłowów z adresu URL
+const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^https:/i, 'http:'); // Usunięcie ewentualnych cudzysłowów z adresu URL
 
 (async function compatibilityAndResponsiveTest() {
   const testName = 'compatibility_test';
@@ -81,7 +81,7 @@ const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, ''); // Usunięcie ewen
         const title = await driver.getTitle();
         console.log(`Tytuł strony: "${title}"`);
 
-        // Weryfikacja obecności elementu 
+        // Weryfikacja obecności elementu
         const header = await driver.findElements(By.css('header'));
         if (header.length > 0) {
           console.log('Nagłówek został odnaleziony.');

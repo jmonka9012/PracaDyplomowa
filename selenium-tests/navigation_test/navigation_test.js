@@ -7,7 +7,7 @@ import { logTestResult } from '../logUtils.js'; // Narzędzie logujące wynik te
 dotenv.config();
 
 // Pobranie adresu URL aplikacji z konfiguracji środowiska
-const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, '');
+const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^https:/i, 'http:');
 const testName = 'navigation_test'; // Nazwa testu (do logów i plików)
 
 (async function runNavigationTest() {
@@ -38,7 +38,7 @@ const testName = 'navigation_test'; // Nazwa testu (do logów i plików)
     console.log('Załadowano stronę główną');
     await driver.sleep(1000); // Krótkie opóźnienie na załadowanie zasobów
 
-    // Znalezienie elementu nawigacji 
+    // Znalezienie elementu nawigacji
     const nav = await driver.wait(until.elementLocated(By.css('nav.header-nav')), 5000);
 
     // Pobranie wszystkich linków (a) w obrębie nawigacji

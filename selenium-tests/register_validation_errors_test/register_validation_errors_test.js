@@ -5,7 +5,8 @@ import { logTestResult } from '../logUtils.js';
 
 // Załadowanie zmiennych środowiskowych z pliku .env
 dotenv.config();
-const BASE_URL = process.env.APP_URL.replace(/"/g, '');
+const raw = (process.env.APP_URL || '').replace(/"/g, '').trim();
+const BASE_URL = raw.replace(/^https:\/\//i, 'http://');
 
 // Główna funkcja testowa weryfikująca walidację formularza rejestracji
 (async function registerValidationErrorsTest() {
@@ -24,7 +25,7 @@ const BASE_URL = process.env.APP_URL.replace(/"/g, '');
       .setChromeOptions(options)
       .build();
 
-    // Ustawienie wymiarów okna 
+    // Ustawienie wymiarów okna
     await driver.manage().window().setRect({ width: 1920, height: 1080 });
 
     // Otwarcie strony głównej aplikacji

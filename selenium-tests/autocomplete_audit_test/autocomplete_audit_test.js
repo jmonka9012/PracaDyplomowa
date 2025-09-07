@@ -6,14 +6,15 @@ import path from 'path';
 import { logTestResult } from '../logUtils.js';
 
 dotenv.config();
-const BASE_URL = process.env.APP_URL.replace(/"/g, '');
+const raw = (process.env.APP_URL || '').replace(/"/g, '').trim();
+const BASE_URL = raw.replace(/^https:\/\//i, 'http://');
 
 (async function autocompleteAuditTest() {
   let driver;
   let testPassed = false;
 
   try {
-    // Konfiguracja przeglądarki Chrome 
+    // Konfiguracja przeglądarki Chrome
     const options = new chrome.Options();
     options.addArguments('--headless=new', '--disable-dev-shm-usage', '--no-sandbox');
 

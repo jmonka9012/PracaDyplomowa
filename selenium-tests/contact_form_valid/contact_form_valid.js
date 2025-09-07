@@ -10,7 +10,7 @@ dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const BASE_URL = process.env.APP_URL?.replace(/(^"|"$)/g, '');
+const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^https:/i, 'http:');
 const logPath = path.resolve(__dirname, '../logs/logs.txt');
 
 /**
@@ -81,7 +81,7 @@ describe('Formularz kontaktowy – poprawne dane', function () {
       await driver.wait(until.elementIsEnabled(submitButton), 3000);
       await submitButton.click();
 
-      // Oczekiwanie na ewentualny komunikat 
+      // Oczekiwanie na ewentualny komunikat
       try {
         await driver.wait(
           until.elementLocated(

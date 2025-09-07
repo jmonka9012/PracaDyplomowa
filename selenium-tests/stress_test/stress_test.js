@@ -7,7 +7,7 @@ import { logTestResult } from '../logUtils.js';
 dotenv.config();
 
 // Pobranie adresu URL aplikacji z konfiguracji
-const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, '');
+const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^https:/i, 'http:');
 
 // Nazwa testu, używana w logach
 const testName = 'stress_login_test';

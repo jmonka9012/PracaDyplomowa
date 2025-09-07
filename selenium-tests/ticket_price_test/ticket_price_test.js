@@ -4,7 +4,8 @@ import dotenv from 'dotenv';
 import { logTestResult } from '../logUtils.js';
 
 dotenv.config();
-const BASE_URL = process.env.APP_URL.replace(/"/g, '');
+const raw = (process.env.APP_URL || '').replace(/"/g, '').trim();
+const BASE_URL = raw.replace(/^https:\/\//i, 'http://');
 
 // Zwraca losową liczbę od 1 do min(max, 50)
 function getRandomQuantity(max) {

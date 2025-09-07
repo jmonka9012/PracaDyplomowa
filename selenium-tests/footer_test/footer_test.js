@@ -10,7 +10,7 @@ dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const BASE_URL = process.env.APP_URL?.replace(/(^"|"$)/g, '');
+const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^https:/i, 'http:');
 const logPath = path.resolve(__dirname, '../logs/logs.txt');
 
 /**
@@ -33,7 +33,7 @@ describe('Test zawartości linków stopki – weryfikacja pierwszego zdania', fu
   let driver;
 
   before(async function () {
-    // Konfiguracja przeglądarki Chrome w trybie headless 
+    // Konfiguracja przeglądarki Chrome w trybie headless
     const options = new chrome.Options();
     options.addArguments('--headless', '--disable-dev-shm-usage', '--no-sandbox');
 

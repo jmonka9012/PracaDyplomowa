@@ -1,13 +1,13 @@
 import { Builder, By, until } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
 import dotenv from 'dotenv';
-import { logTestResult } from '../logUtils.js'; 
+import { logTestResult } from '../logUtils.js';
 
 // Wczytanie zmiennych środowiskowych
 dotenv.config();
 
 // Pobranie adresu aplikacji z pliku .env
-const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, '');
+const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^https:/i, 'http:');
 
 // Nazwa testu używana w logach
 const testName = 'event_details_test';

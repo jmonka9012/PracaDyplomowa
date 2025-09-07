@@ -5,7 +5,8 @@ import { logTestResult } from '../logUtils.js';
 
 // Załadowanie zmiennych środowiskowych z pliku .env
 dotenv.config();
-const BASE_URL = process.env.APP_URL.replace(/"/g, '');
+const raw = (process.env.APP_URL || '').replace(/"/g, '').trim();
+const BASE_URL = raw.replace(/^https:\/\//i, 'http://');
 
 // Główna funkcja testowa realizująca scenariusz logowania i wylogowania użytkownika
 (async function logoutTest() {

@@ -5,7 +5,7 @@ import { logTestResult } from '../logUtils.js';
 
 // Wczytaj zmienne środowiskowe z pliku .env
 dotenv.config();
-const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, '');
+const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^https:/i, 'http:');
 const testName = 'wrong_password_test';
 
 (async function wrongPasswordTest() {

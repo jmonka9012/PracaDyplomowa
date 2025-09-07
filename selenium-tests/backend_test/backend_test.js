@@ -1,18 +1,18 @@
 import { Builder, By, until } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
 import dotenv from 'dotenv';
-import { logTestResult } from '../logUtils.js'; 
+import { logTestResult } from '../logUtils.js';
 
 // Wczytanie zmiennych środowiskowych z pliku .env
 dotenv.config();
 
 // Pobranie podstawowego URL aplikacji
-const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, '');
+const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^https:/i, 'http:');
 
 // Ustalenie nazwy testu do logowania wyników
 const testName = 'backend_test';
 
-// Główna funkcja testowa 
+// Główna funkcja testowa
 (async function backendTest() {
   let driver;
   let success = false;

@@ -9,7 +9,8 @@ import { logTestResult } from '../logUtils.js';
 dotenv.config();
 
 // Ustawienie bazowego adresu aplikacji
-const BASE_URL = process.env.APP_URL.replace(/"/g, '');
+const raw = (process.env.APP_URL || '').replace(/"/g, '').trim();
+const BASE_URL = raw.replace(/^https:\/\//i, 'http://');
 
 // Ścieżki do folderu logów i pliku wyjściowego
 const logDir = path.resolve('selenium-tests/logs');

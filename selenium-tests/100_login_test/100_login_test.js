@@ -5,7 +5,8 @@ import { logTestResult } from '../logUtils.js'; // Logowanie wyniku testu
 
 // Wczytanie zmiennych środowiskowych z pliku .env
 dotenv.config();
-const BASE_URL = process.env.APP_URL.replace(/"/g, '');
+const raw = (process.env.APP_URL || '').replace(/"/g, '').trim();
+const BASE_URL = raw.replace(/^https:\/\//i, 'http://');
 
 // Asynchroniczna funkcja testująca szybkie klikanie w przycisk logowania
 (async function rapidLoginClickTest() {
@@ -16,7 +17,7 @@ const BASE_URL = process.env.APP_URL.replace(/"/g, '');
     // Konfiguracja opcji przeglądarki Chrome
     const options = new chrome.Options();
     options.addArguments('--disable-dev-shm-usage');       // Optymalizacja zużycia pamięci
-    options.addArguments('--no-sandbox');                   // Wyłączenie sandboxa 
+    options.addArguments('--no-sandbox');                   // Wyłączenie sandboxa
     options.addArguments('--remote-debugging-port=9222');   // Port debugowania (opcjonalny)
 
     // Inicjalizacja sterownika przeglądarki

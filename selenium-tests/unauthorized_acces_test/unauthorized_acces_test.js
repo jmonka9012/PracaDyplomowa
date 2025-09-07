@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Pobranie adresu bazowego aplikacji
-const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, '');
+const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^https:/i, 'http:');
 
 // Określenie ścieżki do pliku logu testowego
 const logPath = path.resolve(__dirname, '../logs/logs.txt');

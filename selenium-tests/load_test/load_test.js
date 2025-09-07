@@ -5,7 +5,7 @@ import { logTestResult } from '../logUtils.js'; // Import funkcji logowania wyni
 
 // Wczytanie zmiennych środowiskowych z pliku .env
 dotenv.config();
-const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, '');
+const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^https:/i, 'http:');
 
 // Konfiguracja testu
 const INSTANCES = 18; // Liczba równoległych instancji przeglądarki (userów)
