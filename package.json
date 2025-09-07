@@ -10,6 +10,7 @@
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
         "axios": "^1.8.4",
+        "chromedriver": "^139.0.3",
         "concurrently": "^9.0.1",
         "laravel-vite-plugin": "^1.2.0",
         "sass-embedded": "^1.85.1",
@@ -24,7 +25,6 @@
         "@vitejs/plugin-vue": "^5.2.1",
         "@vuepic/vue-datepicker": "^11.0.2",
         "chai": "^5.2.0",
-        "chromedriver": "^134.0.5",
         "dotenv": "^16.4.7",
         "mocha": "^11.1.0",
         "npm-watch": "^0.13.0",
