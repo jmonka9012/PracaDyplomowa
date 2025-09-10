@@ -53,13 +53,6 @@ const { siteData } = pageInfo();
                             ><span>Kontakt</span></Link
                             >
                         </li>
-                        <li class="justify-content-center justify-content-lg-start">
-                            <Link
-                                class="text-primary hover-white mb-30px"
-                                :href="route('ce')"
-                            ><span>CE</span></Link
-                            >
-                        </li>
                     </ul>
                 </div>
                 <div class="col-12 col-lg-6 d-flex flex-column align-items-center">
