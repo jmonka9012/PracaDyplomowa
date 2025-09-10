@@ -12,7 +12,7 @@
     <link rel="manifest" href="/site.webmanifest"/>
     @routes
     @vite('resources/js/app.js')
-    @vite('resources/css/app-main.scss')
+    @vite('resources/css/app.scss')
     @inertiaHead
 </head>
 <body>
