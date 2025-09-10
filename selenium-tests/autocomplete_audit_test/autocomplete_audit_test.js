@@ -1,34 +1,47 @@
+// Import wymaganych modułów
 import { Builder, By } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { logTestResult } from '../logUtils.js';
 
+// Wczytanie zmiennych środowiskowych z pliku .env
 dotenv.config();
 const raw = (process.env.APP_URL || '').replace(/"/g, '').trim();
 const BASE_URL = raw.replace(/^https:\/\//i, 'http://');
+
+// Ustalanie ścieżek dla zapisu wyników
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const outputPath = path.join(__dirname, 'autocomplete_audit.json');
 
 (async function autocompleteAuditTest() {
   let driver;
   let testPassed = false;
 
   try {
+<<<<<<< HEAD:selenium-tests/autocomplete_audit_test/autocomplete_audit_test.js
     // Konfiguracja przeglądarki Chrome
+=======
+    // Konfiguracja przeglądarki Chrome w trybie headless
+>>>>>>> 354460e (update testów automatycznych):selenium-tests/Automated-Tests/autocomplete_audit_test/autocomplete_audit_test.js
     const options = new chrome.Options();
-    options.addArguments('--headless=new', '--disable-dev-shm-usage', '--no-sandbox');
+    options.addArguments('--headless', '--disable-dev-shm-usage', '--no-sandbox');
 
+    // Uruchomienie przeglądarki
     driver = await new Builder()
       .forBrowser('chrome')
       .setChromeOptions(options)
       .build();
 
-    // Ustawienie rozmiaru okna przeglądarki
+    // Ustawienie wymiarów okna przeglądarki
     await driver.manage().window().setRect({ width: 1400, height: 1000 });
 
-    console.log('Rozpoczęcie testu: audyt autocomplete w formularzu rejestracji');
+    console.log('=== Rozpoczęcie testu: audyt atrybutów autocomplete w formularzu rejestracji ===');
 
-    // Przejście do strony logowania, a następnie do formularza rejestracji
+    // Przejście na stronę logowania i przejście do formularza rejestracji
     await driver.get(`${BASE_URL}/login`);
     await driver.sleep(1000);
 
@@ -36,10 +49,10 @@ const BASE_URL = raw.replace(/^https:\/\//i, 'http://');
     await registerLink.click();
     await driver.sleep(1000);
 
-    // Pobranie wszystkich pól formularza (input, textarea)
+    // Pobranie wszystkich pól formularza (input i textarea)
     const elements = await driver.findElements(By.css('input, textarea'));
 
-    // Dozwolone wartości dla atrybutu autocomplete
+    // Lista dopuszczalnych wartości dla atrybutu autocomplete
     const validValues = new Set([
       'name', 'honorific-prefix', 'given-name', 'additional-name', 'family-name',
       'nickname', 'email', 'username', 'new-password', 'current-password',
@@ -47,6 +60,7 @@ const BASE_URL = raw.replace(/^https:\/\//i, 'http://');
       'address-line3', 'country', 'country-name', 'postal-code', 'tel', 'url'
     ]);
 
+    // Tablica wyników audytu oraz mapa użytych identyfikatorów
     const auditItems = [];
     const seenIds = new Map();
 
@@ -59,22 +73,28 @@ const BASE_URL = raw.replace(/^https:\/\//i, 'http://');
 
       const warnings = [];
 
-      // Weryfikacja poprawności wartości autocomplete
+      // Sprawdzenie poprawności wartości atrybutu autocomplete
       if (autocomplete && !validValues.has(autocomplete)) {
         warnings.push('Niepoprawna wartość autocomplete');
       }
 
-      // Weryfikacja unikalności ID
+      // Sprawdzenie unikalności identyfikatorów pól
       if (id && seenIds.has(id)) {
         warnings.push('Zduplikowane ID');
       } else if (id) {
         seenIds.set(id, true);
       }
 
+      // Raport ostrzeżeń w konsoli
+      if (warnings.length > 0) {
+        console.log(`Pole "${name || id || type}" ma problemy: ${warnings.join(', ')}`);
+      }
+
+      // Zapisanie wyników analizy danego pola
       auditItems.push({ name, id, type, autocomplete, warnings });
     }
 
-    // Przygotowanie danych audytu z podwójnym zapisem daty (UTC i lokalna)
+    // Przygotowanie danych raportu z audytu
     const now = new Date();
     const auditData = {
       generatedAtUTC: now.toISOString(),
@@ -82,33 +102,29 @@ const BASE_URL = raw.replace(/^https:\/\//i, 'http://');
       fields: auditItems
     };
 
-    // Ścieżka do zapisu pliku z audytem
-    const logDir = path.resolve('selenium-tests/logs');
-    const outputPath = path.join(logDir, 'autocomplete_audit.json');
-
-    // Tworzenie folderu logów, jeśli nie istnieje
-    if (!fs.existsSync(logDir)) {
-      fs.mkdirSync(logDir, { recursive: true });
-    }
-
-    // Usunięcie istniejącego pliku z audytem, jeśli istnieje
+    // Usunięcie poprzedniego pliku raportu, jeśli istnieje
     if (fs.existsSync(outputPath)) {
       fs.unlinkSync(outputPath);
     }
 
-    // Zapis danych audytu do pliku JSON
+    // Zapis raportu do pliku JSON
     fs.writeFileSync(outputPath, JSON.stringify(auditData, null, 2));
 
-    console.log(`Zapisano audyt do: ${outputPath}`);
-    console.log(`Zawiera ${auditItems.length} pól – raport wygenerowano: ${auditData.generatedAtLocal}`);
+    // Podsumowanie ostrzeżeń
+    const totalWarnings = auditItems.filter(item => item.warnings.length > 0).length;
+    console.log(`Znaleziono ${totalWarnings} pól z ostrzeżeniami`);
+    console.log(`Raport audytu zapisano w: ${outputPath}`);
+    console.log(`Raport wygenerowano: ${auditData.generatedAtLocal}`);
 
-    testPassed = auditItems.length > 0;
+    // Kryterium zaliczenia testu – wystąpienie co najmniej jednego ostrzeżenia
+    testPassed = totalWarnings > 0;
     logTestResult('autocomplete_audit_test', testPassed);
 
   } catch (err) {
     console.error('Błąd wykonania testu:', err.message);
     logTestResult('autocomplete_audit_test', false);
   } finally {
-    await driver.quit();
+    // Zamykanie przeglądarki po zakończeniu testu
+    if (driver) await driver.quit();
   }
 })();

@@ -1,10 +1,12 @@
+// Import wymaganych modułów
 import { Builder, By, until } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
 import dotenv from 'dotenv';
 import { logTestResult } from '../logUtils.js';
 
-// Wczytanie zmiennych środowiskowych z pliku .env
+// Wczytanie zmiennych środowiskowych (np. adresu aplikacji) z pliku .env
 dotenv.config();
+<<<<<<< HEAD:selenium-tests/backend_test/backend_test.js
 
 // Pobranie podstawowego URL aplikacji
 const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^https:/i, 'http:');
@@ -13,23 +15,22 @@ const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^h
 const testName = 'backend_test';
 
 // Główna funkcja testowa
+=======
+const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, '');
+const testName = 'backend_test';
+
+>>>>>>> 354460e (update testów automatycznych):selenium-tests/Automated-Tests/backend_test/backend_test.js
 (async function backendTest() {
   let driver;
   let success = false;
   let message = '';
 
   try {
-    // Konfiguracja opcji przeglądarki Chrome
+    // Konfiguracja przeglądarki Chrome w trybie headless
     const options = new chrome.Options();
-    options.addArguments('--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu');
+    options.addArguments('--headless', '--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu');
 
-    // Parametr kontrolujący uruchamianie testu w trybie headless
-    const HEADLESS = true;
-    if (HEADLESS) {
-      options.addArguments('--headless');
-    }
-
-    // Inicjalizacja sterownika Selenium WebDriver
+    // Utworzenie instancji przeglądarki
     driver = await new Builder()
       .forBrowser('chrome')
       .setChromeOptions(options)
@@ -38,16 +39,16 @@ const testName = 'backend_test';
     // Ustawienie rozdzielczości okna przeglądarki
     await driver.manage().window().setRect({ width: 1920, height: 1080 });
 
-    console.log('Rozpoczęcie testu backendu administracyjnego.');
+    console.log('=== Rozpoczęcie testu backendu administracyjnego ===');
 
-    // Przejście na stronę główną aplikacji
+    // Wejście na stronę główną aplikacji
     await driver.get(BASE_URL);
 
-    // Oczekiwanie na pojawienie się i kliknięcie w link "Zaloguj"
+    // Przejście do formularza logowania
     const loginLink = await driver.wait(until.elementLocated(By.linkText('Zaloguj')), 10000);
     await loginLink.click();
 
-    // Wypełnienie formularza logowania
+    // Wprowadzenie danych logowania
     const loginInput = await driver.wait(until.elementLocated(By.name('login')), 10000);
     const passwordInput = await driver.findElement(By.name('password'));
     const submitBtn = await driver.findElement(By.css('input[type="submit"]'));
@@ -56,20 +57,22 @@ const testName = 'backend_test';
     await passwordInput.sendKeys('12341234');
     await submitBtn.click();
 
-    // Weryfikacja poprawnego zalogowania poprzez sprawdzenie obecności w URL
-    await driver.wait(until.urlContains('/moje-konto'), 10000);
+    // Weryfikacja poprawnego zalogowania – oczekiwanie na stronę "moje konto"
+    await driver.wait(until.urlMatches(/\/moje-konto(\?page=\d+)?/), 10000);
 
-    // Nawigacja do panelu administracyjnego (backendu)
-    const backendBtn = await driver.wait(until.elementLocated(By.linkText('Backend')), 10000);
-    await backendBtn.click();
+    // Sprawdzenie dostępności linku "Backend"
+    const backendLinks = await driver.findElements(By.linkText('Backend'));
+    if (backendLinks.length === 0) {
+      throw new Error('Brak dostępu do panelu Backend – użytkownik nie ma uprawnień administratora.');
+    }
 
-    // Weryfikacja poprawnego przejścia do sekcji administracyjnej
+    // Wejście do panelu administracyjnego
+    await backendLinks[0].click();
     await driver.wait(until.urlContains('/admin'), 10000);
 
-    // Pobranie listy dostępnych opcji w panelu backend
+    // Pobranie i wyświetlenie listy opcji dostępnych w panelu Backend
     const opcje = await driver.findElements(By.css('p.fw-bold.fs-24'));
-
-    console.log('\nLista dostępnych opcji w panelu backend:');
+    console.log('\nLista dostępnych opcji w panelu Backend:');
     for (const opcja of opcje) {
       const text = await opcja.getText();
       if (text.trim().length > 0) {
@@ -77,20 +80,18 @@ const testName = 'backend_test';
       }
     }
 
-    // Oznaczenie testu jako zakończonego sukcesem
+    // Zakończenie testu pomyślnie
     success = true;
-    message = 'Test zakończony pomyślnie.';
+    message = 'Test zakończony pomyślnie – dostęp do panelu Backend został potwierdzony.';
     console.log(message);
 
   } catch (err) {
-    // Obsługa błędów wykonania testu
-    message = err.message;
-    console.error(`Błąd wykonania testu: ${message}`);
+    // Obsługa błędów testu
+    message = `Błąd wykonania testu: ${err.message}`;
+    console.error(message);
   } finally {
-    // Zamykanie sesji przeglądarki i rejestracja wyniku testu
-    if (driver) {
-      await driver.quit();
-    }
+    // Zamknięcie przeglądarki i zapis wyniku testu do logów
+    if (driver) await driver.quit();
     logTestResult(testName, success, message);
   }
 })();

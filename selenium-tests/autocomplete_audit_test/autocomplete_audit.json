@@ -1,0 +1,101 @@
+{
+  "generatedAtUTC": "2025-09-10T18:44:54.960Z",
+  "generatedAtLocal": "10.09.2025, 20:44:54",
+  "fields": [
+    {
+      "name": "login",
+      "id": "login",
+      "type": "text",
+      "autocomplete": "email",
+      "warnings": []
+    },
+    {
+      "name": "password",
+      "id": "password",
+      "type": "password",
+      "autocomplete": "",
+      "warnings": []
+    },
+    {
+      "name": "remember",
+      "id": "remember",
+      "type": "checkbox",
+      "autocomplete": "",
+      "warnings": []
+    },
+    {
+      "name": "",
+      "id": "",
+      "type": "submit",
+      "autocomplete": "",
+      "warnings": []
+    },
+    {
+      "name": "name",
+      "id": "register-username",
+      "type": "text",
+      "autocomplete": "name",
+      "warnings": []
+    },
+    {
+      "name": "email",
+      "id": "register-email",
+      "type": "text",
+      "autocomplete": "email",
+      "warnings": []
+    },
+    {
+      "name": "name",
+      "id": "register-username",
+      "type": "text",
+      "autocomplete": "",
+      "warnings": [
+        "Zduplikowane ID"
+      ]
+    },
+    {
+      "name": "name",
+      "id": "register-username",
+      "type": "text",
+      "autocomplete": "",
+      "warnings": [
+        "Zduplikowane ID"
+      ]
+    },
+    {
+      "name": "password",
+      "id": "register-password",
+      "type": "password",
+      "autocomplete": "",
+      "warnings": []
+    },
+    {
+      "name": "password_confirmation",
+      "id": "register-password-confirm",
+      "type": "password",
+      "autocomplete": "",
+      "warnings": []
+    },
+    {
+      "name": "confirmation",
+      "id": "confirmation",
+      "type": "checkbox",
+      "autocomplete": "",
+      "warnings": []
+    },
+    {
+      "name": "organizer",
+      "id": "organizer",
+      "type": "checkbox",
+      "autocomplete": "",
+      "warnings": []
+    },
+    {
+      "name": "",
+      "id": "",
+      "type": "submit",
+      "autocomplete": "",
+      "warnings": []
+    }
+  ]
+}

@@ -1,86 +1,144 @@
 import { Builder, By, until } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
 import dotenv from 'dotenv';
-import { logTestResult } from '../logUtils.js'; // Logowanie wyniku testu
+import fs from 'fs';
 
-// Wczytanie zmiennych środowiskowych z pliku .env
 dotenv.config();
 const raw = (process.env.APP_URL || '').replace(/"/g, '').trim();
 const BASE_URL = raw.replace(/^https:\/\//i, 'http://');
 
-// Asynchroniczna funkcja testująca szybkie klikanie w przycisk logowania
-(async function rapidLoginClickTest() {
+// Ścieżka do istniejącego pliku logs.txt
+const logPath = '\\\\wsl.localhost\\Ubuntu\\home\\pgalimski\\inzynierka\\PracaDyplomowa\\selenium-tests\\Automated-Tests\\logs\\logs.txt';
+
+// Funkcja zapisująca wynik testu w istniejącym pliku logs.txt
+function logTestResult(testName, passed) {
+  const logEntry = `${testName}_Passed : ${passed}\n`;
+  try {
+    fs.appendFileSync(logPath, logEntry, 'utf8');
+    console.log(`Wynik testu zapisany w logs.txt: ${logEntry.trim()}`);
+  } catch (error) {
+    console.error(`Błąd podczas zapisywania do logs.txt: ${error.message}`);
+  }
+}
+
+(async function rapidLoginAttemptTest() {
   let driver;
   let testPassed = false;
 
   try {
-    // Konfiguracja opcji przeglądarki Chrome
     const options = new chrome.Options();
+<<<<<<< HEAD:selenium-tests/100_login_test/100_login_test.js
     options.addArguments('--disable-dev-shm-usage');       // Optymalizacja zużycia pamięci
     options.addArguments('--no-sandbox');                   // Wyłączenie sandboxa
     options.addArguments('--remote-debugging-port=9222');   // Port debugowania (opcjonalny)
+=======
+    options.addArguments('--headless', '--disable-dev-shm-usage', '--no-sandbox');
 
-    // Inicjalizacja sterownika przeglądarki
+    // Budujemy przeglądarkę Chrome z powyższymi ustawieniami
+>>>>>>> 354460e (update testów automatycznych):selenium-tests/Automated-Tests/100_login_test/100_login_test.js
+
     driver = await new Builder()
       .forBrowser('chrome')
       .setChromeOptions(options)
       .build();
 
-    // Ustawienie rozmiaru okna przeglądarki
+    // Ustawiamy rozmiar okna (niezbędne dla niektórych elementów strony)
+
     await driver.manage().window().setRect({ width: 1400, height: 1000 });
 
-    console.log('Przejście na stronę główną aplikacji...');
-    await driver.get(BASE_URL);
-    await driver.sleep(100);
+    console.log('=== Rozpoczęcie testu: 100 błędnych prób logowania ===');
+    console.log(`Przejście na stronę logowania: ${BASE_URL}/login`);
+    await driver.get(`${BASE_URL}/login`);
+    await driver.sleep(500);
 
-    // Liczniki sukcesów i błędów
+    // Pętla – 100 razy próbujemy zalogować się na fałszywego użytkownika
+
+
     let successCount = 0;
     let errorCount = 0;
     const attempts = 100;
 
-    console.log(`Rozpoczęcie ${attempts} prób kliknięcia przycisku "Zaloguj"...`);
-
     for (let i = 0; i < attempts; i++) {
       try {
-        // Wyszukanie przycisku logowania po klasie CSS
-        const loginBtn = await driver.wait(
-          until.elementLocated(By.css('a.header-login')),
-          200
+        console.log(`Próba nr ${i + 1}: logowanie z błędnymi danymi`);
+
+      // Znajdujemy pola do wpisania loginu, hasła i przycisk "Zaloguj"
+
+
+        const usernameInput = await driver.wait(until.elementLocated(By.css('input[name="login"]')), 3000);
+        const passwordInput = await driver.wait(until.elementLocated(By.css('input[name="password"]')), 3000);
+        const submitButton = await driver.wait(until.elementLocated(By.css('input[type="submit"]')), 3000);
+
+      // Upewniamy się, że przycisk jest widoczny na ekranie
+
+
+        await driver.executeScript("arguments[0].scrollIntoView(true);", submitButton);
+        await driver.sleep(300);
+
+        // Czyścimy pola i wpisujemy fałszywe dane logowania
+
+        await usernameInput.clear();
+        await passwordInput.clear();
+        await usernameInput.sendKeys(`fakeuser${i}@example.com`);
+        await passwordInput.sendKeys('wrongpassword');
+
+        // Czekamy aż przycisk będzie aktywny, a potem klikamy
+
+        await driver.wait(until.elementIsVisible(submitButton), 3000);
+        await driver.wait(until.elementIsEnabled(submitButton), 3000);
+        await submitButton.click();
+
+        // Oczekujemy na pojawienie się komunikatu błędu
+
+        const errorElement = await driver.wait(
+          until.elementLocated(By.css('.error-msg')),
+          5000
         );
-        await loginBtn.click();
+        const errorText = await errorElement.getText();
 
-        // Sprawdzenie, czy pojawił się formularz logowania
-        await driver.wait(until.elementLocated(By.css('form input[type="text"]')), 300);
+        // Sprawdzamy, czy komunikat jest zgodny z oczekiwaniami
 
-        successCount++;
+
+        if (errorText.includes('Podany użytkownik nie istnieje')) {
+          console.log(`Komunikat błędu poprawnie wykryty: "${errorText}"`);
+          successCount++;
+        } else {
+          console.log(`Komunikat błędu niezgodny: "${errorText}"`);
+          errorCount++;
+        }
+
+        await driver.get(`${BASE_URL}/login`);
+        await driver.sleep(100);
       } catch (err) {
-        // Zliczanie nieudanych prób (np. brak elementu lub timeout)
+        console.log(`Błąd podczas próby nr ${i + 1}: ${err.message}`);
         errorCount++;
+        await driver.get(`${BASE_URL}/login`);
+        await driver.sleep(100);
       }
-
-      // Powrót do strony głównej przed kolejną iteracją
-      await driver.get(BASE_URL);
     }
 
-    // Raport z wynikami testu
+    // Podsumowanie testu
+
+    console.log('=== Podsumowanie testu ===');
     console.log(`Liczba prób: ${attempts}`);
-    console.log(`Udane przejścia do logowania: ${successCount}`);
-    console.log(`Nieudane próby: ${errorCount}`);
+    console.log(`Poprawnie obsłużone błędne logowania: ${successCount}`);
+    console.log(`Nieudane próby (brak komunikatu lub błąd): ${errorCount}`);
 
-    // Ocena sukcesu testu — wymagane minimum 90% skuteczności
-    if (successCount >= 90) {
+    // Uznajemy test za zaliczony, jeśli co najmniej 90% prób zakończyło się poprawnym komunikatem błędu
+
+
+    if (successCount >= 0.9 * attempts) {
       testPassed = true;
+      console.log('Test zaliczony – ponad 90% prób zakończonych poprawnym komunikatem błędu.');
+    } else {
+      console.log('Test niezaliczony – zbyt mało poprawnych komunikatów błędu.');
     }
-
-    // Zamykanie przeglądarki po zakończeniu testu
+    // Zamykanie przeglądarki
     await driver.quit();
-
   } catch (error) {
-    // Obsługa ewentualnych błędów testu
-    console.error('Błąd podczas wykonywania testu:', error);
+    console.error('Błąd podczas wykonywania testu:', error.message);
     if (driver) await driver.quit();
   } finally {
-    // Zapisanie wyniku testu do logów
     logTestResult('100_login_test', testPassed);
   }
 })();

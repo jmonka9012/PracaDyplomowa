@@ -5,7 +5,7 @@
         "build": "vite build",
         "dev": "vite",
         "watch": "vite build --watch",
-        "test": "mocha selenium-tests/${npm_config_file}/${npm_config_file}.js"
+        "test": "mocha selenium-tests/Automated-Tests/${npm_config_file}/${npm_config_file}.js"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
@@ -25,6 +25,10 @@
         "@vitejs/plugin-vue": "^5.2.1",
         "@vuepic/vue-datepicker": "^11.0.2",
         "chai": "^5.2.0",
+<<<<<<< HEAD
+=======
+        "chromedriver": "^140.0.1",
+>>>>>>> 354460e (update testów automatycznych)
         "dotenv": "^16.4.7",
         "mocha": "^11.1.0",
         "npm-watch": "^0.13.0",
