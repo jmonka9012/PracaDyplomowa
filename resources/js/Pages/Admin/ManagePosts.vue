@@ -56,7 +56,7 @@ onMounted(() => {
                 @submit.prevent="FilterPosts()"
                 class="mb-20px mb-lg-10px form"
             >
-                <div class="d-flex flex-column col-12 col-lg-4">
+                <div class="d-flex flex-column col-12">
                     <div class="input-wrap mb-15px relative col-12">
                         <label for="CurrentSearchPhrase"
                             >Wyszukaj po nazwie</label
@@ -70,7 +70,7 @@ onMounted(() => {
                             <i class="fa fa-search search-icon"></i>
                         </div>
                     </div>
-                    <div class="input-wrap mb-15x col-12">
+                    <div class="input-wrap mb-15x col-12 col-lg-6">
                         <label class="" for="category">Kategoria postu</label>
                         <select
                             name="category"
