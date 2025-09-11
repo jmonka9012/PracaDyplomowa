@@ -39,7 +39,7 @@ const testName = 'event_details_test';
 
     // Oczekiwanie na przycisk "Zobacz więcej" i kliknięcie w niego
     const zobaczWiecejBtn = await driver.wait(
-      until.elementLocated(By.xpath("//a[contains(., 'Zobacz więcej') and contains(@class, 'event-link')]")),
+      until.elementLocated(By.xpath("//a[contains(@class, 'event__link') and contains(., 'Zobacz więcej')]")),
       10000
     );
     await zobaczWiecejBtn.click();

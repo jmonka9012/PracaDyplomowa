@@ -4,22 +4,13 @@ import chrome from 'selenium-webdriver/chrome.js';
 import dotenv from 'dotenv';
 import { logTestResult } from '../logUtils.js';
 
-// Wczytanie zmiennych środowiskowych (np. adresu aplikacji) z pliku .env
+// Wczytanie zmiennych środowiskowych z pliku .env
 dotenv.config();
-<<<<<<< HEAD:selenium-tests/backend_test/backend_test.js
 
 // Pobranie podstawowego URL aplikacji
-const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^https:/i, 'http:');
-
-// Ustalenie nazwy testu do logowania wyników
+const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '');
 const testName = 'backend_test';
 
-// Główna funkcja testowa
-=======
-const BASE_URL = process.env.APP_URL.replace(/(^"|"$)/g, '');
-const testName = 'backend_test';
-
->>>>>>> 354460e (update testów automatycznych):selenium-tests/Automated-Tests/backend_test/backend_test.js
 (async function backendTest() {
   let driver;
   let success = false;

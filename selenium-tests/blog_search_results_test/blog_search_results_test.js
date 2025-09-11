@@ -1,70 +1,86 @@
+// Import wymaganych modułów
 import { Builder, By, until } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
 import dotenv from 'dotenv';
 import { logTestResult } from '../logUtils.js';
 
-// Wczytanie zmiennych środowiskowych z pliku .env
+// Wczytanie zmiennych środowiskowych i normalizacja adresu bazowego aplikacji
 dotenv.config();
-const raw = (process.env.APP_URL || '').replace(/"/g, '').trim();
-const BASE_URL = raw.replace(/^https:\/\//i, 'http://');
+const BASE_URL = (process.env.APP_URL || '')
+  .replace(/"/g, '')
+  .trim()
+  .replace(/^https:\/\//i, 'http://');
 
-// Główna funkcja testowa: weryfikacja działania wyszukiwarki bloga
+// Fraza, której szukamy na blogu
+const SEARCH_TERM = 'Muzyka Metalowa w 2025';
+
 (async function blogSearchResultsTest() {
   let driver;
-  let testPassed = false;
+  let success = false;
+  let message = '';
 
   try {
-    // Konfiguracja opcji przeglądarki Chrome
+    // Konfiguracja przeglądarki Chrome
     const options = new chrome.Options();
-    options.addArguments('--headless=new');
-    options.addArguments('--disable-dev-shm-usage');
-    options.addArguments('--no-sandbox');
+    options.addArguments('--disable-dev-shm-usage', '--no-sandbox', '--headless=new');
 
-    // Inicjalizacja przeglądarki
+    // Utworzenie instancji przeglądarki
     driver = await new Builder()
       .forBrowser('chrome')
       .setChromeOptions(options)
       .build();
 
-    // Ustawienie rozdzielczości okna przeglądarki
+    // Ustawienie rozdzielczości okna
     await driver.manage().window().setRect({ width: 1400, height: 1000 });
 
-    console.log('Rozpoczęcie testu: wyszukiwanie na blogu');
+    console.log('=== Rozpoczęcie testu: wyszukiwanie na blogu ===');
 
-    // Otwarcie strony głównej
+    // Krok 1: Wejście na stronę główną
     await driver.get(BASE_URL);
-    await driver.sleep(1000); // Krótkie oczekiwanie na załadowanie strony
 
-    // Przejście do sekcji „Blog” poprzez kliknięcie linku
+    // Krok 2: Przejście do sekcji „Blog”
     const blogLink = await driver.wait(until.elementLocated(By.linkText('Blog')), 5000);
     await blogLink.click();
-    await driver.sleep(2000);
 
-    // Zlokalizowanie pola wyszukiwania i wpisanie frazy „test”
-    const searchInput = await driver.wait(
-      until.elementLocated(By.css('input[type="search"], input[type="text"]')),
-      5000
-    );
-    await searchInput.sendKeys('test');
-    await searchInput.sendKeys('\n'); // Zatwierdzenie wyszukiwania
-    await driver.sleep(2000);
+    // Krok 3: Wpisanie frazy wyszukiwania
+    const searchInput = await driver.wait(until.elementLocated(By.name('search')), 5000);
+    await searchInput.sendKeys(SEARCH_TERM);
 
-    // Pobranie wyników wyszukiwania (np. wpisów blogowych)
-    const results = await driver.findElements(By.css('article, .post, .blog-entry'));
-    const resultCount = results.length;
+    // Krok 4: Kliknięcie przycisku „Szukaj”
+    const searchButton = await driver.findElement(By.css('button[type="submit"]'));
+    await searchButton.click();
 
-    // Wyświetlenie i zapisanie liczby wyników w logach
-    console.log(`Liczba wyników wyszukiwania: ${resultCount}`);
-    logTestResult('blog_search_results_test', true, `Znaleziono ${resultCount} wyników`);
+    // Krok 5: Poczekanie na wyniki wyszukiwania
+    await driver.wait(until.elementLocated(By.css('.post-item__title a')), 10000);
 
-    testPassed = true;
+    // Pobranie wszystkich tytułów wpisów (bez trzymania referencji do elementów)
+    const titleTexts = await driver.executeScript(() => {
+      return Array.from(document.querySelectorAll('.post-item__title a'))
+        .map(el => el.textContent.trim().toLowerCase());
+    });
 
-  } catch (error) {
-    // Obsługa wyjątków i zapisanie błędu w logach
-    console.error('Błąd wykonania testu:', error.message);
-    logTestResult('blog_search_results_test', false, error.message);
+    // Logowanie liczby wyników
+    console.log(`Znaleziono ${titleTexts.length} wyników wyszukiwania.`);
+
+    // Sprawdzenie, czy szukany wpis istnieje w wynikach
+    const found = titleTexts.includes(SEARCH_TERM.toLowerCase());
+
+    if (found) {
+      success = true;
+      message = `Znaleziono wpis: "${SEARCH_TERM}"`;
+    } else {
+      message = `Nie znaleziono wpisu: "${SEARCH_TERM}"`;
+    }
+
+    console.log(message);
+
+  } catch (err) {
+    // Obsługa błędów
+    message = `Błąd wykonania testu: ${err.message}`;
+    console.error(message);
   } finally {
-    // Zamknięcie przeglądarki, niezależnie od wyniku testu
-    await driver.quit();
+    // Zamknięcie przeglądarki i zapis wyniku do logów
+    if (driver) await driver.quit();
+    logTestResult('blog_search_results_test', success, message);
   }
 })();

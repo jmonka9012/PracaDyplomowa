@@ -1,3 +1,4 @@
+// Import wymaganych modułów
 import { Builder, By } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
 import edge from 'selenium-webdriver/edge.js';
@@ -81,12 +82,19 @@ const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^h
         const title = await driver.getTitle();
         console.log(`Tytuł strony: "${title}"`);
 
-        // Weryfikacja obecności elementu
-        const header = await driver.findElements(By.css('header'));
-        if (header.length > 0) {
-          console.log('Nagłówek został odnaleziony.');
+        // Weryfikacja obecności i widoczności nagłówka
+        const headerElements = await driver.findElements(By.css('header'));
+        if (headerElements.length > 0) {
+          const visible = await headerElements[0].isDisplayed();
+          if (visible) {
+            console.log('Nagłówek jest widoczny.');
+          } else {
+            console.warn('Nagłówek istnieje, ale nie jest widoczny.');
+            allPassed = false;
+          }
         } else {
           console.warn('Brak nagłówka na stronie.');
+          allPassed = false;
         }
 
         // Zakończenie sesji przeglądarki
