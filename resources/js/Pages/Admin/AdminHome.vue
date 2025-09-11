@@ -2,6 +2,8 @@
 import { Link, router } from "@inertiajs/vue3";
 import { reactive, ref, onMounted } from "vue";
 import ResetObject from "../../Utilities/resetObject.js";
+import useAuth from "@/Utilities/useAuth";
+const { user, isLoggedIn } = useAuth();
 
 const props = defineProps({
     genres: {
@@ -53,7 +55,7 @@ function SetFeaturedCategories() {
     <section class="pt-50px pb-50px">
         <div class="container">
             <div class="admin-card__container w-100 mb-80px">
-                <Link :href="route('admin.events')" class="w-100 admin-card">
+                <Link v-if="user.permission_level < 2" :href="route('admin.events')" class="w-100 admin-card">
                     <i class="mb-20px fa fa-calendar"></i>
                     <p class="fw-bold fs-24">Zarządzaj wydarzeniami</p>
                     <p class="">
@@ -70,7 +72,7 @@ function SetFeaturedCategories() {
                     <p class="fw-bold fs-24">Zarządzaj wpisami</p>
                     <p class="">Usuń posty</p>
                 </Link>
-                <Link :href="route('admin.users')" class="w-100 admin-card">
+                <Link v-if="user.permission_level < 2" :href="route('admin.users')" class="w-100 admin-card">
                     <i class="mb-20px fa fa-address-card"></i>
                     <p class="fw-bold fs-24">Użytkownicy</p>
                     <p class="">
@@ -78,7 +80,7 @@ function SetFeaturedCategories() {
                         weryfikacyjne, itd?
                     </p>
                 </Link>
-                <Link
+                <Link v-if="user.permission_level < 2"
                     :href="route('admin.customer-service')"
                     class="w-100 admin-card"
                 >
@@ -89,37 +91,39 @@ function SetFeaturedCategories() {
                     </p>
                 </Link>
             </div>
-            <h3 class="mb-30px w-100">Promowane kategorie (strona główna)</h3>
-            <div class="featured-categories">
-                <div v-for="i in 5" :key="i" class="featured-categories__cat-box">
-                    <div class="featured-categories__label">Obecna ikona {{i}}:</div>
-                    <div class="featured-categories__icon-box">
-                        <img    :src="`/storage/${props.featured_categories[i-1].image_path}`"
-                               alt="">
+            <div v-if="user.permission_level < 2" class="d-flex flex-column align-items-center">
+                <h3 class="mb-30px w-100">Promowane kategorie (strona główna)</h3>
+                <div  class="featured-categories">
+                    <div v-for="i in 5" :key="i" class="featured-categories__cat-box">
+                        <div class="featured-categories__label">Obecna ikona {{i}}:</div>
+                        <div class="featured-categories__icon-box">
+                            <img    :src="`/storage/${props.featured_categories[i-1].image_path}`"
+                                    alt="">
+                        </div>
+                        <label class="upload-label"><input @change="HandleIconChange($event, i-1)" accept=".svg,image/svg+xml" type="file"/>Dodaj plik</label>
+                        <div v-if="iconPreviews[i-1]">
+                            <div class="featured-categories__label">Nowa ikona:</div>
+                            <div
+                                class="featured-categories__icon-box"
+                                v-html="iconPreviews[i-1]"
+                            ></div>                    </div>
+                        <label class="featured-categories__label">Obecna kategoria:</label>
+                        <select class="featured-categories__select" v-model="featuredCategories[i-1].id">
+                            <option disabled :value="null">
+                                Wybierz kategorię
+                            </option>
+                            <option
+                                :key="genre.id"
+                                :value="genre.id"
+                                v-for="genre in props.genres"
+                                :selected="Number(genre.id) === Number(featuredCategories[i-1].id)">
+                                {{ genre.genre_name }}
+                            </option>
+                        </select>
                     </div>
-                    <label class="upload-label"><input @change="HandleIconChange($event, i-1)" accept=".svg,image/svg+xml" type="file"/>Dodaj plik</label>
-                    <div v-if="iconPreviews[i-1]">
-                        <div class="featured-categories__label">Nowa ikona:</div>
-                        <div
-                            class="featured-categories__icon-box"
-                            v-html="iconPreviews[i-1]"
-                        ></div>                    </div>
-                    <label class="featured-categories__label">Obecna kategoria:</label>
-                    <select class="featured-categories__select" v-model="featuredCategories[i-1].id">
-                        <option disabled :value="null">
-                            Wybierz kategorię
-                        </option>
-                        <option
-                            :key="genre.id"
-                            :value="genre.id"
-                            v-for="genre in props.genres"
-                            :selected="Number(genre.id) === Number(featuredCategories[i-1].id)">
-                            {{ genre.genre_name }}
-                        </option>
-                    </select>
                 </div>
+                <button @click="SetFeaturedCategories()" class="ml-auto mr-auto btn btn--md btn--hovprim">Ustaw kategorie</button>
             </div>
-            <button @click="SetFeaturedCategories()" class="ml-auto mr-auto btn btn--md btn--hovprim">Ustaw kategorie</button>
         </div>
     </section>
 </template>
