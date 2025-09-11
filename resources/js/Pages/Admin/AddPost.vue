@@ -100,19 +100,19 @@ function submitPostRequest() {
 <template>
     <section class="pt-50px pb-50px">
         <div class="container">
-            <div
+<!--            <div
                 class="d-flex column-gap-10px mb-20px flex-wrap-wrap row-gap-20px"
             >
-                <button @click="console.log(postForm)" class="btn btn--white">
+                <button @click="console.log(postForm)" class="btn btn&#45;&#45;white">
                     Loguj zawartość formularza
                 </button>
-                <button @click="console.log(errors)" class="btn btn--white">
+                <button @click="console.log(errors)" class="btn btn&#45;&#45;white">
                     Loguj errory
                 </button>
-                <button @click="ResetObject(errors)" class="btn btn--white">
+                <button @click="ResetObject(errors)" class="btn btn&#45;&#45;white">
                     Resetuj errory
                 </button>
-            </div>
+            </div>-->
 
             <form
                 class="form"
