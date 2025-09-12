@@ -357,10 +357,63 @@ $grid-breakpoints: (
     }
 }
 
-///dodać reszte xl później
-
+.col-xl-1 {
+    @include media-breakpoint-up(xl) {
+        width: 8.33%;
+    }
+}
+.col-xl-2 {
+    @include media-breakpoint-up(xl) {
+        width: 16.66%;
+    }
+}
+.col-xl-3 {
+    @include media-breakpoint-up(xl) {
+        width: 25%;
+    }
+}
+.col-xl-4 {
+    @include media-breakpoint-up(xl) {
+        width: 33.33%;
+    }
+}
+.col-xl-5 {
+    @include media-breakpoint-up(xl) {
+        width: 41.66%;
+    }
+}
+.col-xl-6 {
+    @include media-breakpoint-up(xl) {
+        width: 50%;
+    }
+}
+.col-xl-7 {
+    @include media-breakpoint-up(xl) {
+        width: 58.33%;
+    }
+}
 .col-xl-8 {
     @include media-breakpoint-up(xl) {
         width: 66.66%;
+    }
+}
+.col-xl-9 {
+    @include media-breakpoint-up(xl) {
+        width: 75%;
+    }
+}
+.col-xl-10 {
+    @include media-breakpoint-up(xl) {
+        width: 83.33%;
+    }
+}
+.col-xl-11 {
+    @include media-breakpoint-up(xl) {
+        width: 91.66%;
+    }
+}
+.col-xl-12 {
+    @include media-breakpoint-up(xl) {
+        width: 100%;
     }
 }
