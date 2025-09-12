@@ -68,7 +68,7 @@ function submitFilterRequest() {
     <section class="pb-100px">
         <div class="container">
             <Tabs class="col-12">
-                <Tab routeName="jacek.test1" title="Zatwierdzone wydarzenia">
+                <Tab title="Zatwierdzone wydarzenia">
                     <h3 class="mb-30px text-center">Zatwierdzone wydarzenia</h3>
                     <form
                         class="select-filters col-12 col-lg-8 align-items-center d-flex flex-column ml-auto mr-auto"
@@ -88,10 +88,6 @@ function submitFilterRequest() {
                             :options="genres"
                             placeholder="Wybierz kategorie"
                         ></MultiSelect>
-<!--                        <DatePicker
-                            v-model="filterRequest.event_date"
-                            format="MM/dd/yyyy"
-                        ></DatePicker>-->
                         <input
                             id="submitFilter"
                             class="btn cursor-pointer btn--md btn--hovprim mt-30px"
@@ -146,10 +142,6 @@ function submitFilterRequest() {
                             :options="genres"
                             placeholder="Wybierz kategorie"
                         ></MultiSelect>
-<!--                        <DatePicker
-                            v-model="filterRequest.pending_date"
-                            format="MM/dd/yyyy"
-                        ></DatePicker>-->
                         <input
                             id="submitFilter"
                             class="btn cursor-pointer btn--md btn--hovprim mt-30px"

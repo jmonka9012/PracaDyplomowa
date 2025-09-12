@@ -109,7 +109,7 @@ function AcceptEvent(eID) {
                 <a v-if="props.pending" @click="openConfirm('accept', event.id)">Zatwierdź</a>
                 <a :href="`/${props.pending ? 'admin/' + event.event_url : event.event_url}`" class="mr-6px"
                    target="_blank">Podgląd</a>
-                <button class="btn-link" @click="toggle">Szczegóły</button>
+                <button v-if="!props.pending" class="btn-link" @click="toggle">Szczegóły</button>
             </div>
         </td>
         <td>{{ event.event_date }}</td>
@@ -121,8 +121,6 @@ function AcceptEvent(eID) {
         <td><a :href="`mailto:${event.contact_email}`">Główny email</a></td>
         <td><a :href="`mailto:${event.contact_email_additional}`">Dodatkowy email</a></td>
     </tr>
-
-    <!-- Confirmation popup (shared for accept/deny) -->
     <div
         v-if="confirmAction.id === event.id"
         class="post-list-item-popup-holder"
@@ -144,11 +142,10 @@ function AcceptEvent(eID) {
             </div>
         </div>
     </div>
-
-    <transition @enter="enter"
+    <transition @enter="enter" v-show="!props.pending"
                 @after-enter="afterEnter"
                 @before-leave="beforeLeave">
-        <tr v-if="isOpen" :aria-expanded="isOpen" class="event-details">
+        <tr  v-if="isOpen" :aria-expanded="isOpen" class="event-details">
             <td class="col-12 p-0" colspan="10">
                 <div
                     ref="detailsWrapper"

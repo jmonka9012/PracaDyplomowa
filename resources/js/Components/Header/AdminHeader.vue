@@ -93,7 +93,7 @@ onBeforeUnmount(() => {
                                 ><span>Strona główna</span></Link
                             >
                         </li>
-                        <li>
+                        <li v-if="user.permission_level < 2">
                             <Link :href="route('admin.events')"
                                 ><span>Wydarzenia</span></Link
                             >
@@ -108,12 +108,12 @@ onBeforeUnmount(() => {
                                 ><span>Posty</span></Link
                             >
                         </li>
-                        <li>
+                        <li v-if="user.permission_level < 2">
                             <Link :href="route('admin.users')"
                                 ><span>Użytkownicy</span></Link
                             >
                         </li>
-                        <li>
+                        <li v-if="user.permission_level < 2">
                             <Link :href="route('admin.customer-service')"
                                 ><span>Obsługa Klienta</span></Link
                             >
@@ -168,7 +168,7 @@ onBeforeUnmount(() => {
                                             ><span>Strona główna</span></Link
                                         >
                                     </li>
-                                    <li>
+                                    <li v-if="user.permission_level < 2">
                                         <Link
                                             v-if="user.permission_level <= 2"
                                             :href="route('admin.events')"
@@ -185,14 +185,14 @@ onBeforeUnmount(() => {
                                             ><span>Posty</span></Link
                                         >
                                     </li>
-                                    <li>
+                                    <li v-if="user.permission_level < 2">
                                         <Link
                                             v-if="user.permission_level <= 1"
                                             :href="route('admin.users')"
                                             ><span>Użytkownicy</span></Link
                                         >
                                     </li>
-                                    <li>
+                                    <li v-if="user.permission_level < 2">
                                         <Link
                                             v-if="user.permission_level <= 2"
                                             :href="
