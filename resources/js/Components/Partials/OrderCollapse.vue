@@ -155,7 +155,7 @@ const confirmCancelOrder = () => {
                     <div v-html="ticket.is_seat === 1 ? `${ticket.seat_data.price} PLN` : `${ticket.standing_ticket_data.price} PLN`"></div>
 
                     <div v-if="props.admin">
-                        <a class="btn btn--sm btn--hovprim" @click="openTicketConfirm(ticket.ticket_id)">Anuluj miejsce</a>
+                        <a class="btn  btn--hovprim" @click="openTicketConfirm(ticket.ticket_id)">Anuluj miejsce</a>
                     </div>
 
                     <!-- Popup anulowanie miejsca  -->
