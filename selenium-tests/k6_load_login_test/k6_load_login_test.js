@@ -1,9 +1,9 @@
 import http from 'k6/http';
-import { check, sleep } from 'selenium-tests/k6_load_login_test/k6';
+import { check, sleep } from 'k6';
 import { textSummary } from 'https://jslib.k6.io/k6-summary/0.0.1/index.js';
 
-// Pobranie zmiennej APP_URL z pliku .env lub ustawienie domyślnej wartości
-const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^https:/i, 'http:');
+// Pobranie zmiennej APP_URL z parametru środowiskowego lub ustawienie domyślnej wartości
+const BASE_URL = __ENV.APP_URL || 'https://eventmachen.ddev.site/';
 
 // Konfiguracja testu wydajnościowego
 export const options = {
@@ -37,14 +37,14 @@ export function handleSummary(data) {
   // Obiekt zawierający uproszczoną informację o wyniku testu
   const resultLog = { logout_test_Passed: testResult };
 
-  return {
-    // Zapis uproszczonego wyniku testu (true/false)
-    '../logs/logs.txt': JSON.stringify(resultLog, null, 2),
+ return {
+  // Zapis uproszczonego wyniku testu (true/false)
+  'selenium-tests/logs/logs.txt': JSON.stringify(resultLog, null, 2),
 
-    // Zapis szczegółowego raportu testowego
-    '../logs/details.txt': textSummary(data, {
-      indent: ' ',
-      enableColors: false,
-    }),
-  };
+  // Zapis szczegółowego raportu testowego
+  'selenium-tests/logs/details.txt': textSummary(data, {
+    indent: ' ',
+    enableColors: false,
+  }),
+};
 }

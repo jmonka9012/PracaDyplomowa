@@ -87,8 +87,14 @@ const pagesToCheck = [
         meta: metaTags
       });
 
-     console.log(`Sprawdzono stronę: ${pathSegment}, title="${title}"`);
+      console.log(`Sprawdzono stronę: ${pathSegment}, title="${title}"`);
+    }
 
+    // Sprawdzenie unikalności tytułów
+    const titles = report.pages.map(p => p.title);
+    const uniqueTitles = new Set(titles);
+    if (uniqueTitles.size < titles.length) {
+      console.warn('Uwaga: Wiele stron ma ten sam tytuł. Może to wpływać negatywnie na SEO i czytelność.');
     }
 
     // Zapisanie raportu do pliku JSON

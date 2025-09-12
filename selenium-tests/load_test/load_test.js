@@ -10,11 +10,11 @@ const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^h
 // Konfiguracja testu
 const INSTANCES = 18; // Liczba równoległych instancji przeglądarki (userów)
 const ACTIONS_PER_INSTANCE = 10; // Liczba akcji do wykonania przez jedną instancję (ile czynności wykona każdy user)
-const ACTIONS = ['Login', 'Kontakt', 'Search', 'Scroll']; // Dostępne akcje testowe
+const ACTIONS = ['Zaloguj', 'Kontakt', 'Search', 'Scroll']; // Dostępne akcje testowe
 
 // Statystyki testu
 const stats = {
-  Login: 0,
+  Zaloguj: 0,
   Kontakt: 0,
   Search: 0,
   Scroll: 0,
@@ -27,7 +27,7 @@ function losowaAkcja() {
   return ACTIONS[Math.floor(Math.random() * ACTIONS.length)];
 }
 
-// Kliknięcie w link tekstowy (np. Login, Kontakt)
+// Kliknięcie w link tekstowy (np. Zaloguj, Kontakt)
 async function clickLink(driver, linkText, id) {
   try {
     const element = await driver.wait(until.elementLocated(By.linkText(linkText)), 7000);
@@ -43,10 +43,12 @@ async function clickLink(driver, linkText, id) {
 // Wykonanie akcji wyszukiwania
 async function search(driver, id) {
   try {
-    const pole = await driver.wait(until.elementLocated(By.css('input[type="search"], input[type="text"]')), 7000);
+    // Wyszukanie pola tekstowego
+    const pole = await driver.wait(until.elementLocated(By.css('input.hero-input')), 7000);
     await pole.sendKeys('test');
 
-    const przycisk = await driver.wait(until.elementLocated(By.css('button[type="submit"], input[type="submit"]')), 7000);
+    // Wyszukanie przycisku "Szukaj"
+    const przycisk = await driver.wait(until.elementLocated(By.css('button.hero-search')), 7000);
     await przycisk.click();
 
     console.log(`Instancja ${id}: Wykonano wyszukiwanie`);
@@ -56,6 +58,7 @@ async function search(driver, id) {
     stats.Nieudane++;
   }
 }
+
 
 // Scrollowanie strony w losowe miejsce
 async function scroll(driver, id) {
@@ -69,6 +72,7 @@ async function scroll(driver, id) {
 async function powrot(driver, id) {
   try {
     await driver.get(BASE_URL);
+    await driver.sleep(1000); // Dodano opóźnienie po załadowaniu strony
     console.log(`Instancja ${id}: Powrót na stronę główną`);
     stats.Powrot++;
   } catch (err) {
@@ -99,7 +103,7 @@ async function uruchomInstancje(id) {
       const akcja = losowaAkcja();
 
       switch (akcja) {
-        case 'Login':
+        case 'Zaloguj':
         case 'Kontakt':
           await clickLink(driver, akcja, id);
           break;
