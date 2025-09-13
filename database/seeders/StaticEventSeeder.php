@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\OrganizerInformation;
 use Illuminate\Database\Seeder;
 use App\Models\Events\Event;
 use App\Models\Events\Genre;
@@ -16,6 +17,8 @@ class StaticEventSeeder extends Seeder
     public function run(): void
     {
         $hall = Hall::with('sections')->first();
+        $organizer = OrganizerInformation::first();
+
 
         if (!$hall) {
             $this->command->error('No hall found, run migration first.');
@@ -45,6 +48,7 @@ class StaticEventSeeder extends Seeder
         $events =[
             [
                 'event_name' => 'David Bowie 2020s',
+                'organizer_id' => $organizer->id,
                 'event_date' => now()->addMonth(),
                 'event_start' => '09:00:00',
                 'event_end' => '17:00:00',
@@ -59,6 +63,7 @@ class StaticEventSeeder extends Seeder
             ],
             [
                 'event_name' => 'David Bowie 2070s',
+                'organizer_id' => $organizer->id,
                 'event_date' => now()->addYears(50),
                 'event_start' => '00:00:00',
                 'event_end' => '24:00:00',
@@ -73,6 +78,7 @@ class StaticEventSeeder extends Seeder
             ],
             [
                 'event_name' => 'Motorhead 2025',
+                'organizer_id' => $organizer->id,
                 'event_date' => now()->addMonths(5),
                 'event_start' => '12:00:00',
                 'event_end' => '17:00:00',
@@ -87,6 +93,7 @@ class StaticEventSeeder extends Seeder
             ],
             [
                 'event_name' => 'Opeth Reveries 202X',
+                'organizer_id' => $organizer->id,
                 'event_date' => now()->addMonths(8),
                 'event_start' => '12:00:00',
                 'event_end' => '13:00:00',
@@ -101,6 +108,7 @@ class StaticEventSeeder extends Seeder
             ],
             [
                 'event_name' => 'Acid Bath.mp4',
+                'organizer_id' => $organizer->id,
                 'event_date' => now()->addYear(),
                 'event_start' => '06:06:06',
                 'event_end' => '07:07:07',
@@ -115,6 +123,7 @@ class StaticEventSeeder extends Seeder
             ],
             [
                 'event_name' => 'System Of A Down Reunion',
+                'organizer_id' => $organizer->id,
                 'event_date' => now()->addYears(2),
                 'event_start' => '10:00:00',
                 'event_end' => '15:00:00',
@@ -130,6 +139,7 @@ class StaticEventSeeder extends Seeder
             
             [
                 'event_name' => 'Archive Test Event',
+                'organizer_id' => $organizer->id,
                 'event_date' => now()->subYears(value: 2),
                 'event_start' => '10:00:00',
                 'event_end' => '15:00:00',

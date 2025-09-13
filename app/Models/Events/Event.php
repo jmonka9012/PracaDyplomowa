@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models\Events;
+use App\Models\OrganizerInformation;
 use App\Models\Tickets\Ticket;
 use App\Models\EventSeats\EventSeat;
 use App\Models\EventStandingTickets\EventStandingTicket;
@@ -62,5 +63,10 @@ class Event extends EventBase
     public function orders()
     {
         return $this->hasMany(Order::class, 'event_id');
+    }
+
+    public function organizer()
+    {
+        return $this->belongsTo(OrganizerInformation::class, 'organizer_id');
     }
 }

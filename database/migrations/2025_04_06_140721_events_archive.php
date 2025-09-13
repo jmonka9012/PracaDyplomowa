@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('events_archive', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('organizer_id')->nullable();
             $table->string('event_name');
             //$table->string('event_additional_url');
             $table->string('slug')->nullable();
@@ -28,6 +29,10 @@ return new class extends Migration
             $table->string('image_path')->nullable();
             $table->dateTime('archived_at')->useCurrent();
             $table->timestamps();
+
+            $table->foreign('organizer_id')
+                ->references('id')
+                ->on('organizer_information');
         });
     }
 

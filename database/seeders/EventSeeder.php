@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\OrganizerInformation;
 use Illuminate\Database\Seeder;
 use App\Models\Events\Event;
 use App\Models\Events\Genre;
@@ -18,6 +19,8 @@ class EventSeeder extends Seeder
 
         $halls = Hall::with('sections')->get();
 
+        $organizers = OrganizerInformation::pluck('id')->all();
+
         if ($halls->isEmpty()) {
             $this->command->error('No halls found. Run migration and hall seeder first.');
             return;
@@ -27,6 +30,7 @@ class EventSeeder extends Seeder
 
         for ($i = 0; $i < 100; $i++) {
             $hall = $halls->random();
+            $randomOrganizer = $faker->randomElement($organizers);
 
             $placeholderImages = [
                 '/storage/demo/images/example1.jpg',
@@ -80,6 +84,7 @@ class EventSeeder extends Seeder
                 'Wydarzenie dla rodzin',
             ]),
             'event_location' => $hall->id,
+            'organizer_id' => $randomOrganizer,
             'image_path' => $faker->randomElement([
                 'demo/posters/example1.jpg',
                 'demo/posters/example2.jpg',

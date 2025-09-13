@@ -33,7 +33,7 @@ class PendingEventsController extends Controller
             'events' => PendingEventResource::collection($events)->response()->getData(true),
 
             'genres' => $genres,
-        ]);
+        ])->with('title', 'Zarządzanie wydarzeniami');;
     }
 
     public function showData(Request $request)
@@ -65,6 +65,7 @@ class PendingEventsController extends Controller
             'hall.sections',
             'seats.section',
             'standingTickets.section',
+            'organizer'
         ]);
 
         $sortField = $request->input('event_sort_field', 'event_date');
@@ -118,6 +119,7 @@ class PendingEventsController extends Controller
             'hall.sections',
             'seats.section',
             'standingTickets.section',
+            'organizer'
         ]);
 
 

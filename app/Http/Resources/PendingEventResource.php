@@ -24,6 +24,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property \DateTime $created_at Datetime the event entry was created
  * @property \DateTime $updated_at Datetime the event entry was last edited
  * @property mixed $genres database entry of the genre(s) the event is tagged with
+ * @property mixed $organizer database entry of the organizer information
  */
 
 class PendingEventResource extends JsonResource
@@ -83,6 +84,9 @@ class PendingEventResource extends JsonResource
                 : null,
             'image_path' => $this->image_path,
             'pending' => $this->pending,
+            'organizer' => $this->whenLoaded('organizer', function () {
+                return new AdminPanelOrgarnizerData($this->organizer);
+            }),
         ];
     }
 }

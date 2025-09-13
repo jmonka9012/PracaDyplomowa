@@ -8,10 +8,12 @@ use App\Models\Hall;
 use App\Models\EventSeats\EventSeat;
 use App\Models\EventStandingTickets\EventStandingTicket;
 use App\Models\Events\Genre;
+use App\Models\OrganizerInformation;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 use App\Http\Requests\RequestEventRequest;
+use Illuminate\Support\Facades\Auth;
 
 class RequestEventController extends Controller
 {
@@ -23,7 +25,7 @@ class RequestEventController extends Controller
         return Inertia::render('Events/RequestEvent', [
             'halls' => $halls,
             'genres' => $genres
-        ]);
+        ])->with('title', 'Zorganizuj Wydarzenie');;
     }
 
     public function showData()
@@ -37,6 +39,10 @@ class RequestEventController extends Controller
     {
 
         $validatedData = $request->validated();
+
+        $user = Auth::user();
+
+        $organizer = $user->organizer;
 
         $genres = collect($validatedData['genre'])->pluck('value')->toArray();
         unset($validatedData['genre']);
@@ -58,6 +64,7 @@ class RequestEventController extends Controller
 
         $event = Event::create([
             'event_name'=> $validatedData['event_name'],
+            'organizer_id' => $organizer->id,
             //'event_additional_url'=> $validatedData['event_additional_url'],
             'event_date'=> $validatedData['event_date'],
             'event_start'=> $validatedData['event_start'],

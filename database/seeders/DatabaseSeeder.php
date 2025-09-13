@@ -13,9 +13,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             GenreSeeder::class,
+            StaticUserSeeder::class,
             StaticHallSeeder::class,
             StaticEventSeeder::class,
-            StaticUserSeeder::class,
             StaticAuthorSeeder::class,
             StaticBlogPostSeeder::class,
             StaticOrganizerSeeder::class,
