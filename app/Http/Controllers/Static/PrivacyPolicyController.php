@@ -9,6 +9,6 @@ class PrivacyPolicyController extends Controller
 {
     public function index()
     {
-        return Inertia::render('PrivacyPolicy');
+        return Inertia::render('PrivacyPolicy')->with('title', 'Polityka Prywatności');
     }
 }

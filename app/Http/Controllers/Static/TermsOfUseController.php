@@ -9,6 +9,6 @@ class TermsOfUseController extends Controller
 {
     public function index()
     {
-        return Inertia::render('TermsOfUse');
+        return Inertia::render('TermsOfUse')->with('title', 'Warunki Użytkowania');
     }
 }

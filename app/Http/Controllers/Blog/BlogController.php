@@ -24,12 +24,14 @@ class BlogController extends Controller
             return redirect()->route('error404');
         }
 
+        $blogTitle = $blog->blog_post_name;
+
         $relatedPosts = $blog->getRelatedPosts();
 
         return Inertia::render('Blog/BlogSingle', [
             'blog_post' => new BlogResource($blog),
             'related_posts' => BlogPostBrowserResource::collection($relatedPosts),
-        ]);
+        ])->with('title', $blogTitle);
     }
 
     public function showData(BlogPost $blog)
@@ -88,6 +90,6 @@ class BlogController extends Controller
             'blog_posts' => BlogPostBrowserResource::collection($blog_posts)->response()->getData(true),
             'filter' => $request->input('blog_post_type'),
             'blogPostTypes' => $blogPostTypes
-        ]);
+        ])->with('title', 'Przeglądarka Bloga');
     }
 }

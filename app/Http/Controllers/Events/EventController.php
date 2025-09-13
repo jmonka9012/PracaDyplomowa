@@ -30,11 +30,12 @@ class EventController extends Controller
         }
         
         $closestEvents = $event->getRelatedEvents()->load('genres', 'standingTickets', 'standingTickets');
+        $eventTitle = $event->event_name;
 
         return Inertia::render('Events/EventSingle', [
             'event' => new EventResource($event),
             'related_events' => EventBrowserResource::collection($closestEvents)
-        ]);
+        ])->with('title', $eventTitle);
     }
 
     public function showData(Event $event)
@@ -66,11 +67,12 @@ class EventController extends Controller
         }
         
         $closestEvents = $event->getRelatedEvents()->load('genres', 'standingTickets', 'standingTickets');
+        $eventTitle = $event->event_name;
 
         return Inertia::render('Events/EventSingle', [
             'event' => new EventResource($event),
             'related_events' => EventBrowserResource::collection($closestEvents)
-        ]);
+        ])->with('title', $eventTitle);
     }
 
 
@@ -128,7 +130,7 @@ class EventController extends Controller
                 'date_to' => $request->input('date_to'),
                 'date' => $request->input('date')
             ]
-        ]);
+        ])->with('title', 'Przeglądarka Wydarzeń');
     }
 
     public function eventBrowserData(Event $event)

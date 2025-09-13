@@ -48,7 +48,7 @@ class MyAccountController extends Controller
             'support_tickets' => SupportTicketResource::collection($supportTickets),
             'user_data' => $userData,
             'orders' => $orders->response()->getData(true)
-        ]);
+        ])->with('title', 'Moje Konto');
     }
 
     public function store(MyAccountDataChangeRequest $request)

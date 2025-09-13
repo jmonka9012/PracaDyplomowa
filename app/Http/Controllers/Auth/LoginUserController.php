@@ -17,7 +17,7 @@ class LoginUserController extends Controller
         return Inertia::render('SignIn', [
             'message' => 'Logowanie',
             'csrf_token' => csrf_token(),
-        ]);
+        ])->with('title', 'Zaloguj się');
     }
 
     public function store(Request $request): RedirectResponse

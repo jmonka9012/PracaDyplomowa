@@ -24,7 +24,7 @@ class ManagePostsController extends Controller
         return Inertia::render('Admin/ManagePosts', [
             'blogPostTypes' => $blogPostTypes,
             'blog_posts' => BlogPostBrowserResource::collection($blogPosts)->response()->getData(true)
-        ]);
+        ])->with('title', 'Zarządzaj Postami');
     }
 
     public function blogBrowserAdminShowData(Request $request)

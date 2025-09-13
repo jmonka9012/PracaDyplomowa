@@ -44,7 +44,7 @@ class HomeController extends Controller
             'events' => EventBrowserResource::collection($upcomingEvents)->resolve(),
             'blog_posts' => BlogPostBrowserResource::collection($newestBlogPosts)->resolve(),
             'featured_categories' => $featuredCategories
-        ]);
+        ])->with('title', 'Event Machen');
     }
 
     public function showData()

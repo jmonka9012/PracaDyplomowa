@@ -18,6 +18,6 @@ class AdminHomeController extends Controller
         return Inertia::render('Admin/AdminHome', [
             'genres' => $genres,
             'featured_categories' => $featuredCategories
-        ]);
+        ])->with('title', 'Panel Administratora');;
     }
 }

@@ -50,7 +50,7 @@ class CustomerServiceController extends Controller
         return Inertia::render('Admin/CustomerService', [
             'support_tickets' =>SupportTicketResource::collection($tickets)->response()->getData(true),
             'orders' => $orders
-        ]);
+        ])->with('title', 'Obsługa Klienta');
     }
 
     public function showData(Request $request)

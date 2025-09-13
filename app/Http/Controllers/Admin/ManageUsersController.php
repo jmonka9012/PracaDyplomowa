@@ -23,7 +23,7 @@ class ManageUsersController extends Controller
             return redirect()->route('admin.users', ['page' => 1] + $request->except('page'));
         }
         
-        return Inertia::render('Admin/ManageUsers', $this->getPageData($request));
+        return Inertia::render('Admin/ManageUsers', $this->getPageData($request))->with('title', 'Zarządzaj Użytkownikami');
     }
 
     public function showData(Request $request)

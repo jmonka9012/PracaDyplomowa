@@ -9,6 +9,6 @@ class FAQController extends Controller
 {
     public function index()
     {
-        return Inertia::render('FAQ');
+        return Inertia::render('FAQ')->with('title', 'Często Zadawane Pytania');
     }
 }

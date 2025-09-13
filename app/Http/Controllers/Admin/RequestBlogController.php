@@ -18,7 +18,7 @@ class RequestBlogController extends Controller
 
         return Inertia::render('Admin/AddPost', [
             'post_types' => $blogPostTypes
-        ]);
+        ])->with('title', 'Dodaj Post');
     }
 
     public function store(RequestBlogRequest $request): RedirectResponse

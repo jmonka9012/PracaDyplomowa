@@ -313,7 +313,7 @@ class TicketSaleController extends Controller
         return Inertia::render('Events/EventForm', [
             'order' => $order->load('tickets'),
             'user_data' => $userData
-        ]);
+        ])->with('title', 'Wypełnij Detale Zamówienia');
     }
 
 
@@ -378,7 +378,7 @@ class TicketSaleController extends Controller
 
         return Inertia::render('Events/EventCheckout', [
             'order' => $order
-        ]);
+        ])->with('title', 'Podsumowanie zamówienia');
     }
         
 }

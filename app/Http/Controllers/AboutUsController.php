@@ -12,6 +12,6 @@ class AboutUsController extends Controller
         $halls = Hall::with('sections')->get();
         return Inertia::render('About-us', [
             'halls' => $halls,
-        ]);
+        ])->with('title', 'O Nas');
     }
 }
