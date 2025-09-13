@@ -1,88 +1,112 @@
-import { Builder, By, until } from 'selenium-webdriver';
+import { Builder, By } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
 import dotenv from 'dotenv';
-import { logTestResult } from '../logUtils.js';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// Wczytaj zmienne środowiskowe z pliku .env
+// Konfiguracja zmiennych środowiskowych
 dotenv.config();
-const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^https:/i, 'http:');
-const testName = 'wrong_password_test';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Adres bazowy aplikacji
+const BASE_URL = (process.env.APP_URL || '')
+  .replace(/(^"|"$)/g, '')
+  .replace(/^https:/i, 'http:');
+
+// Ścieżka do pliku logów
+const logPath = path.resolve(__dirname, '../logs/logs.txt');
+
+/**
+ * Zapisuje wynik testu do pliku logów.
+ * @param {string} testName - nazwa testu
+ * @param {boolean} passed - wynik testu
+ */
+function logTestResult(testName, passed) {
+  const logEntry = `${testName}_Passed : ${passed}\n`;
+  try {
+    fs.appendFileSync(logPath, logEntry, 'utf8');
+    console.log(logEntry.trim());
+  } catch (error) {
+    console.error(`Błąd podczas zapisu do pliku logs.txt: ${error.message}`);
+  }
+}
 
 (async function wrongPasswordTest() {
+  const testName = 'wrong_password_test';
   let driver;
 
   try {
-    // Konfiguracja opcji przeglądarki
-    const options = new chrome.Options();
-    options.addArguments('--disable-dev-shm-usage');
-    options.addArguments('--no-sandbox');
-    options.addArguments('--remote-debugging-port=9222');
+    // Konfiguracja Chrome w trybie headless
+    const options = new chrome.Options()
+      .addArguments('--headless', '--disable-dev-shm-usage', '--no-sandbox');
 
-    // Uruchomienie przeglądarki
     driver = await new Builder()
       .forBrowser('chrome')
       .setChromeOptions(options)
       .build();
 
     await driver.manage().window().setRect({ width: 1400, height: 1000 });
-    console.log('Rozpoczęcie testu z błędnym hasłem...');
 
-    // Przejście na stronę główną
+    console.log(`Rozpoczęcie testu: ${testName}`);
+
+    // Wejście na stronę główną
     await driver.get(BASE_URL);
-    await driver.sleep(1000);
+    await driver.sleep(500);
 
-    // Kliknięcie przycisku "Zaloguj"
-    const loginLink = await driver.wait(
-      until.elementLocated(By.css('a.header-login[href$="/login"]')),
-      5000
-    );
+    // Otwarcie strony logowania
+    const loginLink = await driver.findElement(By.css('a.header-login[href$="/login"]'));
     await loginLink.click();
     console.log('Kliknięto "Zaloguj"');
-
     await driver.sleep(1000);
 
-    // Wprowadzenie błędnych danych logowania
-    const usernameInput = await driver.wait(until.elementLocated(By.id('login')), 5000);
-    const passwordInput = await driver.wait(until.elementLocated(By.id('password')), 5000);
+    // Wypełnienie formularza logowania błędnymi danymi
+    const usernameInput = await driver.findElement(By.css('input[name="login"]'));
+    const passwordInput = await driver.findElement(By.css('input[name="password"]'));
     await usernameInput.sendKeys('pgalimski');
     await passwordInput.sendKeys('zlehaslo123');
 
-    await driver.executeScript('window.scrollBy(0, window.innerHeight / 3);');
-    await driver.sleep(500);
-
     // Kliknięcie przycisku "Zaloguj się"
-    const submitButton = await driver.wait(
-      until.elementLocated(By.css('input[type="submit"][value="Zaloguj się"]')),
-      5000
-    );
-    await submitButton.click();
+    const submitBtn = await driver.findElement(By.css('input[type="submit"][value="Zaloguj się"]'));
+    await submitBtn.click();
     console.log('Kliknięto "Zaloguj się"');
-
     await driver.sleep(1500);
 
-    // Weryfikacja komunikatu błędu
-    const bodyText = await driver.findElement(By.tagName('body')).getText();
-    const keywords = ['nie istnieje', 'błędne', 'niepoprawne', 'nieprawidłowe', 'invalid'];
+    // Sprawdzenie, czy wciąż jesteśmy na stronie logowania
+    const currentUrl = await driver.getCurrentUrl();
+    const stillOnLoginPage = currentUrl.includes('/login');
 
-    const foundKeyword = keywords.find(keyword =>
-      bodyText.toLowerCase().includes(keyword)
-    );
-
-    if (foundKeyword) {
-      console.log(`Znaleziono komunikat o błędzie zawierający: "${foundKeyword}"`);
-      logTestResult(testName, true);
-    } else {
-      console.warn('Nie znaleziono komunikatu o błędzie.');
-      logTestResult(testName, false, 'Brak komunikatu o błędzie przy złym haśle.');
+    // Sprawdzenie komunikatu błędu
+    let errorMessageFound = false;
+    try {
+      const errorMsg = await driver.findElement(By.css('.error-msg')).getText();
+      if (errorMsg.toLowerCase().includes('niepoprawne') || errorMsg.toLowerCase().includes('błędne')) {
+        errorMessageFound = true;
+        console.log(`Znaleziono komunikat błędu: ${errorMsg}`);
+      }
+    } catch {
+      errorMessageFound = false;
     }
 
-    // Zamknięcie przeglądarki po zakończeniu testu
-    await driver.quit();
+    // Sprawdzenie, czy formularz logowania nadal jest widoczny
+    let loginFormStillVisible = false;
+    try {
+      await driver.findElement(By.css('input[name="login"]'));
+      loginFormStillVisible = true;
+    } catch {
+      loginFormStillVisible = false;
+    }
 
+    // Ocena końcowa testu
+    const testPassed = stillOnLoginPage && errorMessageFound && loginFormStillVisible;
+    logTestResult(testName, testPassed);
+
+    console.log(`Zakończenie testu: ${testName}`);
+    await driver.quit();
   } catch (error) {
-    // Obsługa błędów i zamknięcie przeglądarki
-    console.error('Błąd:', error);
+    console.error(`Błąd testu: ${error.message}`);
+    logTestResult(testName, false);
     if (driver) await driver.quit();
-    logTestResult(testName, false, error.message);
   }
 })();

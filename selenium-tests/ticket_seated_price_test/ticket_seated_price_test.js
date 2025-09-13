@@ -13,6 +13,15 @@ function getRandomQuantity(max) {
   return Math.floor(Math.random() * Math.min(max, 50)) + 1;
 }
 
+// Zwraca losowe indeksy z tablicy
+function getRandomIndexes(arrayLength, count) {
+  const indexes = new Set();
+  while (indexes.size < count) {
+    indexes.add(Math.floor(Math.random() * arrayLength));
+  }
+  return Array.from(indexes);
+}
+
 describe('seat_price_calculation_test', function () {
   this.timeout(30000);
 
@@ -21,7 +30,6 @@ describe('seat_price_calculation_test', function () {
     let testPassed = false;
 
     try {
-      // Konfiguracja trybu headless dla przeglądarki Chrome
       const options = new chrome.Options().addArguments('--headless=new', '--no-sandbox', '--disable-dev-shm-usage');
 
       driver = await new Builder()
@@ -31,16 +39,13 @@ describe('seat_price_calculation_test', function () {
 
       await driver.manage().window().setRect({ width: 1400, height: 1000 });
 
-      // Wejście na stronę wydarzeń i wybór pierwszego wydarzenia
       await driver.get(`${BASE_URL}/wydarzenia`);
       await driver.wait(until.elementLocated(By.css('.event .link-stretched')), 10000);
       await driver.findElement(By.css('.event .link-stretched')).click();
       await driver.wait(until.urlContains('/wydarzenia/wydarzenie/'), 10000);
 
-      // Otwórz podgląd sali
       await driver.wait(until.elementLocated(By.css('.scene')), 10000).click();
 
-      // Wybierz dostępne miejsca siedzące
       const seats = await driver.wait(
         until.elementsLocated(By.css('.hall__seat:not(.taken)')),
         10000
@@ -48,13 +53,14 @@ describe('seat_price_calculation_test', function () {
 
       console.log('Dostępne miejsca:', seats.length);
 
-      const toSelect = Math.min(getRandomQuantity(seats.length), 5); // ogranicz wybór do 5 miejsc
+      const toSelect = Math.min(getRandomQuantity(seats.length), 5);
       console.log('Ilość do wybrania:', toSelect);
 
+      const selectedIndexes = getRandomIndexes(seats.length, toSelect);
       let expectedSum = 0;
 
-      for (let i = 0; i < toSelect; i++) {
-        const seat = seats[i];
+      for (let i = 0; i < selectedIndexes.length; i++) {
+        const seat = seats[selectedIndexes[i]];
         const tooltipText = await seat
           .findElement(By.css('.hall__seat-tooltip'))
           .getAttribute('textContent');
@@ -65,12 +71,11 @@ describe('seat_price_calculation_test', function () {
         expectedSum += price;
         console.log(`  Miejsce #${i + 1} cena: ${price}`);
         await seat.click();
-        await driver.sleep(100); // odczekaj po kliknięciu
+        await driver.sleep(100);
       }
 
       console.log('Oczekiwana suma:', expectedSum);
 
-      // Pobierz podsumowanie ilości i ceny
       const summaryDivs = await driver.findElements(By.css('.mr-lg-40px'));
       let finalQty = null;
       let finalPrice = null;
@@ -86,7 +91,6 @@ describe('seat_price_calculation_test', function () {
       console.log('Finalna ilość:', finalQty);
       console.log('Finalna cena:', finalPrice);
 
-      // Weryfikacja wyników
       assert.strictEqual(finalQty, toSelect);
       assert.strictEqual(finalPrice, expectedSum);
 

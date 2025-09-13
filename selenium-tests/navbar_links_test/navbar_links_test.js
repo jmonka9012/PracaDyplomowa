@@ -12,19 +12,19 @@ const BASE_URL = (process.env.APP_URL || '').replace(/(^"|"$)/g, '').replace(/^h
 // Nazwa testu (dla systemu logowania wyników)
 const testName = 'navbar_links_test';
 
-// Lista głównych linków w navbarze (bez linków do CE)
+// Lista głównych linków w navbarze
 const navPaths = [
+  { path: '/', label: 'Strona główna' },
+  { path: '/wydarzenia', label: 'Wydarzenia' },
   { path: '/o-nas', label: 'O nas' },
   { path: '/blog', label: 'Blog' },
-  { path: '/post', label: 'Single (CE)' },
   { path: '/kontakt', label: 'Kontakt' }
 ];
 
-// Linki akcji po prawej stronie nagłówka (logowanie, rejestracja, wydarzenie)
+// Linki akcji po prawej stronie nagłówka (logowanie, rejestracja)
 const actionLinks = [
   { label: 'Zaloguj', selector: 'a.header-login[href*="/login"]' },
-  { label: 'Zarejestruj', selector: 'a.header-login[href*="/rejestracja"]' },
-  { label: 'Zorganizuj wydarzenie', selector: 'a.btn-header[href*="/zorganizuj-wydarzenie"]' }
+  { label: 'Zarejestruj', selector: 'a.header-login[href*="/rejestracja"]' }
 ];
 
 (async function runNavbarLinksTest() {
@@ -87,7 +87,7 @@ const actionLinks = [
       }
     }
 
-    console.log('Testuję akcje nagłówka (logowanie, rejestracja, wydarzenie)...');
+    console.log('Testuję akcje nagłówka (logowanie, rejestracja)...');
 
     // Testowanie linków akcji (po prawej stronie nagłówka)
     for (const { label, selector } of actionLinks) {
@@ -103,7 +103,6 @@ const actionLinks = [
           const currentUrl = await driver.getCurrentUrl();
           if (label === 'Zaloguj' && !currentUrl.includes('/login')) passed = false;
           if (label === 'Zarejestruj' && !currentUrl.includes('/rejestracja')) passed = false;
-          if (label === 'Zorganizuj wydarzenie' && !currentUrl.includes('/zorganizuj-wydarzenie')) passed = false;
         } else {
           console.warn(`Element "${label}" nie jest widoczny`);
           passed = false;

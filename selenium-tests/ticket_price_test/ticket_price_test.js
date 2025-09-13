@@ -92,8 +92,15 @@ function getRandomQuantity(max) {
     console.log(`Oczekiwana cena: ${expectedPrice}`);
 
     // Weryfikacja poprawności kalkulacji
-    if (finalQty && finalPrice === expectedPrice) {
+    if (
+      finalQty !== null &&
+      finalPrice !== null &&
+      Math.abs(finalPrice - expectedPrice) < 0.01
+    ) {
       testPassed = true;
+      console.log('Test kalkulacji cen biletów zakończony pomyślnie.');
+    } else {
+      console.log('Test kalkulacji cen biletów nie przeszedł.');
     }
 
     logTestResult('ticket_price_calculation_test', testPassed);

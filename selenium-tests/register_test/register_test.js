@@ -14,114 +14,132 @@ const testName = 'register_test';
 
   try {
     // Konfiguracja przeglądarki Chrome
-    const options = new chrome.Options();
-    options.addArguments('--disable-dev-shm-usage');
-    options.addArguments('--no-sandbox');
-    options.addArguments('--remote-debugging-port=9222');
+    const options = new chrome.Options()
+      .addArguments('--disable-dev-shm-usage')
+      .addArguments('--no-sandbox')
+      .addArguments('--window-size=1400,1000');
 
     driver = await new Builder()
       .forBrowser('chrome')
       .setChromeOptions(options)
       .build();
 
-    await driver.manage().window().setRect({ width: 1400, height: 1000 });
     console.log('Przeglądarka uruchomiona.');
 
-    // Przejście na stronę rejestracji
-    await driver.get(`${BASE_URL}/rejestracja`);
-    console.log('Załadowano stronę rejestracji.');
-    await driver.sleep(2000);
-    await driver.executeScript('window.scrollBy(0, window.innerHeight / 2);');
+    // Przejście do strony głównej i kliknięcie w link rejestracji
+    await driver.get(BASE_URL);
+    await driver.sleep(500);
+    const registerLink = await driver.findElement(By.css('a.header-login[href*="/rejestracja"]'));
+    await registerLink.click();
+    console.log('Kliknięto "Rejestruj".');
+
+    // Oczekiwanie na sekcję rejestracji
+    await driver.wait(until.elementLocated(By.id('rcol')), 5000);
+    const registerSection = await driver.findElement(By.id('rcol'));
+    await driver.wait(until.elementIsVisible(registerSection), 5000);
 
     // Generowanie danych testowego użytkownika
     const firstNames = ['Anna', 'Marek', 'Kamil', 'Ola', 'Michał'];
     const lastNames = ['Kowalska', 'Nowak', 'Wiśniewska', 'Kamiński', 'Zieliński'];
     const first = firstNames[Math.floor(Math.random() * firstNames.length)];
     const last = lastNames[Math.floor(Math.random() * lastNames.length)];
-    const login = `${first[0]}${last}`.replace('ł', 'l');
-    const email = `${login.toLowerCase()}@fikcja.pl`;
-    const password = 'Test1234!';
+    const login = `${first[0]}${last}`.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const email = `${login.toLowerCase()}@test.pl`;
+    const password = 'Abc123!';
 
-    console.log(`Utworzono dane testowego konta: login=${login}, email=${email}`);
+    console.log(`Testowe konto: login=${login}, email=${email}`);
 
-    // Wypełnienie formularza rejestracyjnego
-    const registrationFields = await driver.findElements(By.css('form:nth-of-type(2) input'));
-    if (registrationFields.length >= 6) {
-      await registrationFields[0].sendKeys(login);       // Login
-      await registrationFields[1].sendKeys(email);       // Email
-      await registrationFields[2].sendKeys(first);       // Imię
-      await registrationFields[3].sendKeys(last);        // Nazwisko
-      await registrationFields[4].sendKeys(password);    // Hasło
-      await registrationFields[5].sendKeys(password);    // Potwierdzenie hasła
-    } else {
-      console.error('Brakuje pól formularza rejestracji.');
-      passed = false;
-      await driver.quit();
-      return logTestResult(testName, false, 'Brak pól formularza rejestracji');
-    }
+    // Wypełnianie pól formularza rejestracyjnego z wywołaniem eventów input
+    const usernameField = await registerSection.findElement(By.css('input[autocomplete="name"]'));
+    await usernameField.sendKeys(login);
+    await driver.executeScript("arguments[0].dispatchEvent(new Event('input', { bubbles: true }));", usernameField);
 
-    // Zaznaczenie zgody na regulamin
-    const termsCheckbox = await driver.findElement(By.css('form:nth-of-type(2) input[type="checkbox"]'));
-    await termsCheckbox.click();
-    await driver.sleep(1000);
+    const emailField = await registerSection.findElement(By.css('input[autocomplete="email"]'));
+    await emailField.sendKeys(email);
+    await driver.executeScript("arguments[0].dispatchEvent(new Event('input', { bubbles: true }));", emailField);
 
-    // Kliknięcie przycisku rejestracji
-    const registerButton = await driver.wait(until.elementLocated(By.css('form:nth-of-type(2) input[type="submit"]')), 5000);
-    await registerButton.click();
-    await driver.sleep(3000);
+    const firstNameField = await registerSection.findElement(By.css('input[autocomplete="first_name"]'));
+    await firstNameField.sendKeys(first);
+    await driver.executeScript("arguments[0].dispatchEvent(new Event('input', { bubbles: true }));", firstNameField);
 
-    // Sprawdzenie sukcesu rejestracji
-    const pageContent = await driver.findElement(By.tagName('body')).getText();
-    const registrationSuccess = pageContent.split('\n').find(line =>
-      /utworzono|sukces|zarejestrowano|konto|Moje konto/i.test(line)
-    );
+    const lastNameField = await registerSection.findElement(By.css('input[autocomplete="last_name"]'));
+    await lastNameField.sendKeys(last);
+    await driver.executeScript("arguments[0].dispatchEvent(new Event('input', { bubbles: true }));", lastNameField);
 
-    if (registrationSuccess) {
-      console.log('Rejestracja zakończona sukcesem:', registrationSuccess);
-    } else {
-      console.error('Brak potwierdzenia udanej rejestracji.');
-      passed = false;
-    }
+    const passwordField = await registerSection.findElement(By.id('register-password'));
+    await passwordField.sendKeys(password);
+    await driver.executeScript("arguments[0].dispatchEvent(new Event('input', { bubbles: true }));", passwordField);
 
-    // Przejście do formularza logowania
-    await driver.get(`${BASE_URL}/login`);
+    const confirmPasswordField = await registerSection.findElement(By.id('register-password-confirm'));
+    await confirmPasswordField.sendKeys(password);
+    await driver.executeScript("arguments[0].dispatchEvent(new Event('input', { bubbles: true }));", confirmPasswordField);
+
+    // Czekaj na walidację frontendową
     await driver.sleep(2000);
 
-    const loginFields = await driver.findElements(By.css('form:nth-of-type(1) input'));
-    if (loginFields.length >= 2) {
-      await loginFields[0].sendKeys(login);     // Login
-      await loginFields[1].sendKeys(password);  // Hasło
-    } else {
-      console.error('Nie znaleziono pól logowania.');
-      passed = false;
-      await driver.quit();
-      return logTestResult(testName, false, 'Brak pól formularza logowania');
+    // Zaznaczenie zgody na regulamin
+    const termsCheckbox = await registerSection.findElement(By.id('confirmation'));
+    await driver.executeScript('arguments[0].scrollIntoView();', termsCheckbox);
+    await termsCheckbox.click();
+    await driver.sleep(500);
+
+    // Sprawdzenie przycisku rejestracji
+    const registerButton = await registerSection.findElement(By.css('input[type="submit"][value="zarejestruj się"]'));
+    let btnClass = await registerButton.getAttribute('class');
+    console.log('Klasa przycisku PRZED:', btnClass);
+
+    // Oczekiwanie aż przycisk zostanie odblokowany
+    let enabled = false;
+    for (let i = 0; i < 10; i++) {
+      const disabledAttr = await registerButton.getAttribute('disabled');
+      btnClass = await registerButton.getAttribute('class');
+      console.log(`Sprawdzenie ${i}: disabled=${disabledAttr}, class=${btnClass}`);
+      if (disabledAttr === null && !btnClass.includes('disabled')) {
+        enabled = true;
+        break;
+      }
+      await driver.sleep(500);
     }
 
-    // Kliknięcie przycisku logowania
-    const loginButton = await driver.findElement(By.css('form:nth-of-type(1) input[type="submit"]'));
-    await loginButton.click();
-    await driver.sleep(3000);
-
-    // Weryfikacja poprawnego logowania
-    const pageText = await driver.findElement(By.tagName('body')).getText();
-    const welcomeMessage = pageText.split('\n').find(line => line.includes('Witaj ponownie'));
-
-    if (welcomeMessage) {
-      console.log('Logowanie zakończone sukcesem:', welcomeMessage);
+    if (!enabled) {
+      console.error('Przycisk rejestracji nie został odblokowany.');
+      passed = false;
     } else {
-      console.error('Brak komunikatu powitalnego po zalogowaniu.');
+      // Kliknięcie przycisku i oczekiwanie na reakcję strony
+      await registerButton.click();
+      await driver.sleep(3000);
+
+      const bodyText = await driver.findElement(By.tagName('body')).getText();
+      if (!bodyText.includes('Witaj ponownie') && !bodyText.includes('Moje konto')) {
+        console.error('Brak potwierdzenia rejestracji.');
+        passed = false;
+      } else {
+        console.log('Rejestracja zakończona sukcesem.');
+      }
+    }
+
+    // Próba logowania
+    await driver.get(`${BASE_URL}/login`);
+    await driver.wait(until.elementLocated(By.tagName('form')), 5000);
+    const loginFields = await driver.findElements(By.css('form input'));
+    await loginFields[0].sendKeys(login);
+    await loginFields[1].sendKeys(password);
+    await driver.findElement(By.css('form input[type="submit"]')).click();
+    await driver.sleep(2000);
+
+    const afterLoginText = await driver.findElement(By.tagName('body')).getText();
+    if (afterLoginText.includes('Witaj ponownie')) {
+      console.log('Logowanie zakończone sukcesem.');
+    } else {
+      console.error('Logowanie nie powiodło się.');
       passed = false;
     }
 
     await driver.quit();
-    console.log('Test zakończony.');
-
     logTestResult(testName, passed);
-
-  } catch (err) {
-    console.error('Wystąpił błąd podczas testu:', err.message);
+  } catch (e) {
+    console.error('Błąd testu:', e);
     if (driver) await driver.quit();
-    logTestResult(testName, false, err.message);
+    logTestResult(testName, false, e.message);
   }
 })();
