@@ -158,7 +158,7 @@ $border-color: rgba(#191028, .2);
         line-height: 1.5;
         font-weight: 500;
         @extend .hover-custom-underline;
-        @include mixin.media-breakpoint-down(lg) {
+        @include mixin.media-breakpoint-down(md) {
             font-size: 20px;
         }
 

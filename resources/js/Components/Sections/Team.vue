@@ -186,8 +186,6 @@ import spiral from "~images/spiral.png";
             }
         }
 
-        @include mixin.media-breakpoint-down(md) {
-        }
     }
 
     &__icon {

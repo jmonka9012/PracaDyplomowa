@@ -579,7 +579,7 @@ function submitRegisterRequest() {
         opacity: 1;
         max-height: 2000px;
         transition: max-height 1s ease-in-out;
-        @include mixin.media-breakpoint-down(lg) {
+        @include mixin.media-breakpoint-down(md) {
             margin-top: 60px;
         }
     }

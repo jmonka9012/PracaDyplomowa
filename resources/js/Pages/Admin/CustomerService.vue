@@ -221,7 +221,7 @@ const SwapStatus = (status) => {
         grid-template-columns: 1fr 1fr 100px 1fr 1fr;
         align-items: center;
         grid-column-gap: 30px;
-        @include mixin.media-breakpoint-down(xl) {
+        @include mixin.media-breakpoint-down(lg) {
             display: flex;
             flex-direction: column;
             align-items: flex-start;

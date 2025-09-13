@@ -1,5 +1,4 @@
 $spacer: 1rem !default;
-$axises: (x, y);
 $sides: (top, bottom, left, right);
 $abbrv: (t, b, l, r);
 
@@ -100,17 +99,16 @@ $grid-breakpoints: (
 
 @mixin media-breakpoint-down($breakpoint) {
     $max-width: map.get($grid-breakpoints, $breakpoint);
-    $keys: map.keys($grid-breakpoints);
-    $index: list.index($keys, $breakpoint);
 
-    @if $index > 1 {
-        $prev-key: list.nth($keys, $index - 1);
-        $max-width: map.get($grid-breakpoints, $prev-key);
-    }
+    @if $max-width {
+        @media (max-width: $max-width) {
+            @content;
+        }
 
     @media (max-width: $max-width) {
         @content;
     }
+}
 }
 
 @mixin media-breakpoint-only($breakpoint) {

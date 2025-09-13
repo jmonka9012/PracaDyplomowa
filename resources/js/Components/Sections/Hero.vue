@@ -217,7 +217,7 @@ function SearchEvents() {
     input {
         border-radius: 8px 0 0 8px;
     }
-    @include mixin.media-breakpoint-down(xl) {
+    @include mixin.media-breakpoint-down(lg) {
         border-radius: 8px 8px 0px 0px;
         input {
             border-radius: 8px 8px 0px 0px;

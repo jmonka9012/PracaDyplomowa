@@ -131,7 +131,7 @@ onUnmounted(() => {
     justify-content: flex-start;
     position: relative;
     max-height: 60px;
-    @include mixin.media-breakpoint-down(xl) {
+    @include mixin.media-breakpoint-down(lg) {
         width: 100%;
     }
     &.open {

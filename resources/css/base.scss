@@ -475,7 +475,7 @@ img {
     flex-direction: column !important;
 }
 .column-mob-reverse {
-    @include mixin.media-breakpoint-down(xl) {
+    @include mixin.media-breakpoint-down(lg) {
         flex-direction: column-reverse !important;
     }
 }

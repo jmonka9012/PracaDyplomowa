@@ -51,7 +51,7 @@ defineProps({
     width: auto;
     &-as {
         .icon-rotate-svg {
-            @include mixin.media-breakpoint-down(md) {
+            @include mixin.media-breakpoint-down(sm) {
                 width: 100%;
             }
         }

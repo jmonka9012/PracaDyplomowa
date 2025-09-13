@@ -344,7 +344,7 @@ function SetUserProperty(value, userID, property) {
     flex-direction: column;
     align-items: flex-start;
     row-gap: 5px;
-    @include mixin.media-breakpoint-down(xl) {
+    @include mixin.media-breakpoint-down(lg) {
         width: 75%;
     }
 
@@ -352,7 +352,7 @@ function SetUserProperty(value, userID, property) {
         display: flex;
         justify-content: center;
         align-items: center;
-        @include mixin.media-breakpoint-down(xl) {
+        @include mixin.media-breakpoint-down(lg) {
             font-size: 14px;
         }
 

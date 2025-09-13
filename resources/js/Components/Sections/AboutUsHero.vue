@@ -153,7 +153,7 @@ onMounted(() => {
     color: transparent;
     text-align: center;
     font-size: 35px;
-    @include mixin.media-breakpoint-down(md) {
+    @include mixin.media-breakpoint-down(sm) {
         transform: translateY(50px);
     }
     @include mixin.media-breakpoint-up(md) {

@@ -164,7 +164,7 @@ const presetDates = ref([
     justify-content: flex-start;
     position: relative;
     color: var(--text);
-    @include mixin.media-breakpoint-down(xl) {
+    @include mixin.media-breakpoint-down(lg) {
         width: 100%;
     }
     &::placeholder {

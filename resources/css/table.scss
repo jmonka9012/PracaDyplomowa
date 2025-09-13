@@ -161,7 +161,7 @@ table {
         display: flex;
         column-gap: 5px;
         flex-wrap: wrap;
-        @include mixin.media-breakpoint-down(xl) {
+        @include mixin.media-breakpoint-down(lg) {
             flex-wrap: nowrap;
             float: left;
         }
