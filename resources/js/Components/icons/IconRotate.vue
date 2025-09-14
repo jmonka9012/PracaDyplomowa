@@ -49,7 +49,7 @@ defineProps({
     font-size: 24px;
     line-height: 0em;
     width: auto;
-    &-as {
+    &--as {
         .icon-rotate-svg {
             @include mixin.media-breakpoint-down(sm) {
                 width: 100%;

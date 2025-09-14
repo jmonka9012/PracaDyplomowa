@@ -12,11 +12,11 @@ const props = defineProps({
 
 <template>
     <section v-bind="$attrs">
-        <div class="container cat-cont">
-            <div v-for="genre in props.genres" class="cat-item">
+        <div class="container cat">
+            <div v-for="genre in props.genres" class="cat__item">
                 <Link :href="route('event.browser', {genres: genre.genre_id})" class="link-stretched z-1"></Link>
-                <img class="cat-img" :src="`/storage/${genre.image_path}`" alt="" />
-                <h3 class="cat-name">{{genre.genre_name}}</h3>
+                <img class="cat__img" :src="`/storage/${genre.image_path}`" alt="" />
+                <h3 class="cat__name">{{genre.genre_name}}</h3>
             </div>
         </div>
     </section>
@@ -24,7 +24,7 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 @use "~css/mixin.scss";
-.cat-cont {
+.cat {
     display: grid;
     grid-template-columns: 1fr;
     column-gap: 30px;
@@ -37,13 +37,13 @@ const props = defineProps({
     }
 }
 
-.cat-img {
+.cat__img {
     width: 150px;
     transition: 0.3s;
     position: relative;
 }
 
-.cat-item {
+.cat__item {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -51,11 +51,11 @@ const props = defineProps({
     position: relative;
 }
 
-.cat-item:hover .cat-img {
+.cat__item:hover .cat__img {
     transform: scale(0.75);
 }
 
-.cat-name {
+.cat__name {
     font-size: 22px;
     margin: 15px 0 0 0;
     position: relative;

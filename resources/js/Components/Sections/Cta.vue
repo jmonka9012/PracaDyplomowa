@@ -8,9 +8,9 @@ import {Link} from "@inertiajs/vue3";
 <template>
     <section class="pb-70px pb-lg-105px cta">
         <div class="container container--big">
-            <div class="cta-left">
+            <div class="cta__left">
                 <p class="sub-title mb-17px">Wydarzenia</p>
-                <h3 class="cta-title mb-20px">
+                <h3 class="cta__title mb-20px">
                     Zobacz na jakie wydarzenia możesz się udać w najbliższym
                     czasie!
                 </h3>
@@ -26,14 +26,14 @@ import {Link} from "@inertiajs/vue3";
                     Zobacz więcej
                 </Link>
             </div>
-            <div class="cta-right">
+            <div class="cta__right">
                 <Poptext class="poptext--cta" text="Najbliższe wydarzenia"/>
             </div>
         </div>
-        <div class="cta-cloud">
+        <div class="cta__cloud">
             <img :src="ctaCloud" alt=""/>
         </div>
-        <div class="cta-calendar">
+        <div class="cta__calendar">
             <img :src="ctaCalendar" alt=""/>
         </div>
     </section>
@@ -64,7 +64,7 @@ import {Link} from "@inertiajs/vue3";
         }
     }
 
-    &-left {
+    &__left {
         display: flex;
         flex-direction: column;
         padding-top: 30px;
@@ -79,7 +79,7 @@ import {Link} from "@inertiajs/vue3";
         }
     }
 
-    &-right {
+    &__right {
         display: flex;
         flex-direction: column;
         padding-top: 80px;
@@ -93,7 +93,7 @@ import {Link} from "@inertiajs/vue3";
         }
     }
 
-    &-scroller {
+    &__scroller {
         background-color: var(--primary);
         width: 100%;
         padding: 18px 0;
@@ -124,7 +124,7 @@ import {Link} from "@inertiajs/vue3";
         }
     }
 
-    &-title {
+    &__title {
         font-size: 26px;
         line-height: 1.24em;
         font-weight: 500;
@@ -133,7 +133,7 @@ import {Link} from "@inertiajs/vue3";
         }
     }
 
-    &-cloud {
+    &__cloud {
         position: absolute;
         transition: transform linear;
         will-change: transform;
@@ -150,7 +150,7 @@ import {Link} from "@inertiajs/vue3";
         }
     }
 
-    &-calendar {
+    &__calendar {
         position: absolute;
         pointer-events: none;
         transition: transform linear;

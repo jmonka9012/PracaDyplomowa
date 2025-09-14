@@ -51,7 +51,7 @@ function SearchEvents() {
 
 <template>
     <section class="hero">
-        <div class="hero-bg">
+        <div class="hero__bg">
             <img :src="heroBg" alt="" />
         </div>
         <div class="container">
@@ -64,19 +64,19 @@ function SearchEvents() {
                     </h1>
                 </slot>
             </div>
-            <form class="hero-form" @submit.prevent="SearchEvents()">
-                <div class="input-wrap hero-input-wrap">
+            <form class="hero__form" @submit.prevent="SearchEvents()">
+                <div class="input-wrap hero__input-wrap">
                     <i class="fa fa-search"></i>
                     <input
-                        class="hero-input"
+                        class="hero__input"
                         type="text"
                         placeholder="Wyszukaj po nazwie"
                         v-model="searchForm.event_name"
                     />
                 </div>
-                <div class="input-wrap hero-select-wrap">
+                <div class="input-wrap hero__select-wrap">
                     <i class="fa fa-th-list"></i>
-                    <select class="hero-select" v-model="searchForm.genre">
+                    <select class="hero__select" v-model="searchForm.genre">
                         <option disabled :value="null">
                             Wybierz kategorię
                         </option>
@@ -89,14 +89,14 @@ function SearchEvents() {
                         </option>
                     </select>
                 </div>
-                <div class="input-wrap hero-select-wrap hero-select-wrap-data">
+                <div class="input-wrap hero__select-wrap hero__select-wrap-data">
                     <DatePicker
                         class="datepicker-hero"
                         v-model="searchForm.date"
                         format="MM/dd/yyyy"
                     ></DatePicker>
                 </div>
-                <button class="hero-search">Szukaj</button>
+                <button class="hero__search">Szukaj</button>
             </form>
         </div>
     </section>
@@ -122,7 +122,7 @@ function SearchEvents() {
             object-fit: contain;
         }
     }
-    &-bg {
+    &__bg {
         position: absolute;
         top: 0;
         left: 0;
@@ -135,7 +135,7 @@ function SearchEvents() {
             object-fit: cover;
         }
     }
-    &-overlay {
+    &__overlay {
         background-color: rgba(0, 0, 0, 0.42);
         opacity: 0.73;
         z-index: 0;
@@ -147,7 +147,7 @@ function SearchEvents() {
     }
 }
 
-.hero-form {
+.hero__form {
     margin: 40px 0px 45px 0px;
     width: 100%;
     display: flex;
@@ -159,7 +159,7 @@ function SearchEvents() {
 }
 
 @media screen and (min-width: 992px) {
-    .hero-form {
+    .hero__form {
         flex-direction: row;
         margin: 58px 0px 20px 0px;
     }
@@ -181,8 +181,8 @@ function SearchEvents() {
     display: block;
 }
 
-.hero-input,
-.hero-select {
+.hero__input,
+.hero__select {
     box-shadow: none;
     min-height: 60px;
     font-size: 15px;
@@ -205,12 +205,12 @@ function SearchEvents() {
     }
 }
 
-.hero-input:focus,
-.hero-select:focus {
+.hero__input:focus,
+.hero__select:focus {
     outline: none;
 }
 
-.hero-input-wrap {
+.hero__input-wrap {
     width: 100%;
     border-right: 1px solid var(--primary-lighter);
     border-radius: 8px 0 0 8px;
@@ -225,7 +225,7 @@ function SearchEvents() {
     }
 }
 
-.hero-select-wrap {
+.hero__select-wrap {
     width: 100%;
     position: relative;
     border-right: 1px solid var(--primary-lighter);
@@ -255,7 +255,7 @@ function SearchEvents() {
     }
 }
 
-.hero-search {
+.hero__search {
     width: 100%;
     background-color: var(--primary);
     border-radius: 0 8px 8px 0;
@@ -281,25 +281,25 @@ function SearchEvents() {
 }
 
 @media screen and (min-width: 992px) {
-    .hero-input-wrap {
+    .hero__input-wrap {
         width: 25%;
     }
 
-    .hero-select-wrap {
+    .hero__select-wrap {
         width: 25%;
     }
-    .hero-select-wrap-data {
+    .hero__select-wrap-data {
         width: 30%;
     }
 
-    .hero-search {
+    .hero__search {
         width: 20%;
     }
 }
-.hero-select {
+.hero__select {
     border-radius: 0;
 }
-.hero-select option {
+.hero__select option {
     padding: 6px 20px !important;
     appearance: none;
     font-family: "Krona one";
@@ -309,7 +309,7 @@ function SearchEvents() {
     letter-spacing: 0px;
 }
 
-.hero-select option:hover {
+.hero__select option:hover {
     background-color: var(--orange);
     color: white;
 }

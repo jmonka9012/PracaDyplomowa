@@ -94,7 +94,7 @@ onMounted(() => {
         <section class="animated-sticky-section__section as-hero">
             <div class="as-iconrotate">
                 <IconRotate
-                    class="icon-rotate-holder-as"
+                    class="icon-rotate-holder--as"
                     :background="`url(${spiral})`"
                     rotateText="Nowoczesna hale koncertowo/wykładowe"
                 />
