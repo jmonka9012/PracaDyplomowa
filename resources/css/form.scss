@@ -224,9 +224,6 @@ select {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    &.select-icon {
-        padding-left: 60px;
-    }
     &.select--small {
         width: 150px;
     }

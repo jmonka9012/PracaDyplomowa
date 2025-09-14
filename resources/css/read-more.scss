@@ -37,7 +37,7 @@
             transition: all 0.6s ease-out;
         }
     }
-    &-stop {
+    &--stop {
         &::after {
             animation: none;
             z-index: 0;
