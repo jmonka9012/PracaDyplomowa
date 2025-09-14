@@ -40,7 +40,7 @@ console.log(props);
     <Hero :genres="genres">
         <template #title>
             <Poptext
-                class="d-flex flex-column justify-content-center align-items-center poptext-white"
+                class="d-flex flex-column justify-content-center align-items-center poptext--white"
                 :text="siteData.title"
             />
         </template>

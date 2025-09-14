@@ -9,7 +9,7 @@ const text = ref("404");
     <section class="pt-75px pb-75px pt-lg-120px pb-lg-120px">
         <div class="container align-items-center flex-column">
             <Poptext
-                class="d-flex flex-column justify-content-center align-items-center poptext-404"
+                class="d-flex flex-column justify-content-center align-items-center poptext--404"
                 :text="text"
             />
             <h1 class="error-title">

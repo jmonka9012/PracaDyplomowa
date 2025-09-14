@@ -116,7 +116,7 @@ const charTotal = computed(() => props.text.length);
             transition: color 0.4s;
         }
     }
-    &-cta {
+    &--cta {
         z-index: 3;
         font-size: 5vw;
         display: flex;
@@ -128,7 +128,7 @@ const charTotal = computed(() => props.text.length);
             padding-left: 65px;
         }
     }
-    &-long {
+    &--long {
         font-size: 5vw;
         display: flex;
         column-gap: 20px;
@@ -136,7 +136,7 @@ const charTotal = computed(() => props.text.length);
             display: block;
         }
     }
-    &-white {
+    &--white {
         .word {
             --color-text: var(--yellow);
         }
@@ -149,7 +149,7 @@ const charTotal = computed(() => props.text.length);
             }
         }
     }
-    &-404 {
+    &--404 {
         font-size: 100px;
         --animation-speed: 700ms;
         @include mixin.media-breakpoint-up(sm) {
@@ -163,13 +163,13 @@ const charTotal = computed(() => props.text.length);
         }
     }
 
-    &-logo {
+    &--logo {
         font-size: 25px;
 
         --animation-speed: 700ms;
     }
 
-    &-footer {
+    &--footer {
         font-size: 55px;
         display: flex;
     }

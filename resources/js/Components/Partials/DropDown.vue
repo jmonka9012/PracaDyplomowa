@@ -45,24 +45,24 @@ const props = defineProps({
     },
 });
 onMounted(() => {
-    const dropDowns = document.querySelectorAll(".dropdown-item-toggle");
+    const dropDowns = document.querySelectorAll(".dropdown__item-toggle");
 
     dropDowns.forEach(function (dropdown) {
         dropdown.addEventListener("click", function (e) {
-            const submenu = this.querySelector(".dropdown-ndlevel");
+            const submenu = this.querySelector(".dropdown__ndlevel");
             if (!submenu) return;
             const subReturn = e.target.closest(".ndlevel-back");
             if (subReturn) {
                 submenu.classList.remove("show");
                 e.stopPropagation();
                 e.preventDefault();
-            } else if (!e.target.closest(".dropdown-ndlevel")) {
+            } else if (!e.target.closest(".dropdown__ndlevel")) {
                 submenu.classList.toggle("show");
                 e.stopPropagation();
                 e.preventDefault();
             }
         });
-        const submenu = dropdown.querySelector(".dropdown-ndlevel");
+        const submenu = dropdown.querySelector(".dropdown__ndlevel");
         if (submenu) {
             submenu.addEventListener("click", function (e) {
                 if (!e.target.closest(".ndlevel-back")) {
@@ -111,9 +111,7 @@ onUnmounted(() => {
 .dropdown {
     box-shadow: none;
     min-height: 60px;
-    display: block;
     padding: 0.375rem 0.75rem;
-    padding-left: 0.75rem;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -186,7 +184,7 @@ onUnmounted(() => {
             transform: rotateZ(180deg);
         }
     }
-    .dropdown-inner {
+    .dropdown__inner {
         height: 300px;
         display: flex;
         flex-direction: column;
@@ -198,7 +196,7 @@ onUnmounted(() => {
         position: relative;
         border-radius: 8px;
     }
-    .dropdown-item {
+    .dropdown__item {
         height: 2rem;
         padding-inline: 12px;
         border-radius: 8px;
@@ -224,7 +222,7 @@ onUnmounted(() => {
             }
         }
     }
-    .dropdown-ndlevel {
+    .dropdown__ndlevel {
         position: absolute;
         top: 0;
         transition: var(--trans-def);

@@ -76,11 +76,11 @@ onBeforeUnmount(() => {
                     class="header__logo d-flex align-items-center"
                 >
                     <Poptext
-                        class="d-none d-lg-flex flex-column justify-content-center align-items-center poptext-logo"
+                        class="d-none d-lg-flex flex-column justify-content-center align-items-center poptext--logo"
                         :text="siteData.title"
                     />
                     <Poptext
-                        class="d-flex d-lg-none flex-column justify-content-center align-items-center poptext-white poptext-logo"
+                        class="d-flex d-lg-none flex-column justify-content-center align-items-center poptext--white poptext--logo"
                         :text="siteData.title"
                     />
                 </Link>

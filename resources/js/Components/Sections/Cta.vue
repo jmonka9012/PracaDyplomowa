@@ -27,7 +27,7 @@ import {Link} from "@inertiajs/vue3";
                 </Link>
             </div>
             <div class="cta-right">
-                <Poptext class="poptext-cta" text="Najbliższe wydarzenia"/>
+                <Poptext class="poptext--cta" text="Najbliższe wydarzenia"/>
             </div>
         </div>
         <div class="cta-cloud">
