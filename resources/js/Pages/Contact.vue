@@ -89,7 +89,7 @@ function SendTicket() {
                     </div>
                     <div class="col-12 col-lg-6 d-flex justify-content-lg-end">
                         <a
-                            class="morph-btn morph-btn-kont kont-icon"
+                            class="morph-btn morph-btn--kont kont-icon"
                             target="_blank"
                             href=""
                         >
@@ -98,7 +98,7 @@ function SendTicket() {
                             </div>
                         </a>
                         <a
-                            class="morph-btn morph-btn-kont kont-icon"
+                            class="morph-btn morph-btn--kont kont-icon"
                             target="_blank"
                             href=""
                         >
@@ -107,7 +107,7 @@ function SendTicket() {
                             </div>
                         </a>
                         <a
-                            class="morph-btn morph-btn-kont kont-icon"
+                            class="morph-btn morph-btn--kont kont-icon"
                             target="_blank"
                             href=""
                         >
@@ -206,7 +206,7 @@ function SendTicket() {
 </template>
 
 <style scoped lang="scss">
-.morph-btn-kont {
+.morph-btn--kont {
     padding: 25px 13px 25px 13px;
 }
 

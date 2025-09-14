@@ -124,17 +124,17 @@ function SendTicket() {
 </script>
 
 <template>
-    <section class="ma-hero"></section>
-    <section class="bg-grey">
+    <section class="ma__hero"></section>
+    <section class="bg-grey ma">
         <div class="container flex-lg-row column-mob-reverse">
             <div class="col-12 d-flex flex-column ma-rcol pl-lg-60px">
-                <h1 class="ma-title">Mój profil</h1>
+                <h1 class="ma__title">Mój profil</h1>
                 <Tabs class="tabs-white">
                     <Tab title="Konto">
                         <div
                             class="d-flex align-items-center column-gap-10px mb-32px"
                         >
-                            <h3 class="ma-ftitle">
+                            <h3 class="ma__ftitle">
                                 <span>Moje Konto </span>
                                 <i class="fa fa-user"></i>
                                 <span v-html="userName" class="username"></span>
@@ -185,7 +185,7 @@ function SendTicket() {
                             </div>
                         </form>
                         <div v-if="user.permission_level === 8">
-                            <h3 class="ma-ftitle mb-20px">Potwierdź Email</h3>
+                            <h3 class="ma__ftitle mb-20px">Potwierdź Email</h3>
                             <form class="form form--ma">
                                 <div class="input-wrap d-flex flex-column col-12">
                                     <input type="submit" class="btn-hover-border " value="Potwierdź" />
@@ -373,7 +373,7 @@ function SendTicket() {
                         <div
                             class="d-flex align-items-center column-gap-10px mb-32px"
                         >
-                            <h3 class="ma-ftitle">Moje zamówienia</h3>
+                            <h3 class="ma__ftitle">Moje zamówienia</h3>
                             <i class="fa fa-ticket"></i>
                         </div>
                         <div class="d-grid row-gap-10px mb-30px">
@@ -482,7 +482,7 @@ function SendTicket() {
                         <div
                             class="d-flex align-items-center column-gap-10px mb-32px"
                         >
-                            <h3 class="ma-ftitle">Szcegóły sprzedawcy</h3>
+                            <h3 class="ma__ftitle">Szcegóły sprzedawcy</h3>
                             <i class="fa fa-user"></i>
                         </div>
                         <div>
@@ -580,19 +580,19 @@ function SendTicket() {
     }
 }
 
-.ma-hero {
+.ma__hero {
     background-color: var(--primary);
     min-height: 380px;
 }
 
-.ma-ftitle {
+.ma__ftitle {
     font-size: 32px;
     line-height: 48px;
     color: var(--text);
     font-weight: 500;
 }
 
-.ma-title {
+.ma__title {
     font-size: 32px;
     font-stretch: normal;
     line-height: 1.21;
@@ -602,7 +602,7 @@ function SendTicket() {
     color: white;
 }
 
-.ma-divider {
+.ma__divider {
     margin: 32px 0px 0px;
     border-width: 1px 0px 0px;
     border-style: solid none none;
@@ -612,102 +612,8 @@ function SendTicket() {
     overflow: visible;
 }
 
-.ma-lcol-intro {
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
-    background-color: rgba(255, 255, 255, 0.1);
 
-    @include mixin.media-breakpoint-up(lg) {
-        min-height: 200px;
-    }
-}
 
-.ma-lcol-content {
-    padding: 16px 0 88px;
-    background-color: rgb(255, 255, 255);
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 10px 3px;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.ma-lcol-nav {
-    color: rgb(18, 18, 18);
-
-    ul {
-        padding-bottom: 5px;
-        margin-bottom: 5px;
-        position: relative;
-
-        &::after {
-            width: calc(100% - 32px);
-            left: 16px;
-            right: 16px;
-            background-color: var(--primary);
-            height: 1px;
-            display: block;
-            position: absolute;
-            content: "";
-            bottom: 0;
-        }
-
-        li {
-            position: relative;
-
-            button {
-                padding: 16px 64px;
-                background-color: transparent;
-                border: 0;
-                font-size: 16px;
-                font-weight: 500;
-                font-family: "Prompt";
-                width: 100%;
-                text-align: start;
-
-                &:hover {
-                    background-color: #f6f6f6;
-                    text-decoration: underline;
-                }
-
-                i {
-                    position: absolute;
-                    position: absolute;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    left: 24px;
-                    color: rgb(100, 100, 100);
-                }
-            }
-
-            a {
-                padding: 12px 24px 12px 64px;
-                color: rgb(18, 18, 18);
-                font-size: 16px;
-                line-height: 1.5;
-                letter-spacing: 0.32px;
-                width: 100%;
-
-                &.user-functions {
-                    padding-left: 24px;
-                }
-
-                &:hover {
-                    background-color: #f6f6f6;
-                    text-decoration: underline;
-                }
-            }
-        }
-
-        &:last-of-type {
-            &::after {
-                display: none;
-            }
-        }
-    }
-}
 
 .ma-rcol {
     margin-top: -240px;
@@ -728,11 +634,7 @@ function SendTicket() {
     }
 }
 
-.ma-lcol {
-    @include mixin.media-breakpoint-up(lg) {
-        margin-top: -200px;
-    }
-}
+
 
 .input-wrap {
     padding: 0 0 !important;

@@ -125,9 +125,7 @@ function FilterBlog() {
         @include mixin.media-breakpoint-up(lg) {
             gap: 20px;
         }
-        &-btn {
 
-        }
     }
 
     &__button {

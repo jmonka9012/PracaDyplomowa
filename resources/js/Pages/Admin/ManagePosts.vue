@@ -149,9 +149,9 @@ onMounted(() => {
                     <div
                         v-if="activePostId === post.id"
                         @click.self="activePostId = null"
-                        class="post-list-item-popup-holder"
+                        class="post-list-item__popup-holder"
                     >
-                        <div class="post-list-item-popup">
+                        <div class="post-list-item__popup">
                             <p class="mb-30px">
                                 Czy na pewno chcesz usunąć posta ?
                             </p>
@@ -217,7 +217,7 @@ onMounted(() => {
     //     grid-template-columns: repeat(7, auto);
     //     display: grid;
     // }
-    &-popup {
+    &__popup {
         width: 50vw;
         background-color: white;
         border: 1px solid var(--primary);
@@ -281,7 +281,7 @@ onMounted(() => {
     //         margin-bottom: 0;
     //     }
     // }
-    &-btns {
+    &__btns {
         row-gap: 15px;
         .btn {
             width: 100%;

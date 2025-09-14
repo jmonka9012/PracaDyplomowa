@@ -211,7 +211,7 @@ function SetUserProperty(value, userID, property) {
                             </template>
                             <div class="content d-flex flex-row pt-20px">
                                 <div
-                                    class="user-row user-row--head user-row--head_collapsed col-2"
+                                    class="user-row user-row--head user-row--head__collapsed col-2"
                                 >
                                     <div>ID:</div>
                                     <div>Nazwa firmy:</div>
@@ -222,7 +222,7 @@ function SetUserProperty(value, userID, property) {
                                     <div>Nr. telefonu:</div>
                                     <div>Status:</div>
                                 </div>
-                                <div class="user-row user-row_collapsed col-10">
+                                <div class="user-row user-row__collapsed col-10">
                                     <div class="user-row__value">
                                         {{ user.organizer.id }}
                                     </div>
@@ -373,7 +373,7 @@ function SetUserProperty(value, userID, property) {
         min-height: 60px;
     }
 
-    &_collapsed {
+    &__collapsed {
         display: flex;
         flex-direction: column;
 
@@ -413,7 +413,7 @@ function SetUserProperty(value, userID, property) {
             }
         }
 
-        &_collapsed {
+        &__collapsed {
             flex-direction: column;
             display: flex;
 
