@@ -67,7 +67,7 @@ onBeforeUnmount(() => {
                 class="d-flex flex-row justify-content-between align-items-center col-12"
             >
                 <a class="mobile-toggle" href="#" @click.prevent="toggleMenu">
-                    <div class="mobile-toggle-inner">
+                    <div class="mobile-toggle__inner">
                         <span></span>
                         <span></span>
                         <span></span>
@@ -75,7 +75,7 @@ onBeforeUnmount(() => {
                 </a>
                 <Link
                     :href="route('home')"
-                    class="header-logo d-flex align-items-center"
+                    class="header__logo d-flex align-items-center"
                 >
                     <Poptext
                         class="d-none d-lg-flex flex-column justify-content-center align-items-center poptext-logo"
@@ -86,7 +86,7 @@ onBeforeUnmount(() => {
                         :text="siteData.title"
                     />
                 </Link>
-                <nav class="header-nav d-none d-lg-flex">
+                <nav class="header__nav d-none d-lg-flex">
                     <ul>
                         <li>
                             <Link :href="route('admin')"
@@ -121,21 +121,21 @@ onBeforeUnmount(() => {
                     </ul>
                 </nav>
                 <div class="d-none d-lg-flex align-items-center">
-                    <Link @click="Logout" class="hover--primary header-login">
+                    <Link @click="Logout" class="hover--primary header__login">
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
                         Wyloguj
                     </Link>
                     <span class="divider divider--dark"></span>
                     <Link
                         :href="route('my-account')"
-                        class="hover--primary header-login"
+                        class="hover--primary header__login"
                     >
                         <i class="fa fa-user text-primary mr-8px"></i>Moje konto
                     </Link>
                     <span class="divider divider--dark"></span>
                     <Link
                         :href="route('home')"
-                        class="hover--primary header-login"
+                        class="hover--primary header__login"
                     >
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
                         Powrót
@@ -146,11 +146,11 @@ onBeforeUnmount(() => {
                 -->
                 <div class="mobile-nav">
                     <a
-                        class="mobile-toggle mobile-toggle-innav"
+                        class="mobile-toggle mobile-toggle--innav"
                         href="#"
                         @click.prevent="toggleMenu"
                     >
-                        <div class="mobile-toggle-inner">
+                        <div class="mobile-toggle__inner">
                             <span></span>
                             <span></span>
                             <span></span>
@@ -158,10 +158,10 @@ onBeforeUnmount(() => {
                     </a>
                     <div class="mobile-nav__content">
                         <div class="container flex-column">
-                            <a class="header-logo mb-30px" href="/">
+                            <a class="header__logo mb-30px" href="/">
                                 <img :src="placeHolder" alt="" />
                             </a>
-                            <nav class="header-nav">
+                            <nav class="header__nav">
                                 <ul class="header-list">
                                     <li>
                                         <Link :href="route('admin')"
@@ -207,7 +207,7 @@ onBeforeUnmount(() => {
                                     <li>
                                         <Link
                                             @click="Logout"
-                                            class="hover--primary header-login"
+                                            class="hover--primary header__login"
                                         >
                                             <i
                                                 class="fa fa-arrow-right text-primary mr-8px"
@@ -218,7 +218,7 @@ onBeforeUnmount(() => {
                                     <li>
                                         <Link
                                             :href="route('my-account')"
-                                            class="hover--primary header-login"
+                                            class="hover--primary header__login"
                                         >
                                             <i
                                                 class="fa fa-user text-primary mr-8px"
@@ -229,7 +229,7 @@ onBeforeUnmount(() => {
                                     <li>
                                         <Link
                                             :href="route('home')"
-                                            class="hover--primary header-login"
+                                            class="hover--primary header__login"
                                         >
                                             <i
                                                 class="fa fa-arrow-right text-primary mr-8px"
@@ -267,12 +267,6 @@ onBeforeUnmount(() => {
         padding: 0 30px;
     }
 
-    &-mobile {
-        @include mixin.media-breakpoint-up(lg) {
-            display: none;
-        }
-    }
-
     .container {
         padding: 0;
     }
@@ -290,7 +284,7 @@ onBeforeUnmount(() => {
     }
 }
 
-.header-logo {
+.header__logo {
     width: 150px;
     height: 30px;
     margin-left: auto;
@@ -313,7 +307,7 @@ onBeforeUnmount(() => {
     }
 }
 
-.header-nav {
+.header__nav {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -378,7 +372,7 @@ onBeforeUnmount(() => {
     }
 }
 
-.header-search {
+.header__search {
     color: white;
     @include mixin.media-breakpoint-up(lg) {
         display: none;
@@ -403,7 +397,7 @@ onBeforeUnmount(() => {
         font-size: 20px;
     }
 
-    &-innav {
+    &--innav {
         position: absolute;
         top: 10px;
         right: -45px;
@@ -411,7 +405,7 @@ onBeforeUnmount(() => {
         margin-left: 0;
     }
 
-    .mobile-toggle-inner {
+    .mobile-toggle__inner {
         display: flex;
         flex-direction: column;
         row-gap: 5px;
@@ -440,7 +434,7 @@ onBeforeUnmount(() => {
 }
 
 .header.open {
-    .mobile-toggle-inner {
+    .mobile-toggle__inner {
         span {
             &:first-of-type {
                 animation: ease 0.7s 0.4s bar-top forwards;
@@ -501,7 +495,7 @@ onBeforeUnmount(() => {
     }
 }
 
-.header-nav {
+.header__nav {
     ul.header-ddown {
         color: white;
 
@@ -520,7 +514,7 @@ onBeforeUnmount(() => {
             color: var(--text);
         }
 
-        li.header-ddown-toggle {
+        li.header-ddown__toggle {
             height: auto !important;
             margin-bottom: 0;
             position: relative;
@@ -528,7 +522,6 @@ onBeforeUnmount(() => {
             .fa {
                 position: absolute;
                 top: 50%;
-                transform: trasnlateY(-50%);
                 right: 10px;
                 font-size: 12px;
                 width: 12px;
@@ -544,7 +537,7 @@ onBeforeUnmount(() => {
             }
         }
 
-        .ddown-content {
+        .ddown__content {
             display: flex;
             padding: 0 0 0 20px;
             overflow: hidden;
@@ -574,7 +567,7 @@ onBeforeUnmount(() => {
     }
 }
 
-.header-login {
+.header__login {
     font-family: "Krona one";
     white-space: nowrap;
     color: white;
