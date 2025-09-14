@@ -80,7 +80,6 @@ const validationRequest = debounce((routeName) => {
         .post(route(routeName), registerForm)
         .then((response) => {
             HandleValidationResponse(routeName, response);
-            //HandleSubmitClass();
         })
         .catch((error) => {
             console.error(error);

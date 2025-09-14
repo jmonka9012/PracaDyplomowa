@@ -1,0 +1,45 @@
+RAPORT TESTU BEZPIECZEŃSTWA – BLOKADA DOSTĘPU DO PANELU ADMINISTRATORA
+Autor: Piotr Galimski
+Wersja dokumentu: ADMIN-ACCESS
+Data: 13.08.2025
+
+──────────────────────────────────────
+Cel testu
+Weryfikacja działania mechanizmu blokującego dostęp do panelu administratora bez uprzedniego logowania.
+
+──────────────────────────────────────
+Środowisko testowe
+Przeglądarka: Firefox Developer Edition
+System operacyjny: Windows 11
+Tryb testowania: ręczny, użytkownik niezalogowany
+Adres testowy: https://eventmachen.ddev.site/admin
+
+──────────────────────────────────────
+Kroki testowe
+1. Uruchomienie przeglądarki w trybie niezalogowanym.
+2. Przejście bezpośrednio pod adres panelu administratora.
+3. Obserwacja zachowania aplikacji oraz komunikatów w konsoli przeglądarki.
+
+──────────────────────────────────────
+Wyniki testu
+– Natychmiastowe przekierowanie na stronę logowania – wynik pozytywny.
+– Brak wyświetlenia jakichkolwiek elementów panelu administratora – wynik pozytywny.
+– Brak błędów autoryzacji w konsoli – wynik pozytywny.
+– Brak komunikatu „Brak dostępu” – neutralne, nie wpływa na bezpieczeństwo, ale może mieć znaczenie dla UX.
+
+──────────────────────────────────────
+Wnioski
+Mechanizm autoryzacji działa prawidłowo — panel administratora jest całkowicie niedostępny dla niezalogowanych użytkowników.
+Przekierowanie jest szybkie i nie ujawnia żadnych wrażliwych danych.
+Dodanie krótkiej informacji o braku dostępu mogłoby poprawić przejrzystość interfejsu.
+
+──────────────────────────────────────
+Rekomendacje
+– Rozważyć dodanie komunikatu nad formularzem logowania:
+  „Aby uzyskać dostęp do panelu administratora, zaloguj się na konto z odpowiednimi uprawnieniami.”
+
+──────────────────────────────────────
+Rejestr zmian w dokumencie
+Data: 09.08.2025
+Zmiana: Utworzenie raportu testu ADMIN-ACCESS
+Autor: Piotr Galimski

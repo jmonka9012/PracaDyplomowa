@@ -1,5 +1,4 @@
 <script setup>
-import catImage from "~images/cat-img-bg-1.jpg";
 import {Link} from "@inertiajs/vue3";
 
 const props = defineProps({

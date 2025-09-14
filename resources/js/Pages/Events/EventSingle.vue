@@ -8,7 +8,7 @@ import blogBg from "~images/blog-bg.jpg";
 import ResetObject from "@/Utilities/resetObject";
 import { router } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
-import { reactive, ref, computed, watch } from "vue";
+import { reactive, watch } from "vue";
 
 const url = window.location.href;
 
@@ -48,8 +48,7 @@ function InitStandingTickets() {
         if (!standingTickets[section.hall_section_id]) {
             standingTickets[section.hall_section_id] = {};
         }
-        standingTickets[section.hall_section_id].hall_section_id =
-            section.hall_section_id;
+        standingTickets[section.hall_section_id].hall_section_id = section.hall_section_id;
         standingTickets[section.hall_section_id].price = section.price;
         standingTickets[section.hall_section_id].amount = null;
         standingTickets[section.hall_section_id].id = section.id;
@@ -84,20 +83,11 @@ function InitSeats() {
 
 function InitSectionPrices() {
     Object.keys(props.event.data.standing_tickets).forEach((key) => {
-        if (
-            !standingSectionPrices[
-                props.event.data.standing_tickets[key].hall_section_id
-            ]
-        ) {
-            standingSectionPrices[
-                props.event.data.standing_tickets[key].hall_section_id
-            ] = {};
+        if (!standingSectionPrices[props.event.data.standing_tickets[key].hall_section_id]) {
+            standingSectionPrices[props.event.data.standing_tickets[key].hall_section_id] = {};
         }
-        standingSectionPrices[
-            props.event.data.standing_tickets[key].hall_section_id
-        ].price = props.event.data.standing_tickets[key].price;
+        standingSectionPrices[props.event.data.standing_tickets[key].hall_section_id].price = props.event.data.standing_tickets[key].price;
     });
-    //console.log(standingSectionPrices);
 }
 
 InitStandingTickets();
@@ -184,7 +174,6 @@ function SubmitTicketRequest() {
         },
     });
     console.log(errors);
-    //console.log(ticketRequest);
 }
 </script>
 
