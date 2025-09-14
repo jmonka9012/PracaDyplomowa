@@ -5,7 +5,8 @@
         "build": "vite build",
         "dev": "vite",
         "watch": "vite build --watch",
-        "test": "mocha selenium-tests/${npm_config_file}/${npm_config_file}.js"
+        "test": "mocha selenium-tests/${npm_config_file}/${npm_config_file}.js",
+        "test:all": "node selenium-tests/run_all_tests.js"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
