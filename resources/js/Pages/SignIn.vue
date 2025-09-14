@@ -181,7 +181,7 @@ function submitRegisterRequest() {
                     </div>
                 </form>
                 <a
-                    class="hover hover-primary read-more read-more-stop"
+                    class="hover hover--primary read-more read-more-stop"
                     @click="RegShow"
                     >Nie masz konta? Zarejestruj się!</a
                 >

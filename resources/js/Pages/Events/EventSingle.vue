@@ -212,14 +212,14 @@ function SubmitTicketRequest() {
                         <h6 class="mb-13px">E-mail:</h6>
                         <a
                             :href="'mailto:' + event.data.contact_email"
-                            class="hover-primary text-underline"
+                            class="hover--primary text-underline"
                             >{{ event.data.contact_email }}</a
                         >
                         <a
                             :href="
                                 'mailto:' + event.data.contact_email_additional
                             "
-                            class="hover-primary text-underline"
+                            class="hover--primary text-underline"
                             >{{ event.data.contact_email_additional }}</a
                         >
                     </div>
@@ -230,7 +230,7 @@ function SubmitTicketRequest() {
                                 v-for="(genre, index) in event.data.genres"
                                 :data="{ genres: genre.id }"
                                 :href="route('event.browser')"
-                                class="hover-primary"
+                                class="hover--primary"
                                 >{{ genre.name
                                 }}<span
                                     v-if="index < event.data.genres.length - 1"

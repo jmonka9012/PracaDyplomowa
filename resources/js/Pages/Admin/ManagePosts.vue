@@ -114,7 +114,7 @@ onMounted(() => {
                     <div class="post-list-item-col">
                         <div>Nazwa</div>
                         <Link
-                            class="hover-primary fw-med"
+                            class="hover--primary fw-med"
                             :href="`/${post.blog_post_url}`"
                             >{{ post.blog_post_name }}</Link
                         >

@@ -22,21 +22,21 @@ const { siteData } = pageInfo();
                     <ul>
                         <li class="justify-content-center justify-content-lg-start">
                             <Link
-                                class="text-primary hover-white mb-15px"
+                                class="text-primary hover--white mb-15px"
                                 :href="route('home')"
                             ><span>Strona główna</span></Link
                             >
                         </li>
                         <li class="justify-content-center justify-content-lg-start">
                             <Link
-                                class="text-primary hover-white mb-15px"
+                                class="text-primary hover--white mb-15px"
                                 :href="route('event.browser')"
                             ><span>Wydarzenia</span></Link
                             >
                         </li>
                         <li class="justify-content-center justify-content-lg-start">
                             <Link
-                                class="text-primary hover-white mb-15px"
+                                class="text-primary hover--white mb-15px"
                                 :href="route('about-us')"
                             ><span>O nas</span></Link
                             >
@@ -48,7 +48,7 @@ const { siteData } = pageInfo();
                         </li>
                         <li class="justify-content-center justify-content-lg-start">
                             <Link
-                                class="text-primary hover-white mb-15px"
+                                class="text-primary hover--white mb-15px"
                                 :href="route('contact')"
                             ><span>Kontakt</span></Link
                             >
@@ -66,11 +66,11 @@ const { siteData } = pageInfo();
                         Kup bilety na niezapomniane wydarzenia w nowoczesnych halach naszego obiektu!
                     </p>
                     <div class="d-flex flex-row justify-content-center mb-35px">
-                        <Link class="text-white hover-primary" :href="route('privacy-policy')">Polityka prywatności</Link>
+                        <Link class="text-white hover--primary" :href="route('privacy-policy')">Polityka prywatności</Link>
                         <span class="text-white divider"></span>
-                        <Link class="text-white hover-primary" :href="route('terms-of-use')">Regulamin</Link>
+                        <Link class="text-white hover--primary" :href="route('terms-of-use')">Regulamin</Link>
                         <span class="text-white divider"></span>
-                        <Link class="text-white hover-primary" :href="route('faq')">FAQ</Link>
+                        <Link class="text-white hover--primary" :href="route('faq')">FAQ</Link>
                     </div>
                     <div class="d-flex flex-row w-fit justify-content-between">
                         <a class="morph-btn footer__icon" href="">
@@ -88,10 +88,10 @@ const { siteData } = pageInfo();
                     class="col-12 col-lg-3 d-flex flex-column text-align-center text-align-lg-end align-items-center align-items-lg-end mt-40px mt-lg-0"
                 >
                     <p class="footer__heading">Poznań</p>
-                    <a class="text-primary hover-white mb-15px" href="mailto:kontakt@eventmachen.pl">
+                    <a class="text-primary hover--white mb-15px" href="mailto:kontakt@eventmachen.pl">
                         kontakt@eventmachen.pl
                     </a>
-                    <a class="text-primary hover-white mb-15px" href="tel:+48111222333">
+                    <a class="text-primary hover--white mb-15px" href="tel:+48111222333">
                         +48 111 222 333
                     </a>
                     <p>

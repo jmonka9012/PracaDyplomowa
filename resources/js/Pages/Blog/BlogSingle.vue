@@ -78,7 +78,7 @@ console.log(props.related_posts);
                 <div
                     class="col-12 col-lg-3 d-flex justify-content-center align-items-center"
                 >
-                    <Link :href="route('blog')" class="hover-primary"
+                    <Link :href="route('blog')" class="hover--primary"
                     ><i class="fa fa-arrow-left"></i> Widok Listy</Link
                     >
                 </div>

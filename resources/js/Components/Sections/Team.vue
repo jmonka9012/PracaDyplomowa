@@ -69,7 +69,7 @@ import spiral from "~images/spiral.png";
 
                     <div class="d-flex flex-column pt-20px pb-10px">
                         <h2 class="team__name">
-                            <a class="hover-underline" :href="member.teamLink">
+                            <a class="hover--underline" :href="member.teamLink">
                                 {{ member.teamName }}
                             </a>
                         </h2>

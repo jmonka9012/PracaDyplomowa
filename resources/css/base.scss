@@ -171,29 +171,6 @@ button {
     border: 0;
 }
 
-.btn-or-wh {
-    border-style: solid;
-    border-width: 1px 1px 1px 1px;
-    border-color: #e86c60;
-
-    &:hover {
-        color: #e86c60;
-        background-color: #ffffff;
-    }
-}
-
-.btn-or-gr {
-    border-style: solid;
-    border-width: 1px 1px 1px 1px;
-    border-color: #e86c60;
-
-    &:hover {
-        border-color: #333;
-        background-color: #333;
-        color: #fff;
-        transition: 0.3s ease;
-    }
-}
 
 p {
     margin-block-start: 0;
@@ -795,29 +772,20 @@ img {
 .hover {
     transition: all 0.4s;
 
-    &-white {
+    &--white {
         @extend .hover;
 
         &:hover {
             color: white !important;
         }
     }
-    &-text {
+    &--text {
         @extend .hover;
         &:hover {
             color: $text;
         }
     }
-
-    &-orange {
-        @extend .hover;
-
-        &:hover {
-            color: $orange !important;
-        }
-    }
-
-    &-primary {
+    &--primary {
         @extend .hover;
 
         &:hover {
@@ -825,7 +793,7 @@ img {
         }
     }
 
-    &-none {
+    &--none {
         &:hover {
             color: initial;
         }
@@ -838,7 +806,7 @@ img {
             text-decoration: underline;
         }
     }
-    &-underline-thick {
+    &--underline-thick {
         @extend .hover;
         text-decoration-thickness: 0.08em !important;
         text-underline-offset: 0.05em;

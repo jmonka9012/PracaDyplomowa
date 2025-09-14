@@ -121,21 +121,21 @@ onBeforeUnmount(() => {
                     </ul>
                 </nav>
                 <div class="d-none d-lg-flex align-items-center">
-                    <Link @click="Logout" class="hover-primary header-login">
+                    <Link @click="Logout" class="hover--primary header-login">
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
                         Wyloguj
                     </Link>
                     <span class="divider divider--dark"></span>
                     <Link
                         :href="route('my-account')"
-                        class="hover-primary header-login"
+                        class="hover--primary header-login"
                     >
                         <i class="fa fa-user text-primary mr-8px"></i>Moje konto
                     </Link>
                     <span class="divider divider--dark"></span>
                     <Link
                         :href="route('home')"
-                        class="hover-primary header-login"
+                        class="hover--primary header-login"
                     >
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
                         Powrót
@@ -207,7 +207,7 @@ onBeforeUnmount(() => {
                                     <li>
                                         <Link
                                             @click="Logout"
-                                            class="hover-primary header-login"
+                                            class="hover--primary header-login"
                                         >
                                             <i
                                                 class="fa fa-arrow-right text-primary mr-8px"
@@ -218,7 +218,7 @@ onBeforeUnmount(() => {
                                     <li>
                                         <Link
                                             :href="route('my-account')"
-                                            class="hover-primary header-login"
+                                            class="hover--primary header-login"
                                         >
                                             <i
                                                 class="fa fa-user text-primary mr-8px"
@@ -229,7 +229,7 @@ onBeforeUnmount(() => {
                                     <li>
                                         <Link
                                             :href="route('home')"
-                                            class="hover-primary header-login"
+                                            class="hover--primary header-login"
                                         >
                                             <i
                                                 class="fa fa-arrow-right text-primary mr-8px"

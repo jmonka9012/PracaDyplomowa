@@ -128,7 +128,7 @@ onBeforeUnmount(() => {
                 <div class="d-none d-lg-flex align-items-center" v-if="!user">
                     <Link
                         :href="route('login')"
-                        class="hover-primary header-login"
+                        class="hover--primary header-login"
                     >
                         <i class="fa fa-user text-primary mr-8px"></i>Zaloguj
                     </Link>
@@ -136,21 +136,21 @@ onBeforeUnmount(() => {
                     <Link
                         :href="route('register')"
                         :data="{ reg: true }"
-                        class="hover-primary header-login"
+                        class="hover--primary header-login"
                     >
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
                         Zarejestruj
                     </Link>
                 </div>
                 <div class="d-none d-lg-flex align-items-center" v-else>
-                    <Link @click="Logout" class="hover-primary header-login">
+                    <Link @click="Logout" class="hover--primary header-login">
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
                         Wyloguj
                     </Link>
                     <span class="divider divider--dark"></span>
                     <Link
                         :href="route('my-account')"
-                        class="hover-primary header-login"
+                        class="hover--primary header-login"
                     >
                         <i class="fa fa-user text-primary mr-8px"></i>Moje konto
                     </Link>
@@ -161,7 +161,7 @@ onBeforeUnmount(() => {
                     <Link
                         v-if="user.permission_level <= 3"
                         :href="route('admin')"
-                        class="hover-primary header-login"
+                        class="hover--primary header-login"
                     >
                         <i class="fa fa-arrow-right text-primary mr-8px"></i>
                         Backend
@@ -298,7 +298,7 @@ onBeforeUnmount(() => {
                                             <li>
                                                 <Link
                                                     :href="route('login')"
-                                                    class="hover-primary header-login"
+                                                    class="hover--primary header-login"
                                                 >
                                                     <i
                                                         class="fa fa-user text-primary mr-8px"
@@ -311,7 +311,7 @@ onBeforeUnmount(() => {
                                                 <Link
                                                     :href="route('register')"
                                                     :data="{ reg: true }"
-                                                    class="hover-primary header-login"
+                                                    class="hover--primary header-login"
                                                 >
                                                     <i
                                                         class="fa fa-arrow-right text-primary mr-8px"
@@ -325,7 +325,7 @@ onBeforeUnmount(() => {
                                             <li>
                                                 <Link
                                                     @click="Logout"
-                                                    class="hover-primary header-login"
+                                                    class="hover--primary header-login"
                                                 >
                                                     <i
                                                         class="fa fa-arrow-right text-primary mr-8px"
@@ -336,7 +336,7 @@ onBeforeUnmount(() => {
                                             <li>
                                                 <Link
                                                     :href="route('my-account')"
-                                                    class="hover-primary header-login"
+                                                    class="hover--primary header-login"
                                                 >
                                                     <i
                                                         class="fa fa-user text-primary mr-8px"
@@ -351,7 +351,7 @@ onBeforeUnmount(() => {
                                                         3
                                                     "
                                                     :href="route('admin')"
-                                                    class="hover-primary header-login"
+                                                    class="hover--primary header-login"
                                                 >
                                                     <i
                                                         class="fa fa-arrow-right text-primary mr-8px"

@@ -60,7 +60,7 @@ function SendTicket() {
                 <p class="mb-16px">
                     Zanim napiszesz, upewnij się, że odpowiedzi na swoje pytania
                     nie znajdziesz w sekcji
-                    <Link class="fw-med hover-primary" :href="route('faq')"
+                    <Link class="fw-med hover--primary" :href="route('faq')"
                         >FAQ</Link
                     >
                     – stworzyliśmy ją specjalnie, byś mógł szybciej znaleźć
@@ -77,12 +77,12 @@ function SendTicket() {
                 >
                     <div class="col-12 col-lg-6 d-flex flex-column">
                         <a
-                            class="hover-primary ff-krona fs-14"
+                            class="hover--primary ff-krona fs-14"
                             href="mailto:kontakt@eventmachen.pl"
                             >kontakt@eventmachen.pl</a
                         >
                         <a
-                            class="hover-primary ff-krona fs-14"
+                            class="hover--primary ff-krona fs-14"
                             href="tel:+48111222333"
                             >111 222 333</a
                         >

@@ -74,7 +74,7 @@ const SwapStatus = (status) => {
                                 :href="route('admin.customer-service')"
                                 :only="['support_tickets']"
                                 method="get"
-                                class="hover-underline"
+                                class="hover--underline"
                                 preserve-scroll
                             >
                                 {{ ticket.name }}

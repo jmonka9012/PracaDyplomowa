@@ -11,11 +11,11 @@ const props = defineProps({
         <div
             v-for="event in props.events.data"
             :key="event.id"
-            class="event-item event-item-blog bt-1 b-secondary pt-25px"
+            class="event-item event-item--blog bt-1 b-secondary pt-25px"
         >
             <h6>
                 <Link
-                    class="hover-underline-thick"
+                    class="hover--underline-thick"
                     :href="`/${event.event_url}`"
                 >
                     {{ event.event_name }}
@@ -26,10 +26,10 @@ const props = defineProps({
                     {{ event.event_date }}
                 </p>
                 <span class="divider divider--horizontal divider--dark"></span>
-                <p class="event-category-link ff-krona mb-16px">
+                <p class="event-item__category-link ff-krona mb-16px">
                     Kategorie:
                     <Link
-                        class="event-category-link hover-primary"
+                        class="event-item__category-link hover--primary"
                         :href="route('event.browser')"
                         :data="{ genres: genre.id }"
                         v-for="(genre, index) in event.genres"
@@ -42,7 +42,7 @@ const props = defineProps({
                 <img
                     :src="`/storage/${event.image_path}`"
                     alt=""
-                    class="event-img event-img--blog"
+                    class="event-item__img event-item__img--blog"
                 />
                 <Link
                     :href="`/${event.event_url}`"
@@ -54,12 +54,12 @@ const props = defineProps({
 </template>
 
 <style lang="scss">
-.event-item-blog {
+.event-item--blog {
     display: flex;
     flex-direction: column;
 }
 
-.event-img--blog {
+.event-item__img--blog {
     margin-bottom: 0;
     padding:10px;
     border-radius: 8px !important;
@@ -67,7 +67,7 @@ const props = defineProps({
     object-fit: contain !important;
 }
 
-.event-category-link {
+.event-item__category-link {
     font-size: 12px;
     line-height: 30px;
     color: var(--text);
