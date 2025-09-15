@@ -27,15 +27,9 @@ function logTestResult(testName, passed) {
 
   try {
     const options = new chrome.Options();
-<<<<<<< HEAD:selenium-tests/100_login_test/100_login_test.js
     options.addArguments('--disable-dev-shm-usage');       // Optymalizacja zużycia pamięci
     options.addArguments('--no-sandbox');                   // Wyłączenie sandboxa
     options.addArguments('--remote-debugging-port=9222');   // Port debugowania (opcjonalny)
-=======
-    options.addArguments('--headless', '--disable-dev-shm-usage', '--no-sandbox');
-
-    // Budujemy przeglądarkę Chrome z powyższymi ustawieniami
->>>>>>> 354460e (update testów automatycznych):selenium-tests/Automated-Tests/100_login_test/100_login_test.js
 
     driver = await new Builder()
       .forBrowser('chrome')

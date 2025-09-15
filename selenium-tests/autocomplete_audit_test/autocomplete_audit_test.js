@@ -22,11 +22,7 @@ const outputPath = path.join(__dirname, 'autocomplete_audit.json');
   let testPassed = false;
 
   try {
-<<<<<<< HEAD:selenium-tests/autocomplete_audit_test/autocomplete_audit_test.js
-    // Konfiguracja przeglądarki Chrome
-=======
     // Konfiguracja przeglądarki Chrome w trybie headless
->>>>>>> 354460e (update testów automatycznych):selenium-tests/Automated-Tests/autocomplete_audit_test/autocomplete_audit_test.js
     const options = new chrome.Options();
     options.addArguments('--headless', '--disable-dev-shm-usage', '--no-sandbox');
 
