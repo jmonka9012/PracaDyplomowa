@@ -225,6 +225,7 @@ select {
     overflow: hidden;
     text-overflow: ellipsis;
     &.select--small {
+        min-height: auto;
         width: 150px;
     }
     &.select--md {

@@ -153,7 +153,7 @@ function SetUserProperty(value, userID, property) {
                         <div>Nazwa:</div>
                         <div>Email:</div>
                         <div>Imie i nazwisko:</div>
-                        <div>Rola:</div>
+                        <div class="pt-4px pb-4px">Rola:</div>
                         <div>Kupione Bilety:</div>
                         <div>Zgłoszenia o pomoc:</div>
                         <div>Akcja:</div>
