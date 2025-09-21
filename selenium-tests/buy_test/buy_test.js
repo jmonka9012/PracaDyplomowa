@@ -3,16 +3,21 @@ import chrome from 'selenium-webdriver/chrome.js';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
-import { logTestResult } from '../logUtils.js'; // zakładam, że masz ten moduł
+import { logTestResult } from '../logUtils.js';
 
 dotenv.config();
 
+// Konfiguracja URL aplikacji
 const BASE_URL = (process.env.APP_URL || '')
   .replace(/(^"|"$)/g, '')
   .replace(/^https:/i, 'http:');
 
-const screenshotPath = '/home/pgalimski/inzynierka/PracaDyplomowa/selenium-tests/logs/screenshots/stripe_checkout.png';
-const logPath = '/home/pgalimski/inzynierka/PracaDyplomowa/selenium-tests/logs/logs.txt';
+// Ścieżki do plików logów i zrzutu ekranu
+const screenshotPath =
+  '/home/pgalimski/inzynierka/PracaDyplomowa/selenium-tests/logs/screenshots/stripe_checkout.png';
+const logPath =
+  '/home/pgalimski/inzynierka/PracaDyplomowa/selenium-tests/logs/logs.txt';
+
 const testName = 'buy_test';
 
 (async function ticketPurchaseTest() {
@@ -21,7 +26,10 @@ const testName = 'buy_test';
   let logMessages = [];
 
   try {
-    const options = new chrome.Options().addArguments('--no-sandbox', '--disable-dev-shm-usage');
+    // 1. Uruchom Chrome
+    const options = new chrome.Options()
+      .addArguments('--no-sandbox')
+      .addArguments('--disable-dev-shm-usage');
     driver = await new Builder().forBrowser('chrome').setChromeOptions(options).build();
     await driver.manage().window().setRect({ width: 1400, height: 1000 });
 
@@ -30,70 +38,81 @@ const testName = 'buy_test';
       logMessages.push(msg);
     };
 
-    log('Start testu zakupu biletu');
+    log('Rozpoczęcie testu zakupu biletu...');
 
+    // 2. Otwórz stronę główną
     await driver.get(BASE_URL);
     log('Strona główna otwarta');
 
+    // 3. Kliknij "Zaloguj"
     await driver.findElement(By.css('a.header__login[href*="/login"]')).click();
     log('Kliknięto "Zaloguj"');
 
+    // 4. Wypełnij dane logowania (prawidłowe)
     await driver.findElement(By.css('input[name="login"]')).sendKeys('pgalimski');
     await driver.findElement(By.css('input[name="password"]')).sendKeys('12341234');
-    log('Wpisano dane logowania');
+    log('Wpisano poprawne dane logowania');
 
+    // 5. Kliknij przycisk "Zaloguj się" i poczekaj na profil
     await driver.findElement(By.css('input[type="submit"][value="Zaloguj się"]')).click();
     await driver.wait(until.elementLocated(By.xpath("//h1[contains(.,'Mój profil')]")), 15000);
-    log('Zalogowano pomyślnie');
+    log('Logowanie zakończone sukcesem');
 
+    // 6. Przejdź na listę wydarzeń
     await driver.get(`${BASE_URL}/wydarzenia`);
     await driver.findElement(By.css('.event .link-stretched')).click();
     await driver.wait(until.urlContains('/wydarzenia/'), 15000);
     log('Wybrano wydarzenie');
 
+    // 7. Wybierz miejsce na sali
     await driver.findElement(By.css('.scene')).click();
     const seats = await driver.findElements(By.css('.hall__seat:not(.taken)'));
     if (!seats.length) throw new Error('Brak dostępnych miejsc');
     await seats[0].click();
-    log('Wybrane miejsce');
+    log('Wybrane miejsce na sali');
 
+    // 8. Jeśli dostępne, wprowadź liczbę biletów stojących
     try {
       const standingInput = await driver.findElement(By.css('.hall__seat-cont .stand-input'));
       await standingInput.clear();
       await standingInput.sendKeys('1');
-      log('Wpisano bilet stojący');
+      log('Wprowadzono bilet stojący');
     } catch {
-      log('Brak pola na bilet stojący — pomijam');
+      log('Brak pola na bilet stojący — pominięto');
     }
 
+    // 9. Kliknij "Kup bilety" i przejdź do formularza zamówienia
     await driver.findElement(By.xpath("//button[contains(text(),'Kup bilety')]")).click();
     await driver.wait(until.urlContains('/kupuj'), 15000);
     await driver.findElement(By.css('form input[type="submit"], form button[type="submit"]')).click();
-    log('Wysłano formularz zamówienia');
+    log('Formularz zamówienia wysłany');
 
+    // 10. Poczekaj na przekierowanie do Stripe Checkout
     await driver.wait(until.urlContains('checkout.stripe.com'), 20000);
     const currentUrl = await driver.getCurrentUrl();
     log(`Przekierowano na Stripe Checkout: ${currentUrl}`);
 
-    // Poczekaj na iframe Stripe i chwilę na załadowanie
-    const stripeIframe = await driver.wait(until.elementLocated(By.css('iframe[src*="stripe.com"]')), 15000);
+    // 11. Sprawdź iframe Stripe i poczekaj na pełne załadowanie
+    await driver.wait(until.elementLocated(By.css('iframe[src*="stripe.com"]')), 15000);
     log('Iframe Stripe wykryty');
+    await driver.sleep(3000);
 
-    await driver.sleep(3000); // dodatkowe oczekiwanie na pełne załadowanie formularza
-
+    // 12. Zrób screenshot ekranu
     const screenshot = await driver.takeScreenshot();
     fs.mkdirSync(path.dirname(screenshotPath), { recursive: true });
     fs.writeFileSync(screenshotPath, screenshot, 'base64');
     log(`Screenshot zapisany: ${screenshotPath}`);
 
-    log('Test zakończony na wejściu do Stripe Checkout — sukces');
-
+    // 13. Sukces — dotarliśmy do Stripe
+    log('Test zakończony sukcesem — wejście do Stripe Checkout potwierdzone');
   } catch (error) {
+    // Obsługa błędów
     const msg = `Błąd w teście: ${error.message}`;
     console.error(msg);
     logMessages.push(msg);
     passed = false;
   } finally {
+    // Zamykanie przeglądarki i logowanie końcowe
     if (driver) await driver.quit();
     const finalMsg = `Test zakończony: ${passed ? 'sukces' : 'niepowodzenie'}`;
     console.log(finalMsg);
@@ -102,7 +121,7 @@ const testName = 'buy_test';
     fs.mkdirSync(path.dirname(logPath), { recursive: true });
     fs.appendFileSync(logPath, logMessages.join('\n') + '\n\n');
 
-    // Dodaj potwierdzenie do logów systemowych
+    // Zapis w centralnym logu testów
     logTestResult(testName, passed);
   }
 })();
