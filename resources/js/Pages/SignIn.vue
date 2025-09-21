@@ -198,7 +198,7 @@ function submitRegisterRequest() {
                         <input
                             type="text"
                             id="register-username"
-                            name="name"
+                            name="register-username"
                             autocomplete="register-username"
                             spellcheck="false"
                             value=""
@@ -218,7 +218,7 @@ function submitRegisterRequest() {
                         <input
                             type="text"
                             id="register-email"
-                            name="email"
+                            name="register-email"
                             autocomplete="email"
                             spellcheck="false"
                             value=""
@@ -234,12 +234,12 @@ function submitRegisterRequest() {
                         </div>
                     </div>
                     <div class="input-wrap col-12">
-                        <label for="register-username">Imię *</label>
+                        <label for="register-name">Imię *</label>
                         <input
                             type="text"
-                            id="register-username"
-                            name="name"
-                            autocomplete="register-username"
+                            id="register-name"
+                            name="register-name"
+                            autocomplete="register-name"
                             spellcheck="false"
                             value=""
                             aria-required="true"
@@ -250,12 +250,12 @@ function submitRegisterRequest() {
                         </div>
                     </div>
                     <div class="input-wrap col-12">
-                        <label for="register-username">Nazwisko *</label>
+                        <label for="register-lastname">Nazwisko *</label>
                         <input
                             type="text"
-                            id="register-username"
+                            id="register-lastname"
                             name="name"
-                            autocomplete="register-username"
+                            autocomplete="register-lastname"
                             spellcheck="false"
                             value=""
                             aria-required="true"
@@ -269,7 +269,7 @@ function submitRegisterRequest() {
                         <label for="register-password">Hasło *</label>
                         <input
                             type="password"
-                            name="password"
+                            name="register-password"
                             id="register-password"
                             required=""
                             aria-required="true"
@@ -285,7 +285,7 @@ function submitRegisterRequest() {
                         >
                         <input
                             type="password"
-                            name="password_confirmation"
+                            name="register-password-confirm"
                             id="register-password-confirm"
                             required=""
                             aria-required="true"
@@ -322,8 +322,8 @@ function submitRegisterRequest() {
                     <div class="input-wrap input-wrap--check col-12 mb-20px">
                         <input
                             type="checkbox"
-                            name="organizer"
-                            id="organizer"
+                            name="register-organizer"
+                            id="register-organizer"
                             v-model="registerForm.organizer_request"
                             @input="console.log(registerForm)"
                         />
@@ -336,11 +336,11 @@ function submitRegisterRequest() {
                         v-if="registerForm.organizer_request"
                     >
                         <div class="input-wrap col-12">
-                            <label for="register-username">Nazwa firmy*</label>
+                            <label for="register-company-name">Nazwa firmy*</label>
                             <input
                                 type="text"
                                 id="register-company-name"
-                                name="company-name"
+                                name="register-company-name"
                                 :required="registerForm.organizer_request"
                                 :aria-required="registerForm.organizer_request"
                                 spellcheck="false"
@@ -360,13 +360,13 @@ function submitRegisterRequest() {
                             </div>
                         </div>
                         <div class="input-wrap col-12">
-                            <label for="register-username"
+                            <label for="register-company-number"
                                 >Telefon kontaktowy*</label
                             >
                             <input
                                 type="tel"
                                 id="register-company-number"
-                                name="company-number"
+                                name="register-company-number"
                                 v-number-only
                                 :required="registerForm.organizer_request"
                                 :aria-required="registerForm.organizer_request"
@@ -387,12 +387,12 @@ function submitRegisterRequest() {
                             </div>
                         </div>
                         <div class="input-wrap col-12">
-                            <label for="register-username">NIP*</label>
+                            <label for="register-company-nip">NIP*</label>
                             <input
                                 type="text"
                                 v-number-only
                                 id="register-company-NIP"
-                                name="company-NIP"
+                                name="register-company-NIP"
                                 :required="registerForm.organizer_request"
                                 :aria-required="registerForm.organizer_request"
                                 spellcheck="false"
@@ -411,11 +411,11 @@ function submitRegisterRequest() {
                             </div>
                         </div>
                         <div class="input-wrap col-12">
-                            <label for="register-username">Kraj*</label>
+                            <label for="register-company-country">Kraj*</label>
                             <input
                                 type="text"
                                 id="register-company-country"
-                                name="company-address"
+                                name="register-company-country"
                                 :required="registerForm.organizer_request"
                                 :aria-required="registerForm.organizer_request"
                                 spellcheck="false"
@@ -435,11 +435,11 @@ function submitRegisterRequest() {
                             </div>
                         </div>
                         <div class="input-wrap col-12">
-                            <label for="register-username">Miasto*</label>
+                            <label for="register-company-city">Miasto*</label>
                             <input
                                 type="text"
-                                id="register-company-country"
-                                name="company-address"
+                                id="register-company-city"
+                                name="register-company-city"
                                 :required="registerForm.organizer_request"
                                 :aria-required="registerForm.organizer_request"
                                 spellcheck="false"
@@ -459,11 +459,11 @@ function submitRegisterRequest() {
                             </div>
                         </div>
                         <div class="input-wrap col-12">
-                            <label for="register-username">Kod pocztowy*</label>
+                            <label for="register-company-zip-code">Kod pocztowy*</label>
                             <input
                                 type="text"
-                                id="register-company-country"
-                                name="company-address"
+                                id="register-company-zip-code"
+                                name="register-company-zip-code"
                                 :required="registerForm.organizer_request"
                                 :aria-required="registerForm.organizer_request"
                                 spellcheck="false"
@@ -483,11 +483,11 @@ function submitRegisterRequest() {
                             </div>
                         </div>
                         <div class="input-wrap col-12">
-                            <label for="register-username">Ulica*</label>
+                            <label for="register-company-street">Ulica*</label>
                             <input
                                 type="text"
-                                id="register-company-country"
-                                name="company-address"
+                                id="register-company-street"
+                                name="register-company-street"
                                 :required="registerForm.organizer_request"
                                 :aria-required="registerForm.organizer_request"
                                 spellcheck="false"
@@ -507,14 +507,14 @@ function submitRegisterRequest() {
                             </div>
                         </div>
                         <div class="input-wrap col-12">
-                            <label for="register-username"
+                            <label for="register-company-bank"
                                 >Numer konta bankowego*</label
                             >
                             <input
                                 type="text"
                                 v-number-only
                                 id="register-company-bank"
-                                name="company-bank"
+                                name="register-company-bank"
                                 :required="registerForm.organizer_request"
                                 :aria-required="registerForm.organizer_request"
                                 spellcheck="false"
