@@ -1,18 +1,32 @@
 <script setup>
 import ResetObject from "@/Utilities/resetObject";
-import { router } from "@inertiajs/vue3";
-import { Link } from "@inertiajs/vue3";
-import { reactive, ref } from "vue";
+import {router} from "@inertiajs/vue3";
+import {computed} from "vue";
+import {Link} from "@inertiajs/vue3";
+import {reactive, ref} from "vue";
 import useAuth from "@/Utilities/useAuth";
-import { debounce } from "@/Utilities/debounce";
+import {debounce} from "@/Utilities/debounce";
 import axios from "axios";
+import {onMounted} from "vue";
 
-const { user, isLoggedIn } = useAuth();
+const {user, isLoggedIn} = useAuth();
 
 const props = defineProps({
-  order: Object
+    order: {
+        type: Object,
+        required: true,
+    },
+    user_data: {
+        type: Object,
+        required: false,
+    },
 });
 
+console.log(props);
+
+const showTaxField = computed(() => {
+    return (paymentForm.company !== null) || props.user_data.tax_number;
+})
 
 const errors = reactive({});
 const liveErrors = reactive({});
@@ -23,6 +37,7 @@ const paymentForm = reactive({
     email: null,
     phone: null,
     company: null,
+    tax_number: null,
     country: null,
     city: null,
     street: null,
@@ -43,16 +58,16 @@ function SubmitPaymentDetails() {
             order_number: props.order.order_number
         }),
         paymentForm, {
-        preserveScroll: true,
-        onError: (err) => {
-            ResetObject(errors);
-            Object.assign(errors, err);
-            console.log(errors);
-        },
-        onSuccess: (test) => {
-            console.log(test);
-        },
-    })
+            preserveScroll: true,
+            onError: (err) => {
+                ResetObject(errors);
+                Object.assign(errors, err);
+                console.log(errors);
+            },
+            onSuccess: (test) => {
+                console.log(test);
+            },
+        })
 }
 
 let canSubmit = ref(false);
@@ -73,213 +88,235 @@ const validationRequest = debounce((routeName) => {
             console.error(error);
         });
 }, 1000);
+
+onMounted(() => {
+    Object.keys(props.user_data).forEach((key) => {
+        props.user_data[key] ? paymentForm[key] = props.user_data[key] : '';
+    });
+});
 </script>
 
 <template>
-    <section>
-        <div class="container d-flex flex-column">
+    <section class="pt-60px pb-60px">
+        <div class="container d-flex flex-column align-items-center">
             <h2 class="mb-40px">Podaj szczegóły płatności</h2>
-            <div>
-                <form class="form pb-100px" @submit.prevent="SubmitPaymentDetails()">
-                    <div class="input-wrap col-12 col-lg-6">
+                <form class="form col-12 pb-100px" @submit.prevent="SubmitPaymentDetails()">
+                    <div class="input-wrap col-12">
                         <label for="name">Imię *</label>
                         <input
-                            type="text"
                             id="name"
+                            v-model="paymentForm.first_name"
+                            aria-required="true"
                             autocomplete="first_name"
                             name="name"
-                            spellcheck="false"
                             required=""
-                            aria-required="true"
-                            v-model="paymentForm.first_name"
+                            spellcheck="false"
+                            type="text"
                         />
-                        <div class="error-msg" v-if="errors.first_name">
+                        <div v-if="errors.first_name" class="error-msg">
                             {{ errors.first_name }}
                         </div>
                     </div>
-                    <div class="input-wrap col-12 col-lg-6">
+                    <div class="input-wrap col-12">
                         <label for="last_name">Nazwisko *</label>
                         <input
-                            type="text"
                             id="last_name"
+                            v-model="paymentForm.last_name"
+                            aria-required="true"
                             autocomplete="last_name"
                             name="last_name"
-                            spellcheck="false"
                             required=""
-                            aria-required="true"
-                            v-model="paymentForm.last_name"
+                            spellcheck="false"
+                            type="text"
                         />
-                        <div class="error-msg" v-if="errors.last_name">
+                        <div v-if="errors.last_name" class="error-msg">
                             {{ errors.last_name }}
                         </div>
                     </div>
-                    <div class="input-wrap col-12 col-lg-6">
+                    <div class="input-wrap col-12">
                         <label for="email">E-mail *</label>
                         <input
-                            type="email"
                             id="email"
+                            v-model="paymentForm.email"
+                            aria-required="true"
                             autocomplete="email"
                             name="email"
-                            spellcheck="false"
                             required=""
-                            aria-required="true"
-                            v-model="paymentForm.email"
+                            spellcheck="false"
+                            type="email"
                         />
-                        <div class="error-msg" v-if="errors.email">
+                        <div v-if="errors.email" class="error-msg">
                             {{ errors.email }}
                         </div>
                     </div>
-                    <div class="input-wrap col-12 col-lg-6">
+                    <div class="input-wrap col-12">
                         <label for="phone">Telefon *</label>
                         <input
-                            type="tel"
                             id="phone"
+                            v-model="paymentForm.phone"
+                            aria-required="true"
                             autocomplete="phone"
                             name="phone"
-                            spellcheck="false"
                             required=""
-                            aria-required="true"
-                            v-model="paymentForm.phone"
+                            spellcheck="false"
+                            type="tel"
                         />
-                        <div class="error-msg" v-if="errors.phone">
+                        <div v-if="errors.phone" class="error-msg">
                             {{ errors.phone }}
                         </div>
                     </div>
-                     <div class="input-wrap col-12 ">
-                      <label for="company">Firma</label>
-                            <input
-                            type="text"
+                    <div class="input-wrap col-12">
+                        <label for="company">Firma</label>
+                        <input
                             id="company"
+                            v-model="paymentForm.company"
+                            aria-required="false"
                             autocomplete="company"
                             name="company"
                             spellcheck="false"
+                            type="text"
+                        />
+                        <div v-if="errors.company" class="error-msg">
+                            {{ errors.company }}
+                        </div>
+                    </div>
+                    <div v-if="showTaxField" class="input-wrap col-12">
+                        <label for="company">NIP</label>
+                        <input
+                            id="company"
+                            v-model="paymentForm.tax_number"
                             aria-required="false"
-                            v-model="paymentForm.company"
-                                    />
-                        <div class="error-msg" v-if="errors.company">
-                                {{ errors.company }}
+                            autocomplete="company"
+                            name="company"
+                            spellcheck="false"
+                            type="text"
+                            v-number-only
+                        />
+                        <div v-if="errors.tax_number" class="error-msg">
+                            {{ errors.tax_number }}
                         </div>
-                        </div>
+                    </div>
                     <div class="input-wrap col-12">
                         <label for="country">Kraj *</label>
                         <input
-                            type="text"
                             id="country"
+                            v-model="paymentForm.country"
+                            aria-required="true"
                             autocomplete="country"
                             name="country"
-                            spellcheck="false"
                             required=""
-                            aria-required="true"
-                            v-model="paymentForm.country"
+                            spellcheck="false"
+                            type="text"
                         />
-                        <div class="error-msg" v-if="errors.country">
+                        <div v-if="errors.country" class="error-msg">
                             {{ errors.country }}
                         </div>
                     </div>
                     <div class="input-wrap col-12">
                         <label for="city">Miasto *</label>
                         <input
-                            type="text"
                             id="city"
+                            v-model="paymentForm.city"
+                            aria-required="true"
                             autocomplete="city"
                             name="city"
-                            spellcheck="false"
                             required=""
-                            aria-required="true"
-                            v-model="paymentForm.city"
+                            spellcheck="false"
+                            type="text"
                         />
-                        <div class="error-msg" v-if="errors.city">
+                        <div v-if="errors.city" class="error-msg">
                             {{ errors.city }}
                         </div>
                     </div>
                     <div class="input-wrap col-12">
                         <label for="street">Ulica *</label>
                         <input
-                            type="text"
                             id="street"
+                            v-model="paymentForm.street"
+                            aria-required="true"
                             autocomplete="street"
                             name="street"
-                            spellcheck="false"
                             required=""
-                            aria-required="true"
-                            v-model="paymentForm.street"
+                            spellcheck="false"
+                            type="text"
                         />
-                        <div class="error-msg" v-if="errors.street">
+                        <div v-if="errors.street" class="error-msg">
                             {{ errors.street }}
                         </div>
                     </div>
                     <div class="input-wrap col-12">
                         <label for="house_number">Numer domu/mieszkania *</label>
                         <input
-                            type="text"
                             id="house_number"
+                            v-model="paymentForm.house_number"
+                            aria-required="true"
                             autocomplete="house_number"
                             name="house_number"
-                            spellcheck="false"
                             required=""
-                            aria-required="true"
-                            v-model="paymentForm.house_number"
+                            spellcheck="false"
+                            type="text"
                         />
-                        <div class="error-msg" v-if="errors.house_number">
+                        <div v-if="errors.house_number" class="error-msg">
                             {{ errors.house_number }}
                         </div>
                     </div>
                     <div class="input-wrap col-12">
                         <label for="zip_code">Kod pocztowy *</label>
                         <input
-                            type="text"
                             id="zip_code"
+                            v-model="paymentForm.zip_code"
+                            aria-required="true"
                             autocomplete="zip_code"
                             name="zip_code"
-                            spellcheck="false"
                             required=""
-                            aria-required="true"
-                            v-model="paymentForm.zip_code"
+                            spellcheck="false"
+                            type="text"
                         />
-                        <div class="error-msg" v-if="errors.zip_code">
+                        <div v-if="errors.zip_code" class="error-msg">
                             {{ errors.zip_code }}
                         </div>
                     </div>
                     <div v-if="user" class="input-wrap d-flex flex-row align-items-center col-12">
-                        <input v-model="paymentForm.save_data" id="save_data" type="checkbox">
+                        <input id="save_data" v-model="paymentForm.save_data" type="checkbox">
                         <label for="save_data">Zapisz dane do przyszłych transakcji</label>
                     </div>
-                    <div v-else class="input-wrap input-wrap-check  align-items-center col-12">
-                        <input v-model="paymentForm.make_account" id="make_account" type="checkbox">
+                    <div v-else class="input-wrap input-wrap--check  align-items-center col-12">
+                        <input id="make_account" v-model="paymentForm.make_account" type="checkbox">
                         <label for="make_account">Stwórz konto z podanymi danymi zapamiętać je na przyszłość</label>
                     </div>
-                    <div v-if="paymentForm.make_account">
+                    <div class="d-flex flex-column">
+                        <div v-if="paymentForm.make_account">
                         <div class="input-wrap col-12">
                             <label for="name">Nazwa konta</label>
                             <input
-                                type="text"
                                 id="name"
+                                v-model="paymentForm.name"
+                                aria-required="true"
                                 autocomplete="name"
                                 name="name"
-                                spellcheck="false"
                                 required=""
-                                aria-required="true"
-                                v-model="paymentForm.name"
+                                spellcheck="false"
+                                type="text"
                                 @input="validationRequest('verification.user')"
                             />
-                            <div class="error-msg" v-if="errors.name">
+                            <div v-if="errors.name" class="error-msg">
                                 {{ errors.name }}
                             </div>
-                            <div class="error-msg" v-if="liveErrors.name">
+                            <div v-if="liveErrors.name" class="error-msg">
                                 {{ liveErrors.name }}
                             </div>
                         </div>
                         <div class="input-wrap col-12">
                             <label for="register-password">Hasło *</label>
                             <input
-                                type="password"
-                                name="password"
                                 id="register-password"
-                                required=""
-                                aria-required="true"
                                 v-model="paymentForm.password"
+                                aria-required="true"
+                                name="password"
+                                required=""
+                                type="password"
                             />
-                            <div class="error-msg" v-if="errors.password">
+                            <div v-if="errors.password" class="error-msg">
                                 {{ errors.password }}
                             </div>
                         </div>
@@ -288,29 +325,33 @@ const validationRequest = debounce((routeName) => {
                             >Potwierdź Hasło *</label
                             >
                             <input
-                                type="password"
-                                name="password_confirmation"
                                 id="register-password-confirm"
-                                required=""
-                                aria-required="true"
                                 v-model="paymentForm.password_confirmation"
+                                aria-required="true"
+                                name="password_confirmation"
+                                required=""
+                                type="password"
                             />
                             <div
-                                class="error-msg"
                                 v-if="errors.password_confirmation"
+                                class="error-msg"
                             >
                                 {{ errors.password_confirmation }}
                             </div>
                         </div>
-
                     </div>
-                    <input :disabled="!canSubmit" :class="{ disabled: !canSubmit }" type="submit">
+                    <div>
+                        <div class="input-wrap">
+                        <input v-if="isLoggedIn" type="submit" value="Przejdź dalej">
+                        <input v-else :class="{ disabled: !canSubmit && paymentForm.make_account }" :disabled="!canSubmit && paymentForm.make_account" type="submit" value="Przejdź dalej">
+                        </div>
+                    </div>
+                    </div>
                 </form>
-            </div>
         </div>
     </section>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 </style>
