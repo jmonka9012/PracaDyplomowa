@@ -12,7 +12,7 @@ Zakres testu:
 – Widoczność i zawartość formularza
 – Działanie przycisku „Wyślij”
 – Komunikaty walidacyjne
-– Estetyka oraz dane dodatkowe 
+– Estetyka oraz dane dodatkowe
 
 Kroki testowe:
 1. Kliknięcie w pozycję „Kontakt” w menu głównym – poprawne przekierowanie do sekcji kontaktowej.
@@ -27,9 +27,9 @@ Szczegóły formularza:
 – Nagłówek: „Masz pytania?”
 – Instrukcja: Pomoc w zakresie zamówień, płatności, faktur, zwrotów
 – Dane kontaktowe:
-   • E-mail: kontakt@eventmachen.pl  
-   • Telefon: 111 222 333  
-   • Adres: ul. Koncertowa 12, 66-666 Poznań
+   • E-mail: kontakt@eventmachen.pl
+   • Telefon: 111 222 333
+   • Adres: ul. Koncertowa 12, 66-721 Poznań
 – Pola formularza:
    • Imię
    • E-mail
@@ -41,7 +41,7 @@ Szczegóły formularza:
 – Informacja o administratorze danych – zgodna z RODO, sformułowana jasno
 
 Obserwacja:
-Podczas testu formularza kontaktowego pojawia się komunikat walidacyjny w języku angielskim:  
+Podczas testu formularza kontaktowego pojawia się komunikat walidacyjny w języku angielskim:
 "The email field must be a valid email address."
 
 Oczekiwany rezultat:

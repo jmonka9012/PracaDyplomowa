@@ -15,7 +15,7 @@ import blogBg from "~images/blog-bg.jpg";
           Niniejszy dokument stanowi kompleksowy zbiór zasad dotyczących ochrony danych osobowych przetwarzanych w ramach funkcjonowania platformy EVENT MACHEN, działającej jako pełnoprawna działalność gospodarcza. Serwis działa na zasadach zgodnych z obowiązującymi przepisami prawa, w szczególności z Rozporządzeniem Parlamentu Europejskiego i Rady (UE) 2016/679 (RODO) oraz przepisami krajowymi dotyczącymi ochrony danych osobowych. Dokument ma na celu zapewnienie pełnej transparentności działań związanych z przetwarzaniem danych osobowych użytkowników oraz określenie praw i obowiązków zarówno administratora, jak i osób korzystających z Serwisu.
         </p>
         <p>
-          Platforma EVENT MACHEN jest prowadzona przez firmę z siedzibą w Poznaniu, pod adresem: <strong>ul. Koncertowa 12, 66-666 Poznań</strong>. Dane identyfikacyjne firmy: <strong>NIP: 123-456-78-90</strong>. Dane kontaktowe: <strong>e-mail:</strong> kontakt@eventmachen.pl, <strong>Telefon:</strong> +48 111 222 333.
+          Platforma EVENT MACHEN jest prowadzona przez firmę z siedzibą w Poznaniu, pod adresem: <strong>ul. Koncertowa 12, 66-721 Poznań</strong>. Dane identyfikacyjne firmy: <strong>NIP: 123-456-78-90</strong>. Dane kontaktowe: <strong>e-mail:</strong> kontakt@eventmachen.pl, <strong>Telefon:</strong> +48 111 222 333.
         </p>
         <p>
           Serwis jest hostowany i dostępny publicznie, co zobowiązuje Administratora do przestrzegania wszelkich standardów bezpieczeństwa oraz stosowania mechanizmów zapewniających ochronę danych osobowych i zarządzanie plikami cookies.

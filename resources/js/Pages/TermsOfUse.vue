@@ -11,7 +11,7 @@ import blogBg from "~images/blog-bg.jpg";
         <h1>REGULAMIN PLATFORMY EVENT MACHEN</h1>
         <p><strong>1. Postanowienia ogólne</strong></p>
         <p>1.1. Niniejszy Regulamin (dalej „Regulamin”) określa zasady korzystania z platformy EVENT MACHEN (dalej „Serwis”), udostępnianej pod adresem internetowym eventmachen.pl, której celem jest umożliwienie Użytkownikom zakupu biletów na wydarzenia kulturalne, sportowe, rozrywkowe oraz inne imprezy organizowane przez podmioty trzecie (dalej „Organizatorzy”).</p>
-        <p>1.2. Serwis jest prowadzony przez firmę EVENT MACHEN z siedzibą w Poznaniu, przy ul. Koncertowej 12, 66-666 Poznań, zarejestrowaną pod numerem NIP 123-456-78-90, posiadającą adres e-mail: kontakt@eventmachen.pl oraz telefon kontaktowy: +48 111 222 333.</p>
+        <p>1.2. Serwis jest prowadzony przez firmę EVENT MACHEN z siedzibą w Poznaniu, przy ul. Koncertowej 12, 66-721 Poznań, zarejestrowaną pod numerem NIP 123-456-78-90, posiadającą adres e-mail: kontakt@eventmachen.pl oraz telefon kontaktowy: +48 111 222 333.</p>
         <p>1.3. Korzystanie z Serwisu jest równoznaczne z akceptacją niniejszego Regulaminu oraz zasad korzystania z usług zawartych w Polityce Prywatności. Użytkownik, dokonując zakupu biletu lub rejestrując konto, potwierdza, że zapoznał się z treścią niniejszego dokumentu oraz zobowiązuje się do jego przestrzegania.</p>
         <p>1.4. Administrator świadczy usługi sprzedaży biletów na zasadzie pośrednictwa, nie będąc jednocześnie Organizatorem wydarzenia. Wszelkie kwestie związane z organizacją eventu, zawartością programu czy odpowiedzialnością za przebieg wydarzenia spoczywają na Organizatorze.</p>
         <p>1.5. Regulamin określa obowiązki i prawa Administratora, Użytkowników oraz Organizatorów, a także zasady dokonywania transakcji, rozpatrywania reklamacji oraz prowadzenia procedur zwrotów zakupionych biletów.</p>
@@ -98,7 +98,7 @@ import blogBg from "~images/blog-bg.jpg";
 <p>Powyższy Regulamin został sporządzony w sposób, który ma zapewnić przejrzystość, ochronę praw Użytkowników oraz właściwe funkcjonowanie platformy EVENT MACHEN. W razie wątpliwości lub potrzeby wyjaśnienia poszczególnych postanowień, Użytkownicy mogą kierować zapytania do Administratora drogą elektroniczną na adres kontakt@eventmachen.pl lub telefonicznie pod numer +48 111 222 333.</p>
 
 
-        
+
       </article>
     </div>
   </section>

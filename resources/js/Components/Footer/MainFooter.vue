@@ -96,7 +96,7 @@ const { siteData } = pageInfo();
                     </a>
                     <p>
                         ul. Koncertowa 12, <br />
-                        66-666 Poznań
+                        66-721 Poznań
                     </p>
                 </div>
             </div>
