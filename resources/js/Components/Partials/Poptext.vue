@@ -18,7 +18,7 @@ const charTotal = computed(() => props.text.length);
 <template>
     <h3
         class="poptext"
-        :style="`--word-total: ${wordTotal}; --char-total: ${charTotal};`"
+        :style="`--pop-word-total: ${wordTotal}; --pop-char-total: ${charTotal};`"
         v-bind="$attrs"
     >
         <span
@@ -26,7 +26,7 @@ const charTotal = computed(() => props.text.length);
             :key="wordIndex"
             class="word"
             :data-word="word"
-            :style="`--word-index: ${wordIndex};`"
+            :style="`--pop-word-index: ${wordIndex};`"
         >
             <span
                 v-for="(char, charIndex) in word.split('')"
@@ -34,8 +34,8 @@ const charTotal = computed(() => props.text.length);
                 class="char"
                 :data-char="char"
                 :style="{
-                    '--char-index': charIndex,
-                    '--char-total': charTotal,
+                    '--pop-char-index': charIndex,
+                    '--pop-char-total': charTotal,
                 }"
             >
                 {{ char }}
@@ -51,41 +51,41 @@ const charTotal = computed(() => props.text.length);
     font-size: 8vw;
     line-height: 1.05em;
     text-transform: uppercase;
-    --word-center: calc((var(--word-total) - 1) / 2);
-    --char-center: calc((var(--char-total) - 1) / 2);
-    --line-center: calc((var(--line-total) - 1) / 2);
-    --color-bg-text: #fff;
+    --pop-word-center: calc((var(--pop-word-total) - 1) / 2);
+    --pop-char-center: calc((var(--pop-char-total) - 1) / 2);
+    --pop-line-center: calc((var(--pop-line-total) - 1) / 2);
+    --pop-color-bg-text: #fff;
     z-index: 1;
     font-weight: 500;
-    --animation-speed: 200ms;
-    --animation-delay: 100ms;
+    --pop-animation-speed: 200ms;
+    --pop-animation-delay: 100ms;
 
     .word {
-        --word-percent: calc(var(--word-index) / var(--word-total));
+        --word-percent: calc(var(--pop-word-index) / var(--pop-word-total));
         display: inline-block;
         white-space: nowrap;
         font: inherit;
         line-height: inherit;
         line-height: inherit;
         letter-spacing: inherit;
-        --color-text: var(--primary);
+        --pop-text-color: var(--primary);
     }
 
     .char {
-        --char-percent: calc(var(--char-index) / var(--char-total));
-        --char-offset: calc(var(--char-index) - var(--char-center));
-        --distance: calc(
-            (var(--char-offset) * var(--char-offset)) / var(--char-center)
+        --char-percent: calc(var(--pop-char-index) / var(--pop-char-total));
+        --pop-char-offset: calc(var(--pop-char-index) - var(--pop-char-center));
+        --pop-distance: calc(
+            (var(--pop-char-offset) * var(--pop-char-offset)) / var(--pop-char-center)
         );
-        --distance-sine: calc(var(--char-offset) / var(--char-center));
-        --distance-percent: calc((var(--distance) / var(--char-center)));
+        --pop-distance-sine: calc(var(--pop-char-offset) / var(--pop-char-center));
+        --pop-distance-percent: calc((var(--pop-distance) / var(--pop-char-center)));
         display: inline-block;
         position: relative;
         animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1), linear;
         animation-iteration-count: infinite;
-        animation-duration: calc(var(--animation-speed) * (var(--char-total)));
-        animation-delay: calc(var(--animation-delay) * var(--char-index));
-        animation-name: color-cycle;
+        animation-duration: calc(var(--pop-animation-speed) * (var(--pop-char-total)));
+        animation-delay: calc(var(--pop-animation-delay) * var(--pop-char-index));
+        animation-name: color-rotation;
         color: var(--primary);
 
         &::before,
@@ -105,12 +105,12 @@ const charTotal = computed(() => props.text.length);
         }
 
         &::before {
-            --color-text: var(--yellow);
-            animation-name: pop-char-out2, color-cycle;
+            --pop-text-color: var(--yellow);
+            animation-name: character-out-2, color-rotation;
         }
 
         &::after {
-            animation-name: pop-char-out;
+            animation-name: character-out;
             color: var(--text);
             z-index: 2;
             transition: color 0.4s;
@@ -138,11 +138,11 @@ const charTotal = computed(() => props.text.length);
     }
     &--white {
         .word {
-            --color-text: var(--yellow);
+            --pop-text-color: var(--yellow);
         }
         .char {
             &::before {
-                --color-text: var(--primary);
+                --pop-text-color: var(--primary);
             }
             &::after {
                 color: #f4f4f4;
@@ -151,7 +151,7 @@ const charTotal = computed(() => props.text.length);
     }
     &--404 {
         font-size: 100px;
-        --animation-speed: 700ms;
+        --pop-animation-speed: 700ms;
         @include mixin.media-breakpoint-up(sm) {
             font-size: 120px;
         }
@@ -166,7 +166,7 @@ const charTotal = computed(() => props.text.length);
     &--logo {
         font-size: 25px;
 
-        --animation-speed: 700ms;
+        --pop-animation-speed: 700ms;
     }
 
     &--footer {

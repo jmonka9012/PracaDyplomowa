@@ -31,7 +31,7 @@
     }
 }
 
-@keyframes pop-char-out {
+@keyframes character-out {
     0%,
     70%,
     100% {
@@ -41,7 +41,7 @@
         transform: translate(0.05em, -0.1em);
     }
 }
-@keyframes pop-char-out2 {
+@keyframes character-out-2 {
     0%,
     70%,
     100% {
@@ -52,21 +52,21 @@
     }
 }
 //poptext
-@keyframes color-cycle {
+@keyframes color-rotation {
     0% {
         color: rgba(255, 255, 255, 0);
     }
     15% {
-        color: var(--color-bg-text);
+        color: var(--pop-color-bg-text);
     }
     50% {
-        color: var(--color-text);
+        color: var(--pop-text-color);
     }
     80% {
-        color: var(--color-text);
+        color: var(--pop-text-color);
     }
     95% {
-        color: var(--color-bg-text);
+        color: var(--pop-color-bg-text);
     }
     100% {
         color: rgba(255, 255, 255, 0);
