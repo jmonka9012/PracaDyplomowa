@@ -966,3 +966,28 @@ img {
 .align-self-start {
     align-self: start;
 }
+.tabs{
+    .post-list-item-popup-holder{
+        width: 100%;
+        padding: 20px;
+        position: relative;
+    }
+}
+
+.ticket-query__ticket{
+    .post-list-item-popup-holder{
+        margin-top: 20px;
+        position: relative;
+
+        width: 100%;
+
+        .popup__close{
+            background:transparent;
+        }
+
+        @include mixin.media-breakpoint-up(lg){
+        grid-column:1/7;
+        }
+
+    }
+}

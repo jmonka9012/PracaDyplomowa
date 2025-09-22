@@ -121,10 +121,11 @@ function AcceptEvent(eID) {
         <td><a :href="`mailto:${event.contact_email}`">Główny email</a></td>
         <td><a :href="`mailto:${event.contact_email_additional}`">Dodatkowy email</a></td>
     </tr>
-    <div
+    <td
         v-if="confirmAction.id === event.id"
         class="post-list-item-popup-holder"
         @click.self="closeConfirm"
+        colspan="10"
     >
         <div class="post-list-item-popup">
             <button class="popup__close" @click="closeConfirm">
@@ -141,7 +142,7 @@ function AcceptEvent(eID) {
                 </button>
             </div>
         </div>
-    </div>
+    </td>
     <transition @enter="enter" v-show="!props.pending"
                 @after-enter="afterEnter"
                 @before-leave="beforeLeave">
