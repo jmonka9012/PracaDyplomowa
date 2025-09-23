@@ -1,10 +1,10 @@
 <script setup>
 import HeroSmall from "../Components/Sections/Hero-small.vue";
-import blogBg from "~images/blog-bg.jpg";
+import postBg from "~images/post-bg.jpg";
 </script>
 
 <template>
-  <HeroSmall :source="blogBg" title="Często zadawane pytania" />
+  <HeroSmall :source="postBg" title="Często zadawane pytania" />
 
   <section>
     <div class="container faq">

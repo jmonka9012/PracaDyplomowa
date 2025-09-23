@@ -1,7 +1,6 @@
 <script setup>
 import HeroSmall from "../Components/Sections/Hero-small.vue";
-import blogBg from "~images/blog-bg.jpg";
-import contactsMap from "~images/contacts_map.jpg";
+import postBg from "~images/post-bg.jpg";
 import facebookIcon from "~icons/facebook-circle-black.svg";
 import twitterIcon from "~icons/twitter-black.svg";
 import instagramIcon from "~icons/instagram-black.svg";
@@ -41,12 +40,12 @@ function SendTicket() {
 </script>
 
 <template>
-    <HeroSmall title="Kontakt" :source="blogBg" />
+    <HeroSmall title="Kontakt" :source="postBg" />
 
     <section class="mt-75px mt-lg-120px mb-75px mb-lg-120px">
         <div class="container container--small flex-reverse-mob flex-lg-row">
             <div class="col-12 col-lg-6 mt-50px mt-lg-0 contact-map">
-                <img src="/public/images/contacts_map.jpg" alt="" />
+                <img src="/public/images/kontakt-bg.jpg" alt="" />
             </div>
             <div class="col-12 col-lg-6 d-flex flex-column">
                 <a href="" class="sub-title sub-title--lprpl mb-17px">Kontakt</a>
@@ -212,6 +211,11 @@ function SendTicket() {
 
 .contact-map {
     img {
+        margin-bottom: 30px;
+        @media screen and (min-width: 992px) {
+            margin-bottom: 0;
+            max-width:500px;
+        }
         @media screen and (min-width: 992px) and (max-width: 1200px) {
             width: 80%;
         }

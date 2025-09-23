@@ -3,7 +3,6 @@ import PostQuery from "../../Components/Sections/PostQuery.vue";
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import { Link } from "@inertiajs/vue3";
 
-import blogBg from "~images/blog-bg.jpg";
 
 const props = defineProps({
     blog_post: {

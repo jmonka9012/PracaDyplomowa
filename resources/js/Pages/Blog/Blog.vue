@@ -4,7 +4,7 @@ import PostQuery from "../../Components/Sections/PostQuery.vue";
 import { Link, router } from "@inertiajs/vue3";
 import {ref, onMounted, reactive} from 'vue';
 
-import blogBg from "~images/blog-bg.jpg";
+import postBg from "~images/post-bg.jpg";
 
 const props = defineProps({
     blog_posts: {
@@ -51,7 +51,7 @@ function FilterBlog() {
 </script>
 
 <template>
-    <HeroSmall :source="blogBg" title="Blog"></HeroSmall>
+    <HeroSmall :source="postBg" title="Blog"></HeroSmall>
     <section class="section pb-80px">
         <div class="container container--small flex-column justify-content-start">
             <form @submit.prevent="FilterBlog()" class="form">

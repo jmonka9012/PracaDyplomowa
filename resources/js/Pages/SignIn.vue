@@ -1,6 +1,6 @@
 <script setup>
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
-import blogBg from "~images/blog-bg.jpg";
+import postBg from "~images/post-bg.jpg";
 import { reactive, ref, computed } from "vue";
 import { router } from "@inertiajs/vue3";
 import { debounce } from "@/Utilities/debounce";
@@ -126,7 +126,7 @@ function submitRegisterRequest() {
 </script>
 
 <template>
-    <HeroSmall title="Zaloguj się" :source="blogBg" />
+    <HeroSmall title="Zaloguj się" :source="postBg" />
     <section class="mb-60px">
         <div class="container align-items-start justify-content-between">
             <div class="col-12 col-lg-5 d-flex flex-column">

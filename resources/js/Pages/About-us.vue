@@ -2,7 +2,7 @@
 import Tab from "@/Components/Partials/Tab.vue";
 import Tabs from "@/Components/Partials/Tabs.vue";
 import Hero from "@/Components/Sections/AboutUsHero.vue";
-import blogBg from "~images/blog-bg.jpg";
+import postBg from "~images/post-bg.jpg";
 
 import useAuth from "@/Utilities/useAuth";
 
@@ -22,7 +22,7 @@ const props = defineProps({
   <section class="section-full mb-100px">
     <div class="container container--full">
       <div class="col-12 col-lg-6 pl-10px pr-10px pl-lg-0 pr-lg-0">
-        <img class="h-100 of-cover" :src="blogBg" alt="" />
+        <img class="h-100 of-cover" :src="postBg" alt="" />
       </div>
       <div
         class="col-12 col-lg-6 pt-30px pb-30px pt-lg-100px pb-lg-100px pl-10px pr-10px pl-md-30px pr-md-30px pl-lg-100px pr-lg-100px"

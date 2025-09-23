@@ -6,7 +6,7 @@ import IsNotEmpty from "@/Utilities/isNotEmpty";
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import DropDown from "@/Components/Partials/DropDown.vue";
 import { Link } from "@inertiajs/vue3";
-import blogBg from "~images/blog-bg.jpg";
+import postBg from "~images/post-bg.jpg";
 import Editor from "@tinymce/tinymce-vue";
 import MultiSelect from "@/Components/Partials/MultiSelect.vue";
 
@@ -165,7 +165,7 @@ const { user, isLoggedIn } = useAuth();
 </script>
 
 <template>
-    <HeroSmall title="Zorganizuj wydarzenie" :source="blogBg"></HeroSmall>
+    <HeroSmall title="Zorganizuj wydarzenie" :source="postBg"></HeroSmall>
     <section class="pt-50px pb-50px">
         <div class="container">
 <!--            <button @click="debugLogForm" class="btn btn&#45;&#45;white">

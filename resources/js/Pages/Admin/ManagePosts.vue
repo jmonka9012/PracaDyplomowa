@@ -1,6 +1,6 @@
 <script setup>
 import { ref, reactive, onMounted } from "vue";
-import blogBg from "~images/blog-bg.jpg";
+import postBg from "~images/post-bg.jpg";
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import { Link, router } from "@inertiajs/vue3";
 
@@ -39,7 +39,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <HeroSmall :source="blogBg" title="Zarządzaj postami"></HeroSmall>
+    <HeroSmall :source="postBg" title="Zarządzaj postami"></HeroSmall>
     <section>
         <div class="container justify-content-center">
             <div

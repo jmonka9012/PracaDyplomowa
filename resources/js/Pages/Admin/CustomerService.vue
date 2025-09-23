@@ -1,5 +1,5 @@
 z<script setup>
-import blogBg from "~images/blog-bg.jpg";
+import postBg from "~images/post-bg.jpg";
 import {Link, router} from "@inertiajs/vue3";
 import {onMounted, ref, computed} from "vue";
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
@@ -46,7 +46,7 @@ const SwapStatus = (status) => {
 </script>
 
 <template>
-    <HeroSmall :source="blogBg" title="Obsługa klienta"></HeroSmall>
+    <HeroSmall :source="postBg" title="Obsługa klienta"></HeroSmall>
     <section class="pb-100px col-12">
         <div class="container flex-column">
             <Tabs>

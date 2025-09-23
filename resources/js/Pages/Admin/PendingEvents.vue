@@ -1,5 +1,5 @@
 <script setup>
-import blogBg from "~images/blog-bg.jpg";
+import postBg from "~images/post-bg.jpg";
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 import Tab from "@/Components/Partials/Tab.vue";
 import Tabs from "@/Components/Partials/Tabs.vue";
@@ -64,7 +64,7 @@ function submitFilterRequest() {
 </script>
 
 <template>
-    <HeroSmall :source="blogBg" title="Zarządzaj wydarzeniami"></HeroSmall>
+    <HeroSmall :source="postBg" title="Zarządzaj wydarzeniami"></HeroSmall>
     <section class="pb-100px">
         <div class="container">
             <Tabs class="col-12">

@@ -1,10 +1,10 @@
 <script setup>
 import HeroSmall from "../Components/Sections/Hero-small.vue";
-import blogBg from "~images/blog-bg.jpg";
+import postBg from "~images/post-bg.jpg";
 </script>
 
 <template>
-  <HeroSmall :source="blogBg" title="Polityka prywatności" />
+  <HeroSmall :source="postBg" title="Polityka prywatności" />
   <section>
     <div class="container privacy-policy">
       <article>

@@ -27,3 +27,9 @@ example5 - https://stocksnap.io/photo/dark-night-NBP6GJVR0M
 blog:
 blog - https://stocksnap.io/photo/books-notebook-GQVPIS7V8S
 blog2 - https://stocksnap.io/photo/sheetmusic-vintage-XCB7KI7WSD
+
+kontakt:
+kontakt-bg - https://www.pexels.com/photo/a-concert-with-people-in-the-front-and-back-18533714/
+
+post:
+post-bg - https://www.pexels.com/photo/crowd-at-a-music-concert-16637459/

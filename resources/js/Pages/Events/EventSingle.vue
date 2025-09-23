@@ -2,8 +2,8 @@
 import EventsAlt from "@/Components/Sections/EventsAlt.vue";
 import HeroSmall from "@/Components/Sections/Hero-small.vue";
 
-import SingleMap from "~images/single-map.jpg";
-import blogBg from "~images/blog-bg.jpg";
+import SingleMap from "~images/single-footer.jpg";
+import postBg from "~images/post-bg.jpg";
 
 import ResetObject from "@/Utilities/resetObject";
 import { router } from "@inertiajs/vue3";
@@ -181,7 +181,7 @@ function SubmitTicketRequest() {
 </script>
 
 <template>
-    <HeroSmall :source="blogBg" :title="event.data.event_name" />
+    <HeroSmall :source="postBg" :title="event.data.event_name" />
     <section class="single">
         <div class="container container--small">
             <div class="single__content">
@@ -666,6 +666,8 @@ function SubmitTicketRequest() {
 
     &__map {
         margin-bottom: 50px;
+        max-height:400px;
+        object-fit: cover;
     }
 
     h3 {

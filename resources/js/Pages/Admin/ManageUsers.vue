@@ -1,5 +1,5 @@
 <script setup>
-import blogBg from "~images/blog-bg.jpg";
+import postBg from "~images/post-bg.jpg";
 import {router} from "@inertiajs/vue3";
 import {reactive} from "vue";
 import {Link} from "@inertiajs/vue3";
@@ -92,7 +92,7 @@ function SetUserProperty(value, userID, property) {
 </script>
 
 <template>
-    <HeroSmall :source="blogBg" title="Zarządzaj użytkownikami"></HeroSmall>
+    <HeroSmall :source="postBg" title="Zarządzaj użytkownikami"></HeroSmall>
     <section>
         <div class="container flex-column">
             <div class="col-12 d-flex flex-lg-row align-items-lg-center">
