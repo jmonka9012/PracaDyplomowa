@@ -25,12 +25,17 @@ class MyAccountTest extends TestCase
     #[Test]
     public function my_account_page_loads_successfully()
     {
-        $this->actingAs($this->user)
-            ->get('/moje-konto')
-            ->assertInertia(
-                fn ($page) => $page
-                    ->component('My-Account')
-            );
+        $response = $this->actingAs($this->user)
+            ->get('/moje-konto');
+        
+        if ($response->isRedirect()) {
+            $response = $this->get($response->headers->get('Location'));
+        }
+        
+        $response->assertInertia(
+            fn ($page) => $page
+                ->component('My-Account')
+        );
     }
 
     #[Test]

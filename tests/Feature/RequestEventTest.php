@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\Models\OrganizerInformation;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
@@ -20,13 +21,18 @@ class RequestEventTest extends TestCase
         $this->withoutExceptionHandling();
 
         $user = User::factory()->create([
-            'role' => 'admin'
+            'role' => 'organizer'
         ]);
+
+        $organizer = OrganizerInformation::factory()->create([
+            'user_id' => $user->id
+        ]);
+    
         $this->actingAs($user);
 
         $data = [
             'event_name'=>'Test456',
-            //'event_additional_url'=>'Test456',
+            'organizer_id' => $user->organizer->id,
             'event_date'=>'2222-11-11',
             'event_start'=>'12:12:00',
             'event_end'=>'12:12:00',
@@ -55,7 +61,7 @@ class RequestEventTest extends TestCase
 
         $this->assertDatabaseHas('events', [
             'event_name'=>'Test456',
-            //'event_additional_url'=>'Test456',
+            'organizer_id' => $user->organizer->id,
             'event_date'=>'2222-11-11',
             'event_start'=>'12:12:00',
             'event_end'=>'12:12:00',
