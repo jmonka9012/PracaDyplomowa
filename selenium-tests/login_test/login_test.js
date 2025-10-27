@@ -37,9 +37,9 @@ const testName = 'login_test';
 
     // Kliknięcie przycisku logowania po klasie i href
     const loginLink = await driver.wait(
-      until.elementLocated(By.css('a.header-login[href$="/login"]')),
-      5000
-    );
+  until.elementLocated(By.css('a.header__login[href$="/login"]')),
+  5000);
+
     await loginLink.click();
     console.log('Przejście do formularza logowania');
     await driver.sleep(1500);

@@ -1,12 +1,12 @@
 {
-  "generatedAtUTC": "2025-09-14T18:02:37.634Z",
-  "generatedAtLocal": "14.09.2025, 20:02:37",
+  "generatedAtUTC": "2025-10-24T05:26:09.979Z",
+  "generatedAtLocal": "24.10.2025, 07:26:09",
   "fields": [
     {
       "name": "login",
       "id": "login",
       "type": "text",
-      "autocomplete": "email",
+      "autocomplete": "username",
       "warnings": []
     },
     {
@@ -31,46 +31,42 @@
       "warnings": []
     },
     {
-      "name": "name",
+      "name": "register-username",
       "id": "register-username",
       "type": "text",
-      "autocomplete": "name",
+      "autocomplete": "",
       "warnings": []
     },
     {
-      "name": "email",
+      "name": "register-email",
       "id": "register-email",
       "type": "text",
       "autocomplete": "email",
       "warnings": []
     },
     {
-      "name": "name",
-      "id": "register-username",
+      "name": "register-name",
+      "id": "register-name",
       "type": "text",
       "autocomplete": "",
-      "warnings": [
-        "Zduplikowane ID"
-      ]
+      "warnings": []
     },
     {
       "name": "name",
-      "id": "register-username",
+      "id": "register-lastname",
       "type": "text",
       "autocomplete": "",
-      "warnings": [
-        "Zduplikowane ID"
-      ]
+      "warnings": []
     },
     {
-      "name": "password",
+      "name": "register-password",
       "id": "register-password",
       "type": "password",
       "autocomplete": "",
       "warnings": []
     },
     {
-      "name": "password_confirmation",
+      "name": "register-password-confirm",
       "id": "register-password-confirm",
       "type": "password",
       "autocomplete": "",
@@ -84,8 +80,8 @@
       "warnings": []
     },
     {
-      "name": "organizer",
-      "id": "organizer",
+      "name": "register-organizer",
+      "id": "register-organizer",
       "type": "checkbox",
       "autocomplete": "",
       "warnings": []
